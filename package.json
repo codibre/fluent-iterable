@@ -1,0 +1,45 @@
+{
+  "name": "fluent-iterable",
+  "description": "Provides LINQ-like fluent api operations for iterables and async iterables (ES2018+).",
+  "version": "0.1.0",
+  "author": {
+    "name": "Kornel Katai <kataik@gmail.com>"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "./node_modules/mocha/bin/mocha tst/**/* --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kataik/fluent-iterable.git"
+  },
+  "homepage": "https://github.com/kataik/fluent-iterable",
+  "bugs": "https://github.com/kataik/fluent-iterable/issues",
+  "keywords": [
+    "iterable",
+    "asyncIterable",
+    "linq",
+    "map",
+    "filter",
+    "fluent"
+  ],
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^12.11.7",
+    "@types/mocha": "^5.2.7",
+    "@types/chai": "^4.2.4",
+    "@types/chai-as-promised": "^7.1.2",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^6.2.2",
+    "prettier": "^1.18.2",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.4"
+  }
+}

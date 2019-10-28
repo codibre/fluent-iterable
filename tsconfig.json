@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "esModuleInterop": true,
+    "lib": ["es2018"],
+    "module": "commonjs",
+    "outDir": "dist",
+    "rootDir": ".",
+    "sourceMap": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "target": "es2018",
+    "types": ["mocha", "node"],
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "main": "dist/index.js"
+  },
+  "include": ["src/**/*", "tst/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
