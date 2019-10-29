@@ -176,31 +176,31 @@ async function* distinctAsync<T, R>(iterable: Iterable<T>, mapper: AsyncMapper<T
 }
 
 function* group<T, R>(iterable: Iterable<T>, mapper: Mapper<T, R>): Iterable<Group<T, R>> {
-  const map = new Map<R, T[]>();
+  const groups = new Map<R, T[]>();
   for (const t of iterable) {
     const key = mapper(t);
-    const values = map.get(key) || [];
+    const values = groups.get(key) || [];
 
     values.push(t);
-    map.set(key, values);
+    groups.set(key, values);
   }
 
-  for (const [key, values] of map.entries()) {
+  for (const [key, values] of groups.entries()) {
     yield { key, values };
   }
 }
 
 async function* groupAsync<T, R>(iterable: Iterable<T>, mapper: AsyncMapper<T, R>): AsyncIterable<Group<T, R>> {
-  const map = new Map<R, T[]>();
+  const groups = new Map<R, T[]>();
   for (const t of iterable) {
     const key = await mapper(t);
-    const values = map.get(key) || [];
+    const values = groups.get(key) || [];
 
     values.push(t);
-    map.set(key, values);
+    groups.set(key, values);
   }
 
-  for (const [key, values] of map.entries()) {
+  for (const [key, values] of groups.entries()) {
     yield { key, values };
   }
 }
@@ -335,7 +335,7 @@ function contains<T>(iterable: Iterable<T>, item: T): boolean {
 }
 
 function toArray<T>(iterable: Iterable<T>): T[] {
-  let array: T[] = [];
+  const array: T[] = [];
   for (const t of iterable) {
     array.push(t);
   }
