@@ -2,6 +2,7 @@
   "name": "fluent-iterable",
   "description": "Provides LINQ-like fluent api operations for iterables and async iterables (ES2018+).",
   "version": "0.1.0",
+  "private": false,
   "author": {
     "name": "Kornel Katai <kataik@gmail.com>"
   },
@@ -14,10 +15,15 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "test": "ts-mocha -p tsconfig.json tst/**/*.spec.ts --reporter spec",
     "format": "prettier --write src/**/*.ts tst/**/*.ts",
-    "lint": "tslint -p tsconfig.json"
+    "lint": "tslint -p tsconfig.json",
+    "build": "npm run format && tsc",
+    "test": "npm run lint && ts-mocha -p tsconfig.json tst/**/*.spec.ts --reporter spec",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test",
+    "preversion": "npm test",
+    "version": "npm build && npm test && git add -A dist",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",

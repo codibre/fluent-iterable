@@ -9,10 +9,13 @@ import {
   Action,
   AsyncAction,
   Group,
+  Page,
+  Pager,
 } from './types';
 
 import fluent, { FluentIterable } from './fluent';
 import fluentAsync, { FluentAsyncIterable } from './fluentAsync';
+import depaginate from './depaginator';
 
 export default fluent;
 export {
@@ -28,5 +31,8 @@ export {
   Action,
   AsyncAction,
   Group,
+  Page,
+  Pager,
   fluentAsync,
+  depaginate,
 };

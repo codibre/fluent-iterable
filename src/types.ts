@@ -13,4 +13,24 @@ interface Group<T, R> {
   values: Iterable<T>;
 }
 
-export { Predicate, AsyncPredicate, Mapper, AsyncMapper, Reducer, AsyncReducer, Comparer, Action, AsyncAction, Group };
+interface Page<T, TToken> {
+  results: T[];
+  nextPageToken?: TToken;
+}
+
+type Pager<T, TToken> = (nextPageToken?: TToken) => Promise<Page<T, TToken> | undefined>;
+
+export {
+  Predicate,
+  AsyncPredicate,
+  Mapper,
+  AsyncMapper,
+  Reducer,
+  AsyncReducer,
+  Comparer,
+  Action,
+  AsyncAction,
+  Group,
+  Page,
+  Pager,
+};

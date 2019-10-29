@@ -101,7 +101,7 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
   anyAsync(predicate: AsyncPredicate<T>): Promise<boolean>;
   contains(item: T): Promise<boolean>;
   toArray(): Promise<T[]>;
-  forEach(action: Action<T>): void;
+  forEach(action: Action<T>): Promise<void>;
   forEachAsync(action: AsyncAction<T>): Promise<void>;
   sum(mapper?: Mapper<T, number>): Promise<number>;
   sumAsync(mapper: AsyncMapper<T, number>): Promise<number>;
