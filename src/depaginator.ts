@@ -1,8 +1,6 @@
-import {Page, Pager} from "./types";
+import { Page, Pager } from './types';
 
-async function* depaginate<T, TToken>(
-  pager: Pager<T, TToken>
-): AsyncIterable<T> {
+async function* depaginate<T, TToken>(pager: Pager<T, TToken>): AsyncIterable<T> {
   let token: TToken | undefined;
 
   do {
