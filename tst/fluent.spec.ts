@@ -1,5 +1,5 @@
 import fluent from '../src';
-import expect, { pick } from './tools';
+import expect, { flatMap, pick } from './tools';
 
 enum Gender {
   Male = 'Male',
@@ -420,7 +420,7 @@ describe('fluent iterable', () => {
             fluent(subject)
               .flatten(p => p.emails)
               .toArray()
-          ).to.eql(picker(1, 2, 6, 7, 8, 9, 10, 11).flatMap(p => p.emails));
+          ).to.eql(flatMap(picker(1, 2, 6, 7, 8, 9, 10, 11), p => p.emails));
         });
       });
       describe('sort', () => {

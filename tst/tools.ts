@@ -13,5 +13,9 @@ function pick<T>(arr: T[], ...indexes: number[]): T[] {
   return res;
 }
 
+function flatMap<T, R>(arr: T[], map: (t: T) => R[]): R[] {
+  return arr.reduce((current, next) => current.concat(map(next)), [] as R[]);
+}
+
 export default expect;
-export { chai, chaiAsPromised, pick };
+export { chai, chaiAsPromised, pick, flatMap };

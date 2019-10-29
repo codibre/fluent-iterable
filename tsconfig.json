@@ -5,18 +5,16 @@
     "lib": ["es2018"],
     "module": "commonjs",
     "outDir": "dist",
-    "rootDir": ".",
+    "rootDir": "./src",
     "sourceMap": true,
     "suppressImplicitAnyIndexErrors": true,
     "strict": true,
     "noUnusedLocals": true,
     "target": "es2018",
-    "types": ["mocha", "node"],
+    "types": ["node", "mocha"],
     "noImplicitAny": true,
     "moduleResolution": "node",
-    "declaration": true,
-    "main": "dist/index.js"
+    "declaration": true
   },
-  "include": ["src/**/*", "tst/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*"]
 }
