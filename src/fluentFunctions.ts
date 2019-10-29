@@ -11,7 +11,15 @@ import {
   Action,
   AsyncAction,
   Group,
+  Indexed,
 } from './types';
+
+function* withIndex<T>(iterable: Iterable<T>): Iterable<Indexed<T>> {
+  let idx = 0;
+  for (const t of iterable) {
+    yield { idx: idx++, value: t };
+  }
+}
 
 function* takeWhile<T>(iterable: Iterable<T>, condition: Predicate<T>): Iterable<T> {
   for (const t of iterable) {
@@ -359,6 +367,36 @@ async function forEachAsync<T>(iterable: Iterable<T>, action: AsyncAction<T>): P
   }
 }
 
+function join<T>(
+  iterable: Iterable<T>,
+  separator: string,
+  mapper: Mapper<T, string> = identity as Mapper<T, string>
+): string {
+  return (
+    reduce<T, string | undefined>(
+      iterable,
+      (current, next) => {
+        const nextStr = mapper(next);
+        return current ? `${current}${separator}${nextStr}` : nextStr;
+      },
+      undefined
+    ) || ''
+  );
+}
+
+async function joinAsync<T>(iterable: Iterable<T>, separator: string, mapper: AsyncMapper<T, string>): Promise<string> {
+  return (
+    (await reduceAsync<T, string | undefined>(
+      iterable,
+      async (current, next) => {
+        const nextStr = await mapper(next);
+        return current ? `${current}${separator}${nextStr}` : nextStr;
+      },
+      undefined
+    )) || ''
+  );
+}
+
 function sum<T>(iterable: Iterable<T>, mapper: Mapper<T, number> = identity as Mapper<T, number>): number {
   return reduce(iterable, (current, next) => current + mapper(next), 0);
 }
@@ -436,6 +474,7 @@ function maxAsync<T>(iterable: Iterable<T>, mapper: AsyncMapper<T, number>): Pro
 }
 
 export {
+  withIndex,
   takeWhile,
   takeWhileAsync,
   take,
@@ -476,6 +515,8 @@ export {
   toAsync,
   forEach,
   forEachAsync,
+  join,
+  joinAsync,
   sum,
   sumAsync,
   avg,

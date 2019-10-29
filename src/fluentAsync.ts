@@ -1,4 +1,5 @@
 import {
+  withIndex,
   takeWhile,
   takeWhileAsync,
   take,
@@ -38,6 +39,8 @@ import {
   toArray,
   forEach,
   forEachAsync,
+  join,
+  joinAsync,
   sum,
   sumAsync,
   avg,
@@ -57,6 +60,7 @@ import {
   AsyncReducer,
   Comparer,
   Group,
+  Indexed,
   Mapper,
   Predicate,
   Reducer,
@@ -64,6 +68,7 @@ import {
 import { identity, truth } from './utils';
 
 interface FluentAsyncIterable<T> extends AsyncIterable<T> {
+  withIndex(): FluentAsyncIterable<Indexed<T>>;
   takeWhile(condition: Predicate<T>): FluentAsyncIterable<T>;
   takeWhileAsync(condition: AsyncPredicate<T>): FluentAsyncIterable<T>;
   take(n: number): FluentAsyncIterable<T>;
@@ -103,6 +108,8 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
   toArray(): Promise<T[]>;
   forEach(action: Action<T>): Promise<void>;
   forEachAsync(action: AsyncAction<T>): Promise<void>;
+  join(separator: string, mapper?: Mapper<T, string>): Promise<string>;
+  joinAsync(separator: string, mapper: AsyncMapper<T, string>): Promise<string>;
   sum(mapper?: Mapper<T, number>): Promise<number>;
   sumAsync(mapper: AsyncMapper<T, number>): Promise<number>;
   avg(mapper?: Mapper<T, number>): Promise<number>;
@@ -117,6 +124,7 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
 
 function fluentAsync<T>(iterable: AsyncIterable<T>): FluentAsyncIterable<T> {
   return {
+    withIndex: () => fluentAsync(withIndex(iterable)),
     takeWhile: predicate => fluentAsync(takeWhile(iterable, predicate)),
     takeWhileAsync: predicate => fluentAsync(takeWhileAsync(iterable, predicate)),
     take: n => fluentAsync(take(iterable, n)),
@@ -157,6 +165,8 @@ function fluentAsync<T>(iterable: AsyncIterable<T>): FluentAsyncIterable<T> {
     toArray: () => toArray(iterable),
     forEach: action => forEach(iterable, action),
     forEachAsync: action => forEachAsync(iterable, action),
+    join: (separator, mapper: Mapper<T, string> = identity as Mapper<T, string>) => join(iterable, separator, mapper),
+    joinAsync: (separator, mapper) => joinAsync(iterable, separator, mapper),
     sum: (mapper: Mapper<T, number> = identity as Mapper<T, number>) => sum(iterable, mapper),
     sumAsync: mapper => sumAsync(iterable, mapper),
     avg: (mapper: Mapper<T, number> = identity as Mapper<T, number>) => avg(iterable, mapper),

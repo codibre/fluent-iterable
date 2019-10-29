@@ -13,6 +13,11 @@ interface Group<T, R> {
   values: Iterable<T>;
 }
 
+interface Indexed<T> {
+  idx: number;
+  value: T;
+}
+
 interface Page<T, TToken> {
   results: T[];
   nextPageToken?: TToken;
@@ -31,6 +36,7 @@ export {
   Action,
   AsyncAction,
   Group,
+  Indexed,
   Page,
   Pager,
 };

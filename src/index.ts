@@ -16,6 +16,7 @@ import {
 import fluent, { FluentIterable } from './fluent';
 import fluentAsync, { FluentAsyncIterable } from './fluentAsync';
 import depaginate from './depaginator';
+import { interval } from './utils';
 
 export default fluent;
 export {
@@ -35,4 +36,5 @@ export {
   Pager,
   fluentAsync,
   depaginate,
+  interval,
 };
