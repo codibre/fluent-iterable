@@ -37,6 +37,8 @@ import {
   anyAsync,
   contains,
   toArray,
+  toObject,
+  toObjectAsync,
   forEach,
   forEachAsync,
   join,
@@ -106,6 +108,8 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
   anyAsync(predicate: AsyncPredicate<T>): Promise<boolean>;
   contains(item: T): Promise<boolean>;
   toArray(): Promise<T[]>;
+  toObject<R>(keySelector: Mapper<T, string>, valueSelector?: Mapper<T, any>): Promise<R>;
+  toObjectAsync<R>(keySelector: AsyncMapper<T, string>, valueSelector: AsyncMapper<T, any>): Promise<R>;
   forEach(action: Action<T>): Promise<void>;
   forEachAsync(action: AsyncAction<T>): Promise<void>;
   join(separator: string, mapper?: Mapper<T, string>): Promise<string>;
@@ -163,6 +167,8 @@ function fluentAsync<T>(iterable: AsyncIterable<T>): FluentAsyncIterable<T> {
     anyAsync: predicate => anyAsync(iterable, predicate),
     contains: item => contains(iterable, item),
     toArray: () => toArray(iterable),
+    toObject: (keySelector, valueSelector = identity) => toObject(iterable, keySelector, valueSelector),
+    toObjectAsync: (keySelector, valueSelector) => toObjectAsync(iterable, keySelector, valueSelector),
     forEach: action => forEach(iterable, action),
     forEachAsync: action => forEachAsync(iterable, action),
     join: (separator, mapper: Mapper<T, string> = identity as Mapper<T, string>) => join(iterable, separator, mapper),

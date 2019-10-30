@@ -39,6 +39,8 @@ import {
   anyAsync,
   contains,
   toArray,
+  toObject,
+  toObjectAsync,
   toAsync,
   forEach,
   forEachAsync,
@@ -108,6 +110,8 @@ interface FluentIterable<T> extends Iterable<T> {
   anyAsync(predicate: AsyncPredicate<T>): Promise<boolean>;
   contains(item: T): boolean;
   toArray(): T[];
+  toObject<R>(keySelector: Mapper<T, string>, valueSelector?: Mapper<T, any>): R;
+  toObjectAsync<R>(keySelector: AsyncMapper<T, string>, valueSelector: AsyncMapper<T, any>): Promise<R>;
   toAsync(): FluentAsyncIterable<T>;
   forEach(action: Action<T>): void;
   forEachAsync(action: AsyncAction<T>): Promise<void>;
@@ -166,6 +170,8 @@ function fluent<T>(iterable: Iterable<T>): FluentIterable<T> {
     anyAsync: predicate => anyAsync(iterable, predicate),
     contains: item => contains(iterable, item),
     toArray: () => toArray(iterable),
+    toObject: (keySelector, valueSelector = identity) => toObject(iterable, keySelector, valueSelector),
+    toObjectAsync: (keySelector, valueSelector) => toObjectAsync(iterable, keySelector, valueSelector),
     toAsync: () => fluentAsync(toAsync(iterable)),
     forEach: action => forEach(iterable, action),
     forEachAsync: action => forEachAsync(iterable, action),

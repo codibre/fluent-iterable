@@ -361,6 +361,33 @@ async function toArray<T>(iterable: AsyncIterable<T>): Promise<T[]> {
   return array;
 }
 
+async function toObject<T, R>(
+  iterable: AsyncIterable<T>,
+  keySelector: Mapper<T, string>,
+  valueSelector: Mapper<T, any> = identity
+): Promise<R> {
+  const res = {};
+  for await (const t of iterable) {
+    res[keySelector(t)] = valueSelector(t);
+  }
+
+  return res as R;
+}
+
+async function toObjectAsync<T, R>(
+  iterable: AsyncIterable<T>,
+  keySelector: AsyncMapper<T, string>,
+  valueSelector: AsyncMapper<T, any>
+): Promise<R> {
+  const res = {};
+  for await (const t of iterable) {
+    res[await keySelector(t)] = await valueSelector(t);
+  }
+
+  return res as R;
+}
+
+
 async function forEach<T>(iterable: AsyncIterable<T>, action: Action<T>): Promise<void> {
   for await (const t of iterable) {
     action(t);
@@ -534,6 +561,8 @@ export {
   anyAsync,
   contains,
   toArray,
+  toObject,
+  toObjectAsync,
   forEach,
   forEachAsync,
   join,

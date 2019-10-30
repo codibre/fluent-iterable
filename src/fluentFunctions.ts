@@ -351,6 +351,32 @@ function toArray<T>(iterable: Iterable<T>): T[] {
   return array;
 }
 
+function toObject<T, R>(
+  iterable: Iterable<T>,
+  keySelector: Mapper<T, string>,
+  valueSelector: Mapper<T, any> = identity
+): R {
+  const res = {};
+  for (const t of iterable) {
+    res[keySelector(t)] = valueSelector(t);
+  }
+
+  return res as R;
+}
+
+async function toObjectAsync<T, R>(
+  iterable: Iterable<T>,
+  keySelector: AsyncMapper<T, string>,
+  valueSelector: AsyncMapper<T, any>
+): Promise<R> {
+  const res = {};
+  for (const t of iterable) {
+    res[await keySelector(t)] = await valueSelector(t);
+  }
+
+  return res as R;
+}
+
 async function* toAsync<T>(iterable: Iterable<T>): AsyncIterable<T> {
   yield* iterable;
 }
@@ -512,6 +538,8 @@ export {
   anyAsync,
   contains,
   toArray,
+  toObject,
+  toObjectAsync,
   toAsync,
   forEach,
   forEachAsync,
