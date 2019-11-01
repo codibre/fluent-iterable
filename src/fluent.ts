@@ -12,6 +12,7 @@ import {
   mapAsync,
   filter,
   filterAsync,
+  partition,
   append,
   prepend,
   concat,
@@ -44,6 +45,8 @@ import {
   toAsync,
   forEach,
   forEachAsync,
+  execute,
+  executeAsync,
   join,
   joinAsync,
   sum,
@@ -83,6 +86,7 @@ interface FluentIterable<T> extends Iterable<T> {
   mapAsync<R>(mapper: AsyncMapper<T, R>): FluentAsyncIterable<R>;
   filter(predicate: Predicate<T>): FluentIterable<T>;
   filterAsync(predicate: AsyncPredicate<T>): FluentAsyncIterable<T>;
+  partition(size: number): FluentIterable<FluentIterable<T>>;
   append(item: T): FluentIterable<T>;
   prepend(item: T): FluentIterable<T>;
   concat(...iterables: Array<Iterable<T>>): FluentIterable<T>;
@@ -115,6 +119,8 @@ interface FluentIterable<T> extends Iterable<T> {
   toAsync(): FluentAsyncIterable<T>;
   forEach(action: Action<T>): void;
   forEachAsync(action: AsyncAction<T>): Promise<void>;
+  execute(action: Action<T>): FluentIterable<T>;
+  executeAsync(action: AsyncAction<T>): FluentAsyncIterable<T>;
   join(separator: string, mapper?: Mapper<T, string>): string;
   joinAsync(separator: string, mapper: AsyncMapper<T, string>): Promise<string>;
   sum(mapper?: Mapper<T, number>): number;
@@ -142,6 +148,7 @@ function fluent<T>(iterable: Iterable<T>): FluentIterable<T> {
     mapAsync: mapper => fluentAsync(mapAsync(iterable, mapper)),
     filter: predicate => fluent(filter(iterable, predicate)),
     filterAsync: predicate => fluentAsync(filterAsync(iterable, predicate)),
+    partition: size => fluent(partition(iterable, size)).map(part => fluent(part)),
     append: item => fluent(append(iterable, item)),
     prepend: item => fluent(prepend(iterable, item)),
     concat: (...iterables) => fluent(concat(iterable, ...iterables)),
@@ -175,6 +182,8 @@ function fluent<T>(iterable: Iterable<T>): FluentIterable<T> {
     toAsync: () => fluentAsync(toAsync(iterable)),
     forEach: action => forEach(iterable, action),
     forEachAsync: action => forEachAsync(iterable, action),
+    execute: action => fluent(execute(iterable, action)),
+    executeAsync: action => fluentAsync(executeAsync(iterable, action)),
     join: (separator, mapper: Mapper<T, string> = identity as Mapper<T, string>) => join(iterable, separator, mapper),
     joinAsync: (separator, mapper) => joinAsync(iterable, separator, mapper),
     sum: (mapper: Mapper<T, number> = identity as Mapper<T, number>) => sum(iterable, mapper),

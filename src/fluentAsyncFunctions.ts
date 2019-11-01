@@ -260,6 +260,31 @@ async function firstAsync<T>(iterable: AsyncIterable<T>, predicate: AsyncPredica
   return undefined;
 }
 
+async function* readPartition<T>(iterator: AsyncIterator<T>, next: IteratorResult<T>, size: number): AsyncIterable<T> {
+  for (; size > 0; --size) {
+    if (next.done) {
+      break;
+    }
+
+    yield next.value;
+
+    if (size > 1) {
+      next = await iterator.next();
+    }
+  }
+}
+
+async function* partition<T>(iterable: AsyncIterable<T>, size: number): AsyncIterable<AsyncIterable<T>> {
+  if (size < 1) {
+    throw new Error(`Validation failed, size (${size}) expected to be bigger than 0`);
+  }
+
+  const iterator = iterable[Symbol.asyncIterator]();
+  for (let next = await iterator.next(); !next.done; next = await iterator.next()) {
+    yield readPartition(iterator, next, size);
+  }
+}
+
 async function last<T>(iterable: AsyncIterable<T>, predicate: Predicate<T> = truth): Promise<T | undefined> {
   let result: T | undefined;
 
@@ -400,6 +425,20 @@ async function forEachAsync<T>(iterable: AsyncIterable<T>, action: AsyncAction<T
   }
 }
 
+async function* execute<T>(iterable: AsyncIterable<T>, action: Action<T>): AsyncIterable<T> {
+  for await (const t of iterable) {
+    action(t);
+    yield t;
+  }
+}
+
+async function* executeAsync<T>(iterable: AsyncIterable<T>, action: AsyncAction<T>): AsyncIterable<T> {
+  for await (const t of iterable) {
+    await action(t);
+    yield t;
+  }
+}
+
 async function join<T>(
   iterable: AsyncIterable<T>,
   separator: string,
@@ -534,6 +573,7 @@ export {
   mapAsync,
   filter,
   firstAsync,
+  partition,
   append,
   prepend,
   concat,
@@ -565,6 +605,8 @@ export {
   toObjectAsync,
   forEach,
   forEachAsync,
+  execute,
+  executeAsync,
   join,
   joinAsync,
   sum,

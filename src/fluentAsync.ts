@@ -10,6 +10,7 @@ import {
   mapAsync,
   filter,
   firstAsync,
+  partition,
   append,
   prepend,
   concat,
@@ -41,6 +42,8 @@ import {
   toObjectAsync,
   forEach,
   forEachAsync,
+  execute,
+  executeAsync,
   join,
   joinAsync,
   sum,
@@ -81,6 +84,7 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
   mapAsync<R>(mapper: AsyncMapper<T, R>): FluentAsyncIterable<R>;
   filter(predicate: Predicate<T>): FluentAsyncIterable<T>;
   filterAsync(predicate: AsyncPredicate<T>): FluentAsyncIterable<T>;
+  partition(size: number): FluentAsyncIterable<FluentAsyncIterable<T>>;
   append(item: T): FluentAsyncIterable<T>;
   prepend(item: T): FluentAsyncIterable<T>;
   concat(...iterables: Array<AsyncIterable<T>>): FluentAsyncIterable<T>;
@@ -112,6 +116,8 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
   toObjectAsync<R>(keySelector: AsyncMapper<T, string>, valueSelector: AsyncMapper<T, any>): Promise<R>;
   forEach(action: Action<T>): Promise<void>;
   forEachAsync(action: AsyncAction<T>): Promise<void>;
+  execute(action: Action<T>): FluentAsyncIterable<T>;
+  executeAsync(action: AsyncAction<T>): FluentAsyncIterable<T>;
   join(separator: string, mapper?: Mapper<T, string>): Promise<string>;
   joinAsync(separator: string, mapper: AsyncMapper<T, string>): Promise<string>;
   sum(mapper?: Mapper<T, number>): Promise<number>;
@@ -139,6 +145,7 @@ function fluentAsync<T>(iterable: AsyncIterable<T>): FluentAsyncIterable<T> {
     mapAsync: mapper => fluentAsync(mapAsync(iterable, mapper)),
     filter: predicate => fluentAsync(filter(iterable, predicate)),
     filterAsync: predicate => fluentAsync(filterAsync(iterable, predicate)),
+    partition: size => fluentAsync(partition(iterable, size)).map(part => fluentAsync(part)),
     append: item => fluentAsync(append(iterable, item)),
     prepend: item => fluentAsync(prepend(iterable, item)),
     concat: (...iterables) => fluentAsync(concat(iterable, ...iterables)),
@@ -171,6 +178,8 @@ function fluentAsync<T>(iterable: AsyncIterable<T>): FluentAsyncIterable<T> {
     toObjectAsync: (keySelector, valueSelector) => toObjectAsync(iterable, keySelector, valueSelector),
     forEach: action => forEach(iterable, action),
     forEachAsync: action => forEachAsync(iterable, action),
+    execute: action => fluentAsync(execute(iterable, action)),
+    executeAsync: action => fluentAsync(executeAsync(iterable, action)),
     join: (separator, mapper: Mapper<T, string> = identity as Mapper<T, string>) => join(iterable, separator, mapper),
     joinAsync: (separator, mapper) => joinAsync(iterable, separator, mapper),
     sum: (mapper: Mapper<T, number> = identity as Mapper<T, number>) => sum(iterable, mapper),
