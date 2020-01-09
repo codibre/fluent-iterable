@@ -6,7 +6,7 @@ type Reducer<T, A> = (current: A, next: T) => A;
 type AsyncReducer<T, A> = (current: A, next: T) => Promise<A>;
 type Comparer<T> = (a: T, b: T) => number;
 type Action<T> = (item: T) => void;
-type AsyncAction<T> = (item: T) => Promise<void>;
+type AsyncAction<T> = (item: T) => Promise<any>;
 
 interface Group<T, R> {
   key: R;
