@@ -412,7 +412,6 @@ async function toObjectAsync<T, R>(
   return res as R;
 }
 
-
 async function forEach<T>(iterable: AsyncIterable<T>, action: Action<T>): Promise<void> {
   for await (const t of iterable) {
     action(t);

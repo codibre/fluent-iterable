@@ -15,9 +15,10 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "doc": "npx typedoc",
     "format": "prettier --write src/**/*.ts tst/**/*.ts",
     "lint": "tslint -p tsconfig.json",
-    "build": "npm run format && tsc",
+    "build": "npm run format && tsc && npm run doc",
     "test": "npm run lint && ts-mocha -p tsconfig.json tst/**/*.spec.ts --reporter spec",
     "prepare": "npm run build",
     "prepublishOnly": "npm test",
@@ -57,7 +58,8 @@
     "ts-node": "^8.4.1",
     "tslint": "^5.20.0",
     "tslint-config-prettier": "^1.18.0",
-    "typedoc": "^0.15.0",
+    "typedoc": "^0.15.6",
+    "typedoc-plugin-markdown": "^2.2.16",
     "typescript": "^3.6.4"
   }
 }

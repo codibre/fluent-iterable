@@ -1,0 +1,7 @@
+{
+  "hideGenerator": true,
+  "mode": "modules",
+  "plugin": "typedoc-plugin-markdown",
+  "theme": "markdown",
+  "out": "docs"
+}
