@@ -1,4 +1,4 @@
-[fluent-iterable - v0.1.4](../README.md) › [Globals](../globals.md) › ["types"](../modules/_types_.md) › [Group](_types_.group.md)
+[fluent-iterable - v0.1.5](../README.md) › [Globals](../globals.md) › ["types"](../modules/_types_.md) › [Group](_types_.group.md)
 
 # Interface: Group <**T, R**>
 
@@ -25,7 +25,7 @@
 
 • **key**: *R*
 
-*Defined in [src/types.ts:12](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/types.ts#L12)*
+*Defined in [src/types.ts:12](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/types.ts#L12)*
 
 ___
 
@@ -33,4 +33,4 @@ ___
 
 • **values**: *Iterable‹T›*
 
-*Defined in [src/types.ts:13](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/types.ts#L13)*
+*Defined in [src/types.ts:13](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/types.ts#L13)*

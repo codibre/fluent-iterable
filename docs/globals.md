@@ -1,6 +1,6 @@
-[fluent-iterable - v0.1.4](README.md) › [Globals](globals.md)
+[fluent-iterable - v0.1.5](README.md) › [Globals](globals.md)
 
-# fluent-iterable - v0.1.4
+# fluent-iterable - v0.1.5
 
 ## Index
 

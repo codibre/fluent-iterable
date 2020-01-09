@@ -1,4 +1,4 @@
-[fluent-iterable - v0.1.4](../README.md) › [Globals](../globals.md) › ["types"](_types_.md)
+[fluent-iterable - v0.1.5](../README.md) › [Globals](../globals.md) › ["types"](_types_.md)
 
 # External module: "types"
 
@@ -29,7 +29,7 @@
 
 Ƭ **Action**: *function*
 
-*Defined in [src/types.ts:8](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/types.ts#L8)*
+*Defined in [src/types.ts:8](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/types.ts#L8)*
 
 #### Type declaration:
 
@@ -47,7 +47,7 @@ ___
 
 Ƭ **AsyncAction**: *function*
 
-*Defined in [src/types.ts:9](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/types.ts#L9)*
+*Defined in [src/types.ts:9](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/types.ts#L9)*
 
 #### Type declaration:
 
@@ -65,7 +65,7 @@ ___
 
 Ƭ **AsyncMapper**: *function*
 
-*Defined in [src/types.ts:4](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/types.ts#L4)*
+*Defined in [src/types.ts:4](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/types.ts#L4)*
 
 #### Type declaration:
 
@@ -83,7 +83,7 @@ ___
 
 Ƭ **AsyncPredicate**: *function*
 
-*Defined in [src/types.ts:2](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/types.ts#L2)*
+*Defined in [src/types.ts:2](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/types.ts#L2)*
 
 #### Type declaration:
 
@@ -101,7 +101,7 @@ ___
 
 Ƭ **AsyncReducer**: *function*
 
-*Defined in [src/types.ts:6](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/types.ts#L6)*
+*Defined in [src/types.ts:6](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/types.ts#L6)*
 
 #### Type declaration:
 
@@ -120,7 +120,7 @@ ___
 
 Ƭ **Comparer**: *function*
 
-*Defined in [src/types.ts:7](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/types.ts#L7)*
+*Defined in [src/types.ts:7](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/types.ts#L7)*
 
 #### Type declaration:
 
@@ -139,7 +139,7 @@ ___
 
 Ƭ **Mapper**: *function*
 
-*Defined in [src/types.ts:3](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/types.ts#L3)*
+*Defined in [src/types.ts:3](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/types.ts#L3)*
 
 #### Type declaration:
 
@@ -157,7 +157,7 @@ ___
 
 Ƭ **Pager**: *function*
 
-*Defined in [src/types.ts:26](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/types.ts#L26)*
+*Defined in [src/types.ts:26](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/types.ts#L26)*
 
 #### Type declaration:
 
@@ -175,7 +175,7 @@ ___
 
 Ƭ **Predicate**: *function*
 
-*Defined in [src/types.ts:1](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/types.ts#L1)*
+*Defined in [src/types.ts:1](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/types.ts#L1)*
 
 #### Type declaration:
 
@@ -193,7 +193,7 @@ ___
 
 Ƭ **Reducer**: *function*
 
-*Defined in [src/types.ts:5](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/types.ts#L5)*
+*Defined in [src/types.ts:5](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/types.ts#L5)*
 
 #### Type declaration:
 

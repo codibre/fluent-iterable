@@ -1,4 +1,4 @@
-[fluent-iterable - v0.1.4](../README.md) › [Globals](../globals.md) › ["fluentAsync"](_fluentasync_.md)
+[fluent-iterable - v0.1.5](../README.md) › [Globals](../globals.md) › ["fluentAsync"](_fluentasync_.md)
 
 # External module: "fluentAsync"
 
@@ -18,7 +18,7 @@
 
 ▸ **fluentAsync**<**T**>(`iterable`: AsyncIterable‹T›): *[FluentAsyncIterable](../interfaces/_fluentasync_.fluentasynciterable.md)‹T›*
 
-*Defined in [src/fluentAsync.ts:135](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsync.ts#L135)*
+*Defined in [src/fluentAsync.ts:135](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsync.ts#L135)*
 
 **Type parameters:**
 

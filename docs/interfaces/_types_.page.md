@@ -1,4 +1,4 @@
-[fluent-iterable - v0.1.4](../README.md) › [Globals](../globals.md) › ["types"](../modules/_types_.md) › [Page](_types_.page.md)
+[fluent-iterable - v0.1.5](../README.md) › [Globals](../globals.md) › ["types"](../modules/_types_.md) › [Page](_types_.page.md)
 
 # Interface: Page <**T, TToken**>
 
@@ -25,7 +25,7 @@
 
 • **nextPageToken**? : *TToken*
 
-*Defined in [src/types.ts:23](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/types.ts#L23)*
+*Defined in [src/types.ts:23](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/types.ts#L23)*
 
 ___
 
@@ -33,4 +33,4 @@ ___
 
 • **results**: *T[]*
 
-*Defined in [src/types.ts:22](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/types.ts#L22)*
+*Defined in [src/types.ts:22](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/types.ts#L22)*

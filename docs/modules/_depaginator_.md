@@ -1,4 +1,4 @@
-[fluent-iterable - v0.1.4](../README.md) › [Globals](../globals.md) › ["depaginator"](_depaginator_.md)
+[fluent-iterable - v0.1.5](../README.md) › [Globals](../globals.md) › ["depaginator"](_depaginator_.md)
 
 # External module: "depaginator"
 
@@ -14,7 +14,7 @@
 
 ▸ **depaginate**<**T**, **TToken**>(`pager`: [Pager](_types_.md#pager)‹T, TToken›): *AsyncIterable‹T›*
 
-*Defined in [src/depaginator.ts:3](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/depaginator.ts#L3)*
+*Defined in [src/depaginator.ts:3](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/depaginator.ts#L3)*
 
 **Type parameters:**
 

@@ -1,4 +1,4 @@
-[fluent-iterable - v0.1.4](../README.md) › [Globals](../globals.md) › ["utils"](_utils_.md)
+[fluent-iterable - v0.1.5](../README.md) › [Globals](../globals.md) › ["utils"](_utils_.md)
 
 # External module: "utils"
 
@@ -18,7 +18,7 @@
 
 ▸ **identity**<**T**>(`t`: T): *T*
 
-*Defined in [src/utils.ts:1](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/utils.ts#L1)*
+*Defined in [src/utils.ts:1](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/utils.ts#L1)*
 
 **Type parameters:**
 
@@ -38,7 +38,7 @@ ___
 
 ▸ **identityAsync**<**T**>(`t`: T): *Promise‹T›*
 
-*Defined in [src/utils.ts:2](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/utils.ts#L2)*
+*Defined in [src/utils.ts:2](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/utils.ts#L2)*
 
 **Type parameters:**
 
@@ -58,7 +58,7 @@ ___
 
 ▸ **interval**(`fromInclusive`: number, `count?`: undefined | number): *Iterable‹number›*
 
-*Defined in [src/utils.ts:6](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/utils.ts#L6)*
+*Defined in [src/utils.ts:6](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/utils.ts#L6)*
 
 **Parameters:**
 
@@ -75,7 +75,7 @@ ___
 
 ▸ **truth**(): *boolean*
 
-*Defined in [src/utils.ts:3](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/utils.ts#L3)*
+*Defined in [src/utils.ts:3](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/utils.ts#L3)*
 
 **Returns:** *boolean*
 
@@ -85,6 +85,6 @@ ___
 
 ▸ **truthAsync**(): *Promise‹boolean›*
 
-*Defined in [src/utils.ts:4](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/utils.ts#L4)*
+*Defined in [src/utils.ts:4](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/utils.ts#L4)*
 
 **Returns:** *Promise‹boolean›*

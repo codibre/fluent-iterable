@@ -1,4 +1,4 @@
-[fluent-iterable - v0.1.4](../README.md) › [Globals](../globals.md) › ["fluentAsyncFunctions"](_fluentasyncfunctions_.md)
+[fluent-iterable - v0.1.5](../README.md) › [Globals](../globals.md) › ["fluentAsyncFunctions"](_fluentasyncfunctions_.md)
 
 # External module: "fluentAsyncFunctions"
 
@@ -71,7 +71,7 @@
 
 ▸ **all**<**T**>(`iterable`: AsyncIterable‹T›, `predicate`: [Predicate](_types_.md#predicate)‹T›): *Promise‹boolean›*
 
-*Defined in [src/fluentAsyncFunctions.ts:348](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L348)*
+*Defined in [src/fluentAsyncFunctions.ts:348](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L348)*
 
 **Type parameters:**
 
@@ -92,7 +92,7 @@ ___
 
 ▸ **allAsync**<**T**>(`iterable`: AsyncIterable‹T›, `predicate`: [AsyncPredicate](_types_.md#asyncpredicate)‹T›): *Promise‹boolean›*
 
-*Defined in [src/fluentAsyncFunctions.ts:358](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L358)*
+*Defined in [src/fluentAsyncFunctions.ts:358](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L358)*
 
 **Type parameters:**
 
@@ -113,7 +113,7 @@ ___
 
 ▸ **any**<**T**>(`iterable`: AsyncIterable‹T›, `predicate`: [Predicate](_types_.md#predicate)‹T›): *Promise‹boolean›*
 
-*Defined in [src/fluentAsyncFunctions.ts:368](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L368)*
+*Defined in [src/fluentAsyncFunctions.ts:368](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L368)*
 
 **Type parameters:**
 
@@ -134,7 +134,7 @@ ___
 
 ▸ **anyAsync**<**T**>(`iterable`: AsyncIterable‹T›, `predicate`: [AsyncPredicate](_types_.md#asyncpredicate)‹T›): *Promise‹boolean›*
 
-*Defined in [src/fluentAsyncFunctions.ts:372](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L372)*
+*Defined in [src/fluentAsyncFunctions.ts:372](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L372)*
 
 **Type parameters:**
 
@@ -155,7 +155,7 @@ ___
 
 ▸ **append**<**T**>(`iterable`: AsyncIterable‹T›, `item`: T): *AsyncIterable‹T›*
 
-*Defined in [src/fluentAsyncFunctions.ts:107](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L107)*
+*Defined in [src/fluentAsyncFunctions.ts:107](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L107)*
 
 **Type parameters:**
 
@@ -176,7 +176,7 @@ ___
 
 ▸ **avg**<**T**>(`iterable`: AsyncIterable‹T›, `mapper`: [Mapper](_types_.md#mapper)‹T, number›): *Promise‹number›*
 
-*Defined in [src/fluentAsyncFunctions.ts:486](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L486)*
+*Defined in [src/fluentAsyncFunctions.ts:486](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L486)*
 
 **Type parameters:**
 
@@ -197,7 +197,7 @@ ___
 
 ▸ **avgAsync**<**T**>(`iterable`: AsyncIterable‹T›, `mapper`: [AsyncMapper](_types_.md#asyncmapper)‹T, number›): *Promise‹number›*
 
-*Defined in [src/fluentAsyncFunctions.ts:501](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L501)*
+*Defined in [src/fluentAsyncFunctions.ts:501](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L501)*
 
 **Type parameters:**
 
@@ -218,7 +218,7 @@ ___
 
 ▸ **concat**<**T**>(...`iterables`: Array‹AsyncIterable‹T››): *AsyncIterable‹T›*
 
-*Defined in [src/fluentAsyncFunctions.ts:117](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L117)*
+*Defined in [src/fluentAsyncFunctions.ts:117](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L117)*
 
 **Type parameters:**
 
@@ -238,7 +238,7 @@ ___
 
 ▸ **contains**<**T**>(`iterable`: AsyncIterable‹T›, `item`: T): *Promise‹boolean›*
 
-*Defined in [src/fluentAsyncFunctions.ts:376](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L376)*
+*Defined in [src/fluentAsyncFunctions.ts:376](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L376)*
 
 **Type parameters:**
 
@@ -259,7 +259,7 @@ ___
 
 ▸ **count**<**T**>(`iterable`: AsyncIterable‹T›, `predicate`: [Predicate](_types_.md#predicate)‹T›): *Promise‹number›*
 
-*Defined in [src/fluentAsyncFunctions.ts:221](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L221)*
+*Defined in [src/fluentAsyncFunctions.ts:221](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L221)*
 
 **Type parameters:**
 
@@ -280,7 +280,7 @@ ___
 
 ▸ **countAsync**<**T**>(`iterable`: AsyncIterable‹T›, `predicate`: [AsyncPredicate](_types_.md#asyncpredicate)‹T›): *Promise‹number›*
 
-*Defined in [src/fluentAsyncFunctions.ts:232](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L232)*
+*Defined in [src/fluentAsyncFunctions.ts:232](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L232)*
 
 **Type parameters:**
 
@@ -301,7 +301,7 @@ ___
 
 ▸ **distinct**<**T**, **R**>(`iterable`: AsyncIterable‹T›, `mapper`: [Mapper](_types_.md#mapper)‹T, R›): *AsyncIterable‹T›*
 
-*Defined in [src/fluentAsyncFunctions.ts:162](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L162)*
+*Defined in [src/fluentAsyncFunctions.ts:162](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L162)*
 
 **Type parameters:**
 
@@ -324,7 +324,7 @@ ___
 
 ▸ **distinctAsync**<**T**, **R**>(`iterable`: AsyncIterable‹T›, `mapper`: [AsyncMapper](_types_.md#asyncmapper)‹T, R›): *AsyncIterable‹T›*
 
-*Defined in [src/fluentAsyncFunctions.ts:178](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L178)*
+*Defined in [src/fluentAsyncFunctions.ts:178](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L178)*
 
 **Type parameters:**
 
@@ -347,7 +347,7 @@ ___
 
 ▸ **execute**<**T**>(`iterable`: AsyncIterable‹T›, `action`: [Action](_types_.md#action)‹T›): *AsyncIterable‹T›*
 
-*Defined in [src/fluentAsyncFunctions.ts:427](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L427)*
+*Defined in [src/fluentAsyncFunctions.ts:427](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L427)*
 
 **Type parameters:**
 
@@ -368,7 +368,7 @@ ___
 
 ▸ **executeAsync**<**T**>(`iterable`: AsyncIterable‹T›, `action`: [AsyncAction](_types_.md#asyncaction)‹T›): *AsyncIterable‹T›*
 
-*Defined in [src/fluentAsyncFunctions.ts:434](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L434)*
+*Defined in [src/fluentAsyncFunctions.ts:434](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L434)*
 
 **Type parameters:**
 
@@ -389,7 +389,7 @@ ___
 
 ▸ **filter**<**T**>(`iterable`: AsyncIterable‹T›, `predicate`: [Predicate](_types_.md#predicate)‹T›): *AsyncIterable‹T›*
 
-*Defined in [src/fluentAsyncFunctions.ts:91](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L91)*
+*Defined in [src/fluentAsyncFunctions.ts:91](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L91)*
 
 **Type parameters:**
 
@@ -410,7 +410,7 @@ ___
 
 ▸ **filterAsync**<**T**>(`iterable`: AsyncIterable‹T›, `predicate`: [AsyncPredicate](_types_.md#asyncpredicate)‹T›): *AsyncIterable‹T›*
 
-*Defined in [src/fluentAsyncFunctions.ts:99](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L99)*
+*Defined in [src/fluentAsyncFunctions.ts:99](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L99)*
 
 **Type parameters:**
 
@@ -431,7 +431,7 @@ ___
 
 ▸ **first**<**T**>(`iterable`: AsyncIterable‹T›, `predicate`: [Predicate](_types_.md#predicate)‹T›): *Promise‹T | undefined›*
 
-*Defined in [src/fluentAsyncFunctions.ts:243](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L243)*
+*Defined in [src/fluentAsyncFunctions.ts:243](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L243)*
 
 **Type parameters:**
 
@@ -452,7 +452,7 @@ ___
 
 ▸ **firstAsync**<**T**>(`iterable`: AsyncIterable‹T›, `predicate`: [AsyncPredicate](_types_.md#asyncpredicate)‹T›): *Promise‹T | undefined›*
 
-*Defined in [src/fluentAsyncFunctions.ts:253](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L253)*
+*Defined in [src/fluentAsyncFunctions.ts:253](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L253)*
 
 **Type parameters:**
 
@@ -473,7 +473,7 @@ ___
 
 ▸ **flatten**<**T**, **R**>(`iterable`: AsyncIterable‹T›, `mapper`: [Mapper](_types_.md#mapper)‹T, Iterable‹R››): *AsyncIterable‹R›*
 
-*Defined in [src/fluentAsyncFunctions.ts:140](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L140)*
+*Defined in [src/fluentAsyncFunctions.ts:140](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L140)*
 
 **Type parameters:**
 
@@ -496,7 +496,7 @@ ___
 
 ▸ **flattenAsync**<**T**, **R**>(`iterable`: AsyncIterable‹T›, `mapper`: [AsyncMapper](_types_.md#asyncmapper)‹T, AsyncIterable‹R››): *AsyncIterable‹R›*
 
-*Defined in [src/fluentAsyncFunctions.ts:149](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L149)*
+*Defined in [src/fluentAsyncFunctions.ts:149](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L149)*
 
 **Type parameters:**
 
@@ -519,7 +519,7 @@ ___
 
 ▸ **forEach**<**T**>(`iterable`: AsyncIterable‹T›, `action`: [Action](_types_.md#action)‹T›): *Promise‹void›*
 
-*Defined in [src/fluentAsyncFunctions.ts:415](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L415)*
+*Defined in [src/fluentAsyncFunctions.ts:415](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L415)*
 
 **Type parameters:**
 
@@ -540,7 +540,7 @@ ___
 
 ▸ **forEachAsync**<**T**>(`iterable`: AsyncIterable‹T›, `action`: [AsyncAction](_types_.md#asyncaction)‹T›): *Promise‹void›*
 
-*Defined in [src/fluentAsyncFunctions.ts:421](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L421)*
+*Defined in [src/fluentAsyncFunctions.ts:421](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L421)*
 
 **Type parameters:**
 
@@ -561,7 +561,7 @@ ___
 
 ▸ **group**<**T**, **R**>(`iterable`: AsyncIterable‹T›, `mapper`: [Mapper](_types_.md#mapper)‹T, R›): *AsyncIterable‹[Group](../interfaces/_types_.group.md)‹T, R››*
 
-*Defined in [src/fluentAsyncFunctions.ts:191](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L191)*
+*Defined in [src/fluentAsyncFunctions.ts:191](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L191)*
 
 **Type parameters:**
 
@@ -584,7 +584,7 @@ ___
 
 ▸ **groupAsync**<**T**, **R**>(`iterable`: AsyncIterable‹T›, `mapper`: [AsyncMapper](_types_.md#asyncmapper)‹T, R›): *AsyncIterable‹[Group](../interfaces/_types_.group.md)‹T, R››*
 
-*Defined in [src/fluentAsyncFunctions.ts:206](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L206)*
+*Defined in [src/fluentAsyncFunctions.ts:206](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L206)*
 
 **Type parameters:**
 
@@ -607,7 +607,7 @@ ___
 
 ▸ **join**<**T**>(`iterable`: AsyncIterable‹T›, `separator`: string, `mapper`: [Mapper](_types_.md#mapper)‹T, string›): *Promise‹string›*
 
-*Defined in [src/fluentAsyncFunctions.ts:441](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L441)*
+*Defined in [src/fluentAsyncFunctions.ts:441](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L441)*
 
 **Type parameters:**
 
@@ -629,7 +629,7 @@ ___
 
 ▸ **joinAsync**<**T**>(`iterable`: AsyncIterable‹T›, `separator`: string, `mapper`: [AsyncMapper](_types_.md#asyncmapper)‹T, string›): *Promise‹string›*
 
-*Defined in [src/fluentAsyncFunctions.ts:458](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L458)*
+*Defined in [src/fluentAsyncFunctions.ts:458](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L458)*
 
 **Type parameters:**
 
@@ -651,7 +651,7 @@ ___
 
 ▸ **last**<**T**>(`iterable`: AsyncIterable‹T›, `predicate`: [Predicate](_types_.md#predicate)‹T›): *Promise‹T | undefined›*
 
-*Defined in [src/fluentAsyncFunctions.ts:288](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L288)*
+*Defined in [src/fluentAsyncFunctions.ts:288](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L288)*
 
 **Type parameters:**
 
@@ -672,7 +672,7 @@ ___
 
 ▸ **lastAsync**<**T**>(`iterable`: AsyncIterable‹T›, `predicate`: [AsyncPredicate](_types_.md#asyncpredicate)‹T›): *Promise‹T | undefined›*
 
-*Defined in [src/fluentAsyncFunctions.ts:300](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L300)*
+*Defined in [src/fluentAsyncFunctions.ts:300](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L300)*
 
 **Type parameters:**
 
@@ -693,7 +693,7 @@ ___
 
 ▸ **map**<**T**, **R**>(`iterable`: AsyncIterable‹T›, `mapper`: [Mapper](_types_.md#mapper)‹T, R›): *AsyncIterable‹R›*
 
-*Defined in [src/fluentAsyncFunctions.ts:79](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L79)*
+*Defined in [src/fluentAsyncFunctions.ts:79](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L79)*
 
 **Type parameters:**
 
@@ -716,7 +716,7 @@ ___
 
 ▸ **mapAsync**<**T**, **R**>(`iterable`: AsyncIterable‹T›, `mapper`: [AsyncMapper](_types_.md#asyncmapper)‹T, R›): *AsyncIterable‹R›*
 
-*Defined in [src/fluentAsyncFunctions.ts:85](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L85)*
+*Defined in [src/fluentAsyncFunctions.ts:85](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L85)*
 
 **Type parameters:**
 
@@ -739,7 +739,7 @@ ___
 
 ▸ **max**<**T**>(`iterable`: AsyncIterable‹T›, `mapper`: [Mapper](_types_.md#mapper)‹T, number›): *Promise‹T | undefined›*
 
-*Defined in [src/fluentAsyncFunctions.ts:552](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L552)*
+*Defined in [src/fluentAsyncFunctions.ts:552](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L552)*
 
 **Type parameters:**
 
@@ -760,7 +760,7 @@ ___
 
 ▸ **maxAsync**<**T**>(`iterable`: AsyncIterable‹T›, `mapper`: [AsyncMapper](_types_.md#asyncmapper)‹T, number›): *Promise‹T | undefined›*
 
-*Defined in [src/fluentAsyncFunctions.ts:559](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L559)*
+*Defined in [src/fluentAsyncFunctions.ts:559](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L559)*
 
 **Type parameters:**
 
@@ -781,7 +781,7 @@ ___
 
 ▸ **min**<**T**>(`iterable`: AsyncIterable‹T›, `mapper`: [Mapper](_types_.md#mapper)‹T, number›): *Promise‹T | undefined›*
 
-*Defined in [src/fluentAsyncFunctions.ts:541](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L541)*
+*Defined in [src/fluentAsyncFunctions.ts:541](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L541)*
 
 **Type parameters:**
 
@@ -802,7 +802,7 @@ ___
 
 ▸ **minAsync**<**T**>(`iterable`: AsyncIterable‹T›, `mapper`: [AsyncMapper](_types_.md#asyncmapper)‹T, number›): *Promise‹T | undefined›*
 
-*Defined in [src/fluentAsyncFunctions.ts:548](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L548)*
+*Defined in [src/fluentAsyncFunctions.ts:548](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L548)*
 
 **Type parameters:**
 
@@ -823,7 +823,7 @@ ___
 
 ▸ **partition**<**T**>(`iterable`: AsyncIterable‹T›, `size`: number): *AsyncIterable‹AsyncIterable‹T››*
 
-*Defined in [src/fluentAsyncFunctions.ts:277](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L277)*
+*Defined in [src/fluentAsyncFunctions.ts:277](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L277)*
 
 **Type parameters:**
 
@@ -844,7 +844,7 @@ ___
 
 ▸ **prepend**<**T**>(`iterable`: AsyncIterable‹T›, `item`: T): *AsyncIterable‹T›*
 
-*Defined in [src/fluentAsyncFunctions.ts:112](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L112)*
+*Defined in [src/fluentAsyncFunctions.ts:112](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L112)*
 
 **Type parameters:**
 
@@ -865,7 +865,7 @@ ___
 
 ▸ **readPartition**<**T**>(`iterator`: AsyncIterator‹T›, `next`: IteratorResult‹T›, `size`: number): *AsyncIterable‹T›*
 
-*Defined in [src/fluentAsyncFunctions.ts:263](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L263)*
+*Defined in [src/fluentAsyncFunctions.ts:263](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L263)*
 
 **Type parameters:**
 
@@ -887,7 +887,7 @@ ___
 
 ▸ **reduce**<**T**, **R**>(`iterable`: AsyncIterable‹T›, `reducer`: [Reducer](_types_.md#reducer)‹T, R›, `initial`: R): *Promise‹R›*
 
-*Defined in [src/fluentAsyncFunctions.ts:340](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L340)*
+*Defined in [src/fluentAsyncFunctions.ts:340](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L340)*
 
 **Type parameters:**
 
@@ -911,7 +911,7 @@ ___
 
 ▸ **reduceAndMap**<**T**, **A**, **R**>(`iterable`: AsyncIterable‹T›, `reducer`: [Reducer](_types_.md#reducer)‹T, A›, `initial`: A, `result`: [Mapper](_types_.md#mapper)‹A, R›): *Promise‹R›*
 
-*Defined in [src/fluentAsyncFunctions.ts:312](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L312)*
+*Defined in [src/fluentAsyncFunctions.ts:312](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L312)*
 
 **Type parameters:**
 
@@ -938,7 +938,7 @@ ___
 
 ▸ **reduceAndMapAsync**<**T**, **A**, **R**>(`iterable`: AsyncIterable‹T›, `reducer`: [AsyncReducer](_types_.md#asyncreducer)‹T, A›, `initial`: A, `result`: [AsyncMapper](_types_.md#asyncmapper)‹A, R›): *Promise‹R›*
 
-*Defined in [src/fluentAsyncFunctions.ts:326](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L326)*
+*Defined in [src/fluentAsyncFunctions.ts:326](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L326)*
 
 **Type parameters:**
 
@@ -965,7 +965,7 @@ ___
 
 ▸ **reduceAsync**<**T**, **R**>(`iterable`: AsyncIterable‹T›, `reducer`: [AsyncReducer](_types_.md#asyncreducer)‹T, R›, `initial`: R): *Promise‹R›*
 
-*Defined in [src/fluentAsyncFunctions.ts:344](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L344)*
+*Defined in [src/fluentAsyncFunctions.ts:344](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L344)*
 
 **Type parameters:**
 
@@ -989,7 +989,7 @@ ___
 
 ▸ **repeat**<**T**>(`iterable`: AsyncIterable‹T›, `n`: number): *AsyncIterable‹T›*
 
-*Defined in [src/fluentAsyncFunctions.ts:123](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L123)*
+*Defined in [src/fluentAsyncFunctions.ts:123](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L123)*
 
 **Type parameters:**
 
@@ -1010,7 +1010,7 @@ ___
 
 ▸ **skip**<**T**>(`iterable`: AsyncIterable‹T›, `n`: number): *AsyncIterable‹T›*
 
-*Defined in [src/fluentAsyncFunctions.ts:74](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L74)*
+*Defined in [src/fluentAsyncFunctions.ts:74](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L74)*
 
 **Type parameters:**
 
@@ -1031,7 +1031,7 @@ ___
 
 ▸ **skipWhile**<**T**>(`iterable`: AsyncIterable‹T›, `condition`: [Predicate](_types_.md#predicate)‹T›): *AsyncIterable‹T›*
 
-*Defined in [src/fluentAsyncFunctions.ts:48](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L48)*
+*Defined in [src/fluentAsyncFunctions.ts:48](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L48)*
 
 **Type parameters:**
 
@@ -1052,7 +1052,7 @@ ___
 
 ▸ **skipWhileAsync**<**T**>(`iterable`: AsyncIterable‹T›, `condition`: [AsyncPredicate](_types_.md#asyncpredicate)‹T›): *AsyncIterable‹T›*
 
-*Defined in [src/fluentAsyncFunctions.ts:61](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L61)*
+*Defined in [src/fluentAsyncFunctions.ts:61](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L61)*
 
 **Type parameters:**
 
@@ -1073,7 +1073,7 @@ ___
 
 ▸ **sort**<**T**>(`iterable`: AsyncIterable‹T›, `comparer?`: [Comparer](_types_.md#comparer)‹T›): *AsyncIterable‹T›*
 
-*Defined in [src/fluentAsyncFunctions.ts:158](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L158)*
+*Defined in [src/fluentAsyncFunctions.ts:158](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L158)*
 
 **Type parameters:**
 
@@ -1094,7 +1094,7 @@ ___
 
 ▸ **sum**<**T**>(`iterable`: AsyncIterable‹T›, `mapper`: [Mapper](_types_.md#mapper)‹T, number›): *Promise‹number›*
 
-*Defined in [src/fluentAsyncFunctions.ts:475](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L475)*
+*Defined in [src/fluentAsyncFunctions.ts:475](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L475)*
 
 **Type parameters:**
 
@@ -1115,7 +1115,7 @@ ___
 
 ▸ **sumAsync**<**T**>(`iterable`: AsyncIterable‹T›, `mapper`: [AsyncMapper](_types_.md#asyncmapper)‹T, number›): *Promise‹number›*
 
-*Defined in [src/fluentAsyncFunctions.ts:482](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L482)*
+*Defined in [src/fluentAsyncFunctions.ts:482](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L482)*
 
 **Type parameters:**
 
@@ -1136,7 +1136,7 @@ ___
 
 ▸ **take**<**T**>(`iterable`: AsyncIterable‹T›, `n`: number): *AsyncIterable‹T›*
 
-*Defined in [src/fluentAsyncFunctions.ts:43](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L43)*
+*Defined in [src/fluentAsyncFunctions.ts:43](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L43)*
 
 **Type parameters:**
 
@@ -1157,7 +1157,7 @@ ___
 
 ▸ **takeWhile**<**T**>(`iterable`: AsyncIterable‹T›, `condition`: [Predicate](_types_.md#predicate)‹T›): *AsyncIterable‹T›*
 
-*Defined in [src/fluentAsyncFunctions.ts:23](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L23)*
+*Defined in [src/fluentAsyncFunctions.ts:23](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L23)*
 
 **Type parameters:**
 
@@ -1178,7 +1178,7 @@ ___
 
 ▸ **takeWhileAsync**<**T**>(`iterable`: AsyncIterable‹T›, `condition`: [AsyncPredicate](_types_.md#asyncpredicate)‹T›): *AsyncIterable‹T›*
 
-*Defined in [src/fluentAsyncFunctions.ts:33](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L33)*
+*Defined in [src/fluentAsyncFunctions.ts:33](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L33)*
 
 **Type parameters:**
 
@@ -1199,7 +1199,7 @@ ___
 
 ▸ **toArray**<**T**>(`iterable`: AsyncIterable‹T›): *Promise‹T[]›*
 
-*Defined in [src/fluentAsyncFunctions.ts:380](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L380)*
+*Defined in [src/fluentAsyncFunctions.ts:380](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L380)*
 
 **Type parameters:**
 
@@ -1219,7 +1219,7 @@ ___
 
 ▸ **toObject**<**T**, **R**>(`iterable`: AsyncIterable‹T›, `keySelector`: [Mapper](_types_.md#mapper)‹T, string›, `valueSelector`: [Mapper](_types_.md#mapper)‹T, any›): *Promise‹R›*
 
-*Defined in [src/fluentAsyncFunctions.ts:389](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L389)*
+*Defined in [src/fluentAsyncFunctions.ts:389](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L389)*
 
 **Type parameters:**
 
@@ -1243,7 +1243,7 @@ ___
 
 ▸ **toObjectAsync**<**T**, **R**>(`iterable`: AsyncIterable‹T›, `keySelector`: [AsyncMapper](_types_.md#asyncmapper)‹T, string›, `valueSelector`: [AsyncMapper](_types_.md#asyncmapper)‹T, any›): *Promise‹R›*
 
-*Defined in [src/fluentAsyncFunctions.ts:402](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L402)*
+*Defined in [src/fluentAsyncFunctions.ts:402](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L402)*
 
 **Type parameters:**
 
@@ -1267,7 +1267,7 @@ ___
 
 ▸ **top**<**T**, **R**>(`iterable`: AsyncIterable‹T›, `mapper`: [Mapper](_types_.md#mapper)‹T, R›, `comparer`: [Comparer](_types_.md#comparer)‹R›): *Promise‹T | undefined›*
 
-*Defined in [src/fluentAsyncFunctions.ts:513](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L513)*
+*Defined in [src/fluentAsyncFunctions.ts:513](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L513)*
 
 **Type parameters:**
 
@@ -1291,7 +1291,7 @@ ___
 
 ▸ **topAsync**<**T**, **R**>(`iterable`: AsyncIterable‹T›, `mapper`: [AsyncMapper](_types_.md#asyncmapper)‹T, R›, `comparer`: [Comparer](_types_.md#comparer)‹R›): *Promise‹T | undefined›*
 
-*Defined in [src/fluentAsyncFunctions.ts:525](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L525)*
+*Defined in [src/fluentAsyncFunctions.ts:525](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L525)*
 
 **Type parameters:**
 
@@ -1315,7 +1315,7 @@ ___
 
 ▸ **withIndex**<**T**>(`iterable`: AsyncIterable‹T›): *AsyncIterable‹[Indexed](../interfaces/_types_.indexed.md)‹T››*
 
-*Defined in [src/fluentAsyncFunctions.ts:16](https://github.com/kataik/fluent-iterable/blob/bc60f04/src/fluentAsyncFunctions.ts#L16)*
+*Defined in [src/fluentAsyncFunctions.ts:16](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsyncFunctions.ts#L16)*
 
 **Type parameters:**
 
