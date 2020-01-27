@@ -1,12 +1,18 @@
-[fluent-iterable - v0.1.5](../README.md) › [Globals](../globals.md) › ["types"](../modules/_types_.md) › [Page](_types_.page.md)
+[fluent-iterable - v0.1.5](../README.md) › ["types"](../modules/_types_.md) › [Page](_types_.page.md)
 
 # Interface: Page <**T, TToken**>
+
+Represents a page of a paginated resource.
 
 ## Type parameters
 
 ▪ **T**
 
+The type of the elements of the page.
+
 ▪ **TToken**
+
+The type of the next page token associated to the page.
 
 ## Hierarchy
 
@@ -25,7 +31,7 @@
 
 • **nextPageToken**? : *TToken*
 
-*Defined in [src/types.ts:23](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/types.ts#L23)*
+The next page token associated to the page.
 
 ___
 
@@ -33,4 +39,4 @@ ___
 
 • **results**: *T[]*
 
-*Defined in [src/types.ts:22](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/types.ts#L22)*
+The elements of the page.

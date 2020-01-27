@@ -1,12 +1,8 @@
-[fluent-iterable - v0.1.5](../README.md) › [Globals](../globals.md) › ["fluentAsync"](_fluentasync_.md)
+[fluent-iterable - v0.1.5](../README.md) › ["fluentAsync"](_fluentasync_.md)
 
-# External module: "fluentAsync"
+# Module: "fluentAsync"
 
 ## Index
-
-### Interfaces
-
-* [FluentAsyncIterable](../interfaces/_fluentasync_.fluentasynciterable.md)
 
 ### Functions
 
@@ -16,18 +12,22 @@
 
 ###  fluentAsync
 
-▸ **fluentAsync**<**T**>(`iterable`: AsyncIterable‹T›): *[FluentAsyncIterable](../interfaces/_fluentasync_.fluentasynciterable.md)‹T›*
+▸ **fluentAsync**<**T**>(`iterable`: AsyncIterable‹T›): *[FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)‹T›*
 
-*Defined in [src/fluentAsync.ts:135](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluentAsync.ts#L135)*
+Tranforms an asynchronous iterable into a [FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md).
 
 **Type parameters:**
 
 ▪ **T**
 
+The type of the items in the async iterable.
+
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`iterable` | AsyncIterable‹T› |
+Name | Type | Description |
+------ | ------ | ------ |
+`iterable` | AsyncIterable‹T› | The asynchronous iterable instance. |
 
-**Returns:** *[FluentAsyncIterable](../interfaces/_fluentasync_.fluentasynciterable.md)‹T›*
+**Returns:** *[FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)‹T›*
+
+The [FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md) instance.

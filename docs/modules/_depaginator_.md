@@ -1,6 +1,6 @@
-[fluent-iterable - v0.1.5](../README.md) › [Globals](../globals.md) › ["depaginator"](_depaginator_.md)
+[fluent-iterable - v0.1.5](../README.md) › ["depaginator"](_depaginator_.md)
 
-# External module: "depaginator"
+# Module: "depaginator"
 
 ## Index
 
@@ -12,20 +12,26 @@
 
 ###  depaginate
 
-▸ **depaginate**<**T**, **TToken**>(`pager`: [Pager](_types_.md#pager)‹T, TToken›): *AsyncIterable‹T›*
+▸ **depaginate**<**T**, **TToken**>(`pager`: [Pager](../interfaces/_types_.pager.md)‹T, TToken›): *AsyncIterable‹T›*
 
-*Defined in [src/depaginator.ts:3](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/depaginator.ts#L3)*
+Translate a paginated resource into a non-paginated iterable of elements.
 
 **Type parameters:**
 
 ▪ **T**
 
+The type of the elements of the page.
+
 ▪ **TToken**
+
+The type of the next page token associated to the page.
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`pager` | [Pager](_types_.md#pager)‹T, TToken› |
+Name | Type | Description |
+------ | ------ | ------ |
+`pager` | [Pager](../interfaces/_types_.pager.md)‹T, TToken› | Represents the way of retrieving pages from the paginated resource. |
 
 **Returns:** *AsyncIterable‹T›*
+
+The iterable representing a steady flow of elements from the paginated resource.

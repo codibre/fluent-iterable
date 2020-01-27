@@ -1,11 +1,12 @@
-[fluent-iterable - v0.1.5](../README.md) › [Globals](../globals.md) › ["utils"](_utils_.md)
+[fluent-iterable - v0.1.5](../README.md) › ["utils"](_utils_.md)
 
-# External module: "utils"
+# Module: "utils"
 
 ## Index
 
 ### Functions
 
+* [fluentGroup](_utils_.md#const-fluentgroup)
 * [identity](_utils_.md#const-identity)
 * [identityAsync](_utils_.md#const-identityasync)
 * [interval](_utils_.md#interval)
@@ -14,11 +15,33 @@
 
 ## Functions
 
+### `Const` fluentGroup
+
+▸ **fluentGroup**<**T**, **R**>(`grp`: [Group](../interfaces/_types_.group.md)‹T, R›): *[FluentGroup](../interfaces/_types_.fluentgroup.md)‹T, R›*
+
+**`internal`** 
+
+**Type parameters:**
+
+▪ **T**
+
+▪ **R**
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`grp` | [Group](../interfaces/_types_.group.md)‹T, R› |
+
+**Returns:** *[FluentGroup](../interfaces/_types_.fluentgroup.md)‹T, R›*
+
+___
+
 ### `Const` identity
 
 ▸ **identity**<**T**>(`t`: T): *T*
 
-*Defined in [src/utils.ts:1](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/utils.ts#L1)*
+**`internal`** 
 
 **Type parameters:**
 
@@ -38,7 +61,7 @@ ___
 
 ▸ **identityAsync**<**T**>(`t`: T): *Promise‹T›*
 
-*Defined in [src/utils.ts:2](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/utils.ts#L2)*
+**`internal`** 
 
 **Type parameters:**
 
@@ -56,18 +79,30 @@ ___
 
 ###  interval
 
-▸ **interval**(`fromInclusive`: number, `count?`: undefined | number): *Iterable‹number›*
+▸ **interval**(`fromInclusive?`: undefined | number, `count?`: undefined | number): *Iterable‹number›*
 
-*Defined in [src/utils.ts:6](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/utils.ts#L6)*
+Generates a `count` long sequential integer interval starting from `fromInclusive`.
+
+* The interval starts at zero if `fromInclusive` is not specified.
+* The interval ends in infinity if `count` is not specified.
+
+Examples:
+
+1. `interval(5, 3)` generates an interval of `[5, 6, 7]`
+2. `interval(5)` generates an interval of `[5, 6, 7, ...]`
+3. `interval()` generates an interval of `[0, 1, 2, ...]`
+4. `fluent(interval(1)).take(10).forEach(console.log)` prints all numbers between 1 and 10 using [fluent](_fluent_.md#fluent).
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`fromInclusive` | number |
-`count?` | undefined &#124; number |
+Name | Type | Description |
+------ | ------ | ------ |
+`fromInclusive?` | undefined &#124; number | Specifies the start of the interval. Defaults to zero. |
+`count?` | undefined &#124; number | Specifies the length of the interval. The interval provides numbers indefinitely if omitted. |
 
 **Returns:** *Iterable‹number›*
+
+The iterable of numbers in the interval.
 
 ___
 
@@ -75,7 +110,7 @@ ___
 
 ▸ **truth**(): *boolean*
 
-*Defined in [src/utils.ts:3](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/utils.ts#L3)*
+**`internal`** 
 
 **Returns:** *boolean*
 
@@ -85,6 +120,6 @@ ___
 
 ▸ **truthAsync**(): *Promise‹boolean›*
 
-*Defined in [src/utils.ts:4](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/utils.ts#L4)*
+**`internal`** 
 
 **Returns:** *Promise‹boolean›*
