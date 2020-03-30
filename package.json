@@ -22,7 +22,7 @@
     "test": "npm run lint && ts-mocha -p tsconfig.json tst/**/*.spec.ts --reporter spec",
     "prepublishOnly": "npm run build && npm test",
     "preversion": "npm run build && npm test",
-    "version": "scripts/prepare && git add -A",
+    "version": "scripts/prepare $npm_package_version && git add -A",
     "postversion": "git push && git push --tags"
   },
   "repository": {
