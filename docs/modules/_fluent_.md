@@ -1,12 +1,8 @@
-[fluent-iterable - v0.1.5](../README.md) › [Globals](../globals.md) › ["fluent"](_fluent_.md)
+[fluent-iterable - v0.1.5](../README.md) › ["fluent"](_fluent_.md)
 
-# External module: "fluent"
+# Module: "fluent"
 
 ## Index
-
-### Interfaces
-
-* [FluentIterable](../interfaces/_fluent_.fluentiterable.md)
 
 ### Functions
 
@@ -16,18 +12,22 @@
 
 ###  fluent
 
-▸ **fluent**<**T**>(`iterable`: Iterable‹T›): *[FluentIterable](../interfaces/_fluent_.fluentiterable.md)‹T›*
+▸ **fluent**<**T**>(`iterable`: Iterable‹T›): *[FluentIterable](../interfaces/_types_.fluentiterable.md)‹T›*
 
-*Defined in [src/fluent.ts:138](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/fluent.ts#L138)*
+Tranforms an iterable into a [FluentIterable](../interfaces/_types_.fluentiterable.md).
 
 **Type parameters:**
 
 ▪ **T**
 
+The type of the items in the iterable.
+
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`iterable` | Iterable‹T› |
+Name | Type | Description |
+------ | ------ | ------ |
+`iterable` | Iterable‹T› | The iterable instance. |
 
-**Returns:** *[FluentIterable](../interfaces/_fluent_.fluentiterable.md)‹T›*
+**Returns:** *[FluentIterable](../interfaces/_types_.fluentiterable.md)‹T›*
+
+The [FluentIterable](../interfaces/_types_.fluentiterable.md) instance.

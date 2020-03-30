@@ -1,10 +1,194 @@
-# fluent-iterable
+![CI](https://github.com/kataik/fluent-iterable/workflows/CI/badge.svg)
 
-Provides LINQ-like fluent api operations for iterables and async iterables. Detailed readme is on it's way, until that, some fun examples on how to use this library:
+Provides [fluent api](https://en.wikipedia.org/wiki/Fluent_interface) operations on iterables and async iterables - similar to what defined on arrays. Especially useful until [relevant ESNext features](https://tc39.es/proposal-iterator-helpers/#sec-iteration) are being delivered.
 
-## Examples
+## Description
 
-### Playing with Fibonacci generator
+The library provides the common transformation, filtering and aggregation operations on iterables and async iterables. Supported operations include:
+
+* Item-by-item transformations like [map](docs/interfaces/_types_.fluentiterable.md#map), [withIndex](docs/interfaces/_types_.fluentiterable.md#withIndex)
+* Group transformations like [flatten](docs/interfaces/_types_.fluentiterable.md#flatten), [group](docs/interfaces/_types_.fluentiterable.md#group), [partition](docs/interfaces/_types_.fluentiterable.md#partition), [repeat](docs/interfaces/_types_.fluentiterable.md#repeat), [sort](docs/interfaces/_types_.fluentiterable.md#sort)
+* Extending operations like [append](docs/interfaces/_types_.fluentiterable.md#append), [prepend](docs/interfaces/_types_.fluentiterable.md#prepend), [concat](docs/interfaces/_types_.fluentiterable.md#concat)
+* Narrowing operations like [filter](docs/interfaces/_types_.fluentiterable.md#filter), [take](docs/interfaces/_types_.fluentiterable.md#take), [skip](docs/interfaces/_types_.fluentiterable.md#skip), [distinct](docs/interfaces/_types_.fluentiterable.md#distinct), [first](docs/interfaces/_types_.fluentiterable.md#first), [last](docs/interfaces/_types_.fluentiterable.md#last)
+* Aggregating operations like [reduce](docs/interfaces/_types_.fluentiterable.md#reduce), [toArray](docs/interfaces/_types_.fluentiterable.md#toArray), [toObject](docs/interfaces/_types_.fluentiterable.md#toObject), [join](docs/interfaces/_types_.fluentiterable.md#join)
+* Numeric aggregating operations like [count](docs/interfaces/_types_.fluentiterable.md#count), [max](docs/interfaces/_types_.fluentiterable.md#max), [min](docs/interfaces/_types_.fluentiterable.md#min), [sum](docs/interfaces/_types_.fluentiterable.md#sum), [avg](docs/interfaces/_types_.fluentiterable.md#avg)
+* Logical aggregating operations like [all](docs/interfaces/_types_.fluentiterable.md#all), [any](docs/interfaces/_types_.fluentiterable.md#any), [contains](docs/interfaces/_types_.fluentiterable.md#contains)
+* Execution operations like [execute](docs/interfaces/_types_.fluentiterable.md#execute), [forEach](docs/interfaces/_types_.fluentiterable.md#forEach)
+
+## Quick start guide
+
+Install from [Node Package Manager](https://www.npmjs.com/): `npm i fluent-iterable`
+
+Add the following code to your index file (ts example):
+
+```typescript
+import fluent, { FluentIterable } from 'fluent-iterable';
+
+const numbers: number[] = [3, 1, 8, 6, 9, 2];
+const iterable: FluentIterable<number> = fluent(numbers);
+
+console.log(`The largest even number is: ${iterable.filter(n => n % 2 === 0).max()}`);
+```
+
+## Usage
+
+Click here for the [Full API Reference](./docs/README.md).
+
+### Basics
+
+ECMAScript introduced support for [iterables and generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators) with version ES6 and their [asynchronous counterparts](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator) with version ES2018. It has introduced an abstraction over sequential iterators (arrays, maps, generators, etc), enabling us to implement solutions regardless of the actual type of the iterable collection. It is especially powerful when using in tandem with generator functions to avoid storing all items in memory when its avoidable. The API provided by *fluent-iterable* reads the elements of the underlying iterable only when needed and stops reading elements as soon as the result is determined.
+
+To get started with the fluent API, you need to translate the iterable (can be any object with [Symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) [iterator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator) or [asyncIterator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator) defined) into either a [FluentIterable](docs/interfaces/_types_.fluentiterable.md) using [fluent()](docs/modules/_fluent_.md#fluent) or a [FluentAsyncIterable](docs/interfaces/_types_.fluentasynciterable.md) using [fluentAsync()](docs/modules/_fluentasync_.md#fluentAsync).
+
+```typescript
+import fetch from 'node-fetch';
+import fluent, { fluentAsync, FluentIterable, FluentAsyncIterable } from 'fluent-iterable';
+
+const iterableOfArray: FluentIterable<number> = fluent([3, 1, 8, 6, 9, 2]);
+
+function* naiveFibonacci(): Iterable<number> {
+  yield 0;
+  yield 1;
+
+  let x = 0;
+  let y = 1;
+
+  while (true) {
+    y = x + y;
+    x = y - x;
+    yield y;
+  }
+}
+
+const iterableOfGenerator: FluentIterable<number> = fluent(naiveFibonacci());
+
+async function* emails(): AsyncIterable<string> {
+  let page = 1;
+  while (true) {
+    const res = await fetch(`https://reqres.in/api/users?page=${page}`);
+    if (!res.ok) {
+      break;
+    }
+    yield* (await res.json()).data.map(user => user.email);
+  }
+}
+
+const asyncIterableOfEmails: FluentAsyncIterable<string> = fluentAsync(emails());
+```
+
+Once you have an instance of a fluent iterable, you can start chaining any of the supported operations to express what you need, like:
+
+```typescript
+...
+
+interface ChatMessage {
+  id: number;
+  from: string;
+  to: string;
+  body: string;
+}
+
+...
+
+function getAllMessages(iterable: FluentAsyncIterable<ChatMessage>): FluentAsyncIterable<string> {
+  return iterable.map(chatMessage => chatMessage.body);
+}
+
+function getAllUsers(iterable: FluentAsyncIterable<ChatMessage>): FluentAsyncIterable<string> {
+  return iterable
+    .flatten(chatMessage => [ chatMessage.from, chatMessage.to ]) // convert the message entries into arrays of sender and recipient and flatten them
+    .distinct(); // yield the users only once
+}
+
+function getNumberOfUsers(iterable: FluentAsyncIterable<ChatMessage>): Promise<number> {
+  return getAllUsers(iterable).count();
+}
+
+async function getMostActiveUser(iterable: FluentAsyncIterable<ChatMessage>): Promise<string> {
+  const maxGroup: FluentGroup<ChatMessage> = await iterable
+    .group(chatMessage => chatMessage.from) // group the messages by their sender
+    .max(chatMessage => chatMessage.values.count()); // find one of the groups which has the most messages
+  return maxGroup.key;
+}
+
+async function hasUserSentEmptyMessage(iterable: FluentAsyncIterable<ChatMessage>, user: string): Promise<bool> {
+  return await iterable
+    .any(chatMessage => chatMessage.from === user && chatMessage.body.length === 0); // will stop reading elements as soon as found one which satisfying the condition
+}
+
+async function createBackupSequential(iterable: FluentAsyncIterable<ChatMessage>): Promise<void> {
+  await iterable
+    .execute(chatMessage => console.log(`Backing up message ${chatMessage.id}.`)) // log progress w/o modifying the iterable
+    .forEachAsync(chatMessage => fetch(BACKUP_URL, { // execute the asynchronous backup operation against all elements one-by-one
+      method: 'post',
+      body:    JSON.stringify(chatMessage),
+      headers: { 'Content-Type': 'application/json' },    
+    }));
+}
+
+async function createBackupParallel(iterable: FluentAsyncIterable<ChatMessage>): Promise<void> {
+  const promises = iterable
+    .execute(chatMessage => console.log(`Backing up message ${chatMessage.id}.`)) // log progress w/o modifying the iterable
+    .map(chatMessage => fetch(BACKUP_URL, { // translate all elements into a promise of their asynchronous backup operation
+      method: 'post',
+      body:    JSON.stringify(chatMessage),
+      headers: { 'Content-Type': 'application/json' },    
+    }));
+  await Promise.all(promises);
+}
+```
+
+### Utils
+
+The API provides some utility functions to help working with iterables.
+
+#### Interval
+
+The [interval()](docs/modules/_utils_.md#interval) function generates a continuous and unique sequence of numbers. If no arguments provided, the sequence starts at zero and generates infinite numbers.
+
+Note: remember, generator functions are state machines, calling the function will not actually generate the numbers. They are generated on the fly until new number are being read from it:
+
+```typescript
+import fluent, { interval } from 'fluent-iterable';
+
+const numbers: Iterable<number> = interval();
+const iterable: FluentIterable<number> = fluent(numbers);
+
+for (const number of iterable.take(10)) { // generate the first 10 numbers one-by-one
+  console.log(number);
+} // close the generator
+
+// this function would cause an infinite loop:
+// for (const number of iterable.take(10)) { // generate infinite number of numbers one-by-one
+//   console.log(number);
+// }
+```
+
+#### Depaginator
+
+The [depaginate()](docs/modules/_depaginator_.md#depaginate) is a handy little generator function when it comes down to dealing paginated resources. It is designed to translate the paginated resource into a non-paginated iterable of elements. The function takes one parameter of type [Pager](docs/modules/_types_.md), which defines how to retrieve a single [page](docs/interfaces/_types_.page.md) from the resource.
+
+```typescript
+import { fluentAsync, depaginate, Page, Pager } from 'fluent-iterable';
+
+interface Data { .. } // The type of the data stored in the paginated resource
+type NextPageToken = ..; // The type of the next page token (e.g. page number, DDB token string, etc)
+
+// These functions return a page of items from the resource in the form of { nextPageToken: NextPageToken, results: Data[] }
+async function getFirstPage(): Promise<Page<Data, NextPageToken>> { .. }
+async function getPage(nextPageToken: NextPageToken): Promise<Page<Data, NextPageToken>> { .. }
+
+const pager: Pager<Data, NextPageToken> = (nextPageToken) => nextPageToken ? getPage(nextPageToken) : getFirstPage();
+
+const allItems: AsyncIterable<Data> = depaginate(pager); // as long as you keep read items from this it will keep requesting pages to fulfil the reads
+const firstItems: FluentAsyncIterable<Data> = fluentAsync(depaginate(pager)).take(10); // you can read up to 10 items from this and it will request exactly as many pages as necessary to fulfill the reads
+
+// ... you get the picture
+```
+
+### Examples
+
+#### Playing with Fibonacci generator
 
 ```typescript
 import fluent from 'fluent-iterable';
@@ -57,7 +241,7 @@ console.log(
 
 ```
 
-### Playing with object arrays
+#### Playing with object arrays
 
 ```typescript
 import fluent from 'fluent-iterable';
@@ -139,11 +323,11 @@ console.log(
 );
 ```
 
-### Playing with remote
+#### Playing with remote
 
 ```typescript
 import fetch from 'node-fetch';
-import { fluentAsync } from 'fluent-iterable';
+import { fluentAsync, Pager } from 'fluent-iterable';
 
 interface Data {
   id: number;
@@ -168,3 +352,48 @@ fluentAsync(depaginate(pager))
   .forEach(res => console.log(res))
   .then(() => console.log('done'));
 ```
+
+#### Bonus: How to Scan DynamoDB like a pro
+
+```typescript
+import { DynamoDB } from 'aws-sdk';
+import { Key } from 'aws-sdk/clients/dynamodb';
+import { depaginate, fluentAsync, Pager } from 'fluent-iterable';
+
+async function *scan<TData>(
+  input: DynamoDB.DocumentClient.ScanInput
+): AsyncIterable<TData> {
+  const ddb = new DynamoDB.DocumentClient(..);
+  const pager: Pager<TData, Key> = async (token) => {
+    const result = await ddb
+      .scan(input)
+      .promise();
+
+    return {
+      nextPageToken: result.LastEvaluatedKey,
+      results: result.Items as TData[],
+    };
+  };
+
+  yield* depaginate(pager);
+}
+
+// and use it like this:
+
+const productsParams: DynamoDB.DocumentClient.ScanInput = {
+  TableName : 'ProductTable',
+  FilterExpression : '#shoename = :shoename', // optional
+  ExpressionAttributeValues : {':shoename' : 'yeezys'}, // optional
+  ExpressionAttributeNames: { '#shoename': 'name' } // optional
+};
+
+async function printProducts(count: number) {
+  for await (const product of fluentAsync(scan(productsParams)).take(count)) {
+    console.dir(product);
+  }
+}
+```
+
+## License
+
+Licensed under [MIT](https://en.wikipedia.org/wiki/MIT_License).

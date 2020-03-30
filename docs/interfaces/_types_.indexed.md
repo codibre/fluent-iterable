@@ -1,10 +1,14 @@
-[fluent-iterable - v0.1.5](../README.md) › [Globals](../globals.md) › ["types"](../modules/_types_.md) › [Indexed](_types_.indexed.md)
+[fluent-iterable - v0.1.5](../README.md) › ["types"](../modules/_types_.md) › [Indexed](_types_.indexed.md)
 
 # Interface: Indexed <**T**>
+
+Represents an indexed value of type `T`.
 
 ## Type parameters
 
 ▪ **T**
+
+The type of the value the index is associated to.
 
 ## Hierarchy
 
@@ -23,7 +27,7 @@
 
 • **idx**: *number*
 
-*Defined in [src/types.ts:17](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/types.ts#L17)*
+The index of the value.
 
 ___
 
@@ -31,4 +35,4 @@ ___
 
 • **value**: *T*
 
-*Defined in [src/types.ts:18](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/types.ts#L18)*
+The value.

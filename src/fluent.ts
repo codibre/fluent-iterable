@@ -1,5 +1,5 @@
-import fluentAsync, { FluentAsyncIterable } from './fluentAsync';
-import { identity, truth } from './utils';
+import fluentAsync from './fluentAsync';
+import { fluentGroup, identity, truth } from './utils';
 import {
   withIndex,
   takeWhile,
@@ -60,81 +60,14 @@ import {
   max,
   maxAsync,
 } from './fluentFunctions';
-import {
-  Action,
-  AsyncAction,
-  Comparer,
-  Group,
-  Mapper,
-  AsyncMapper,
-  Predicate,
-  AsyncPredicate,
-  Reducer,
-  AsyncReducer,
-  Indexed,
-} from './types';
+import { Comparer, Mapper, FluentIterable } from './types';
 
-interface FluentIterable<T> extends Iterable<T> {
-  withIndex(): FluentIterable<Indexed<T>>;
-  takeWhile(condition: Predicate<T>): FluentIterable<T>;
-  takeWhileAsync(condition: AsyncPredicate<T>): FluentAsyncIterable<T>;
-  take(n: number): FluentIterable<T>;
-  skipWhile(condition: Predicate<T>): FluentIterable<T>;
-  skipWhileAsync(condition: AsyncPredicate<T>): FluentAsyncIterable<T>;
-  skip(n: number): FluentIterable<T>;
-  map<R>(mapper: Mapper<T, R>): FluentIterable<R>;
-  mapAsync<R>(mapper: AsyncMapper<T, R>): FluentAsyncIterable<R>;
-  filter(predicate: Predicate<T>): FluentIterable<T>;
-  filterAsync(predicate: AsyncPredicate<T>): FluentAsyncIterable<T>;
-  partition(size: number): FluentIterable<FluentIterable<T>>;
-  append(item: T): FluentIterable<T>;
-  prepend(item: T): FluentIterable<T>;
-  concat(...iterables: Array<Iterable<T>>): FluentIterable<T>;
-  repeat(n: number): FluentIterable<T>;
-  flatten<R>(mapper?: Mapper<T, Iterable<R>>): FluentIterable<R>;
-  flattenAsync<R>(mapper: AsyncMapper<T, Iterable<R>>): FluentAsyncIterable<R>;
-  sort(comparer?: Comparer<T>): FluentIterable<T>;
-  distinct<R>(mapper?: Mapper<T, R>): FluentIterable<T>;
-  distinctAsync<R>(mapper: AsyncMapper<T, R>): FluentAsyncIterable<T>;
-  group<R>(mapper: Mapper<T, R>): FluentIterable<Group<T, R>>;
-  groupAsync<R>(mapper: AsyncMapper<T, R>): FluentAsyncIterable<Group<T, R>>;
-  count(predicate?: Predicate<T>): number;
-  countAsync(predicate: AsyncPredicate<T>): Promise<number>;
-  first(predicate?: Predicate<T>): T | undefined;
-  firstAsync(predicate: AsyncPredicate<T>): Promise<T | undefined>;
-  last(predicate?: Predicate<T>): T | undefined;
-  lastAsync(predicate: AsyncPredicate<T>): Promise<T | undefined>;
-  reduceAndMap<A, R>(reducer: Reducer<T, A>, initial: A, result: Mapper<A, R>): R;
-  reduceAndMapAsync<A, R>(reducer: AsyncReducer<T, A>, initial: A, result: AsyncMapper<A, R>): Promise<R>;
-  reduce<R>(reducer: Reducer<T, R>, initial: R): R;
-  reduceAsync<R>(reducer: AsyncReducer<T, R>, initial: R): Promise<R>;
-  all(predicate: Predicate<T>): boolean;
-  allAsync(predicate: AsyncPredicate<T>): Promise<boolean>;
-  any(predicate?: Predicate<T>): boolean;
-  anyAsync(predicate: AsyncPredicate<T>): Promise<boolean>;
-  contains(item: T): boolean;
-  toArray(): T[];
-  toObject<R>(keySelector: Mapper<T, string>, valueSelector?: Mapper<T, any>): R;
-  toObjectAsync<R>(keySelector: AsyncMapper<T, string>, valueSelector: AsyncMapper<T, any>): Promise<R>;
-  toAsync(): FluentAsyncIterable<T>;
-  forEach(action: Action<T>): void;
-  forEachAsync(action: AsyncAction<T>): Promise<void>;
-  execute(action: Action<T>): FluentIterable<T>;
-  executeAsync(action: AsyncAction<T>): FluentAsyncIterable<T>;
-  join(separator: string, mapper?: Mapper<T, string>): string;
-  joinAsync(separator: string, mapper: AsyncMapper<T, string>): Promise<string>;
-  sum(mapper?: Mapper<T, number>): number;
-  sumAsync(mapper: AsyncMapper<T, number>): Promise<number>;
-  avg(mapper?: Mapper<T, number>): number;
-  avgAsync(mapper: AsyncMapper<T, number>): Promise<number>;
-  top<R>(mapper: Mapper<T, R>, comparer: Comparer<R>): T | undefined;
-  topAsync<R>(mapper: AsyncMapper<T, R>, comparer: Comparer<R>): Promise<T | undefined>;
-  min(mapper?: Mapper<T, number>): T | undefined;
-  minAsync(mapper: AsyncMapper<T, number>): Promise<T | undefined>;
-  max(mapper?: Mapper<T, number>): T | undefined;
-  maxAsync(mapper: AsyncMapper<T, number>): Promise<T | undefined>;
-}
-
+/**
+ * Tranforms an iterable into a [[FluentIterable]].
+ * @typeparam T The type of the items in the iterable.
+ * @param iterable The iterable instance.
+ * @returns The [[FluentIterable]] instance.
+ */
 function fluent<T>(iterable: Iterable<T>): FluentIterable<T> {
   return {
     withIndex: () => fluent(withIndex(iterable)),
@@ -159,8 +92,8 @@ function fluent<T>(iterable: Iterable<T>): FluentIterable<T> {
     sort: (comparer?) => fluent(sort(iterable, comparer)),
     distinct: <R>(mapper: Mapper<T, R> = identity as Mapper<T, R>) => fluent(distinct(iterable, mapper)),
     distinctAsync: mapper => fluentAsync(distinctAsync(iterable, mapper)),
-    group: <R>(mapper: Mapper<T, R>) => fluent(group(iterable, mapper)),
-    groupAsync: mapper => fluentAsync(groupAsync(iterable, mapper)),
+    group: <R>(mapper: Mapper<T, R>) => fluent(group(iterable, mapper)).map(fluentGroup),
+    groupAsync: mapper => fluentAsync(groupAsync(iterable, mapper)).map(fluentGroup),
     count: (predicate = truth) => count(iterable, predicate),
     countAsync: predicate => countAsync(iterable, predicate),
     first: (predicate = truth) => first(iterable, predicate),
@@ -201,4 +134,3 @@ function fluent<T>(iterable: Iterable<T>): FluentIterable<T> {
 }
 
 export default fluent;
-export { FluentIterable };

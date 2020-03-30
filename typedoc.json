@@ -1,7 +1,11 @@
 {
   "hideGenerator": true,
   "mode": "modules",
-  "plugin": "typedoc-plugin-markdown",
   "theme": "markdown",
-  "out": "docs"
+  "out": "docs",
+  "readme": "none",
+  "name": "fluent-iterable",
+  "includeVersion": true,
+  "disableSources": true,
+  "exclude": ["src/fluentFunctions.ts", "src/fluentAsyncFunctions.ts"]
 }

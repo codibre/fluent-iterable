@@ -13,6 +13,15 @@ import {
 } from './types';
 import { identity, identityAsync, truth } from './utils';
 
+async function toArray<T>(iterable: AsyncIterable<T>): Promise<T[]> {
+  const array: T[] = [];
+  for await (const t of iterable) {
+    array.push(t);
+  }
+
+  return array;
+}
+
 async function* withIndex<T>(iterable: AsyncIterable<T>): AsyncIterable<Indexed<T>> {
   let idx = 0;
   for await (const t of iterable) {
@@ -377,19 +386,10 @@ function contains<T>(iterable: AsyncIterable<T>, item: T): Promise<boolean> {
   return any(iterable, next => next === item);
 }
 
-async function toArray<T>(iterable: AsyncIterable<T>): Promise<T[]> {
-  const array: T[] = [];
-  for await (const t of iterable) {
-    array.push(t);
-  }
-
-  return array;
-}
-
 async function toObject<T, R>(
   iterable: AsyncIterable<T>,
   keySelector: Mapper<T, string>,
-  valueSelector: Mapper<T, any> = identity
+  valueSelector: Mapper<T, unknown> = identity
 ): Promise<R> {
   const res = {};
   for await (const t of iterable) {
@@ -402,7 +402,7 @@ async function toObject<T, R>(
 async function toObjectAsync<T, R>(
   iterable: AsyncIterable<T>,
   keySelector: AsyncMapper<T, string>,
-  valueSelector: AsyncMapper<T, any>
+  valueSelector: AsyncMapper<T, unknown>
 ): Promise<R> {
   const res = {};
   for await (const t of iterable) {
@@ -515,7 +515,9 @@ function top<T, R>(iterable: AsyncIterable<T>, mapper: Mapper<T, R>, comparer: C
     iterable,
     (current, next) => {
       const value = mapper(next);
-      return !current.found || comparer(value, current.value!) > 0 ? { value, item: next, found: true } : current;
+      return !current.found || (current.value && comparer(value, current.value) > 0)
+        ? { value, item: next, found: true }
+        : current;
     },
     { value: undefined, item: undefined, found: false },
     acc => acc.item
@@ -531,7 +533,9 @@ function topAsync<T, R>(
     iterable,
     async (current, next) => {
       const value = await mapper(next);
-      return !current.found || comparer(value, current.value!) > 0 ? { value, item: next, found: true } : current;
+      return !current.found || (current.value && comparer(value, current.value) > 0)
+        ? { value, item: next, found: true }
+        : current;
     },
     { value: undefined, item: undefined, found: false },
     async acc => acc.item
@@ -542,22 +546,22 @@ function min<T>(
   iterable: AsyncIterable<T>,
   mapper: Mapper<T, number> = identity as Mapper<T, number>
 ): Promise<T | undefined> {
-  return top<T, number>(iterable, mapper, (a, b) => (a < b ? 1 : 0));
+  return top<T, number>(iterable, mapper, (a, b) => b - a);
 }
 
 function minAsync<T>(iterable: AsyncIterable<T>, mapper: AsyncMapper<T, number>): Promise<T | undefined> {
-  return topAsync<T, number>(iterable, mapper, (a, b) => (a < b ? 1 : 0));
+  return topAsync<T, number>(iterable, mapper, (a, b) => b - a);
 }
 
 function max<T>(
   iterable: AsyncIterable<T>,
   mapper: Mapper<T, number> = identity as Mapper<T, number>
 ): Promise<T | undefined> {
-  return top<T, number>(iterable, mapper, (a, b) => (a > b ? 1 : 0));
+  return top<T, number>(iterable, mapper, (a, b) => a - b);
 }
 
 function maxAsync<T>(iterable: AsyncIterable<T>, mapper: AsyncMapper<T, number>): Promise<T | undefined> {
-  return topAsync<T, number>(iterable, mapper, (a, b) => (a > b ? 1 : 0));
+  return topAsync<T, number>(iterable, mapper, (a, b) => a - b);
 }
 
 export {

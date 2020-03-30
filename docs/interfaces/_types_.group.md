@@ -1,16 +1,24 @@
-[fluent-iterable - v0.1.5](../README.md) › [Globals](../globals.md) › ["types"](../modules/_types_.md) › [Group](_types_.group.md)
+[fluent-iterable - v0.1.5](../README.md) › ["types"](../modules/_types_.md) › [Group](_types_.group.md)
 
 # Interface: Group <**T, R**>
+
+Represents a group of items of type `T` with a key of type `R`.
 
 ## Type parameters
 
 ▪ **T**
 
+The type of the items in the [Group](_types_.group.md).
+
 ▪ **R**
+
+The type of the key of the [Group](_types_.group.md).
 
 ## Hierarchy
 
 * **Group**
+
+  ↳ [FluentGroup](_types_.fluentgroup.md)
 
 ## Index
 
@@ -25,7 +33,7 @@
 
 • **key**: *R*
 
-*Defined in [src/types.ts:12](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/types.ts#L12)*
+The key of the [Group](_types_.group.md).
 
 ___
 
@@ -33,4 +41,4 @@ ___
 
 • **values**: *Iterable‹T›*
 
-*Defined in [src/types.ts:13](https://github.com/kataik/fluent-iterable/blob/0d3fbb0/src/types.ts#L13)*
+The items in the [Group](_types_.group.md).
