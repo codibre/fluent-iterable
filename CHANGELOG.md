@@ -1,4 +1,13 @@
 
+## v0.1.6
+* 64a6793 0.1.6
+* b42c354 adding email address to contributors & updating licence
+* 772cd94 Merge pull request #1 from kataik/docsNGroups
+* 92f5e24 fluent groups introduced, documentation added
+* e69cfc0 Update main.yml
+* ae66008 Update main.yml
+* 40bf335 Create main.yml
+* f7dff79 adding doc for version 0.1.5
 ## v0.1.5
 * 0d3fbb0 0.1.5
 * 92a1819 adding doc generation and minor fix
