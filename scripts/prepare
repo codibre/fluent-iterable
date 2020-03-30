@@ -6,7 +6,7 @@ CONTRIBUTORS=CONTRIBUTORS.md
 echo > $CHANGELOG
 unset LAST_TAG
 for TAG in $(git tag | tac); do
-  if [[ -v LAST_TAG ]]; then
+  if [ -n "$LAST_TAG" ]; then
     git log $TAG..$LAST_TAG --oneline | sed 's/^/* /' >> $CHANGELOG
   fi
   echo "## $TAG" >> $CHANGELOG
@@ -14,4 +14,4 @@ for TAG in $(git tag | tac); do
 done
 git log $LAST_TAG --oneline | sed 's/^/* /' >> $CHANGELOG
 
-git shortlog -n -s | cut -f2 | sed 's/^/* /' > CONTRIBUTORS.md
+git shortlog -nse | cut -f2 | sed 's/^/* /' > CONTRIBUTORS.md
