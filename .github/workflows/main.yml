@@ -23,7 +23,7 @@ jobs:
           version: ${{ matrix.node-version }}
 
       - name: Build
-        run: npm run-script build
+        run: npm install && npm run-script build
 
       - name: Test
         run: npm run-script test
