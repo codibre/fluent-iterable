@@ -1,19 +1,19 @@
 import fluent from '../src';
 import expect, { flatMap, pick } from './tools';
 
-enum Gender {
+export enum Gender {
   Male = 'Male',
   Female = 'Female',
   NonBinary = 'NonBinary',
 }
 
-interface Person {
+export interface Person {
   name: string;
   gender?: Gender;
   emails: string[];
 }
 
-const data: Person[] = [
+export const data: Person[] = [
   {
     name: '0: w/o gender & 0 emails',
     emails: [],
@@ -73,7 +73,7 @@ const data: Person[] = [
   },
 ];
 
-const picker = (...indexes: number[]) => pick(data, ...indexes);
+export const picker = (...indexes: number[]) => pick(data, ...indexes);
 
 function* generator(): Iterable<Person> {
   yield* data;
