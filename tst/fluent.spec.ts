@@ -452,6 +452,18 @@ describe('fluent iterable', () => {
         it('one element', () => expect(fluent([0]).count()).to.equal(1));
         it('multiple elements', () => expect(fluent(subject).count()).to.equal(data.length));
       });
+      describe('hasLessThan', () => {
+        it('false', () => expect(fluent([1, 2, 3]).hasLessThan(3)).to.false);
+        it('true', () => expect(fluent([1, 2, 3]).hasLessThan(4)).to.true);
+      });
+      describe('hasMoreThan', () => {
+        it('false', () => expect(fluent([1, 2, 3]).hasMoreThan(3)).to.false);
+        it('true', () => expect(fluent([1, 2, 3]).hasMoreThan(2)).to.true);
+      });
+      describe('hasExactly', () => {
+        it('false', () => expect(fluent([1, 2, 3]).hasExactly(2)).to.false);
+        it('true', () => expect(fluent([1, 2, 3]).hasExactly(3)).to.true);
+      });
     });
 
     describe('asynchronous', () => {

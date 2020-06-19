@@ -564,6 +564,18 @@ function maxAsync<T>(iterable: AsyncIterable<T>, mapper: AsyncMapper<T, number>)
   return topAsync<T, number>(iterable, mapper, (a, b) => a - b);
 }
 
+async function hasExactly<T>(iterable: AsyncIterable<T>, expectedSize: number): Promise<boolean> {
+  return (await count(take(iterable, expectedSize + 1))) === expectedSize;
+}
+
+async function hasLessThan<T>(iterable: AsyncIterable<T>, threshold: number): Promise<boolean> {
+  return (await count(take(iterable, threshold + 1))) < threshold;
+}
+
+async function hasMoreThan<T>(iterable: AsyncIterable<T>, threshold: number): Promise<boolean> {
+  return (await count(take(iterable, threshold + 1))) > threshold;
+}
+
 export {
   withIndex,
   takeWhile,
@@ -622,4 +634,7 @@ export {
   minAsync,
   max,
   maxAsync,
+  hasExactly,
+  hasLessThan,
+  hasMoreThan,
 };

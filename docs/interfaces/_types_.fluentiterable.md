@@ -47,6 +47,9 @@ The type of the items in the iterable.
 * [forEachAsync](_types_.fluentiterable.md#foreachasync)
 * [group](_types_.fluentiterable.md#group)
 * [groupAsync](_types_.fluentiterable.md#groupasync)
+* [hasExactly](_types_.fluentiterable.md#hasexactly)
+* [hasLessThan](_types_.fluentiterable.md#haslessthan)
+* [hasMoreThan](_types_.fluentiterable.md#hasmorethan)
 * [join](_types_.fluentiterable.md#join)
 * [joinAsync](_types_.fluentiterable.md#joinasync)
 * [last](_types_.fluentiterable.md#last)
@@ -614,6 +617,60 @@ Name | Type | Description |
 **Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[FluentGroup](_types_.fluentgroup.md)‹T, R››*
 
 The [FluentAsyncIterable](_types_.fluentasynciterable.md) of the distinct groups.
+
+___
+
+###  hasExactly
+
+▸ **hasExactly**(`expectedNumber`: number): *boolean*
+
+Checks if the number of elements of the iterable is equal to the threshold using a projection. This is a resolving operation, will cause a loop with up to threshold + 1 iterations through the elements.
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`expectedNumber` | number |
+
+**Returns:** *boolean*
+
+True if the number of elements of the iterable is equal to threshold and false if its not;
+
+___
+
+###  hasLessThan
+
+▸ **hasLessThan**(`threshold`: number): *boolean*
+
+Checks if the number of elements of the iterable is less than the threshold using a projection. This is a resolving operation, will cause a loop with up to threshold + 1 iterations through the elements.
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`threshold` | number | The validation threshold |
+
+**Returns:** *boolean*
+
+True if the number of elements of the iterable is lesser than the threshold and false if it is not.
+
+___
+
+###  hasMoreThan
+
+▸ **hasMoreThan**(`threshold`: number): *boolean*
+
+Checks if the number of elements of the iterable is more than the threshold using a projection. This is a resolving operation, will cause a loop with up to threshold + 1 iterations through the elements.
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`threshold` | number | The validation threshold |
+
+**Returns:** *boolean*
+
+True if the number of elements of the iterable is greater than the threshold and false if it is not.
 
 ___
 

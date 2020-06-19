@@ -703,6 +703,27 @@ interface FluentIterable<T> extends Iterable<T> {
    * @returns A promise of the maximum of the iterable's projected elements.
    */
   maxAsync(mapper: AsyncMapper<T, number>): Promise<T | undefined>;
+
+  /**
+   * Checks if the number of elements of the iterable is equal to the threshold using a projection. This is a resolving operation, will cause a loop with up to threshold + 1 iterations through the elements.
+   * @param threshold The validation threshold
+   * @returns True if the number of elements of the iterable is equal to threshold and false if its not;
+   */
+  hasExactly(expectedNumber: number): boolean;
+
+  /**
+   * Checks if the number of elements of the iterable is less than the threshold using a projection. This is a resolving operation, will cause a loop with up to threshold + 1 iterations through the elements.
+   * @param threshold The validation threshold
+   * @returns True if the number of elements of the iterable is lesser than the threshold and false if it is not.
+   */
+  hasLessThan(threshold: number): boolean;
+
+  /**
+   * Checks if the number of elements of the iterable is more than the threshold using a projection. This is a resolving operation, will cause a loop with up to threshold + 1 iterations through the elements.
+   * @param threshold The validation threshold
+   * @returns True if the number of elements of the iterable is greater than the threshold and false if it is not.
+   */
+  hasMoreThan(threshold: number): boolean;
 }
 
 /**
@@ -1139,6 +1160,27 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @returns A promise of the maximum of the iterable's projected elements.
    */
   maxAsync(mapper: AsyncMapper<T, number>): Promise<T | undefined>;
+
+  /**
+   * Checks if the number of elements of the iterable is equal to the threshold using a projection. This is a resolving operation, will cause a loop with up to threshold + 1 iterations through the elements.
+   * @param threshold The validation threshold
+   * @returns A promise that resolves to true if the number of elements of the iterable is equal to threshold and false if its not;
+   */
+  hasExactly(expectedNumber: number): Promise<boolean>;
+
+  /**
+   * Checks if the number of elements of the iterable is less than the threshold using a projection. This is a resolving operation, will cause a loop with up to threshold + 1 iterations through the elements.
+   * @param threshold The validation threshold
+   * @returns A promise that resolves to true if the number of elements of the iterable is lesser than the threshold and false if it is not.
+   */
+  hasLessThan(threshold: number): Promise<boolean>;
+
+  /**
+   * Checks if the number of elements of the iterable is more than the threshold using a projection. This is a resolving operation, will cause a loop with up to threshold + 1 iterations through the elements.
+   * @param threshold The validation threshold
+   * @returns A promise that resolves to true if the number of elements of the iterable is greater than the threshold and false if it is not.
+   */
+  hasMoreThan(threshold: number): Promise<boolean>;
 }
 
 /**
