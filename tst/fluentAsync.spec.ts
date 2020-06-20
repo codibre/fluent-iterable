@@ -590,6 +590,92 @@ describe('fluent async iterable', () => {
           await fluentAsync(new ObjectReadableMock([3, 1, 2, 6, 7])).lastAsync(async x => x % 2 === 0)
         ).to.be.equal(6));
     });
+    describe('reduceAndMap', () => {
+      it('empty', async () =>
+        expect(
+          await fluentAsync(new ObjectReadableMock([])).reduceAndMap(
+            (a, b) => (a += b),
+            0,
+            a => a * 10 + 1
+          )
+        ).to.be.equal(1));
+      it('not empty', async () =>
+        expect(
+          await fluentAsync(new ObjectReadableMock([1, 2, 3])).reduceAndMap(
+            (a, b) => (a += b),
+            0,
+            a => a * 10 + 1
+          )
+        ).to.be.equals(61));
+    });
+    describe('reduceAndMapAsync', () => {
+      it('empty', async () =>
+        expect(
+          await fluentAsync(new ObjectReadableMock([])).reduceAndMapAsync(
+            async (a, b) => (a += b),
+            0,
+            async a => a * 10 + 1
+          )
+        ).to.be.equal(1));
+      it('not empty', async () =>
+        expect(
+          await fluentAsync(new ObjectReadableMock([1, 2, 3])).reduceAndMapAsync(
+            async (a, b) => (a += b),
+            0,
+            async a => a * 10 + 1
+          )
+        ).to.be.equals(61));
+    });
+    describe('reduce', () => {
+      it('empty', async () =>
+        expect(await fluentAsync(new ObjectReadableMock([])).reduce((a, b) => (a += b), 0)).to.be.equal(0));
+      it('not empty', async () =>
+        expect(await fluentAsync(new ObjectReadableMock([1, 2, 3])).reduce((a, b) => (a += b), 0)).to.be.equals(6));
+    });
+    describe('reduceAsync', () => {
+      it('empty', async () =>
+        expect(await fluentAsync(new ObjectReadableMock([])).reduceAsync(async (a, b) => (a += b), 0)).to.be.equal(0));
+      it('not empty', async () =>
+        expect(
+          await fluentAsync(new ObjectReadableMock([1, 2, 3])).reduceAsync(async (a, b) => (a += b), 0)
+        ).to.be.equals(6));
+    });
+    describe('all', () => {
+      it('empty', async () =>
+        expect(await fluentAsync(new ObjectReadableMock([])).all((a: number) => a % 2 === 0)).to.be.false);
+      it('false', async () =>
+        expect(await fluentAsync(new ObjectReadableMock([1, 2, 3])).all((a: number) => a % 2 === 0)).to.be.false);
+      it('true', async () =>
+        expect(await fluentAsync(new ObjectReadableMock([2, 4, 6])).all((a: number) => a % 2 === 0)).to.be.true);
+    });
+    describe('allAsync', () => {
+      it('empty', async () =>
+        expect(await fluentAsync(new ObjectReadableMock([])).allAsync(async (a: number) => a % 2 === 0)).to.be.false);
+      it('false', async () =>
+        expect(await fluentAsync(new ObjectReadableMock([1, 2, 3])).allAsync(async (a: number) => a % 2 === 0)).to.be
+          .false);
+      it('true', async () =>
+        expect(await fluentAsync(new ObjectReadableMock([2, 4, 6])).allAsync(async (a: number) => a % 2 === 0)).to.be
+          .true);
+    });
+    describe('any', () => {
+      it('empty', async () =>
+        expect(await fluentAsync(new ObjectReadableMock([])).any((a: number) => a % 2 === 0)).to.be.false);
+      it('false', async () =>
+        expect(await fluentAsync(new ObjectReadableMock([1, 3, 5])).any((a: number) => a % 2 === 0)).to.be.false);
+      it('true', async () =>
+        expect(await fluentAsync(new ObjectReadableMock([1, 2, 3])).any((a: number) => a % 2 === 0)).to.be.true);
+    });
+    describe('allAsync', () => {
+      it('empty', async () =>
+        expect(await fluentAsync(new ObjectReadableMock([])).anyAsync(async (a: number) => a % 2 === 0)).to.be.false);
+      it('false', async () =>
+        expect(await fluentAsync(new ObjectReadableMock([1, 3, 5])).anyAsync(async (a: number) => a % 2 === 0)).to.be
+          .false);
+      it('true', async () =>
+        expect(await fluentAsync(new ObjectReadableMock([1, 2, 3])).anyAsync(async (a: number) => a % 2 === 0)).to.be
+          .true);
+    });
     describe('hasLessThan', () => {
       it('false', async () => expect(await fluentAsync(new ObjectReadableMock([1, 2, 3])).hasLessThan(3)).to.false);
       it('true', async () => expect(await fluentAsync(new ObjectReadableMock([1, 2, 3])).hasLessThan(4)).to.true);

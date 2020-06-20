@@ -129,9 +129,9 @@ function fluentAsync<T>(iterable: AsyncIterable<T>): FluentAsyncIterable<T> {
     minAsync: mapper => minAsync(iterable, mapper),
     max: (mapper: Mapper<T, number> = identity as Mapper<T, number>) => max(iterable, mapper),
     maxAsync: mapper => maxAsync(iterable, mapper),
+    hasExactly: expectedNumber => hasExactly(iterable, expectedNumber),
     hasLessThan: threshold => hasLessThan(iterable, threshold),
     hasMoreThan: threshold => hasMoreThan(iterable, threshold),
-    hasExactly: expectedNumber => hasExactly(iterable, expectedNumber),
     [Symbol.asyncIterator]: () => iterable[Symbol.asyncIterator](),
   };
 }

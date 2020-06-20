@@ -705,21 +705,21 @@ interface FluentIterable<T> extends Iterable<T> {
   maxAsync(mapper: AsyncMapper<T, number>): Promise<T | undefined>;
 
   /**
-   * Checks if the number of elements of the iterable is equal to the threshold using a projection. This is a resolving operation, will cause a loop with up to threshold + 1 iterations through the elements.
+   * Checks if the number of elements of the iterable is equal to the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
    * @param threshold The validation threshold
    * @returns True if the number of elements of the iterable is equal to threshold and false if its not;
    */
   hasExactly(expectedNumber: number): boolean;
 
   /**
-   * Checks if the number of elements of the iterable is less than the threshold using a projection. This is a resolving operation, will cause a loop with up to threshold + 1 iterations through the elements.
+   * Checks if the number of elements of the iterable is less than the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
    * @param threshold The validation threshold
    * @returns True if the number of elements of the iterable is lesser than the threshold and false if it is not.
    */
   hasLessThan(threshold: number): boolean;
 
   /**
-   * Checks if the number of elements of the iterable is more than the threshold using a projection. This is a resolving operation, will cause a loop with up to threshold + 1 iterations through the elements.
+   * Checks if the number of elements of the iterable is more than the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
    * @param threshold The validation threshold
    * @returns True if the number of elements of the iterable is greater than the threshold and false if it is not.
    */
@@ -1162,21 +1162,21 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
   maxAsync(mapper: AsyncMapper<T, number>): Promise<T | undefined>;
 
   /**
-   * Checks if the number of elements of the iterable is equal to the threshold using a projection. This is a resolving operation, will cause a loop with up to threshold + 1 iterations through the elements.
+   * Checks if the number of elements of the iterable is equal to the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
    * @param threshold The validation threshold
    * @returns A promise that resolves to true if the number of elements of the iterable is equal to threshold and false if its not;
    */
   hasExactly(expectedNumber: number): Promise<boolean>;
 
   /**
-   * Checks if the number of elements of the iterable is less than the threshold using a projection. This is a resolving operation, will cause a loop with up to threshold + 1 iterations through the elements.
+   * Checks if the number of elements of the iterable is less than the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
    * @param threshold The validation threshold
    * @returns A promise that resolves to true if the number of elements of the iterable is lesser than the threshold and false if it is not.
    */
   hasLessThan(threshold: number): Promise<boolean>;
 
   /**
-   * Checks if the number of elements of the iterable is more than the threshold using a projection. This is a resolving operation, will cause a loop with up to threshold + 1 iterations through the elements.
+   * Checks if the number of elements of the iterable is more than the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
    * @param threshold The validation threshold
    * @returns A promise that resolves to true if the number of elements of the iterable is greater than the threshold and false if it is not.
    */
