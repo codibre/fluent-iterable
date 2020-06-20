@@ -102,6 +102,19 @@ describe('fluent iterable', () => {
           expect(fluent(subject).toArray()).to.eql(data);
         });
       });
+      context('withIndex', () => {
+        it('should return Indexed instances from informed array', () => {
+          expect(
+            fluent(['a', 'b', 'c'])
+              .withIndex()
+              .toArray()
+          ).to.be.eql([
+            { idx: 0, value: 'a' },
+            { idx: 1, value: 'b' },
+            { idx: 2, value: 'c' },
+          ]);
+        });
+      });
       context('takeWhile', () => {
         it('works with initially not true statement', () =>
           expect(
@@ -120,6 +133,28 @@ describe('fluent iterable', () => {
           expect(
             fluent(subject)
               .takeWhile(p => p.name.length > 0)
+              .toArray()
+          ).to.eql(data);
+        });
+      });
+      context('takeWhileAsync', () => {
+        it('works with initially not true statement', async () =>
+          expect(
+            await fluent(subject)
+              .takeWhileAsync(async p => p.emails.length > 0)
+              .toArray()
+          ).to.be.empty);
+        it('works with eventually not true statement', async () => {
+          expect(
+            await fluent(subject)
+              .takeWhileAsync(async p => p.gender === undefined)
+              .toArray()
+          ).to.eql(data.slice(0, 3));
+        });
+        it('works with always true statement', async () => {
+          expect(
+            await fluent(subject)
+              .takeWhileAsync(async p => p.name.length > 0)
               .toArray()
           ).to.eql(data);
         });
@@ -188,6 +223,32 @@ describe('fluent iterable', () => {
               .toArray()
           ).to.eql(data.slice(1)));
       });
+      context('skipWhileAsync', () => {
+        it('works with initially not true statement', async () =>
+          expect(
+            await fluent(subject)
+              .skipWhileAsync(async p => p.emails.length > 0)
+              .toArray()
+          ).to.eql(data));
+        it('works with eventually not true statement', async () =>
+          expect(
+            await fluent(subject)
+              .skipWhileAsync(async p => p.gender === undefined)
+              .toArray()
+          ).to.eql(data.slice(3)));
+        it('works with always true statement', async () =>
+          expect(
+            await fluent(subject)
+              .skipWhileAsync(async p => p.name.length > 0)
+              .toArray()
+          ).to.be.empty);
+        it('works with alternating true statement', async () =>
+          expect(
+            await fluent(subject)
+              .skipWhileAsync(async p => p.emails.length === 0)
+              .toArray()
+          ).to.eql(data.slice(1)));
+      });
       context('skip', () => {
         it('works with negative count', () =>
           expect(
@@ -245,6 +306,25 @@ describe('fluent iterable', () => {
           }
         });
       });
+      describe('mapAsync', () => {
+        it('maps to undefined', async () => {
+          const res = await fluent(subject)
+            .mapAsync(async () => undefined)
+            .toArray();
+          expect(res).to.length(data.length);
+          res.forEach(item => expect(item).to.be.undefined);
+        });
+        it('maps to projection', async () => {
+          const res = await fluent(subject)
+            .mapAsync(async p => p.name)
+            .toArray();
+          expect(res).to.length(data.length);
+          let idx = 0;
+          for (const item of res) {
+            expect(item).to.equal(data[idx++].name);
+          }
+        });
+      });
       describe('filter', () => {
         it('with always false predicate', () =>
           expect(
@@ -264,6 +344,40 @@ describe('fluent iterable', () => {
               .filter(p => p.gender === Gender.Female)
               .toArray()
           ).to.eql(picker(4, 7, 10)));
+      });
+      describe('filterAsync', () => {
+        it('with always false predicate', async () =>
+          expect(
+            await fluent(subject)
+              .filterAsync(async () => false)
+              .toArray()
+          ).to.be.empty);
+        it('with always true predicate', async () =>
+          expect(
+            await fluent(subject)
+              .filterAsync(async () => true)
+              .toArray()
+          ).to.eql(data));
+        it('with alternating predicate', async () =>
+          expect(
+            await fluent(subject)
+              .filterAsync(async p => p.gender === Gender.Female)
+              .toArray()
+          ).to.eql(picker(4, 7, 10)));
+      });
+      describe('partition', () => {
+        it('should divide result in blocks of the specified size', () => {
+          expect(
+            fluent([1, 2, 3, 4, 5, 6, 7, 8])
+              .partition(3)
+              .map(x => x.toArray())
+              .toArray()
+          ).to.be.eql([
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8],
+          ]);
+        });
       });
       describe('append', () => {
         it('with empty iterable', () =>
@@ -383,6 +497,20 @@ describe('fluent iterable', () => {
               .toArray()
           ).to.eql(flatMap(picker(1, 2, 6, 7, 8, 9, 10, 11), p => p.emails)));
       });
+      describe('flattenAsync', () => {
+        it('empty array', async () =>
+          expect(
+            await fluent([])
+              .flattenAsync(x => x)
+              .toArray()
+          ).to.be.empty);
+        it('not flat', async () =>
+          expect(
+            await fluent([[1, 2], [3, 4, 5], [], [6]])
+              .flattenAsync(async x => x)
+              .toArray()
+          ).to.eql([1, 2, 3, 4, 5, 6]));
+      });
       describe('sort', () => {
         it('empty', () =>
           expect(
@@ -429,6 +557,26 @@ describe('fluent iterable', () => {
               .toArray()
           ).to.eql(picker(0, 3, 4, 5)));
       });
+      describe('distinctAsync', () => {
+        it('empty', async () =>
+          expect(
+            await fluent([])
+              .distinctAsync(async x => x)
+              .toArray()
+          ).to.be.empty);
+        it('not distinct numbers', async () =>
+          expect(
+            await fluent([1, 1, 1, 2, 2, 3])
+              .distinctAsync(async x => x)
+              .toArray()
+          ).to.eql([1, 2, 3]));
+        it('already distinct collection', async () =>
+          expect(
+            await fluent(subject)
+              .distinctAsync(async x => x)
+              .toArray()
+          ).to.eql(data));
+      });
       describe('group', () => {
         it('empty', () =>
           expect(
@@ -447,10 +595,57 @@ describe('fluent iterable', () => {
           }
         });
       });
+      describe('groupAsync', () => {
+        it('empty', async () =>
+          expect(
+            await fluent([] as Person[])
+              .groupAsync(async p => p.gender)
+              .toArray()
+          ).to.be.empty);
+        it('non-empty', async () => {
+          const groups = await fluent(subject)
+            .groupAsync(async p => p.gender)
+            .toArray();
+          expect(groups.length).to.eql(4);
+          expect(groups.map(grp => grp.key)).to.have.members([undefined, Gender.Male, Gender.Female, Gender.NonBinary]);
+          for (const grp of groups) {
+            expect(grp.values.toArray()).to.eql(data.filter(p => p.gender === grp.key));
+          }
+        });
+      });
       describe('count', () => {
         it('empty', () => expect(fluent([]).count()).to.equal(0));
         it('one element', () => expect(fluent([0]).count()).to.equal(1));
         it('multiple elements', () => expect(fluent(subject).count()).to.equal(data.length));
+        it('multiple elements with predicate', () =>
+          expect(fluent(subject).count(x => x.emails.length > 0)).to.equal(8));
+      });
+      describe('countAsync', () => {
+        it('empty', async () => expect(await fluent([]).countAsync(async () => true)).to.equal(0));
+        it('one element', async () => expect(await fluent([0]).countAsync(async x => x === 0)).to.equal(1));
+        it('multiple elements', async () =>
+          expect(await fluent(subject).countAsync(async x => x.emails.length > 0)).to.equal(8));
+      });
+      describe('first', () => {
+        it('empty', () => expect(fluent([]).first()).to.be.undefined);
+        it('not empty', () => expect(fluent([3, 1]).first()).to.be.equal(3));
+        it('with predicate', () => expect(fluent([3, 1, 2, 6]).first(x => x % 2 === 0)).to.be.equal(2));
+      });
+      describe('firstAsync', () => {
+        it('empty', async () => expect(await fluent([]).firstAsync(async x => x)).to.be.undefined);
+        it('not empty', async () =>
+          expect(await fluent([3, 1, 2, 6]).firstAsync(async x => x % 2 === 0)).to.be.equal(2));
+      });
+      describe('last', () => {
+        it('empty', () => expect(fluent([]).last()).to.be.undefined);
+        it('not empty', () => expect(fluent([3, 1]).last()).to.be.equal(1));
+        it('with predicate', () => expect(fluent([3, 1, 2, 6]).last(x => x % 2 === 0)).to.be.equal(6));
+      });
+
+      describe('lastAsync', () => {
+        it('empty', async () => expect(await fluent([]).lastAsync(async x => x)).to.be.undefined);
+        it('not empty', async () =>
+          expect(await fluent([3, 1, 2, 6, 7]).lastAsync(async x => x % 2 === 0)).to.be.equal(6));
       });
       describe('hasLessThan', () => {
         it('false', () => expect(fluent([1, 2, 3]).hasLessThan(3)).to.false);
