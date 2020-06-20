@@ -693,12 +693,12 @@ describe('fluent iterable', () => {
           expect(await fluent([1, 2, 3]).reduceAsync(async (a, b) => (a += b), 0)).to.be.equals(6));
       });
       describe('all', () => {
-        it('empty', async () => expect(fluent([]).all((a: number) => a % 2 === 0)).to.be.false);
+        it('empty', async () => expect(fluent([]).all((a: number) => a % 2 === 0)).to.be.true);
         it('false', async () => expect(fluent([1, 2, 3]).all((a: number) => a % 2 === 0)).to.be.false);
         it('true', async () => expect(fluent([2, 4, 6]).all((a: number) => a % 2 === 0)).to.be.true);
       });
       describe('allAsync', () => {
-        it('empty', async () => expect(await fluent([]).allAsync(async (a: number) => a % 2 === 0)).to.be.false);
+        it('empty', async () => expect(await fluent([]).allAsync(async (a: number) => a % 2 === 0)).to.be.true);
         it('false', async () => expect(await fluent([1, 2, 3]).allAsync(async (a: number) => a % 2 === 0)).to.be.false);
         it('true', async () => expect(await fluent([2, 4, 6]).allAsync(async (a: number) => a % 2 === 0)).to.be.true);
       });

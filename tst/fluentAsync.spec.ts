@@ -642,7 +642,7 @@ describe('fluent async iterable', () => {
     });
     describe('all', () => {
       it('empty', async () =>
-        expect(await fluentAsync(new ObjectReadableMock([])).all((a: number) => a % 2 === 0)).to.be.false);
+        expect(await fluentAsync(new ObjectReadableMock([])).all((a: number) => a % 2 === 0)).to.be.true);
       it('false', async () =>
         expect(await fluentAsync(new ObjectReadableMock([1, 2, 3])).all((a: number) => a % 2 === 0)).to.be.false);
       it('true', async () =>
@@ -650,7 +650,7 @@ describe('fluent async iterable', () => {
     });
     describe('allAsync', () => {
       it('empty', async () =>
-        expect(await fluentAsync(new ObjectReadableMock([])).allAsync(async (a: number) => a % 2 === 0)).to.be.false);
+        expect(await fluentAsync(new ObjectReadableMock([])).allAsync(async (a: number) => a % 2 === 0)).to.be.true);
       it('false', async () =>
         expect(await fluentAsync(new ObjectReadableMock([1, 2, 3])).allAsync(async (a: number) => a % 2 === 0)).to.be
           .false);

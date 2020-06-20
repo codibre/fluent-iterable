@@ -345,33 +345,21 @@ function reduceAsync<T, R>(iterable: Iterable<T>, reducer: AsyncReducer<T, R>, i
 }
 
 function all<T>(iterable: Iterable<T>, predicate: Predicate<T>): boolean {
-  const iterator = iterable[Symbol.iterator]();
-  let next = iterator.next();
-  if (next.done) {
-    return false;
-  }
-  do {
-    if (!predicate(next.value)) {
+  for (const t of iterable) {
+    if (!predicate(t)) {
       return false;
     }
-    next = iterator.next();
-  } while (!next.done);
+  }
 
   return true;
 }
 
 async function allAsync<T>(iterable: Iterable<T>, predicate: AsyncPredicate<T>): Promise<boolean> {
-  const iterator = iterable[Symbol.iterator]();
-  let next = iterator.next();
-  if (next.done) {
-    return false;
-  }
-  do {
-    if (!(await predicate(next.value))) {
+  for (const t of iterable) {
+    if (!(await predicate(t))) {
       return false;
     }
-    next = iterator.next();
-  } while (!next.done);
+  }
 
   return true;
 }
