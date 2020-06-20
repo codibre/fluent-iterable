@@ -666,7 +666,7 @@ describe('fluent async iterable', () => {
       it('true', async () =>
         expect(await fluentAsync(new ObjectReadableMock([1, 2, 3])).any((a: number) => a % 2 === 0)).to.be.true);
     });
-    describe('allAsync', () => {
+    describe('anyAsync', () => {
       it('empty', async () =>
         expect(await fluentAsync(new ObjectReadableMock([])).anyAsync(async (a: number) => a % 2 === 0)).to.be.false);
       it('false', async () =>
@@ -675,6 +675,81 @@ describe('fluent async iterable', () => {
       it('true', async () =>
         expect(await fluentAsync(new ObjectReadableMock([1, 2, 3])).anyAsync(async (a: number) => a % 2 === 0)).to.be
           .true);
+    });
+    describe('contains', () => {
+      it('empty', async () => expect(await fluentAsync(new ObjectReadableMock([])).contains(4)).to.be.false);
+      it('false', async () => expect(await fluentAsync(new ObjectReadableMock([1, 3, 5])).contains(4)).to.be.false);
+      it('true', async () => expect(await fluentAsync(new ObjectReadableMock([1, 2, 4])).contains(4)).to.be.true);
+    });
+    describe('toObject', () => {
+      it('empty', async () =>
+        expect(
+          await fluentAsync(new ObjectReadableMock([]) as AsyncIterable<Person>).toObject(
+            x => x.gender as string,
+            x => x.name
+          )
+        ).to.be.deep.equal({}));
+      it('not empty', async () =>
+        expect(
+          await fluentAsync(
+            new ObjectReadableMock([
+              {
+                gender: Gender.Female,
+                name: 'name A',
+              },
+              {
+                gender: Gender.NonBinary,
+                name: 'name B',
+              },
+              {
+                gender: Gender.Male,
+                name: 'name C',
+              },
+            ]) as AsyncIterable<Person>
+          ).toObject(
+            x => x.gender as string,
+            x => x.name
+          )
+        ).to.be.deep.equal({
+          [Gender.Female]: 'name A',
+          [Gender.NonBinary]: 'name B',
+          [Gender.Male]: 'name C',
+        }));
+    });
+    describe('toObjectAsync', () => {
+      it('empty', async () =>
+        expect(
+          await fluentAsync(new ObjectReadableMock([]) as AsyncIterable<Person>).toObjectAsync(
+            async x => x.gender as string,
+            async x => x.name
+          )
+        ).to.be.deep.equal({}));
+      it('not empty', async () =>
+        expect(
+          await fluentAsync(
+            new ObjectReadableMock([
+              {
+                gender: Gender.Female,
+                name: 'name A',
+              },
+              {
+                gender: Gender.NonBinary,
+                name: 'name B',
+              },
+              {
+                gender: Gender.Male,
+                name: 'name C',
+              },
+            ]) as AsyncIterable<Person>
+          ).toObjectAsync(
+            async x => x.gender as string,
+            async x => x.name
+          )
+        ).to.be.deep.equal({
+          [Gender.Female]: 'name A',
+          [Gender.NonBinary]: 'name B',
+          [Gender.Male]: 'name C',
+        }));
     });
     describe('hasLessThan', () => {
       it('false', async () => expect(await fluentAsync(new ObjectReadableMock([1, 2, 3])).hasLessThan(3)).to.false);

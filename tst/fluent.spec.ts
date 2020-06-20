@@ -647,6 +647,146 @@ describe('fluent iterable', () => {
         it('not empty', async () =>
           expect(await fluent([3, 1, 2, 6, 7]).lastAsync(async x => x % 2 === 0)).to.be.equal(6));
       });
+      describe('reduceAndMap', () => {
+        it('empty', async () =>
+          expect(
+            fluent([]).reduceAndMap(
+              (a, b) => (a += b),
+              0,
+              a => a * 10 + 1
+            )
+          ).to.be.equal(1));
+        it('not empty', async () =>
+          expect(
+            fluent([1, 2, 3]).reduceAndMap(
+              (a, b) => (a += b),
+              0,
+              a => a * 10 + 1
+            )
+          ).to.be.equals(61));
+      });
+      describe('reduceAndMapAsync', () => {
+        it('empty', async () =>
+          expect(
+            await fluent([]).reduceAndMapAsync(
+              async (a, b) => (a += b),
+              0,
+              async a => a * 10 + 1
+            )
+          ).to.be.equal(1));
+        it('not empty', async () =>
+          expect(
+            await fluent([1, 2, 3]).reduceAndMapAsync(
+              async (a, b) => (a += b),
+              0,
+              async a => a * 10 + 1
+            )
+          ).to.be.equals(61));
+      });
+      describe('reduce', () => {
+        it('empty', async () => expect(fluent([]).reduce((a, b) => (a += b), 0)).to.be.equal(0));
+        it('not empty', async () => expect(fluent([1, 2, 3]).reduce((a, b) => (a += b), 0)).to.be.equals(6));
+      });
+      describe('reduceAsync', () => {
+        it('empty', async () => expect(await fluent([]).reduceAsync(async (a, b) => (a += b), 0)).to.be.equal(0));
+        it('not empty', async () =>
+          expect(await fluent([1, 2, 3]).reduceAsync(async (a, b) => (a += b), 0)).to.be.equals(6));
+      });
+      describe('all', () => {
+        it('empty', async () => expect(fluent([]).all((a: number) => a % 2 === 0)).to.be.false);
+        it('false', async () => expect(fluent([1, 2, 3]).all((a: number) => a % 2 === 0)).to.be.false);
+        it('true', async () => expect(fluent([2, 4, 6]).all((a: number) => a % 2 === 0)).to.be.true);
+      });
+      describe('allAsync', () => {
+        it('empty', async () => expect(await fluent([]).allAsync(async (a: number) => a % 2 === 0)).to.be.false);
+        it('false', async () => expect(await fluent([1, 2, 3]).allAsync(async (a: number) => a % 2 === 0)).to.be.false);
+        it('true', async () => expect(await fluent([2, 4, 6]).allAsync(async (a: number) => a % 2 === 0)).to.be.true);
+      });
+      describe('any', () => {
+        it('empty', async () => expect(fluent([]).any((a: number) => a % 2 === 0)).to.be.false);
+        it('false', async () => expect(fluent([1, 3, 5]).any((a: number) => a % 2 === 0)).to.be.false);
+        it('true', async () => expect(fluent([1, 2, 3]).any((a: number) => a % 2 === 0)).to.be.true);
+      });
+      describe('allAsync', () => {
+        it('empty', async () => expect(await fluent([]).anyAsync(async (a: number) => a % 2 === 0)).to.be.false);
+        it('false', async () => expect(await fluent([1, 3, 5]).anyAsync(async (a: number) => a % 2 === 0)).to.be.false);
+        it('true', async () => expect(await fluent([1, 2, 3]).anyAsync(async (a: number) => a % 2 === 0)).to.be.true);
+      });
+      describe('contains', () => {
+        it('empty', async () => expect(fluent([] as number[]).contains(4)).to.be.false);
+        it('false', async () => expect(fluent([1, 3, 5]).contains(4)).to.be.false);
+        it('true', async () => expect(fluent([1, 2, 4]).contains(4)).to.be.true);
+      });
+      describe('toObject', () => {
+        it('empty', async () =>
+          expect(
+            await fluent([] as Iterable<Person>).toObject(
+              x => x.gender as string,
+              x => x.name
+            )
+          ).to.be.deep.equal({}));
+        it('not empty', async () =>
+          expect(
+            await fluent([
+              {
+                gender: Gender.Female,
+                name: 'name A',
+              },
+              {
+                gender: Gender.NonBinary,
+                name: 'name B',
+              },
+              {
+                gender: Gender.Male,
+                name: 'name C',
+              },
+            ]).toObject(
+              x => x.gender as string,
+              x => x.name
+            )
+          ).to.be.deep.equal({
+            [Gender.Female]: 'name A',
+            [Gender.NonBinary]: 'name B',
+            [Gender.Male]: 'name C',
+          }));
+      });
+      describe('toObjectAsync', () => {
+        it('empty', async () =>
+          expect(
+            await fluent([] as Iterable<Person>).toObjectAsync(
+              async x => x.gender as string,
+              async x => x.name
+            )
+          ).to.be.deep.equal({}));
+        it('not empty', async () =>
+          expect(
+            await fluent([
+              {
+                gender: Gender.Female,
+                name: 'name A',
+              },
+              {
+                gender: Gender.NonBinary,
+                name: 'name B',
+              },
+              {
+                gender: Gender.Male,
+                name: 'name C',
+              },
+            ]).toObjectAsync(
+              async x => x.gender as string,
+              async x => x.name
+            )
+          ).to.be.deep.equal({
+            [Gender.Female]: 'name A',
+            [Gender.NonBinary]: 'name B',
+            [Gender.Male]: 'name C',
+          }));
+      });
+      describe('hasExactly', () => {
+        it('false', () => expect(fluent([1, 2, 3]).hasExactly(2)).to.false);
+        it('true', () => expect(fluent([1, 2, 3]).hasExactly(3)).to.true);
+      });
       describe('hasLessThan', () => {
         it('false', () => expect(fluent([1, 2, 3]).hasLessThan(3)).to.false);
         it('true', () => expect(fluent([1, 2, 3]).hasLessThan(4)).to.true);
@@ -655,15 +795,11 @@ describe('fluent iterable', () => {
         it('false', () => expect(fluent([1, 2, 3]).hasMoreThan(3)).to.false);
         it('true', () => expect(fluent([1, 2, 3]).hasMoreThan(2)).to.true);
       });
-      describe('hasExactly', () => {
-        it('false', () => expect(fluent([1, 2, 3]).hasExactly(2)).to.false);
-        it('true', () => expect(fluent([1, 2, 3]).hasExactly(3)).to.true);
-      });
     });
 
     describe('asynchronous', () => {
       context('basics work', () => {
-        it('can convert to fluentAsync', async () =>
+        it('can convert to fluent', async () =>
           expect(
             await fluent(subject)
               .toAsync()
