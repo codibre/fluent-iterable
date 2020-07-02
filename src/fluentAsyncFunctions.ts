@@ -12,6 +12,7 @@ import {
   Indexed,
 } from './types';
 import { identity, identityAsync, truth } from './utils';
+import { mergeIterators, ErrorCallback } from './mergeIterators';
 
 async function toArray<T>(iterable: AsyncIterable<T>): Promise<T[]> {
   const array: T[] = [];
@@ -576,6 +577,18 @@ async function hasMoreThan<T>(iterable: AsyncIterable<T>, threshold: number): Pr
   return (await count(take(iterable, threshold + 1))) > threshold;
 }
 
+function getIterators<T>(items: (AsyncIterable<T> | AsyncIterator<T>)[]) {
+  return items.map(x => (x[Symbol.asyncIterator] ? x[Symbol.asyncIterator]() : x));
+}
+
+function merge<T>(...items: Array<AsyncIterable<T> | AsyncIterator<T>>) {
+  return mergeIterators(undefined, ...getIterators<T>(items));
+}
+
+function mergeCatching<T>(callback: ErrorCallback, ...items: Array<AsyncIterable<T> | AsyncIterator<T>>) {
+  return mergeIterators(callback, ...getIterators<T>(items));
+}
+
 export {
   withIndex,
   takeWhile,
@@ -637,4 +650,6 @@ export {
   hasExactly,
   hasLessThan,
   hasMoreThan,
+  merge,
+  mergeCatching,
 };

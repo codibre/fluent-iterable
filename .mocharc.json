@@ -5,6 +5,7 @@
     ],
     "package": "./package.json",
     "spec": [
+        "tst/setup.spec.ts",
         "tst/**"
     ],
     "reporter": "spec",

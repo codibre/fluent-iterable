@@ -2,6 +2,8 @@ import { fluentAsync } from '../src';
 import expect, { flatMap } from './tools';
 import { ObjectReadableMock } from 'stream-mock';
 import { Person, data, Gender, picker } from './fluent.spec';
+import delay from 'delay';
+import { stub } from 'sinon';
 
 async function* generator(): AsyncIterable<Person> {
   yield* data;
@@ -762,6 +764,60 @@ describe('fluent async iterable', () => {
     describe('hasExactly', () => {
       it('false', async () => expect(await fluentAsync(new ObjectReadableMock([1, 2, 3])).hasExactly(2)).to.false);
       it('true', async () => expect(await fluentAsync(new ObjectReadableMock([1, 2, 3])).hasExactly(3)).to.true);
+    });
+
+    describe('merge', () => {
+      it('should merge the iterables', async () => {
+        const it1 = (async function*(): AsyncIterable<number> {
+          await delay(10);
+          yield 1;
+          await delay(5);
+          yield 2;
+          await delay(7);
+          yield 3;
+        })();
+        const it2 = (async function*(): AsyncIterable<string> {
+          await delay(2);
+          yield 'a';
+          await delay(15);
+          yield 'b';
+          await delay(3);
+          yield 'c';
+        })();
+
+        const result = await fluentAsync(it1)
+          .merge(it2)
+          .toArray();
+
+        expect(result).to.be.deep.equal(['a', 1, 2, 'b', 'c', 3]);
+      });
+    });
+
+    describe('mergeCatching', () => {
+      it('should merge the iterables', async () => {
+        const testError = new Error('test');
+        const it1 = (async function*(): AsyncIterable<number> {
+          await delay(10);
+          yield 1;
+          await delay(5);
+          yield 2;
+          await delay(7);
+          yield 3;
+        })();
+        const it2 = (async function*(): AsyncIterable<string> {
+          await delay(2);
+          yield 'a';
+          throw testError;
+        })();
+        const callback = stub();
+
+        const result = await fluentAsync(it1)
+          .mergeCatching(callback, it2)
+          .toArray();
+
+        expect(callback).to.have.been.calledOnceWithExactly(testError, 1);
+        expect(result).to.be.deep.equal(['a', 1, 2, 3]);
+      });
     });
   };
   describe('on generator', suite(generator));

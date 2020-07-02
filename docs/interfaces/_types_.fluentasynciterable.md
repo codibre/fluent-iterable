@@ -58,6 +58,8 @@ The type of the items in the asynchronous iterable.
 * [mapAsync](_types_.fluentasynciterable.md#mapasync)
 * [max](_types_.fluentasynciterable.md#max)
 * [maxAsync](_types_.fluentasynciterable.md#maxasync)
+* [merge](_types_.fluentasynciterable.md#merge)
+* [mergeCatching](_types_.fluentasynciterable.md#mergecatching)
 * [min](_types_.fluentasynciterable.md#min)
 * [minAsync](_types_.fluentasynciterable.md#minasync)
 * [partition](_types_.fluentasynciterable.md#partition)
@@ -585,7 +587,7 @@ ___
 
 ▸ **hasExactly**(`expectedNumber`: number): *Promise‹boolean›*
 
-Checks if the number of elements of the iterable is equal to the threshold using a projection. This is a resolving operation, will cause a loop with up to threshold + 1 iterations through the elements.
+Checks if the number of elements of the iterable is equal to the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
 
 **Parameters:**
 
@@ -603,7 +605,7 @@ ___
 
 ▸ **hasLessThan**(`threshold`: number): *Promise‹boolean›*
 
-Checks if the number of elements of the iterable is less than the threshold using a projection. This is a resolving operation, will cause a loop with up to threshold + 1 iterations through the elements.
+Checks if the number of elements of the iterable is less than the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
 
 **Parameters:**
 
@@ -621,7 +623,7 @@ ___
 
 ▸ **hasMoreThan**(`threshold`: number): *Promise‹boolean›*
 
-Checks if the number of elements of the iterable is more than the threshold using a projection. This is a resolving operation, will cause a loop with up to threshold + 1 iterations through the elements.
+Checks if the number of elements of the iterable is more than the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
 
 **Parameters:**
 
@@ -790,6 +792,51 @@ Name | Type | Description |
 **Returns:** *Promise‹T | undefined›*
 
 A promise of the maximum of the iterable's projected elements.
+
+___
+
+###  merge
+
+▸ **merge**<**R**>(...`iterables`: AsyncIterable‹R›[]): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T | R›*
+
+Merge the iterable with the informed ones.
+
+**Type parameters:**
+
+▪ **R**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`...iterables` | AsyncIterable‹R›[] | The iterables to be merged |
+
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T | R›*
+
+A new iterable that returns the elements of all others in the order of which resolves first
+
+___
+
+###  mergeCatching
+
+▸ **mergeCatching**<**R**>(`errorCallback`: [ErrorCallback](_mergeiterators_.errorcallback.md), ...`iterables`: AsyncIterable‹R›[]): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T | R›*
+
+Merge the iterable with the informed ones, catching the errors of any of the iterables that fails, so the process can continue until all the successful iterables ends.
+
+**Type parameters:**
+
+▪ **R**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`errorCallback` | [ErrorCallback](_mergeiterators_.errorcallback.md) | A callback to be called if any of the iterables fail |
+`...iterables` | AsyncIterable‹R›[] | The iterables to be merged |
+
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T | R›*
+
+A new iterable that returns the elements of all others in the order of which resolves first
 
 ___
 

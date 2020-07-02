@@ -1,19 +1,20 @@
 ![CI](https://github.com/kataik/fluent-iterable/workflows/CI/badge.svg)
 
 Provides [fluent api](https://en.wikipedia.org/wiki/Fluent_interface) operations on iterables and async iterables - similar to what defined on arrays. Especially useful until [relevant ESNext features](https://tc39.es/proposal-iterator-helpers/#sec-iteration) are being delivered.
+This library are a fork from [kataik fluent-iterable repository](https://github.com/kataik/fluent-iterable) where more functionalities was added.
 
 ## Description
 
 The library provides the common transformation, filtering and aggregation operations on iterables and async iterables. Supported operations include:
 
-* Item-by-item transformations like [map](docs/interfaces/_types_.fluentiterable.md#map), [withIndex](docs/interfaces/_types_.fluentiterable.md#withIndex)
-* Group transformations like [flatten](docs/interfaces/_types_.fluentiterable.md#flatten), [group](docs/interfaces/_types_.fluentiterable.md#group), [partition](docs/interfaces/_types_.fluentiterable.md#partition), [repeat](docs/interfaces/_types_.fluentiterable.md#repeat), [sort](docs/interfaces/_types_.fluentiterable.md#sort)
-* Extending operations like [append](docs/interfaces/_types_.fluentiterable.md#append), [prepend](docs/interfaces/_types_.fluentiterable.md#prepend), [concat](docs/interfaces/_types_.fluentiterable.md#concat)
-* Narrowing operations like [filter](docs/interfaces/_types_.fluentiterable.md#filter), [take](docs/interfaces/_types_.fluentiterable.md#take), [skip](docs/interfaces/_types_.fluentiterable.md#skip), [distinct](docs/interfaces/_types_.fluentiterable.md#distinct), [first](docs/interfaces/_types_.fluentiterable.md#first), [last](docs/interfaces/_types_.fluentiterable.md#last)
-* Aggregating operations like [reduce](docs/interfaces/_types_.fluentiterable.md#reduce), [toArray](docs/interfaces/_types_.fluentiterable.md#toArray), [toObject](docs/interfaces/_types_.fluentiterable.md#toObject), [join](docs/interfaces/_types_.fluentiterable.md#join)
-* Numeric aggregating operations like [count](docs/interfaces/_types_.fluentiterable.md#count), [max](docs/interfaces/_types_.fluentiterable.md#max), [min](docs/interfaces/_types_.fluentiterable.md#min), [sum](docs/interfaces/_types_.fluentiterable.md#sum), [avg](docs/interfaces/_types_.fluentiterable.md#avg)
-* Logical aggregating operations like [all](docs/interfaces/_types_.fluentiterable.md#all), [any](docs/interfaces/_types_.fluentiterable.md#any), [contains](docs/interfaces/_types_.fluentiterable.md#contains)
-* Execution operations like [execute](docs/interfaces/_types_.fluentiterable.md#execute), [forEach](docs/interfaces/_types_.fluentiterable.md#forEach)
+- Item-by-item transformations like [map](docs/interfaces/_types_.fluentiterable.md#map), [withIndex](docs/interfaces/_types_.fluentiterable.md#withIndex)
+- Group transformations like [flatten](docs/interfaces/_types_.fluentiterable.md#flatten), [group](docs/interfaces/_types_.fluentiterable.md#group), [partition](docs/interfaces/_types_.fluentiterable.md#partition), [repeat](docs/interfaces/_types_.fluentiterable.md#repeat), [sort](docs/interfaces/_types_.fluentiterable.md#sort)
+- Extending operations like [append](docs/interfaces/_types_.fluentiterable.md#append), [prepend](docs/interfaces/_types_.fluentiterable.md#prepend), [concat](docs/interfaces/_types_.fluentiterable.md#concat)
+- Narrowing operations like [filter](docs/interfaces/_types_.fluentiterable.md#filter), [take](docs/interfaces/_types_.fluentiterable.md#take), [skip](docs/interfaces/_types_.fluentiterable.md#skip), [distinct](docs/interfaces/_types_.fluentiterable.md#distinct), [first](docs/interfaces/_types_.fluentiterable.md#first), [last](docs/interfaces/_types_.fluentiterable.md#last)
+- Aggregating operations like [reduce](docs/interfaces/_types_.fluentiterable.md#reduce), [toArray](docs/interfaces/_types_.fluentiterable.md#toArray), [toObject](docs/interfaces/_types_.fluentiterable.md#toObject), [join](docs/interfaces/_types_.fluentiterable.md#join)
+- Numeric aggregating operations like [count](docs/interfaces/_types_.fluentiterable.md#count), [max](docs/interfaces/_types_.fluentiterable.md#max), [min](docs/interfaces/_types_.fluentiterable.md#min), [sum](docs/interfaces/_types_.fluentiterable.md#sum), [avg](docs/interfaces/_types_.fluentiterable.md#avg)
+- Logical aggregating operations like [all](docs/interfaces/_types_.fluentiterable.md#all), [any](docs/interfaces/_types_.fluentiterable.md#any), [contains](docs/interfaces/_types_.fluentiterable.md#contains)
+- Execution operations like [execute](docs/interfaces/_types_.fluentiterable.md#execute), [forEach](docs/interfaces/_types_.fluentiterable.md#forEach)
 
 ## Quick start guide
 
@@ -36,7 +37,7 @@ Click here for the [Full API Reference](./docs/README.md).
 
 ### Basics
 
-ECMAScript introduced support for [iterables and generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators) with version ES6 and their [asynchronous counterparts](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator) with version ES2018. It has introduced an abstraction over sequential iterators (arrays, maps, generators, etc), enabling us to implement solutions regardless of the actual type of the iterable collection. It is especially powerful when using in tandem with generator functions to avoid storing all items in memory when its avoidable. The API provided by *fluent-iterable* reads the elements of the underlying iterable only when needed and stops reading elements as soon as the result is determined.
+ECMAScript introduced support for [iterables and generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators) with version ES6 and their [asynchronous counterparts](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator) with version ES2018. It has introduced an abstraction over sequential iterators (arrays, maps, generators, etc), enabling us to implement solutions regardless of the actual type of the iterable collection. It is especially powerful when using in tandem with generator functions to avoid storing all items in memory when its avoidable. The API provided by _fluent-iterable_ reads the elements of the underlying iterable only when needed and stops reading elements as soon as the result is determined.
 
 To get started with the fluent API, you need to translate the iterable (can be any object with [Symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) [iterator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator) or [asyncIterator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator) defined) into either a [FluentIterable](docs/interfaces/_types_.fluentiterable.md) using [fluent()](docs/modules/_fluent_.md#fluent) or a [FluentAsyncIterable](docs/interfaces/_types_.fluentasynciterable.md) using [fluentAsync()](docs/modules/_fluentasync_.md#fluentAsync).
 
@@ -122,7 +123,7 @@ async function createBackupSequential(iterable: FluentAsyncIterable<ChatMessage>
     .forEachAsync(chatMessage => fetch(BACKUP_URL, { // execute the asynchronous backup operation against all elements one-by-one
       method: 'post',
       body:    JSON.stringify(chatMessage),
-      headers: { 'Content-Type': 'application/json' },    
+      headers: { 'Content-Type': 'application/json' },
     }));
 }
 
@@ -132,7 +133,7 @@ async function createBackupParallel(iterable: FluentAsyncIterable<ChatMessage>):
     .map(chatMessage => fetch(BACKUP_URL, { // translate all elements into a promise of their asynchronous backup operation
       method: 'post',
       body:    JSON.stringify(chatMessage),
-      headers: { 'Content-Type': 'application/json' },    
+      headers: { 'Content-Type': 'application/json' },
     }));
   await Promise.all(promises);
 }
@@ -154,7 +155,8 @@ import fluent, { interval } from 'fluent-iterable';
 const numbers: Iterable<number> = interval();
 const iterable: FluentIterable<number> = fluent(numbers);
 
-for (const number of iterable.take(10)) { // generate the first 10 numbers one-by-one
+for (const number of iterable.take(10)) {
+  // generate the first 10 numbers one-by-one
   console.log(number);
 } // close the generator
 
@@ -238,7 +240,6 @@ console.log(
     .map(n => n / 2)
     .toArray()
 );
-
 ```
 
 #### Playing with object arrays
@@ -393,6 +394,16 @@ async function printProducts(count: number) {
   }
 }
 ```
+
+## Punctual transformations
+
+Maybe you're interested in doing only one transformation without the need to chain another ones. In this case, you can use the same functions offered through _fluent_ and _fluentAsync_ using the exported objects _helper_ and _asyncHelper_ :)
+
+## Merging stream, async iterables and async iterators
+
+Due to Readables also being async iterables, it can be very useful, if you have a scenario where you have many streams being dealt with and you need to combine all results, you can use _asyncHelper.merge_ or _asyncHelper.mergeCatching_ for it! The difference between them is that, with _mergeCatching_, you can continue to receive chunks from non concluded async iterables/readables, even if one of them throws an error, while _merge_, in the other hand, will throw an error at the first error received.
+
+The solution used for this problems was 90% inspired in the [fraxken combine-async-iterators repository](https://github.com/fraxken/combine-async-iterators), which uses Promise.race to generate a new merged iterable that yields the items from all iterators in the resolving order.
 
 ## License
 

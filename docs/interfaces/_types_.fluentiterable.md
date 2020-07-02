@@ -624,7 +624,7 @@ ___
 
 ▸ **hasExactly**(`expectedNumber`: number): *boolean*
 
-Checks if the number of elements of the iterable is equal to the threshold using a projection. This is a resolving operation, will cause a loop with up to threshold + 1 iterations through the elements.
+Checks if the number of elements of the iterable is equal to the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
 
 **Parameters:**
 
@@ -642,7 +642,7 @@ ___
 
 ▸ **hasLessThan**(`threshold`: number): *boolean*
 
-Checks if the number of elements of the iterable is less than the threshold using a projection. This is a resolving operation, will cause a loop with up to threshold + 1 iterations through the elements.
+Checks if the number of elements of the iterable is less than the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
 
 **Parameters:**
 
@@ -660,7 +660,7 @@ ___
 
 ▸ **hasMoreThan**(`threshold`: number): *boolean*
 
-Checks if the number of elements of the iterable is more than the threshold using a projection. This is a resolving operation, will cause a loop with up to threshold + 1 iterations through the elements.
+Checks if the number of elements of the iterable is more than the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
 
 **Parameters:**
 

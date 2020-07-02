@@ -20,6 +20,10 @@ import fluent from './fluent';
 import fluentAsync from './fluentAsync';
 import depaginate from './depaginator';
 import { interval } from './utils';
+import { mergeIterators } from './mergeIterators';
+
+import * as helper from './fluentFunctions';
+import * as asyncHelper from './fluentAsyncFunctions';
 
 export default fluent;
 export {
@@ -41,4 +45,7 @@ export {
   fluentAsync,
   depaginate,
   interval,
+  mergeIterators as combineIterators,
+  helper,
+  asyncHelper,
 };

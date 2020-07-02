@@ -1,3 +1,5 @@
+import { ErrorCallback } from './mergeIterators';
+
 /**
  * Represents a predicate on type `T`.<br>
  *   Example: `const evenNumber: Predicate<number> = n => (n % 2) === 0;`
@@ -1181,6 +1183,21 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @returns A promise that resolves to true if the number of elements of the iterable is greater than the threshold and false if it is not.
    */
   hasMoreThan(threshold: number): Promise<boolean>;
+
+  /**
+   * Merge the iterable with the informed ones.
+   * @param iterables The iterables to be merged
+   * @returns A new iterable that returns the elements of all others in the order of which resolves first
+   */
+  merge<R>(...iterables: AsyncIterable<R>[]): FluentAsyncIterable<T | R>;
+
+  /**
+   * Merge the iterable with the informed ones, catching the errors of any of the iterables that fails, so the process can continue until all the successful iterables ends.
+   * @param errorCallback A callback to be called if any of the iterables fail
+   * @param iterables The iterables to be merged
+   * @returns A new iterable that returns the elements of all others in the order of which resolves first
+   */
+  mergeCatching<R>(errorCallback: ErrorCallback, ...iterables: AsyncIterable<R>[]): FluentAsyncIterable<T | R>;
 }
 
 /**

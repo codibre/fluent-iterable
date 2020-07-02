@@ -59,9 +59,12 @@ import {
   hasExactly,
   hasLessThan,
   hasMoreThan,
+  merge,
+  mergeCatching,
 } from './fluentAsyncFunctions';
 import { AsyncPredicate, Comparer, Mapper, Predicate, FluentAsyncIterable } from './types';
 import { fluentGroup, identity, truth } from './utils';
+import { ErrorCallback } from './mergeIterators';
 
 /**
  * Tranforms an asynchronous iterable into a [[FluentAsyncIterable]].
@@ -132,6 +135,9 @@ function fluentAsync<T>(iterable: AsyncIterable<T>): FluentAsyncIterable<T> {
     hasExactly: expectedNumber => hasExactly(iterable, expectedNumber),
     hasLessThan: threshold => hasLessThan(iterable, threshold),
     hasMoreThan: threshold => hasMoreThan(iterable, threshold),
+    merge: <R>(...iterables: AsyncIterable<R>[]) => fluentAsync(merge<T | R>(iterable, ...iterables)),
+    mergeCatching: <R>(errorCallback: ErrorCallback, ...iterables: AsyncIterable<R>[]) =>
+      fluentAsync(mergeCatching<T | R>(errorCallback, iterable, ...iterables)),
     [Symbol.asyncIterator]: () => iterable[Symbol.asyncIterator](),
   };
 }
