@@ -25,7 +25,6 @@ import { mergeIterators } from './mergeIterators';
 import * as helper from './fluentFunctions';
 import * as asyncHelper from './fluentAsyncFunctions';
 
-export default fluent;
 export {
   FluentIterable,
   FluentAsyncIterable,
@@ -42,6 +41,7 @@ export {
   FluentGroup,
   Page,
   Pager,
+  fluent,
   fluentAsync,
   depaginate,
   interval,

@@ -22,6 +22,7 @@
     "doc": "npx typedoc",
     "format": "prettier --write src/**/*.ts tst/**/*.ts",
     "lint": "eslint src/**/*.ts tst/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts tst/**/*.ts --fix",
     "build": "npm run format && tsc && npm run doc",
     "test": "npm run lint && mocha",
     "test:coverage": "nyc npm test",

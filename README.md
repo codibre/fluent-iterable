@@ -23,7 +23,7 @@ Install from [Node Package Manager](https://www.npmjs.com/): `npm i fluent-itera
 Add the following code to your index file (ts example):
 
 ```typescript
-import fluent, { FluentIterable } from 'fluent-iterable';
+import { fluent, FluentIterable } from 'fluent-iterable';
 
 const numbers: number[] = [3, 1, 8, 6, 9, 2];
 const iterable: FluentIterable<number> = fluent(numbers);
@@ -43,7 +43,7 @@ To get started with the fluent API, you need to translate the iterable (can be a
 
 ```typescript
 import fetch from 'node-fetch';
-import fluent, { fluentAsync, FluentIterable, FluentAsyncIterable } from 'fluent-iterable';
+import { fluent, fluentAsync, FluentIterable, FluentAsyncIterable } from 'fluent-iterable';
 
 const iterableOfArray: FluentIterable<number> = fluent([3, 1, 8, 6, 9, 2]);
 
@@ -150,7 +150,7 @@ The [interval()](docs/modules/_utils_.md#interval) function generates a continuo
 Note: remember, generator functions are state machines, calling the function will not actually generate the numbers. They are generated on the fly until new number are being read from it:
 
 ```typescript
-import fluent, { interval } from 'fluent-iterable';
+import { fluent, interval } from 'fluent-iterable';
 
 const numbers: Iterable<number> = interval();
 const iterable: FluentIterable<number> = fluent(numbers);
@@ -193,7 +193,7 @@ const firstItems: FluentAsyncIterable<Data> = fluentAsync(depaginate(pager)).tak
 #### Playing with Fibonacci generator
 
 ```typescript
-import fluent from 'fluent-iterable';
+import { fluent } from 'fluent-iterable';
 
 function* naiveFibonacci(): Iterable<number> {
   yield 0;
@@ -225,12 +225,7 @@ console.log(
 );
 
 // What are the 10th to 20th fibonacci numbers?
-console.log(
-  fluent(naiveFibonacci())
-    .skip(9)
-    .take(10)
-    .toArray()
-);
+console.log(fluent(naiveFibonacci()).skip(9).take(10).toArray());
 
 // What are the halves of the first 20 even fibonacci numbers?
 console.log(
@@ -245,7 +240,7 @@ console.log(
 #### Playing with object arrays
 
 ```typescript
-import fluent from 'fluent-iterable';
+import { fluent } from 'fluent-iterable';
 
 enum Gender {
   Male = 'Male',
