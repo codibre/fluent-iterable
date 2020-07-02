@@ -6,6 +6,10 @@
   "author": {
     "name": "Kornel B Katai <kataik@gmail.com>"
   },
+  "contributors": [
+    "Thiago O Santos <tos.oliveira@gmail.com>",
+    "Gentilhomme <gentilhomme.thomas@gmail.fr>"
+  ],
   "engines": {
     "node": ">=10"
   },

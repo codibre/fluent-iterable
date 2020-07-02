@@ -1,6 +1,6 @@
 [fluent-iterable - v0.1.6](../README.md) › ["types"](../modules/_types_.md) › [AsyncAction](_types_.asyncaction.md)
 
-# Interface: AsyncAction <**T**>
+# Interface: AsyncAction ‹**T**›
 
 Represents an asynchronous action on an item of type `T`.<br>
   Example: `const createUserAction: AsyncAction<User> = async user => await database.put(user);`

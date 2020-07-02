@@ -1,6 +1,6 @@
 [fluent-iterable - v0.1.6](../README.md) › ["types"](../modules/_types_.md) › [Comparer](_types_.comparer.md)
 
-# Interface: Comparer <**T**>
+# Interface: Comparer ‹**T**›
 
 Compares two instances of type `T`.<br>
   Example: `const levelComparer: Comparer<User> = (userA, userB) => userA.level - userB.level;`

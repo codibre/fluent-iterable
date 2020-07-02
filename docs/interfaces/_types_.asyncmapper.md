@@ -1,6 +1,6 @@
 [fluent-iterable - v0.1.6](../README.md) › ["types"](../modules/_types_.md) › [AsyncMapper](_types_.asyncmapper.md)
 
-# Interface: AsyncMapper <**T, R**>
+# Interface: AsyncMapper ‹**T, R**›
 
 Represents a asynchronous mapping operation from type `T` to type `R`.<br>
   Example: `const idToUser: AsyncMapper<number, User> = async id => await getUser(id)`<br>

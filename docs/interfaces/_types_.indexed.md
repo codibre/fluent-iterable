@@ -1,6 +1,6 @@
 [fluent-iterable - v0.1.6](../README.md) › ["types"](../modules/_types_.md) › [Indexed](_types_.indexed.md)
 
-# Interface: Indexed <**T**>
+# Interface: Indexed ‹**T**›
 
 Represents an indexed value of type `T`.
 

@@ -12,7 +12,7 @@
 
 ###  fluentAsync
 
-▸ **fluentAsync**<**T**>(`iterable`: AsyncIterable‹T›): *[FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)‹T›*
+▸ **fluentAsync**‹**T**›(`iterable`: AsyncIterable‹T›): *[FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)‹T›*
 
 Tranforms an asynchronous iterable into a [FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md).
 

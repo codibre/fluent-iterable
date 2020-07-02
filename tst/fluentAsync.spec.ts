@@ -88,36 +88,14 @@ describe('fluent async iterable', () => {
       });
     });
     context('take', async () => {
-      it('works with negative count', async () =>
-        expect(
-          await fluentAsync(subject)
-            .take(-5)
-            .toArray()
-        ).to.be.empty);
-      it('works with zero count', async () =>
-        expect(
-          await fluentAsync(subject)
-            .take(0)
-            .toArray()
-        ).to.be.empty);
+      it('works with negative count', async () => expect(await fluentAsync(subject).take(-5).toArray()).to.be.empty);
+      it('works with zero count', async () => expect(await fluentAsync(subject).take(0).toArray()).to.be.empty);
       it('works with one count', async () =>
-        expect(
-          await fluentAsync(subject)
-            .take(1)
-            .toArray()
-        ).to.eql(data.slice(0, 1)));
+        expect(await fluentAsync(subject).take(1).toArray()).to.eql(data.slice(0, 1)));
       it('works with count < length', async () =>
-        expect(
-          await fluentAsync(subject)
-            .take(5)
-            .toArray()
-        ).to.eql(data.slice(0, 5)));
+        expect(await fluentAsync(subject).take(5).toArray()).to.eql(data.slice(0, 5)));
       it('works with count = length', async () =>
-        expect(
-          await fluentAsync(subject)
-            .take(data.length)
-            .toArray()
-        ).to.eql(data));
+        expect(await fluentAsync(subject).take(data.length).toArray()).to.eql(data));
       it('works with count > length', async () =>
         expect(
           await fluentAsync(subject)
@@ -178,36 +156,14 @@ describe('fluent async iterable', () => {
         ).to.eql(data.slice(1)));
     });
     context('skip', async () => {
-      it('works with negative count', async () =>
-        expect(
-          await fluentAsync(subject)
-            .skip(-5)
-            .toArray()
-        ).to.eql(data));
-      it('works with zero count', async () =>
-        expect(
-          await fluentAsync(subject)
-            .skip(0)
-            .toArray()
-        ).to.eql(data));
+      it('works with negative count', async () => expect(await fluentAsync(subject).skip(-5).toArray()).to.eql(data));
+      it('works with zero count', async () => expect(await fluentAsync(subject).skip(0).toArray()).to.eql(data));
       it('works with one count', async () =>
-        expect(
-          await fluentAsync(subject)
-            .skip(1)
-            .toArray()
-        ).to.eql(data.slice(1)));
+        expect(await fluentAsync(subject).skip(1).toArray()).to.eql(data.slice(1)));
       it('works with count < length', async () =>
-        expect(
-          await fluentAsync(subject)
-            .skip(5)
-            .toArray()
-        ).to.eql(data.slice(5)));
+        expect(await fluentAsync(subject).skip(5).toArray()).to.eql(data.slice(5)));
       it('works with count = length', async () =>
-        expect(
-          await fluentAsync(subject)
-            .skip(data.length)
-            .toArray()
-        ).to.be.empty);
+        expect(await fluentAsync(subject).skip(data.length).toArray()).to.be.empty);
       it('works with count > length', async () =>
         expect(
           await fluentAsync(subject)
@@ -315,11 +271,7 @@ describe('fluent async iterable', () => {
             .toArray()
         ).to.eql([additionalPerson]));
       it('with non-empty iterable', async () =>
-        expect(
-          await fluentAsync(subject)
-            .append(additionalPerson)
-            .toArray()
-        ).to.eql([...data, additionalPerson]));
+        expect(await fluentAsync(subject).append(additionalPerson).toArray()).to.eql([...data, additionalPerson]));
     });
     describe('prepend', () => {
       it('with empty iterable', async () =>
@@ -329,24 +281,14 @@ describe('fluent async iterable', () => {
             .toArray()
         ).to.eql([additionalPerson]));
       it('with non-empty iterable', async () =>
-        expect(
-          await fluentAsync(subject)
-            .prepend(additionalPerson)
-            .toArray()
-        ).to.eql([additionalPerson, ...data]));
+        expect(await fluentAsync(subject).prepend(additionalPerson).toArray()).to.eql([additionalPerson, ...data]));
     });
     describe('concat', () => {
       it('one empty array', async () =>
-        expect(
-          await fluentAsync(subject)
-            .concat(new ObjectReadableMock([]))
-            .toArray()
-        ).to.eql(data));
+        expect(await fluentAsync(subject).concat(new ObjectReadableMock([])).toArray()).to.eql(data));
       it('two empty arrays', async () =>
         expect(
-          await fluentAsync(subject)
-            .concat(new ObjectReadableMock([]), new ObjectReadableMock([]))
-            .toArray()
+          await fluentAsync(subject).concat(new ObjectReadableMock([]), new ObjectReadableMock([])).toArray()
         ).to.eql(data));
       it('one non-empty arrays', async () =>
         expect(
@@ -368,51 +310,21 @@ describe('fluent async iterable', () => {
         ).to.eql([...data, additionalPerson]));
     });
     describe('repeat', () => {
-      it('negative number of times', async () =>
-        expect(
-          await fluentAsync(subject)
-            .repeat(-5)
-            .toArray()
-        ).to.be.empty);
-      it('zero times', async () =>
-        expect(
-          await fluentAsync(subject)
-            .repeat(0)
-            .toArray()
-        ).to.be.empty);
-      it('once', async () =>
-        expect(
-          await fluentAsync(subject)
-            .repeat(1)
-            .toArray()
-        ).to.eql(data));
-      it('twice', async () =>
-        expect(
-          await fluentAsync(subject)
-            .repeat(2)
-            .toArray()
-        ).to.eql([...data, ...data]));
+      it('negative number of times', async () => expect(await fluentAsync(subject).repeat(-5).toArray()).to.be.empty);
+      it('zero times', async () => expect(await fluentAsync(subject).repeat(0).toArray()).to.be.empty);
+      it('once', async () => expect(await fluentAsync(subject).repeat(1).toArray()).to.eql(data));
+      it('twice', async () => expect(await fluentAsync(subject).repeat(2).toArray()).to.eql([...data, ...data]));
       it('three times', async () =>
-        expect(
-          await fluentAsync(subject)
-            .repeat(3)
-            .toArray()
-        ).to.eql([...data, ...data, ...data]));
+        expect(await fluentAsync(subject).repeat(3).toArray()).to.eql([...data, ...data, ...data]));
     });
     describe('flatten', () => {
       it('empty array', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([]))
-            .flatten()
-            .toArray()
-        ).to.be.empty);
+        expect(await fluentAsync(new ObjectReadableMock([])).flatten().toArray()).to.be.empty);
       it('already flat fails', async () => {
         let error: unknown;
 
         try {
-          await fluentAsync(subject)
-            .flatten()
-            .toArray();
+          await fluentAsync(subject).flatten().toArray();
         } catch (err) {
           error = err;
         }
@@ -447,12 +359,7 @@ describe('fluent async iterable', () => {
         ).to.eql([1, 2, 3, 4, 5, 6]));
     });
     describe('sort', () => {
-      it('empty', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([]))
-            .sort()
-            .toArray()
-        ).to.be.empty);
+      it('empty', async () => expect(await fluentAsync(new ObjectReadableMock([])).sort().toArray()).to.be.empty);
       it('flat numbers', async () =>
         expect(
           await fluentAsync(new ObjectReadableMock([6, 4, 5, 3, 2, 1]))
@@ -467,12 +374,7 @@ describe('fluent async iterable', () => {
         ).to.eql([6, 5, 4, 3, 2, 1]));
     });
     describe('distinct', () => {
-      it('empty', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([]))
-            .distinct()
-            .toArray()
-        ).to.be.empty);
+      it('empty', async () => expect(await fluentAsync(new ObjectReadableMock([])).distinct().toArray()).to.be.empty);
       it('not distinct numbers', async () =>
         expect(
           await fluentAsync(new ObjectReadableMock([1, 1, 1, 2, 2, 3]))
@@ -480,11 +382,7 @@ describe('fluent async iterable', () => {
             .toArray()
         ).to.eql([1, 2, 3]));
       it('already distinct collection', async () =>
-        expect(
-          await fluentAsync(subject)
-            .distinct()
-            .toArray()
-        ).to.eql(data));
+        expect(await fluentAsync(subject).distinct().toArray()).to.eql(data));
       it('with mapper', async () =>
         expect(
           await fluentAsync(subject)
@@ -768,7 +666,7 @@ describe('fluent async iterable', () => {
 
     describe('merge', () => {
       it('should merge the iterables', async () => {
-        const it1 = (async function*(): AsyncIterable<number> {
+        const it1 = (async function* (): AsyncIterable<number> {
           await delay(10);
           yield 1;
           await delay(5);
@@ -776,7 +674,7 @@ describe('fluent async iterable', () => {
           await delay(7);
           yield 3;
         })();
-        const it2 = (async function*(): AsyncIterable<string> {
+        const it2 = (async function* (): AsyncIterable<string> {
           await delay(2);
           yield 'a';
           await delay(15);
@@ -785,9 +683,7 @@ describe('fluent async iterable', () => {
           yield 'c';
         })();
 
-        const result = await fluentAsync(it1)
-          .merge(it2)
-          .toArray();
+        const result = await fluentAsync(it1).merge(it2).toArray();
 
         expect(result).to.be.deep.equal(['a', 1, 2, 'b', 'c', 3]);
       });
@@ -796,7 +692,7 @@ describe('fluent async iterable', () => {
     describe('mergeCatching', () => {
       it('should merge the iterables', async () => {
         const testError = new Error('test');
-        const it1 = (async function*(): AsyncIterable<number> {
+        const it1 = (async function* (): AsyncIterable<number> {
           await delay(10);
           yield 1;
           await delay(5);
@@ -804,16 +700,14 @@ describe('fluent async iterable', () => {
           await delay(7);
           yield 3;
         })();
-        const it2 = (async function*(): AsyncIterable<string> {
+        const it2 = (async function* (): AsyncIterable<string> {
           await delay(2);
           yield 'a';
           throw testError;
         })();
         const callback = stub();
 
-        const result = await fluentAsync(it1)
-          .mergeCatching(callback, it2)
-          .toArray();
+        const result = await fluentAsync(it1).mergeCatching(callback, it2).toArray();
 
         expect(callback).to.have.been.calledOnceWithExactly(testError, 1);
         expect(result).to.be.deep.equal(['a', 1, 2, 3]);

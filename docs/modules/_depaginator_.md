@@ -12,7 +12,7 @@
 
 ###  depaginate
 
-▸ **depaginate**<**T**, **TToken**>(`pager`: [Pager](../interfaces/_types_.pager.md)‹T, TToken›): *AsyncIterable‹T›*
+▸ **depaginate**‹**T**, **TToken**›(`pager`: [Pager](../interfaces/_types_.pager.md)‹T, TToken›): *AsyncIterable‹T›*
 
 Translate a paginated resource into a non-paginated iterable of elements.
 

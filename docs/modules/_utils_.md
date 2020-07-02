@@ -17,7 +17,7 @@
 
 ### `Const` fluentGroup
 
-▸ **fluentGroup**<**T**, **R**>(`grp`: [Group](../interfaces/_types_.group.md)‹T, R›): *[FluentGroup](../interfaces/_types_.fluentgroup.md)‹T, R›*
+▸ **fluentGroup**‹**T**, **R**›(`grp`: [Group](../interfaces/_types_.group.md)‹T, R›): *[FluentGroup](../interfaces/_types_.fluentgroup.md)‹T, R›*
 
 **`internal`** 
 
@@ -39,7 +39,7 @@ ___
 
 ### `Const` identity
 
-▸ **identity**<**T**>(`t`: T): *T*
+▸ **identity**‹**T**›(`t`: T): *T*
 
 **`internal`** 
 
@@ -59,7 +59,7 @@ ___
 
 ### `Const` identityAsync
 
-▸ **identityAsync**<**T**>(`t`: T): *Promise‹T›*
+▸ **identityAsync**‹**T**›(`t`: T): *Promise‹T›*
 
 **`internal`** 
 

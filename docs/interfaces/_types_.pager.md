@@ -1,6 +1,6 @@
 [fluent-iterable - v0.1.6](../README.md) › ["types"](../modules/_types_.md) › [Pager](_types_.pager.md)
 
-# Interface: Pager <**T, TToken**>
+# Interface: Pager ‹**T, TToken**›
 
 Represents a pager - responsible to retrieve pages from a paginated resource.
 

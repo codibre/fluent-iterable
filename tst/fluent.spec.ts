@@ -104,11 +104,7 @@ describe('fluent iterable', () => {
       });
       context('withIndex', () => {
         it('should return Indexed instances from informed array', () => {
-          expect(
-            fluent(['a', 'b', 'c'])
-              .withIndex()
-              .toArray()
-          ).to.be.eql([
+          expect(fluent(['a', 'b', 'c']).withIndex().toArray()).to.be.eql([
             { idx: 0, value: 'a' },
             { idx: 1, value: 'b' },
             { idx: 2, value: 'c' },
@@ -160,36 +156,11 @@ describe('fluent iterable', () => {
         });
       });
       context('take', () => {
-        it('works with negative count', () =>
-          expect(
-            fluent(subject)
-              .take(-5)
-              .toArray()
-          ).to.be.empty);
-        it('works with zero count', () =>
-          expect(
-            fluent(subject)
-              .take(0)
-              .toArray()
-          ).to.be.empty);
-        it('works with one count', () =>
-          expect(
-            fluent(subject)
-              .take(1)
-              .toArray()
-          ).to.eql(data.slice(0, 1)));
-        it('works with count < length', () =>
-          expect(
-            fluent(subject)
-              .take(5)
-              .toArray()
-          ).to.eql(data.slice(0, 5)));
-        it('works with count = length', () =>
-          expect(
-            fluent(subject)
-              .take(data.length)
-              .toArray()
-          ).to.eql(data));
+        it('works with negative count', () => expect(fluent(subject).take(-5).toArray()).to.be.empty);
+        it('works with zero count', () => expect(fluent(subject).take(0).toArray()).to.be.empty);
+        it('works with one count', () => expect(fluent(subject).take(1).toArray()).to.eql(data.slice(0, 1)));
+        it('works with count < length', () => expect(fluent(subject).take(5).toArray()).to.eql(data.slice(0, 5)));
+        it('works with count = length', () => expect(fluent(subject).take(data.length).toArray()).to.eql(data));
         it('works with count > length', () =>
           expect(
             fluent(subject)
@@ -250,36 +221,11 @@ describe('fluent iterable', () => {
           ).to.eql(data.slice(1)));
       });
       context('skip', () => {
-        it('works with negative count', () =>
-          expect(
-            fluent(subject)
-              .skip(-5)
-              .toArray()
-          ).to.eql(data));
-        it('works with zero count', () =>
-          expect(
-            fluent(subject)
-              .skip(0)
-              .toArray()
-          ).to.eql(data));
-        it('works with one count', () =>
-          expect(
-            fluent(subject)
-              .skip(1)
-              .toArray()
-          ).to.eql(data.slice(1)));
-        it('works with count < length', () =>
-          expect(
-            fluent(subject)
-              .skip(5)
-              .toArray()
-          ).to.eql(data.slice(5)));
-        it('works with count = length', () =>
-          expect(
-            fluent(subject)
-              .skip(data.length)
-              .toArray()
-          ).to.be.empty);
+        it('works with negative count', () => expect(fluent(subject).skip(-5).toArray()).to.eql(data));
+        it('works with zero count', () => expect(fluent(subject).skip(0).toArray()).to.eql(data));
+        it('works with one count', () => expect(fluent(subject).skip(1).toArray()).to.eql(data.slice(1)));
+        it('works with count < length', () => expect(fluent(subject).skip(5).toArray()).to.eql(data.slice(5)));
+        it('works with count = length', () => expect(fluent(subject).skip(data.length).toArray()).to.be.empty);
         it('works with count > length', () =>
           expect(
             fluent(subject)
@@ -387,11 +333,7 @@ describe('fluent iterable', () => {
               .toArray()
           ).to.eql([additionalPerson]));
         it('with non-empty iterable', () =>
-          expect(
-            fluent(subject)
-              .append(additionalPerson)
-              .toArray()
-          ).to.eql([...data, additionalPerson]));
+          expect(fluent(subject).append(additionalPerson).toArray()).to.eql([...data, additionalPerson]));
       });
       describe('prepend', () => {
         it('with empty iterable', () =>
@@ -401,89 +343,32 @@ describe('fluent iterable', () => {
               .toArray()
           ).to.eql([additionalPerson]));
         it('with non-empty iterable', () =>
-          expect(
-            fluent(subject)
-              .prepend(additionalPerson)
-              .toArray()
-          ).to.eql([additionalPerson, ...data]));
+          expect(fluent(subject).prepend(additionalPerson).toArray()).to.eql([additionalPerson, ...data]));
       });
       describe('concat', () => {
-        it('one empty array', () =>
-          expect(
-            fluent(subject)
-              .concat([])
-              .toArray()
-          ).to.eql(data));
-        it('two empty arrays', () =>
-          expect(
-            fluent(subject)
-              .concat([], [])
-              .toArray()
-          ).to.eql(data));
+        it('one empty array', () => expect(fluent(subject).concat([]).toArray()).to.eql(data));
+        it('two empty arrays', () => expect(fluent(subject).concat([], []).toArray()).to.eql(data));
         it('one non-empty arrays', () =>
-          expect(
-            fluent(subject)
-              .concat([additionalPerson])
-              .toArray()
-          ).to.eql([...data, additionalPerson]));
+          expect(fluent(subject).concat([additionalPerson]).toArray()).to.eql([...data, additionalPerson]));
         it('two non-empty arrays', () =>
-          expect(
-            fluent(subject)
-              .concat([additionalPerson], data)
-              .toArray()
-          ).to.eql([...data, additionalPerson, ...data]));
+          expect(fluent(subject).concat([additionalPerson], data).toArray()).to.eql([
+            ...data,
+            additionalPerson,
+            ...data,
+          ]));
         it('one empty and one non-empty arrays', () =>
-          expect(
-            fluent(subject)
-              .concat([], [additionalPerson])
-              .toArray()
-          ).to.eql([...data, additionalPerson]));
+          expect(fluent(subject).concat([], [additionalPerson]).toArray()).to.eql([...data, additionalPerson]));
       });
       describe('repeat', () => {
-        it('negative number of times', () =>
-          expect(
-            fluent(subject)
-              .repeat(-5)
-              .toArray()
-          ).to.be.empty);
-        it('zero times', () =>
-          expect(
-            fluent(subject)
-              .repeat(0)
-              .toArray()
-          ).to.be.empty);
-        it('once', () =>
-          expect(
-            fluent(subject)
-              .repeat(1)
-              .toArray()
-          ).to.eql(data));
-        it('twice', () =>
-          expect(
-            fluent(subject)
-              .repeat(2)
-              .toArray()
-          ).to.eql([...data, ...data]));
-        it('three times', () =>
-          expect(
-            fluent(subject)
-              .repeat(3)
-              .toArray()
-          ).to.eql([...data, ...data, ...data]));
+        it('negative number of times', () => expect(fluent(subject).repeat(-5).toArray()).to.be.empty);
+        it('zero times', () => expect(fluent(subject).repeat(0).toArray()).to.be.empty);
+        it('once', () => expect(fluent(subject).repeat(1).toArray()).to.eql(data));
+        it('twice', () => expect(fluent(subject).repeat(2).toArray()).to.eql([...data, ...data]));
+        it('three times', () => expect(fluent(subject).repeat(3).toArray()).to.eql([...data, ...data, ...data]));
       });
       describe('flatten', () => {
-        it('empty array', () =>
-          expect(
-            fluent([])
-              .flatten()
-              .toArray()
-          ).to.be.empty);
-        it('already flat fails', () =>
-          expect(() =>
-            fluent(subject)
-              .flatten()
-              .toArray()
-          ).to.throw());
+        it('empty array', () => expect(fluent([]).flatten().toArray()).to.be.empty);
+        it('already flat fails', () => expect(() => fluent(subject).flatten().toArray()).to.throw());
         it('not flat', () =>
           expect(
             fluent([[1, 2], [3, 4, 5], [], [6]])
@@ -512,18 +397,8 @@ describe('fluent iterable', () => {
           ).to.eql([1, 2, 3, 4, 5, 6]));
       });
       describe('sort', () => {
-        it('empty', () =>
-          expect(
-            fluent([])
-              .sort()
-              .toArray()
-          ).to.be.empty);
-        it('flat numbers', () =>
-          expect(
-            fluent([6, 4, 5, 3, 2, 1])
-              .sort()
-              .toArray()
-          ).to.eql([1, 2, 3, 4, 5, 6]));
+        it('empty', () => expect(fluent([]).sort().toArray()).to.be.empty);
+        it('flat numbers', () => expect(fluent([6, 4, 5, 3, 2, 1]).sort().toArray()).to.eql([1, 2, 3, 4, 5, 6]));
         it('flat numbers with reversed comparison', () =>
           expect(
             fluent([6, 4, 5, 3, 2, 1])
@@ -532,24 +407,9 @@ describe('fluent iterable', () => {
           ).to.eql([6, 5, 4, 3, 2, 1]));
       });
       describe('distinct', () => {
-        it('empty', () =>
-          expect(
-            fluent([])
-              .distinct()
-              .toArray()
-          ).to.be.empty);
-        it('not distinct numbers', () =>
-          expect(
-            fluent([1, 1, 1, 2, 2, 3])
-              .distinct()
-              .toArray()
-          ).to.eql([1, 2, 3]));
-        it('already distinct collection', () =>
-          expect(
-            fluent(subject)
-              .distinct()
-              .toArray()
-          ).to.eql(data));
+        it('empty', () => expect(fluent([]).distinct().toArray()).to.be.empty);
+        it('not distinct numbers', () => expect(fluent([1, 1, 1, 2, 2, 3]).distinct().toArray()).to.eql([1, 2, 3]));
+        it('already distinct collection', () => expect(fluent(subject).distinct().toArray()).to.eql(data));
         it('with mapper', () =>
           expect(
             fluent(subject)
@@ -799,12 +659,7 @@ describe('fluent iterable', () => {
 
     describe('asynchronous', () => {
       context('basics work', () => {
-        it('can convert to fluent', async () =>
-          expect(
-            await fluent(subject)
-              .toAsync()
-              .toArray()
-          ).to.eql(data));
+        it('can convert to fluent', async () => expect(await fluent(subject).toAsync().toArray()).to.eql(data));
       });
     });
   };

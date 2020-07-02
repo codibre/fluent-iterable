@@ -1,6 +1,6 @@
 [fluent-iterable - v0.1.6](../README.md) › ["types"](../modules/_types_.md) › [FluentIterable](_types_.fluentiterable.md)
 
-# Interface: FluentIterable <**T**>
+# Interface: FluentIterable ‹**T**›
 
 Represents an iterable extended with common processing and mutating capabilities.<br>
   The capabilities introduced are defined as a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) and thus they support *method chaining*.
@@ -319,7 +319,7 @@ ___
 
 ###  distinct
 
-▸ **distinct**<**R**>(`mapper?`: [Mapper](_types_.mapper.md)‹T, R›): *[FluentIterable](_types_.fluentiterable.md)‹T›*
+▸ **distinct**‹**R**›(`mapper?`: [Mapper](_types_.mapper.md)‹T, R›): *[FluentIterable](_types_.fluentiterable.md)‹T›*
 
 Returns distinct elements from the iterable from a certain projections perspective.<br>
   Examples:<br>
@@ -346,7 +346,7 @@ ___
 
 ###  distinctAsync
 
-▸ **distinctAsync**<**R**>(`mapper`: [AsyncMapper](_types_.asyncmapper.md)‹T, R›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+▸ **distinctAsync**‹**R**›(`mapper`: [AsyncMapper](_types_.asyncmapper.md)‹T, R›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
 Returns distinct elements from the iterable from a certain asynchronous projections perspective.
 
@@ -487,7 +487,7 @@ ___
 
 ###  flatten
 
-▸ **flatten**<**R**>(`mapper?`: [Mapper](_types_.mapper.md)‹T, Iterable‹R››): *[FluentIterable](_types_.fluentiterable.md)‹R›*
+▸ **flatten**‹**R**›(`mapper?`: [Mapper](_types_.mapper.md)‹T, Iterable‹R››): *[FluentIterable](_types_.fluentiterable.md)‹R›*
 
 Projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.<br>
 Examples:<br>
@@ -514,7 +514,7 @@ ___
 
 ###  flattenAsync
 
-▸ **flattenAsync**<**R**>(`mapper`: [AsyncMapper](_types_.asyncmapper.md)‹T, Iterable‹R››): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹R›*
+▸ **flattenAsync**‹**R**›(`mapper`: [AsyncMapper](_types_.asyncmapper.md)‹T, Iterable‹R››): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹R›*
 
 Asynchronously projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.
 
@@ -573,7 +573,7 @@ ___
 
 ###  group
 
-▸ **group**<**R**>(`mapper`: [Mapper](_types_.mapper.md)‹T, R›): *[FluentIterable](_types_.fluentiterable.md)‹[FluentGroup](_types_.fluentgroup.md)‹T, R››*
+▸ **group**‹**R**›(`mapper`: [Mapper](_types_.mapper.md)‹T, R›): *[FluentIterable](_types_.fluentiterable.md)‹[FluentGroup](_types_.fluentgroup.md)‹T, R››*
 
 Groups the elements of the iterable keyed by equality of data at the specified projection.<br>
   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).group(word => word[0])` yields { key: 'a', values: ['anchor', 'almond', 'alpine'] } and { key: 'b', values: ['bound'] }.
@@ -598,7 +598,7 @@ ___
 
 ###  groupAsync
 
-▸ **groupAsync**<**R**>(`mapper`: [AsyncMapper](_types_.asyncmapper.md)‹T, R›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[FluentGroup](_types_.fluentgroup.md)‹T, R››*
+▸ **groupAsync**‹**R**›(`mapper`: [AsyncMapper](_types_.asyncmapper.md)‹T, R›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[FluentGroup](_types_.fluentgroup.md)‹T, R››*
 
 Groups the elements of the iterable keyed by equality of data at the specified asynchronous projection.
 
@@ -757,7 +757,7 @@ ___
 
 ###  map
 
-▸ **map**<**R**>(`mapper`: [Mapper](_types_.mapper.md)‹T, R›): *[FluentIterable](_types_.fluentiterable.md)‹R›*
+▸ **map**‹**R**›(`mapper`: [Mapper](_types_.mapper.md)‹T, R›): *[FluentIterable](_types_.fluentiterable.md)‹R›*
 
 Transforms the iterable of `T` into an iterable of `R` by mapping all elements to an element of `R`.<br>
   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).map(word => word.toUpperCase())` yields *ANCHOR*, *ALMOND*, *BOUND* and *ALPINE*.
@@ -782,7 +782,7 @@ ___
 
 ###  mapAsync
 
-▸ **mapAsync**<**R**>(`mapper`: [AsyncMapper](_types_.asyncmapper.md)‹T, R›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹R›*
+▸ **mapAsync**‹**R**›(`mapper`: [AsyncMapper](_types_.asyncmapper.md)‹T, R›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹R›*
 
 Transforms the iterable of `T` into an iterable of `R` by mapping all elements to an element of `R`.
 
@@ -919,7 +919,7 @@ ___
 
 ###  reduce
 
-▸ **reduce**<**R**>(`reducer`: [Reducer](_types_.reducer.md)‹T, R›, `initial`: R): *R*
+▸ **reduce**‹**R**›(`reducer`: [Reducer](_types_.reducer.md)‹T, R›, `initial`: R): *R*
 
 Aggregates the iterable by applying an accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Example:<br>
@@ -951,7 +951,7 @@ ___
 
 ###  reduceAndMap
 
-▸ **reduceAndMap**<**A**, **R**>(`reducer`: [Reducer](_types_.reducer.md)‹T, A›, `initial`: A, `result`: [Mapper](_types_.mapper.md)‹A, R›): *R*
+▸ **reduceAndMap**‹**A**, **R**›(`reducer`: [Reducer](_types_.reducer.md)‹T, A›, `initial`: A, `result`: [Mapper](_types_.mapper.md)‹A, R›): *R*
 
 Aggregates the iterable by applying an accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value, and the specified map function is used to project the result value from the accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Example:<br>
@@ -992,7 +992,7 @@ ___
 
 ###  reduceAndMapAsync
 
-▸ **reduceAndMapAsync**<**A**, **R**>(`reducer`: [AsyncReducer](_types_.asyncreducer.md)‹T, A›, `initial`: A, `result`: [AsyncMapper](_types_.asyncmapper.md)‹A, R›): *Promise‹R›*
+▸ **reduceAndMapAsync**‹**A**, **R**›(`reducer`: [AsyncReducer](_types_.asyncreducer.md)‹T, A›, `initial`: A, `result`: [AsyncMapper](_types_.asyncmapper.md)‹A, R›): *Promise‹R›*
 
 Aggregates the iterable by applying an asynchronous accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value, and the specified asynchronous map function is used to project the result value from the accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -1022,7 +1022,7 @@ ___
 
 ###  reduceAsync
 
-▸ **reduceAsync**<**R**>(`reducer`: [AsyncReducer](_types_.asyncreducer.md)‹T, R›, `initial`: R): *Promise‹R›*
+▸ **reduceAsync**‹**R**›(`reducer`: [AsyncReducer](_types_.asyncreducer.md)‹T, R›, `initial`: R): *Promise‹R›*
 
 Aggregates the iterable by applying an asynchronous accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -1265,7 +1265,7 @@ ___
 
 ###  toObject
 
-▸ **toObject**<**R**>(`keySelector`: [Mapper](_types_.mapper.md)‹T, string›, `valueSelector?`: [Mapper](_types_.mapper.md)‹T, unknown›): *R*
+▸ **toObject**‹**R**›(`keySelector`: [Mapper](_types_.mapper.md)‹T, string›, `valueSelector?`: [Mapper](_types_.mapper.md)‹T, unknown›): *R*
 
 Translates the iterable into an object using the elements of the iterable as representations of fields as specified by a key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Examples:<br>
@@ -1293,7 +1293,7 @@ ___
 
 ###  toObjectAsync
 
-▸ **toObjectAsync**<**R**>(`keySelector`: [AsyncMapper](_types_.asyncmapper.md)‹T, string›, `valueSelector`: [AsyncMapper](_types_.asyncmapper.md)‹T, unknown›): *Promise‹R›*
+▸ **toObjectAsync**‹**R**›(`keySelector`: [AsyncMapper](_types_.asyncmapper.md)‹T, string›, `valueSelector`: [AsyncMapper](_types_.asyncmapper.md)‹T, unknown›): *Promise‹R›*
 
 Translates the iterable into an object using the elements of the iterable as representations of fields as specified by an asynchronous key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -1318,7 +1318,7 @@ ___
 
 ###  top
 
-▸ **top**<**R**>(`mapper`: [Mapper](_types_.mapper.md)‹T, R›, `comparer`: [Comparer](_types_.comparer.md)‹R›): *T | undefined*
+▸ **top**‹**R**›(`mapper`: [Mapper](_types_.mapper.md)‹T, R›, `comparer`: [Comparer](_types_.comparer.md)‹R›): *T | undefined*
 
 Calculates the top element of the iterable using a projection and a comparer. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Examples:<br>
@@ -1346,7 +1346,7 @@ ___
 
 ###  topAsync
 
-▸ **topAsync**<**R**>(`mapper`: [AsyncMapper](_types_.asyncmapper.md)‹T, R›, `comparer`: [Comparer](_types_.comparer.md)‹R›): *Promise‹T | undefined›*
+▸ **topAsync**‹**R**›(`mapper`: [AsyncMapper](_types_.asyncmapper.md)‹T, R›, `comparer`: [Comparer](_types_.comparer.md)‹R›): *Promise‹T | undefined›*
 
 Calculates the top element of the iterable using an asynchronous projection and a comparer. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 

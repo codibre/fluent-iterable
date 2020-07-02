@@ -1,6 +1,6 @@
 [fluent-iterable - v0.1.6](../README.md) › ["types"](../modules/_types_.md) › [AsyncReducer](_types_.asyncreducer.md)
 
-# Interface: AsyncReducer <**T, A**>
+# Interface: AsyncReducer ‹**T, A**›
 
 Represents an asynchronous reducer of type `T` into the accumulator type `A`.<br>
   Example: `const sumReducer: AsyncReducer<Channel, number> = async (sum, next) => sum + await getNumberOfMessages(next)`

@@ -1,6 +1,6 @@
 [fluent-iterable - v0.1.6](../README.md) › ["types"](../modules/_types_.md) › [AsyncPredicate](_types_.asyncpredicate.md)
 
-# Interface: AsyncPredicate <**T**>
+# Interface: AsyncPredicate ‹**T**›
 
 Represents an asynchronous predicate on type `T`.<br>
   Example: `const userExists: AsyncPredicate<User> = async user => !!(await getUser(user.id))`

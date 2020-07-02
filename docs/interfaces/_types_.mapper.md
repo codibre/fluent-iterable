@@ -1,6 +1,6 @@
 [fluent-iterable - v0.1.6](../README.md) › ["types"](../modules/_types_.md) › [Mapper](_types_.mapper.md)
 
-# Interface: Mapper <**T, R**>
+# Interface: Mapper ‹**T, R**›
 
 Represents a mapping operation from type `T` to type `R`.<br>
   Example: ``const userToPrintable: Mapper<User, string> = user => `${user.name} (id: ${user.id})` ``

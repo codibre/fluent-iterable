@@ -18,7 +18,7 @@
 
 ###  getNextAsyncIterator
 
-▸ **getNextAsyncIterator**<**T**>(`asyncIterator`: AsyncIterator‹T›, `index`: number): *Promise‹object›*
+▸ **getNextAsyncIterator**‹**T**›(`asyncIterator`: AsyncIterator‹T›, `index`: number): *Promise‹object›*
 
 **Type parameters:**
 
@@ -37,7 +37,7 @@ ___
 
 ###  getNextAsyncIteratorFactory
 
-▸ **getNextAsyncIteratorFactory**<**T**>(`callback?`: [ErrorCallback](../interfaces/_mergeiterators_.errorcallback.md)): *(Anonymous function)*
+▸ **getNextAsyncIteratorFactory**‹**T**›(`callback?`: [ErrorCallback](../interfaces/_mergeiterators_.errorcallback.md)): *(Anonymous function)*
 
 **Type parameters:**
 
@@ -55,7 +55,7 @@ ___
 
 ###  mergeIterators
 
-▸ **mergeIterators**<**T**>(`callback`: [ErrorCallback](../interfaces/_mergeiterators_.errorcallback.md) | undefined, ...`iterators`: AsyncIterator‹T›[]): *AsyncGenerator‹any, void, unknown›*
+▸ **mergeIterators**‹**T**›(`callback`: [ErrorCallback](../interfaces/_mergeiterators_.errorcallback.md) | undefined, ...`iterators`: AsyncIterator‹T›[]): *AsyncGenerator‹any, void, unknown›*
 
 **Type parameters:**
 

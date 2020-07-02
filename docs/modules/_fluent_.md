@@ -12,7 +12,7 @@
 
 ###  fluent
 
-▸ **fluent**<**T**>(`iterable`: Iterable‹T›): *[FluentIterable](../interfaces/_types_.fluentiterable.md)‹T›*
+▸ **fluent**‹**T**›(`iterable`: Iterable‹T›): *[FluentIterable](../interfaces/_types_.fluentiterable.md)‹T›*
 
 Tranforms an iterable into a [FluentIterable](../interfaces/_types_.fluentiterable.md).
 

@@ -1,6 +1,6 @@
 [fluent-iterable - v0.1.6](../README.md) › ["types"](../modules/_types_.md) › [FluentGroup](_types_.fluentgroup.md)
 
-# Interface: FluentGroup <**T, R**>
+# Interface: FluentGroup ‹**T, R**›
 
 Represents a group of [fluent](../modules/_fluent_.md#fluent) items of type `T` with a key of type `R`.
 

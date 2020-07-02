@@ -1,6 +1,6 @@
 [fluent-iterable - v0.1.6](../README.md) › ["types"](../modules/_types_.md) › [Page](_types_.page.md)
 
-# Interface: Page <**T, TToken**>
+# Interface: Page ‹**T, TToken**›
 
 Represents a page of a paginated resource.
 

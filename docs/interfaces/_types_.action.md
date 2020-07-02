@@ -1,6 +1,6 @@
 [fluent-iterable - v0.1.6](../README.md) › ["types"](../modules/_types_.md) › [Action](_types_.action.md)
 
-# Interface: Action <**T**>
+# Interface: Action ‹**T**›
 
 Represents an action on an item of type `T`.<br>
   Example: ``const logUserAction: Action<User> = user => console.log(`User ${user.name} (id: ${user.id})`);``

@@ -1,6 +1,6 @@
 [fluent-iterable - v0.1.6](../README.md) › ["types"](../modules/_types_.md) › [Reducer](_types_.reducer.md)
 
-# Interface: Reducer <**T, A**>
+# Interface: Reducer ‹**T, A**›
 
 Represents a reducer of type `T` into the accumulator type `A`.<br>
   Example: `const sumReducer: Reducer<number, number> = (sum, next) => sum + next;`
