@@ -1,17 +1,3 @@
 {
-    "diff": true,
-    "extension": [
-        "ts"
-    ],
-    "package": "./package.json",
-    "spec": [
-        "tst/setup.spec.ts",
-        "tst/**"
-    ],
-    "reporter": "spec",
-    "slow": 75,
-    "timeout": 2000,
-    "ui": "bdd",
-    "recursive": true,
-    "require": "ts-node/register"
+  "extends": "node_modules/@codibre/confs/mocharc.json"
 }

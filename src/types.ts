@@ -373,7 +373,9 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param mapper Asynchronously projects the elements of the iterable into the group key they belong to.
    * @returns The [[FluentAsyncIterable]] of the distinct groups.
    */
-  groupAsync<R>(mapper: AsyncMapper<T, R>): FluentAsyncIterable<FluentGroup<T, R>>;
+  groupAsync<R>(
+    mapper: AsyncMapper<T, R>,
+  ): FluentAsyncIterable<FluentGroup<T, R>>;
 
   /**
    * Returns the number of elements that matches a predicate in the iterable. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -450,7 +452,11 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param result The mapping function, projects the accumulator value of type `A` to the result value of type `R`.
    * @returns The aggregated value.
    */
-  reduceAndMap<A, R>(reducer: Reducer<T, A>, initial: A, result: Mapper<A, R>): R;
+  reduceAndMap<A, R>(
+    reducer: Reducer<T, A>,
+    initial: A,
+    result: Mapper<A, R>,
+  ): R;
 
   /**
    * Aggregates the iterable by applying an asynchronous accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value, and the specified asynchronous map function is used to project the result value from the accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -461,7 +467,11 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param result The asynchronous mapping function, projects the accumulator value of type `A` to the result value of type `R`.
    * @returns A promise of the aggregated value.
    */
-  reduceAndMapAsync<A, R>(reducer: AsyncReducer<T, A>, initial: A, result: AsyncMapper<A, R>): Promise<R>;
+  reduceAndMapAsync<A, R>(
+    reducer: AsyncReducer<T, A>,
+    initial: A,
+    result: AsyncMapper<A, R>,
+  ): Promise<R>;
 
   /**
    * Aggregates the iterable by applying an accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -555,7 +565,10 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param valueSelector Projects an element of the iterable into the value of the corresponding field. The identity function is being used if omitted.
    * @returns The object composed of the elements of the iterable as fields.
    */
-  toObject<R>(keySelector: Mapper<T, string>, valueSelector?: Mapper<T, unknown>): R;
+  toObject<R>(
+    keySelector: Mapper<T, string>,
+    valueSelector?: Mapper<T, unknown>,
+  ): R;
 
   /**
    * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by an asynchronous key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -564,7 +577,10 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param valueSelector Asynchronously projects an element of the iterable into the value of the corresponding field.
    * @returns A promise of the object composed of the elements of the iterable as fields.
    */
-  toObjectAsync<R>(keySelector: AsyncMapper<T, string>, valueSelector: AsyncMapper<T, unknown>): Promise<R>;
+  toObjectAsync<R>(
+    keySelector: AsyncMapper<T, string>,
+    valueSelector: AsyncMapper<T, unknown>,
+  ): Promise<R>;
 
   /**
    * Translates the iterable into a [[FluentAsyncIterable]].
@@ -674,7 +690,10 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param comparer The comparison function.
    * @returns A promise of the top of the iterable's projected elements.
    */
-  topAsync<R>(mapper: AsyncMapper<T, R>, comparer: Comparer<R>): Promise<T | undefined>;
+  topAsync<R>(
+    mapper: AsyncMapper<T, R>,
+    comparer: Comparer<R>,
+  ): Promise<T | undefined>;
 
   /**
    * Finds the numeric minimum element of the iterable using a projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -862,7 +881,9 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param mapper Specifies the asynchronous projection from the elements of `T` to iterables of `R`.
    * @returns The flattened [[FluentAsyncIterable]].
    */
-  flattenAsync<R>(mapper: AsyncMapper<T, AsyncIterable<R>>): FluentAsyncIterable<R>;
+  flattenAsync<R>(
+    mapper: AsyncMapper<T, AsyncIterable<R>>,
+  ): FluentAsyncIterable<R>;
 
   /**
    * Sorts the elements of the iterable based on a specified comparer. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -901,7 +922,9 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param mapper Asynchronously projects the elements of the iterable into the group key they belong to.
    * @returns The [[FluentAsyncIterable]] of the distinct groups.
    */
-  groupAsync<R>(mapper: AsyncMapper<T, R>): FluentAsyncIterable<FluentGroup<T, R>>;
+  groupAsync<R>(
+    mapper: AsyncMapper<T, R>,
+  ): FluentAsyncIterable<FluentGroup<T, R>>;
 
   /**
    * Returns the number of elements that matches a predicate in the iterable. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -954,7 +977,11 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param result The mapping function, projects the accumulator value of type `A` to the result value of type `R`.
    * @returns A promise of the aggregated value.
    */
-  reduceAndMap<A, R>(reducer: Reducer<T, A>, initial: A, result: Mapper<A, R>): Promise<R>;
+  reduceAndMap<A, R>(
+    reducer: Reducer<T, A>,
+    initial: A,
+    result: Mapper<A, R>,
+  ): Promise<R>;
 
   /**
    * Aggregates the iterable by applying an asynchronous accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value, and the specified asynchronous map function is used to project the result value from the accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -965,7 +992,11 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param result The asynchronous mapping function, projects the accumulator value of type `A` to the result value of type `R`.
    * @returns A promise of the aggregated value.
    */
-  reduceAndMapAsync<A, R>(reducer: AsyncReducer<T, A>, initial: A, result: AsyncMapper<A, R>): Promise<R>;
+  reduceAndMapAsync<A, R>(
+    reducer: AsyncReducer<T, A>,
+    initial: A,
+    result: AsyncMapper<A, R>,
+  ): Promise<R>;
 
   /**
    * Aggregates the iterable by applying an accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -1035,7 +1066,10 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param valueSelector Projects an element of the iterable into the value of the corresponding field. The identity function is being used if omitted.
    * @returns A promise of the object composed of the elements of the iterable as fields.
    */
-  toObject<R>(keySelector: Mapper<T, string>, valueSelector?: Mapper<T, unknown>): Promise<R>;
+  toObject<R>(
+    keySelector: Mapper<T, string>,
+    valueSelector?: Mapper<T, unknown>,
+  ): Promise<R>;
 
   /**
    * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by an asynchronous key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -1044,7 +1078,10 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param valueSelector Asynchronously projects an element of the iterable into the value of the corresponding field.
    * @returns A promise of the object composed of the elements of the iterable as fields.
    */
-  toObjectAsync<R>(keySelector: AsyncMapper<T, string>, valueSelector: AsyncMapper<T, unknown>): Promise<R>;
+  toObjectAsync<R>(
+    keySelector: AsyncMapper<T, string>,
+    valueSelector: AsyncMapper<T, unknown>,
+  ): Promise<R>;
 
   /**
    * Iterates through the iterable and executes an action against each element. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -1133,7 +1170,10 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param comparer The comparison function.
    * @returns A promise of the top of the iterable's projected elements.
    */
-  topAsync<R>(mapper: AsyncMapper<T, R>, comparer: Comparer<R>): Promise<T | undefined>;
+  topAsync<R>(
+    mapper: AsyncMapper<T, R>,
+    comparer: Comparer<R>,
+  ): Promise<T | undefined>;
 
   /**
    * Finds the numeric minimum element of the iterable using a projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -1197,7 +1237,10 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param iterables The iterables to be merged
    * @returns A new iterable that returns the elements of all others in the order of which resolves first
    */
-  mergeCatching<R>(errorCallback: ErrorCallback, ...iterables: AsyncIterable<R>[]): FluentAsyncIterable<T | R>;
+  mergeCatching<R>(
+    errorCallback: ErrorCallback,
+    ...iterables: AsyncIterable<R>[]
+  ): FluentAsyncIterable<T | R>;
 }
 
 /**

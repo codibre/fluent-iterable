@@ -10,7 +10,10 @@ const truth = (): boolean => true;
 /** @internal */
 const truthAsync = async (): Promise<boolean> => true;
 /** @internal */
-const fluentGroup = <T, R>(grp: Group<T, R>): FluentGroup<T, R> => ({ ...grp, values: fluent(grp.values) });
+const fluentGroup = <T, R>(grp: Group<T, R>): FluentGroup<T, R> => ({
+  ...grp,
+  values: fluent(grp.values),
+});
 
 /**
  * Generates a `count` long sequential integer interval starting from `fromInclusive`.

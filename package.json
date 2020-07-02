@@ -14,22 +14,33 @@
     "node": ">=10"
   },
   "files": [
-    "dist/**/*"
+    "dist"
   ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "doc": "npx typedoc",
     "format": "prettier --write src/**/*.ts tst/**/*.ts",
-    "lint": "eslint src/**/*.ts tst/**/*.ts",
-    "lint:fix": "eslint src/**/*.ts tst/**/*.ts --fix",
-    "build": "npm run format && tsc && npm run doc",
-    "test": "npm run lint && mocha",
+    "lint": "npm run lint:format && npm run lint:style",
+    "lint:fix": "npm run lint:format:fix && npm run lint:style:fix",
+    "build": "tsc",
+    "test": "mocha",
     "test:coverage": "nyc npm test",
     "prepublishOnly": "npm run build && npm test",
     "preversion": "npm run build && npm test",
     "version": "scripts/prepare $npm_package_version && git add -A",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "clear": "npm run clear:build && npm run clear:modules",
+    "clear:build": "del-cli ./dist",
+    "clear:modules": "del-cli ./node_modules",
+    "prebuild": "npm run clear:build && del-cli tsconfig.tsbuildinfo",
+    "preaction:verify:update-modules": "npm run action:verify:update-modules:check",
+    "action:verify:update-modules": "npm run action:verify:update-modules:reinstall && npm run action:verify:update-modules:clean",
+    "action:verify:update-modules:clean": "del-cli .check",
+    "lint:format": "prettier --check '{src,test}/**/*.ts'",
+    "lint:format:fix": "prettier --write '{src,test}/**/*.ts'",
+    "lint:style": "eslint '**/*.ts'",
+    "lint:style:fix": "eslint '**/*.ts' --fix"
   },
   "repository": {
     "type": "git",
@@ -54,6 +65,7 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
+    "@codibre/confs": "0.0.6",
     "@types/chai": "^4.2.11",
     "@types/chai-as-promised": "^7.1.2",
     "@types/delay": "^3.1.0",

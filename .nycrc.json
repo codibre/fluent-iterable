@@ -1,20 +1,3 @@
 {
-    "check-coverage": true,
-    "lines": 80,
-    "branches": 80,
-    "functions": 80,
-    "exclude": [
-        "tst",
-        "build",
-        "dist",
-        "coverage"
-    ],
-    "reporter": [
-        "text",
-        "lcov"
-    ],
-    "extension": [
-        ".ts"
-    ],
-    "all": true
+  "extends": "node_modules/@codibre/confs/nycrc.json"
 }

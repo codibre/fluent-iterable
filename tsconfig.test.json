@@ -1,0 +1,15 @@
+{
+  "extends": "@codibre/confs/tsconfig.test.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "types": [
+      "reflect-metadata",
+      "node",
+      "mocha",
+      "chai",
+      "sinon-chai",
+      "sinon-chai-calls-assertion"
+    ]
+  },
+  "include": ["./src", "./test"]
+}

@@ -1,8 +1,0 @@
-node_modules
-src
-tst
-.idea
-.gitignore
-.prettierrc.yaml
-.tsconfig.json
-.tslint.yaml
