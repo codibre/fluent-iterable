@@ -15,7 +15,7 @@
 ### Properties
 
 * [index](_mergeiterators_.nextresult.md#index)
-* [result](_mergeiterators_.nextresult.md#optional-result)
+* [result](_mergeiterators_.nextresult.md#result)
 
 ## Properties
 
@@ -25,6 +25,6 @@
 
 ___
 
-### `Optional` result
+###  result
 
-• **result**? : *IteratorResult‹T›*
+• **result**: *IteratorResult‹T›*
