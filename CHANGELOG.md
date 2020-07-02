@@ -1,5 +1,11 @@
 
-## 0.2.0
+## 0.2.1
+* 6b28e6d fixing test
+* c552518 adding keywords
+* 89de565 fixing github url
+* 6d8a6a1 fixing tests
+## v0.2.0
+* 3e9d603 0.2.0
 * 584f221 fixing typing
 * 477f03d fixing lint
 * dd6e45b updating tests
