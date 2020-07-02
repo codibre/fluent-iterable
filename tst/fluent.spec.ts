@@ -73,7 +73,7 @@ export const data: Person[] = [
   },
 ];
 
-export const picker = (...indexes: number[]) => pick(data, ...indexes);
+export const picker = (...indexes: number[]): Person[] => pick(data, ...indexes);
 
 function* generator(): Iterable<Person> {
   yield* data;

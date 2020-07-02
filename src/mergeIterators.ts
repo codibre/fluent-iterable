@@ -2,14 +2,23 @@ export interface ErrorCallback {
   (error: Error, index: number): unknown;
 }
 
-export async function getNextAsyncIterator<T>(asyncIterator: AsyncIterator<T>, index: number) {
+interface NextResult<T> {
+  index: number;
+  result?: IteratorResult<T>;
+}
+
+interface GetNextAsyncIterator<T> {
+  (asyncIterator: AsyncIterator<T>, index: number): Promise<NextResult<T>>;
+}
+
+export async function getNextAsyncIterator<T>(asyncIterator: AsyncIterator<T>, index: number): Promise<NextResult<T>> {
   return {
     index,
-    iterator: await asyncIterator.next(),
+    result: await asyncIterator.next(),
   };
 }
 
-export function getNextAsyncIteratorFactory<T>(callback?: ErrorCallback) {
+export function getNextAsyncIteratorFactory<T>(callback?: ErrorCallback): GetNextAsyncIterator<T> {
   return !callback
     ? getNextAsyncIterator
     : async (asyncIterator: AsyncIterator<T>, index: number) => {
@@ -27,7 +36,10 @@ export function getNextAsyncIteratorFactory<T>(callback?: ErrorCallback) {
       };
 }
 
-export async function* mergeIterators<T>(callback: ErrorCallback | undefined, ...iterators: AsyncIterator<T>[]) {
+export async function* mergeIterators<T>(
+  callback: ErrorCallback | undefined,
+  ...iterators: AsyncIterator<T>[]
+): AsyncIterable<T> {
   const getNextAsyncIteratorValue = getNextAsyncIteratorFactory(callback);
   const asyncIteratorsValues = new Map();
   iterators.forEach((it, idx) => asyncIteratorsValues.set(idx, getNextAsyncIteratorValue(it, idx)));

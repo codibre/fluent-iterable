@@ -2,13 +2,13 @@ import fluent from './fluent';
 import { Group, FluentGroup } from './types';
 
 /** @internal */
-const identity = <T>(t: T) => t;
+const identity = <T>(t: T): T => t;
 /** @internal */
-const identityAsync = async <T>(t: T) => t;
+const identityAsync = async <T>(t: T): Promise<T> => t;
 /** @internal */
-const truth = () => true;
+const truth = (): boolean => true;
 /** @internal */
-const truthAsync = async () => true;
+const truthAsync = async (): Promise<boolean> => true;
 /** @internal */
 const fluentGroup = <T, R>(grp: Group<T, R>): FluentGroup<T, R> => ({ ...grp, values: fluent(grp.values) });
 

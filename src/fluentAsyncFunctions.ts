@@ -581,11 +581,14 @@ function getIterators<T>(items: (AsyncIterable<T> | AsyncIterator<T>)[]) {
   return items.map(x => (x[Symbol.asyncIterator] ? x[Symbol.asyncIterator]() : x));
 }
 
-function merge<T>(...items: Array<AsyncIterable<T> | AsyncIterator<T>>) {
+function merge<T>(...items: Array<AsyncIterable<T> | AsyncIterator<T>>): AsyncIterable<T> {
   return mergeIterators(undefined, ...getIterators<T>(items));
 }
 
-function mergeCatching<T>(callback: ErrorCallback, ...items: Array<AsyncIterable<T> | AsyncIterator<T>>) {
+function mergeCatching<T>(
+  callback: ErrorCallback,
+  ...items: Array<AsyncIterable<T> | AsyncIterator<T>>
+): AsyncIterable<T> {
   return mergeIterators(callback, ...getIterators<T>(items));
 }
 

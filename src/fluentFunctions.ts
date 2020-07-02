@@ -542,15 +542,15 @@ function maxAsync<T>(iterable: Iterable<T>, mapper: AsyncMapper<T, number>): Pro
   return topAsync<T, number>(iterable, mapper, (a, b) => a - b);
 }
 
-function hasExactly<T>(iterable: Iterable<T>, expectedSize: number) {
+function hasExactly<T>(iterable: Iterable<T>, expectedSize: number): boolean {
   return count(take(iterable, expectedSize + 1)) === expectedSize;
 }
 
-function hasLessThan<T>(iterable: Iterable<T>, threshold: number) {
+function hasLessThan<T>(iterable: Iterable<T>, threshold: number): boolean {
   return count(take(iterable, threshold + 1)) < threshold;
 }
 
-function hasMoreThan<T>(iterable: Iterable<T>, threshold: number) {
+function hasMoreThan<T>(iterable: Iterable<T>, threshold: number): boolean {
   return count(take(iterable, threshold + 1)) > threshold;
 }
 
