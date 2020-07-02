@@ -1,4 +1,4 @@
-[fluent-iterable - v0.2.0](../README.md) › ["mergeIterators"](_mergeiterators_.md)
+[fluent-iterable - v0.2.1](../README.md) › ["mergeIterators"](_mergeiterators_.md)
 
 # Module: "mergeIterators"
 

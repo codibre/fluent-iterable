@@ -1,4 +1,4 @@
-[fluent-iterable - v0.2.0](../README.md) › ["types"](../modules/_types_.md) › [Reducer](_types_.reducer.md)
+[fluent-iterable - v0.2.1](../README.md) › ["types"](../modules/_types_.md) › [Reducer](_types_.reducer.md)
 
 # Interface: Reducer ‹**T, A**›
 

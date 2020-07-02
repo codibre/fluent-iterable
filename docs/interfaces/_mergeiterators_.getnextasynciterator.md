@@ -1,4 +1,4 @@
-[fluent-iterable - v0.2.0](../README.md) › ["mergeIterators"](../modules/_mergeiterators_.md) › [GetNextAsyncIterator](_mergeiterators_.getnextasynciterator.md)
+[fluent-iterable - v0.2.1](../README.md) › ["mergeIterators"](../modules/_mergeiterators_.md) › [GetNextAsyncIterator](_mergeiterators_.getnextasynciterator.md)
 
 # Interface: GetNextAsyncIterator ‹**T**›
 
