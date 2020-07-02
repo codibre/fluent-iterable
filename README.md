@@ -1,4 +1,10 @@
-![CI](https://github.com/kataik/fluent-iterable/workflows/CI/badge.svg)
+[![Actions Status](https://github.com/Codibre/fluent-iterable/workflows/build/badge.svg)](https://github.com/Codibre/fluent-iterable/actions)
+[![Actions Status](https://github.com/Codibre/fluent-iterable/workflows/test/badge.svg)](https://github.com/Codibre/fluent-iterable/actions)
+[![Actions Status](https://github.com/Codibre/fluent-iterable/workflows/lint/badge.svg)](https://github.com/Codibre/fluent-iterable/actions)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/786f2feef20063142467/test_coverage)](https://codeclimate.com/github/Codibre/fluent-iterable/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/786f2feef20063142467/maintainability)](https://codeclimate.com/github/Codibre/fluent-iterable/maintainability)
+[![Packages](https://david-dm.org/Codibre/fluent-iterable.svg)](https://david-dm.org/Codibre/fluent-iterable)
+[![npm version](https://badge.fury.io/js/%40codibre%2Ffluent-iterable.svg)](https://badge.fury.io/js/%40codibre%2Ffluent-iterable)
 
 Provides [fluent api](https://en.wikipedia.org/wiki/Fluent_interface) operations on iterables and async iterables - similar to what defined on arrays. Especially useful until [relevant ESNext features](https://tc39.es/proposal-iterator-helpers/#sec-iteration) are being delivered.
 This library are a fork from [kataik fluent-iterable repository](https://github.com/kataik/fluent-iterable) where more functionalities was added.
@@ -28,7 +34,9 @@ import { fluent, FluentIterable } from 'fluent-iterable';
 const numbers: number[] = [3, 1, 8, 6, 9, 2];
 const iterable: FluentIterable<number> = fluent(numbers);
 
-console.log(`The largest even number is: ${iterable.filter(n => n % 2 === 0).max()}`);
+console.log(
+  `The largest even number is: ${iterable.filter((n) => n % 2 === 0).max()}`,
+);
 ```
 
 ## Usage
@@ -43,7 +51,12 @@ To get started with the fluent API, you need to translate the iterable (can be a
 
 ```typescript
 import fetch from 'node-fetch';
-import { fluent, fluentAsync, FluentIterable, FluentAsyncIterable } from 'fluent-iterable';
+import {
+  fluent,
+  fluentAsync,
+  FluentIterable,
+  FluentAsyncIterable,
+} from 'fluent-iterable';
 
 const iterableOfArray: FluentIterable<number> = fluent([3, 1, 8, 6, 9, 2]);
 
@@ -70,11 +83,13 @@ async function* emails(): AsyncIterable<string> {
     if (!res.ok) {
       break;
     }
-    yield* (await res.json()).data.map(user => user.email);
+    yield* (await res.json()).data.map((user) => user.email);
   }
 }
 
-const asyncIterableOfEmails: FluentAsyncIterable<string> = fluentAsync(emails());
+const asyncIterableOfEmails: FluentAsyncIterable<string> = fluentAsync(
+  emails(),
+);
 ```
 
 Once you have an instance of a fluent iterable, you can start chaining any of the supported operations to express what you need, like:
@@ -212,16 +227,16 @@ function* naiveFibonacci(): Iterable<number> {
 // What is the sum of the first 100 fibonacci numbers?
 console.log(
   fluent(naiveFibonacci())
-    .takeWhile(n => n < 100)
-    .sum()
+    .takeWhile((n) => n < 100)
+    .sum(),
 );
 
 // How many fibonacci numbers are there between 1K and 1M?
 console.log(
   fluent(naiveFibonacci())
-    .skipWhile(n => n < 1000)
-    .takeWhile(n => n < 1000000)
-    .count()
+    .skipWhile((n) => n < 1000)
+    .takeWhile((n) => n < 1000000)
+    .count(),
 );
 
 // What are the 10th to 20th fibonacci numbers?
@@ -230,10 +245,10 @@ console.log(fluent(naiveFibonacci()).skip(9).take(10).toArray());
 // What are the halves of the first 20 even fibonacci numbers?
 console.log(
   fluent(naiveFibonacci())
-    .filter(n => n % 2 === 0)
+    .filter((n) => n % 2 === 0)
     .take(20)
-    .map(n => n / 2)
-    .toArray()
+    .map((n) => n / 2)
+    .toArray(),
 );
 ```
 
@@ -277,45 +292,45 @@ const people: Person[] = [
 ];
 
 // Log all the names!
-for (const name of fluent(people).map(p => p.name)) {
+for (const name of fluent(people).map((p) => p.name)) {
   console.log(name);
 }
 
 // Log all the emails!
 console.log(
   fluent(people)
-    .flatten(p => p.emails)
-    .toArray()
+    .flatten((p) => p.emails)
+    .toArray(),
 );
 
 // Are there any persons without gender specified?
-console.log(fluent(people).any(p => !p.gender));
+console.log(fluent(people).any((p) => !p.gender));
 
 // Are all the persons have at least one email?
-console.log(fluent(people).all(p => p.emails.length > 0));
+console.log(fluent(people).all((p) => p.emails.length > 0));
 
 // Who is the last female?
-console.log(fluent(people).last(p => p.gender === Gender.Female));
+console.log(fluent(people).last((p) => p.gender === Gender.Female));
 
 // Who is the last one in lexicographical order?
 console.log(
   fluent(people)
     .sort((a, b) => a.name.localeCompare(b.name))
-    .last()
+    .last(),
 );
 
 // Log all persons grouped by gender!
 console.log(
   fluent(people)
-    .group(p => p.gender)
+    .group((p) => p.gender)
     .map(
-      grp =>
+      (grp) =>
         `${fluent(grp.values)
-          .map(p => p.name)
+          .map((p) => p.name)
           .toArray()
-          .join(', ')} is/are ${grp.key}`
+          .join(', ')} is/are ${grp.key}`,
     )
-    .reduce((current, next) => `${current}\n${next}`, '')
+    .reduce((current, next) => `${current}\n${next}`, ''),
 );
 ```
 
@@ -342,10 +357,10 @@ const pager: Pager<Data, number> = async (token?: number) => {
 
 // Get the first 10 emails sorted!
 fluentAsync(depaginate(pager))
-  .map(data => data.email)
+  .map((data) => data.email)
   .take(10)
   .sort()
-  .forEach(res => console.log(res))
+  .forEach((res) => console.log(res))
   .then(() => console.log('done'));
 ```
 
