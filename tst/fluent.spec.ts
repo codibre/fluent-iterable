@@ -1,4 +1,4 @@
-import fluent from '../src';
+import { fluent } from '../src';
 import expect, { flatMap, pick } from './tools';
 
 export enum Gender {

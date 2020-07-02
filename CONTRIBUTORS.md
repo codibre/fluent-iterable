@@ -1,3 +1,3 @@
-- Kornel B Katai <korkatai@amazon.com>
-- Kornel B Katai <kataik@gmail.com>
-- Thiago O Santos <tos.oliveira@gmail.com>
+* Kornel B Katai <korkatai@amazon.com>
+* Thiago Santos <thiago.santos@maxmilhas.com.br>
+* Kornel B Katai <kataik@gmail.com>
