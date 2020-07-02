@@ -7,6 +7,8 @@
 ### Interfaces
 
 * [ErrorCallback](../interfaces/_mergeiterators_.errorcallback.md)
+* [GetNextAsyncIterator](../interfaces/_mergeiterators_.getnextasynciterator.md)
+* [NextResult](../interfaces/_mergeiterators_.nextresult.md)
 
 ### Functions
 
@@ -18,7 +20,7 @@
 
 ###  getNextAsyncIterator
 
-▸ **getNextAsyncIterator**‹**T**›(`asyncIterator`: AsyncIterator‹T›, `index`: number): *Promise‹object›*
+▸ **getNextAsyncIterator**‹**T**›(`asyncIterator`: AsyncIterator‹T›, `index`: number): *Promise‹[NextResult](../interfaces/_mergeiterators_.nextresult.md)‹T››*
 
 **Type parameters:**
 
@@ -31,13 +33,13 @@ Name | Type |
 `asyncIterator` | AsyncIterator‹T› |
 `index` | number |
 
-**Returns:** *Promise‹object›*
+**Returns:** *Promise‹[NextResult](../interfaces/_mergeiterators_.nextresult.md)‹T››*
 
 ___
 
 ###  getNextAsyncIteratorFactory
 
-▸ **getNextAsyncIteratorFactory**‹**T**›(`callback?`: [ErrorCallback](../interfaces/_mergeiterators_.errorcallback.md)): *(Anonymous function)*
+▸ **getNextAsyncIteratorFactory**‹**T**›(`callback?`: [ErrorCallback](../interfaces/_mergeiterators_.errorcallback.md)): *[GetNextAsyncIterator](../interfaces/_mergeiterators_.getnextasynciterator.md)‹T›*
 
 **Type parameters:**
 
@@ -49,13 +51,13 @@ Name | Type |
 ------ | ------ |
 `callback?` | [ErrorCallback](../interfaces/_mergeiterators_.errorcallback.md) |
 
-**Returns:** *(Anonymous function)*
+**Returns:** *[GetNextAsyncIterator](../interfaces/_mergeiterators_.getnextasynciterator.md)‹T›*
 
 ___
 
 ###  mergeIterators
 
-▸ **mergeIterators**‹**T**›(`callback`: [ErrorCallback](../interfaces/_mergeiterators_.errorcallback.md) | undefined, ...`iterators`: AsyncIterator‹T›[]): *AsyncGenerator‹any, void, unknown›*
+▸ **mergeIterators**‹**T**›(`callback`: [ErrorCallback](../interfaces/_mergeiterators_.errorcallback.md) | undefined, ...`iterators`: AsyncIterator‹T›[]): *AsyncIterable‹T›*
 
 **Type parameters:**
 
@@ -68,4 +70,4 @@ Name | Type |
 `callback` | [ErrorCallback](../interfaces/_mergeiterators_.errorcallback.md) &#124; undefined |
 `...iterators` | AsyncIterator‹T›[] |
 
-**Returns:** *AsyncGenerator‹any, void, unknown›*
+**Returns:** *AsyncIterable‹T›*

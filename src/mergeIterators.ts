@@ -4,7 +4,7 @@ export interface ErrorCallback {
 
 interface NextResult<T> {
   index: number;
-  result?: IteratorResult<T>;
+  result: IteratorResult<T>;
 }
 
 interface GetNextAsyncIterator<T> {
@@ -21,16 +21,16 @@ export async function getNextAsyncIterator<T>(asyncIterator: AsyncIterator<T>, i
 export function getNextAsyncIteratorFactory<T>(callback?: ErrorCallback): GetNextAsyncIterator<T> {
   return !callback
     ? getNextAsyncIterator
-    : async (asyncIterator: AsyncIterator<T>, index: number) => {
+    : async (asyncIterator: AsyncIterator<T>, index: number): Promise<NextResult<T>> => {
         try {
           return await getNextAsyncIterator(asyncIterator, index);
         } catch (err) {
           callback(err, index);
           return {
             index,
-            iterator: {
+            result: {
               done: true,
-            },
+            } as IteratorResult<T>,
           };
         }
       };
@@ -47,11 +47,11 @@ export async function* mergeIterators<T>(
   while (asyncIteratorsValues.size > 0) {
     const response = await Promise.race(Array.from(asyncIteratorsValues.values()));
     if (response) {
-      const { iterator, index } = response;
-      if (iterator.done) {
+      const { result, index } = response;
+      if (result.done) {
         asyncIteratorsValues.delete(index);
       } else {
-        yield iterator.value;
+        yield result.value;
         asyncIteratorsValues.set(index, getNextAsyncIteratorValue(iterators[index], index));
       }
     }
