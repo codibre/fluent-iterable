@@ -1,4 +1,4 @@
-[fluent-iterable - v0.1.6](../README.md) › ["types"](../modules/_types_.md) › [Group](_types_.group.md)
+[fluent-iterable - v0.2.0](../README.md) › ["types"](../modules/_types_.md) › [Group](_types_.group.md)
 
 # Interface: Group ‹**T, R**›
 

@@ -1,4 +1,4 @@
-[fluent-iterable - v0.1.6](../README.md) › ["types"](_types_.md)
+[fluent-iterable - v0.2.0](../README.md) › ["types"](_types_.md)
 
 # Module: "types"
 

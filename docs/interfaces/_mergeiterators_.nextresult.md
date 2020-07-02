@@ -1,4 +1,4 @@
-[fluent-iterable - v0.1.6](../README.md) › ["mergeIterators"](../modules/_mergeiterators_.md) › [NextResult](_mergeiterators_.nextresult.md)
+[fluent-iterable - v0.2.0](../README.md) › ["mergeIterators"](../modules/_mergeiterators_.md) › [NextResult](_mergeiterators_.nextresult.md)
 
 # Interface: NextResult ‹**T**›
 

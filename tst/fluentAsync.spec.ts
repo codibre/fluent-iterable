@@ -671,7 +671,7 @@ describe('fluent async iterable', () => {
           yield 1;
           await delay(5);
           yield 2;
-          await delay(7);
+          await delay(10);
           yield 3;
         })();
         const it2 = (async function* (): AsyncIterable<string> {
