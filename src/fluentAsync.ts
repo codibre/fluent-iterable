@@ -130,7 +130,7 @@ function fluentAsync<T>(iterable: AsyncIterable<T>): FluentAsyncIterable<T> {
     anyAsync: (predicate) => anyAsync(iterable, predicate),
     contains: (item) => contains(iterable, item),
     toArray: () => toArray(iterable),
-    toObject: (keySelector, valueSelector = identity) =>
+    toObject: (keySelector, valueSelector = identity as any) =>
       toObject(iterable, keySelector, valueSelector),
     toObjectAsync: (keySelector, valueSelector) =>
       toObjectAsync(iterable, keySelector, valueSelector),

@@ -1,7 +1,5 @@
 import * as chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
 
-chai.use(chaiAsPromised);
 const expect = chai.expect;
 
 function pick<T>(arr: T[], ...indexes: number[]): T[] {
@@ -18,4 +16,4 @@ function flatMap<T, R>(arr: T[], map: (t: T) => R[]): R[] {
 }
 
 export default expect;
-export { chai, chaiAsPromised, pick, flatMap };
+export { chai, pick, flatMap };

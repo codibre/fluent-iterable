@@ -766,6 +766,14 @@ describe('fluent iterable', () => {
             [Gender.Male]: 'name C',
           }));
       });
+      describe('max', () => {
+        it('should return the max number from a numeric array when no parameter is informed', () => {
+          expect(fluent([1, 2, 3]).max()).to.be.eq(3);
+        });
+        it('should return the max number from a transformation when a parameter is informed', () => {
+          expect(fluent([1, 2, 3]).max((x) => 3 - x)).to.be.eq(1);
+        });
+      });
       describe('hasExactly', () => {
         it('false', () => expect(fluent([1, 2, 3]).hasExactly(2)).to.false);
         it('true', () => expect(fluent([1, 2, 3]).hasExactly(3)).to.true);

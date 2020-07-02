@@ -461,30 +461,30 @@ function contains<T>(iterable: Iterable<T>, item: T): boolean {
   return any(iterable, (next) => next === item);
 }
 
-function toObject<T, R>(
+function toObject<T, R = T>(
   iterable: Iterable<T>,
-  keySelector: Mapper<T, string>,
-  valueSelector: Mapper<T, unknown> = identity,
+  keySelector: Mapper<T, keyof R>,
+  valueSelector: Mapper<T, R[keyof R]> = identity as any,
 ): R {
-  const res = {};
+  const res = {} as R;
   for (const t of iterable) {
     res[keySelector(t)] = valueSelector(t);
   }
 
-  return res as R;
+  return res;
 }
 
-async function toObjectAsync<T, R>(
+async function toObjectAsync<T, R = T>(
   iterable: Iterable<T>,
-  keySelector: AsyncMapper<T, string>,
-  valueSelector: AsyncMapper<T, unknown>,
+  keySelector: AsyncMapper<T, keyof R>,
+  valueSelector: AsyncMapper<T, R[keyof R]> = identity as any,
 ): Promise<R> {
-  const res = {};
+  const res = {} as R;
   for (const t of iterable) {
     res[await keySelector(t)] = await valueSelector(t);
   }
 
-  return res as R;
+  return res;
 }
 
 async function* toAsync<T>(iterable: Iterable<T>): AsyncIterable<T> {

@@ -489,28 +489,28 @@ function contains<T>(iterable: AsyncIterable<T>, item: T): Promise<boolean> {
 
 async function toObject<T, R>(
   iterable: AsyncIterable<T>,
-  keySelector: Mapper<T, string>,
-  valueSelector: Mapper<T, unknown> = identity,
+  keySelector: Mapper<T, keyof R>,
+  valueSelector: Mapper<T, R[keyof R]> = identity as any,
 ): Promise<R> {
-  const res = {};
+  const res = {} as R;
   for await (const t of iterable) {
     res[keySelector(t)] = valueSelector(t);
   }
 
-  return res as R;
+  return res;
 }
 
 async function toObjectAsync<T, R>(
   iterable: AsyncIterable<T>,
-  keySelector: AsyncMapper<T, string>,
-  valueSelector: AsyncMapper<T, unknown>,
+  keySelector: AsyncMapper<T, keyof R>,
+  valueSelector: AsyncMapper<T, R[keyof R]>,
 ): Promise<R> {
-  const res = {};
+  const res = {} as R;
   for await (const t of iterable) {
     res[await keySelector(t)] = await valueSelector(t);
   }
 
-  return res as R;
+  return res;
 }
 
 async function forEach<T>(
@@ -730,9 +730,13 @@ async function hasMoreThan<T>(
   return (await count(take(iterable, threshold + 1))) > threshold;
 }
 
-function getIterators<T>(items: (AsyncIterable<T> | AsyncIterator<T>)[]) {
+function getIterators<T>(
+  items: (AsyncIterable<T> | AsyncIterator<T>)[],
+): AsyncIterator<T>[] {
   return items.map((x) =>
-    x[Symbol.asyncIterator] ? x[Symbol.asyncIterator]() : x,
+    x.hasOwnProperty(Symbol.asyncIterator)
+      ? (x as AsyncIterable<T>)[Symbol.asyncIterator]()
+      : (x as AsyncIterator<T>),
   );
 }
 

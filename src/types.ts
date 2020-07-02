@@ -565,9 +565,9 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param valueSelector Projects an element of the iterable into the value of the corresponding field. The identity function is being used if omitted.
    * @returns The object composed of the elements of the iterable as fields.
    */
-  toObject<R>(
-    keySelector: Mapper<T, string>,
-    valueSelector?: Mapper<T, unknown>,
+  toObject<R = T>(
+    keySelector: Mapper<T, keyof R>,
+    valueSelector?: Mapper<T, R[keyof R]>,
   ): R;
 
   /**
@@ -577,9 +577,9 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param valueSelector Asynchronously projects an element of the iterable into the value of the corresponding field.
    * @returns A promise of the object composed of the elements of the iterable as fields.
    */
-  toObjectAsync<R>(
-    keySelector: AsyncMapper<T, string>,
-    valueSelector: AsyncMapper<T, unknown>,
+  toObjectAsync<R = T>(
+    keySelector: AsyncMapper<T, keyof R>,
+    valueSelector?: AsyncMapper<T, R[keyof R]>,
   ): Promise<R>;
 
   /**
@@ -1067,8 +1067,8 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @returns A promise of the object composed of the elements of the iterable as fields.
    */
   toObject<R>(
-    keySelector: Mapper<T, string>,
-    valueSelector?: Mapper<T, unknown>,
+    keySelector: Mapper<T, keyof R>,
+    valueSelector?: Mapper<T, R[keyof R]>,
   ): Promise<R>;
 
   /**
@@ -1079,8 +1079,8 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @returns A promise of the object composed of the elements of the iterable as fields.
    */
   toObjectAsync<R>(
-    keySelector: AsyncMapper<T, string>,
-    valueSelector: AsyncMapper<T, unknown>,
+    keySelector: AsyncMapper<T, keyof R>,
+    valueSelector: AsyncMapper<T, R[keyof R]>,
   ): Promise<R>;
 
   /**

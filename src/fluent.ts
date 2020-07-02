@@ -92,13 +92,11 @@ function fluent<T>(iterable: Iterable<T>): FluentIterable<T> {
     prepend: (item) => fluent(prepend(iterable, item)),
     concat: (...iterables) => fluent(concat(iterable, ...iterables)),
     repeat: (n) => fluent(repeat(iterable, n)),
-    flatten: <R>(
-      mapper: Mapper<T, Iterable<R>> = identity as Mapper<T, Iterable<R>>,
-    ) => fluent(flatten(iterable, mapper)),
+    flatten: <R>(mapper?: Mapper<T, Iterable<R>>) =>
+      fluent(flatten(iterable, mapper)),
     flattenAsync: (mapper) => fluentAsync(flattenAsync(iterable, mapper)),
     sort: (comparer?) => fluent(sort(iterable, comparer)),
-    distinct: <R>(mapper: Mapper<T, R> = identity as Mapper<T, R>) =>
-      fluent(distinct(iterable, mapper)),
+    distinct: <R>(mapper: Mapper<T, R>) => fluent(distinct(iterable, mapper)),
     distinctAsync: (mapper) => fluentAsync(distinctAsync(iterable, mapper)),
     group: <R>(mapper: Mapper<T, R>) =>
       fluent(group(iterable, mapper)).map(fluentGroup),
@@ -122,7 +120,7 @@ function fluent<T>(iterable: Iterable<T>): FluentIterable<T> {
     anyAsync: (predicate) => anyAsync(iterable, predicate),
     contains: (item) => contains(iterable, item),
     toArray: () => toArray(iterable),
-    toObject: (keySelector, valueSelector = identity) =>
+    toObject: (keySelector, valueSelector?) =>
       toObject(iterable, keySelector, valueSelector),
     toObjectAsync: (keySelector, valueSelector) =>
       toObjectAsync(iterable, keySelector, valueSelector),
@@ -131,25 +129,18 @@ function fluent<T>(iterable: Iterable<T>): FluentIterable<T> {
     forEachAsync: (action) => forEachAsync(iterable, action),
     execute: (action) => fluent(execute(iterable, action)),
     executeAsync: (action) => fluentAsync(executeAsync(iterable, action)),
-    join: (
-      separator,
-      mapper: Mapper<T, string> = identity as Mapper<T, string>,
-    ) => join(iterable, separator, mapper),
+    join: (separator, mapper?) => join(iterable, separator, mapper),
     joinAsync: (separator, mapper) => joinAsync(iterable, separator, mapper),
-    sum: (mapper: Mapper<T, number> = identity as Mapper<T, number>) =>
-      sum(iterable, mapper),
+    sum: (mapper?: Mapper<T, number>) => sum(iterable, mapper),
     sumAsync: (mapper) => sumAsync(iterable, mapper),
-    avg: (mapper: Mapper<T, number> = identity as Mapper<T, number>) =>
-      avg(iterable, mapper),
+    avg: (mapper?: Mapper<T, number>) => avg(iterable, mapper),
     avgAsync: (mapper) => avgAsync(iterable, mapper),
     top: <R>(mapper: Mapper<T, R>, comparer: Comparer<R>) =>
       top(iterable, mapper, comparer),
     topAsync: (mapper, comparer) => topAsync(iterable, mapper, comparer),
-    min: (mapper: Mapper<T, number> = identity as Mapper<T, number>) =>
-      min(iterable, mapper),
+    min: (mapper?: Mapper<T, number>) => min(iterable, mapper),
     minAsync: (mapper) => minAsync(iterable, mapper),
-    max: (mapper: Mapper<T, number> = identity as Mapper<T, number>) =>
-      max(iterable, mapper),
+    max: (mapper?: Mapper<T, number>) => max(iterable, mapper),
     maxAsync: (mapper) => maxAsync(iterable, mapper),
     hasExactly: (expectedNumber) => hasExactly(iterable, expectedNumber),
     hasLessThan: (threshold) => hasLessThan(iterable, threshold),
