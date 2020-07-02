@@ -33,11 +33,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kataik/fluent-iterable.git"
+    "url": "git+https://github.com/codibre/fluent-iterable.git"
   },
-  "homepage": "https://github.com/kataik/fluent-iterable#readme",
+  "homepage": "https://github.com/codibre/fluent-iterable#readme",
   "bugs": {
-    "url": "https://github.com/kataik/fluent-iterable/issues"
+    "url": "https://github.com/codibre/fluent-iterable/issues"
   },
   "keywords": [
     "iterable",
