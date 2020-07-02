@@ -45,7 +45,11 @@
     "linq",
     "map",
     "filter",
-    "fluent"
+    "fluent",
+    "stream",
+    "readable",
+    "merge",
+    "combine"
   ],
   "license": "MIT",
   "dependencies": {},
