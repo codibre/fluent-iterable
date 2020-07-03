@@ -12,7 +12,8 @@ import {
   Group,
   Indexed,
 } from './types';
-import { toObject, toAsync } from './sync';
+import { toObject, toAsync, reduceAndMapAsync } from './sync';
+import { commonTopAsync } from './common/common-top-async';
 
 function toArray<T>(iterable: Iterable<T>): T[] {
   const array: T[] = [];
@@ -390,20 +391,6 @@ function reduceAndMap<T, A, R>(
   return result(accumulator);
 }
 
-async function reduceAndMapAsync<T, A, R>(
-  iterable: Iterable<T>,
-  reducer: AsyncReducer<T, A>,
-  initial: A,
-  result: AsyncMapper<A, R>,
-): Promise<R> {
-  let accumulator: A = initial;
-  for (const t of iterable) {
-    accumulator = await reducer(accumulator, t);
-  }
-
-  return result(accumulator);
-}
-
 function reduce<T, R>(
   iterable: Iterable<T>,
   reducer: Reducer<T, R>,
@@ -618,22 +605,7 @@ function topAsync<T, R>(
   mapper: AsyncMapper<T, R>,
   comparer: Comparer<R>,
 ): Promise<T | undefined> {
-  return reduceAndMapAsync<
-    T,
-    { value: R | undefined; item: T | undefined; found: boolean },
-    T | undefined
-  >(
-    iterable,
-    async (current, next) => {
-      const value = await mapper(next);
-      return !current.found ||
-        (current.value && comparer(value, current.value) > 0)
-        ? { value, item: next, found: true }
-        : current;
-    },
-    { value: undefined, item: undefined, found: false },
-    async (acc) => acc.item,
-  );
+  return commonTopAsync(iterable, mapper, comparer, reduceAndMapAsync);
 }
 
 function min<T>(

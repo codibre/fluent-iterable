@@ -13,6 +13,7 @@ import {
 } from './types';
 import { identity, identityAsync, truth } from './utils';
 import { merge, mergeCatching } from './async';
+import { commonTopAsync } from './common/common-top-async';
 
 async function toArray<T>(iterable: AsyncIterable<T>): Promise<T[]> {
   const array: T[] = [];
@@ -663,22 +664,7 @@ function topAsync<T, R>(
   mapper: AsyncMapper<T, R>,
   comparer: Comparer<R>,
 ): Promise<T | undefined> {
-  return reduceAndMapAsync<
-    T,
-    { value: R | undefined; item: T | undefined; found: boolean },
-    T | undefined
-  >(
-    iterable,
-    async (current, next) => {
-      const value = await mapper(next);
-      return !current.found ||
-        (current.value && comparer(value, current.value) > 0)
-        ? { value, item: next, found: true }
-        : current;
-    },
-    { value: undefined, item: undefined, found: false },
-    async (acc) => acc.item,
-  );
+  return commonTopAsync(iterable, mapper, comparer, reduceAndMapAsync);
 }
 
 function min<T>(

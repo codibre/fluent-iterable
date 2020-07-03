@@ -1,11 +1,4 @@
-import {
-  AsyncPredicate,
-  Comparer,
-  Mapper,
-  Predicate,
-  FluentAsyncIterable,
-} from './types';
-import { fluentGroup, identity, truth } from './utils';
+import { FluentAsyncIterable } from './types';
 import { ErrorCallback } from './async/merging/merge-types';
 import {
   mountIterableFunctions,
