@@ -1,5 +1,4 @@
-import { toObject } from './to-object';
-import { fromObject } from './from-object';
+/* eslint-disable guard-for-in */
 
 export function mountIterableFunctions<
   T,
@@ -10,13 +9,13 @@ export function mountIterableFunctions<
   iterableFuncs: Funcs,
   wrapper: (...args: any[]) => any,
 ): any {
-  return toObject(
-    fromObject(iterableFuncs),
-    (x) => x[0] as string,
-    (x) => {
-      return (...args: any[]) => wrapper(x[1](iterable, ...args));
-    },
-  );
+  const result: any = {};
+  for (const prop in iterableFuncs) {
+    result[prop] = (...args: any[]) =>
+      wrapper(iterableFuncs[prop](iterable, ...args));
+  }
+
+  return result;
 }
 
 export function mountResolvingFunctions<
@@ -24,12 +23,9 @@ export function mountResolvingFunctions<
   Func extends Function,
   Funcs extends { [key: string]: Func }
 >(iterable: Iterable<T> | AsyncIterable<T>, resolvingFuncs: Funcs): any {
-  const newLocal = fromObject(resolvingFuncs);
-  return toObject(
-    newLocal,
-    (x) => x[0] as string,
-    (x) => {
-      return (...args: any[]) => x[1](iterable, ...args);
-    },
-  );
+  const result: any = {};
+  for (const prop in resolvingFuncs) {
+    result[prop] = (...args: any[]) => resolvingFuncs[prop](iterable, ...args);
+  }
+  return result;
 }

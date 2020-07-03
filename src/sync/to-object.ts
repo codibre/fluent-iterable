@@ -1,5 +1,5 @@
-import { Mapper } from '.';
-import { identity } from './utils';
+import { Mapper } from '..';
+import { identity } from '../utils';
 
 export function toObject<T, V, R extends { [key: string]: V }>(
   iterable: Iterable<T>,

@@ -12,8 +12,7 @@ import {
   Group,
   Indexed,
 } from './types';
-import { toObject } from './to-object';
-import { toAsync } from './to-async';
+import { toObject, toAsync } from './sync';
 
 function toArray<T>(iterable: Iterable<T>): T[] {
   const array: T[] = [];

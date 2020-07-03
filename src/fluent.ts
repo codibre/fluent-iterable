@@ -10,7 +10,7 @@ import {
   iterableAsyncFuncs,
   special,
 } from './fluentFunctions';
-import { toAsync } from './to-async';
+import { toAsync } from './sync/to-async';
 import { fromObject } from './from-object';
 import { mountSpecial } from './mount-special';
 

@@ -1,5 +1,5 @@
-import { ErrorCallback, mergeIterators } from '../mergeIterators';
-import { getIterators } from './get-iterators';
+import { ErrorCallback } from './merging/merge-types';
+import { mergeIterators, getIterators } from './merging';
 
 export function mergeCatching<T>(
   callback: ErrorCallback,

@@ -20,7 +20,7 @@ import fluent from './fluent';
 import fluentAsync from './fluentAsync';
 import depaginate from './depaginator';
 import { interval } from './utils';
-import { mergeIterators } from './mergeIterators';
+import { mergeIterators } from './async/merging';
 
 import * as helper from './fluentFunctions';
 import * as asyncHelper from './fluentAsyncFunctions';

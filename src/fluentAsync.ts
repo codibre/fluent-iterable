@@ -6,7 +6,7 @@ import {
   FluentAsyncIterable,
 } from './types';
 import { fluentGroup, identity, truth } from './utils';
-import { ErrorCallback } from './mergeIterators';
+import { ErrorCallback } from './async/merging/merge-types';
 import {
   mountIterableFunctions,
   mountResolvingFunctions,

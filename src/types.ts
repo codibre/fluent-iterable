@@ -1,4 +1,4 @@
-import { ErrorCallback } from './mergeIterators';
+import { ErrorCallback } from './async/merging/merge-types';
 
 /**
  * Represents a predicate on type `T`.<br>

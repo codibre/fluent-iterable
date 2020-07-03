@@ -12,9 +12,7 @@ import {
   Indexed,
 } from './types';
 import { identity, identityAsync, truth } from './utils';
-import { mergeIterators } from './mergeIterators';
-import { getIterators } from './async/get-iterators';
-import { mergeCatching } from './async';
+import { merge, mergeCatching } from './async';
 
 async function toArray<T>(iterable: AsyncIterable<T>): Promise<T[]> {
   const array: T[] = [];
@@ -730,12 +728,6 @@ async function hasMoreThan<T>(
   threshold: number,
 ): Promise<boolean> {
   return (await count(take(iterable, threshold + 1))) > threshold;
-}
-
-function merge<T>(
-  ...items: Array<AsyncIterable<T> | AsyncIterator<T>>
-): AsyncIterable<T> {
-  return mergeIterators(undefined, ...getIterators<T>(items));
 }
 
 export const asyncHelper = {
