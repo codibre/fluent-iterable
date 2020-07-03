@@ -12,7 +12,9 @@ import {
   Indexed,
 } from './types';
 import { identity, identityAsync, truth } from './utils';
-import { mergeIterators, ErrorCallback } from './mergeIterators';
+import { mergeIterators } from './mergeIterators';
+import { getIterators } from './async/get-iterators';
+import { mergeCatching } from './async';
 
 async function toArray<T>(iterable: AsyncIterable<T>): Promise<T[]> {
   const array: T[] = [];
@@ -730,30 +732,13 @@ async function hasMoreThan<T>(
   return (await count(take(iterable, threshold + 1))) > threshold;
 }
 
-function getIterators<T>(
-  items: (AsyncIterable<T> | AsyncIterator<T>)[],
-): AsyncIterator<T>[] {
-  return items.map((x) =>
-    x.hasOwnProperty(Symbol.asyncIterator)
-      ? (x as AsyncIterable<T>)[Symbol.asyncIterator]()
-      : (x as AsyncIterator<T>),
-  );
-}
-
 function merge<T>(
   ...items: Array<AsyncIterable<T> | AsyncIterator<T>>
 ): AsyncIterable<T> {
   return mergeIterators(undefined, ...getIterators<T>(items));
 }
 
-function mergeCatching<T>(
-  callback: ErrorCallback,
-  ...items: Array<AsyncIterable<T> | AsyncIterator<T>>
-): AsyncIterable<T> {
-  return mergeIterators(callback, ...getIterators<T>(items));
-}
-
-export {
+export const asyncHelper = {
   withIndex,
   takeWhile,
   takeWhileAsync,
@@ -775,8 +760,6 @@ export {
   sort,
   distinct,
   distinctAsync,
-  group,
-  groupAsync,
   count,
   countAsync,
   first,
@@ -815,5 +798,77 @@ export {
   hasLessThan,
   hasMoreThan,
   merge,
+};
+
+export const asyncIterableFuncs = {
+  withIndex,
+  takeWhile,
+  takeWhileAsync,
+  take,
+  skipWhile,
+  skipWhileAsync,
+  skip,
+  map,
+  mapAsync,
+  filter,
+  filterAsync,
+  append,
+  prepend,
+  concat,
+  repeat,
+  flatten,
+  flattenAsync,
+  sort,
+  distinct,
+  distinctAsync,
+  group,
+  groupAsync,
+  execute,
+  executeAsync,
+  merge,
   mergeCatching,
+};
+
+export const asyncSpecial = {
+  partition,
+  group,
+  groupAsync,
+};
+
+export const asyncResolvingFuncs = {
+  count,
+  countAsync,
+  first,
+  firstAsync,
+  last,
+  lastAsync,
+  reduceAndMap,
+  reduceAndMapAsync,
+  reduce,
+  reduceAsync,
+  all,
+  allAsync,
+  any,
+  anyAsync,
+  contains,
+  toArray,
+  toObject,
+  toObjectAsync,
+  forEach,
+  forEachAsync,
+  join,
+  joinAsync,
+  sum,
+  sumAsync,
+  avg,
+  avgAsync,
+  top,
+  topAsync,
+  min,
+  minAsync,
+  max,
+  maxAsync,
+  hasExactly,
+  hasLessThan,
+  hasMoreThan,
 };

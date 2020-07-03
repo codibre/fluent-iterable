@@ -1,144 +1,35 @@
-import { FluentIterable, FluentAsyncIterable, Mapper, Comparer } from './types';
-import { fluentAsync } from '.';
-import { fluentGroup, truth } from './utils';
+import { toObject } from './to-object';
+import { fromObject } from './from-object';
 
-export function mountFluentFunctions<T>(
+export function mountIterableFunctions<
+  T,
+  Func extends Function,
+  Funcs extends { [key: string]: Func }
+>(
   iterable: Iterable<T> | AsyncIterable<T>,
-  {
-    withIndex,
-    takeWhile,
-    takeWhileAsync,
-    take,
-    skipWhile,
-    skipWhileAsync,
-    skip,
-    map,
-    mapAsync,
-    filter,
-    filterAsync,
-    partition,
-    append,
-    prepend,
-    concat,
-    repeat,
-    flatten,
-    flattenAsync,
-    sort,
-    distinct,
-    distinctAsync,
-    group,
-    groupAsync,
-    count,
-    countAsync,
-    first,
-    firstAsync,
-    last,
-    lastAsync,
-    reduceAndMap,
-    reduceAndMapAsync,
-    reduce,
-    reduceAsync,
-    all,
-    allAsync,
-    any,
-    anyAsync,
-    contains,
-    toArray,
-    toObject,
-    toObjectAsync,
-    forEach,
-    forEachAsync,
-    execute,
-    executeAsync,
-    join,
-    joinAsync,
-    sum,
-    sumAsync,
-    avg,
-    avgAsync,
-    top,
-    topAsync,
-    min,
-    minAsync,
-    max,
-    maxAsync,
-    hasExactly,
-    hasLessThan,
-    hasMoreThan,
-  }: {
-    [key: string]: (...args: any[]) => any;
-  },
-  fluent: (...args: any[]) => any,
+  iterableFuncs: Funcs,
+  wrapper: (...args: any[]) => any,
 ): any {
-  return {
-    withIndex: <T>() => fluent(withIndex(iterable)),
-    takeWhile: (...args: any[]) => fluent(takeWhile(iterable, ...args)),
-    takeWhileAsync: (...args: any[]) =>
-      fluentAsync(takeWhileAsync(iterable, ...args)),
-    take: (...args: any[]) => fluent(take(iterable, ...args)),
-    skipWhile: (...args: any[]) => fluent(skipWhile(iterable, ...args)),
-    skipWhileAsync: (...args: any[]) =>
-      fluentAsync(skipWhileAsync(iterable, ...args)),
-    skip: (...args: any[]) => fluent(skip(iterable, ...args)),
-    map: (...args: any[]) => fluent(map(iterable, ...args)),
-    mapAsync: (...args: any[]) => fluentAsync(mapAsync(iterable, ...args)),
-    filter: (...args: any[]) => fluent(filter(iterable, ...args)),
-    filterAsync: (...args: any[]) =>
-      fluentAsync(filterAsync(iterable, ...args)),
-    partition: (...args: any[]) =>
-      fluent(partition(iterable, ...args)).map((part: any) => fluent(part)),
-    append: (...args: any[]) => fluent(append(iterable, ...args)),
-    prepend: (...args: any[]) => fluent(prepend(iterable, ...args)),
-    concat: (...args: any[]) => fluent(concat(iterable, ...args)),
-    repeat: (...args: any[]) => fluent(repeat(iterable, ...args)),
-    flatten: <R>(...args: any[]) => fluent(flatten(iterable, ...args)),
-    flattenAsync: (...args: any[]) =>
-      fluentAsync(flattenAsync(iterable, ...args)),
-    sort: (...args: any[]) => fluent(sort(iterable, ...args)),
-    distinct: <R>(...args: any[]) => fluent(distinct(iterable, ...args)),
-    distinctAsync: (...args: any[]) =>
-      fluentAsync(distinctAsync(iterable, ...args)),
-    group: <R>(...args: any[]) =>
-      fluent(group(iterable, ...args)).map(fluentGroup),
-    groupAsync: (...args: any[]) =>
-      fluentAsync(groupAsync(iterable, ...args)).map(fluentGroup as any),
-    count: (...args: any[]) => count(iterable, ...args),
-    countAsync: (...args: any[]) => countAsync(iterable, ...args),
-    first: (...args: any[]) => first(iterable, ...args),
-    firstAsync: (...args: any[]) => firstAsync(iterable, ...args),
-    last: (...args: any[]) => last(iterable, ...args),
-    lastAsync: (...args: any[]) => lastAsync(iterable, ...args),
-    reduceAndMap: (...args: any[]) => reduceAndMap(iterable, ...args),
-    reduceAndMapAsync: (...args: any[]) => reduceAndMapAsync(iterable, ...args),
-    reduce: (...args: any[]) => reduce(iterable, ...args),
-    reduceAsync: (...args: any[]) => reduceAsync(iterable, ...args),
-    all: (...args: any[]) => all(iterable, ...args),
-    allAsync: (...args: any[]) => allAsync(iterable, ...args),
-    any: (...args: any[]) => any(iterable, ...args),
-    anyAsync: (...args: any[]) => anyAsync(iterable, ...args),
-    contains: (...args: any[]) => contains(iterable, ...args),
-    toArray: () => toArray(iterable),
-    toObject: (...args: any[]) => toObject(iterable, ...args),
-    toObjectAsync: (...args: any[]) => toObjectAsync(iterable, ...args),
-    forEach: (...args: any[]) => forEach(iterable, ...args),
-    forEachAsync: (...args: any[]) => forEachAsync(iterable, ...args),
-    execute: (...args: any[]) => fluent(execute(iterable, ...args)),
-    executeAsync: (...args: any[]) =>
-      fluentAsync(executeAsync(iterable, ...args)),
-    join: (...args: any[]) => join(iterable, ...args),
-    joinAsync: (...args: any[]) => joinAsync(iterable, ...args),
-    sum: (...args: any[]) => sum(iterable, ...args),
-    sumAsync: (...args: any[]) => sumAsync(iterable, ...args),
-    avg: (...args: any[]) => avg(iterable, ...args),
-    avgAsync: (...args: any[]) => avgAsync(iterable, ...args),
-    top: <R>(...args: any[]) => top(iterable, ...args),
-    topAsync: (...args: any[]) => topAsync(iterable, ...args),
-    min: (...args: any[]) => min(iterable, ...args),
-    minAsync: (...args: any[]) => minAsync(iterable, ...args),
-    max: (...args: any[]) => max(iterable, ...args),
-    maxAsync: (...args: any[]) => maxAsync(iterable, ...args),
-    hasExactly: (...args: any[]) => hasExactly(iterable, ...args),
-    hasLessThan: (...args: any[]) => hasLessThan(iterable, ...args),
-    hasMoreThan: (...args: any[]) => hasMoreThan(iterable, ...args),
-  };
+  return toObject(
+    fromObject(iterableFuncs),
+    (x) => x[0] as string,
+    (x) => {
+      return (...args: any[]) => wrapper(x[1](iterable, ...args));
+    },
+  );
+}
+
+export function mountResolvingFunctions<
+  T,
+  Func extends Function,
+  Funcs extends { [key: string]: Func }
+>(iterable: Iterable<T> | AsyncIterable<T>, resolvingFuncs: Funcs): any {
+  const newLocal = fromObject(resolvingFuncs);
+  return toObject(
+    newLocal,
+    (x) => x[0] as string,
+    (x) => {
+      return (...args: any[]) => x[1](iterable, ...args);
+    },
+  );
 }

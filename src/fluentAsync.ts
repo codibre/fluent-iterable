@@ -1,4 +1,3 @@
-import * as funcs from './fluentAsyncFunctions';
 import {
   AsyncPredicate,
   Comparer,
@@ -8,7 +7,17 @@ import {
 } from './types';
 import { fluentGroup, identity, truth } from './utils';
 import { ErrorCallback } from './mergeIterators';
-import { mountFluentFunctions } from './mount-fluent-functions';
+import {
+  mountIterableFunctions,
+  mountResolvingFunctions,
+} from './mount-fluent-functions';
+import {
+  asyncIterableFuncs,
+  asyncResolvingFuncs,
+  asyncSpecial,
+} from './fluentAsyncFunctions';
+import { mountSpecial } from './mount-special';
+import { mergeCatching } from './async';
 
 /**
  * Tranforms an asynchronous iterable into a [[FluentAsyncIterable]].
@@ -18,16 +27,14 @@ import { mountFluentFunctions } from './mount-fluent-functions';
  */
 function fluentAsync<T>(iterable: AsyncIterable<T>): FluentAsyncIterable<T> {
   return {
-    ...mountFluentFunctions(iterable, funcs, fluentAsync),
-    merge: <R>(...iterables: AsyncIterable<R>[]) =>
-      fluentAsync(funcs.merge<T | R>(iterable, ...iterables)),
+    ...mountIterableFunctions(iterable, asyncIterableFuncs, fluentAsync),
+    ...mountResolvingFunctions(iterable, asyncResolvingFuncs),
+    ...mountSpecial(iterable, asyncSpecial, fluentAsync, fluentAsync),
     mergeCatching: <R>(
       errorCallback: ErrorCallback,
       ...iterables: AsyncIterable<R>[]
     ) =>
-      fluentAsync(
-        funcs.mergeCatching<T | R>(errorCallback, iterable, ...iterables),
-      ),
+      fluentAsync(mergeCatching<T | R>(errorCallback, iterable, ...iterables)),
     [Symbol.asyncIterator]: () => iterable[Symbol.asyncIterator](),
   };
 }

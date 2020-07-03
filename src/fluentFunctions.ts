@@ -1,5 +1,4 @@
 import { identity, identityAsync, truth } from './utils';
-
 import {
   Predicate,
   AsyncPredicate,
@@ -13,6 +12,8 @@ import {
   Group,
   Indexed,
 } from './types';
+import { toObject } from './to-object';
+import { toAsync } from './to-async';
 
 function toArray<T>(iterable: Iterable<T>): T[] {
   const array: T[] = [];
@@ -461,19 +462,6 @@ function contains<T>(iterable: Iterable<T>, item: T): boolean {
   return any(iterable, (next) => next === item);
 }
 
-function toObject<T, R = T>(
-  iterable: Iterable<T>,
-  keySelector: Mapper<T, keyof R>,
-  valueSelector: Mapper<T, R[keyof R]> = identity as any,
-): R {
-  const res = {} as R;
-  for (const t of iterable) {
-    res[keySelector(t)] = valueSelector(t);
-  }
-
-  return res;
-}
-
 async function toObjectAsync<T, R = T>(
   iterable: Iterable<T>,
   keySelector: AsyncMapper<T, keyof R>,
@@ -485,10 +473,6 @@ async function toObjectAsync<T, R = T>(
   }
 
   return res;
-}
-
-async function* toAsync<T>(iterable: Iterable<T>): AsyncIterable<T> {
-  yield* iterable;
 }
 
 function forEach<T>(iterable: Iterable<T>, action: Action<T>): void {
@@ -693,7 +677,7 @@ function hasMoreThan<T>(iterable: Iterable<T>, threshold: number): boolean {
   return count(take(iterable, threshold + 1)) > threshold;
 }
 
-export {
+export const helper = {
   withIndex,
   takeWhile,
   takeWhileAsync,
@@ -740,6 +724,79 @@ export {
   forEachAsync,
   execute,
   executeAsync,
+  join,
+  joinAsync,
+  sum,
+  sumAsync,
+  avg,
+  avgAsync,
+  top,
+  topAsync,
+  min,
+  minAsync,
+  max,
+  maxAsync,
+  hasExactly,
+  hasLessThan,
+  hasMoreThan,
+};
+
+export const iterableFuncs = {
+  withIndex,
+  takeWhile,
+  take,
+  skipWhile,
+  skip,
+  map,
+  mapAsync,
+  filter,
+  append,
+  prepend,
+  concat,
+  repeat,
+  flatten,
+  sort,
+  distinct,
+  execute,
+};
+
+export const iterableAsyncFuncs = {
+  takeWhileAsync,
+  skipWhileAsync,
+  mapAsync,
+  filterAsync,
+  flattenAsync,
+  distinctAsync,
+  executeAsync,
+};
+
+export const special = {
+  partition,
+  group,
+  groupAsync,
+};
+
+export const resolvingFuncs = {
+  count,
+  countAsync,
+  first,
+  firstAsync,
+  last,
+  lastAsync,
+  reduceAndMap,
+  reduceAndMapAsync,
+  reduce,
+  reduceAsync,
+  all,
+  allAsync,
+  any,
+  anyAsync,
+  contains,
+  toArray,
+  toObject,
+  toObjectAsync,
+  forEach,
+  forEachAsync,
   join,
   joinAsync,
   sum,
