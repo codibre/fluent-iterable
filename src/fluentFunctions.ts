@@ -13,7 +13,9 @@ import {
   Indexed,
 } from './types';
 import { toObject, toAsync, reduceAndMapAsync } from './sync';
-import { commonTopAsync } from './common/common-top-async';
+import { getTop } from './common/get-top';
+import { getMax, getMin } from './common';
+import { getTopAsync } from './common/get-top-async';
 
 function toArray<T>(iterable: Iterable<T>): T[] {
   const array: T[] = [];
@@ -577,64 +579,37 @@ function avgAsync<T>(
   );
 }
 
-function top<T, R>(
+const top: <T, R>(
   iterable: Iterable<T>,
   mapper: Mapper<T, R>,
   comparer: Comparer<R>,
-): T | undefined {
-  return reduceAndMap<
-    T,
-    { value: R | undefined; item: T | undefined; found: boolean },
-    T | undefined
-  >(
-    iterable,
-    (current, next) => {
-      const value = mapper(next);
-      return !current.found ||
-        (current.value && comparer(value, current.value) > 0)
-        ? { value, item: next, found: true }
-        : current;
-    },
-    { value: undefined, item: undefined, found: false },
-    (acc) => acc.item,
-  );
-}
+) => T | undefined = getTop(reduceAndMap);
 
-function topAsync<T, R>(
+const topAsync: <T, R>(
   iterable: Iterable<T>,
   mapper: AsyncMapper<T, R>,
   comparer: Comparer<R>,
-): Promise<T | undefined> {
-  return commonTopAsync(iterable, mapper, comparer, reduceAndMapAsync);
-}
+) => Promise<T | undefined> = getTopAsync(reduceAndMapAsync);
 
-function min<T>(
+const min: <T>(
   iterable: Iterable<T>,
-  mapper: Mapper<T, number> = identity as Mapper<T, number>,
-): T | undefined {
-  return top<T, number>(iterable, mapper, (a, b) => b - a);
-}
+  mapper?: Mapper<T, number>,
+) => T | undefined = getMin(top);
 
-function minAsync<T>(
+const minAsync: <T>(
   iterable: Iterable<T>,
   mapper: AsyncMapper<T, number>,
-): Promise<T | undefined> {
-  return topAsync<T, number>(iterable, mapper, (a, b) => b - a);
-}
+) => Promise<T | undefined> = getMin(topAsync);
 
-function max<T>(
+const max: <T>(
   iterable: Iterable<T>,
-  mapper: Mapper<T, number> = identity as Mapper<T, number>,
-): T | undefined {
-  return top<T, number>(iterable, mapper, (a, b) => a - b);
-}
+  mapper?: Mapper<T, number>,
+) => T | undefined = getMax(top);
 
-function maxAsync<T>(
+const maxAsync: <T>(
   iterable: Iterable<T>,
   mapper: AsyncMapper<T, number>,
-): Promise<T | undefined> {
-  return topAsync<T, number>(iterable, mapper, (a, b) => a - b);
-}
+) => Promise<T | undefined> = getMax(topAsync);
 
 function hasExactly<T>(iterable: Iterable<T>, expectedSize: number): boolean {
   return count(take(iterable, expectedSize + 1)) === expectedSize;
