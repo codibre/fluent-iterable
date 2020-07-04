@@ -1,13 +1,14 @@
 import { identity } from '../utils';
+import { AnyMapper } from './any-mapper';
 
-export interface AvgCalc {
+interface AvgCalc {
   sum: number;
   count: number;
 }
 
 export function getAvg(
   reduceAndMap: Function,
-  getSumming: <T>(mapper: Function) => (current: AvgCalc, next: T) => any,
+  getSumming: <T>(mapper: AnyMapper<T>) => (current: AvgCalc, next: T) => any,
 ) {
   return <T>(iterable: Iterable<T>, mapper: any = identity) => {
     const summing = getSumming(mapper);
