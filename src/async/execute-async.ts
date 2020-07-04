@@ -1,12 +1,11 @@
-import { AsyncAction } from '../types';
-import { AnyIterable } from '../common/any-iterable';
+import { Action } from '../types';
+import { getExecute } from '../common/get-execute';
+import { mapAsync } from './map-async';
 
-export async function* executeAsync<T>(
-  iterable: AnyIterable<T>,
-  action: AsyncAction<T>,
-): AsyncIterable<T> {
-  for await (const t of iterable) {
-    await action(t);
-    yield t;
-  }
-}
+export const executeAsync: <T>(
+  iterable: Iterable<T>,
+  action: Action<T>,
+) => Iterable<T> = getExecute(mapAsync, (action) => async (t) => {
+  await action(t);
+  return t;
+});

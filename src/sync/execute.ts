@@ -1,11 +1,11 @@
 import { Action } from '../types';
+import { getExecute } from '../common/get-execute';
+import { map } from './map';
 
-export function* execute<T>(
+export const execute: <T>(
   iterable: Iterable<T>,
   action: Action<T>,
-): Iterable<T> {
-  for (const t of iterable) {
-    action(t);
-    yield t;
-  }
-}
+) => Iterable<T> = getExecute(map, (action) => (t) => {
+  action(t);
+  return t;
+});
