@@ -12,10 +12,11 @@ import {
   Indexed,
 } from './types';
 import { identity, identityAsync, truth } from './utils';
-import { merge, mergeCatching } from './async';
+import { merge, mergeCatching, forEachAsync } from './async';
 import { getTop } from './common/get-top';
 import { getMin, getMax } from './common';
-import { getTopAsync } from './common/get-top-async';
+import { forEach } from './async/for-each';
+import { commonGroupAsync } from './common/common-group-async';
 
 async function toArray<T>(iterable: AsyncIterable<T>): Promise<T[]> {
   const array: T[] = [];
@@ -244,41 +245,15 @@ async function* distinctAsync<T, R>(
   }
 }
 
-async function* group<T, R>(
+const group: <T, R>(
   iterable: AsyncIterable<T>,
   mapper: Mapper<T, R>,
-): AsyncIterable<Group<T, R>> {
-  const groups = new Map<R, T[]>();
-  for await (const t of iterable) {
-    const key = mapper(t);
-    const values = groups.get(key) || [];
+) => AsyncIterable<Group<T, R>> = commonGroupAsync;
 
-    values.push(t);
-    groups.set(key, values);
-  }
-
-  for (const [key, values] of groups.entries()) {
-    yield { key, values };
-  }
-}
-
-async function* groupAsync<T, R>(
+const groupAsync: <T, R>(
   iterable: AsyncIterable<T>,
-  mapper: AsyncMapper<T, R>,
-): AsyncIterable<Group<T, R>> {
-  const groups = new Map<R, T[]>();
-  for await (const t of iterable) {
-    const key = await mapper(t);
-    const values = groups.get(key) || [];
-
-    values.push(t);
-    groups.set(key, values);
-  }
-
-  for (const [key, values] of groups.entries()) {
-    yield { key, values };
-  }
-}
+  mapper: Mapper<T, R>,
+) => AsyncIterable<Group<T, R>> = commonGroupAsync;
 
 async function count<T>(
   iterable: AsyncIterable<T>,
@@ -516,24 +491,6 @@ async function toObjectAsync<T, R>(
   return res;
 }
 
-async function forEach<T>(
-  iterable: AsyncIterable<T>,
-  action: Action<T>,
-): Promise<void> {
-  for await (const t of iterable) {
-    action(t);
-  }
-}
-
-async function forEachAsync<T>(
-  iterable: AsyncIterable<T>,
-  action: AsyncAction<T>,
-): Promise<void> {
-  for await (const t of iterable) {
-    await action(t);
-  }
-}
-
 async function* execute<T>(
   iterable: AsyncIterable<T>,
   action: Action<T>,
@@ -648,7 +605,7 @@ const topAsync: <T, R>(
   iterable: AsyncIterable<T>,
   mapper: AsyncMapper<T, R>,
   comparer: Comparer<R>,
-) => Promise<T | undefined> = getTopAsync(reduceAndMapAsync);
+) => Promise<T | undefined> = getTop(reduceAndMapAsync);
 
 const min: <T>(
   iterable: AsyncIterable<T>,

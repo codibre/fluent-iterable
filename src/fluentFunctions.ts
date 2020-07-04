@@ -12,10 +12,11 @@ import {
   Group,
   Indexed,
 } from './types';
-import { toObject, toAsync, reduceAndMapAsync } from './sync';
+import { toObject, toAsync, reduceAndMapAsync, map } from './sync';
 import { getTop } from './common/get-top';
 import { getMax, getMin } from './common';
-import { getTopAsync } from './common/get-top-async';
+import { forEach } from './sync/for-each';
+import { commonGroupAsync } from './common/common-group-async';
 
 function toArray<T>(iterable: Iterable<T>): T[] {
   const array: T[] = [];
@@ -99,12 +100,6 @@ async function* skipWhileAsync<T>(
 function skip<T>(iterable: Iterable<T>, n: number): Iterable<T> {
   let counter = n;
   return skipWhile(iterable, () => counter-- > 0);
-}
-
-function* map<T, R>(iterable: Iterable<T>, mapper: Mapper<T, R>): Iterable<R> {
-  for (const t of iterable) {
-    yield mapper(t);
-  }
 }
 
 async function* mapAsync<T, R>(
@@ -277,23 +272,10 @@ function* group<T, R>(
   }
 }
 
-async function* groupAsync<T, R>(
+const groupAsync: <T, R>(
   iterable: Iterable<T>,
   mapper: AsyncMapper<T, R>,
-): AsyncIterable<Group<T, R>> {
-  const groups = new Map<R, T[]>();
-  for (const t of iterable) {
-    const key = await mapper(t);
-    const values = groups.get(key) || [];
-
-    values.push(t);
-    groups.set(key, values);
-  }
-
-  for (const [key, values] of groups.entries()) {
-    yield { key, values };
-  }
-}
+) => AsyncIterable<Group<T, R>> = commonGroupAsync;
 
 function count<T>(
   iterable: Iterable<T>,
@@ -463,12 +445,6 @@ async function toObjectAsync<T, R = T>(
   return res;
 }
 
-function forEach<T>(iterable: Iterable<T>, action: Action<T>): void {
-  for (const t of iterable) {
-    action(t);
-  }
-}
-
 async function forEachAsync<T>(
   iterable: Iterable<T>,
   action: AsyncAction<T>,
@@ -589,7 +565,7 @@ const topAsync: <T, R>(
   iterable: Iterable<T>,
   mapper: AsyncMapper<T, R>,
   comparer: Comparer<R>,
-) => Promise<T | undefined> = getTopAsync(reduceAndMapAsync);
+) => Promise<T | undefined> = getTop(reduceAndMapAsync);
 
 const min: <T>(
   iterable: Iterable<T>,

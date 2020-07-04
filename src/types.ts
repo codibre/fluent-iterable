@@ -56,7 +56,7 @@ interface AsyncMapper<T, R> {
    * @param item The item to map.
    * @returns A promise of the map of `item`.
    */
-  (item: T): Promise<R>;
+  (item: T): Promise<R> | R;
 }
 
 /**
