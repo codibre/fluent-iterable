@@ -301,6 +301,14 @@ interface FluentIterable<T> extends Iterable<T> {
   concat(...iterables: Array<Iterable<T>>): FluentIterable<T>;
 
   /**
+   * Concatenates specified async iterables to the iterable.<br>
+   *   Example: `fluent(['anchor', 'almond']).concat(['bound', 'alpine'], someStream)` yields *anchor*, *almond*, *bound*, *alpine* and the elements of the stream.
+   * @param iterables The async iterables to concatenate.
+   * @returns The [[FluentAsyncIterable]] of the concatenated async iterables.
+   */
+  concatAsync(...iterables: Array<Iterable<T>>): FluentAsyncIterable<T>;
+
+  /**
    * Repeats the elements of the iterable a specified amount of times.<br>
    *   Example: `fluent(['anchor', 'almond']).repeat(3)` yields *anchor*, *almond*, *anchor*, *almond*, *anchor* and *almond*.
    * @param n The amount of times the iterable is to be repeated.
