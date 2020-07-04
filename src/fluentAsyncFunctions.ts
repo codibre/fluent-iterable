@@ -78,6 +78,7 @@ export const asyncHelper = {
   hasLessThan: hasLessThanAsync,
   hasMoreThan: hasMoreThanAsync,
   merge,
+  mergeCatching,
 };
 
 export const asyncIterableFuncs = {
