@@ -1,11 +1,12 @@
-import { Comparer, Mapper, Predicate, Reducer, Indexed } from './types';
-import { identity, truth } from './utils';
+import { Comparer, Mapper, Indexed } from './types';
+import { identity } from './utils';
 import {
   anyAsync,
   merge,
   mergeCatching,
   forEachAsync,
   groupAsync,
+  joinAsync,
   takeWhileAsync,
   distinctAsync,
   executeAsync,
@@ -19,11 +20,14 @@ import {
   reduceAndMapAsync,
   lastAsync,
 } from './async';
-import { getTop } from './common/get-top';
-import { getMin, getMax } from './common';
 import {} from './async/first-async';
 import { countAsync } from './async/count-async';
 import { reduceAsync } from './async/reduce-async';
+import { topAsync } from './async/top-async';
+import { minAsync } from './async/min-async';
+import { maxAsync } from './async/max-async';
+import { sumAsync } from './async/sum-async';
+import { containsAsync } from './async/contains-async';
 
 async function toArray<T>(iterable: AsyncIterable<T>): Promise<T[]> {
   const array: T[] = [];
@@ -142,34 +146,6 @@ async function* partition<T>(
   }
 }
 
-function contains<T>(iterable: AsyncIterable<T>, item: T): Promise<boolean> {
-  return anyAsync(iterable, (next) => next === item);
-}
-
-async function join<T>(
-  iterable: AsyncIterable<T>,
-  separator: string,
-  mapper: Mapper<T, string> = identity as Mapper<T, string>,
-): Promise<string> {
-  return (
-    (await reduceAsync<T, string | undefined>(
-      iterable,
-      (current, next) => {
-        const nextStr = mapper(next);
-        return current ? `${current}${separator}${nextStr}` : nextStr;
-      },
-      undefined,
-    )) || ''
-  );
-}
-
-function sum<T>(
-  iterable: AsyncIterable<T>,
-  mapper: Mapper<T, number> = identity as Mapper<T, number>,
-): Promise<number> {
-  return reduceAsync(iterable, (current, next) => current + mapper(next), 0);
-}
-
 function avg<T>(
   iterable: AsyncIterable<T>,
   mapper: Mapper<T, number> = identity as Mapper<T, number>,
@@ -184,22 +160,6 @@ function avg<T>(
     (acc) => acc.avg,
   );
 }
-
-const top: <T, R>(
-  iterable: AsyncIterable<T>,
-  mapper: Mapper<T, R>,
-  comparer: Comparer<R>,
-) => Promise<T | undefined> = getTop(reduceAndMapAsync);
-
-const min: <T>(
-  iterable: AsyncIterable<T>,
-  mapper?: Mapper<T, number>,
-) => Promise<T | undefined> = getMin(top);
-
-const max: <T>(
-  iterable: AsyncIterable<T>,
-  mapper?: Mapper<T, number>,
-) => Promise<T | undefined> = getMax(top);
 
 async function hasExactly<T>(
   iterable: AsyncIterable<T>,
@@ -245,17 +205,17 @@ export const asyncHelper = {
   reduce: reduceAsync,
   all: allAsync,
   any: anyAsync,
-  contains,
+  contains: containsAsync,
   toArray,
   toObject: toObjectAsync,
   forEach: forEachAsync,
   execute: executeAsync,
-  join,
-  sum,
+  join: joinAsync,
+  sum: sumAsync,
   avg,
-  top,
-  min,
-  max,
+  top: topAsync,
+  min: minAsync,
+  max: maxAsync,
   hasExactly,
   hasLessThan,
   hasMoreThan,
@@ -312,24 +272,25 @@ export const asyncResolvingFuncs = {
   allAsync,
   any: anyAsync,
   anyAsync,
-  contains,
+  contains: containsAsync,
+  containsAsync,
   toArray,
   toObject: toObjectAsync,
   toObjectAsync,
   forEach: forEachAsync,
   forEachAsync,
-  join,
-  joinAsync: join,
-  sum,
-  sumAsync: sum,
+  join: joinAsync,
+  joinAsync,
+  sum: sumAsync,
+  sumAsync,
   avg,
   avgAsync: avg,
-  top,
-  topAsync: top,
-  min,
-  minAsync: min,
-  max,
-  maxAsync: max,
+  top: topAsync,
+  topAsync,
+  min: minAsync,
+  minAsync,
+  max: maxAsync,
+  maxAsync,
   hasExactly,
   hasLessThan,
   hasMoreThan,

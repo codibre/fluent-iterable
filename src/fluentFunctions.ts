@@ -1,16 +1,19 @@
 import { identity, truth } from './utils';
+import { Predicate, Mapper, Comparer, Action, Group, Indexed } from './types';
 import {
-  Predicate,
-  Mapper,
-  Reducer,
-  Comparer,
-  Action,
-  Group,
-  Indexed,
-} from './types';
-import { toObject, toAsync, map } from './sync';
-import { getTop } from './common/get-top';
-import { getMax, getMin } from './common';
+  any,
+  contains,
+  first,
+  toObject,
+  toAsync,
+  join,
+  map,
+  max,
+  min,
+  reduce,
+  sum,
+  top,
+} from './sync';
 import { forEach } from './sync/for-each';
 import { getWithIndex } from './common/get-with-index';
 import { getTake } from './common/get-take';
@@ -21,6 +24,7 @@ import {
   firstAsync,
   forEachAsync,
   groupAsync,
+  joinAsync,
   lastAsync,
   reduceAsync,
   takeWhileAsync,
@@ -32,7 +36,12 @@ import {
   reduceAndMapAsync,
   skipWhileAsync,
   toObjectAsync,
+  topAsync,
+  minAsync,
+  maxAsync,
+  sumAsync,
 } from './async';
+import { reduceAndMap } from './sync/reduce-and-map';
 
 const toArray: <T>(iterable: Iterable<T>) => T[] = Array.from.bind(Array);
 
@@ -217,19 +226,6 @@ function count<T>(
   return counter;
 }
 
-function first<T>(
-  iterable: Iterable<T>,
-  predicate: Predicate<T> = truth,
-): T | undefined {
-  for (const t of iterable) {
-    if (predicate(t)) {
-      return t;
-    }
-  }
-
-  return undefined;
-}
-
 function last<T>(
   iterable: Iterable<T>,
   predicate: Predicate<T> = truth,
@@ -245,28 +241,6 @@ function last<T>(
   return result;
 }
 
-function reduceAndMap<T, A, R>(
-  iterable: Iterable<T>,
-  reducer: Reducer<T, A>,
-  initial: A,
-  result: Mapper<A, R>,
-): R {
-  let accumulator: A = initial;
-  for (const t of iterable) {
-    accumulator = reducer(accumulator, t);
-  }
-
-  return result(accumulator);
-}
-
-function reduce<T, R>(
-  iterable: Iterable<T>,
-  reducer: Reducer<T, R>,
-  initial: R,
-): R {
-  return reduceAndMap(iterable, reducer, initial, identity);
-}
-
 function all<T>(iterable: Iterable<T>, predicate: Predicate<T>): boolean {
   for (const t of iterable) {
     if (!predicate(t)) {
@@ -277,46 +251,11 @@ function all<T>(iterable: Iterable<T>, predicate: Predicate<T>): boolean {
   return true;
 }
 
-function any<T>(
-  iterable: Iterable<T>,
-  predicate: Predicate<T> = truth,
-): boolean {
-  return first(iterable, predicate) !== undefined;
-}
-
-function contains<T>(iterable: Iterable<T>, item: T): boolean {
-  return any(iterable, (next) => next === item);
-}
-
 function* execute<T>(iterable: Iterable<T>, action: Action<T>): Iterable<T> {
   for (const t of iterable) {
     action(t);
     yield t;
   }
-}
-
-function join<T>(
-  iterable: Iterable<T>,
-  separator: string,
-  mapper: Mapper<T, string> = identity as Mapper<T, string>,
-): string {
-  return (
-    reduce<T, string | undefined>(
-      iterable,
-      (current, next) => {
-        const nextStr = mapper(next);
-        return current ? `${current}${separator}${nextStr}` : nextStr;
-      },
-      undefined,
-    ) || ''
-  );
-}
-
-function sum<T>(
-  iterable: Iterable<T>,
-  mapper: Mapper<T, number> = identity as Mapper<T, number>,
-): number {
-  return reduce(iterable, (current, next) => current + mapper(next), 0);
 }
 
 function avg<T>(
@@ -333,22 +272,6 @@ function avg<T>(
     (acc) => acc.avg,
   );
 }
-
-const top: <T, R>(
-  iterable: Iterable<T>,
-  mapper: Mapper<T, R>,
-  comparer: Comparer<R>,
-) => T | undefined = getTop(reduceAndMap);
-
-const min: <T>(
-  iterable: Iterable<T>,
-  mapper?: Mapper<T, number>,
-) => T | undefined = getMin(top);
-
-const max: <T>(
-  iterable: Iterable<T>,
-  mapper?: Mapper<T, number>,
-) => T | undefined = getMax(top);
 
 function hasExactly<T>(iterable: Iterable<T>, expectedSize: number): boolean {
   return count(take(iterable, expectedSize + 1)) === expectedSize;
@@ -459,11 +382,16 @@ export const resolvingFuncs = {
   forEach,
   forEachAsync,
   join,
+  joinAsync,
   sum,
+  sumAsync,
   avg,
   top,
+  topAsync,
   min,
+  minAsync,
   max,
+  maxAsync,
   hasExactly,
   hasLessThan,
   hasMoreThan,
