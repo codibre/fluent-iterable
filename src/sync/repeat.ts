@@ -1,10 +1,9 @@
-import { getRepeater } from '../common';
 import { map } from './map';
+import { getRepeat } from '../common/get-repeat';
+import { empty } from '../utils';
+import { concat } from './concat';
 
-export function* repeat<T>(iterable: Iterable<T>, n: number): Iterable<T> {
-  if (n >= 1) {
-    const repeater = getRepeater<T>();
-    yield* map(iterable, repeater.push);
-    yield* repeater.repeat(n);
-  }
-}
+export const repeat: <T>(
+  iterable: Iterable<T>,
+  n: number,
+) => Iterable<T> = getRepeat(map, concat, empty);

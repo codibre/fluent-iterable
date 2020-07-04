@@ -2,6 +2,11 @@ import fluent from './fluent';
 import { Group, FluentGroup, Predicate, AsyncPredicate } from './types';
 
 /** @internal */
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+function* empty(): Iterable<undefined> {}
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+async function* emptyAsync(): AsyncIterable<undefined> {}
+/** @internal */
 const identity = <T>(t: T): T => t;
 /** @internal */
 const identityAsync = async <T>(t: T): Promise<T> => t;
@@ -47,6 +52,8 @@ function* interval(fromInclusive?: number, count?: number): Iterable<number> {
 }
 
 export {
+  empty,
+  emptyAsync as asyncEmpty,
   identity,
   identityAsync,
   truth,

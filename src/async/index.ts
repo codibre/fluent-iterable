@@ -22,7 +22,7 @@ export * from './max-async';
 export * from './merge';
 export * from './merge-catching';
 export * from './min-async';
-export * from './prepend';
+export * from './prepend-async';
 export * from './reduce-and-map-async';
 export * from './reduce-async';
 export * from './repeat-async';
