@@ -1,17 +1,11 @@
 import { AnyIterable } from '../common/any-iterable';
 import { AsyncPredicate } from '../types';
 import { truth } from '../utils';
+import { getCount } from '../common/get-count';
+import { reduceAsync } from './reduce-async';
+import { filterAsync } from './filter-async';
 
-export async function countAsync<T>(
-  iterable: AnyIterable<T>,
-  predicate: AsyncPredicate<T> = truth as any,
-): Promise<number> {
-  let counter = 0;
-  for await (const t of iterable) {
-    if (await predicate(t)) {
-      counter++;
-    }
-  }
-
-  return counter;
-}
+export const countAsync: <T>(
+  iterable: Iterable<T>,
+  predicate?: AsyncPredicate<T>,
+) => Promise<number> = getCount(reduceAsync, filterAsync);

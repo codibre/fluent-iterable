@@ -1,10 +1,8 @@
 import { Predicate } from '../types';
 import { truth } from '../utils';
-import { first } from './first';
+import { getCaseCheck } from './if-case';
 
-export function any<T>(
+export const any: <T>(
   iterable: Iterable<T>,
-  predicate: Predicate<T> = truth as any,
-): boolean {
-  return first(iterable, predicate) !== undefined;
-}
+  predicate?: Predicate<T>,
+) => boolean = getCaseCheck(truth, false, truth);

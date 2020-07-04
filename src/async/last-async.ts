@@ -1,18 +1,13 @@
 import { AsyncPredicate } from '../types';
-import { truth } from '../utils';
 import { AnyIterable } from '../common/any-iterable';
+import { getLast } from '../common/get-last';
+import { reduceAsync } from './reduce-async';
 
-export async function lastAsync<T>(
+export const lastAsync: <T>(
   iterable: AnyIterable<T>,
-  predicate: AsyncPredicate<T> = truth as any,
-): Promise<T | undefined> {
-  let result: T | undefined;
-
-  for await (const t of iterable) {
-    if (await predicate(t)) {
-      result = t;
-    }
-  }
-
-  return result;
-}
+  predicate?: AsyncPredicate<T>,
+) => Promise<T | undefined> = getLast(
+  reduceAsync,
+  (predicate) => async (current, next) =>
+    (await predicate(next)) ? next : current,
+);

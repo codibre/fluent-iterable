@@ -1,16 +1,9 @@
 import { Predicate } from '../types';
-import { truth } from '../utils';
+import { filter } from './filter';
+import { reduce } from './reduce';
+import { getCount } from '../common/get-count';
 
-export function count<T>(
+export const count: <T>(
   iterable: Iterable<T>,
-  predicate: Predicate<T> = truth,
-): number {
-  let counter = 0;
-  for (const t of iterable) {
-    if (predicate(t)) {
-      counter++;
-    }
-  }
-
-  return counter;
-}
+  predicate?: Predicate<T>,
+) => number = getCount(reduce, filter);

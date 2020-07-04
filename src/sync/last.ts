@@ -1,17 +1,10 @@
 import { Predicate } from '../types';
-import { truth } from '../utils';
+import { reduce } from './reduce';
+import { getLast } from '../common/get-last';
 
-export function last<T>(
+export const last: <T>(
   iterable: Iterable<T>,
-  predicate: Predicate<T> = truth,
-): T | undefined {
-  let result: T | undefined;
-
-  for (const t of iterable) {
-    if (predicate(t)) {
-      result = t;
-    }
-  }
-
-  return result;
-}
+  predicate?: Predicate<T>,
+) => T | undefined = getLast(reduce, (predicate) => (current, next) =>
+  predicate(next) ? next : current,
+);

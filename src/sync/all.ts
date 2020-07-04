@@ -1,14 +1,8 @@
 import { Predicate } from '../types';
+import { getCaseCheck } from './if-case';
+import { falsity, negation } from '../utils';
 
-export function all<T>(
+export const all: <T>(
   iterable: Iterable<T>,
   predicate: Predicate<T>,
-): boolean {
-  for (const t of iterable) {
-    if (!predicate(t)) {
-      return false;
-    }
-  }
-
-  return true;
-}
+) => boolean = getCaseCheck(falsity, true, undefined, negation);
