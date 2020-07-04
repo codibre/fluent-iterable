@@ -1,11 +1,9 @@
 import { AsyncPredicate } from '../types';
 import { truth } from '../utils';
-import { firstAsync } from './first-async';
 import { AnyIterable } from '../common/any-iterable';
+import { getCaseCheckAsync } from './get-case-check-async';
 
-export async function anyAsync<T>(
+export const anyAsync: <T>(
   iterable: AnyIterable<T>,
-  predicate: AsyncPredicate<T> = truth as any,
-): Promise<boolean> {
-  return (await firstAsync(iterable, predicate)) !== undefined;
-}
+  predicate?: AsyncPredicate<T>,
+) => Promise<boolean> = getCaseCheckAsync(truth, false, truth);

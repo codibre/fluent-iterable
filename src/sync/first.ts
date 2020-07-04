@@ -1,6 +1,6 @@
 import { Predicate } from '../types';
 import { truth, identity } from '../utils';
-import { getCaseCheck } from './if-case';
+import { getCaseCheck } from './get-case-check';
 
 export const first: <T>(
   iterable: Iterable<T>,

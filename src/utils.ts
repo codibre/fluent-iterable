@@ -1,5 +1,5 @@
 import fluent from './fluent';
-import { Group, FluentGroup, Predicate } from './types';
+import { Group, FluentGroup, Predicate, AsyncPredicate } from './types';
 
 /** @internal */
 const identity = <T>(t: T): T => t;
@@ -12,6 +12,9 @@ const falsity = (): boolean => false;
 /** @internal */
 const negation = <T>(predicate: Predicate<T>): Predicate<T> => (item: T) =>
   !predicate(item);
+const asyncNegation = <T>(
+  predicate: AsyncPredicate<T>,
+): AsyncPredicate<T> => async (item: T) => !(await predicate(item));
 /** @internal */
 const truthAsync = async (): Promise<boolean> => true;
 /** @internal */
@@ -49,6 +52,7 @@ export {
   truth,
   falsity,
   negation,
+  asyncNegation,
   truthAsync,
   fluentGroup,
   interval,

@@ -1,5 +1,5 @@
 import { Predicate } from '../types';
-import { getCaseCheck } from './if-case';
+import { getCaseCheck } from './get-case-check';
 import { falsity, negation } from '../utils';
 
 export const all: <T>(
