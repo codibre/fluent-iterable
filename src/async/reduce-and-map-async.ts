@@ -1,7 +1,8 @@
 import { AsyncReducer, AsyncMapper } from '../types';
+import { AnyIterable } from '../common/any-iterable';
 
 export async function reduceAndMapAsync<T, A, R>(
-  iterable: AsyncIterable<T>,
+  iterable: AnyIterable<T>,
   reducer: AsyncReducer<T, A>,
   initial: A,
   result: AsyncMapper<A, R>,

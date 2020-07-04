@@ -1,5 +1,6 @@
 export * from './all-async';
 export * from './any-async';
+export * from './avg-async';
 export * from './count-async';
 export * from './distinct-async';
 export * from './execute-async';

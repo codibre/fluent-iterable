@@ -2,6 +2,7 @@ import { Comparer, Mapper, Indexed } from './types';
 import { identity } from './utils';
 import {
   anyAsync,
+  avgAsync,
   merge,
   mergeCatching,
   forEachAsync,
@@ -146,21 +147,6 @@ async function* partition<T>(
   }
 }
 
-function avg<T>(
-  iterable: AsyncIterable<T>,
-  mapper: Mapper<T, number> = identity as Mapper<T, number>,
-): Promise<number> {
-  return reduceAndMapAsync(
-    iterable,
-    (current, next) => ({
-      avg: (current.avg * current.count + mapper(next)) / (current.count + 1),
-      count: current.count + 1,
-    }),
-    { avg: 0, count: 0 },
-    (acc) => acc.avg,
-  );
-}
-
 async function hasExactly<T>(
   iterable: AsyncIterable<T>,
   expectedSize: number,
@@ -212,7 +198,7 @@ export const asyncHelper = {
   execute: executeAsync,
   join: joinAsync,
   sum: sumAsync,
-  avg,
+  avg: avgAsync,
   top: topAsync,
   min: minAsync,
   max: maxAsync,
@@ -283,8 +269,8 @@ export const asyncResolvingFuncs = {
   joinAsync,
   sum: sumAsync,
   sumAsync,
-  avg,
-  avgAsync: avg,
+  avg: avgAsync,
+  avgAsync,
   top: topAsync,
   topAsync,
   min: minAsync,

@@ -19,6 +19,7 @@ import { getWithIndex } from './common/get-with-index';
 import { getTake } from './common/get-take';
 import {
   allAsync,
+  avgAsync,
   anyAsync,
   countAsync,
   firstAsync,
@@ -386,6 +387,7 @@ export const resolvingFuncs = {
   sum,
   sumAsync,
   avg,
+  avgAsync,
   top,
   topAsync,
   min,
