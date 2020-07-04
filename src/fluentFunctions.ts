@@ -3,7 +3,11 @@ import { Predicate, Mapper, Comparer, Action, Group, Indexed } from './types';
 import {
   any,
   contains,
+  count,
   first,
+  hasExactly,
+  hasLessThan,
+  hasMoreThan,
   toObject,
   toAsync,
   join,
@@ -13,6 +17,8 @@ import {
   reduce,
   repeat,
   sum,
+  take,
+  takeWhile,
   top,
 } from './sync';
 import { forEach } from './sync/for-each';
@@ -51,23 +57,6 @@ const toArray: <T>(iterable: Iterable<T>) => T[] = Array.from.bind(Array);
 const withIndex: <T>(
   iterable: Iterable<T>,
 ) => Iterable<Indexed<T>> = getWithIndex(map);
-
-function* takeWhile<T>(
-  iterable: Iterable<T>,
-  condition: Predicate<T>,
-): Iterable<T> {
-  for (const t of iterable) {
-    if (!condition(t)) {
-      break;
-    }
-
-    yield t;
-  }
-}
-
-const take: <T>(iterable: Iterable<T>, n: number) => Iterable<T> = getTake(
-  takeWhile,
-);
 
 function* skipWhile<T>(
   iterable: Iterable<T>,
@@ -198,20 +187,6 @@ function* group<T, R>(
   }
 }
 
-function count<T>(
-  iterable: Iterable<T>,
-  predicate: Predicate<T> = truth,
-): number {
-  let counter = 0;
-  for (const t of iterable) {
-    if (predicate(t)) {
-      counter++;
-    }
-  }
-
-  return counter;
-}
-
 function last<T>(
   iterable: Iterable<T>,
   predicate: Predicate<T> = truth,
@@ -257,18 +232,6 @@ function avg<T>(
     { avg: 0, count: 0 },
     (acc) => acc.avg,
   );
-}
-
-function hasExactly<T>(iterable: Iterable<T>, expectedSize: number): boolean {
-  return count(take(iterable, expectedSize + 1)) === expectedSize;
-}
-
-function hasLessThan<T>(iterable: Iterable<T>, threshold: number): boolean {
-  return count(take(iterable, threshold + 1)) < threshold;
-}
-
-function hasMoreThan<T>(iterable: Iterable<T>, threshold: number): boolean {
-  return count(take(iterable, threshold + 1)) > threshold;
 }
 
 export const helper = {
