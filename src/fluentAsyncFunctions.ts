@@ -31,15 +31,14 @@ import {
   hasExactlyAsync,
   hasLessThanAsync,
   hasMoreThanAsync,
+  countAsync,
+  reduceAsync,
+  topAsync,
+  minAsync,
+  maxAsync,
+  sumAsync,
+  containsAsync,
 } from './async';
-import {} from './async/first-async';
-import { countAsync } from './async/count-async';
-import { reduceAsync } from './async/reduce-async';
-import { topAsync } from './async/top-async';
-import { minAsync } from './async/min-async';
-import { maxAsync } from './async/max-async';
-import { sumAsync } from './async/sum-async';
-import { containsAsync } from './async/contains-async';
 
 export const asyncHelper = {
   withIndex: withIndexAsync,

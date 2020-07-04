@@ -3,6 +3,7 @@ export * from './any-async';
 export * from './append-async';
 export * from './avg-async';
 export * from './concat-async';
+export * from './contains-async';
 export * from './count-async';
 export * from './distinct-async';
 export * from './execute-async';
