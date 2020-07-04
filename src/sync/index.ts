@@ -8,6 +8,7 @@ export * from './max';
 export * from './min';
 export * from './reduce';
 export * from './reduce-and-map';
+export * from './repeat';
 export * from './sum';
 export * from './to-async';
 export * from './to-object';

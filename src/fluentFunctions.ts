@@ -11,6 +11,7 @@ import {
   max,
   min,
   reduce,
+  repeat,
   sum,
   top,
 } from './sync';
@@ -21,6 +22,7 @@ import {
   allAsync,
   avgAsync,
   anyAsync,
+  concatAsync,
   countAsync,
   firstAsync,
   forEachAsync,
@@ -146,23 +148,6 @@ function* prepend<T>(iterable: Iterable<T>, item: T): Iterable<T> {
 function* concat<T>(...iterables: Array<Iterable<T>>): Iterable<T> {
   for (const iterable of iterables) {
     yield* iterable;
-  }
-}
-
-function* repeat<T>(iterable: Iterable<T>, n: number): Iterable<T> {
-  if (n < 1) {
-    return;
-  }
-
-  const cache: T[] = [];
-
-  for (const t of iterable) {
-    yield t;
-    cache.push(t);
-  }
-
-  for (let i = 1; i < n; ++i) {
-    yield* cache;
   }
 }
 
@@ -347,6 +332,7 @@ export const iterableFuncs = {
 };
 
 export const iterableAsyncFuncs = {
+  concatAsync,
   takeWhileAsync,
   skipWhileAsync,
   mapAsync,
