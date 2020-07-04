@@ -1,4 +1,5 @@
 import { AnyIterable, getRepeater } from '../common';
+import { mapAsync } from './map-async';
 
 export async function* repeatAsync<T>(
   iterable: AnyIterable<T>,
@@ -6,10 +7,7 @@ export async function* repeatAsync<T>(
 ): AsyncIterable<T> {
   if (n >= 1) {
     const repeater = getRepeater<T>();
-    for await (const t of iterable) {
-      yield repeater.push(t);
-    }
-
+    yield* mapAsync(iterable, repeater.push);
     yield* repeater.repeat(n);
   }
 }
