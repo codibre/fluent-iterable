@@ -1,7 +1,7 @@
 import { AsyncMapper, Group } from '../types';
-import { AnyIterable } from './any-iterable';
+import { AnyIterable } from '../common/any-iterable';
 
-export async function* commonGroupAsync<T, R>(
+export async function* groupAsync<T, R>(
   iterable: AnyIterable<T>,
   mapper: AsyncMapper<T, R>,
 ): AsyncIterable<Group<T, R>> {

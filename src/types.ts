@@ -25,7 +25,7 @@ interface AsyncPredicate<T> {
    * @param item The item evaluated.
    * @returns A promise of `true` if the predicate passed on `item`; otherwise a promise of `false`.
    */
-  (item: T): Promise<boolean>;
+  (item: T): Promise<boolean> | boolean;
 }
 
 /**
@@ -88,7 +88,7 @@ interface AsyncReducer<T, A> {
    * @param next The next item.
    * @returns A promise of the new accumulator value.
    */
-  (current: A, next: T): Promise<A>;
+  (current: A, next: T): Promise<A> | A;
 }
 
 /**
@@ -130,7 +130,7 @@ interface AsyncAction<T> {
    * @param item The item the action is performed against.
    * @returns The promise of any action.
    */
-  (item: T): Promise<unknown>;
+  (item: T): Promise<unknown> | unknown;
 }
 
 /**

@@ -1,11 +1,12 @@
 import { AsyncAction } from '../types';
 import { AnyIterable } from '../common/any-iterable';
 
-export async function forEachAsync<T>(
+export async function* executeAsync<T>(
   iterable: AnyIterable<T>,
   action: AsyncAction<T>,
-): Promise<void> {
+): AsyncIterable<T> {
   for await (const t of iterable) {
     await action(t);
+    yield t;
   }
 }

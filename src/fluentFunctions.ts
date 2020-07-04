@@ -1,38 +1,44 @@
-import { identity, identityAsync, truth } from './utils';
+import { identity, truth } from './utils';
 import {
   Predicate,
-  AsyncPredicate,
   Mapper,
-  AsyncMapper,
   Reducer,
-  AsyncReducer,
   Comparer,
   Action,
-  AsyncAction,
   Group,
   Indexed,
 } from './types';
-import { toObject, toAsync, reduceAndMapAsync, map } from './sync';
+import { toObject, toAsync, map } from './sync';
 import { getTop } from './common/get-top';
 import { getMax, getMin } from './common';
 import { forEach } from './sync/for-each';
-import { commonGroupAsync } from './common/common-group-async';
+import { getWithIndex } from './common/get-with-index';
+import { getTake } from './common/get-take';
+import {
+  allAsync,
+  anyAsync,
+  countAsync,
+  firstAsync,
+  forEachAsync,
+  groupAsync,
+  lastAsync,
+  reduceAsync,
+  takeWhileAsync,
+  distinctAsync,
+  executeAsync,
+  filterAsync,
+  flattenAsync,
+  mapAsync,
+  reduceAndMapAsync,
+  skipWhileAsync,
+  toObjectAsync,
+} from './async';
 
-function toArray<T>(iterable: Iterable<T>): T[] {
-  const array: T[] = [];
-  for (const t of iterable) {
-    array.push(t);
-  }
+const toArray: <T>(iterable: Iterable<T>) => T[] = Array.from.bind(Array);
 
-  return array;
-}
-
-function* withIndex<T>(iterable: Iterable<T>): Iterable<Indexed<T>> {
-  let idx = 0;
-  for (const t of iterable) {
-    yield { idx: idx++, value: t };
-  }
-}
+const withIndex: <T>(
+  iterable: Iterable<T>,
+) => Iterable<Indexed<T>> = getWithIndex(map);
 
 function* takeWhile<T>(
   iterable: Iterable<T>,
@@ -47,23 +53,9 @@ function* takeWhile<T>(
   }
 }
 
-async function* takeWhileAsync<T>(
-  iterable: Iterable<T>,
-  condition: AsyncPredicate<T>,
-): AsyncIterable<T> {
-  for (const t of iterable) {
-    if (!(await condition(t))) {
-      break;
-    }
-
-    yield t;
-  }
-}
-
-function take<T>(iterable: Iterable<T>, n: number): Iterable<T> {
-  let counter = 0;
-  return takeWhile(iterable, () => counter++ < n);
-}
+const take: <T>(iterable: Iterable<T>, n: number) => Iterable<T> = getTake(
+  takeWhile,
+);
 
 function* skipWhile<T>(
   iterable: Iterable<T>,
@@ -81,34 +73,9 @@ function* skipWhile<T>(
   }
 }
 
-async function* skipWhileAsync<T>(
-  iterable: Iterable<T>,
-  condition: AsyncPredicate<T>,
-): AsyncIterable<T> {
-  let found = false;
-
-  for (const t of iterable) {
-    found = found || !(await condition(t));
-    if (!found) {
-      continue;
-    }
-
-    yield t;
-  }
-}
-
 function skip<T>(iterable: Iterable<T>, n: number): Iterable<T> {
   let counter = n;
   return skipWhile(iterable, () => counter-- > 0);
-}
-
-async function* mapAsync<T, R>(
-  iterable: Iterable<T>,
-  mapper: AsyncMapper<T, R>,
-): AsyncIterable<R> {
-  for (const t of iterable) {
-    yield await mapper(t);
-  }
 }
 
 function* filter<T>(
@@ -117,17 +84,6 @@ function* filter<T>(
 ): Iterable<T> {
   for (const t of iterable) {
     if (predicate(t)) {
-      yield t;
-    }
-  }
-}
-
-async function* filterAsync<T>(
-  iterable: Iterable<T>,
-  predicate: AsyncPredicate<T>,
-): AsyncIterable<T> {
-  for (const t of iterable) {
-    if (await predicate(t)) {
       yield t;
     }
   }
@@ -209,15 +165,6 @@ function* flatten<T, R>(
   }
 }
 
-async function* flattenAsync<T, R>(
-  iterable: Iterable<T>,
-  mapper: AsyncMapper<T, Iterable<R>>,
-): AsyncIterable<R> {
-  for (const t of iterable) {
-    yield* await mapper(t);
-  }
-}
-
 function* sort<T>(iterable: Iterable<T>, comparer?: Comparer<T>): Iterable<T> {
   yield* toArray(iterable).sort(comparer);
 }
@@ -229,22 +176,6 @@ function* distinct<T, R>(
   const set = new Set<R>();
   for (const t of iterable) {
     const value = mapper(t);
-    if (set.has(value)) {
-      continue;
-    }
-
-    set.add(value);
-    yield t;
-  }
-}
-
-async function* distinctAsync<T, R>(
-  iterable: Iterable<T>,
-  mapper: AsyncMapper<T, R>,
-): AsyncIterable<T> {
-  const set = new Set<R>();
-  for (const t of iterable) {
-    const value = await mapper(t);
     if (set.has(value)) {
       continue;
     }
@@ -272,11 +203,6 @@ function* group<T, R>(
   }
 }
 
-const groupAsync: <T, R>(
-  iterable: Iterable<T>,
-  mapper: AsyncMapper<T, R>,
-) => AsyncIterable<Group<T, R>> = commonGroupAsync;
-
 function count<T>(
   iterable: Iterable<T>,
   predicate: Predicate<T> = truth,
@@ -284,20 +210,6 @@ function count<T>(
   let counter = 0;
   for (const t of iterable) {
     if (predicate(t)) {
-      counter++;
-    }
-  }
-
-  return counter;
-}
-
-async function countAsync<T>(
-  iterable: Iterable<T>,
-  predicate: AsyncPredicate<T>,
-): Promise<number> {
-  let counter = 0;
-  for (const t of iterable) {
-    if (await predicate(t)) {
       counter++;
     }
   }
@@ -318,19 +230,6 @@ function first<T>(
   return undefined;
 }
 
-async function firstAsync<T>(
-  iterable: Iterable<T>,
-  predicate: AsyncPredicate<T>,
-): Promise<T | undefined> {
-  for (const t of iterable) {
-    if (await predicate(t)) {
-      return t;
-    }
-  }
-
-  return undefined;
-}
-
 function last<T>(
   iterable: Iterable<T>,
   predicate: Predicate<T> = truth,
@@ -339,21 +238,6 @@ function last<T>(
 
   for (const t of iterable) {
     if (predicate(t)) {
-      result = t;
-    }
-  }
-
-  return result;
-}
-
-async function lastAsync<T>(
-  iterable: Iterable<T>,
-  predicate: AsyncPredicate<T>,
-): Promise<T | undefined> {
-  let result: T | undefined;
-
-  for (const t of iterable) {
-    if (await predicate(t)) {
       result = t;
     }
   }
@@ -383,30 +267,9 @@ function reduce<T, R>(
   return reduceAndMap(iterable, reducer, initial, identity);
 }
 
-function reduceAsync<T, R>(
-  iterable: Iterable<T>,
-  reducer: AsyncReducer<T, R>,
-  initial: R,
-): Promise<R> {
-  return reduceAndMapAsync(iterable, reducer, initial, identityAsync);
-}
-
 function all<T>(iterable: Iterable<T>, predicate: Predicate<T>): boolean {
   for (const t of iterable) {
     if (!predicate(t)) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-async function allAsync<T>(
-  iterable: Iterable<T>,
-  predicate: AsyncPredicate<T>,
-): Promise<boolean> {
-  for (const t of iterable) {
-    if (!(await predicate(t))) {
       return false;
     }
   }
@@ -421,52 +284,13 @@ function any<T>(
   return first(iterable, predicate) !== undefined;
 }
 
-async function anyAsync<T>(
-  iterable: Iterable<T>,
-  predicate: AsyncPredicate<T>,
-): Promise<boolean> {
-  return (await firstAsync(iterable, predicate)) !== undefined;
-}
-
 function contains<T>(iterable: Iterable<T>, item: T): boolean {
   return any(iterable, (next) => next === item);
-}
-
-async function toObjectAsync<T, R = T>(
-  iterable: Iterable<T>,
-  keySelector: AsyncMapper<T, keyof R>,
-  valueSelector: AsyncMapper<T, R[keyof R]> = identity as any,
-): Promise<R> {
-  const res = {} as R;
-  for (const t of iterable) {
-    res[await keySelector(t)] = await valueSelector(t);
-  }
-
-  return res;
-}
-
-async function forEachAsync<T>(
-  iterable: Iterable<T>,
-  action: AsyncAction<T>,
-): Promise<void> {
-  for (const t of iterable) {
-    await action(t);
-  }
 }
 
 function* execute<T>(iterable: Iterable<T>, action: Action<T>): Iterable<T> {
   for (const t of iterable) {
     action(t);
-    yield t;
-  }
-}
-
-async function* executeAsync<T>(
-  iterable: Iterable<T>,
-  action: AsyncAction<T>,
-): AsyncIterable<T> {
-  for (const t of iterable) {
-    await action(t);
     yield t;
   }
 }
@@ -488,39 +312,11 @@ function join<T>(
   );
 }
 
-async function joinAsync<T>(
-  iterable: Iterable<T>,
-  separator: string,
-  mapper: AsyncMapper<T, string>,
-): Promise<string> {
-  return (
-    (await reduceAsync<T, string | undefined>(
-      iterable,
-      async (current, next) => {
-        const nextStr = await mapper(next);
-        return current ? `${current}${separator}${nextStr}` : nextStr;
-      },
-      undefined,
-    )) || ''
-  );
-}
-
 function sum<T>(
   iterable: Iterable<T>,
   mapper: Mapper<T, number> = identity as Mapper<T, number>,
 ): number {
   return reduce(iterable, (current, next) => current + mapper(next), 0);
-}
-
-function sumAsync<T>(
-  iterable: Iterable<T>,
-  mapper: AsyncMapper<T, number>,
-): Promise<number> {
-  return reduceAsync(
-    iterable,
-    async (current, next) => current + (await mapper(next)),
-    0,
-  );
 }
 
 function avg<T>(
@@ -538,54 +334,21 @@ function avg<T>(
   );
 }
 
-function avgAsync<T>(
-  iterable: Iterable<T>,
-  mapper: AsyncMapper<T, number>,
-): Promise<number> {
-  return reduceAndMapAsync(
-    iterable,
-    async (current, next) => ({
-      avg:
-        (current.avg * current.count + (await mapper(next))) /
-        (current.count + 1),
-      count: current.count + 1,
-    }),
-    { avg: 0, count: 0 },
-    async (acc) => acc.avg,
-  );
-}
-
 const top: <T, R>(
   iterable: Iterable<T>,
   mapper: Mapper<T, R>,
   comparer: Comparer<R>,
 ) => T | undefined = getTop(reduceAndMap);
 
-const topAsync: <T, R>(
-  iterable: Iterable<T>,
-  mapper: AsyncMapper<T, R>,
-  comparer: Comparer<R>,
-) => Promise<T | undefined> = getTop(reduceAndMapAsync);
-
 const min: <T>(
   iterable: Iterable<T>,
   mapper?: Mapper<T, number>,
 ) => T | undefined = getMin(top);
 
-const minAsync: <T>(
-  iterable: Iterable<T>,
-  mapper: AsyncMapper<T, number>,
-) => Promise<T | undefined> = getMin(topAsync);
-
 const max: <T>(
   iterable: Iterable<T>,
   mapper?: Mapper<T, number>,
 ) => T | undefined = getMax(top);
-
-const maxAsync: <T>(
-  iterable: Iterable<T>,
-  mapper: AsyncMapper<T, number>,
-) => Promise<T | undefined> = getMax(topAsync);
 
 function hasExactly<T>(iterable: Iterable<T>, expectedSize: number): boolean {
   return count(take(iterable, expectedSize + 1)) === expectedSize;
@@ -602,62 +365,40 @@ function hasMoreThan<T>(iterable: Iterable<T>, threshold: number): boolean {
 export const helper = {
   withIndex,
   takeWhile,
-  takeWhileAsync,
   take,
   skipWhile,
-  skipWhileAsync,
   skip,
   map,
-  mapAsync,
   filter,
-  filterAsync,
   partition,
   append,
   prepend,
   concat,
   repeat,
   flatten,
-  flattenAsync,
   sort,
   distinct,
-  distinctAsync,
   group,
-  groupAsync,
   count,
-  countAsync,
   first,
-  firstAsync,
   last,
-  lastAsync,
   reduceAndMap,
   reduceAndMapAsync,
   reduce,
-  reduceAsync,
   all,
-  allAsync,
   any,
-  anyAsync,
   contains,
   toArray,
   toObject,
-  toObjectAsync,
   toAsync,
   forEach,
-  forEachAsync,
   execute,
-  executeAsync,
   join,
-  joinAsync,
   sum,
-  sumAsync,
   avg,
-  avgAsync,
   top,
-  topAsync,
   min,
-  minAsync,
   max,
-  maxAsync,
   hasExactly,
   hasLessThan,
   hasMoreThan,
@@ -670,7 +411,6 @@ export const iterableFuncs = {
   skipWhile,
   skip,
   map,
-  mapAsync,
   filter,
   append,
   prepend,
@@ -697,7 +437,6 @@ export const special = {
   group,
   groupAsync,
 };
-
 export const resolvingFuncs = {
   count,
   countAsync,
@@ -720,17 +459,11 @@ export const resolvingFuncs = {
   forEach,
   forEachAsync,
   join,
-  joinAsync,
   sum,
-  sumAsync,
   avg,
-  avgAsync,
   top,
-  topAsync,
   min,
-  minAsync,
   max,
-  maxAsync,
   hasExactly,
   hasLessThan,
   hasMoreThan,
