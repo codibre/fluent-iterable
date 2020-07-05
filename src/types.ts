@@ -232,11 +232,11 @@ interface JoinAsync<T> {
 }
 
 interface SumAsync<T> {
-  (mapper: AsyncMapper<T, number>): Promise<number>;
+  (mapper?: AsyncMapper<T, number>): Promise<number>;
 }
 
 interface AvgAsync<T> {
-  (mapper: AsyncMapper<T, number>): Promise<number>;
+  (mapper?: AsyncMapper<T, number>): Promise<number>;
 }
 
 interface TopAsync<T> {
@@ -244,11 +244,11 @@ interface TopAsync<T> {
 }
 
 interface MinAsync<T> {
-  (mapper: AsyncMapper<T, number>): Promise<T | undefined>;
+  (mapper?: AsyncMapper<T, number>): Promise<T | undefined>;
 }
 
 interface MaxAsync<T> {
-  (mapper: AsyncMapper<T, number>): Promise<T | undefined>;
+  (mapper?: AsyncMapper<T, number>): Promise<T | undefined>;
 }
 
 /**

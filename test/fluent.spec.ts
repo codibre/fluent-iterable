@@ -541,6 +541,25 @@ describe('fluent iterable', () => {
           }
         });
       });
+      describe('avg', () => {
+        it('empty', () => expect(fluent([]).avg()).to.eql(NaN));
+        it('one element', () => expect(fluent([2]).avg()).to.equal(2));
+        it('multiple elements', () =>
+          expect(fluent([2, 3, 4, 5]).avg()).to.equal(3.5));
+        it('multiple elements with predicate', () =>
+          expect(fluent(subject).avg((x) => x.emails.length)).to.equal(1));
+      });
+      describe('min', () => {
+        it('empty', () => expect(fluent([]).min()).to.eql(undefined));
+        it('one element', () => expect(fluent([2]).min()).to.equal(2));
+        it('multiple elements', () =>
+          expect(fluent([1, 3, 4, 5]).min()).to.equal(1));
+        it('multiple elements with predicate', () =>
+          expect(fluent(subject).min((x) => x.emails.length)).to.eql({
+            emails: [],
+            name: '0: w/o gender & 0 emails',
+          }));
+      });
       describe('count', () => {
         it('empty', () => expect(fluent([]).count()).to.equal(0));
         it('one element', () => expect(fluent([0]).count()).to.equal(1));
@@ -562,6 +581,16 @@ describe('fluent iterable', () => {
           expect(
             await fluent(subject).countAsync(async (x) => x.emails.length > 0),
           ).to.equal(8));
+      });
+      describe('join', () => {
+        it('empty', () => expect(fluent([]).join('-')).to.be.eq(''));
+        it('one', () => expect(fluent(['1']).join('-')).to.be.equal('1'));
+        it('two', () =>
+          expect(fluent(['1', '2']).join('-')).to.be.equal('1-2'));
+        it('many with predicate', () =>
+          expect(fluent(['1', '2', '3']).join('-', (x) => `a${x}`)).to.be.equal(
+            'a1-a2-a3',
+          ));
       });
       describe('first', () => {
         it('empty', () => expect(fluent([]).first()).to.be.undefined);

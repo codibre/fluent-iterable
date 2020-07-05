@@ -366,6 +366,61 @@ describe('fluent async iterable', () => {
         }
       });
     });
+    describe('avg', () => {
+      it('empty', async () =>
+        expect(await fluentAsync(new ObjectReadableMock([])).avg()).to.be.eql(
+          NaN,
+        ));
+      it('one element', async () =>
+        expect(await fluentAsync(new ObjectReadableMock([2])).avg()).to.equal(
+          2,
+        ));
+      it('multiple elements', async () =>
+        expect(
+          await fluentAsync(new ObjectReadableMock([2, 3, 4, 5])).avg(),
+        ).to.equal(3.5));
+      it('multiple elements with predicate', async () =>
+        expect(await fluentAsync(subject).avg((x) => x.emails.length)).to.equal(
+          1,
+        ));
+    });
+    describe('min', () => {
+      it('empty', async () =>
+        expect(await fluentAsync(new ObjectReadableMock([])).min()).to.be.eql(
+          undefined,
+        ));
+      it('one element', async () =>
+        expect(await fluentAsync(new ObjectReadableMock([2])).min()).to.equal(
+          2,
+        ));
+      it('multiple elements', async () =>
+        expect(
+          await fluentAsync(new ObjectReadableMock([2, 3, 4, 5])).min(),
+        ).to.equal(2));
+      it('multiple elements with predicate', async () =>
+        expect(await fluentAsync(subject).min((x) => x.emails.length)).to.eql({
+          emails: [],
+          name: '0: w/o gender & 0 emails',
+        }));
+    });
+    describe('sum', () => {
+      it('empty', async () =>
+        expect(await fluentAsync(new ObjectReadableMock([])).sum()).to.be.eql(
+          0,
+        ));
+      it('one element', async () =>
+        expect(await fluentAsync(new ObjectReadableMock([2])).sum()).to.equal(
+          2,
+        ));
+      it('multiple elements', async () =>
+        expect(
+          await fluentAsync(new ObjectReadableMock([2, 3, 4, 5])).sum(),
+        ).to.equal(14));
+      it('multiple elements with predicate', async () =>
+        expect(await fluentAsync(subject).sum((x) => x.emails.length)).to.equal(
+          12,
+        ));
+    });
     describe('count', () => {
       it('empty', async () =>
         expect(await fluentAsync(new ObjectReadableMock([])).count()).to.equal(
