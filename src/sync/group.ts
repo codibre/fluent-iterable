@@ -1,19 +1,12 @@
 import { Mapper, Group } from '../types';
+import { map } from './map';
+import { reduceAndMap } from './reduce-and-map';
+import { getGrouper } from '../common/get-group';
 
-export function* group<T, R>(
+export function group<T, R>(
   iterable: Iterable<T>,
   mapper: Mapper<T, R>,
 ): Iterable<Group<T, R>> {
-  const groups = new Map<R, T[]>();
-  for (const t of iterable) {
-    const key = mapper(t);
-    const values = groups.get(key) || [];
-
-    values.push(t);
-    groups.set(key, values);
-  }
-
-  for (const [key, values] of groups.entries()) {
-    yield { key, values };
-  }
+  const r = getGrouper(iterable, mapper, reduceAndMap, (t, g) => g(t), map);
+  return r.group(r.mapped);
 }
