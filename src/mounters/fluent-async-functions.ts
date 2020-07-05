@@ -9,13 +9,10 @@ import {
   groupAsync,
   joinAsync,
   partitionAsync,
-  takeWhileAsync,
   distinctAsync,
   executeAsync,
-  filterAsync,
   firstAsync,
   flattenAsync,
-  mapAsync,
   skipWhileAsync,
   toObjectAsync,
   allAsync,
@@ -39,6 +36,7 @@ import {
   sumAsync,
   containsAsync,
 } from '../async';
+import { takeWhileAsync, filterAsync, mapAsync } from '../async-base';
 
 export const asyncHelper = {
   withIndex: withIndexAsync,

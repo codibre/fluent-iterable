@@ -9,19 +9,16 @@ import {
   toObject,
   toAsync,
   join,
-  map,
   max,
   min,
   reduce,
   repeat,
   sum,
   take,
-  takeWhile,
   top,
   withIndex,
   skipWhile,
   skip,
-  filter,
   partition,
   append,
   prepend,
@@ -50,12 +47,9 @@ import {
   joinAsync,
   lastAsync,
   reduceAsync,
-  takeWhileAsync,
   distinctAsync,
   executeAsync,
-  filterAsync,
   flattenAsync,
-  mapAsync,
   reduceAndMapAsync,
   skipWhileAsync,
   toObjectAsync,
@@ -64,6 +58,8 @@ import {
   maxAsync,
   sumAsync,
 } from '../async';
+import { map, filter, takeWhile } from '../sync-base';
+import { mapAsync, filterAsync, takeWhileAsync } from '../async-base';
 
 export const helper = {
   withIndex,
