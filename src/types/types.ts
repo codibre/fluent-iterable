@@ -504,7 +504,7 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param initial The initial (aka *seed*) value of the accumulator.
    * @returns A promise of the aggregated value.
    */
-  reduceAsync<R>(mapper: AsyncMapper<T, R>): FluentAsyncIterable<T>;
+  reduceAsync<R>(reducer: AsyncReducer<T, R>, initial: R): Promise<R>;
 
   /**
    * Determines whether all elements of the iterable satisfy a condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
@@ -867,7 +867,7 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param mapper The projection to use to determine element equality. Identity mapping is used if omitted.
    * @returns The [[FluentAsyncIterable]] of the distinct elements.
    */
-  distinct<R>(mapper: AsyncMapper<T, R>): FluentAsyncIterable<T>;
+  distinct<R>(mapper?: AsyncMapper<T, R>): FluentAsyncIterable<T>;
 
   /**
    * Groups the elements of the iterable keyed by equality of data at the specified projection.
@@ -920,7 +920,7 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param initial The initial (aka *seed*) value of the accumulator.
    * @returns A promise of the aggregated value.
    */
-  reduce<R>(mapper: AsyncMapper<T, R>): FluentAsyncIterable<T>;
+  reduce<R>(reducer: AsyncReducer<T, R>, initial: R): Promise<R>;
 
   /**
    * Determines whether all elements of the iterable satisfy a condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.

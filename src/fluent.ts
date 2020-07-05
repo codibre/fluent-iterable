@@ -5,13 +5,13 @@ import {
   resolvingFuncs,
   iterableAsyncFuncs,
   special,
-} from './helpers';
+} from './mounters';
 import { toAsync } from './sync/to-async';
 import {
   mountIterableFunctions,
   mountResolvingFunctions,
   mountSpecial,
-} from './helpers';
+} from './mounters';
 
 /**
  * Tranforms an iterable into a [[FluentIterable]].

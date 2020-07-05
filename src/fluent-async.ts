@@ -4,13 +4,13 @@ import {
   asyncIterableFuncs,
   asyncResolvingFuncs,
   asyncSpecial,
-} from './helpers';
+} from './mounters';
 import { mergeCatching } from './async';
 import {
   mountIterableFunctions,
   mountResolvingFunctions,
   mountSpecial,
-} from './helpers';
+} from './mounters';
 
 /**
  * Tranforms an asynchronous iterable into a [[FluentAsyncIterable]].
