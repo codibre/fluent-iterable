@@ -1,4 +1,4 @@
-import { lastRecipe } from '../recipes/last-recipe';
+import { lastRecipe } from '../recipes';
 import { reduceAsync } from './reduce-async';
 
 export const lastAsync = lastRecipe(

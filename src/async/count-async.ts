@@ -1,4 +1,4 @@
-import { countRecipe } from '../recipes/count-recipe';
+import { countRecipe } from '../recipes';
 import { reduceAsync } from './reduce-async';
 import { filterAsync } from './filter-async';
 

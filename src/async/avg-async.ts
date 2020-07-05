@@ -1,5 +1,5 @@
 import { reduceAndMapAsync } from './reduce-and-map-async';
-import { avgRecipe } from '../recipes/avg-recipe';
+import { avgRecipe } from '../recipes';
 
 export const avgAsync = avgRecipe(
   reduceAndMapAsync,

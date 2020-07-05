@@ -1,4 +1,4 @@
-import { skipWhileRecipe } from '../recipes/skip-while-recipe';
+import { skipWhileRecipe } from '../recipes';
 import { filterAsync } from './filter-async';
 import { asyncResolver } from '../utils';
 

@@ -1,4 +1,4 @@
-import { distinctRecipe } from '../recipes/distinct-recipe';
+import { distinctRecipe } from '../recipes';
 import { filter } from './filter';
 
 export const distinct = distinctRecipe(filter, (v, mapper, check) =>

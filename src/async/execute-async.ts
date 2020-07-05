@@ -1,4 +1,4 @@
-import { executeRecipe } from '../recipes/execute-recipe';
+import { executeRecipe } from '../recipes';
 import { mapAsync } from './map-async';
 
 export const executeAsync = executeRecipe(mapAsync, (action) => async (t) => {

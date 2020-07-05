@@ -1,5 +1,5 @@
 import { mapAsync } from './map-async';
-import { repeatRecipe } from '../recipes/repeat-recipe';
+import { repeatRecipe } from '../recipes';
 import { asyncEmpty } from '../utils';
 import { concatAsync } from './concat-async';
 
