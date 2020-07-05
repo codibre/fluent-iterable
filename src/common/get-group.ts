@@ -6,7 +6,7 @@ export function getGrouper<T, R>(
   iterable: AnyIterable<T>,
   mapper: AnyMapper<T>,
   reduceAndMap: Function,
-  grouper: <K, T>(k: K, g: (k: K) => any) => any,
+  grouper: <K>(k: any, g: (k: K) => any) => any,
   map: Function,
 ) {
   return {

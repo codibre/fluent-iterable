@@ -1,18 +1,10 @@
 import { AsyncPredicate } from '../types';
-import { AnyIterable } from '../common/any-iterable';
+import { getSkipWhile } from '../common/get-skip-while';
+import { filterAsync } from './filter-async';
+import { AnyIterable } from '../common';
+import { asyncResolver } from '../utils';
 
-export async function* skipWhileAsync<T>(
+export const skipWhileAsync: <T>(
   iterable: AnyIterable<T>,
   condition: AsyncPredicate<T>,
-): AsyncIterable<T> {
-  let found = false;
-
-  for await (const t of iterable) {
-    found = found || !(await condition(t));
-    if (!found) {
-      continue;
-    }
-
-    yield t;
-  }
-}
+) => AsyncIterable<T> = getSkipWhile(filterAsync, asyncResolver);

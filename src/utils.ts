@@ -2,6 +2,11 @@ import fluent from './fluent';
 import { Group, FluentGroup, Predicate, AsyncPredicate } from './types';
 
 /** @internal */
+const resolver = <T, R>(a: T, b: (c: T) => R) => b(a);
+/** @internal */
+const asyncResolver = async <T, R>(a: PromiseLike<T>, b: (c: T) => R) =>
+  b(await a);
+/** @internal */
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 function* empty(): Iterable<undefined> {}
 // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -63,4 +68,6 @@ export {
   truthAsync,
   fluentGroup,
   interval,
+  resolver,
+  asyncResolver,
 };

@@ -1,17 +1,9 @@
 import { Predicate } from '../types';
+import { getSkipWhile } from '../common/get-skip-while';
+import { filter } from './filter';
+import { resolver } from '../utils';
 
-export function* skipWhile<T>(
+export const skipWhile: <T>(
   iterable: Iterable<T>,
   condition: Predicate<T>,
-): Iterable<T> {
-  let found = false;
-
-  for (const t of iterable) {
-    found = found || !condition(t);
-    if (!found) {
-      continue;
-    }
-
-    yield t;
-  }
-}
+) => Iterable<T> = getSkipWhile(filter, resolver);
