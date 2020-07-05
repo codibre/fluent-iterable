@@ -2,6 +2,8 @@ import fluent from './fluent';
 import { Group, FluentGroup, Predicate, AsyncPredicate } from './types';
 
 /** @internal */
+type ResolverType = (a: any, b: (c: any) => any) => any;
+/** @internal */
 const resolver = <T, R>(a: T, b: (c: T) => R) => b(a);
 /** @internal */
 const asyncResolver = async <T, R>(a: PromiseLike<T>, b: (c: T) => R) =>
@@ -70,4 +72,5 @@ export {
   interval,
   resolver,
   asyncResolver,
+  ResolverType,
 };

@@ -1,15 +1,11 @@
 import { AsyncMapper } from '../types';
-import { identity } from '../utils';
+import { asyncResolver } from '../utils';
+import { getToObject } from '../common/get-to-object';
+import { reduceAsync } from './reduce-async';
+import { AnyIterable } from '../common';
 
-export async function toObjectAsync<T, V, R extends { [key: string]: V }>(
-  iterable: AsyncIterable<T>,
+export const toObjectAsync: <T, V, R extends { [key: string]: V }>(
+  iterable: AnyIterable<T>,
   keySelector: AsyncMapper<T, keyof R>,
-  valueSelector: AsyncMapper<T, V> = identity as any,
-): Promise<R> {
-  const res: { [key: string]: V } = {};
-  for await (const t of iterable) {
-    res[(await keySelector(t)) as string] = await valueSelector(t);
-  }
-
-  return res as any;
-}
+  valueSelector?: AsyncMapper<T, V>,
+) => R = getToObject(reduceAsync, asyncResolver);
