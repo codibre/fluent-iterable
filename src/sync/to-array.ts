@@ -1,3 +1,1 @@
-export const toArray: <T>(iterable: Iterable<T>) => T[] = Array.from.bind(
-  Array,
-);
+export const toArray = Array.from.bind(Array);

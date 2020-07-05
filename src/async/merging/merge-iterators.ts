@@ -1,4 +1,4 @@
-import { ErrorCallback, GetNextAsyncIterator, NextResult } from './merge-types';
+import { ErrorCallback, NextResult } from './merge-types';
 import { getNextAsyncIteratorFactory } from './get-next-async-iterator-factory';
 
 async function getNextValue(
