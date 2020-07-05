@@ -15,6 +15,7 @@
     "src/recipes/**",
     "src/types-internal/**",
     "src/helpers/**",
+    "src/mounters/**",
     "src/utils.ts"
   ]
 }
