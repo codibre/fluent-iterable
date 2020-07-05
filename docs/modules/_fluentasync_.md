@@ -12,9 +12,9 @@
 
 ###  fluentAsync
 
-▸ **fluentAsync**‹**T**›(`iterable`: AsyncIterable‹T›): *[FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)‹T›*
+▸ **fluentAsync**‹**T**›(`iterable`: AsyncIterable‹T›): *[FluentAsyncIterable](../interfaces/_types_types_.fluentasynciterable.md)‹T›*
 
-Tranforms an asynchronous iterable into a [FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md).
+Tranforms an asynchronous iterable into a [FluentAsyncIterable](../interfaces/_types_types_.fluentasynciterable.md).
 
 **Type parameters:**
 
@@ -28,6 +28,6 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `iterable` | AsyncIterable‹T› | The asynchronous iterable instance. |
 
-**Returns:** *[FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)‹T›*
+**Returns:** *[FluentAsyncIterable](../interfaces/_types_types_.fluentasynciterable.md)‹T›*
 
-The [FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md) instance.
+The [FluentAsyncIterable](../interfaces/_types_types_.fluentasynciterable.md) instance.

@@ -1,4 +1,4 @@
-[fluent-iterable - v0.2.1](../README.md) › ["types"](../modules/_types_.md) › [AsyncAction](_types_.asyncaction.md)
+[fluent-iterable - v0.2.1](../README.md) › ["types/types"](../modules/_types_types_.md) › [AsyncAction](_types_types_.asyncaction.md)
 
 # Interface: AsyncAction ‹**T**›
 
@@ -17,7 +17,7 @@ The type of the item the action is defined on.
 
 ## Callable
 
-▸ (`item`: T): *Promise‹unknown›*
+▸ (`item`: T): *Promise‹unknown› | unknown*
 
 Specifies the asynchronous action to perform on `item`.
 
@@ -27,6 +27,6 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `item` | T | The item the action is performed against. |
 
-**Returns:** *Promise‹unknown›*
+**Returns:** *Promise‹unknown› | unknown*
 
 The promise of any action.

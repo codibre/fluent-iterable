@@ -1,4 +1,4 @@
-[fluent-iterable - v0.2.1](../README.md) › ["types"](../modules/_types_.md) › [Action](_types_.action.md)
+[fluent-iterable - v0.2.1](../README.md) › ["types/types"](../modules/_types_types_.md) › [Action](_types_types_.action.md)
 
 # Interface: Action ‹**T**›
 

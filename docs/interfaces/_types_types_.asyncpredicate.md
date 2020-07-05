@@ -1,4 +1,4 @@
-[fluent-iterable - v0.2.1](../README.md) › ["types"](../modules/_types_.md) › [AsyncPredicate](_types_.asyncpredicate.md)
+[fluent-iterable - v0.2.1](../README.md) › ["types/types"](../modules/_types_types_.md) › [AsyncPredicate](_types_types_.asyncpredicate.md)
 
 # Interface: AsyncPredicate ‹**T**›
 
@@ -17,7 +17,7 @@ The type the predicate is defined on.
 
 ## Callable
 
-▸ (`item`: T): *Promise‹boolean›*
+▸ (`item`: T): *Promise‹boolean› | boolean*
 
 Asynchronously evaluates an item of type `T`.
 
@@ -27,6 +27,6 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `item` | T | The item evaluated. |
 
-**Returns:** *Promise‹boolean›*
+**Returns:** *Promise‹boolean› | boolean*
 
 A promise of `true` if the predicate passed on `item`; otherwise a promise of `false`.

@@ -1,4 +1,4 @@
-[fluent-iterable - v0.2.1](../README.md) › ["types"](../modules/_types_.md) › [AsyncReducer](_types_.asyncreducer.md)
+[fluent-iterable - v0.2.1](../README.md) › ["types/types"](../modules/_types_types_.md) › [AsyncReducer](_types_types_.asyncreducer.md)
 
 # Interface: AsyncReducer ‹**T, A**›
 
@@ -21,7 +21,7 @@ The accumulator type.
 
 ## Callable
 
-▸ (`current`: A, `next`: T): *Promise‹A›*
+▸ (`current`: A, `next`: T): *Promise‹A› | A*
 
 Asynchronously generates the next accumulator item based on the previous one and the next item under reduce.
 
@@ -32,6 +32,6 @@ Name | Type | Description |
 `current` | A | The previous accumulator value. |
 `next` | T | The next item. |
 
-**Returns:** *Promise‹A›*
+**Returns:** *Promise‹A› | A*
 
 A promise of the new accumulator value.

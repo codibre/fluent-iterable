@@ -1,4 +1,4 @@
-[fluent-iterable - v0.2.1](../README.md) › ["types"](../modules/_types_.md) › [Mapper](_types_.mapper.md)
+[fluent-iterable - v0.2.1](../README.md) › ["types/types"](../modules/_types_types_.md) › [Mapper](_types_types_.mapper.md)
 
 # Interface: Mapper ‹**T, R**›
 

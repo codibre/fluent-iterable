@@ -12,9 +12,9 @@
 
 ###  fluent
 
-▸ **fluent**‹**T**›(`iterable`: Iterable‹T›): *[FluentIterable](../interfaces/_types_.fluentiterable.md)‹T›*
+▸ **fluent**‹**T**›(`iterable`: Iterable‹T›): *[FluentIterable](../interfaces/_types_types_.fluentiterable.md)‹T›*
 
-Tranforms an iterable into a [FluentIterable](../interfaces/_types_.fluentiterable.md).
+Tranforms an iterable into a [FluentIterable](../interfaces/_types_types_.fluentiterable.md).
 
 **Type parameters:**
 
@@ -28,6 +28,6 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `iterable` | Iterable‹T› | The iterable instance. |
 
-**Returns:** *[FluentIterable](../interfaces/_types_.fluentiterable.md)‹T›*
+**Returns:** *[FluentIterable](../interfaces/_types_types_.fluentiterable.md)‹T›*
 
-The [FluentIterable](../interfaces/_types_.fluentiterable.md) instance.
+The [FluentIterable](../interfaces/_types_types_.fluentiterable.md) instance.
