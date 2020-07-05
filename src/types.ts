@@ -224,7 +224,7 @@ interface GroupAsync<T> {
 }
 
 interface FlattenAsync<T> {
-  <R>(mapper: AsyncMapper<T, Iterable<R>>): FluentAsyncIterable<R>;
+  <R>(mapper?: AsyncMapper<T, Iterable<R>>): FluentAsyncIterable<R>;
 }
 
 interface JoinAsync<T> {
