@@ -4,7 +4,7 @@ import {
   asyncResolvingFuncs,
   asyncSpecial,
 } from './mounters';
-import { mergeCatching } from './async';
+import { mergeCatching } from './async-base';
 import {
   mountIterableFunctions,
   mountResolvingFunctions,

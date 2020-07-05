@@ -1,4 +1,4 @@
 import { greater } from '../utils';
-import { getAsyncComparer } from './get-async-comparer';
+import { asyncCompareRecipe } from './async-comparer-recipe';
 
-export const hasMoreThanAsync = getAsyncComparer(greater);
+export const hasMoreThanAsync = asyncCompareRecipe(greater);

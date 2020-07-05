@@ -1,7 +1,7 @@
 import { identity } from '../utils';
 import { AnyIterable } from '../types-internal';
 
-export function getCaseCheckAsync(
+export function caseCheckAsyncRecipe(
   ifTrue: Function,
   ifFalse: unknown,
   defaultPredicate?: Function,

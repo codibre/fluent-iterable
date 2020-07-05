@@ -2,12 +2,9 @@ import {
   anyAsync,
   appendAsync,
   avgAsync,
-  merge,
-  mergeCatching,
   prependAsync,
   groupAsync,
   joinAsync,
-  partitionAsync,
   distinctAsync,
   executeAsync,
   firstAsync,
@@ -40,6 +37,9 @@ import {
   takeWhileAsync,
   filterAsync,
   mapAsync,
+  merge,
+  mergeCatching,
+  partitionAsync,
 } from '../async-base';
 
 export const asyncHelper = {
@@ -109,7 +109,6 @@ export const asyncIterableFuncs = {
   execute: executeAsync,
   executeAsync,
   merge,
-  mergeCatching,
 };
 
 export const asyncSpecial = {

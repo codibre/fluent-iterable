@@ -4,6 +4,6 @@ import { countAsync } from './count-async';
 import { takeAsync } from './take-async';
 import { BinaryComparer } from '../types-internal';
 
-export function getAsyncComparer(comparer: BinaryComparer) {
+export function asyncCompareRecipe(comparer: BinaryComparer) {
   return comparisonRecipe(countAsync, takeAsync, resolverAsync, comparer);
 }

@@ -1,4 +1,4 @@
 import { truth, identity } from '../utils';
-import { getCaseCheckAsync } from './get-case-check-async';
+import { caseCheckAsyncRecipe } from './case-check-async-recipe';
 
-export const firstAsync = getCaseCheckAsync(identity, undefined, truth);
+export const firstAsync = caseCheckAsyncRecipe(identity, undefined, truth);

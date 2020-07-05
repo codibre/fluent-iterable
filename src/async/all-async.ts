@@ -1,7 +1,7 @@
-import { getCaseCheckAsync } from './get-case-check-async';
+import { caseCheckAsyncRecipe } from './case-check-async-recipe';
 import { falsity, asyncNegation } from '../utils';
 
-export const allAsync = getCaseCheckAsync(
+export const allAsync = caseCheckAsyncRecipe(
   falsity,
   true,
   undefined,
