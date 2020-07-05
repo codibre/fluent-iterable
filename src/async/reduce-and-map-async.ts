@@ -1,4 +1,4 @@
-import { forEachAsync } from './for-each-async';
+import { forEachAsync } from '../async-base/for-each-async';
 import { reduceAndMapRecipe } from '../recipes';
 import { resolverAsync } from '../utils';
 

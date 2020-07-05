@@ -33,7 +33,6 @@ import {
   execute,
   avg,
   reduceAndMap,
-  forEach,
 } from '../sync';
 import {
   allAsync,
@@ -42,7 +41,6 @@ import {
   concatAsync,
   countAsync,
   firstAsync,
-  forEachAsync,
   groupAsync,
   joinAsync,
   lastAsync,
@@ -58,8 +56,13 @@ import {
   maxAsync,
   sumAsync,
 } from '../async';
-import { map, filter, takeWhile } from '../sync-base';
-import { mapAsync, filterAsync, takeWhileAsync } from '../async-base';
+import { forEach, map, filter, takeWhile } from '../sync-base';
+import {
+  forEachAsync,
+  mapAsync,
+  filterAsync,
+  takeWhileAsync,
+} from '../async-base';
 
 export const helper = {
   withIndex,

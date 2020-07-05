@@ -9,7 +9,6 @@ export * from './distinct-async';
 export * from './execute-async';
 export * from './first-async';
 export * from './flatten-async';
-export * from './for-each-async';
 export * from './group-async';
 export * from './has-exactly-async';
 export * from './has-less-than-async';

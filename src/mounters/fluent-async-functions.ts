@@ -5,7 +5,6 @@ import {
   merge,
   mergeCatching,
   prependAsync,
-  forEachAsync,
   groupAsync,
   joinAsync,
   partitionAsync,
@@ -36,7 +35,12 @@ import {
   sumAsync,
   containsAsync,
 } from '../async';
-import { takeWhileAsync, filterAsync, mapAsync } from '../async-base';
+import {
+  forEachAsync,
+  takeWhileAsync,
+  filterAsync,
+  mapAsync,
+} from '../async-base';
 
 export const asyncHelper = {
   withIndex: withIndexAsync,

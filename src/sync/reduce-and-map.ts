@@ -1,5 +1,5 @@
 import { Reducer, Mapper } from '../types';
-import { forEach } from './for-each';
+import { forEach } from '../sync-base/for-each';
 import { reduceAndMapRecipe } from '../recipes';
 import { resolver } from '../utils';
 
