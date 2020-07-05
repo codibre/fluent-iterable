@@ -31,9 +31,7 @@ The type of the items in the asynchronous iterable.
 * [count](_types_types_.fluentasynciterable.md#count)
 * [distinct](_types_types_.fluentasynciterable.md#distinct)
 * [execute](_types_types_.fluentasynciterable.md#execute)
-* [executeAsync](_types_types_.fluentasynciterable.md#executeasync)
 * [filter](_types_types_.fluentasynciterable.md#filter)
-* [filterAsync](_types_types_.fluentasynciterable.md#filterasync)
 * [first](_types_types_.fluentasynciterable.md#first)
 * [flatten](_types_types_.fluentasynciterable.md#flatten)
 * [forEach](_types_types_.fluentasynciterable.md#foreach)
@@ -56,12 +54,10 @@ The type of the items in the asynchronous iterable.
 * [repeat](_types_types_.fluentasynciterable.md#repeat)
 * [skip](_types_types_.fluentasynciterable.md#skip)
 * [skipWhile](_types_types_.fluentasynciterable.md#skipwhile)
-* [skipWhileAsync](_types_types_.fluentasynciterable.md#skipwhileasync)
 * [sort](_types_types_.fluentasynciterable.md#sort)
 * [sum](_types_types_.fluentasynciterable.md#sum)
 * [take](_types_types_.fluentasynciterable.md#take)
 * [takeWhile](_types_types_.fluentasynciterable.md#takewhile)
-* [takeWhileAsync](_types_types_.fluentasynciterable.md#takewhileasync)
 * [toArray](_types_types_.fluentasynciterable.md#toarray)
 * [toObject](_types_types_.fluentasynciterable.md#toobject)
 * [top](_types_types_.fluentasynciterable.md#top)
@@ -231,7 +227,7 @@ ___
 
 ###  execute
 
-▸ **execute**(`action`: [Action](_types_types_.action.md)‹T›): *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
+▸ **execute**(`action`: [AsyncAction](_types_types_.asyncaction.md)‹T›): *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
 
 Translate an iterable into one which executes an action against each element before yield them.
 
@@ -239,25 +235,7 @@ Translate an iterable into one which executes an action against each element bef
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`action` | [Action](_types_types_.action.md)‹T› | The action to execute against each element. |
-
-**Returns:** *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
-
-The [FluentAsyncIterable](_types_types_.fluentasynciterable.md) with the action injected to it.
-
-___
-
-###  executeAsync
-
-▸ **executeAsync**(`action`: [AsyncAction](_types_types_.asyncaction.md)‹T›): *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
-
-Translate an iterable into one which executes an asynchronous action against each element before yield them.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`action` | [AsyncAction](_types_types_.asyncaction.md)‹T› | The asynchronous action to execute against each element. |
+`action` | [AsyncAction](_types_types_.asyncaction.md)‹T› | The action to execute against each element. |
 
 **Returns:** *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
 
@@ -267,7 +245,7 @@ ___
 
 ###  filter
 
-▸ **filter**(`predicate`: [Predicate](_types_types_.predicate.md)‹T›): *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
+▸ **filter**(`predicate`: [AsyncPredicate](_types_types_.asyncpredicate.md)‹T›): *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
 
 Filters the iterable of `T` based on a predicate.
 
@@ -275,25 +253,7 @@ Filters the iterable of `T` based on a predicate.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate` | [Predicate](_types_types_.predicate.md)‹T› | A predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`. |
-
-**Returns:** *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
-
-A [FluentAsyncIterable](_types_types_.fluentasynciterable.md) of the elements against which the predicate evaluates to `true`.
-
-___
-
-###  filterAsync
-
-▸ **filterAsync**(`predicate`: [AsyncPredicate](_types_types_.asyncpredicate.md)‹T›): *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
-
-Filters the iterable of `T` based on an asynchronous predicate.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`predicate` | [AsyncPredicate](_types_types_.asyncpredicate.md)‹T› | An asynchronous predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`. |
+`predicate` | [AsyncPredicate](_types_types_.asyncpredicate.md)‹T› | A predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`. |
 
 **Returns:** *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
 
@@ -480,7 +440,7 @@ ___
 
 ###  map
 
-▸ **map**‹**R**›(`mapper`: [Mapper](_types_types_.mapper.md)‹T, R›): *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹R›*
+▸ **map**‹**R**›(`mapper`: [AsyncMapper](_types_types_.asyncmapper.md)‹T, R›): *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹R›*
 
 Transforms the iterable of `T` into an iterable of `R` by mapping all elements to an element of `R`.
 
@@ -494,7 +454,7 @@ The destination type of the mapping.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper` | [Mapper](_types_types_.mapper.md)‹T, R› | The operation which maps an instance of `T` into an instance of `R`. |
+`mapper` | [AsyncMapper](_types_types_.asyncmapper.md)‹T, R› | The operation which maps an instance of `T` into an instance of `R`. |
 
 **Returns:** *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹R›*
 
@@ -736,7 +696,7 @@ ___
 
 ###  skipWhile
 
-▸ **skipWhile**(`condition`: [Predicate](_types_types_.predicate.md)‹T›): *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
+▸ **skipWhile**(`condition`: [AsyncPredicate](_types_types_.asyncpredicate.md)‹T›): *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
 
 Bypasses elements in the iterable as long as a specified condition is true and then returns the remaining elements.
 
@@ -744,25 +704,7 @@ Bypasses elements in the iterable as long as a specified condition is true and t
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`condition` | [Predicate](_types_types_.predicate.md)‹T› | A predicate of `T`. All elements are skipped from the iterable until this evaluates to `false` for the first time. |
-
-**Returns:** *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
-
-A [FluentAsyncIterable](_types_types_.fluentasynciterable.md) of the elements after the condition is not met.
-
-___
-
-###  skipWhileAsync
-
-▸ **skipWhileAsync**(`condition`: [AsyncPredicate](_types_types_.asyncpredicate.md)‹T›): *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
-
-Bypasses elements in the iterable as long as a specified asynchronous condition is true and then returns the remaining elements.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`condition` | [AsyncPredicate](_types_types_.asyncpredicate.md)‹T› | An asynchronous predicate of `T`. All elements are skipped from the iterable until this evaluates to `false` for the first time. |
+`condition` | [AsyncPredicate](_types_types_.asyncpredicate.md)‹T› | A predicate of `T`. All elements are skipped from the iterable until this evaluates to `false` for the first time. |
 
 **Returns:** *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
 
@@ -826,7 +768,7 @@ ___
 
 ###  takeWhile
 
-▸ **takeWhile**(`condition`: [Predicate](_types_types_.predicate.md)‹T›): *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
+▸ **takeWhile**(`condition`: [AsyncPredicate](_types_types_.asyncpredicate.md)‹T›): *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
 
 Returns elements from the iterable as long as a specified condition is met.
 
@@ -834,25 +776,7 @@ Returns elements from the iterable as long as a specified condition is met.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`condition` | [Predicate](_types_types_.predicate.md)‹T› | A predicate of `T`. All elements are yielded from the iterable until this evaluates to `false` for the first time. |
-
-**Returns:** *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
-
-A [FluentAsyncIterable](_types_types_.fluentasynciterable.md) of the elements until the condition is met.
-
-___
-
-###  takeWhileAsync
-
-▸ **takeWhileAsync**(`condition`: [AsyncPredicate](_types_types_.asyncpredicate.md)‹T›): *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
-
-Returns elements from the iterable as long as a specified asynchronous condition is met.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`condition` | [AsyncPredicate](_types_types_.asyncpredicate.md)‹T› | An asynchronous predicate of `T`. All elements are yielded from the iterable until this evaluates to `false` for the first time. |
+`condition` | [AsyncPredicate](_types_types_.asyncpredicate.md)‹T› | A predicate of `T`. All elements are yielded from the iterable until this evaluates to `false` for the first time. |
 
 **Returns:** *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
 
