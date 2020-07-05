@@ -1,4 +1,4 @@
-[fluent-iterable - v0.2.1](../README.md) › ["types/types"](../modules/_types_types_.md) › [FluentIterable](_types_types_.fluentiterable.md)
+[fluent-iterable - v0.3.2](../README.md) › ["types/types"](../modules/_types_types_.md) › [FluentIterable](_types_types_.fluentiterable.md)
 
 # Interface: FluentIterable ‹**T**›
 
@@ -1046,7 +1046,7 @@ ___
 
 ###  reduceAsync
 
-▸ **reduceAsync**‹**R**›(`mapper`: [AsyncMapper](_types_types_.asyncmapper.md)‹T, R›): *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
+▸ **reduceAsync**‹**R**›(`reducer`: [AsyncReducer](_types_types_.asyncreducer.md)‹T, R›, `initial`: R): *Promise‹R›*
 
 Aggregates the iterable by applying an asynchronous accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -1058,11 +1058,12 @@ The type of the accumulator value.
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`mapper` | [AsyncMapper](_types_types_.asyncmapper.md)‹T, R› |
+Name | Type | Description |
+------ | ------ | ------ |
+`reducer` | [AsyncReducer](_types_types_.asyncreducer.md)‹T, R› | The asynchronous accumulator function, provides the next accumulator value out of the last accumulator value and the next element in the iterable. |
+`initial` | R | The initial (aka *seed*) value of the accumulator. |
 
-**Returns:** *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
+**Returns:** *Promise‹R›*
 
 A promise of the aggregated value.
 

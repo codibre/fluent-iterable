@@ -1,4 +1,4 @@
-[fluent-iterable - v0.2.1](../README.md) › ["types/types"](../modules/_types_types_.md) › [FluentAsyncIterable](_types_types_.fluentasynciterable.md)
+[fluent-iterable - v0.3.2](../README.md) › ["types/types"](../modules/_types_types_.md) › [FluentAsyncIterable](_types_types_.fluentasynciterable.md)
 
 # Interface: FluentAsyncIterable ‹**T**›
 
@@ -202,7 +202,7 @@ ___
 
 ###  distinct
 
-▸ **distinct**‹**R**›(`mapper`: [AsyncMapper](_types_types_.asyncmapper.md)‹T, R›): *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
+▸ **distinct**‹**R**›(`mapper?`: [AsyncMapper](_types_types_.asyncmapper.md)‹T, R›): *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
 
 Returns distinct elements from the iterable from a certain projections perspective.
 
@@ -216,7 +216,7 @@ The type of the data the element equality is based on.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper` | [AsyncMapper](_types_types_.asyncmapper.md)‹T, R› | The projection to use to determine element equality. Identity mapping is used if omitted. |
+`mapper?` | [AsyncMapper](_types_types_.asyncmapper.md)‹T, R› | The projection to use to determine element equality. Identity mapping is used if omitted. |
 
 **Returns:** *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
 
@@ -581,7 +581,7 @@ ___
 
 ###  reduce
 
-▸ **reduce**‹**R**›(`mapper`: [AsyncMapper](_types_types_.asyncmapper.md)‹T, R›): *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
+▸ **reduce**‹**R**›(`reducer`: [AsyncReducer](_types_types_.asyncreducer.md)‹T, R›, `initial`: R): *Promise‹R›*
 
 Aggregates the iterable by applying an accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -593,11 +593,12 @@ The type of the accumulator value.
 
 **Parameters:**
 
-Name | Type |
------- | ------ |
-`mapper` | [AsyncMapper](_types_types_.asyncmapper.md)‹T, R› |
+Name | Type | Description |
+------ | ------ | ------ |
+`reducer` | [AsyncReducer](_types_types_.asyncreducer.md)‹T, R› | The accumulator function, provides the next accumulator value out of the last accumulator value and the next element in the iterable. |
+`initial` | R | The initial (aka *seed*) value of the accumulator. |
 
-**Returns:** *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹T›*
+**Returns:** *Promise‹R›*
 
 A promise of the aggregated value.
 

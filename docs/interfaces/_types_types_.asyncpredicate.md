@@ -1,4 +1,4 @@
-[fluent-iterable - v0.2.1](../README.md) › ["types/types"](../modules/_types_types_.md) › [AsyncPredicate](_types_types_.asyncpredicate.md)
+[fluent-iterable - v0.3.2](../README.md) › ["types/types"](../modules/_types_types_.md) › [AsyncPredicate](_types_types_.asyncpredicate.md)
 
 # Interface: AsyncPredicate ‹**T**›
 

@@ -1,4 +1,4 @@
-[fluent-iterable - v0.2.1](../README.md) › ["types/index"](_types_index_.md)
+[fluent-iterable - v0.3.2](../README.md) › ["types/index"](_types_index_.md)
 
 # Module: "types/index"
 
