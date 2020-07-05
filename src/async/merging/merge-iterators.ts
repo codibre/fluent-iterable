@@ -1,5 +1,6 @@
-import { ErrorCallback, NextResult } from './merge-types';
+import { NextResult } from './merge-types';
 import { getNextAsyncIteratorFactory } from './get-next-async-iterator-factory';
+import { ErrorCallback } from '../../types';
 
 async function getNextValue(
   asyncIteratorsValues: Map<any, any>,

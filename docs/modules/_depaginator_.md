@@ -12,7 +12,7 @@
 
 ###  depaginate
 
-▸ **depaginate**‹**T**, **TToken**›(`pager`: [Pager](../interfaces/_types_types_.pager.md)‹T, TToken›): *AsyncIterable‹T›*
+▸ **depaginate**‹**T**, **TToken**›(`pager`: [Pager](../interfaces/_types_.pager.md)‹T, TToken›): *AsyncIterable‹T›*
 
 Translate a paginated resource into a non-paginated iterable of elements.
 
@@ -30,7 +30,7 @@ The type of the next page token associated to the page.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`pager` | [Pager](../interfaces/_types_types_.pager.md)‹T, TToken› | Represents the way of retrieving pages from the paginated resource. |
+`pager` | [Pager](../interfaces/_types_.pager.md)‹T, TToken› | Represents the way of retrieving pages from the paginated resource. |
 
 **Returns:** *AsyncIterable‹T›*
 

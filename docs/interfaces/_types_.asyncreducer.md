@@ -1,4 +1,4 @@
-[fluent-iterable - v0.3.2](../README.md) › ["types/types"](../modules/_types_types_.md) › [AsyncReducer](_types_types_.asyncreducer.md)
+[fluent-iterable - v0.3.2](../README.md) › ["types"](../modules/_types_.md) › [AsyncReducer](_types_.asyncreducer.md)
 
 # Interface: AsyncReducer ‹**T, A**›
 

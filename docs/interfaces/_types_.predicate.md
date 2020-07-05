@@ -1,4 +1,4 @@
-[fluent-iterable - v0.3.2](../README.md) › ["types/types"](../modules/_types_types_.md) › [Predicate](_types_types_.predicate.md)
+[fluent-iterable - v0.3.2](../README.md) › ["types"](../modules/_types_.md) › [Predicate](_types_.predicate.md)
 
 # Interface: Predicate ‹**T**›
 

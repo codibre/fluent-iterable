@@ -1,4 +1,4 @@
-[fluent-iterable - v0.3.2](../README.md) › ["types/types"](../modules/_types_types_.md) › [Pager](_types_types_.pager.md)
+[fluent-iterable - v0.3.2](../README.md) › ["types"](../modules/_types_.md) › [Pager](_types_.pager.md)
 
 # Interface: Pager ‹**T, TToken**›
 
@@ -20,7 +20,7 @@ The type of the next page token associated to the page.
 
 ## Callable
 
-▸ (`nextPageToken?`: TToken): *Promise‹[Page](_types_types_.page.md)‹T, TToken› | undefined›*
+▸ (`nextPageToken?`: TToken): *Promise‹[Page](_types_.page.md)‹T, TToken› | undefined›*
 
 Retrieves a page from a paginated resource.
 
@@ -30,6 +30,6 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `nextPageToken?` | TToken | The token represents the page to retrieve or the first page if undefined. |
 
-**Returns:** *Promise‹[Page](_types_types_.page.md)‹T, TToken› | undefined›*
+**Returns:** *Promise‹[Page](_types_.page.md)‹T, TToken› | undefined›*
 
 A promise of the page requested.

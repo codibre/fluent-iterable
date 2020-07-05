@@ -11,5 +11,4 @@
 * ["fluent-async"](modules/_fluent_async_.md)
 * ["index"](modules/_index_.md)
 * ["interval"](modules/_interval_.md)
-* ["types/index"](modules/_types_index_.md)
-* ["types/types"](modules/_types_types_.md)
+* ["types"](modules/_types_.md)

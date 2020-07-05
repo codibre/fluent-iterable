@@ -1,4 +1,4 @@
-[fluent-iterable - v0.3.2](../README.md) › ["types/types"](../modules/_types_types_.md) › [Indexed](_types_types_.indexed.md)
+[fluent-iterable - v0.3.2](../README.md) › ["types"](../modules/_types_.md) › [Indexed](_types_.indexed.md)
 
 # Interface: Indexed ‹**T**›
 
@@ -18,8 +18,8 @@ The type of the value the index is associated to.
 
 ### Properties
 
-* [idx](_types_types_.indexed.md#idx)
-* [value](_types_types_.indexed.md#value)
+* [idx](_types_.indexed.md#idx)
+* [value](_types_.indexed.md#value)
 
 ## Properties
 

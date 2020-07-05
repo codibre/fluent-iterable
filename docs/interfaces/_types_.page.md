@@ -1,4 +1,4 @@
-[fluent-iterable - v0.3.2](../README.md) › ["types/types"](../modules/_types_types_.md) › [Page](_types_types_.page.md)
+[fluent-iterable - v0.3.2](../README.md) › ["types"](../modules/_types_.md) › [Page](_types_.page.md)
 
 # Interface: Page ‹**T, TToken**›
 
@@ -22,8 +22,8 @@ The type of the next page token associated to the page.
 
 ### Properties
 
-* [nextPageToken](_types_types_.page.md#optional-nextpagetoken)
-* [results](_types_types_.page.md#results)
+* [nextPageToken](_types_.page.md#optional-nextpagetoken)
+* [results](_types_.page.md#results)
 
 ## Properties
 

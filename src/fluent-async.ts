@@ -1,5 +1,4 @@
-import { FluentAsyncIterable } from './types';
-import { ErrorCallback } from './async/merging/merge-types';
+import { FluentAsyncIterable, ErrorCallback } from './types';
 import {
   asyncIterableFuncs,
   asyncResolvingFuncs,
