@@ -1,7 +1,7 @@
 import { AsyncPredicate } from '../types';
 import { AnyIterable } from '../types-internal';
 
-export function getSkipWhile(
+export function skipWhileRecipe(
   filter: Function,
   delegator: (c: any, a: (b: any) => any) => any,
 ) {

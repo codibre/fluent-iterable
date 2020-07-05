@@ -1,6 +1,6 @@
 import { Reducer, Mapper } from '../types';
 import { forEach } from './for-each';
-import { getReduceAndMap } from '../recipes/get-reduce-and-map';
+import { reduceAndMapRecipe } from '../recipes/reduce-and-map-recipe';
 import { resolver } from '../utils';
 
-export const reduceAndMap = getReduceAndMap(forEach, resolver);
+export const reduceAndMap = reduceAndMapRecipe(forEach, resolver);

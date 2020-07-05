@@ -1,4 +1,4 @@
-import { getWithIndex } from '../recipes/get-with-index';
+import { withIndexRecipe } from '../recipes/with-index-recipe';
 import { mapAsync } from './map-async';
 
-export const withIndexAsync = getWithIndex(mapAsync);
+export const withIndexAsync = withIndexRecipe(mapAsync);

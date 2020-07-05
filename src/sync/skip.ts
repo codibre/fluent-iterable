@@ -1,4 +1,4 @@
-import { getSkip } from '../recipes/get-skip';
+import { skipRecipe } from '../recipes/skip-recipe';
 import { skipWhile } from './skip-while';
 
-export const skip = getSkip(skipWhile);
+export const skip = skipRecipe(skipWhile);

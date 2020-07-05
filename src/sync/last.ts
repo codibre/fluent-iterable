@@ -1,6 +1,6 @@
 import { reduce } from './reduce';
-import { getLast } from '../recipes/get-last';
+import { lastRecipe } from '../recipes/last-recipe';
 
-export const last = getLast(reduce, (predicate) => (current, next) =>
+export const last = lastRecipe(reduce, (predicate) => (current, next) =>
   predicate(next) ? next : current,
 );

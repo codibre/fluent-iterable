@@ -1,4 +1,4 @@
-export function getTop(reduceAndMap: Function) {
+export function topRecipe(reduceAndMap: Function) {
   return (iterable: any, mapper: Function, comparer: Function): any => {
     return reduceAndMap(
       iterable,

@@ -1,7 +1,7 @@
 import { truth } from '../utils';
 import { AnyIterable } from '../types-internal';
 
-export function getLast(
+export function lastRecipe(
   reduce: Function,
   getTransform: <T>(
     predicate: Function,

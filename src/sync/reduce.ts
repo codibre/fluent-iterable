@@ -1,4 +1,4 @@
-import { getReduce } from '../recipes/get-reduce';
+import { reduceRecipe } from '../recipes/reduce-recipe';
 import { reduceAndMap } from './reduce-and-map';
 
-export const reduce = getReduce(reduceAndMap);
+export const reduce = reduceRecipe(reduceAndMap);

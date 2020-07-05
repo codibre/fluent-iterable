@@ -1,7 +1,7 @@
 import { reduceAndMapAsync } from './reduce-and-map-async';
-import { getAvg } from '../recipes/get-avg';
+import { avgRecipe } from '../recipes/avg-recipe';
 
-export const avgAsync = getAvg(
+export const avgAsync = avgRecipe(
   reduceAndMapAsync,
   (mapper) => async (current, next) => {
     current.sum += await mapper(next);

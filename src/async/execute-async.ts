@@ -1,7 +1,7 @@
-import { getExecute } from '../recipes/get-execute';
+import { executeRecipe } from '../recipes/execute-recipe';
 import { mapAsync } from './map-async';
 
-export const executeAsync = getExecute(mapAsync, (action) => async (t) => {
+export const executeAsync = executeRecipe(mapAsync, (action) => async (t) => {
   await action(t);
   return t;
 });

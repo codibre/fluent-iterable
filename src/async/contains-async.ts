@@ -1,4 +1,4 @@
-import { getContains } from '../recipes/get-contains';
+import { containsRecipe } from '../recipes/contains-recipe';
 import { anyAsync } from './any-async';
 
-export const containsAsync = getContains(anyAsync);
+export const containsAsync = containsRecipe(anyAsync);

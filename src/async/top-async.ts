@@ -1,4 +1,4 @@
-import { getTop } from '../recipes';
+import { topRecipe } from '../recipes';
 import { reduceAndMapAsync } from './reduce-and-map-async';
 
-export const topAsync = getTop(reduceAndMapAsync);
+export const topAsync = topRecipe(reduceAndMapAsync);

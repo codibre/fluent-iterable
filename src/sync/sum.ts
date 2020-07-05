@@ -1,4 +1,4 @@
-import { getSum } from '../recipes/get-sum';
+import { sumRecipe } from '../recipes/sum-recipe';
 import { reduce } from './reduce';
 
-export const sum = getSum(reduce);
+export const sum = sumRecipe(reduce);

@@ -2,11 +2,11 @@ import { identity } from '../utils';
 import { AnyIterable } from '../types-internal';
 import { AnyMapper } from '../types-internal';
 
-export interface Checker {
+interface Checker {
   (value: any): boolean;
 }
 
-export function getDistinct(
+export function distinctRecipe(
   filter: Function,
   checkUnicity: <T>(value: T, mapper: AnyMapper<T>, checker: Checker) => any,
 ) {

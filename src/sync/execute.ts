@@ -1,7 +1,7 @@
-import { getExecute } from '../recipes/get-execute';
+import { executeRecipe } from '../recipes/execute-recipe';
 import { map } from './map';
 
-export const execute = getExecute(map, (action) => (t) => {
+export const execute = executeRecipe(map, (action) => (t) => {
   action(t);
   return t;
 });

@@ -2,7 +2,7 @@ import { identity, ResolverType } from '../utils';
 import { AnyIterable } from '../types-internal';
 import { AnyMapper } from '../types-internal';
 
-export function getToObject(reduce: Function, resolver: ResolverType) {
+export function toObjectRecipe(reduce: Function, resolver: ResolverType) {
   return <T, V, R extends { [key: string]: V }>(
     iterable: AnyIterable<T>,
     keySelector: AnyMapper<T>,

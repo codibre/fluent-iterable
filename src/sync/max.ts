@@ -1,4 +1,4 @@
-import { getMax } from '../recipes';
+import { maxRecipe } from '../recipes';
 import { top } from './top';
 
-export const max = getMax(top);
+export const max = maxRecipe(top);

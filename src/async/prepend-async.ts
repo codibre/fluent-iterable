@@ -1,4 +1,4 @@
-import { getPrepend } from '../recipes/get-prepend';
+import { prependRecipe } from '../recipes/prepend-recipe';
 import { concatAsync } from './concat-async';
 
-export const prependAsync = getPrepend(concatAsync);
+export const prependAsync = prependRecipe(concatAsync);

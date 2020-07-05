@@ -2,7 +2,7 @@ import { AsyncMapper } from '../types';
 import { identity } from '../utils';
 import { AnyIterable } from '../types-internal';
 
-export function getSum(reduce: Function) {
+export function sumRecipe(reduce: Function) {
   return <T>(
     iterable: AnyIterable<T>,
     mapper: AsyncMapper<T, number> = identity as AsyncMapper<T, number>,

@@ -1,4 +1,4 @@
-import { getTake } from '../recipes/get-take';
+import { takeRecipe } from '../recipes/take-recipe';
 import { takeWhile } from './take-while';
 
-export const take = getTake(takeWhile);
+export const take = takeRecipe(takeWhile);

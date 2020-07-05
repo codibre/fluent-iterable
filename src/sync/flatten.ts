@@ -1,6 +1,6 @@
 import { Mapper } from '../types';
 import { map } from './map';
 import { iterateAll } from '../utils';
-import { getFlatten } from '../recipes/get-flatten';
+import { flattenRecipe } from '../recipes/flatten-recipe';
 
-export const flatten = getFlatten(iterateAll, map);
+export const flatten = flattenRecipe(iterateAll, map);

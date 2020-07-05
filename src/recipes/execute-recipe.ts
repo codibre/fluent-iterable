@@ -1,6 +1,6 @@
 import { AnyIterable } from '../types-internal';
 
-export function getExecute(
+export function executeRecipe(
   map: Function,
   getMapping: (action: Function) => <T>(t: T) => any,
 ) {

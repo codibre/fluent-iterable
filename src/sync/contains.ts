@@ -1,4 +1,4 @@
-import { getContains } from '../recipes/get-contains';
+import { containsRecipe } from '../recipes/contains-recipe';
 import { any } from './any';
 
-export const contains = getContains(any);
+export const contains = containsRecipe(any);

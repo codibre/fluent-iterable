@@ -1,7 +1,7 @@
 import { AnyIterable } from '../types-internal';
 import { ResolverType, BinaryComparer } from '../utils';
 
-export function getComparison(
+export function comparisonRecipe(
   count: Function,
   take: Function,
   resolver: ResolverType,

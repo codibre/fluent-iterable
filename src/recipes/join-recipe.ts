@@ -2,7 +2,7 @@ import { identity } from '../utils';
 import { AnyMapper } from '../types-internal';
 import { AnyIterable } from '../types-internal';
 
-export function getJoin<T>(
+export function joinRecipe<T>(
   reduce: Function,
   delegator: (a: any, m: (b: any) => string) => any,
 ) {

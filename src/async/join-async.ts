@@ -1,5 +1,5 @@
 import { reduceAsync } from './reduce-async';
-import { getJoin } from '../recipes/get-join';
+import { joinRecipe } from '../recipes/join-recipe';
 import { asyncResolver } from '../utils';
 
-export const joinAsync = getJoin(reduceAsync, asyncResolver);
+export const joinAsync = joinRecipe(reduceAsync, asyncResolver);

@@ -1,5 +1,8 @@
 import { forEachAsync } from './for-each-async';
-import { getReduceAndMap } from '../recipes/get-reduce-and-map';
+import { reduceAndMapRecipe } from '../recipes/reduce-and-map-recipe';
 import { asyncResolver } from '../utils';
 
-export const reduceAndMapAsync = getReduceAndMap(forEachAsync, asyncResolver);
+export const reduceAndMapAsync = reduceAndMapRecipe(
+  forEachAsync,
+  asyncResolver,
+);

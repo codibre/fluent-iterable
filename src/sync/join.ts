@@ -1,5 +1,5 @@
 import { reduce } from './reduce';
-import { getJoin } from '../recipes/get-join';
+import { joinRecipe } from '../recipes/join-recipe';
 import { resolver } from '../utils';
 
-export const join = getJoin(reduce, resolver);
+export const join = joinRecipe(reduce, resolver);

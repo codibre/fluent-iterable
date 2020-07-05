@@ -1,4 +1,4 @@
-import { getReduce } from '../recipes/get-reduce';
+import { reduceRecipe } from '../recipes/reduce-recipe';
 import { reduceAndMapAsync } from './reduce-and-map-async';
 
-export const reduceAsync = getReduce(reduceAndMapAsync);
+export const reduceAsync = reduceRecipe(reduceAndMapAsync);

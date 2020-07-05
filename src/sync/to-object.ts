@@ -1,5 +1,5 @@
 import { resolver } from '../utils';
-import { getToObject } from '../recipes/get-to-object';
+import { toObjectRecipe } from '../recipes/to-object-recipe';
 import { reduce } from './reduce';
 
-export const toObject = getToObject(reduce, resolver);
+export const toObject = toObjectRecipe(reduce, resolver);

@@ -1,5 +1,5 @@
-import { getSkipWhile } from '../recipes/get-skip-while';
+import { skipWhileRecipe } from '../recipes/skip-while-recipe';
 import { filter } from './filter';
 import { resolver } from '../utils';
 
-export const skipWhile = getSkipWhile(filter, resolver);
+export const skipWhile = skipWhileRecipe(filter, resolver);

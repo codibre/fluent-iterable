@@ -1,4 +1,4 @@
-import { getConcat } from '../recipes/get-concat';
+import { concatRecipe } from '../recipes/concat-recipe';
 import { flatten } from './flatten';
 
-export const concat = getConcat(flatten);
+export const concat = concatRecipe(flatten);

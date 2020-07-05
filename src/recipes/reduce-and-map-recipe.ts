@@ -1,7 +1,7 @@
 import { Reducer, Mapper } from '../types';
 import { ResolverType } from '../utils';
 
-export function getReduceAndMap(forEach: Function, resolver: ResolverType) {
+export function reduceAndMapRecipe(forEach: Function, resolver: ResolverType) {
   return <T, A, R>(
     iterable: Iterable<T>,
     reducer: Reducer<T, A>,

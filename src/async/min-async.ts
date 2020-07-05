@@ -1,4 +1,4 @@
-import { getMin } from '../recipes';
+import { minRecipe } from '../recipes';
 import { topAsync } from './top-async';
 
-export const minAsync = getMin(topAsync);
+export const minAsync = minRecipe(topAsync);

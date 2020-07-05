@@ -1,6 +1,6 @@
-import { getDistinct } from '../recipes/get-distinct';
+import { distinctRecipe } from '../recipes/distinct-recipe';
 import { filter } from './filter';
 
-export const distinct = getDistinct(filter, (v, mapper, check) =>
+export const distinct = distinctRecipe(filter, (v, mapper, check) =>
   check(mapper(v)),
 );

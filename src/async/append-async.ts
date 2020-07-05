@@ -1,4 +1,4 @@
 import { concatAsync } from './concat-async';
-import { getAppend } from '../recipes/get-append';
+import { appendRecipe } from '../recipes/append-recipe';
 
-export const appendAsync = getAppend(concatAsync);
+export const appendAsync = appendRecipe(concatAsync);

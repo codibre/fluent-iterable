@@ -1,5 +1,5 @@
 import { filter } from './filter';
 import { reduce } from './reduce';
-import { getCount } from '../recipes/get-count';
+import { countRecipe } from '../recipes/count-recipe';
 
-export const count = getCount(reduce, filter);
+export const count = countRecipe(reduce, filter);

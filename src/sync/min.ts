@@ -1,4 +1,4 @@
-import { getMin } from '../recipes';
+import { minRecipe } from '../recipes';
 import { top } from './top';
 
-export const min = getMin(top);
+export const min = minRecipe(top);

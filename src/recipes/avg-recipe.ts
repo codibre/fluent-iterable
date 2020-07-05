@@ -6,7 +6,7 @@ interface AvgCalc {
   count: number;
 }
 
-export function getAvg(
+export function avgRecipe(
   reduceAndMap: Function,
   getSumming: <T>(mapper: AnyMapper<T>) => (current: AvgCalc, next: T) => any,
 ) {
