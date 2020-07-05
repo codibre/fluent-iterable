@@ -1,7 +1,3 @@
-export interface ErrorCallback {
-  (error: Error, index: number): unknown;
-}
-
 export interface NextResult<T> {
   index: number;
   result: IteratorResult<T>;

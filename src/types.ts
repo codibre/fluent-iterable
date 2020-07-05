@@ -1,4 +1,6 @@
-import { ErrorCallback } from '../async/merging/merge-types';
+export interface ErrorCallback {
+  (error: Error, index: number): unknown;
+}
 
 /**
  * Represents a predicate on type `T`.<br>
