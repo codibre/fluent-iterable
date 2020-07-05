@@ -1,9 +1,5 @@
-import { Comparer } from '../types';
 import { toArray } from './to-array';
+import { sortRecipe } from '../recipes';
+import { resolver, iterate } from '../utils';
 
-export function* sort<T>(
-  iterable: Iterable<T>,
-  comparer?: Comparer<T>,
-): Iterable<T> {
-  yield* toArray(iterable).sort(comparer);
-}
+export const sort = sortRecipe(toArray, resolver, iterate);

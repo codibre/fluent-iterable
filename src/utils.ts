@@ -6,13 +6,13 @@ type ResolverType = (a: any, b: (c: any) => any) => any;
 /** @internal */
 const resolver = <T, R>(a: T, b: (c: T) => R) => b(a);
 /** @internal */
-const asyncResolver = async <T, R>(a: PromiseLike<T>, b: (c: T) => R) =>
+const resolverAsync = async <T, R>(a: PromiseLike<T>, b: (c: T) => R) =>
   b(await a);
 /** @internal */
-async function* asyncIterate(a: any) {
+async function* iterateAsync(a: any) {
   yield* await a;
 }
-async function* asyncIterateAll(a: any) {
+async function* iterateAllAsync(a: any) {
   for await (const it of a) {
     yield* it;
   }
@@ -81,7 +81,7 @@ function* interval(fromInclusive?: number, count?: number): Iterable<number> {
 
 export {
   empty,
-  emptyAsync as asyncEmpty,
+  emptyAsync,
   identity,
   identityAsync,
   truth,
@@ -92,14 +92,14 @@ export {
   fluentGroup,
   interval,
   resolver,
-  asyncResolver,
+  resolverAsync,
   ResolverType,
   BinaryComparer,
   equals,
   greater,
   lesser,
-  asyncIterate,
-  asyncIterateAll,
+  iterateAsync,
+  iterateAllAsync,
   iterate,
   iterateAll,
 };

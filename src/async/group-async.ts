@@ -2,12 +2,12 @@ import { Mapper, Group, AsyncMapper } from '../types';
 import { mapAsync } from './map-async';
 import { reduceAndMapAsync } from './reduce-and-map-async';
 import { groupRecipe } from '../recipes';
-import { asyncResolver, asyncIterate } from '../utils';
+import { resolverAsync, iterateAsync } from '../utils';
 import { map } from '../sync';
 
 export const groupAsync = groupRecipe(
   reduceAndMapAsync,
-  asyncResolver,
+  resolverAsync,
   map,
-  asyncIterate,
+  iterateAsync,
 );

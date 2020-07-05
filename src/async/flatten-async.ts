@@ -1,6 +1,6 @@
 import { AsyncMapper } from '../types';
 import { mapAsync } from './map-async';
 import { flattenRecipe } from '../recipes';
-import { asyncIterateAll } from '../utils';
+import { iterateAllAsync } from '../utils';
 
-export const flattenAsync = flattenRecipe(asyncIterateAll, mapAsync);
+export const flattenAsync = flattenRecipe(iterateAllAsync, mapAsync);

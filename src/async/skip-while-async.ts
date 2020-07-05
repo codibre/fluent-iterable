@@ -1,5 +1,5 @@
 import { skipWhileRecipe } from '../recipes';
 import { filterAsync } from './filter-async';
-import { asyncResolver } from '../utils';
+import { resolverAsync } from '../utils';
 
-export const skipWhileAsync = skipWhileRecipe(filterAsync, asyncResolver);
+export const skipWhileAsync = skipWhileRecipe(filterAsync, resolverAsync);

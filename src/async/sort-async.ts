@@ -1,10 +1,5 @@
-import { Comparer } from '../types';
+import { sortRecipe } from '../recipes';
+import { resolverAsync, iterateAsync } from '../utils';
 import { toArrayAsync } from './to-array-async';
-import { AnyIterable } from '../types-internal';
 
-export async function* sortAsync<T>(
-  iterable: AnyIterable<T>,
-  comparer?: Comparer<T>,
-): AsyncIterable<T> {
-  yield* (await toArrayAsync(iterable)).sort(comparer);
-}
+export const sortAsync = sortRecipe(toArrayAsync, resolverAsync, iterateAsync);
