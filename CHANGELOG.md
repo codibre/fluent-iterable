@@ -1,5 +1,8 @@
 
-## 0.3.1
+## 0.3.2
+* ebc86d8 reorganizing code so utils can have documentation generated
+## v0.3.1
+* 41b9db1 0.3.1
 * 7dcc16b testing interval and organizing it
 ## v0.3.0
 * 3e939e4 0.3.0
