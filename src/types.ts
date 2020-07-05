@@ -219,6 +219,14 @@ interface ReduceAndMapAsync<T> {
   ): Promise<R>;
 }
 
+interface GroupAsync<T> {
+  <R>(mapper: AsyncMapper<T, R>): FluentAsyncIterable<FluentGroup<T, R>>;
+}
+
+interface FlattenAsync<T> {
+  <R>(mapper: AsyncMapper<T, Iterable<R>>): FluentAsyncIterable<R>;
+}
+
 interface JoinAsync<T> {
   (separator: string, mapper: AsyncMapper<T, string>): Promise<string>;
 }
@@ -400,7 +408,7 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param mapper Specifies the asynchronous projection from the elements of `T` to iterables of `R`.
    * @returns The flattened [[FluentAsyncIterable]].
    */
-  flattenAsync<R>(mapper: AsyncMapper<T, Iterable<R>>): FluentAsyncIterable<R>;
+  flattenAsync: FlattenAsync<T>;
 
   /**
    * Sorts the elements of the iterable based on a specified comparer. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -448,9 +456,7 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param mapper Asynchronously projects the elements of the iterable into the group key they belong to.
    * @returns The [[FluentAsyncIterable]] of the distinct groups.
    */
-  groupAsync<R>(
-    mapper: AsyncMapper<T, R>,
-  ): FluentAsyncIterable<FluentGroup<T, R>>;
+  groupAsync: GroupAsync<T>;
 
   /**
    * Returns the number of elements that matches a predicate in the iterable. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -938,17 +944,7 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param mapper Specifies the projection from the elements of `T` to iterables of `R`. Identity mapping is applied (taking the elements as iterables) if omitted.
    * @returns The [[FluentAsyncIterable]] of the flattened iterable.
    */
-  flatten<R>(mapper?: Mapper<T, Iterable<R>>): FluentAsyncIterable<R>;
-
-  /**
-   * Asynchronously projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.
-   * @typeparam R The type of the elements in the inner iterable.
-   * @param mapper Specifies the asynchronous projection from the elements of `T` to iterables of `R`.
-   * @returns The flattened [[FluentAsyncIterable]].
-   */
-  flattenAsync<R>(
-    mapper: AsyncMapper<T, AsyncIterable<R>>,
-  ): FluentAsyncIterable<R>;
+  flatten: FlattenAsync<T>;
 
   /**
    * Sorts the elements of the iterable based on a specified comparer. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -979,17 +975,7 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param mapper Projects the elements of the iterable into the group key they belong to.
    * @returns The [[FluentAsyncIterable]] of the distinct groups.
    */
-  group<R>(mapper: Mapper<T, R>): FluentAsyncIterable<FluentGroup<T, R>>;
-
-  /**
-   * Groups the elements of the iterable keyed by equality of data at the specified asynchronous projection.
-   * @typeparam R The type of the groups key.
-   * @param mapper Asynchronously projects the elements of the iterable into the group key they belong to.
-   * @returns The [[FluentAsyncIterable]] of the distinct groups.
-   */
-  groupAsync<R>(
-    mapper: AsyncMapper<T, R>,
-  ): FluentAsyncIterable<FluentGroup<T, R>>;
+  group: GroupAsync<T>;
 
   /**
    * Returns the number of elements that matches a predicate in the iterable. This is a resolving operation, will cause a full loop through all the elements of the iterable.
