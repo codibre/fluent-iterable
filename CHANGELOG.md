@@ -1,5 +1,8 @@
 
-## 0.3.0
+## 0.3.1
+* 7dcc16b testing interval and organizing it
+## v0.3.0
+* 3e939e4 0.3.0
 * 993be06 fixing messs I made with the reorganization
 * 6f7c1a8 updating docs
 * 3b5cfa6 generating type docs
