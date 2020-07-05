@@ -1,12 +1,12 @@
-[fluent-iterable - v0.2.1](../README.md) › ["fluentAsync"](_fluentasync_.md)
+[fluent-iterable - v0.2.1](../README.md) › ["fluent-async"](_fluent_async_.md)
 
-# Module: "fluentAsync"
+# Module: "fluent-async"
 
 ## Index
 
 ### Functions
 
-* [fluentAsync](_fluentasync_.md#fluentasync)
+* [fluentAsync](_fluent_async_.md#fluentasync)
 
 ## Functions
 
