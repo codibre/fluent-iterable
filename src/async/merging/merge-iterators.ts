@@ -1,5 +1,11 @@
-import { ErrorCallback, GetNextAsyncIterator } from './merge-types';
+import { ErrorCallback, GetNextAsyncIterator, NextResult } from './merge-types';
 import { getNextAsyncIteratorFactory } from './get-next-async-iterator-factory';
+
+async function getNextValue(
+  asyncIteratorsValues: Map<any, any>,
+): Promise<NextResult<any>> {
+  return Promise.race(Array.from(asyncIteratorsValues.values()));
+}
 
 export async function* mergeIterators<T>(
   callback: ErrorCallback | undefined,
@@ -12,9 +18,7 @@ export async function* mergeIterators<T>(
   );
 
   while (asyncIteratorsValues.size > 0) {
-    const { result, index } = await Promise.race(
-      Array.from(asyncIteratorsValues.values()),
-    );
+    const { result, index } = await getNextValue(asyncIteratorsValues);
     if (result.done) {
       asyncIteratorsValues.delete(index);
     } else {
