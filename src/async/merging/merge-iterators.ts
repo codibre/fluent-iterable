@@ -1,18 +1,6 @@
 import { ErrorCallback, GetNextAsyncIterator } from './merge-types';
 import { getNextAsyncIteratorFactory } from './get-next-async-iterator-factory';
 
-function prepareNextValue<T>(
-  asyncIteratorsValues: Map<any, any>,
-  index: any,
-  getNextAsyncIteratorValue: GetNextAsyncIterator<unknown>,
-  iterators: AsyncIterator<T, any, undefined>[],
-) {
-  asyncIteratorsValues.set(
-    index,
-    getNextAsyncIteratorValue(iterators[index], index),
-  );
-}
-
 export async function* mergeIterators<T>(
   callback: ErrorCallback | undefined,
   ...iterators: AsyncIterator<T>[]
@@ -31,11 +19,9 @@ export async function* mergeIterators<T>(
       asyncIteratorsValues.delete(index);
     } else {
       yield result.value;
-      prepareNextValue<T>(
-        asyncIteratorsValues,
+      asyncIteratorsValues.set(
         index,
-        getNextAsyncIteratorValue,
-        iterators,
+        getNextAsyncIteratorValue(iterators[index], index),
       );
     }
   }
