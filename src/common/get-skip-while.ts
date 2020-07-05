@@ -1,5 +1,5 @@
 import { AsyncPredicate } from '../types';
-import { AnyIterable } from './any-iterable';
+import { AnyIterable } from '../types-internal';
 
 export function getSkipWhile(
   filter: Function,

@@ -1,5 +1,5 @@
 import { AsyncMapper } from '../types';
-import { AnyIterable } from '../common/any-iterable';
+import { AnyIterable } from '../types-internal';
 
 export async function* mapAsync<T, R>(
   iterable: AnyIterable<T>,

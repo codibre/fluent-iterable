@@ -1,5 +1,5 @@
 import { Predicate, AsyncPredicate } from '../types';
-import { AnyIterable } from '../common/any-iterable';
+import { AnyIterable } from '../types-internal';
 
 export async function* takeWhileAsync<T>(
   iterable: AnyIterable<T>,

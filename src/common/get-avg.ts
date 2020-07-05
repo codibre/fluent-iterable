@@ -1,5 +1,5 @@
 import { identity } from '../utils';
-import { AnyMapper } from './any-mapper';
+import { AnyMapper } from '../types-internal';
 
 interface AvgCalc {
   sum: number;

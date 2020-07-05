@@ -1,4 +1,4 @@
-import { AnyIterable } from '../common/any-iterable';
+import { AnyIterable } from '../types-internal';
 
 export function getExecute(
   map: Function,

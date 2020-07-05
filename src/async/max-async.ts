@@ -1,5 +1,5 @@
 import { AsyncMapper } from '../types';
-import { AnyIterable } from '../common/any-iterable';
+import { AnyIterable } from '../types-internal';
 import { getMax } from '../common';
 import { topAsync } from './top-async';
 

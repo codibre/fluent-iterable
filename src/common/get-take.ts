@@ -1,4 +1,4 @@
-import { AnyIterable } from './any-iterable';
+import { AnyIterable } from '../types-internal';
 
 export function getTake(takeWhile: Function) {
   return <T>(iterable: AnyIterable<T>, n: number) => {

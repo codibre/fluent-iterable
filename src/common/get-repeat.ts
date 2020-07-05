@@ -1,4 +1,5 @@
-import { getRepeater, AnyIterable } from '../common';
+import { getRepeater } from '../common';
+import { AnyIterable } from '../types-internal';
 
 export function getRepeat(map: Function, concat: Function, empty: Function) {
   return <T>(iterable: AnyIterable<T>, n: number): any => {

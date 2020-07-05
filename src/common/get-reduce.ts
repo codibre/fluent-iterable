@@ -1,5 +1,5 @@
 import { identity } from '../utils';
-import { AnyIterable } from './any-iterable';
+import { AnyIterable } from '../types-internal';
 import { AsyncReducer } from '../types';
 
 export function getReduce(reduceAndMap: Function) {

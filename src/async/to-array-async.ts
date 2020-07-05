@@ -1,4 +1,4 @@
-import { AnyIterable } from '../common';
+import { AnyIterable } from '../types-internal';
 
 export async function toArrayAsync<T>(iterable: AnyIterable<T>): Promise<T[]> {
   const array: T[] = [];

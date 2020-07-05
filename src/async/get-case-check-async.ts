@@ -1,5 +1,5 @@
 import { identity } from '../utils';
-import { AnyIterable } from '../common';
+import { AnyIterable } from '../types-internal';
 
 export function getCaseCheckAsync(
   ifTrue: Function,

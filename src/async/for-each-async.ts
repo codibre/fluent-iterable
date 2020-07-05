@@ -1,5 +1,5 @@
 import { AsyncAction } from '../types';
-import { AnyIterable } from '../common/any-iterable';
+import { AnyIterable } from '../types-internal';
 
 export async function forEachAsync<T>(
   iterable: AnyIterable<T>,

@@ -1,6 +1,6 @@
 import { identity } from '../utils';
-import { AnyMapper } from './any-mapper';
-import { AnyIterable } from './any-iterable';
+import { AnyMapper } from '../types-internal';
+import { AnyIterable } from '../types-internal';
 
 export function getJoin<T>(
   reduce: Function,

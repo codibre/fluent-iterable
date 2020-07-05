@@ -1,4 +1,4 @@
-import { AnyIterable } from './any-iterable';
+import { AnyIterable } from '../types-internal';
 import { truth } from '../utils';
 
 export function getCount(reduce: Function, filter: Function) {

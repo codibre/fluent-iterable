@@ -1,6 +1,6 @@
 import { AsyncMapper } from '../types';
 import { identity } from '../utils';
-import { AnyIterable } from './any-iterable';
+import { AnyIterable } from '../types-internal';
 
 export function getSum(reduce: Function) {
   return <T>(

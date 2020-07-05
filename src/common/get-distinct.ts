@@ -1,6 +1,6 @@
 import { identity } from '../utils';
-import { AnyIterable } from './any-iterable';
-import { AnyMapper } from './any-mapper';
+import { AnyIterable } from '../types-internal';
+import { AnyMapper } from '../types-internal';
 
 export interface Checker {
   (value: any): boolean;

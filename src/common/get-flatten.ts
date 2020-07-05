@@ -1,4 +1,4 @@
-import { AnyMapper } from './any-mapper';
+import { AnyMapper } from '../types-internal';
 
 export function getFlatten(iterateAll: Function, map: Function) {
   return <T, R>(

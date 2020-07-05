@@ -1,5 +1,5 @@
-import { AnyIterable } from './any-iterable';
-import { AnyMapper } from './any-mapper';
+import { AnyIterable } from '../types-internal';
+import { AnyMapper } from '../types-internal';
 import { ResolverType } from '../utils';
 
 export function getGroup(

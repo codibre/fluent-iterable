@@ -1,5 +1,5 @@
 import { truth } from '../utils';
-import { AnyIterable } from './any-iterable';
+import { AnyIterable } from '../types-internal';
 
 export function getLast(
   reduce: Function,

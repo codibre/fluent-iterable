@@ -1,4 +1,4 @@
-import { AnyIterable } from './any-iterable';
+import { AnyIterable } from '../types-internal';
 import { ResolverType, BinaryComparer } from '../utils';
 
 export function getComparison(
