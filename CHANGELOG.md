@@ -1,5 +1,67 @@
 
-## 0.2.1
+## 0.3.0
+* 993be06 fixing messs I made with the reorganization
+* 6f7c1a8 updating docs
+* 3b5cfa6 generating type docs
+* 4202d93 fixing types
+* 4259069 generating docs
+* 926040d undoing type unification due to bad type doc generation
+* 59600d0 generating type docs
+* 303c747 reorganizing files to typedoc generation
+* 52b9a09 reorganizing files for typedoc generation
+* 7cf949e typedocs
+* 754f141 removing punctual use as it doesn't bring any relevant performance increase
+* 05f4434 normalizing utils
+* 10fe286 fixing import of recipes
+* fe7e955 rename implementation getters to recipe
+* 643eea0 removing uneeded functions and renaming common to repeats
+* a45571a reorganizing types
+* 1156aed bettering coverage
+* d9aa9bc fixing types
+* 61f2a05 fixing types
+* d932d90 generalizing flatten
+* 3e47a05 generalizing group
+* 9844483 fixing comparers
+* 7ca046c generalizing reduce-and-map
+* 99e0cb6 fixing takeCount
+* f3e1d39 removing uneeded methods
+* d82fe4b removing types of internal functions
+* 7b524cd fixing complexity
+* 690d2dc removing uneeded function
+* f417060 fixing complexity
+* d780c55 fixing grouper code smell
+* 29fc4cc unifying toObject
+* 3b68e47 unifying group and skip while, and creating resolver and asyncResolver
+* 8f65cef unifying joing
+* d2883ed refactoring has functions
+* 4bebdef unifying group
+* 7b8fc7f Unifying execute
+* b8156d5 unifying distinct, concat, avg
+* 6a815cc Incredibly refactoring repeat, append and preppend
+* e086c39 refactoring async case checking
+* 695cde8 refactoring repeat
+* 3a9a57a generalizing some other functions
+* 6f706e4 organizing sync functions
+* 96b347d adding concatAsync definition'
+* 1341659 organizing async imports
+* d7db465 removing duplication os has exactly less and more than
+* 6c669ae organizing async functions
+* 85de294 fixing avg duplication
+* 3b8f0c9 removing more duplicated functions
+* 5bd7500 refactoring async duplicated functions
+* 4eabb7d unifying async group
+* 706a8a2 removing duplications
+* 7e64202 Fixing some duplications
+* 32ff6e0 refactoring and reorganizing functions
+* c717dac refactoring
+* f2cdba5 unifying code
+* fccad67 updating code climate
+* 1148fb0 updating git workflow
+* ac2db6d formatting code for team preferences
+* aedd7bb updating project fomatting to team preferences
+* 377fc78 new docs
+## v0.2.1
+* 9c940aa 0.2.1
 * 6b28e6d fixing test
 * c552518 adding keywords
 * 89de565 fixing github url
