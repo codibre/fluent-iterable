@@ -1,18 +1,17 @@
 import fluentAsync from './fluentAsync';
 import { FluentIterable } from './types';
 import {
-  mountIterableFunctions,
-  mountResolvingFunctions,
-} from './mount-fluent-functions';
-import {
   iterableFuncs,
   resolvingFuncs,
   iterableAsyncFuncs,
   special,
-} from './fluentFunctions';
+} from './helpers';
 import { toAsync } from './sync/to-async';
-import { fromObject } from './from-object';
-import { mountSpecial } from './mount-special';
+import {
+  mountIterableFunctions,
+  mountResolvingFunctions,
+  mountSpecial,
+} from './helpers';
 
 /**
  * Tranforms an iterable into a [[FluentIterable]].

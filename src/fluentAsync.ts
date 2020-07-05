@@ -1,16 +1,16 @@
 import { FluentAsyncIterable } from './types';
 import { ErrorCallback } from './async/merging/merge-types';
 import {
-  mountIterableFunctions,
-  mountResolvingFunctions,
-} from './mount-fluent-functions';
-import {
   asyncIterableFuncs,
   asyncResolvingFuncs,
   asyncSpecial,
-} from './fluentAsyncFunctions';
-import { mountSpecial } from './mount-special';
+} from './helpers';
 import { mergeCatching } from './async';
+import {
+  mountIterableFunctions,
+  mountResolvingFunctions,
+  mountSpecial,
+} from './helpers';
 
 /**
  * Tranforms an asynchronous iterable into a [[FluentAsyncIterable]].

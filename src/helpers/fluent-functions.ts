@@ -35,8 +35,9 @@ import {
   toArray,
   execute,
   avg,
-} from './sync';
-import { forEach } from './sync/for-each';
+  reduceAndMap,
+  forEach,
+} from '../sync';
 import {
   allAsync,
   avgAsync,
@@ -62,8 +63,7 @@ import {
   minAsync,
   maxAsync,
   sumAsync,
-} from './async';
-import { reduceAndMap } from './sync/reduce-and-map';
+} from '../async';
 
 export const helper = {
   withIndex,

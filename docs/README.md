@@ -11,7 +11,5 @@
 * ["fluentAsync"](modules/_fluentasync_.md)
 * ["from-object"](modules/_from_object_.md)
 * ["index"](modules/_index_.md)
-* ["mount-fluent-functions"](modules/_mount_fluent_functions_.md)
-* ["mount-special"](modules/_mount_special_.md)
 * ["types/index"](modules/_types_index_.md)
 * ["types/types"](modules/_types_types_.md)

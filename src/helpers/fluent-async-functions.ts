@@ -38,7 +38,7 @@ import {
   maxAsync,
   sumAsync,
   containsAsync,
-} from './async';
+} from '../async';
 
 export const asyncHelper = {
   withIndex: withIndexAsync,
