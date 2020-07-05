@@ -405,10 +405,6 @@ async function printProducts(count: number) {
 }
 ```
 
-## Punctual transformations
-
-Maybe you're interested in doing only one transformation without the need to chain another ones. In this case, you can use the same functions offered through _fluent_ and _fluentAsync_ using the exported objects _helper_ and _asyncHelper_ :)
-
 ## Merging stream, async iterables and async iterators
 
 Due to Readables also being async iterables, it can be very useful, if you have a scenario where you have many streams being dealt with and you need to combine all results, you can use _asyncHelper.merge_ or _asyncHelper.mergeCatching_ for it! The difference between them is that, with _mergeCatching_, you can continue to receive chunks from non concluded async iterables/readables, even if one of them throws an error, while _merge_, in the other hand, will throw an error at the first error received.
