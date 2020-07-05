@@ -1,4 +1,4 @@
-import { getLast } from '../common/get-last';
+import { getLast } from '../recipes/get-last';
 import { reduceAsync } from './reduce-async';
 
 export const lastAsync = getLast(

@@ -1,5 +1,5 @@
 import { reduceAndMap } from './reduce-and-map';
-import { getGroup } from '../common/get-group';
+import { getGroup } from '../recipes/get-group';
 import { resolver, iterate } from '../utils';
 import { map } from './map';
 

@@ -1,5 +1,5 @@
 import { BinaryComparer, asyncResolver } from '../utils';
-import { getComparison } from '../common';
+import { getComparison } from '../recipes';
 import { countAsync } from './count-async';
 import { takeAsync } from './take-async';
 

@@ -1,4 +1,4 @@
-import { getDistinct } from '../common/get-distinct';
+import { getDistinct } from '../recipes/get-distinct';
 import { filterAsync } from './filter-async';
 
 export const distinctAsync = getDistinct(

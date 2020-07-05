@@ -1,5 +1,5 @@
 import { BinaryComparer, resolver } from '../utils';
-import { getComparison } from '../common';
+import { getComparison } from '../recipes';
 import { count } from './count';
 import { take } from './take';
 

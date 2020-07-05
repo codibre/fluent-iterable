@@ -1,4 +1,4 @@
-import { getSkipWhile } from '../common/get-skip-while';
+import { getSkipWhile } from '../recipes/get-skip-while';
 import { filter } from './filter';
 import { resolver } from '../utils';
 

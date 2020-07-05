@@ -1,5 +1,5 @@
 import { reduceAndMapAsync } from './reduce-and-map-async';
-import { getAvg } from '../common/get-avg';
+import { getAvg } from '../recipes/get-avg';
 
 export const avgAsync = getAvg(
   reduceAndMapAsync,

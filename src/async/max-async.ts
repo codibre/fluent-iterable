@@ -1,6 +1,6 @@
 import { AsyncMapper } from '../types';
 import { AnyIterable } from '../types-internal';
-import { getMax } from '../common';
+import { getMax } from '../recipes';
 import { topAsync } from './top-async';
 
 export const maxAsync: <T>(
