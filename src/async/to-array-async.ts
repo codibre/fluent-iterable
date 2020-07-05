@@ -1,10 +1,5 @@
-import { AnyIterable } from '../types-internal';
+import { toArrayRecipe } from '../recipes/to-array-recipe';
+import { forEachAsync } from '../async-base';
+import { resolverAsync } from '../utils';
 
-export async function toArrayAsync<T>(iterable: AnyIterable<T>): Promise<T[]> {
-  const array: T[] = [];
-  for await (const t of iterable) {
-    array.push(t);
-  }
-
-  return array;
-}
+export const toArrayAsync = toArrayRecipe(forEachAsync, resolverAsync);

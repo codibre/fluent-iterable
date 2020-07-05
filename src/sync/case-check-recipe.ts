@@ -1,6 +1,6 @@
 import { identity } from '../utils';
 
-export function getCaseCheck(
+export function caseCheckRecipe(
   ifTrue: Function,
   ifFalse: unknown,
   defaultPredicate?: Function,

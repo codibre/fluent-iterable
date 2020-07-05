@@ -1,4 +1,4 @@
 import { truth, identity } from '../utils';
-import { getCaseCheck } from './get-case-check';
+import { caseCheckRecipe } from './case-check-recipe';
 
-export const first = getCaseCheck(identity, undefined, truth);
+export const first = caseCheckRecipe(identity, undefined, truth);
