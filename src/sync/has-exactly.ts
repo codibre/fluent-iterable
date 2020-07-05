@@ -4,5 +4,5 @@ export function hasExactly<T>(
   iterable: Iterable<T>,
   expectedSize: number,
 ): boolean {
-  return takeCount(iterable, expectedSize + 1) === expectedSize;
+  return takeCount(iterable, expectedSize) === expectedSize;
 }
