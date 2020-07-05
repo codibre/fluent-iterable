@@ -1,8 +1,4 @@
-import { takeCount } from './take-count';
+import { equals } from '../utils';
+import { getSyncComparer } from './get-sync-comparer';
 
-export function hasExactly<T>(
-  iterable: Iterable<T>,
-  expectedSize: number,
-): boolean {
-  return takeCount(iterable, expectedSize) === expectedSize;
-}
+export const hasExactly = getSyncComparer(equals);

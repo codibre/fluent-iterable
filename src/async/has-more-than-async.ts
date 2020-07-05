@@ -1,8 +1,4 @@
-import { takeCountAsync } from './take-count-async';
+import { greater } from '../utils';
+import { getAsyncComparer } from './get-async-comparer';
 
-export async function hasMoreThanAsync<T>(
-  iterable: AsyncIterable<T>,
-  threshold: number,
-): Promise<boolean> {
-  return (await takeCountAsync(iterable, threshold)) > threshold;
-}
+export const hasMoreThanAsync = getAsyncComparer(greater);

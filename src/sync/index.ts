@@ -29,7 +29,6 @@ export * from './skip-while';
 export * from './sort';
 export * from './sum';
 export * from './take';
-export * from './take-count';
 export * from './take-while';
 export * from './to-array';
 export * from './to-async';

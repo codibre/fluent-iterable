@@ -1,8 +1,4 @@
-import { takeCount } from './take-count';
+import { greater } from '../utils';
+import { getSyncComparer } from './get-sync-comparer';
 
-export function hasMoreThan<T>(
-  iterable: Iterable<T>,
-  threshold: number,
-): boolean {
-  return takeCount(iterable, threshold) > threshold;
-}
+export const hasMoreThan = getSyncComparer(greater);

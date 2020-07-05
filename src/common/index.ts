@@ -4,4 +4,4 @@ export * from './get-min';
 export * from './get-top';
 export * from './group-value';
 export * from './repeater';
-export * from './get-take-count';
+export * from './get-comparison';

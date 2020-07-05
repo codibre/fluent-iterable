@@ -1,8 +1,4 @@
-import { takeCountAsync } from './take-count-async';
+import { getAsyncComparer } from './get-async-comparer';
+import { equals } from '../utils';
 
-export async function hasExactlyAsync<T>(
-  iterable: AsyncIterable<T>,
-  expectedSize: number,
-): Promise<boolean> {
-  return (await takeCountAsync(iterable, expectedSize)) === expectedSize;
-}
+export const hasExactlyAsync = getAsyncComparer(equals);

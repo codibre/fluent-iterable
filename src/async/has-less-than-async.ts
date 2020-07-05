@@ -1,8 +1,4 @@
-import { takeCountAsync } from './take-count-async';
+import { lesser } from '../utils';
+import { getAsyncComparer } from './get-async-comparer';
 
-export async function hasLessThanAsync<T>(
-  iterable: AsyncIterable<T>,
-  threshold: number,
-): Promise<boolean> {
-  return (await takeCountAsync(iterable, threshold)) < threshold;
-}
+export const hasLessThanAsync = getAsyncComparer(lesser);
