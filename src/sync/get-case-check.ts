@@ -1,4 +1,4 @@
-import { identity } from '../utils';
+import { identity } from '../helpers';
 
 export function getCaseCheck(
   ifTrue: Function,

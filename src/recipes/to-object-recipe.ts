@@ -1,4 +1,4 @@
-import { identity, ResolverType } from '../utils';
+import { identity, ResolverType } from '../helpers';
 import { AnyIterable } from '../types-internal';
 import { AnyMapper } from '../types-internal';
 

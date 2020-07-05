@@ -1,4 +1,4 @@
-import { identity } from '../utils';
+import { identity } from '../helpers';
 import { AnyIterable } from '../types-internal';
 
 export function getCaseCheckAsync(

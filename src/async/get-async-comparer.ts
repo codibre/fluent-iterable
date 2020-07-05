@@ -1,4 +1,4 @@
-import { BinaryComparer, resolverAsync } from '../utils';
+import { BinaryComparer, resolverAsync } from '../helpers';
 import { comparisonRecipe } from '../recipes';
 import { countAsync } from './count-async';
 import { takeAsync } from './take-async';

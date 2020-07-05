@@ -1,4 +1,4 @@
-import { BinaryComparer, resolver } from '../utils';
+import { BinaryComparer, resolver } from '../helpers';
 import { comparisonRecipe } from '../recipes';
 import { count } from './count';
 import { take } from './take';

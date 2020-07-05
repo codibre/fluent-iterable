@@ -1,5 +1,5 @@
 import { Mapper } from '../types';
-import { identity } from '../utils';
+import { identity } from '../helpers';
 
 export function minRecipe(top: Function) {
   return <T>(iterable: any, mapper: any = identity): any =>

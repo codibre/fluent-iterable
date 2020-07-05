@@ -1,5 +1,5 @@
-import fluent from './fluent';
-import { Group, FluentGroup, Predicate, AsyncPredicate } from './types';
+import fluent from '../fluent';
+import { Group, FluentGroup, Predicate, AsyncPredicate } from '../types';
 
 /** @internal */
 type ResolverType = (a: any, b: (c: any) => any) => any;
