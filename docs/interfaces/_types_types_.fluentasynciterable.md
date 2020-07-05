@@ -42,7 +42,6 @@ The type of the items in the asynchronous iterable.
 * [join](_types_types_.fluentasynciterable.md#join)
 * [last](_types_types_.fluentasynciterable.md#last)
 * [map](_types_types_.fluentasynciterable.md#map)
-* [mapAsync](_types_types_.fluentasynciterable.md#mapasync)
 * [max](_types_types_.fluentasynciterable.md#max)
 * [merge](_types_types_.fluentasynciterable.md#merge)
 * [mergeCatching](_types_types_.fluentasynciterable.md#mergecatching)
@@ -455,30 +454,6 @@ The destination type of the mapping.
 Name | Type | Description |
 ------ | ------ | ------ |
 `mapper` | [AsyncMapper](_types_types_.asyncmapper.md)‹T, R› | The operation which maps an instance of `T` into an instance of `R`. |
-
-**Returns:** *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹R›*
-
-A [FluentAsyncIterable](_types_types_.fluentasynciterable.md) of the mapped elements.
-
-___
-
-###  mapAsync
-
-▸ **mapAsync**‹**R**›(`mapper`: [AsyncMapper](_types_types_.asyncmapper.md)‹T, R›): *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹R›*
-
-Transforms the iterable of `T` into an iterable of `R` by mapping all elements to an element of `R`.
-
-**Type parameters:**
-
-▪ **R**
-
-The destination type of the mapping.
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`mapper` | [AsyncMapper](_types_types_.asyncmapper.md)‹T, R› | The asynchronous operation which maps an instance of `T` into an instance of `R`. |
 
 **Returns:** *[FluentAsyncIterable](_types_types_.fluentasynciterable.md)‹R›*
 

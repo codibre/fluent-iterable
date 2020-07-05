@@ -804,14 +804,6 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
   map<R>(mapper: AsyncMapper<T, R>): FluentAsyncIterable<R>;
 
   /**
-   * Transforms the iterable of `T` into an iterable of `R` by mapping all elements to an element of `R`.
-   * @typeparam R The destination type of the mapping.
-   * @param mapper The asynchronous operation which maps an instance of `T` into an instance of `R`.
-   * @returns A [[FluentAsyncIterable]] of the mapped elements.
-   */
-  mapAsync<R>(mapper: AsyncMapper<T, R>): FluentAsyncIterable<R>;
-
-  /**
    * Filters the iterable of `T` based on a predicate.
    * @param predicate A predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`.
    * @returns A [[FluentAsyncIterable]] of the elements against which the predicate evaluates to `true`.
