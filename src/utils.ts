@@ -8,6 +8,13 @@ const resolver = <T, R>(a: T, b: (c: T) => R) => b(a);
 /** @internal */
 const asyncResolver = async <T, R>(a: PromiseLike<T>, b: (c: T) => R) =>
   b(await a);
+/** @internal */
+async function* asyncIterate(a: any) {
+  yield* await a;
+}
+function* iterate(a: any) {
+  yield* a;
+}
 type BinaryComparer = (a: any, b: any) => boolean;
 const equals = (a: any, b: any) => a === b;
 const greater = (a: any, b: any) => a > b;
@@ -81,4 +88,6 @@ export {
   equals,
   greater,
   lesser,
+  asyncIterate,
+  iterate,
 };

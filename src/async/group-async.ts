@@ -1,14 +1,13 @@
 import { Mapper, Group, AsyncMapper } from '../types';
 import { mapAsync } from './map-async';
 import { reduceAndMapAsync } from './reduce-and-map-async';
-import { getGrouper, groupMap } from '../common/get-group';
-import { AnyIterable } from '../common';
-import { asyncResolver } from '../utils';
+import { getGroup } from '../common/get-group';
+import { asyncResolver, asyncIterate } from '../utils';
+import { map } from '../sync';
 
-export async function* groupAsync<T, R>(
-  iterable: AnyIterable<T>,
-  mapper: AsyncMapper<T, R>,
-): AsyncIterable<Group<T, R>> {
-  const r = getGrouper(iterable, mapper, reduceAndMapAsync, asyncResolver);
-  yield* groupMap(await r, mapAsync);
-}
+export const groupAsync = getGroup(
+  reduceAndMapAsync,
+  asyncResolver,
+  map,
+  asyncIterate,
+);
