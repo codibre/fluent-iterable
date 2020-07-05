@@ -1,15 +1,6 @@
 import { Reducer, Mapper } from '../types';
+import { forEach } from './for-each';
+import { getReduceAndMap } from '../common/get-reduce-and-map';
+import { resolver } from '../utils';
 
-export function reduceAndMap<T, A, R>(
-  iterable: Iterable<T>,
-  reducer: Reducer<T, A>,
-  initial: A,
-  result: Mapper<A, R>,
-): R {
-  let accumulator: A = initial;
-  for (const t of iterable) {
-    accumulator = reducer(accumulator, t);
-  }
-
-  return result(accumulator);
-}
+export const reduceAndMap = getReduceAndMap(forEach, resolver);
