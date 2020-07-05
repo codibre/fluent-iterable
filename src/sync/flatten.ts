@@ -1,10 +1,6 @@
 import { Mapper } from '../types';
+import { map } from './map';
+import { iterateAll } from '../utils';
+import { getFlatten } from '../common/get-flatten';
 
-export function* flatten<T, R>(
-  iterable: Iterable<T>,
-  mapper: Mapper<T, Iterable<R>> = (t) => (t as unknown) as Iterable<R>,
-): Iterable<R> {
-  for (const t of iterable) {
-    yield* mapper(t);
-  }
-}
+export const flatten = getFlatten(iterateAll, map);
