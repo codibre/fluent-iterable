@@ -1,5 +1,5 @@
-import { identity, ResolverType } from '../helpers';
-import { AnyIterable } from '../types-internal';
+import { identity } from '../utils';
+import { AnyIterable, ResolverType } from '../types-internal';
 import { AnyMapper } from '../types-internal';
 
 export function toObjectRecipe(reduce: Function, resolver: ResolverType) {

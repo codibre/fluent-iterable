@@ -1,5 +1,5 @@
-import { ResolverType } from '../helpers';
 import { Comparer } from '../types';
+import { ResolverType } from '../types-internal';
 
 export function sortRecipe(
   toArray: Function,

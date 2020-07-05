@@ -1,5 +1,5 @@
 import { Reducer, Mapper } from '../types';
-import { ResolverType } from '../helpers';
+import { ResolverType } from '../types-internal';
 
 export function reduceAndMapRecipe(forEach: Function, resolver: ResolverType) {
   return <T, A, R>(

@@ -1,4 +1,4 @@
-import { identity } from '../helpers';
+import { identity } from '../utils';
 
 export function maxRecipe(top: Function) {
   return (iterable: any, mapper: any = identity): any =>

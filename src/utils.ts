@@ -1,8 +1,6 @@
-import fluent from '../fluent';
-import { Group, FluentGroup, Predicate, AsyncPredicate } from '../types';
+import fluent from './fluent';
+import { Group, FluentGroup, Predicate, AsyncPredicate } from './types';
 
-/** @internal */
-type ResolverType = (a: any, b: (c: any) => any) => any;
 /** @internal */
 const resolver = <T, R>(a: T, b: (c: T) => R) => b(a);
 /** @internal */
@@ -25,7 +23,6 @@ function* iterateAll(a: any) {
     yield* it;
   }
 }
-type BinaryComparer = (a: any, b: any) => boolean;
 const equals = (a: any, b: any) => a === b;
 const greater = (a: any, b: any) => a > b;
 const lesser = (a: any, b: any) => a < b;
@@ -69,8 +66,6 @@ export {
   fluentGroup,
   resolver,
   resolverAsync,
-  ResolverType,
-  BinaryComparer,
   equals,
   greater,
   lesser,

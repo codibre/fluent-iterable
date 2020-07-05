@@ -1,4 +1,4 @@
-import { truth } from '../helpers';
+import { truth } from '../utils';
 import { AnyIterable } from '../types-internal';
 
 export function lastRecipe(

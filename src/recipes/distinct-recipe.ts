@@ -1,4 +1,4 @@
-import { identity } from '../helpers';
+import { identity } from '../utils';
 import { AnyIterable } from '../types-internal';
 import { AnyMapper } from '../types-internal';
 

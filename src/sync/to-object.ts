@@ -1,4 +1,4 @@
-import { resolver } from '../helpers';
+import { resolver } from '../utils';
 import { toObjectRecipe } from '../recipes';
 import { reduce } from './reduce';
 

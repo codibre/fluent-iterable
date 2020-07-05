@@ -1,5 +1,5 @@
 import { AnyIterable } from '../types-internal';
-import { truth } from '../helpers';
+import { truth } from '../utils';
 
 export function countRecipe(reduce: Function, filter: Function) {
   return <T>(iterable: AnyIterable<T>, predicate: any = truth): any =>

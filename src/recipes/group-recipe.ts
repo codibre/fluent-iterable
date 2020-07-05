@@ -1,6 +1,5 @@
-import { AnyIterable } from '../types-internal';
+import { AnyIterable, ResolverType } from '../types-internal';
 import { AnyMapper } from '../types-internal';
-import { ResolverType } from '../helpers';
 
 export function groupRecipe(
   reduceAndMap: Function,

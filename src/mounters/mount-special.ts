@@ -1,4 +1,4 @@
-import { fluentGroup } from '../helpers/utils';
+import { fluentGroup } from '../utils';
 
 export type SpecialType = {
   [key in 'group' | 'groupAsync' | 'partition']: Function;
