@@ -772,14 +772,7 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param condition A predicate of `T`. All elements are yielded from the iterable until this evaluates to `false` for the first time.
    * @returns A [[FluentAsyncIterable]] of the elements until the condition is met.
    */
-  takeWhile(condition: Predicate<T>): FluentAsyncIterable<T>;
-
-  /**
-   * Returns elements from the iterable as long as a specified asynchronous condition is met.
-   * @param condition An asynchronous predicate of `T`. All elements are yielded from the iterable until this evaluates to `false` for the first time.
-   * @returns A [[FluentAsyncIterable]] of the elements until the condition is met.
-   */
-  takeWhileAsync(condition: AsyncPredicate<T>): FluentAsyncIterable<T>;
+  takeWhile(condition: AsyncPredicate<T>): FluentAsyncIterable<T>;
 
   /**
    * Returns a specified number of contiguous elements from the start of the iterable.
@@ -793,14 +786,7 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param condition A predicate of `T`. All elements are skipped from the iterable until this evaluates to `false` for the first time.
    * @returns A [[FluentAsyncIterable]] of the elements after the condition is not met.
    */
-  skipWhile(condition: Predicate<T>): FluentAsyncIterable<T>;
-
-  /**
-   * Bypasses elements in the iterable as long as a specified asynchronous condition is true and then returns the remaining elements.
-   * @param condition An asynchronous predicate of `T`. All elements are skipped from the iterable until this evaluates to `false` for the first time.
-   * @returns A [[FluentAsyncIterable]] of the elements after the condition is not met.
-   */
-  skipWhileAsync(condition: AsyncPredicate<T>): FluentAsyncIterable<T>;
+  skipWhile(condition: AsyncPredicate<T>): FluentAsyncIterable<T>;
 
   /**
    * Bypasses a specified number of elements in the iterable and then returns the remaining elements.
@@ -815,7 +801,7 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param mapper The operation which maps an instance of `T` into an instance of `R`.
    * @returns A [[FluentAsyncIterable]] of the mapped elements.
    */
-  map<R>(mapper: Mapper<T, R>): FluentAsyncIterable<R>;
+  map<R>(mapper: AsyncMapper<T, R>): FluentAsyncIterable<R>;
 
   /**
    * Transforms the iterable of `T` into an iterable of `R` by mapping all elements to an element of `R`.
@@ -830,14 +816,7 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param predicate A predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`.
    * @returns A [[FluentAsyncIterable]] of the elements against which the predicate evaluates to `true`.
    */
-  filter(predicate: Predicate<T>): FluentAsyncIterable<T>;
-
-  /**
-   * Filters the iterable of `T` based on an asynchronous predicate.
-   * @param predicate An asynchronous predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`.
-   * @returns A [[FluentAsyncIterable]] of the elements against which the predicate evaluates to `true`.
-   */
-  filterAsync(predicate: AsyncPredicate<T>): FluentAsyncIterable<T>;
+  filter(predicate: AsyncPredicate<T>): FluentAsyncIterable<T>;
 
   /**
    * Groups the elements of the iterable into partitions of a specified size.<br>
@@ -1001,14 +980,7 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param action The action to execute against each element.
    * @returns The [[FluentAsyncIterable]] with the action injected to it.
    */
-  execute(action: Action<T>): FluentAsyncIterable<T>;
-
-  /**
-   * Translate an iterable into one which executes an asynchronous action against each element before yield them.
-   * @param action The asynchronous action to execute against each element.
-   * @returns The [[FluentAsyncIterable]] with the action injected to it.
-   */
-  executeAsync(action: AsyncAction<T>): FluentAsyncIterable<T>;
+  execute(action: AsyncAction<T>): FluentAsyncIterable<T>;
 
   /**
    * Projects and concatenates the elements of the iterable into a `string` using a separator. This is a resolving operation, will cause a full loop through all the elements of the iterable.
