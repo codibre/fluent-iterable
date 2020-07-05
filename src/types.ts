@@ -176,6 +176,73 @@ interface Indexed<T> {
   value: T;
 }
 
+interface AllAsync<T> {
+  (predicate: AsyncPredicate<T>): Promise<boolean>;
+}
+
+interface AnyAsync<T> {
+  (predicate?: AsyncPredicate<T>): Promise<boolean>;
+}
+
+interface ToObjectAsync<T> {
+  <R = T>(
+    keySelector: AsyncMapper<T, keyof R>,
+    valueSelector?: AsyncMapper<T, R[keyof R]>,
+  ): Promise<R>;
+}
+
+interface ForEachAsync<T> {
+  (action: AsyncAction<T>): Promise<void>;
+}
+
+interface ReduceAsync<T> {
+  <R>(reducer: AsyncReducer<T, R>, initial: R): Promise<R>;
+}
+
+interface LastAsync<T> {
+  (predicate?: AsyncPredicate<T>): Promise<T | undefined>;
+}
+
+interface FirstAsync<T> {
+  (predicate?: AsyncPredicate<T>): Promise<T | undefined>;
+}
+
+interface CountAsync<T> {
+  (predicate?: AsyncPredicate<T>): Promise<number>;
+}
+
+interface ReduceAndMapAsync<T> {
+  <A, R>(
+    reducer: AsyncReducer<T, A>,
+    initial: A,
+    result: AsyncMapper<A, R>,
+  ): Promise<R>;
+}
+
+interface JoinAsync<T> {
+  (separator: string, mapper: AsyncMapper<T, string>): Promise<string>;
+}
+
+interface SumAsync<T> {
+  (mapper: AsyncMapper<T, number>): Promise<number>;
+}
+
+interface AvgAsync<T> {
+  (mapper: AsyncMapper<T, number>): Promise<number>;
+}
+
+interface TopAsync<T> {
+  <R>(mapper: AsyncMapper<T, R>, comparer: Comparer<R>): Promise<T | undefined>;
+}
+
+interface MinAsync<T> {
+  (mapper: AsyncMapper<T, number>): Promise<T | undefined>;
+}
+
+interface MaxAsync<T> {
+  (mapper: AsyncMapper<T, number>): Promise<T | undefined>;
+}
+
 /**
  * Represents an iterable extended with common processing and mutating capabilities.<br>
  *   The capabilities introduced are defined as a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) and thus they support *method chaining*.
@@ -400,7 +467,7 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param predicate The count will consider elements which match this asynchronous predicate.
    * @returns A promise of the number of elements matching the specified predicate.
    */
-  countAsync(predicate: AsyncPredicate<T>): Promise<number>;
+  countAsync: CountAsync<T>;
 
   /**
    * Returns the first element of the iterable matching a predicate, or `undefined` value if no such element is found. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
@@ -419,7 +486,7 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param predicate The first element is to be returned which matches this asynchronous predicate.
    * @returns A promise of the first element matching the specified predicate, or `undefined` if no such element found.
    */
-  firstAsync(predicate: AsyncPredicate<T>): Promise<T | undefined>;
+  firstAsync: FirstAsync<T>;
 
   /**
    * Returns the last element of the iterable matching a predicate, or `undefined` value if no such element is found. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -438,7 +505,7 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param predicate The last element is to be returned which matches this asynchronous predicate.
    * @returns A promise of the last element matching the specified predicate, or `undefined` if no such element found.
    */
-  lastAsync(predicate: AsyncPredicate<T>): Promise<T | undefined>;
+  lastAsync: LastAsync<T>;
 
   /**
    * Aggregates the iterable by applying an accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value, and the specified map function is used to project the result value from the accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -475,11 +542,7 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param result The asynchronous mapping function, projects the accumulator value of type `A` to the result value of type `R`.
    * @returns A promise of the aggregated value.
    */
-  reduceAndMapAsync<A, R>(
-    reducer: AsyncReducer<T, A>,
-    initial: A,
-    result: AsyncMapper<A, R>,
-  ): Promise<R>;
+  reduceAndMapAsync: ReduceAndMapAsync<T>;
 
   /**
    * Aggregates the iterable by applying an accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -504,7 +567,7 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param initial The initial (aka *seed*) value of the accumulator.
    * @returns A promise of the aggregated value.
    */
-  reduceAsync<R>(reducer: AsyncReducer<T, R>, initial: R): Promise<R>;
+  reduceAsync: ReduceAsync<T>;
 
   /**
    * Determines whether all elements of the iterable satisfy a condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
@@ -524,7 +587,7 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param predicate The asynchronous condition checked for all elements in the iterable.
    * @returns A promise of `true` if all elements in the iterable satisfy the specified condition, `false` otherwise.
    */
-  allAsync(predicate: AsyncPredicate<T>): Promise<boolean>;
+  allAsync: AllAsync<T>;
 
   /**
    * Determines whether any element of the iterable exists or satisfies a condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
@@ -546,7 +609,7 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param predicate The asynchronous condition checked for the elements in the iterable.
    * @returns A promise of `true` if any of the elements in the iterable satisfy the specified condition, `false` otherwise.
    */
-  anyAsync(predicate: AsyncPredicate<T>): Promise<boolean>;
+  anyAsync: AnyAsync<T>;
 
   /**
    * Determines whether the iterable contains a specified element. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
@@ -585,10 +648,7 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param valueSelector Asynchronously projects an element of the iterable into the value of the corresponding field.
    * @returns A promise of the object composed of the elements of the iterable as fields.
    */
-  toObjectAsync<R = T>(
-    keySelector: AsyncMapper<T, keyof R>,
-    valueSelector?: AsyncMapper<T, R[keyof R]>,
-  ): Promise<R>;
+  toObjectAsync: ToObjectAsync<T>;
 
   /**
    * Translates the iterable into a [[FluentAsyncIterable]].
@@ -608,7 +668,7 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param action The asynchronous action to execute against each element.
    * @returns A promise of the executions.
    */
-  forEachAsync(action: AsyncAction<T>): Promise<void>;
+  forEachAsync: ForEachAsync<T>;
 
   /**
    * Translate an iterable into one which executes an action against each element before yield them.<br>
@@ -643,7 +703,7 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param mapper The function which asynchronously projects the elements of the iterable into `string`s. Falls back to the identity function if omitted.
    * @returns A promise of the concatenated string of the elements in the iterable.
    */
-  joinAsync(separator: string, mapper: AsyncMapper<T, string>): Promise<string>;
+  joinAsync: JoinAsync<T>;
 
   /**
    * Calculates the sum of the elements of the iterable projected into a `number`. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -660,7 +720,7 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param mapper The asynchronous function which projects the elements of the iterable into `number`s. Falls back to the identity function if omitted.
    * @returns A promise of the sum of the projected elements of the iterable.
    */
-  sumAsync(mapper: AsyncMapper<T, number>): Promise<number>;
+  sumAsync: SumAsync<T>;
 
   /**
    * Calculates the average of the elements of the iterable projected into a `number`. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -677,7 +737,7 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param mapper The asynchronous function which projects the elements of the iterable into `number`s. Falls back to the identity function if omitted.
    * @returns A promise of the average of the projected elements of the iterable.
    */
-  avgAsync(mapper: AsyncMapper<T, number>): Promise<number>;
+  avgAsync: AvgAsync<T>;
 
   /**
    * Calculates the top element of the iterable using a projection and a comparer. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -698,10 +758,7 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param comparer The comparison function.
    * @returns A promise of the top of the iterable's projected elements.
    */
-  topAsync<R>(
-    mapper: AsyncMapper<T, R>,
-    comparer: Comparer<R>,
-  ): Promise<T | undefined>;
+  topAsync: TopAsync<T>;
 
   /**
    * Finds the numeric minimum element of the iterable using a projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -716,7 +773,7 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param mapper The asynchronous function which projects the elements of the iterable into numbers.
    * @returns A promise of the minimum of the iterable's projected elements.
    */
-  minAsync(mapper: AsyncMapper<T, number>): Promise<T | undefined>;
+  minAsync: MinAsync<T>;
 
   /**
    * Finds the numeric maximum element of the iterable using a projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -731,7 +788,7 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param mapper The function which asynchronously projects the elements of the iterable into numbers.
    * @returns A promise of the maximum of the iterable's projected elements.
    */
-  maxAsync(mapper: AsyncMapper<T, number>): Promise<T | undefined>;
+  maxAsync: MaxAsync<T>;
 
   /**
    * Checks if the number of elements of the iterable is equal to the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
@@ -939,42 +996,21 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param predicate The count will consider elements which match this predicate. Defaults to the always true function and thus, counts all the elements in the iterable if omitted.
    * @returns A promise of the number of elements matching the specified predicate.
    */
-  count(predicate?: Predicate<T>): Promise<number>;
-
-  /**
-   * Returns the number of elements that matches an asynchronous predicate in the iterable. This is a resolving operation, will cause a full loop through all the elements of the iterable.
-   * @param predicate The count will consider elements which match this asynchronous predicate.
-   * @returns A promise of the number of elements matching the specified predicate.
-   */
-  countAsync(predicate: AsyncPredicate<T>): Promise<number>;
+  count: CountAsync<T>;
 
   /**
    * Returns the first element of the iterable matching a predicate, or `undefined` value if no such element is found. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
    * @param predicate The first element is to be returned which matches this predicate. Defaults to the always true function and thus, returns the first element in the iterable if omitted.
    * @returns A promise of the first element matching the specified predicate, or `undefined` if no such element found.
    */
-  first(predicate?: Predicate<T>): Promise<T | undefined>;
-
-  /**
-   * Returns the first element of the iterable matching an asynchronous predicate, or `undefined` value if no such element is found. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
-   * @param predicate The first element is to be returned which matches this asynchronous predicate.
-   * @returns A promise of the first element matching the specified predicate, or `undefined` if no such element found.
-   */
-  firstAsync(predicate: AsyncPredicate<T>): Promise<T | undefined>;
+  first: FirstAsync<T>;
 
   /**
    * Returns the last element of the iterable matching a predicate, or `undefined` value if no such element is found. This is a resolving operation, will cause a full loop through all the elements of the iterable.
    * @param predicate The last element is to be returned which matches this predicate. Defaults to the always true function and thus, returns the last element in the iterable if omitted.
    * @returns A promise of the last element matching the specified predicate, or `undefined` if no such element found.
    */
-  last(predicate?: Predicate<T>): Promise<T | undefined>;
-
-  /**
-   * Returns the last element of the iterable matching an asynchronous predicate, or `undefined` value if no such element is found. This is a resolving operation, will cause a full loop through all the elements of the iterable.
-   * @param predicate The last element is to be returned which matches this asynchronous predicate.
-   * @returns A promise of the last element matching the specified predicate, or `undefined` if no such element found.
-   */
-  lastAsync(predicate: AsyncPredicate<T>): Promise<T | undefined>;
+  last: LastAsync<T>;
 
   /**
    * Aggregates the iterable by applying an accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value, and the specified map function is used to project the result value from the accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -985,26 +1021,7 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param result The mapping function, projects the accumulator value of type `A` to the result value of type `R`.
    * @returns A promise of the aggregated value.
    */
-  reduceAndMap<A, R>(
-    reducer: Reducer<T, A>,
-    initial: A,
-    result: Mapper<A, R>,
-  ): Promise<R>;
-
-  /**
-   * Aggregates the iterable by applying an asynchronous accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value, and the specified asynchronous map function is used to project the result value from the accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.
-   * @typeparam A The type of the accumulator value.
-   * @typeparam R The type of the aggregation result.
-   * @param reducer The asynchronous accumulator function, provides the next accumulator value out of the last accumulator value and the next element in the iterable.
-   * @param initial The initial (aka *seed*) value of the accumulator.
-   * @param result The asynchronous mapping function, projects the accumulator value of type `A` to the result value of type `R`.
-   * @returns A promise of the aggregated value.
-   */
-  reduceAndMapAsync<A, R>(
-    reducer: AsyncReducer<T, A>,
-    initial: A,
-    result: AsyncMapper<A, R>,
-  ): Promise<R>;
+  reduceAndMap: ReduceAndMapAsync<T>;
 
   /**
    * Aggregates the iterable by applying an accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -1013,46 +1030,21 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param initial The initial (aka *seed*) value of the accumulator.
    * @returns A promise of the aggregated value.
    */
-  reduce<R>(reducer: Reducer<T, R>, initial: R): Promise<R>;
-
-  /**
-   * Aggregates the iterable by applying an asynchronous accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.
-   * @typeparam R The type of the accumulator value.
-   * @param reducer The asynchronous accumulator function, provides the next accumulator value out of the last accumulator value and the next element in the iterable.
-   * @param initial The initial (aka *seed*) value of the accumulator.
-   * @returns A promise of the aggregated value.
-   */
-  reduceAsync<R>(reducer: AsyncReducer<T, R>, initial: R): Promise<R>;
+  reduce: ReduceAsync<T>;
 
   /**
    * Determines whether all elements of the iterable satisfy a condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
    * @param predicate The condition checked for all elements in the iterable.
    * @returns A promise of `true` if all elements in the iterable satisfy the specified condition, `false` otherwise.
    */
-  all(predicate: Predicate<T>): Promise<boolean>;
-
-  /**
-   * Determines whether all elements of the iterable satisfy an asynchronous condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
-   *   Note: This operation stops reading elements from the iterable as soon as the result can be determined.
-   * @param predicate The asynchronous condition checked for all elements in the iterable.
-   * @returns A promise of `true` if all elements in the iterable satisfy the specified condition, `false` otherwise.
-   */
-  allAsync(predicate: AsyncPredicate<T>): Promise<boolean>;
+  all: AllAsync<T>;
 
   /**
    * Determines whether any element of the iterable exists or satisfies a condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
    * @param predicate The condition checked for the elements in the iterable. Defaults to the always true function and thus, returns if the iterable is empty.
    * @returns A promise of `true` if any of the elements in the iterable satisfy the specified condition, `false` otherwise.
    */
-  any(predicate?: Predicate<T>): Promise<boolean>;
-
-  /**
-   * Determines whether any element of the iterable exists or satisfies an asynchronous condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
-   *   Note: This operation stops reading elements from the iterable as soon as the result can be determined.
-   * @param predicate The asynchronous condition checked for the elements in the iterable.
-   * @returns A promise of `true` if any of the elements in the iterable satisfy the specified condition, `false` otherwise.
-   */
-  anyAsync(predicate: AsyncPredicate<T>): Promise<boolean>;
+  any: AnyAsync<T>;
 
   /**
    * Determines whether the iterable contains a specified element. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
@@ -1074,35 +1066,13 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param valueSelector Projects an element of the iterable into the value of the corresponding field. The identity function is being used if omitted.
    * @returns A promise of the object composed of the elements of the iterable as fields.
    */
-  toObject<R>(
-    keySelector: Mapper<T, keyof R>,
-    valueSelector?: Mapper<T, R[keyof R]>,
-  ): Promise<R>;
-
-  /**
-   * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by an asynchronous key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
-   * @typeparam R The expected type of the object. Cannot be enforced, this is strictly informal.
-   * @param keySelector Asynchronously projects an element of the iterable into the key of the corresponding field.
-   * @param valueSelector Asynchronously projects an element of the iterable into the value of the corresponding field.
-   * @returns A promise of the object composed of the elements of the iterable as fields.
-   */
-  toObjectAsync<R>(
-    keySelector: AsyncMapper<T, keyof R>,
-    valueSelector: AsyncMapper<T, R[keyof R]>,
-  ): Promise<R>;
+  toObject: ToObjectAsync<T>;
 
   /**
    * Iterates through the iterable and executes an action against each element. This is a resolving operation, will cause a full loop through all the elements of the iterable.
    * @param action A promise of the action to execute against each element.
    */
-  forEach(action: Action<T>): Promise<void>;
-
-  /**
-   * Iterates through the iterable and executes an asynchronous action against each element. This is a resolving operation, will cause a full loop through all the elements of the iterable.
-   * @param action The asynchronous action to execute against each element.
-   * @returns A promise of the executions.
-   */
-  forEachAsync(action: AsyncAction<T>): Promise<void>;
+  forEach: ForEachAsync<T>;
 
   /**
    * Translate an iterable into one which executes an action against each element before yield them.
@@ -1124,43 +1094,21 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param mapper The function which projects the elements of the iterable into `string`s. Falls back to the identity function if omitted.
    * @returns A promise of the concatenated string of the elements in the iterable.
    */
-  join(separator: string, mapper?: Mapper<T, string>): Promise<string>;
-
-  /**
-   * Asynchronously projects and concatenates the elements of the iterable into a `string` using a separator. This is a resolving operation, will cause a full loop through all the elements of the iterable.
-   * @param separator The separator to use in between the elements of the iterable.
-   * @param mapper The function which asynchronously projects the elements of the iterable into `string`s. Falls back to the identity function if omitted.
-   * @returns A promise of the concatenated string of the elements in the iterable.
-   */
-  joinAsync(separator: string, mapper: AsyncMapper<T, string>): Promise<string>;
+  join: JoinAsync<T>;
 
   /**
    * Calculates the sum of the elements of the iterable projected into a `number`. This is a resolving operation, will cause a full loop through all the elements of the iterable.
    * @param mapper The function which projects the elements of the iterable into `number`s. Falls back to the identity function if omitted.
    * @returns A promise of the sum of the projected elements of the iterable.
    */
-  sum(mapper?: Mapper<T, number>): Promise<number>;
-
-  /**
-   * Calculates the sum of the elements of the iterable asynchronously projected into a `number`. This is a resolving operation, will cause a full loop through all the elements of the iterable.
-   * @param mapper The asynchronous function which projects the elements of the iterable into `number`s. Falls back to the identity function if omitted.
-   * @returns A promise of the sum of the projected elements of the iterable.
-   */
-  sumAsync(mapper: AsyncMapper<T, number>): Promise<number>;
+  sum: SumAsync<T>;
 
   /**
    * Calculates the average of the elements of the iterable projected into a `number`. This is a resolving operation, will cause a full loop through all the elements of the iterable.
    * @param mapper The function which projects the elements of the iterable into `number`s. Falls back to the identity function if omitted.
    * @returns A promise of the average of the projected elements of the iterable.
    */
-  avg(mapper?: Mapper<T, number>): Promise<number>;
-
-  /**
-   * Calculates the average of the elements of the iterable asynchronously projected into a `number`. This is a resolving operation, will cause a full loop through all the elements of the iterable.
-   * @param mapper The asynchronous function which projects the elements of the iterable into `number`s. Falls back to the identity function if omitted.
-   * @returns A promise of the average of the projected elements of the iterable.
-   */
-  avgAsync(mapper: AsyncMapper<T, number>): Promise<number>;
+  avg: AvgAsync<T>;
 
   /**
    * Calculates the top element of the iterable using a projection and a comparer. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -1169,47 +1117,21 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param comparer The comparison function.
    * @returns A promise of the top of the iterable's projected elements.
    */
-  top<R>(mapper: Mapper<T, R>, comparer: Comparer<R>): Promise<T | undefined>;
-
-  /**
-   * Calculates the top element of the iterable using an asynchronous projection and a comparer. This is a resolving operation, will cause a full loop through all the elements of the iterable.
-   * @typeparam R The type of the projected elements used for comparison.
-   * @param mapper The asynchronous function which projects the elements of the iterable into comparable.
-   * @param comparer The comparison function.
-   * @returns A promise of the top of the iterable's projected elements.
-   */
-  topAsync<R>(
-    mapper: AsyncMapper<T, R>,
-    comparer: Comparer<R>,
-  ): Promise<T | undefined>;
+  top: TopAsync<T>;
 
   /**
    * Finds the numeric minimum element of the iterable using a projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.
    * @param mapper The function which projects the elements of the iterable into numbers. Falls back to the identity function if omitted.
    * @returns A promise of the minimum of the iterable's projected elements.
    */
-  min(mapper?: Mapper<T, number>): Promise<T | undefined>;
-
-  /**
-   * Finds the numeric minimum element of the iterable using an asynchronous projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.
-   * @param mapper The asynchronous function which projects the elements of the iterable into numbers.
-   * @returns A promise of the minimum of the iterable's projected elements.
-   */
-  minAsync(mapper: AsyncMapper<T, number>): Promise<T | undefined>;
+  min: MinAsync<T>;
 
   /**
    * Finds the numeric maximum element of the iterable using a projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.
    * @param mapper The function which projects the elements of the iterable into numbers. Falls back to the identity function if omitted.
    * @returns A promise of the maximum of the iterable's projected elements.
    */
-  max(mapper?: Mapper<T, number>): Promise<T | undefined>;
-
-  /**
-   * Finds the numeric maximum element of the iterable using an asynchronous projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.
-   * @param mapper The function which asynchronously projects the elements of the iterable into numbers.
-   * @returns A promise of the maximum of the iterable's projected elements.
-   */
-  maxAsync(mapper: AsyncMapper<T, number>): Promise<T | undefined>;
+  max: MaxAsync<T>;
 
   /**
    * Checks if the number of elements of the iterable is equal to the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.

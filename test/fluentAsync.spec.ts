@@ -69,28 +69,6 @@ describe('fluent async iterable', () => {
         ).to.eql(data);
       });
     });
-    context('takeWhileAsync', () => {
-      it('works with initially not true statement', async () =>
-        expect(
-          await fluentAsync(subject)
-            .takeWhileAsync(async (p) => p.emails.length > 0)
-            .toArray(),
-        ).to.be.empty);
-      it('works with eventually not true statement', async () => {
-        expect(
-          await fluentAsync(subject)
-            .takeWhileAsync(async (p) => p.gender === undefined)
-            .toArray(),
-        ).to.eql(data.slice(0, 3));
-      });
-      it('works with always true statement', async () => {
-        expect(
-          await fluentAsync(subject)
-            .takeWhileAsync(async (p) => p.name.length > 0)
-            .toArray(),
-        ).to.eql(data);
-      });
-    });
     context('take', async () => {
       it('works with negative count', async () =>
         expect(await fluentAsync(subject).take(-5).toArray()).to.be.empty);
@@ -141,32 +119,6 @@ describe('fluent async iterable', () => {
             .toArray(),
         ).to.eql(data.slice(1)));
     });
-    context('skipWhileAsync', () => {
-      it('works with initially not true statement', async () =>
-        expect(
-          await fluentAsync(subject)
-            .skipWhileAsync(async (p) => p.emails.length > 0)
-            .toArray(),
-        ).to.eql(data));
-      it('works with eventually not true statement', async () =>
-        expect(
-          await fluentAsync(subject)
-            .skipWhileAsync(async (p) => p.gender === undefined)
-            .toArray(),
-        ).to.eql(data.slice(3)));
-      it('works with always true statement', async () =>
-        expect(
-          await fluentAsync(subject)
-            .skipWhileAsync(async (p) => p.name.length > 0)
-            .toArray(),
-        ).to.be.empty);
-      it('works with alternating true statement', async () =>
-        expect(
-          await fluentAsync(subject)
-            .skipWhileAsync(async (p) => p.emails.length === 0)
-            .toArray(),
-        ).to.eql(data.slice(1)));
-    });
     context('skip', async () => {
       it('works with negative count', async () =>
         expect(await fluentAsync(subject).skip(-5).toArray()).to.eql(data));
@@ -209,25 +161,6 @@ describe('fluent async iterable', () => {
         }
       });
     });
-    describe('mapAsync', () => {
-      it('maps to undefined', async () => {
-        const res = await fluentAsync(subject)
-          .mapAsync(async () => undefined)
-          .toArray();
-        expect(res).to.length(data.length);
-        res.forEach((item) => expect(item).to.be.undefined);
-      });
-      it('maps to projection', async () => {
-        const res = await fluentAsync(subject)
-          .mapAsync(async (p) => p.name)
-          .toArray();
-        expect(res).to.length(data.length);
-        let idx = 0;
-        for (const item of res) {
-          expect(item).to.equal(data[idx++].name);
-        }
-      });
-    });
     describe('filter', () => {
       it('with always false predicate', async () =>
         expect(
@@ -245,26 +178,6 @@ describe('fluent async iterable', () => {
         expect(
           await fluentAsync(subject)
             .filter((p) => p.gender === Gender.Female)
-            .toArray(),
-        ).to.eql(picker(4, 7, 10)));
-    });
-    describe('filterAsync', () => {
-      it('with always false predicate', async () =>
-        expect(
-          await fluentAsync(subject)
-            .filterAsync(async () => false)
-            .toArray(),
-        ).to.be.empty);
-      it('with always true predicate', async () =>
-        expect(
-          await fluentAsync(subject)
-            .filterAsync(async () => true)
-            .toArray(),
-        ).to.eql(data));
-      it('with alternating predicate', async () =>
-        expect(
-          await fluentAsync(subject)
-            .filterAsync(async (p) => p.gender === Gender.Female)
             .toArray(),
         ).to.eql(picker(4, 7, 10)));
     });
@@ -391,22 +304,6 @@ describe('fluent async iterable', () => {
             .toArray(),
         ).to.eql(flatMap(picker(1, 2, 6, 7, 8, 9, 10, 11), (p) => p.emails)));
     });
-    describe('flattenAsync', () => {
-      it('empty array', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([]))
-            .flattenAsync((x) => x)
-            .toArray(),
-        ).to.be.empty);
-      it('not flat', async () =>
-        expect(
-          await fluentAsync(
-            new ObjectReadableMock([[1, 2], [3, 4, 5], [], [6]]),
-          )
-            .flattenAsync(async (x) => x)
-            .toArray(),
-        ).to.eql([1, 2, 3, 4, 5, 6]));
-    });
     describe('sort', () => {
       it('empty', async () =>
         expect(await fluentAsync(new ObjectReadableMock([])).sort().toArray())
@@ -444,26 +341,6 @@ describe('fluent async iterable', () => {
             .toArray(),
         ).to.eql(picker(0, 3, 4, 5)));
     });
-    describe('distinctAsync', () => {
-      it('empty', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([]))
-            .distinctAsync(async (x) => x)
-            .toArray(),
-        ).to.be.empty);
-      it('not distinct numbers', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([1, 1, 1, 2, 2, 3]))
-            .distinctAsync(async (x) => x)
-            .toArray(),
-        ).to.eql([1, 2, 3]));
-      it('already distinct collection', async () =>
-        expect(
-          await fluentAsync(subject)
-            .distinctAsync(async (x) => x)
-            .toArray(),
-        ).to.eql(data));
-    });
     describe('group', () => {
       it('empty', async () =>
         expect(
@@ -489,31 +366,6 @@ describe('fluent async iterable', () => {
         }
       });
     });
-    describe('groupAsync', () => {
-      it('empty', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([] as Person[]))
-            .groupAsync(async (p) => p.gender)
-            .toArray(),
-        ).to.be.empty);
-      it('non-empty', async () => {
-        const groups = await fluentAsync(subject)
-          .groupAsync(async (p) => p.gender)
-          .toArray();
-        expect(groups.length).to.eql(4);
-        expect(groups.map((grp) => grp.key)).to.have.members([
-          undefined,
-          Gender.Male,
-          Gender.Female,
-          Gender.NonBinary,
-        ]);
-        for (const grp of groups) {
-          expect(grp.values.toArray()).to.eql(
-            data.filter((p) => p.gender === grp.key),
-          );
-        }
-      });
-    });
     describe('count', () => {
       it('empty', async () =>
         expect(await fluentAsync(new ObjectReadableMock([])).count()).to.equal(
@@ -528,26 +380,6 @@ describe('fluent async iterable', () => {
       it('multiple elements with predicate', async () =>
         expect(
           await fluentAsync(subject).count((x) => x.emails.length > 0),
-        ).to.equal(8));
-    });
-    describe('countAsync', () => {
-      it('empty', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([])).countAsync(
-            async () => true,
-          ),
-        ).to.equal(0));
-      it('one element', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([0])).countAsync(
-            async (x) => x === 0,
-          ),
-        ).to.equal(1));
-      it('multiple elements', async () =>
-        expect(
-          await fluentAsync(subject).countAsync(
-            async (x) => x.emails.length > 0,
-          ),
         ).to.equal(8));
     });
     describe('first', () => {
@@ -565,20 +397,6 @@ describe('fluent async iterable', () => {
           ),
         ).to.be.equal(2));
     });
-    describe('firstAsync', () => {
-      it('empty', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([])).firstAsync(
-            async (x) => x,
-          ),
-        ).to.be.undefined);
-      it('not empty', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([3, 1, 2, 6])).firstAsync(
-            async (x) => x % 2 === 0,
-          ),
-        ).to.be.equal(2));
-    });
     describe('last', () => {
       it('empty', async () =>
         expect(await fluentAsync(new ObjectReadableMock([])).last()).to.be
@@ -591,21 +409,6 @@ describe('fluent async iterable', () => {
         expect(
           await fluentAsync(new ObjectReadableMock([3, 1, 2, 6])).last(
             (x) => x % 2 === 0,
-          ),
-        ).to.be.equal(6));
-    });
-
-    describe('lastAsync', () => {
-      it('empty', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([])).lastAsync(
-            async (x) => x,
-          ),
-        ).to.be.undefined);
-      it('not empty', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([3, 1, 2, 6, 7])).lastAsync(
-            async (x) => x % 2 === 0,
           ),
         ).to.be.equal(6));
     });
@@ -627,26 +430,6 @@ describe('fluent async iterable', () => {
           ),
         ).to.be.equals(61));
     });
-    describe('reduceAndMapAsync', () => {
-      it('empty', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([])).reduceAndMapAsync(
-            async (a, b) => (a += b),
-            0,
-            async (a) => a * 10 + 1,
-          ),
-        ).to.be.equal(1));
-      it('not empty', async () =>
-        expect(
-          await fluentAsync(
-            new ObjectReadableMock([1, 2, 3]),
-          ).reduceAndMapAsync(
-            async (a, b) => (a += b),
-            0,
-            async (a) => a * 10 + 1,
-          ),
-        ).to.be.equals(61));
-    });
     describe('reduce', () => {
       it('empty', async () =>
         expect(
@@ -659,22 +442,6 @@ describe('fluent async iterable', () => {
         expect(
           await fluentAsync(new ObjectReadableMock([1, 2, 3])).reduce(
             (a, b) => (a += b),
-            0,
-          ),
-        ).to.be.equals(6));
-    });
-    describe('reduceAsync', () => {
-      it('empty', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([])).reduceAsync(
-            async (a, b) => (a += b),
-            0,
-          ),
-        ).to.be.equal(0));
-      it('not empty', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([1, 2, 3])).reduceAsync(
-            async (a, b) => (a += b),
             0,
           ),
         ).to.be.equals(6));
@@ -699,26 +466,6 @@ describe('fluent async iterable', () => {
           ),
         ).to.be.true);
     });
-    describe('allAsync', () => {
-      it('empty', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([])).allAsync(
-            async (a: number) => a % 2 === 0,
-          ),
-        ).to.be.true);
-      it('false', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([1, 2, 3])).allAsync(
-            async (a: number) => a % 2 === 0,
-          ),
-        ).to.be.false);
-      it('true', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([2, 4, 6])).allAsync(
-            async (a: number) => a % 2 === 0,
-          ),
-        ).to.be.true);
-    });
     describe('any', () => {
       it('empty', async () =>
         expect(
@@ -736,26 +483,6 @@ describe('fluent async iterable', () => {
         expect(
           await fluentAsync(new ObjectReadableMock([1, 2, 3])).any(
             (a: number) => a % 2 === 0,
-          ),
-        ).to.be.true);
-    });
-    describe('anyAsync', () => {
-      it('empty', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([])).anyAsync(
-            async (a: number) => a % 2 === 0,
-          ),
-        ).to.be.false);
-      it('false', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([1, 3, 5])).anyAsync(
-            async (a: number) => a % 2 === 0,
-          ),
-        ).to.be.false);
-      it('true', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([1, 2, 3])).anyAsync(
-            async (a: number) => a % 2 === 0,
           ),
         ).to.be.true);
     });
@@ -800,43 +527,6 @@ describe('fluent async iterable', () => {
           ).toObject(
             (x) => x.gender as string,
             (x) => x.name,
-          ),
-        ).to.be.deep.equal({
-          [Gender.Female]: 'name A',
-          [Gender.NonBinary]: 'name B',
-          [Gender.Male]: 'name C',
-        }));
-    });
-    describe('toObjectAsync', () => {
-      it('empty', async () =>
-        expect(
-          await fluentAsync(
-            new ObjectReadableMock([]) as AsyncIterable<Person>,
-          ).toObjectAsync(
-            async (x) => x.gender as string,
-            async (x) => x.name,
-          ),
-        ).to.be.deep.equal({}));
-      it('not empty', async () =>
-        expect(
-          await fluentAsync(
-            new ObjectReadableMock([
-              {
-                gender: Gender.Female,
-                name: 'name A',
-              },
-              {
-                gender: Gender.NonBinary,
-                name: 'name B',
-              },
-              {
-                gender: Gender.Male,
-                name: 'name C',
-              },
-            ]) as AsyncIterable<Person>,
-          ).toObjectAsync(
-            async (x) => x.gender as string,
-            async (x) => x.name,
           ),
         ).to.be.deep.equal({
           [Gender.Female]: 'name A',
