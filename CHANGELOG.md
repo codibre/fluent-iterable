@@ -1,5 +1,16 @@
 
-## 0.3.2
+## 0.3.3
+* b0dcc8b declaring
+* 7ab97c2 reorganizing reorganizing reorganizing
+* 56aeb98 reorganizing other basic operations
+* f3b087c putting basic resolving operations in a separated folder"
+* 6c8c714 moving basic iterable operations to separating folders to avoid cross reference
+* 8792cf2 fixing docs
+* 8f8856b organizing types to doc generation
+* 85cbeaf removing mounters from doc
+* a820c95 generating documentation
+## v0.3.2
+* bd5f303 0.3.2
 * ebc86d8 reorganizing code so utils can have documentation generated
 ## v0.3.1
 * 41b9db1 0.3.1
