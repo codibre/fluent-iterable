@@ -4,12 +4,13 @@ import {
   asyncResolvingFuncs,
   asyncSpecial,
 } from './mounters';
-import { mergeCatching } from './async-base';
 import {
   mountIterableFunctions,
   mountResolvingFunctions,
   mountSpecial,
 } from './mounters';
+import { AnyIterable } from './types-internal';
+import { iterateAsync } from './utils';
 
 /**
  * Tranforms an asynchronous iterable into a [[FluentAsyncIterable]].
@@ -17,17 +18,17 @@ import {
  * @param iterable The asynchronous iterable instance.
  * @returns The [[FluentAsyncIterable]] instance.
  */
-function fluentAsync<T>(iterable: AsyncIterable<T>): FluentAsyncIterable<T> {
+function fluentAsync<T>(
+  iterable: AsyncIterable<T> | PromiseLike<AnyIterable<T>>,
+): FluentAsyncIterable<T> {
+  const asyncIterable = (iterable.hasOwnProperty(Symbol.asyncIterator)
+    ? iterable
+    : iterateAsync(iterable)) as AsyncIterable<T>;
   return {
-    ...mountIterableFunctions(iterable, asyncIterableFuncs, fluentAsync),
-    ...mountResolvingFunctions(iterable, asyncResolvingFuncs),
-    ...mountSpecial(iterable, asyncSpecial, fluentAsync, fluentAsync),
-    mergeCatching: <R>(
-      errorCallback: ErrorCallback,
-      ...iterables: AsyncIterable<R>[]
-    ) =>
-      fluentAsync(mergeCatching<T | R>(errorCallback, iterable, ...iterables)),
-    [Symbol.asyncIterator]: () => iterable[Symbol.asyncIterator](),
+    ...mountIterableFunctions(asyncIterable, asyncIterableFuncs, fluentAsync),
+    ...mountResolvingFunctions(asyncIterable, asyncResolvingFuncs),
+    ...mountSpecial(asyncIterable, asyncSpecial, fluentAsync, fluentAsync),
+    [Symbol.asyncIterator]: () => asyncIterable[Symbol.asyncIterator](),
   };
 }
 

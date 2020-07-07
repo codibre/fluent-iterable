@@ -105,7 +105,6 @@ export const helper = {
   hasLessThan,
   hasMoreThan,
 };
-
 export const iterableFuncs = {
   withIndex,
   takeWhile,
@@ -133,6 +132,7 @@ export const iterableAsyncFuncs = {
   flattenAsync,
   distinctAsync,
   executeAsync,
+  toAsync,
 };
 
 export const special = {

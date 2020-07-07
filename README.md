@@ -411,6 +411,26 @@ Due to Readables also being async iterables, it can be very useful, if you have 
 
 The solution used for this problems was 90% inspired in the [fraxken combine-async-iterators repository](https://github.com/fraxken/combine-async-iterators), which uses Promise.race to generate a new merged iterable that yields the items from all iterators in the resolving order.
 
+## Adding custom operations
+
+You can add custom methods to the FluentIterable and FluentAsyncIterable using the _extend_ and _extendAsync_ utilities. Here is a practical example of how to:
+
+```TypeScript
+declare module '@codibre/fluent-iterable' {
+  import { extendAsync } from '../src';
+
+  interface FluentAsyncIterable<T> {
+    myCustomIterableMethod(): FluentAsyncIterable<T>;
+    myCustomResolvingMethod(): PromiseLike<number>;
+  }
+
+  extendAsync.use('myCustomIterableMethod', (x) => someOperation(x));
+  extendAsync.use('myCustomResolvingMethod', (x) => someResolvingOperation(x));
+}
+```
+
+Notice that, when you import a code like the above, all the next created FluentAsyncIterable will have the declared methods, so use it with caution!
+
 ## License
 
 Licensed under [MIT](https://en.wikipedia.org/wiki/MIT_License).

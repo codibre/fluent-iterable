@@ -33,6 +33,13 @@ describe('fluent async iterable', () => {
       it('can convert to array', async () => {
         expect(await fluentAsync(subject).toArray()).to.eql(data);
       });
+      it('iterate over a Promise of an iterable', async () => {
+        expect(
+          await fluentAsync(
+            new Promise<any>((resolve) => resolve(subject)),
+          ).toArray(),
+        ).to.eql(data);
+      });
     });
     context('withIndex', () => {
       it('should return Indexed instances from informed array', async () => {

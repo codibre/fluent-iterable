@@ -109,6 +109,7 @@ export const asyncIterableFuncs = {
   execute: executeAsync,
   executeAsync,
   merge,
+  mergeCatching,
 };
 
 export const asyncSpecial = {

@@ -22,6 +22,8 @@ import depaginate from './depaginator';
 import { interval } from './interval';
 import { mergeIterators } from './async-base/merging';
 
+export * from './extend-async';
+export * from './extend';
 export {
   FluentIterable,
   FluentAsyncIterable,
