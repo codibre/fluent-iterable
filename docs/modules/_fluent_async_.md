@@ -1,4 +1,4 @@
-[fluent-iterable - v0.3.2](../README.md) › ["fluent-async"](_fluent_async_.md)
+[fluent-iterable - v0.4.0](../README.md) › ["fluent-async"](_fluent_async_.md)
 
 # Module: "fluent-async"
 
@@ -12,7 +12,7 @@
 
 ###  fluentAsync
 
-▸ **fluentAsync**‹**T**›(`iterable`: AsyncIterable‹T›): *[FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)‹T›*
+▸ **fluentAsync**‹**T**›(`iterable`: AsyncIterable‹T› | PromiseLike‹AnyIterable‹T››): *[FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)‹T›*
 
 Tranforms an asynchronous iterable into a [FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md).
 
@@ -26,7 +26,7 @@ The type of the items in the async iterable.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`iterable` | AsyncIterable‹T› | The asynchronous iterable instance. |
+`iterable` | AsyncIterable‹T› &#124; PromiseLike‹AnyIterable‹T›› | The asynchronous iterable instance. |
 
 **Returns:** *[FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)‹T›*
 
