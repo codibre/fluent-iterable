@@ -1,5 +1,8 @@
 
-## 0.3.3
+## 0.4.0
+* aac6f82 Refactoring some methods for simplicity sake and creating extending functionality
+## v0.3.3
+* ffeed63 0.3.3
 * b0dcc8b declaring
 * 7ab97c2 reorganizing reorganizing reorganizing
 * 56aeb98 reorganizing other basic operations
