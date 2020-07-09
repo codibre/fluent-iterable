@@ -83,6 +83,7 @@ The type of the items in the iterable.
 * [toObjectAsync](_types_.fluentiterable.md#toobjectasync)
 * [top](_types_.fluentiterable.md#top)
 * [topAsync](_types_.fluentiterable.md#topasync)
+* [waitAll](_types_.fluentiterable.md#waitall)
 * [withIndex](_types_.fluentiterable.md#withindex)
 
 ## Methods
@@ -1390,6 +1391,28 @@ Name | Type | Description |
 **Returns:** *Promise‹T | undefined›*
 
 A promise of the top of the iterable's projected elements.
+
+___
+
+###  waitAll
+
+▸ **waitAll**‹**R**›(`mapper`: [AsyncMapper](_types_.asyncmapper.md)‹T, R›): *PromiseLike‹R[]›*
+
+Applies a async transformation for every element in the array and, then, wait for they conclusion with Promise.all. This is a resolving operation.
+
+**Type parameters:**
+
+▪ **R**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`mapper` | [AsyncMapper](_types_.asyncmapper.md)‹T, R› | The asynchronous function which projects the elements of the iterable into promises. |
+
+**Returns:** *PromiseLike‹R[]›*
+
+a promises that resolves into an array with the result of all mappings.
 
 ___
 
