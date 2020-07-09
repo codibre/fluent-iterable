@@ -1,4 +1,4 @@
-[fluent-iterable - v0.5.0](../README.md) › ["async-base/map-async"](_async_base_map_async_.md)
+[fluent-iterable - v0.6.1](../README.md) › ["async-base/map-async"](_async_base_map_async_.md)
 
 # Module: "async-base/map-async"
 

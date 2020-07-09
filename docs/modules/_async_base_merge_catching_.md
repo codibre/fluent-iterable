@@ -1,4 +1,4 @@
-[fluent-iterable - v0.5.0](../README.md) › ["async-base/merge-catching"](_async_base_merge_catching_.md)
+[fluent-iterable - v0.6.1](../README.md) › ["async-base/merge-catching"](_async_base_merge_catching_.md)
 
 # Module: "async-base/merge-catching"
 

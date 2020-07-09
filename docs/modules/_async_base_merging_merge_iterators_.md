@@ -1,4 +1,4 @@
-[fluent-iterable - v0.5.0](../README.md) › ["async-base/merging/merge-iterators"](_async_base_merging_merge_iterators_.md)
+[fluent-iterable - v0.6.1](../README.md) › ["async-base/merging/merge-iterators"](_async_base_merging_merge_iterators_.md)
 
 # Module: "async-base/merging/merge-iterators"
 

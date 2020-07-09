@@ -1,4 +1,4 @@
-[fluent-iterable - v0.5.0](../README.md) › ["types"](../modules/_types_.md) › [Pager](_types_.pager.md)
+[fluent-iterable - v0.6.1](../README.md) › ["types"](../modules/_types_.md) › [Pager](_types_.pager.md)
 
 # Interface: Pager ‹**T, TToken**›
 
