@@ -1,7 +1,7 @@
 {
   "name": "@codibre/fluent-iterable",
   "description": "Provides LINQ-like fluent api operations for iterables and async iterables (ES2018+).",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": false,
   "author": {
     "name": "Kornel B Katai <kataik@gmail.com>"

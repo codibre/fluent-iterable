@@ -1,5 +1,8 @@
 
-## 0.5.0
+## 0.6.0
+* 4d7ccaa documenting and exposing utils functions and changing return type of predicates, so falsy and truthy values can also be used
+## v0.5.0
+* c6a29b0 0.5.0
 * 9af782f updating docs
 * a98ccf6 creating waitAll
 * aaf9dcd updating docs
