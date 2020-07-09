@@ -1,4 +1,4 @@
-import { fluentAsync } from '../src';
+import { fluentAsync, interval, fluent } from '../src';
 import expect, { flatMap } from './tools';
 import { ObjectReadableMock } from 'stream-mock';
 import { Person, data, Gender, picker } from './fluent.spec';
@@ -680,4 +680,24 @@ describe('fluent async iterable', () => {
     });
   };
   describe('on generator', suite(generator));
+
+  describe('waitAll', () => {
+    it('should return a promises with resolves when all promises are resolved', async () => {
+      let resolved = 0;
+
+      const promise = fluentAsync(fluent(interval(1, 10)).toAsync()).waitAll(
+        (x) =>
+          new Promise(async (resolve) => {
+            await delay(1);
+            resolved++;
+            resolve(x);
+          }),
+      );
+
+      expect(resolved).to.be.eq(0);
+      const result = await promise;
+      expect(resolved).to.be.eq(10);
+      expect(result).to.be.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    });
+  });
 });

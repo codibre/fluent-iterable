@@ -1,5 +1,6 @@
-import { fluent } from '../src';
+import { fluent, interval } from '../src';
 import expect, { flatMap, pick } from './tools';
+import delay from 'delay';
 
 export enum Gender {
   Male = 'Male',
@@ -829,4 +830,24 @@ describe('fluent iterable', () => {
     suite(() => data),
   );
   describe('on generator', suite(generator));
+
+  describe('waitAll', () => {
+    it('should return a promises with resolves when all promises are resolved', async () => {
+      let resolved = 0;
+
+      const promise = fluent(interval(1, 10)).waitAll(
+        (x) =>
+          new Promise(async (resolve) => {
+            await delay(1);
+            resolved++;
+            resolve(x);
+          }),
+      );
+
+      expect(resolved).to.be.eq(0);
+      const result = await promise;
+      expect(resolved).to.be.eq(10);
+      expect(result).to.be.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    });
+  });
 });

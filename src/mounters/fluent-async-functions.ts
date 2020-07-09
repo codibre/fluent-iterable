@@ -31,6 +31,7 @@ import {
   maxAsync,
   sumAsync,
   containsAsync,
+  waitAllAsync,
 } from '../async';
 import {
   forEachAsync,
@@ -139,4 +140,5 @@ export const asyncResolvingFuncs = {
   hasExactly: hasExactlyAsync,
   hasLessThan: hasLessThanAsync,
   hasMoreThan: hasMoreThanAsync,
+  waitAll: waitAllAsync,
 };

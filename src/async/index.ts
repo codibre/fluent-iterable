@@ -29,4 +29,5 @@ export * from './take-async';
 export * from './to-array-async';
 export * from './to-object-async';
 export * from './top-async';
+export * from './wait-all';
 export * from './with-index-async';

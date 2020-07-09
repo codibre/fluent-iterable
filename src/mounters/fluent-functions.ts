@@ -33,6 +33,7 @@ import {
   execute,
   avg,
   reduceAndMap,
+  waitAll,
 } from '../sync';
 import {
   allAsync,
@@ -176,4 +177,5 @@ export const resolvingFuncs = {
   hasExactly,
   hasLessThan,
   hasMoreThan,
+  waitAll,
 };
