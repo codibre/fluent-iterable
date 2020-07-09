@@ -1,5 +1,10 @@
 
-## 0.6.0
+## 0.6.1
+* b1fe2d4 removing uneeded exportings
+* d77529e fixing incorrect mapping of executeAsync and flattenAsync to AsyncIterable
+* 34d4c89 fixing incorrect mapping of groupAsync to AsyncIterable
+## v0.6.0
+* a241d05 0.6.0
 * 4d7ccaa documenting and exposing utils functions and changing return type of predicates, so falsy and truthy values can also be used
 ## v0.5.0
 * c6a29b0 0.5.0
