@@ -1,5 +1,5 @@
 export * from './any-iterable';
 export * from './any-mapper';
-export * from './binary-comparer';
+export * from './compare-provider';
 export * from './find-strut';
 export * from './resolver-type';

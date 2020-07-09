@@ -1,4 +1,4 @@
 import { asyncCompareRecipe } from './async-comparer-recipe';
-import { equals } from '../utils';
+import { eq } from '../utils';
 
-export const hasExactlyAsync = asyncCompareRecipe(equals);
+export const hasExactlyAsync = asyncCompareRecipe(eq);

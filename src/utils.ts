@@ -1,74 +1,201 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import fluent from './fluent';
 import { Group, FluentGroup, Predicate, AsyncPredicate } from './types';
+import { AnyIterable } from './types-internal';
 
-/** @internal */
-const resolver = <T, R>(a: T, b: (c: T) => R) => b(a);
-/** @internal */
-const resolverAsync = async <T, R>(a: PromiseLike<T>, b: (c: T) => R) =>
-  b(await a);
-/** @internal */
-async function* iterateAsync(a: any) {
+/**
+ * Pass the informed value to the callback and returns it's result
+ * @typeparam T input type of the callback
+ * @typeparam R the result type of the callback
+ * @param value The value to be passed on
+ * @param callback The callback
+ */
+function resolver<T, R>(value: T, callback: (c: T) => R) {
+  return callback(value);
+}
+
+/**
+ * Resolves a promise like value and pass the result to a callback and returns it's result
+ * @typeparam T input type of the callback
+ * @typeparam R the result type of the callback
+ * @param promise The promise like value
+ * @param callback The callback
+ */
+async function resolverAsync<T, R>(
+  promise: PromiseLike<T>,
+  callback: (c: T) => R,
+) {
+  return callback(await promise);
+}
+
+/**
+ * Iterates all element of an async iterable
+ * @typeparam T the item type of the [[Iterable]]
+ * @param a The async iterable
+ */
+async function* iterateAsync<T>(
+  a: AsyncIterable<T> | PromiseLike<AnyIterable<T>>,
+) {
   yield* await a;
 }
-async function* iterateAllAsync(a: any) {
+
+/**
+ * Iterates in all elements of an async iterable of iterables or async iterables
+ * @typeparam T the item type of the internal [[Iterable/AsyncIterable]]
+ * @param a The async iterable
+ */
+async function* iterateAllAsync<T>(a: AsyncIterable<AnyIterable<T>>) {
   for await (const it of a) {
     yield* it;
   }
 }
-function* iterate(a: any) {
+
+/**
+ * Iterates all element of an iterable
+ * @typeparam T the item type of the [[Iterable]]
+ * @param a The iterable
+ */
+function* iterate<T>(a: Iterable<T>) {
   yield* a;
 }
-function* iterateAll(a: any) {
+
+/**
+ * Iterates in all elements of an iterable of iterables
+ * @typeparam T the item type of the internal [[Iterable]]
+ * @param a The iterable
+ */
+function* iterateAll<T>(a: Iterable<Iterable<T>>) {
   for (const it of a) {
     yield* it;
   }
 }
-const equals = (a: any, b: any) => a === b;
-const greater = (a: any, b: any) => a > b;
-const lesser = (a: any, b: any) => a < b;
-/** @internal */
-// eslint-disable-next-line @typescript-eslint/no-empty-function
+
+/**
+ * Provides a "equals" comparer
+ * @typeparam T the type of b
+ * @param b the value for comparison
+ */
+function eq<T>(b: any) {
+  return (a: T) => a === b;
+}
+
+/**
+ * Provides a "greater than" comparer
+ * @typeparam T the type of b
+ * @param b the value for comparison
+ */
+function gt<T>(b: any) {
+  return (a: T) => a > b;
+}
+
+/**
+ * Provides a "greater or equal" comparer
+ * @typeparam T the type of b
+ * @param b the value for comparison
+ */
+function ge<T>(b: any) {
+  return (a: T) => a >= b;
+}
+
+/**
+ * Provides a "lesser than" comparer
+ * @typeparam T the type of b
+ * @param b the value for comparison
+ */
+function lt<T>(b: any) {
+  return (a: T) => a < b;
+}
+
+/**
+ * Provides a "lesser or equal" comparer
+ * @typeparam T the type of b
+ * @param b the value for comparison
+ */
+function le<T>(b: any) {
+  return (a: T) => a <= b;
+}
+
+/**
+ * Provides an empty iterable
+ */
 function* empty(): Iterable<undefined> {}
-// eslint-disable-next-line @typescript-eslint/no-empty-function
+
+/**
+ * Provides an empty async iterable
+ */
 async function* emptyAsync(): AsyncIterable<undefined> {}
-/** @internal */
-const identity = <T>(t: T): T => t;
-/** @internal */
-const identityAsync = async <T>(t: T): Promise<T> => t;
-/** @internal */
-const truth = (): boolean => true;
-/** @internal */
-const falsity = (): boolean => false;
-/** @internal */
-const negation = <T>(predicate: Predicate<T>): Predicate<T> => (item: T) =>
-  !predicate(item);
-const asyncNegation = <T>(
-  predicate: AsyncPredicate<T>,
-): AsyncPredicate<T> => async (item: T) => !(await predicate(item));
-/** @internal */
-const truthAsync = async (): Promise<boolean> => true;
-/** @internal */
-const fluentGroup = <T, R>(grp: Group<T, R>): FluentGroup<T, R> => ({
-  ...grp,
-  values: fluent(grp.values),
-});
+
+/**
+ * Returns exactly the informed parameter
+ * @param param The informed parameter to be returned
+ */
+function identity<T>(param: T): T {
+  return param;
+}
+
+/**
+ * Always returns true
+ */
+function truth(): boolean {
+  return true;
+}
+
+/**
+ * Always returns false
+ */
+function falsity(): boolean {
+  return false;
+}
+
+/**
+ * Provides a function that negates the informed predicate
+ * @typeparam T the item type of the [[Predicate]]
+ * @param predicate The predicate to be negated
+ */
+function negation<T>(predicate: Predicate<T>): Predicate<T> {
+  return (item: T) => !predicate(item);
+}
+
+/**
+ * Provides a function that negates the informed async predicate
+ * @typeparam T the item type of the [[AsyncPredicate]]
+ * @param predicate The async predicate to be negated
+ */
+function asyncNegation<T>(predicate: AsyncPredicate<T>): AsyncPredicate<T> {
+  return async (item: T) => !(await predicate(item));
+}
+
+/**
+ * Convert a simple [[Group]] to a [[FluentGroup]]
+ * @typeparam Key The type of the key
+ * @typeparam Value the type of the items of the value property
+ * @param {Group} grp the [[Group]] to be converted
+ */
+function fluentGroup<Key, Value>(
+  grp: Group<Value, Key>,
+): FluentGroup<Value, Key> {
+  return {
+    ...grp,
+    values: fluent(grp.values),
+  };
+}
 
 export {
   empty,
   emptyAsync,
   identity,
-  identityAsync,
   truth,
   falsity,
   negation,
   asyncNegation,
-  truthAsync,
   fluentGroup,
   resolver,
   resolverAsync,
-  equals,
-  greater,
-  lesser,
+  eq,
+  ge,
+  gt,
+  le,
+  lt,
   iterateAsync,
   iterateAllAsync,
   iterate,

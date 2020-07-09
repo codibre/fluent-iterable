@@ -46,3 +46,4 @@ export {
   interval,
   mergeIterators,
 };
+export * from './utils';

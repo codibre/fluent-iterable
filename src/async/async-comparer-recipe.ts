@@ -2,8 +2,8 @@ import { resolverAsync } from '../utils';
 import { comparisonRecipe } from '../recipes';
 import { countAsync } from './count-async';
 import { takeAsync } from './take-async';
-import { BinaryComparer } from '../types-internal';
+import { CompareProvider } from '../types-internal';
 
-export function asyncCompareRecipe(comparer: BinaryComparer) {
+export function asyncCompareRecipe(comparer: CompareProvider) {
   return comparisonRecipe(countAsync, takeAsync, resolverAsync, comparer);
 }

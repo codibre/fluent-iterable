@@ -16,7 +16,6 @@
     "src/types-internal/**",
     "src/helpers/**",
     "src/mounters/**",
-    "src/utils.ts",
     "index.ts"
   ]
 }

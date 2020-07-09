@@ -1,4 +1,4 @@
-[fluent-iterable - v0.4.0](../README.md) › ["extend-async"](_extend_async_.md)
+[fluent-iterable - v0.5.0](../README.md) › ["extend-async"](_extend_async_.md)
 
 # Module: "extend-async"
 

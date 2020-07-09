@@ -1,6 +1,6 @@
-[fluent-iterable - v0.4.0](README.md)
+[fluent-iterable - v0.5.0](README.md)
 
-# fluent-iterable - v0.4.0
+# fluent-iterable - v0.5.0
 
 ## Index
 
@@ -34,3 +34,4 @@
 * ["sync-base/map"](modules/_sync_base_map_.md)
 * ["sync-base/take-while"](modules/_sync_base_take_while_.md)
 * ["types"](modules/_types_.md)
+* ["utils"](modules/_utils_.md)

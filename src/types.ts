@@ -13,7 +13,7 @@ interface Predicate<T> {
    * @param item The item evaluated.
    * @returns `true` if the predicate passed on `item`; otherwise `false`.
    */
-  (item: T): boolean;
+  (item: T): any;
 }
 
 /**
@@ -27,7 +27,7 @@ interface AsyncPredicate<T> {
    * @param item The item evaluated.
    * @returns A promise of `true` if the predicate passed on `item`; otherwise a promise of `false`.
    */
-  (item: T): Promise<boolean> | boolean;
+  (item: T): Promise<any> | any;
 }
 
 /**

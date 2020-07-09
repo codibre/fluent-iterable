@@ -1,4 +1,4 @@
-[fluent-iterable - v0.4.0](../README.md) › ["types"](../modules/_types_.md) › [Predicate](_types_.predicate.md)
+[fluent-iterable - v0.5.0](../README.md) › ["types"](../modules/_types_.md) › [Predicate](_types_.predicate.md)
 
 # Interface: Predicate ‹**T**›
 
@@ -17,7 +17,7 @@ The type the predicate is defined on.
 
 ## Callable
 
-▸ (`item`: T): *boolean*
+▸ (`item`: T): *any*
 
 Evaluates an item of type `T`.
 
@@ -27,6 +27,6 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `item` | T | The item evaluated. |
 
-**Returns:** *boolean*
+**Returns:** *any*
 
 `true` if the predicate passed on `item`; otherwise `false`.
