@@ -1,5 +1,10 @@
 
-## 0.4.0
+## 0.5.0
+* 9af782f updating docs
+* a98ccf6 creating waitAll
+* aaf9dcd updating docs
+## v0.4.0
+* 6090f1b 0.4.0
 * aac6f82 Refactoring some methods for simplicity sake and creating extending functionality
 ## v0.3.3
 * ffeed63 0.3.3
