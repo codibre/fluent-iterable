@@ -6,7 +6,7 @@ export type SpecialType = {
 
 export function mountSpecial<T>(
   iterable: Iterable<T> | AsyncIterable<T>,
-  { group, groupAsync, partition }: SpecialType,
+  { group, groupAsync, partition }: Partial<SpecialType>,
   wrapper: (...args: any[]) => any,
   asyncWrapper: (...args: any[]) => any,
 ) {

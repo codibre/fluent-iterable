@@ -43,47 +43,6 @@ import {
   partitionAsync,
 } from '../async-base';
 
-export const asyncHelper = {
-  withIndex: withIndexAsync,
-  takeWhile: takeWhileAsync,
-  take: takeAsync,
-  skipWhile: skipWhileAsync,
-  skip: skipAsync,
-  map: mapAsync,
-  filter: filterAsync,
-  partition: partitionAsync,
-  append: appendAsync,
-  prepend: prependAsync,
-  concat: concatAsync,
-  repeat: repeatAsync,
-  flatten: flattenAsync,
-  sort: sortAsync,
-  distinct: distinctAsync,
-  count: countAsync,
-  first: firstAsync,
-  last: lastAsync,
-  reduceAndMap: reduceAndMapAsync,
-  reduce: reduceAsync,
-  all: allAsync,
-  any: anyAsync,
-  contains: containsAsync,
-  toArray: toArrayAsync,
-  toObject: toObjectAsync,
-  forEach: forEachAsync,
-  execute: executeAsync,
-  join: joinAsync,
-  sum: sumAsync,
-  avg: avgAsync,
-  top: topAsync,
-  min: minAsync,
-  max: maxAsync,
-  hasExactly: hasExactlyAsync,
-  hasLessThan: hasLessThanAsync,
-  hasMoreThan: hasMoreThanAsync,
-  merge,
-  mergeCatching,
-};
-
 export const asyncIterableFuncs = {
   withIndex: withIndexAsync,
   takeWhile: takeWhileAsync,
@@ -104,7 +63,6 @@ export const asyncIterableFuncs = {
   sort: sortAsync,
   distinct: distinctAsync,
   distinctAsync,
-  group: groupAsync,
   execute: executeAsync,
   merge,
   mergeCatching,
@@ -113,7 +71,6 @@ export const asyncIterableFuncs = {
 export const asyncSpecial = {
   partition: partitionAsync,
   group: groupAsync,
-  groupAsync,
 };
 
 export const asyncResolvingFuncs = {
