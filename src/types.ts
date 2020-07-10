@@ -610,7 +610,7 @@ interface FluentIterable<T> extends Iterable<T> {
    * @param action The asynchronous action to execute against each element.
    * @returns A promise of the executions.
    */
-  forEachAsync<R>(mapper: AsyncMapper<T, R>): FluentAsyncIterable<T>;
+  forEachAsync<R>(mapper: AsyncMapper<T, R>): Promise<void>;
 
   /**
    * Translate an iterable into one which executes an action against each element before yield them.<br>
@@ -974,7 +974,7 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * Iterates through the iterable and executes an action against each element. This is a resolving operation, will cause a full loop through all the elements of the iterable.
    * @param action A promise of the action to execute against each element.
    */
-  forEach<R>(mapper: AsyncMapper<T, R>): FluentAsyncIterable<T>;
+  forEach<R>(mapper: AsyncMapper<T, R>): Promise<void>;
 
   /**
    * Translate an iterable into one which executes an action against each element before yield them.

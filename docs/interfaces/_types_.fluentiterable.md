@@ -576,7 +576,7 @@ ___
 
 ###  forEachAsync
 
-▸ **forEachAsync**‹**R**›(`mapper`: [AsyncMapper](_types_.asyncmapper.md)‹T, R›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+▸ **forEachAsync**‹**R**›(`mapper`: [AsyncMapper](_types_.asyncmapper.md)‹T, R›): *Promise‹void›*
 
 Iterates through the iterable and executes an asynchronous action against each element. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -590,7 +590,7 @@ Name | Type |
 ------ | ------ |
 `mapper` | [AsyncMapper](_types_.asyncmapper.md)‹T, R› |
 
-**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+**Returns:** *Promise‹void›*
 
 A promise of the executions.
 

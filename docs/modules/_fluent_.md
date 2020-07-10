@@ -21,7 +21,7 @@
 
 #### Type declaration:
 
-* **get**‹**T**›(`target`: AnyIterable‹T› | PromiseLike‹AnyIterable‹T››, `name`: string): *undefined | (Anonymous function)*
+* **get**‹**T**›(`target`: AnyIterable‹T›, `name`: string): *any*
 
 ___
 
