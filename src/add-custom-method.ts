@@ -1,12 +1,14 @@
+/* eslint-disable guard-for-in */
+import { ProxyReference } from './mounters';
+
 export function addCustomMethod(
-  object: object,
-  name: string,
-  operation: Function,
+  proxyReference: ProxyReference,
+  methods: { [name: string]: Function },
 ) {
-  if (object.hasOwnProperty(name)) {
-    throw new Error(`There is already a method called ${name}`);
+  for (const name in methods) {
+    if (proxyReference.hasOwnProperty(name)) {
+      throw new Error(`There is already a method called ${name}`);
+    }
   }
-  Object.assign(object, {
-    [name]: operation,
-  });
+  Object.assign(proxyReference, methods);
 }

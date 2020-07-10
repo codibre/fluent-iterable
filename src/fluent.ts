@@ -6,12 +6,11 @@ import {
   iterableAsyncFuncs,
   special,
 } from './mounters';
-import { toAsync } from './sync/to-async';
-import {
-  mountIterableFunctions,
-  mountResolvingFunctions,
-  mountSpecial,
-} from './mounters';
+import { mountIterableFunctions, mountSpecial, getHandler } from './mounters';
+import { iterate } from './utils';
+
+export const proxyReference: { [key: string]: Function } = {};
+const handler = getHandler(proxyReference);
 
 /**
  * Tranforms an iterable into a [[FluentIterable]].
@@ -20,14 +19,14 @@ import {
  * @returns The [[FluentIterable]] instance.
  */
 function fluent<T>(iterable: Iterable<T>): FluentIterable<T> {
-  return {
-    ...mountIterableFunctions(iterable, iterableFuncs, fluent),
-    ...mountIterableFunctions(iterable, iterableAsyncFuncs, fluentAsync),
-    ...mountResolvingFunctions(iterable, resolvingFuncs),
-    ...mountSpecial(iterable, special, fluent, fluentAsync),
-    toAsync: () => fluentAsync(toAsync(iterable)),
-    [Symbol.iterator]: () => iterable[Symbol.iterator](),
-  };
+  return new Proxy(iterate(iterable), handler) as FluentIterable<T>;
 }
+
+Object.assign(proxyReference, {
+  ...mountIterableFunctions(iterableFuncs, fluent),
+  ...mountIterableFunctions(iterableAsyncFuncs, fluentAsync),
+  ...resolvingFuncs,
+  ...mountSpecial(special, fluent, fluentAsync),
+});
 
 export default fluent;
