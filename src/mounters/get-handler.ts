@@ -8,10 +8,17 @@ export function getHandler(proxyReference: ProxyReference) {
   return {
     get<T>(target: AnyIterable<T>, name: string) {
       if (name in target) {
-        return (target[name as keyof AnyIterable<T>] as any).bind(target);
+        const value = target[name as keyof AnyIterable<T>];
+        return typeof value === 'function'
+          ? (value as Function).bind(target)
+          : value;
       }
       if (name in proxyReference) {
-        return (...args: any[]) => proxyReference[name](target, ...args);
+        const value = function (...args: any[]) {
+          return proxyReference[name](target, ...args);
+        } as never;
+        target[name as keyof AnyIterable<T>] = value;
+        return value;
       }
     },
   };
