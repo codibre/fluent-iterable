@@ -6,7 +6,7 @@ export interface ProxyReference {
 
 export function getHandler(proxyReference: ProxyReference) {
   return {
-    get<T>(target: AnyIterable<T> | PromiseLike<AnyIterable<T>>, name: string) {
+    get<T>(target: AnyIterable<T>, name: string) {
       if (name in target) {
         return () => (target[name as keyof AnyIterable<T>] as any)();
       }
