@@ -1,5 +1,9 @@
 
-## 0.6.1
+## 0.7.0
+* 87c0c41 using proxy to remove overload
+* a159bf4 updating docs
+## v0.6.1
+* f6f3f55 0.6.1
 * b1fe2d4 removing uneeded exportings
 * d77529e fixing incorrect mapping of executeAsync and flattenAsync to AsyncIterable
 * 34d4c89 fixing incorrect mapping of groupAsync to AsyncIterable
