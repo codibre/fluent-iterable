@@ -1,5 +1,12 @@
 
-## 0.7.0
+## 0.7.1
+* 9a51d8d fixing returning type of forEach and forEachAsync
+* a26d9ff betterning binding
+* d4df7b0 treating bind case
+* 2ba45d3 removing uneeded typing
+* 2f56614 updating doc
+## v0.7.0
+* fa62bc1 0.7.0
 * 87c0c41 using proxy to remove overload
 * a159bf4 updating docs
 ## v0.6.1
