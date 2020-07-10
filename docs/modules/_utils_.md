@@ -1,4 +1,4 @@
-[fluent-iterable - v0.7.0](../README.md) › ["utils"](_utils_.md)
+[fluent-iterable - v0.7.1](../README.md) › ["utils"](_utils_.md)
 
 # Module: "utils"
 

@@ -1,4 +1,4 @@
-[fluent-iterable - v0.7.0](../README.md) › ["async-base/filter-async"](_async_base_filter_async_.md)
+[fluent-iterable - v0.7.1](../README.md) › ["async-base/filter-async"](_async_base_filter_async_.md)
 
 # Module: "async-base/filter-async"
 
