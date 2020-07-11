@@ -1,6 +1,6 @@
 export function withIndexRecipe(map: Function) {
-  return (iterable: any): any => {
+  return function (this: any): any {
     let idx = 0;
-    return map(iterable, (t: any) => ({ idx: idx++, value: t }));
+    return map.call(this, (t: any) => ({ idx: idx++, value: t }));
   };
 }

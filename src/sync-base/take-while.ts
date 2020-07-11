@@ -1,10 +1,10 @@
 import { Predicate } from '../types';
 
 export function* takeWhile<T>(
-  iterable: Iterable<T>,
+  this: Iterable<T>,
   condition: Predicate<T>,
 ): Iterable<T> {
-  for (const t of iterable) {
+  for (const t of this) {
     if (!condition(t)) {
       break;
     }

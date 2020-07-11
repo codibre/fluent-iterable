@@ -1,9 +1,4 @@
-import {
-  iterableFuncs,
-  resolvingFuncs,
-  iterableAsyncFuncs,
-  mountIterableFunctions,
-} from './mounters';
+import { mountIterableFunctions } from './mounters';
 import { addCustomMethod } from './add-custom-method';
 import { AnyIterable } from './types-internal';
 import { proxyReference } from './fluent';
@@ -14,7 +9,7 @@ import fluentAsync from './fluent-async';
  * An operation that returns an Iterable
  */
 export type IterableOperation = <T>(
-  iterable: Iterable<T>,
+  this: Iterable<T>,
   ...args: any[]
 ) => Iterable<any>;
 
@@ -22,7 +17,7 @@ export type IterableOperation = <T>(
  * An operation that returns an AsyncIterable
  */
 export type IterableOperationAsync = <T>(
-  iterable: Iterable<T>,
+  this: Iterable<T>,
   ...args: any[]
 ) => AsyncIterable<any> | PromiseLike<AnyIterable<any>>;
 
@@ -30,7 +25,7 @@ export type IterableOperationAsync = <T>(
  * A resolving operation
  */
 export type IterableResolvingOperation = <T>(
-  iterable: Iterable<T>,
+  this: Iterable<T>,
   ...args: any[]
 ) => any;
 

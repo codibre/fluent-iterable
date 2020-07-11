@@ -1,3 +1,3 @@
-export async function* toAsync<T>(iterable: Iterable<T>): AsyncIterable<T> {
-  yield* iterable;
+export async function* toAsync<T>(this: Iterable<T>): AsyncIterable<T> {
+  yield* this;
 }

@@ -1,8 +1,8 @@
 import { AnyIterable } from '../types-internal';
 
 export function takeRecipe(takeWhile: Function) {
-  return <T>(iterable: AnyIterable<T>, n: number) => {
+  return function <T>(this: AnyIterable<T>, n: number) {
     let counter = 0;
-    return takeWhile(iterable, () => counter++ < n);
+    return takeWhile.call(this, () => counter++ < n);
   };
 }

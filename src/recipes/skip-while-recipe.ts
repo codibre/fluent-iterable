@@ -5,9 +5,9 @@ export function skipWhileRecipe(
   filter: Function,
   delegator: (c: any, a: (b: any) => any) => any,
 ) {
-  return <T>(iterable: AnyIterable<T>, condition: AsyncPredicate<T>) => {
+  return function <T>(this: AnyIterable<T>, condition: AsyncPredicate<T>) {
     let found = false;
-    return filter(iterable, (t: any) =>
+    return filter.call(this, (t: any) =>
       delegator(condition(t), (r) => (found = found || !r)),
     );
   };

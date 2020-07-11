@@ -1,7 +1,7 @@
 export function topRecipe(reduceAndMap: Function) {
-  return (iterable: any, mapper: Function, comparer: Function): any => {
-    return reduceAndMap(
-      iterable,
+  return function (this: any, mapper: Function, comparer: Function): any {
+    return reduceAndMap.call(
+      this,
       (current: any, next: any) => {
         const value = mapper(next);
         return !current.found ||

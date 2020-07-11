@@ -19,7 +19,6 @@ import {
   withIndex,
   skipWhile,
   skip,
-  partition,
   append,
   prepend,
   concat,
@@ -57,7 +56,7 @@ import {
   maxAsync,
   sumAsync,
 } from '../async';
-import { forEach, map, filter, takeWhile } from '../sync-base';
+import { forEach, map, filter, takeWhile, partition } from '../sync-base';
 import {
   forEachAsync,
   mapAsync,

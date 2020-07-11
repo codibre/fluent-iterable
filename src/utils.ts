@@ -35,7 +35,7 @@ async function resolverAsync<T, R>(
  */
 async function* iterateAsync<T>(
   a: AsyncIterable<T> | PromiseLike<AnyIterable<T>>,
-) {
+): AsyncIterable<T> {
   yield* await a;
 }
 

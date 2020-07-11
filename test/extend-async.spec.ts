@@ -9,10 +9,14 @@ declare module '../src' {
   }
 }
 
+async function asyncIdentityFunction(this: any) {
+  return this;
+}
+
 describe('extendAsync', () => {
   describe('use', () => {
-    it('should add new specified method to FluentIterable', async () => {
-      extendAsync.use('testIterable', identity);
+    it('should add new specified method to FluentAsyncIterable', async () => {
+      extendAsync.use('testIterable', asyncIdentityFunction);
 
       const iterable = fluentAsync(
         new Promise<number[]>((r) => r([1, 2, 3])),

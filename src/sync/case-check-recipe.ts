@@ -6,12 +6,12 @@ export function caseCheckRecipe(
   defaultPredicate?: Function,
   predicateTransform: Function = identity,
 ) {
-  return <T>(
-    iterable: Iterable<T>,
+  return function <T>(
+    this: Iterable<T>,
     givenPredicate: Function = defaultPredicate as any,
-  ) => {
+  ) {
     const predicate = predicateTransform(givenPredicate);
-    for (const t of iterable) {
+    for (const t of this) {
       if (predicate(t)) {
         return ifTrue(t);
       }

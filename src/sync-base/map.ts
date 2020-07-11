@@ -1,10 +1,10 @@
 import { Mapper } from '../types';
 
 export function* map<T, R>(
-  iterable: Iterable<T>,
+  this: Iterable<T>,
   mapper: Mapper<T, R>,
 ): Iterable<R> {
-  for (const t of iterable) {
+  for (const t of this) {
     yield mapper(t);
   }
 }

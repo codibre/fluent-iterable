@@ -7,11 +7,11 @@ function* repeat<T>(times: number, cache: T[]) {
 }
 
 export function repeatRecipe(map: Function, concat: Function, empty: Function) {
-  return <T>(iterable: AnyIterable<T>, n: number): any => {
+  return function <T>(this: AnyIterable<T>, n: number): any {
     if (n >= 1) {
       const cache: T[] = [];
-      return concat(
-        map(iterable, (value: T) => {
+      return concat.call(
+        map.call(this, (value: T) => {
           cache.push(value);
           return value;
         }),

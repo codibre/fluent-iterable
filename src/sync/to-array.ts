@@ -1,1 +1,3 @@
-export const toArray = Array.from.bind(Array);
+export function toArray<T>(this: Iterable<T>) {
+  return Array.from(this);
+}

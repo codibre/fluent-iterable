@@ -4,6 +4,7 @@ export function executeRecipe(
   map: Function,
   getMapping: (action: Function) => <T>(t: T) => any,
 ) {
-  return <T>(iterable: AnyIterable<T>, action: Function) =>
-    map(iterable, getMapping(action));
+  return function <T>(this: AnyIterable<T>, action: Function) {
+    return map.call(this, getMapping(action));
+  };
 }

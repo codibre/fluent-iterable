@@ -3,13 +3,13 @@ import { AnyIterable, ResolverType } from '../types-internal';
 import { AnyMapper } from '../types-internal';
 
 export function toObjectRecipe(reduce: Function, resolver: ResolverType) {
-  return <T, V, R extends { [key: string]: V }>(
-    iterable: AnyIterable<T>,
+  return function <T, V, R extends { [key: string]: V }>(
+    this: AnyIterable<T>,
     keySelector: AnyMapper<T>,
     valueSelector: AnyMapper<T> = identity,
-  ): R =>
-    reduce(
-      iterable,
+  ): R {
+    return reduce.call(
+      this,
       (res: any, t: T) =>
         resolver(valueSelector(t), (v) =>
           resolver(keySelector(t), (k) => {
@@ -19,4 +19,5 @@ export function toObjectRecipe(reduce: Function, resolver: ResolverType) {
         ),
       {},
     );
+  };
 }

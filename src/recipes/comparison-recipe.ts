@@ -7,6 +7,8 @@ export function comparisonRecipe(
   resolver: ResolverType,
   comparer: CompareProvider,
 ) {
-  return <T>(iterable: AnyIterable<T>, expectedSize: number): any =>
-    resolver(count(take(iterable, expectedSize + 1)), comparer(expectedSize));
+  return function <T>(this: AnyIterable<T>, expectedSize: number): any {
+    const counted = count.call(take.call(this, expectedSize + 1));
+    return resolver(counted, comparer(expectedSize));
+  };
 }

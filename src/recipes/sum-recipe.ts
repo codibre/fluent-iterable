@@ -3,8 +3,14 @@ import { identity } from '../utils';
 import { AnyIterable } from '../types-internal';
 
 export function sumRecipe(reduce: Function) {
-  return <T>(
-    iterable: AnyIterable<T>,
+  return function <T>(
+    this: AnyIterable<T>,
     mapper: AsyncMapper<T, number> = identity as AsyncMapper<T, number>,
-  ) => reduce(iterable, (current: any, next: any) => current + mapper(next), 0);
+  ) {
+    return reduce.call(
+      this,
+      (current: any, next: any) => current + mapper(next),
+      0,
+    );
+  };
 }

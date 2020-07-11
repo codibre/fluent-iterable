@@ -1,6 +1,7 @@
 import { AnyIterable } from '../types-internal';
 
 export function containsRecipe(any: Function) {
-  return <T>(iterable: AnyIterable<T>, item: T) =>
-    any(iterable, (next: any) => next === item);
+  return function <T>(this: AnyIterable<T>, item: T) {
+    return any.call(this, (next: any) => next === item);
+  };
 }

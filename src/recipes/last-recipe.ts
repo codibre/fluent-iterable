@@ -7,8 +7,8 @@ export function lastRecipe(
     predicate: Function,
   ) => (current: T | undefined, next: T) => any,
 ) {
-  return <T>(iterable: AnyIterable<T>, predicate: any = truth) => {
+  return function <T>(this: AnyIterable<T>, predicate: any = truth) {
     const reduction = getTransform(predicate);
-    return reduce(iterable, reduction, undefined as T | undefined);
+    return reduce.call(this, reduction, undefined as T | undefined);
   };
 }

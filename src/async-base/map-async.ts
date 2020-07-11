@@ -2,10 +2,10 @@ import { AsyncMapper } from '../types';
 import { AnyIterable } from '../types-internal';
 
 export async function* mapAsync<T, R>(
-  iterable: AnyIterable<T>,
+  this: AnyIterable<T>,
   mapper: AsyncMapper<T, R>,
 ): AsyncIterable<R> {
-  for await (const t of iterable) {
+  for await (const t of this) {
     yield await mapper(t);
   }
 }

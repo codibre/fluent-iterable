@@ -1,8 +1,8 @@
 import { AnyIterable } from '../types-internal';
 
 export function skipRecipe(skipWhile: Function) {
-  return <T>(iterable: AnyIterable<T>, n: number) => {
+  return function <T>(this: AnyIterable<T>, n: number) {
     let counter = n;
-    return skipWhile(iterable, () => counter-- > 0);
+    return skipWhile.call(this, () => counter-- > 0);
   };
 }

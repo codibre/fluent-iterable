@@ -7,12 +7,12 @@ export function caseCheckAsyncRecipe(
   defaultPredicate?: Function,
   predicateTransform: Function = identity,
 ) {
-  return async <T>(
-    iterable: AnyIterable<T>,
+  return async function <T>(
+    this: AnyIterable<T>,
     givenPredicate: Function = defaultPredicate as any,
-  ) => {
+  ) {
     const predicate = predicateTransform(givenPredicate);
-    for await (const t of iterable) {
+    for await (const t of this) {
       if (await predicate(t)) {
         return ifTrue(t);
       }

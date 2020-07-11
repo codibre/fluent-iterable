@@ -1,11 +1,12 @@
 import { Comparer } from '../types';
-import { ResolverType } from '../types-internal';
+import { ResolverType, Iterate } from '../types-internal';
 
 export function sortRecipe(
   toArray: Function,
   resolver: ResolverType,
-  iterate: Function,
+  iterate: Iterate,
 ) {
-  return <T>(iterable: Iterable<T>, comparer?: Comparer<T>) =>
-    iterate(resolver(toArray(iterable), (b) => b.sort(comparer)));
+  return function <T>(this: Iterable<T>, comparer?: Comparer<T>) {
+    return iterate(resolver(toArray.call(this), (b) => b.sort(comparer)));
+  };
 }

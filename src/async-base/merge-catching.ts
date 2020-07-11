@@ -1,13 +1,13 @@
 import { mergeIterators, getIterators } from './merging';
 import { ErrorCallback } from '../types';
 
-export function mergeCatching<T>(
-  iterable: AsyncIterable<T>,
+export function mergeCatching<T, R>(
+  this: AsyncIterable<T>,
   callback: ErrorCallback,
-  ...items: Array<AsyncIterable<T> | AsyncIterator<T>>
-): AsyncIterable<T> {
+  ...items: Array<AsyncIterable<R> | AsyncIterator<R>>
+): AsyncIterable<T | R> {
   return mergeIterators(
     callback,
-    ...getIterators<T>([iterable, ...items]),
+    ...getIterators<T | R>([this, ...items]),
   );
 }

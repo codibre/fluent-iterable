@@ -1,5 +1,7 @@
 import { AnyIterable } from '../types-internal';
 
 export function appendRecipe(concat: Function): any {
-  return <T>(iterable: AnyIterable<T>, item: T) => concat(iterable, [item]);
+  return function <T>(this: AnyIterable<T>, item: T) {
+    return concat.call(this, [item]);
+  };
 }

@@ -11,11 +11,11 @@ export function distinctRecipe(
   checkUnicity: <T>(value: T, mapper: AnyMapper<T>, checker: Checker) => any,
 ) {
   return function distinct<T, R>(
-    iterable: AnyIterable<T>,
+    this: AnyIterable<T>,
     mapper: AnyMapper<T> = identity,
   ) {
     const set = new Set<R>();
-    return filter(iterable, (value: T) =>
+    return filter.call(this, (value: T) =>
       checkUnicity(value, mapper, (mappedValue: R) => {
         if (set.has(mappedValue)) {
           return false;

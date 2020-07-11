@@ -17,7 +17,7 @@ async function* readPartition<T>(
 }
 
 export async function* partitionAsync<T>(
-  iterable: AsyncIterable<T>,
+  this: AsyncIterable<T>,
   size: number,
 ): AsyncIterable<AsyncIterable<T>> {
   if (size < 1) {
@@ -26,7 +26,7 @@ export async function* partitionAsync<T>(
     );
   }
 
-  const iterator = iterable[Symbol.asyncIterator]();
+  const iterator = this[Symbol.asyncIterator]();
   for (
     let next = await iterator.next();
     !next.done;

@@ -1,5 +1,4 @@
 import { extend, fluent } from '../src';
-import { identity } from '../src/utils';
 import { expect } from 'chai';
 
 declare module '../src' {
@@ -10,10 +9,18 @@ declare module '../src' {
   }
 }
 
+function identityFunction(this: any) {
+  return this;
+}
+
+async function asyncIdentityFunction(this: any) {
+  return this;
+}
+
 describe('extend', () => {
   describe('use', () => {
     it('should add new specified method to FluentIterable', () => {
-      extend.use('testIterable', identity);
+      extend.use('testIterable', identityFunction);
 
       const iterable = fluent([1, 2, 3]);
 
@@ -24,7 +31,7 @@ describe('extend', () => {
       let error: any;
 
       try {
-        extend.use('take', identity);
+        extend.use('take', identityFunction);
       } catch (err) {
         error = err;
       }
@@ -34,7 +41,7 @@ describe('extend', () => {
   });
   describe('useAsync', () => {
     it('should add new specified method to FluentIterable', async () => {
-      extend.useAsync('testAsyncIterable', async (x) => x);
+      extend.useAsync('testAsyncIterable', asyncIdentityFunction);
 
       const iterable = fluent([1, 2, 3]);
 
@@ -45,7 +52,7 @@ describe('extend', () => {
       let error: any;
 
       try {
-        extend.useAsync('takeWhileAsync', async (x) => x);
+        extend.useAsync('takeWhileAsync', asyncIdentityFunction);
       } catch (err) {
         error = err;
       }
@@ -55,19 +62,21 @@ describe('extend', () => {
   });
 
   describe('useResolving', () => {
-    it('should add new specified method to FluentIterable', async () => {
-      extend.useResolving('testResolving', async () => 2);
+    it('should add new specified method to FluentIterable', () => {
+      extend.useResolving('testResolving', function (this: any) {
+        return 2;
+      });
 
       const iterable = fluent([1, 2, 3]);
 
-      expect(await iterable.testResolving()).to.be.eq(2);
+      expect(iterable.testResolving()).to.be.eq(2);
     });
 
     it('should throw an error if a existing method is tried to be added', () => {
       let error: any;
 
       try {
-        extend.useResolving('toArray', async (x) => x);
+        extend.useResolving('toArray', asyncIdentityFunction);
       } catch (err) {
         error = err;
       }

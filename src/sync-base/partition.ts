@@ -17,7 +17,7 @@ function* readPartition<T>(
 }
 
 export function* partition<T>(
-  iterable: Iterable<T>,
+  this: Iterable<T>,
   size: number,
 ): Iterable<Iterable<T>> {
   if (size < 1) {
@@ -26,7 +26,7 @@ export function* partition<T>(
     );
   }
 
-  const iterator = iterable[Symbol.iterator]();
+  const iterator = this[Symbol.iterator]();
   for (let next = iterator.next(); !next.done; next = iterator.next()) {
     yield readPartition(iterator, next, size);
   }
