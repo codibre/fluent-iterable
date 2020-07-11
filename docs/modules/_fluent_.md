@@ -1,4 +1,4 @@
-[fluent-iterable - v0.7.1](../README.md) › ["fluent"](_fluent_.md)
+[fluent-iterable - v0.7.2](../README.md) › ["fluent"](_fluent_.md)
 
 # Module: "fluent"
 
@@ -21,7 +21,7 @@
 
 #### Type declaration:
 
-* **get**‹**T**›(`target`: AnyIterable‹T›, `name`: string): *any*
+* **get**‹**T**›(`target`: T, `name`: string): *any*
 
 ___
 

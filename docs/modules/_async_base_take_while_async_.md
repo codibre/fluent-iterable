@@ -1,4 +1,4 @@
-[fluent-iterable - v0.7.1](../README.md) › ["async-base/take-while-async"](_async_base_take_while_async_.md)
+[fluent-iterable - v0.7.2](../README.md) › ["async-base/take-while-async"](_async_base_take_while_async_.md)
 
 # Module: "async-base/take-while-async"
 
@@ -12,7 +12,7 @@
 
 ###  takeWhileAsync
 
-▸ **takeWhileAsync**‹**T**›(`iterable`: AnyIterable‹T›, `condition`: [AsyncPredicate](../interfaces/_types_.asyncpredicate.md)‹T›): *AsyncIterable‹T›*
+▸ **takeWhileAsync**‹**T**›(`this`: AnyIterable‹T›, `condition`: [AsyncPredicate](../interfaces/_types_.asyncpredicate.md)‹T›): *AsyncIterable‹T›*
 
 **Type parameters:**
 
@@ -22,7 +22,7 @@
 
 Name | Type |
 ------ | ------ |
-`iterable` | AnyIterable‹T› |
+`this` | AnyIterable‹T› |
 `condition` | [AsyncPredicate](../interfaces/_types_.asyncpredicate.md)‹T› |
 
 **Returns:** *AsyncIterable‹T›*

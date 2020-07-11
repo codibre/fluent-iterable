@@ -1,4 +1,4 @@
-[fluent-iterable - v0.7.1](../README.md) › ["async-base/partition-async"](_async_base_partition_async_.md)
+[fluent-iterable - v0.7.2](../README.md) › ["async-base/partition-async"](_async_base_partition_async_.md)
 
 # Module: "async-base/partition-async"
 
@@ -13,7 +13,7 @@
 
 ###  partitionAsync
 
-▸ **partitionAsync**‹**T**›(`iterable`: AsyncIterable‹T›, `size`: number): *AsyncIterable‹AsyncIterable‹T››*
+▸ **partitionAsync**‹**T**›(`this`: AsyncIterable‹T›, `size`: number): *AsyncIterable‹AsyncIterable‹T››*
 
 **Type parameters:**
 
@@ -23,7 +23,7 @@
 
 Name | Type |
 ------ | ------ |
-`iterable` | AsyncIterable‹T› |
+`this` | AsyncIterable‹T› |
 `size` | number |
 
 **Returns:** *AsyncIterable‹AsyncIterable‹T››*

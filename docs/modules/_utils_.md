@@ -1,4 +1,4 @@
-[fluent-iterable - v0.7.1](../README.md) › ["utils"](_utils_.md)
+[fluent-iterable - v0.7.2](../README.md) › ["utils"](_utils_.md)
 
 # Module: "utils"
 
@@ -260,7 +260,7 @@ ___
 
 ###  iterateAsync
 
-▸ **iterateAsync**‹**T**›(`a`: AsyncIterable‹T› | PromiseLike‹AnyIterable‹T››): *AsyncGenerator‹T, void, undefined›*
+▸ **iterateAsync**‹**T**›(`a`: AsyncIterable‹T› | PromiseLike‹AnyIterable‹T››): *AsyncIterable‹T›*
 
 Iterates all element of an async iterable
 
@@ -276,7 +276,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `a` | AsyncIterable‹T› &#124; PromiseLike‹AnyIterable‹T›› | The async iterable  |
 
-**Returns:** *AsyncGenerator‹T, void, undefined›*
+**Returns:** *AsyncIterable‹T›*
 
 ___
 

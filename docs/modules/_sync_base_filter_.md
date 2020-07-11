@@ -1,4 +1,4 @@
-[fluent-iterable - v0.7.1](../README.md) › ["sync-base/filter"](_sync_base_filter_.md)
+[fluent-iterable - v0.7.2](../README.md) › ["sync-base/filter"](_sync_base_filter_.md)
 
 # Module: "sync-base/filter"
 
@@ -12,7 +12,7 @@
 
 ###  filter
 
-▸ **filter**‹**T**›(`iterable`: Iterable‹T›, `predicate`: [Predicate](../interfaces/_types_.predicate.md)‹T›): *Iterable‹T›*
+▸ **filter**‹**T**›(`this`: Iterable‹T›, `predicate`: [Predicate](../interfaces/_types_.predicate.md)‹T›): *Iterable‹T›*
 
 **Type parameters:**
 
@@ -22,7 +22,7 @@
 
 Name | Type |
 ------ | ------ |
-`iterable` | Iterable‹T› |
+`this` | Iterable‹T› |
 `predicate` | [Predicate](../interfaces/_types_.predicate.md)‹T› |
 
 **Returns:** *Iterable‹T›*

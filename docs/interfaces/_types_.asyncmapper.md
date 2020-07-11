@@ -1,4 +1,4 @@
-[fluent-iterable - v0.7.1](../README.md) › ["types"](../modules/_types_.md) › [AsyncMapper](_types_.asyncmapper.md)
+[fluent-iterable - v0.7.2](../README.md) › ["types"](../modules/_types_.md) › [AsyncMapper](_types_.asyncmapper.md)
 
 # Interface: AsyncMapper ‹**T, R**›
 

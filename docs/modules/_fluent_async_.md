@@ -1,4 +1,4 @@
-[fluent-iterable - v0.7.1](../README.md) › ["fluent-async"](_fluent_async_.md)
+[fluent-iterable - v0.7.2](../README.md) › ["fluent-async"](_fluent_async_.md)
 
 # Module: "fluent-async"
 
@@ -21,7 +21,7 @@
 
 #### Type declaration:
 
-* **get**‹**T**›(`target`: AnyIterable‹T›, `name`: string): *any*
+* **get**‹**T**›(`target`: T, `name`: string): *any*
 
 ___
 

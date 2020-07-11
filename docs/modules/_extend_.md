@@ -1,4 +1,4 @@
-[fluent-iterable - v0.7.1](../README.md) › ["extend"](_extend_.md)
+[fluent-iterable - v0.7.2](../README.md) › ["extend"](_extend_.md)
 
 # Module: "extend"
 
@@ -24,7 +24,7 @@ An operation that returns an Iterable
 
 #### Type declaration:
 
-▸ ‹**T**›(`iterable`: Iterable‹T›, ...`args`: any[]): *Iterable‹any›*
+▸ ‹**T**›(`this`: Iterable‹T›, ...`args`: any[]): *Iterable‹any›*
 
 **Type parameters:**
 
@@ -34,7 +34,7 @@ An operation that returns an Iterable
 
 Name | Type |
 ------ | ------ |
-`iterable` | Iterable‹T› |
+`this` | Iterable‹T› |
 `...args` | any[] |
 
 ___
@@ -47,7 +47,7 @@ An operation that returns an AsyncIterable
 
 #### Type declaration:
 
-▸ ‹**T**›(`iterable`: Iterable‹T›, ...`args`: any[]): *AsyncIterable‹any› | PromiseLike‹AnyIterable‹any››*
+▸ ‹**T**›(`this`: Iterable‹T›, ...`args`: any[]): *AsyncIterable‹any› | PromiseLike‹AnyIterable‹any››*
 
 **Type parameters:**
 
@@ -57,7 +57,7 @@ An operation that returns an AsyncIterable
 
 Name | Type |
 ------ | ------ |
-`iterable` | Iterable‹T› |
+`this` | Iterable‹T› |
 `...args` | any[] |
 
 ___
@@ -70,7 +70,7 @@ A resolving operation
 
 #### Type declaration:
 
-▸ ‹**T**›(`iterable`: Iterable‹T›, ...`args`: any[]): *any*
+▸ ‹**T**›(`this`: Iterable‹T›, ...`args`: any[]): *any*
 
 **Type parameters:**
 
@@ -80,7 +80,7 @@ A resolving operation
 
 Name | Type |
 ------ | ------ |
-`iterable` | Iterable‹T› |
+`this` | Iterable‹T› |
 `...args` | any[] |
 
 ## Object literals

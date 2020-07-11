@@ -1,4 +1,4 @@
-[fluent-iterable - v0.7.1](../README.md) › ["async-base/filter-async"](_async_base_filter_async_.md)
+[fluent-iterable - v0.7.2](../README.md) › ["async-base/filter-async"](_async_base_filter_async_.md)
 
 # Module: "async-base/filter-async"
 
@@ -12,7 +12,7 @@
 
 ###  filterAsync
 
-▸ **filterAsync**‹**T**›(`iterable`: AnyIterable‹T›, `predicate`: [AsyncPredicate](../interfaces/_types_.asyncpredicate.md)‹T›): *AsyncIterable‹T›*
+▸ **filterAsync**‹**T**›(`this`: AnyIterable‹T›, `predicate`: [AsyncPredicate](../interfaces/_types_.asyncpredicate.md)‹T›): *AsyncIterable‹T›*
 
 **Type parameters:**
 
@@ -22,7 +22,7 @@
 
 Name | Type |
 ------ | ------ |
-`iterable` | AnyIterable‹T› |
+`this` | AnyIterable‹T› |
 `predicate` | [AsyncPredicate](../interfaces/_types_.asyncpredicate.md)‹T› |
 
 **Returns:** *AsyncIterable‹T›*

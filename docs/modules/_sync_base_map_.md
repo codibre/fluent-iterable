@@ -1,4 +1,4 @@
-[fluent-iterable - v0.7.1](../README.md) › ["sync-base/map"](_sync_base_map_.md)
+[fluent-iterable - v0.7.2](../README.md) › ["sync-base/map"](_sync_base_map_.md)
 
 # Module: "sync-base/map"
 
@@ -12,7 +12,7 @@
 
 ###  map
 
-▸ **map**‹**T**, **R**›(`iterable`: Iterable‹T›, `mapper`: [Mapper](../interfaces/_types_.mapper.md)‹T, R›): *Iterable‹R›*
+▸ **map**‹**T**, **R**›(`this`: Iterable‹T›, `mapper`: [Mapper](../interfaces/_types_.mapper.md)‹T, R›): *Iterable‹R›*
 
 **Type parameters:**
 
@@ -24,7 +24,7 @@
 
 Name | Type |
 ------ | ------ |
-`iterable` | Iterable‹T› |
+`this` | Iterable‹T› |
 `mapper` | [Mapper](../interfaces/_types_.mapper.md)‹T, R› |
 
 **Returns:** *Iterable‹R›*

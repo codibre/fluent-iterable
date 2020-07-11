@@ -1,4 +1,4 @@
-[fluent-iterable - v0.7.1](../README.md) › ["async-base/map-async"](_async_base_map_async_.md)
+[fluent-iterable - v0.7.2](../README.md) › ["async-base/map-async"](_async_base_map_async_.md)
 
 # Module: "async-base/map-async"
 
@@ -12,7 +12,7 @@
 
 ###  mapAsync
 
-▸ **mapAsync**‹**T**, **R**›(`iterable`: AnyIterable‹T›, `mapper`: [AsyncMapper](../interfaces/_types_.asyncmapper.md)‹T, R›): *AsyncIterable‹R›*
+▸ **mapAsync**‹**T**, **R**›(`this`: AnyIterable‹T›, `mapper`: [AsyncMapper](../interfaces/_types_.asyncmapper.md)‹T, R›): *AsyncIterable‹R›*
 
 **Type parameters:**
 
@@ -24,7 +24,7 @@
 
 Name | Type |
 ------ | ------ |
-`iterable` | AnyIterable‹T› |
+`this` | AnyIterable‹T› |
 `mapper` | [AsyncMapper](../interfaces/_types_.asyncmapper.md)‹T, R› |
 
 **Returns:** *AsyncIterable‹R›*

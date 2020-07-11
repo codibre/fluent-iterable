@@ -1,4 +1,4 @@
-[fluent-iterable - v0.7.1](../README.md) › ["async-base/merging/index"](_async_base_merging_index_.md)
+[fluent-iterable - v0.7.2](../README.md) › ["async-base/merging/index"](_async_base_merging_index_.md)
 
 # Module: "async-base/merging/index"
 

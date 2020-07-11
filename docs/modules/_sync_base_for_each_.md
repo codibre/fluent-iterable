@@ -1,4 +1,4 @@
-[fluent-iterable - v0.7.1](../README.md) › ["sync-base/for-each"](_sync_base_for_each_.md)
+[fluent-iterable - v0.7.2](../README.md) › ["sync-base/for-each"](_sync_base_for_each_.md)
 
 # Module: "sync-base/for-each"
 
@@ -12,7 +12,7 @@
 
 ###  forEach
 
-▸ **forEach**‹**T**›(`iterable`: Iterable‹T›, `action`: [Action](../interfaces/_types_.action.md)‹T›): *void*
+▸ **forEach**‹**T**›(`this`: Iterable‹T›, `action`: [Action](../interfaces/_types_.action.md)‹T›): *void*
 
 **Type parameters:**
 
@@ -22,7 +22,7 @@
 
 Name | Type |
 ------ | ------ |
-`iterable` | Iterable‹T› |
+`this` | Iterable‹T› |
 `action` | [Action](../interfaces/_types_.action.md)‹T› |
 
 **Returns:** *void*

@@ -1,6 +1,6 @@
-[fluent-iterable - v0.7.1](README.md)
+[fluent-iterable - v0.7.2](README.md)
 
-# fluent-iterable - v0.7.1
+# fluent-iterable - v0.7.2
 
 ## Index
 
@@ -32,6 +32,7 @@
 * ["sync-base/for-each"](modules/_sync_base_for_each_.md)
 * ["sync-base/index"](modules/_sync_base_index_.md)
 * ["sync-base/map"](modules/_sync_base_map_.md)
+* ["sync-base/partition"](modules/_sync_base_partition_.md)
 * ["sync-base/take-while"](modules/_sync_base_take_while_.md)
 * ["types"](modules/_types_.md)
 * ["utils"](modules/_utils_.md)

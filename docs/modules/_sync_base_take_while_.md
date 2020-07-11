@@ -1,4 +1,4 @@
-[fluent-iterable - v0.7.1](../README.md) › ["sync-base/take-while"](_sync_base_take_while_.md)
+[fluent-iterable - v0.7.2](../README.md) › ["sync-base/take-while"](_sync_base_take_while_.md)
 
 # Module: "sync-base/take-while"
 
@@ -12,7 +12,7 @@
 
 ###  takeWhile
 
-▸ **takeWhile**‹**T**›(`iterable`: Iterable‹T›, `condition`: [Predicate](../interfaces/_types_.predicate.md)‹T›): *Iterable‹T›*
+▸ **takeWhile**‹**T**›(`this`: Iterable‹T›, `condition`: [Predicate](../interfaces/_types_.predicate.md)‹T›): *Iterable‹T›*
 
 **Type parameters:**
 
@@ -22,7 +22,7 @@
 
 Name | Type |
 ------ | ------ |
-`iterable` | Iterable‹T› |
+`this` | Iterable‹T› |
 `condition` | [Predicate](../interfaces/_types_.predicate.md)‹T› |
 
 **Returns:** *Iterable‹T›*
