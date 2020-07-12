@@ -4,12 +4,13 @@ import {
   asyncResolvingFuncs,
   asyncSpecial,
 } from './mounters';
-import { mountIterableFunctions, mountSpecial, getHandler } from './mounters';
+import { mountIterableFunctions, mountSpecial } from './mounters';
 import { AnyIterable } from './types-internal';
 import { iterateAsync } from './utils';
+import { getExtender, extend } from 'extension-methods';
 
 export const proxyReference: { [key: string]: Function } = {};
-const handler = getHandler(proxyReference);
+const handler = getExtender(proxyReference);
 
 /**
  * Tranforms an asynchronous iterable into a [[FluentAsyncIterable]].
@@ -20,7 +21,7 @@ const handler = getHandler(proxyReference);
 function fluentAsync<T>(
   iterable: AsyncIterable<T> | PromiseLike<AnyIterable<T>>,
 ): FluentAsyncIterable<T> {
-  return new Proxy(iterateAsync(iterable), handler) as FluentAsyncIterable<T>;
+  return extend(iterateAsync(iterable), handler) as any;
 }
 
 Object.assign(proxyReference, {

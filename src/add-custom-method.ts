@@ -1,5 +1,6 @@
 /* eslint-disable guard-for-in */
-import { ProxyReference } from './mounters';
+
+import { ProxyReference } from 'extension-methods';
 
 export function addCustomMethod(
   proxyReference: ProxyReference,

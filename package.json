@@ -63,7 +63,9 @@
     "combine"
   ],
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "extension-methods": "0.0.4"
+  },
   "devDependencies": {
     "@codibre/confs": "0.0.6",
     "@types/chai": "^4.2.11",

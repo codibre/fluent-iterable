@@ -5,12 +5,12 @@ import {
   iterableAsyncFuncs,
   resolvingFuncs,
   special,
-  getHandler,
 } from '../src/mounters';
 import fluent from '../src/fluent';
 import fluentAsync from '../src/fluent-async';
 import { interval } from '../src';
 import { expect } from 'chai';
+import { getExtender } from 'extension-methods';
 
 function explicitWay() {
   return Object.assign({
@@ -22,7 +22,7 @@ function explicitWay() {
 }
 
 const proxyReference = explicitWay();
-const handler = getHandler(proxyReference);
+const handler = getExtender(proxyReference);
 
 function proxyWay() {
   return new Proxy({} as any, handler);
