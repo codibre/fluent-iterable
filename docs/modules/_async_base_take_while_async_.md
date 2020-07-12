@@ -1,4 +1,4 @@
-[fluent-iterable - v0.7.2](../README.md) › ["async-base/take-while-async"](_async_base_take_while_async_.md)
+[fluent-iterable - v0.7.3](../README.md) › ["async-base/take-while-async"](_async_base_take_while_async_.md)
 
 # Module: "async-base/take-while-async"
 

@@ -1,4 +1,4 @@
-[fluent-iterable - v0.7.2](../README.md) › ["index"](_index_.md)
+[fluent-iterable - v0.7.3](../README.md) › ["index"](_index_.md)
 
 # Module: "index"
 

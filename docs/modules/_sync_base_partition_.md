@@ -1,4 +1,4 @@
-[fluent-iterable - v0.7.2](../README.md) › ["sync-base/partition"](_sync_base_partition_.md)
+[fluent-iterable - v0.7.3](../README.md) › ["sync-base/partition"](_sync_base_partition_.md)
 
 # Module: "sync-base/partition"
 

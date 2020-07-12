@@ -1,4 +1,4 @@
-[fluent-iterable - v0.7.2](../README.md) › ["sync-base/map"](_sync_base_map_.md)
+[fluent-iterable - v0.7.3](../README.md) › ["sync-base/map"](_sync_base_map_.md)
 
 # Module: "sync-base/map"
 

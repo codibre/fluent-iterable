@@ -1,5 +1,9 @@
 
-## 0.7.2
+## 0.7.3
+* 9c194e7 using extension methods
+* 9a00e80 checking coverage before publishing
+## v0.7.2
+* cb7f110 0.7.2
 * 2b3774c generating documentation while versioning
 * 0327f13 testing performance with this
 * 6abcb68 proxy benchmark
