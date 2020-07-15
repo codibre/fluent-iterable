@@ -1,4 +1,4 @@
-[fluent-iterable - v0.7.3](../README.md) › ["types"](../modules/_types_.md) › [FluentAsyncIterable](_types_.fluentasynciterable.md)
+[fluent-iterable - v0.8.0](../README.md) › ["types"](../modules/_types_.md) › [FluentAsyncIterable](_types_.fluentasynciterable.md)
 
 # Interface: FluentAsyncIterable ‹**T**›
 
@@ -26,6 +26,7 @@ The type of the items in the asynchronous iterable.
 * [any](_types_.fluentasynciterable.md#any)
 * [append](_types_.fluentasynciterable.md#append)
 * [avg](_types_.fluentasynciterable.md#avg)
+* [combine](_types_.fluentasynciterable.md#combine)
 * [concat](_types_.fluentasynciterable.md#concat)
 * [contains](_types_.fluentasynciterable.md#contains)
 * [count](_types_.fluentasynciterable.md#count)
@@ -144,6 +145,26 @@ Name | Type | Description |
 **Returns:** *Promise‹number›*
 
 A promise of the average of the projected elements of the iterable.
+
+___
+
+###  combine
+
+▸ **combine**‹**U**›(`iterable`: Iterable‹U› | AsyncIterable‹U›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[T, U]›*
+
+Join the async iterable with another one, returning a new async iterable with a NxN combination
+
+**Type parameters:**
+
+▪ **U**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`iterable` | Iterable‹U› &#124; AsyncIterable‹U› | The iterable to be combined  |
+
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[T, U]›*
 
 ___
 

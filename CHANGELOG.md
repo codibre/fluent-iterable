@@ -1,5 +1,8 @@
 
-## 0.7.3
+## 0.8.0
+* 240712f Creating combine methods
+## v0.7.3
+* 0201e8c 0.7.3
 * 9c194e7 using extension methods
 * 9a00e80 checking coverage before publishing
 ## v0.7.2
