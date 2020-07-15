@@ -33,6 +33,7 @@ import {
   avg,
   reduceAndMap,
   waitAll,
+  combine,
 } from '../sync';
 import {
   allAsync,
@@ -55,6 +56,7 @@ import {
   minAsync,
   maxAsync,
   sumAsync,
+  combineAsync,
 } from '../async';
 import { forEach, map, filter, takeWhile, partition } from '../sync-base';
 import {
@@ -80,6 +82,7 @@ export const iterableFuncs = {
   sort,
   distinct,
   execute,
+  combine,
 };
 
 export const iterableAsyncFuncs = {
@@ -92,6 +95,7 @@ export const iterableAsyncFuncs = {
   distinctAsync,
   executeAsync,
   toAsync,
+  combineAsync,
 };
 
 export const special = {

@@ -762,6 +762,18 @@ interface FluentIterable<T> extends Iterable<T> {
    * @returns a promises that resolves into an array with the result of all mappings.
    */
   waitAll<R>(mapper: AsyncMapper<T, R>): PromiseLike<R[]>;
+
+  /**
+   * Join the iterable with another one, returning a new iterable with a NxN combination
+   * @param iterable The iterable to be combined
+   */
+  combine<U>(iterable: Iterable<U>): FluentIterable<[T, U]>;
+
+  /**
+   * Join the iterable with an async one, returning a new async iterable with a NxN combination
+   * @param iterable The iterable to be combined
+   */
+  combineAsync<U>(iterable: AsyncIterable<U>): FluentAsyncIterable<[T, U]>;
 }
 
 /**
@@ -1076,6 +1088,14 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @returns a promises that resolves into an array with the result of all mappings.
    */
   waitAll<R>(mapper: AsyncMapper<T, R>): PromiseLike<R[]>;
+
+  /**
+   * Join the async iterable with another one, returning a new async iterable with a NxN combination
+   * @param iterable The iterable to be combined
+   */
+  combine<U>(
+    iterable: Iterable<U> | AsyncIterable<U>,
+  ): FluentAsyncIterable<[T, U]>;
 }
 
 /**

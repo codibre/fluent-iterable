@@ -32,6 +32,7 @@ import {
   sumAsync,
   containsAsync,
   waitAllAsync,
+  combineAsync,
 } from '../async';
 import {
   forEachAsync,
@@ -66,6 +67,7 @@ export const asyncIterableFuncs = {
   execute: executeAsync,
   merge,
   mergeCatching,
+  combine: combineAsync,
 };
 
 export const asyncSpecial = {
