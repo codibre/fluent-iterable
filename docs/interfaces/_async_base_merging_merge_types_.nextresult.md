@@ -1,4 +1,4 @@
-[fluent-iterable - v0.8.0](../README.md) › ["async-base/merging/merge-types"](../modules/_async_base_merging_merge_types_.md) › [NextResult](_async_base_merging_merge_types_.nextresult.md)
+[fluent-iterable - v1.0.0](../README.md) › ["async-base/merging/merge-types"](../modules/_async_base_merging_merge_types_.md) › [NextResult](_async_base_merging_merge_types_.nextresult.md)
 
 # Interface: NextResult ‹**T**›
 

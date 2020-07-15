@@ -1,4 +1,4 @@
-[fluent-iterable - v0.8.0](../README.md) › ["types"](../modules/_types_.md) › [FluentIterable](_types_.fluentiterable.md)
+[fluent-iterable - v1.0.0](../README.md) › ["types"](../modules/_types_.md) › [FluentIterable](_types_.fluentiterable.md)
 
 # Interface: FluentIterable ‹**T**›
 

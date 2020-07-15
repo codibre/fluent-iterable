@@ -1,4 +1,4 @@
-[fluent-iterable - v0.8.0](../README.md) › ["async-base/index"](_async_base_index_.md)
+[fluent-iterable - v1.0.0](../README.md) › ["async-base/index"](_async_base_index_.md)
 
 # Module: "async-base/index"
 
