@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import fluent from './fluent';
-import { Group, FluentGroup, Predicate, AsyncPredicate } from './types';
-import { AnyIterable } from './types-internal';
-import { map } from './sync-base';
+import { Group, FluentGroup, Predicate, AsyncPredicate, Mapper } from './types';
+import { AnyIterable, AnyMapper } from './types-internal';
+import { toObject } from './sync/to-object';
+import { first } from './sync/first';
 
 /**
  * Pass the informed value to the callback and returns it's result

@@ -1,9 +1,7 @@
 /* eslint-disable guard-for-in */
 
 import { AnyIterable } from '../types-internal';
-import { map } from '../sync-base';
-import { iterateObjEntries } from '../utils';
-import { toObject } from '../sync';
+import { transformObjValues } from '../transform-obj-values';
 
 const getDefinition = <Func extends Function>(
   iterableFunc: Func,
@@ -16,9 +14,7 @@ const getDefinition = <Func extends Function>(
 
 const getProperty = ([prop]: any) => prop;
 
-function getValue(
-  wrapper: (...args: any[]) => any,
-): ([_p, func]: any) => <T>(this: AnyIterable<T>, ...args: any[]) => any {
+function getValue(wrapper: (...args: any[]) => any) {
   return ([_p, func]: any) => getDefinition(func, wrapper);
 }
 
@@ -27,11 +23,5 @@ export function mountIterableFunctions<
   Func extends Function,
   Funcs extends { [key: string]: Func }
 >(iterableFuncs: Funcs, wrapper: (...args: any[]) => any): any {
-  const result = toObject.call(
-    iterateObjEntries(iterableFuncs),
-    getProperty,
-    getValue(wrapper),
-  );
-
-  return result;
+  return transformObjValues(iterableFuncs, getValue(wrapper));
 }

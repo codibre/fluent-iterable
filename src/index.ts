@@ -24,6 +24,7 @@ import { mergeIterators } from './async-base/merging';
 
 export * from './extend-async';
 export * from './extend';
+export * from './transform-obj-values';
 export {
   FluentIterable,
   FluentAsyncIterable,
