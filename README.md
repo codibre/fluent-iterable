@@ -6,9 +6,7 @@
 [![npm version](https://badge.fury.io/js/%40codibre%2Ffluent-iterable.svg)](https://badge.fury.io/js/%40codibre%2Ffluent-iterable)
 
 <p align="center">
-
-![(:](./resources/logo.png)
-
+<img src="resources/logo.png">
 </p>
 
 Provides [fluent api](https://en.wikipedia.org/wiki/Fluent_interface) operations on iterables and async iterables - similar to what defined on arrays. Especially useful until [relevant ESNext features](https://tc39.es/proposal-iterator-helpers/#sec-iteration) are being delivered.
