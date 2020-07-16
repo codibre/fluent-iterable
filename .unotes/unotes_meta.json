@@ -1,0 +1,53 @@
+{
+  "name": "",
+  "isOrdered": true,
+  "folders": {
+    "coverage": {
+      "name": "coverage",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "dist": {
+      "name": "dist",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "docs": {
+      "name": "docs",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "resources": {
+      "name": "resources",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "scripts": {
+      "name": "scripts",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "src": {
+      "name": "src",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "test": {
+      "name": "test",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    }
+  },
+  "files": {
+    "CONTRIBUTORS": 0,
+    "CHANGELOG": 1,
+    "README": 2
+  }
+}
