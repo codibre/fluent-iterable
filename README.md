@@ -7,7 +7,7 @@
 
 <p align="center">
 
-![(:](./resources/logo.png)
+![(:](./resources/preview.png)
 
 </p>
 
