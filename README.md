@@ -5,7 +5,11 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/ead6c08b3f629f094362/maintainability)](https://codeclimate.com/github/Codibre/fluent-iterable/maintainability)
 [![npm version](https://badge.fury.io/js/%40codibre%2Ffluent-iterable.svg)](https://badge.fury.io/js/%40codibre%2Ffluent-iterable)
 
-![(:](./resources/logo.png)<br>
+<p align="center">
+
+![(:](./resources/logo.png)
+
+</p>
 
 Provides [fluent api](https://en.wikipedia.org/wiki/Fluent_interface) operations on iterables and async iterables - similar to what defined on arrays. Especially useful until [relevant ESNext features](https://tc39.es/proposal-iterator-helpers/#sec-iteration) are being delivered.
 This library are a fork from [kataik fluent-iterable repository](https://github.com/kataik/fluent-iterable) where more functionalities was added.
