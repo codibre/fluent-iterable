@@ -1,4 +1,4 @@
-[fluent-iterable - v1.0.0](../README.md) › ["utils"](_utils_.md)
+[fluent-iterable - v1.0.1](../README.md) › ["utils"](_utils_.md)
 
 # Module: "utils"
 
@@ -19,6 +19,8 @@
 * [iterateAll](_utils_.md#iterateall)
 * [iterateAllAsync](_utils_.md#iterateallasync)
 * [iterateAsync](_utils_.md#iterateasync)
+* [iterateObjEntries](_utils_.md#iterateobjentries)
+* [iterateObjProps](_utils_.md#iterateobjprops)
 * [le](_utils_.md#le)
 * [lt](_utils_.md#lt)
 * [negation](_utils_.md#negation)
@@ -277,6 +279,46 @@ Name | Type | Description |
 `a` | AsyncIterable‹T› &#124; PromiseLike‹AnyIterable‹T›› | The async iterable  |
 
 **Returns:** *AsyncIterable‹T›*
+
+___
+
+###  iterateObjEntries
+
+▸ **iterateObjEntries**‹**T**›(`obj`: T): *Generator‹keyof T | T[keyof T][], void, unknown›*
+
+Iterates over all owned entries of given object
+
+**Type parameters:**
+
+▪ **T**: *object*
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`obj` | T | The object to iterate with  |
+
+**Returns:** *Generator‹keyof T | T[keyof T][], void, unknown›*
+
+___
+
+###  iterateObjProps
+
+▸ **iterateObjProps**‹**T**›(`obj`: T): *Iterable‹keyof T›*
+
+Iterates over all owned properties of the given object
+
+**Type parameters:**
+
+▪ **T**: *object*
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`obj` | T | The object to iterate with  |
+
+**Returns:** *Iterable‹keyof T›*
 
 ___
 

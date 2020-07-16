@@ -1,4 +1,4 @@
-[fluent-iterable - v1.0.0](../README.md) › ["sync-base/for-each"](_sync_base_for_each_.md)
+[fluent-iterable - v1.0.1](../README.md) › ["sync-base/for-each"](_sync_base_for_each_.md)
 
 # Module: "sync-base/for-each"
 

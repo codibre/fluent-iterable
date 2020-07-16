@@ -1,6 +1,6 @@
-[fluent-iterable - v1.0.0](README.md)
+[fluent-iterable - v1.0.1](README.md)
 
-# fluent-iterable - v1.0.0
+# fluent-iterable - v1.0.1
 
 ## Index
 
@@ -34,5 +34,6 @@
 * ["sync-base/map"](modules/_sync_base_map_.md)
 * ["sync-base/partition"](modules/_sync_base_partition_.md)
 * ["sync-base/take-while"](modules/_sync_base_take_while_.md)
+* ["transform-obj-values"](modules/_transform_obj_values_.md)
 * ["types"](modules/_types_.md)
 * ["utils"](modules/_utils_.md)

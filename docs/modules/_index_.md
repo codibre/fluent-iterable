@@ -1,4 +1,4 @@
-[fluent-iterable - v1.0.0](../README.md) › ["index"](_index_.md)
+[fluent-iterable - v1.0.1](../README.md) › ["index"](_index_.md)
 
 # Module: "index"
 
@@ -26,11 +26,14 @@
 * [iterateAll](_index_.md#iterateall)
 * [iterateAllAsync](_index_.md#iterateallasync)
 * [iterateAsync](_index_.md#iterateasync)
+* [iterateObjEntries](_index_.md#iterateobjentries)
+* [iterateObjProps](_index_.md#iterateobjprops)
 * [le](_index_.md#le)
 * [lt](_index_.md#lt)
 * [negation](_index_.md#negation)
 * [resolver](_index_.md#resolver)
 * [resolverAsync](_index_.md#resolverasync)
+* [transformObjValues](_index_.md#transformobjvalues)
 * [truth](_index_.md#truth)
 
 ## References
@@ -155,6 +158,18 @@ ___
 
 ___
 
+###  iterateObjEntries
+
+• **iterateObjEntries**:
+
+___
+
+###  iterateObjProps
+
+• **iterateObjProps**:
+
+___
+
 ###  le
 
 • **le**:
@@ -182,6 +197,12 @@ ___
 ###  resolverAsync
 
 • **resolverAsync**:
+
+___
+
+###  transformObjValues
+
+• **transformObjValues**:
 
 ___
 

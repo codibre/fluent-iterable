@@ -1,5 +1,9 @@
 
-## 1.0.0
+## 1.0.1
+* 6cf4401 creating helper transformObjValues
+* 24d2cde creating helper for object keys intetator
+## v1.0.0
+* ed4b23c 1.0.0
 ## v0.8.0
 * f1b83d9 0.8.0
 * 240712f Creating combine methods
