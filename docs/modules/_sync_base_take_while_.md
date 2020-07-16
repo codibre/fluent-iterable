@@ -1,4 +1,4 @@
-[fluent-iterable - v1.0.1](../README.md) › ["sync-base/take-while"](_sync_base_take_while_.md)
+[fluent-iterable - v1.0.2](../README.md) › ["sync-base/take-while"](_sync_base_take_while_.md)
 
 # Module: "sync-base/take-while"
 

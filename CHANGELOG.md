@@ -1,5 +1,14 @@
 
-## 1.0.1
+## 1.0.2
+* c89d8af Merge branch 'master' of github.com:Codibre/fluent-iterable
+* 555ec15 creating preview
+* 13999fd Update README.md
+* 2755cc3 align image
+* b6ee41d adding line break
+* ece28af adding logo
+* 6b4cb06 adding logo
+## v1.0.1
+* 438b915 1.0.1
 * 6cf4401 creating helper transformObjValues
 * 24d2cde creating helper for object keys intetator
 ## v1.0.0
