@@ -2,6 +2,7 @@
 import fluent from './fluent';
 import { Group, FluentGroup, Predicate, AsyncPredicate } from './types';
 import { AnyIterable } from './types-internal';
+import { map } from './sync-base';
 
 /**
  * Pass the informed value to the callback and returns it's result
@@ -67,6 +68,28 @@ function* iterate<T>(a: Iterable<T>) {
 function* iterateAll<T>(a: Iterable<Iterable<T>>) {
   for (const it of a) {
     yield* it;
+  }
+}
+
+/**
+ * Iterates over all owned properties of the given object
+ * @param obj The object to iterate with
+ */
+function* iterateObjProps<T extends object>(obj: T): Iterable<keyof T> {
+  for (const property in obj) {
+    if (obj.hasOwnProperty(property)) {
+      yield property;
+    }
+  }
+}
+
+/**
+ * Iterates over all owned entries of given object
+ * @param obj The object to iterate with
+ */
+function* iterateObjEntries<T extends object>(obj: T) {
+  for (const property of iterateObjProps(obj)) {
+    yield [property, obj[property]];
   }
 }
 
@@ -200,4 +223,6 @@ export {
   iterateAllAsync,
   iterate,
   iterateAll,
+  iterateObjProps,
+  iterateObjEntries,
 };
