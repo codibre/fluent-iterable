@@ -2,7 +2,8 @@
 
 name: test-benchmark
 on:
-  workflow_dispatch: [master]
+  workflow_dispatch:
+    branches: [master]
 
 jobs:
   test:
