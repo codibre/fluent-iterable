@@ -1,6 +1,22 @@
 import { yieldArrayPartition } from '../recipes';
+import { getChooseIteration } from '../types-internal';
 
-export function* partition<T>(
+function* iterate<T>(arr: Iterable<T>, size: number) {
+  const iterator = arr[Symbol.iterator]();
+  let next = iterator.next();
+  while (!next.done) {
+    yield (function* () {
+      for (let i = 0; i < size && !next.done; i++) {
+        yield next.value;
+        next = iterator.next();
+      }
+    })();
+  }
+}
+
+const partitioning = getChooseIteration(yieldArrayPartition, iterate);
+
+export function partition<T>(
   this: Iterable<T>,
   size: number,
 ): Iterable<Iterable<T>> {
@@ -10,18 +26,5 @@ export function* partition<T>(
     );
   }
 
-  if (Array.isArray(this)) {
-    yield* yieldArrayPartition(this, size);
-  } else {
-    const iterator = this[Symbol.iterator]();
-    let next = iterator.next();
-    while (!next.done) {
-      yield (function* () {
-        for (let i = 0; i < size && !next.done; i++) {
-          yield next.value;
-          next = iterator.next();
-        }
-      })();
-    }
-  }
+  return partitioning.call(this, size);
 }

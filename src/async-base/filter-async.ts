@@ -1,5 +1,5 @@
-import { Predicate, AsyncPredicate } from '../types';
-import { chooseIteration } from '../types-internal/choose-iteration';
+import { AsyncPredicate } from '../types';
+import { getChooseIteration } from '../types-internal/choose-iteration';
 import { AnyIterable } from '../types-internal';
 
 async function* iterateAsArray<T>(
@@ -24,9 +24,4 @@ async function* iterate<T>(
   }
 }
 
-export function filterAsync<T>(
-  this: AnyIterable<T>,
-  predicate: Predicate<T>,
-): AsyncIterable<T> {
-  return chooseIteration(this, iterateAsArray, iterate, predicate);
-}
+export const filterAsync = getChooseIteration(iterateAsArray, iterate);

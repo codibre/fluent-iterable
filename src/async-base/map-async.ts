@@ -1,5 +1,5 @@
 import { AsyncMapper } from '../types';
-import { chooseIteration, AnyIterable } from '../types-internal';
+import { AnyIterable, getChooseIteration } from '../types-internal';
 
 async function* iterateAsArray<T, R>(
   arr: T[],
@@ -19,9 +19,4 @@ async function* iterate<T, R>(
   }
 }
 
-export function mapAsync<T, R>(
-  this: Iterable<T>,
-  mapper: AsyncMapper<T, R>,
-): AsyncIterable<R> {
-  return chooseIteration(this, iterateAsArray, iterate, mapper);
-}
+export const mapAsync = getChooseIteration(iterateAsArray, iterate);

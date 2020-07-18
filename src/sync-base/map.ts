@@ -1,5 +1,5 @@
 import { Mapper } from '../types';
-import { chooseIteration } from '../types-internal';
+import { getChooseIteration } from '../types-internal';
 
 function* iterateAsArray<T, R>(arr: T[], mapper: Mapper<T, R>): Iterable<R> {
   for (let i = 0; i < arr.length; i++) {
@@ -13,9 +13,4 @@ function* iterate<T, R>(arr: Iterable<T>, mapper: Mapper<T, R>): Iterable<R> {
   }
 }
 
-export function map<T, R>(
-  this: Iterable<T>,
-  mapper: Mapper<T, R>,
-): Iterable<R> {
-  return chooseIteration(this, iterateAsArray, iterate, mapper);
-}
+export const map = getChooseIteration(iterateAsArray, iterate);

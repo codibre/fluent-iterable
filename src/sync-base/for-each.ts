@@ -1,5 +1,5 @@
 import { Action } from '../types';
-import { chooseIteration } from '../types-internal';
+import { getChooseIteration } from '../types-internal';
 
 function iterateAsArray<T>(arr: T[], action: Action<T>) {
   for (let i = 0; i < arr.length; i++) {
@@ -13,6 +13,4 @@ function iterate<T>(arr: Iterable<T>, action: Action<T>) {
   }
 }
 
-export function forEach<T>(this: Iterable<T>, action: Action<T>): void {
-  return chooseIteration(this, iterateAsArray, iterate, action);
-}
+export const forEach = getChooseIteration(iterateAsArray, iterate);

@@ -1,5 +1,5 @@
 import { Predicate } from '../types';
-import { chooseIteration } from '../types-internal';
+import { getChooseIteration } from '../types-internal';
 
 function* iterateAsArray<T>(arr: T[], condition: Predicate<T>): Iterable<T> {
   for (let i = 0; i < arr.length && condition(arr[i]); i++) {
@@ -17,9 +17,4 @@ function* iterate<T>(arr: Iterable<T>, condition: Predicate<T>): Iterable<T> {
   }
 }
 
-export function takeWhile<T>(
-  this: Iterable<T>,
-  condition: Predicate<T>,
-): Iterable<T> {
-  return chooseIteration(this, iterateAsArray, iterate, condition);
-}
+export const takeWhile = getChooseIteration(iterateAsArray, iterate);

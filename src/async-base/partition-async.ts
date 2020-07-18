@@ -1,18 +1,21 @@
 import { yieldArrayPartition } from '../recipes';
-import { iterateAsync } from '../utils';
+import { getChooseIteration } from '../types-internal';
 
-async function* readPartition<T>(
-  iterator: AsyncIterator<T>,
-  next: IteratorResult<T>,
-  size: number,
-): AsyncIterable<T> {
-  for (; size > 1 && !next.done; size--) {
-    yield next.value;
-    next = await iterator.next();
+async function* iterate<T>(arr: AsyncIterable<T>, size: number) {
+  const iterator = arr[Symbol.asyncIterator]();
+  for (let next = await iterator.next(); !next.done; ) {
+    yield (async function* () {
+      for (let i = 0; i < size && !next.done; i++) {
+        yield next.value;
+        next = await iterator.next();
+      }
+    })();
   }
 }
 
-export async function* partitionAsync<T>(
+const partitioning = getChooseIteration(yieldArrayPartition, iterate);
+
+export function partitionAsync<T>(
   this: AsyncIterable<T>,
   size: number,
 ): AsyncIterable<AsyncIterable<T>> {
@@ -22,17 +25,5 @@ export async function* partitionAsync<T>(
     );
   }
 
-  if (Array.isArray(this)) {
-    yield* yieldArrayPartition(this, size);
-  } else {
-    const iterator = this[Symbol.asyncIterator]();
-    for (let next = await iterator.next(); !next.done; ) {
-      yield (async function* () {
-        for (let i = 0; i < size && !next.done; i++) {
-          yield next.value;
-          next = await iterator.next();
-        }
-      })();
-    }
-  }
+  return partitioning.call(this, size);
 }
