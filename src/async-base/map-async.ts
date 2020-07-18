@@ -1,17 +1,27 @@
 import { AsyncMapper } from '../types';
-import { AnyIterable } from '../types-internal';
+import { chooseIteration, AnyIterable } from '../types-internal';
 
-export async function* mapAsync<T, R>(
-  this: AnyIterable<T>,
+async function* iterateAsArray<T, R>(
+  arr: T[],
   mapper: AsyncMapper<T, R>,
 ): AsyncIterable<R> {
-  if (Array.isArray(this)) {
-    for (let i = 0; i < this.length; i++) {
-      yield await mapper(this[i]);
-    }
-  } else {
-    for await (const t of this) {
-      yield await mapper(t);
-    }
+  for (let i = 0; i < arr.length; i++) {
+    yield await mapper(arr[i]);
   }
+}
+
+async function* iterate<T, R>(
+  arr: AnyIterable<T>,
+  mapper: AsyncMapper<T, R>,
+): AsyncIterable<R> {
+  for await (const t of arr) {
+    yield await mapper(t);
+  }
+}
+
+export function mapAsync<T, R>(
+  this: Iterable<T>,
+  mapper: AsyncMapper<T, R>,
+): AsyncIterable<R> {
+  return chooseIteration(this, iterateAsArray, iterate, mapper);
 }

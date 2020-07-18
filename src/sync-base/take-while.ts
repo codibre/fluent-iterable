@@ -1,20 +1,25 @@
 import { Predicate } from '../types';
+import { chooseIteration } from '../types-internal';
 
-export function* takeWhile<T>(
+function* iterateAsArray<T>(arr: T[], condition: Predicate<T>): Iterable<T> {
+  for (let i = 0; i < arr.length && condition(arr[i]); i++) {
+    yield arr[i];
+  }
+}
+
+function* iterate<T>(arr: Iterable<T>, condition: Predicate<T>): Iterable<T> {
+  for (const t of arr) {
+    if (!condition(t)) {
+      break;
+    }
+
+    yield t;
+  }
+}
+
+export function takeWhile<T>(
   this: Iterable<T>,
   condition: Predicate<T>,
 ): Iterable<T> {
-  if (Array.isArray(this)) {
-    for (let i = 0; i < this.length && condition(this[i]); i++) {
-      yield this[i];
-    }
-  } else {
-    for (const t of this) {
-      if (!condition(t)) {
-        break;
-      }
-
-      yield t;
-    }
-  }
+  return chooseIteration(this, iterateAsArray, iterate, condition);
 }

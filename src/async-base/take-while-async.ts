@@ -1,21 +1,31 @@
 import { AsyncPredicate } from '../types';
-import { AnyIterable } from '../types-internal';
+import { chooseIteration, AnyIterable } from '../types-internal';
 
-export async function* takeWhileAsync<T>(
-  this: AnyIterable<T>,
+async function* iterateAsArray<T>(
+  arr: T[],
   condition: AsyncPredicate<T>,
 ): AsyncIterable<T> {
-  if (Array.isArray(this)) {
-    for (let i = 0; i < this.length && (await condition(this[i])); i++) {
-      yield this[i];
-    }
-  } else {
-    for await (const t of this) {
-      if (!(await condition(t))) {
-        break;
-      }
-
-      yield t;
-    }
+  for (let i = 0; i < arr.length && (await condition(arr[i])); i++) {
+    yield arr[i];
   }
+}
+
+async function* iterate<T>(
+  arr: AnyIterable<T>,
+  condition: AsyncPredicate<T>,
+): AsyncIterable<T> {
+  for await (const t of arr) {
+    if (!(await condition(t))) {
+      break;
+    }
+
+    yield t;
+  }
+}
+
+export function takeWhileAsync<T>(
+  this: Iterable<T>,
+  condition: AsyncPredicate<T>,
+): AsyncIterable<T> {
+  return chooseIteration(this, iterateAsArray, iterate, condition);
 }
