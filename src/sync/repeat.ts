@@ -1,4 +1,4 @@
-import { map } from '../sync-base/map';
+import { map } from './map';
 import { repeatRecipe } from '../recipes';
 import { empty } from '../utils';
 import { concat } from './concat';

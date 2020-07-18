@@ -1,5 +1,5 @@
 import { distinctRecipe } from '../recipes';
-import { filterAsync } from '../async-base/filter-async';
+import { filterAsync } from './filter-async';
 
 export const distinctAsync = distinctRecipe(
   filterAsync,

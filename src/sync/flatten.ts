@@ -1,5 +1,4 @@
-import { Mapper } from '../types';
-import { map } from '../sync-base/map';
+import { map } from './map';
 import { iterateAll } from '../utils';
 import { flattenRecipe } from '../recipes';
 

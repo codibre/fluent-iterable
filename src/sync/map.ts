@@ -1,5 +1,5 @@
 import { Mapper } from '../types';
-import { getChooseIteration } from '../types-internal';
+import { getChooseIteration } from '../recipes';
 
 function* iterateAsArray<T, R>(arr: T[], mapper: Mapper<T, R>): Iterable<R> {
   for (let i = 0; i < arr.length; i++) {

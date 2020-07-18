@@ -34,15 +34,12 @@ import {
   waitAllAsync,
   combineAsync,
   partitionAsync,
-} from '../async';
-import {
   forEachAsync,
   takeWhileAsync,
   filterAsync,
   mapAsync,
-  merge,
-  mergeCatching,
-} from '../async-base';
+} from '../async';
+import { merge, mergeCatching } from '../async-base';
 
 export const asyncIterableFuncs = {
   withIndex: withIndexAsync,

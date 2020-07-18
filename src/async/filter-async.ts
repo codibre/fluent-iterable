@@ -1,5 +1,5 @@
 import { AsyncPredicate } from '../types';
-import { getChooseIteration } from '../types-internal/choose-iteration';
+import { getChooseIteration } from '../recipes';
 import { AnyIterable } from '../types-internal';
 
 async function* iterateAsArray<T>(

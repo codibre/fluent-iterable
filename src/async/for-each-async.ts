@@ -1,5 +1,6 @@
 import { AsyncAction } from '../types';
-import { AnyIterable, getChooseIteration } from '../types-internal';
+import { getChooseIteration } from '../recipes';
+import { AnyIterable } from '../types-internal';
 
 async function iterateAsArray<T>(arr: T[], action: AsyncAction<T>) {
   for (let i = 0; i < arr.length; i++) {

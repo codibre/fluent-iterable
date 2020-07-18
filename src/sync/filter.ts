@@ -1,5 +1,5 @@
 import { Predicate } from '../types';
-import { getChooseIteration } from '../types-internal/choose-iteration';
+import { getChooseIteration } from '../recipes';
 
 function* iterateAsArray<T>(arr: T[], predicate: Predicate<T>): Iterable<T> {
   for (let i = 0; i < arr.length; i++) {

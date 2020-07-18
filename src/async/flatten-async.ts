@@ -1,4 +1,4 @@
-import { mapAsync } from '../async-base/map-async';
+import { mapAsync } from './map-async';
 import { flattenRecipe } from '../recipes';
 import { iterateAllAsync } from '../utils';
 

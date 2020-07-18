@@ -1,4 +1,4 @@
 import { takeRecipe } from '../recipes';
-import { takeWhile } from '../sync-base/take-while';
+import { takeWhile } from './take-while';
 
 export const take = takeRecipe(takeWhile);

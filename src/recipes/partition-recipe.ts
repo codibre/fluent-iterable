@@ -1,5 +1,5 @@
 import { yieldArrayPartition } from './yield-array-partition';
-import { getChooseIteration } from '../types-internal';
+import { getChooseIteration } from '../recipes';
 
 export function getPartition(iterate: any) {
   const partitioning = getChooseIteration(yieldArrayPartition, iterate);

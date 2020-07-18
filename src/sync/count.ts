@@ -1,4 +1,4 @@
-import { filter } from '../sync-base/filter';
+import { filter } from './filter';
 import { reduce } from './reduce';
 import { countRecipe } from '../recipes';
 

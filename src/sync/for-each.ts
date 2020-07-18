@@ -1,5 +1,5 @@
 import { Action } from '../types';
-import { getChooseIteration } from '../types-internal';
+import { getChooseIteration } from '../recipes';
 
 function iterateAsArray<T>(arr: T[], action: Action<T>) {
   for (let i = 0; i < arr.length; i++) {

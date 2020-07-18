@@ -35,6 +35,10 @@ import {
   waitAll,
   combine,
   partition,
+  forEach,
+  map,
+  filter,
+  takeWhile,
 } from '../sync';
 import {
   allAsync,
@@ -58,14 +62,11 @@ import {
   maxAsync,
   sumAsync,
   combineAsync,
-} from '../async';
-import { forEach, map, filter, takeWhile } from '../sync-base';
-import {
   forEachAsync,
   mapAsync,
   filterAsync,
   takeWhileAsync,
-} from '../async-base';
+} from '../async';
 
 export const iterableFuncs = {
   withIndex,

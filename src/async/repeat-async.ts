@@ -1,4 +1,4 @@
-import { mapAsync } from '../async-base/map-async';
+import { mapAsync } from './map-async';
 import { repeatRecipe } from '../recipes';
 import { emptyAsync } from '../utils';
 import { concatAsync } from './concat-async';

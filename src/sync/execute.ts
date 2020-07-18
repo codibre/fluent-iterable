@@ -1,5 +1,5 @@
 import { executeRecipe } from '../recipes';
-import { map } from '../sync-base/map';
+import { map } from './map';
 
 export const execute = executeRecipe(map, (action) => (t) => {
   action(t);
