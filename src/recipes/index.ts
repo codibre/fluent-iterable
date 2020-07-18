@@ -24,3 +24,4 @@ export * from './take-recipe';
 export * from './to-object-recipe';
 export * from './top-recipe';
 export * from './with-index-recipe';
+export * from './yield-array-partition';

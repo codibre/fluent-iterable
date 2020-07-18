@@ -1,8 +1,4 @@
-import {
-  asyncIterableFuncs,
-  asyncResolvingFuncs,
-  mountIterableFunctions,
-} from './mounters';
+import { mountIterableFunctions } from './mounters';
 import { addCustomMethod } from './add-custom-method';
 import { AnyIterable } from './types-internal';
 import fluentAsync, { proxyReference } from './fluent-async';

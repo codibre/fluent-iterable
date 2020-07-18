@@ -1,3 +1,6 @@
+import { yieldArrayPartition } from '../recipes';
+import { iterateAsync } from '../utils';
+
 async function* readPartition<T>(
   iterator: AsyncIterator<T>,
   next: IteratorResult<T>,
@@ -20,15 +23,7 @@ export async function* partitionAsync<T>(
   }
 
   if (Array.isArray(this)) {
-    let i = 0;
-    while (i < this.length) {
-      const arr = this;
-      yield (async function* () {
-        for (let j = i; i < j + size && i < arr.length; i++) {
-          yield arr[i];
-        }
-      })();
-    }
+    yield* yieldArrayPartition(this, size);
   } else {
     const iterator = this[Symbol.asyncIterator]();
     for (let next = await iterator.next(); !next.done; ) {

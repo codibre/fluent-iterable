@@ -11,16 +11,18 @@ export function mountSpecial<T>(
   asyncWrapper: (...args: any[]) => any,
 ) {
   const result = {} as any;
-  if (group) {
-    result.group = function <T>(this: AnyIterable<T>, ...args: any[]) {
-      return wrapper(group.call(this, ...args)).map(fluentGroup);
-    };
-  }
-  if (groupAsync) {
-    result.groupAsync = function <T>(this: AnyIterable<T>, ...args: any[]) {
-      return asyncWrapper(groupAsync.call(this, ...args)).map(fluentGroup);
-    };
-  }
+  const groups: [Function | undefined, string, Function][] = [
+    [group, 'group', wrapper],
+    [groupAsync, 'groupAsync', asyncWrapper],
+  ];
+  groups.forEach(([g, name, w]) => {
+    if (g) {
+      result[name] = function <T>(this: AnyIterable<T>, ...args: any[]) {
+        return w(g.call(this, ...args)).map(fluentGroup);
+      };
+    }
+  });
+
   if (partition) {
     result.partition = function <T>(this: AnyIterable<T>, ...args: any[]) {
       return wrapper(partition.call(this, ...args)).map((part: any) => {

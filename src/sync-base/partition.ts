@@ -1,3 +1,5 @@
+import { yieldArrayPartition } from '../recipes';
+
 export function* partition<T>(
   this: Iterable<T>,
   size: number,
@@ -9,15 +11,7 @@ export function* partition<T>(
   }
 
   if (Array.isArray(this)) {
-    let i = 0;
-    while (i < this.length) {
-      const arr = this;
-      yield (function* () {
-        for (let j = i; i < j + size && i < arr.length; i++) {
-          yield arr[i];
-        }
-      })();
-    }
+    yield* yieldArrayPartition(this, size);
   } else {
     const iterator = this[Symbol.iterator]();
     let next = iterator.next();
