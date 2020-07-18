@@ -1,4 +1,4 @@
-[fluent-iterable - v1.0.2](../README.md) › ["sync-base/index"](_sync_base_index_.md)
+[fluent-iterable - v1.0.3](../README.md) › ["sync-base/index"](_sync_base_index_.md)
 
 # Module: "sync-base/index"
 

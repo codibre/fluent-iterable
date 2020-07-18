@@ -1,4 +1,4 @@
-[fluent-iterable - v1.0.2](../README.md) › ["async-base/for-each-async"](_async_base_for_each_async_.md)
+[fluent-iterable - v1.0.3](../README.md) › ["async-base/for-each-async"](_async_base_for_each_async_.md)
 
 # Module: "async-base/for-each-async"
 

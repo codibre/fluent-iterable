@@ -1,4 +1,4 @@
-[fluent-iterable - v1.0.2](../README.md) › ["types"](../modules/_types_.md) › [FluentAsyncIterable](_types_.fluentasynciterable.md)
+[fluent-iterable - v1.0.3](../README.md) › ["types"](../modules/_types_.md) › [FluentAsyncIterable](_types_.fluentasynciterable.md)
 
 # Interface: FluentAsyncIterable ‹**T**›
 
@@ -170,7 +170,7 @@ ___
 
 ###  concat
 
-▸ **concat**(...`iterables`: Array‹AsyncIterable‹T››): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+▸ **concat**(...`iterables`: Array‹AnyIterable‹T››): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
 Concatenates specified iterables to the iterable.
 
@@ -178,7 +178,7 @@ Concatenates specified iterables to the iterable.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`...iterables` | Array‹AsyncIterable‹T›› | The iterables to concatenate. |
+`...iterables` | Array‹AnyIterable‹T›› | The iterables to concatenate. |
 
 **Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 

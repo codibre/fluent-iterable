@@ -1,4 +1,4 @@
-[fluent-iterable - v1.0.2](../README.md) › ["fluent-async"](_fluent_async_.md)
+[fluent-iterable - v1.0.3](../README.md) › ["fluent-async"](_fluent_async_.md)
 
 # Module: "fluent-async"
 
@@ -17,7 +17,7 @@
 
 ### `Const` handler
 
-• **handler**: *Extender‹object›* = getExtender(proxyReference)
+• **handler**: *Extender‹object›* = getExtender(proxyReference, defaultCookFunction, 'extender')
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 ###  fluentAsync
 
-▸ **fluentAsync**‹**T**›(`iterable`: AsyncIterable‹T› | PromiseLike‹AnyIterable‹T››): *[FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)‹T›*
+▸ **fluentAsync**‹**T**›(`iterable`: AnyIterable‹T› | PromiseLike‹AnyIterable‹T››): *[FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)‹T›*
 
 Tranforms an asynchronous iterable into a [FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md).
 
@@ -47,7 +47,7 @@ The type of the items in the async iterable.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`iterable` | AsyncIterable‹T› &#124; PromiseLike‹AnyIterable‹T›› | The asynchronous iterable instance. |
+`iterable` | AnyIterable‹T› &#124; PromiseLike‹AnyIterable‹T›› | The asynchronous iterable instance. |
 
 **Returns:** *[FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)‹T›*
 

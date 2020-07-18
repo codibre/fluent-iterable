@@ -1,4 +1,4 @@
-[fluent-iterable - v1.0.2](../README.md) › ["sync-base/filter"](_sync_base_filter_.md)
+[fluent-iterable - v1.0.3](../README.md) › ["sync-base/filter"](_sync_base_filter_.md)
 
 # Module: "sync-base/filter"
 

@@ -1,5 +1,15 @@
 
-## 1.0.2
+## 1.0.3
+* 7c8846b adding benchmark disclaimer
+* ad8a48b fixing again benchmark until I get it right
+* fcb6385 changing benchmark
+* 52a7ea0 fixing used os for benchmark
+* aa75b7e fixing benchmark pipeline
+* be49671 renaming benchmark
+* 8641618 organizing benchmark tests and github workflow for it
+* 858da8e Creating benchmark against rxjs and performance tweaks in cases where an array is manipulated
+## v1.0.2
+* 49a809a 1.0.2
 * c89d8af Merge branch 'master' of github.com:Codibre/fluent-iterable
 * 555ec15 creating preview
 * 13999fd Update README.md
