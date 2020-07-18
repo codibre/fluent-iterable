@@ -1,5 +1,13 @@
 
-## 1.0.3
+## 1.0.4
+* 34fbf75 Reorganizing files after resolving duplications
+* d32fad7 refactoring and removing more duplications
+* 0ef496a fixing duplications
+* de0511b resolving code smells
+* 31f2bff resolving duplications
+* d76f5e9 commit test
+## v1.0.3
+* ef0dc9d 1.0.3
 * 7c8846b adding benchmark disclaimer
 * ad8a48b fixing again benchmark until I get it right
 * fcb6385 changing benchmark

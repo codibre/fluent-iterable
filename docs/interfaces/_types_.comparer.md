@@ -1,4 +1,4 @@
-[fluent-iterable - v1.0.3](../README.md) › ["types"](../modules/_types_.md) › [Comparer](_types_.comparer.md)
+[fluent-iterable - v1.0.4](../README.md) › ["types"](../modules/_types_.md) › [Comparer](_types_.comparer.md)
 
 # Interface: Comparer ‹**T**›
 

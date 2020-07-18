@@ -1,4 +1,4 @@
-[fluent-iterable - v1.0.3](../README.md) › ["async-base/index"](_async_base_index_.md)
+[fluent-iterable - v1.0.4](../README.md) › ["async-base/index"](_async_base_index_.md)
 
 # Module: "async-base/index"
 
@@ -6,33 +6,10 @@
 
 ### References
 
-* [filterAsync](_async_base_index_.md#filterasync)
-* [forEachAsync](_async_base_index_.md#foreachasync)
-* [mapAsync](_async_base_index_.md#mapasync)
 * [merge](_async_base_index_.md#merge)
 * [mergeCatching](_async_base_index_.md#mergecatching)
-* [partitionAsync](_async_base_index_.md#partitionasync)
-* [takeWhileAsync](_async_base_index_.md#takewhileasync)
 
 ## References
-
-###  filterAsync
-
-• **filterAsync**:
-
-___
-
-###  forEachAsync
-
-• **forEachAsync**:
-
-___
-
-###  mapAsync
-
-• **mapAsync**:
-
-___
 
 ###  merge
 
@@ -43,15 +20,3 @@ ___
 ###  mergeCatching
 
 • **mergeCatching**:
-
-___
-
-###  partitionAsync
-
-• **partitionAsync**:
-
-___
-
-###  takeWhileAsync
-
-• **takeWhileAsync**:
