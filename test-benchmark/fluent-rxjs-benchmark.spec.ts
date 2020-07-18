@@ -5,13 +5,6 @@ import rxjsOp = require('rxjs/operators');
 import src = require('../src');
 import { expect } from 'chai';
 
-/**
- * This test suite is meant to benchmark fluent-iterable against rxjs, a amazing library that we can use
- * to solve similar problems.
- * Currently, as expected, rxjs have a better performance than this library, but still fluent-iterable is
- * performing very well too and it seems like irrelevant micro differences for most use cases.
- * To run these test, run "npm run test:benchmark in your console command"
- */
 describe('fluent x rxjs', () => {
   function instantiationSuite(repetition: number, total: number) {
     return () => {
