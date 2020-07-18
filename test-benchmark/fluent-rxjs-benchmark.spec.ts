@@ -12,6 +12,7 @@ import { expect } from 'chai';
  * performing very well too and it seems like irrelevant micro differences for most use cases.
  * To run these test, run "npm run test:benchmark in your console command"
  */
+
 describe('fluent x rxjs', () => {
   function instantiationSuite(repetition: number, total: number) {
     return () => {
