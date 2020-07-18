@@ -20,4 +20,4 @@ jobs:
       - name: install
         run: npm ci
       - name: 'Benchmark'
-        run: npm run test:test-benchmark
+        run: npm run test:benchmark
