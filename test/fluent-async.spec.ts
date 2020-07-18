@@ -4,6 +4,7 @@ import { ObjectReadableMock } from 'stream-mock';
 import { Person, data, Gender, picker } from './fluent.spec';
 import delay from 'delay';
 import { stub } from 'sinon';
+import { AnyIterable } from '../src/types-internal';
 
 async function* generator(): AsyncIterable<Person> {
   yield* data;
@@ -16,8 +17,8 @@ const additionalPerson: Person = {
 };
 
 describe('fluent async iterable', () => {
-  const suite = (createSubject: () => AsyncIterable<Person>) => () => {
-    let subject: AsyncIterable<Person>;
+  const suite = (createSubject: () => AnyIterable<Person>) => () => {
+    let subject: AnyIterable<Person>;
 
     beforeEach(() => (subject = createSubject()));
     context('basics work', async () => {
@@ -248,9 +249,9 @@ describe('fluent async iterable', () => {
       it('two non-empty arrays', async () =>
         expect(
           await fluentAsync(subject)
-            .concat(new ObjectReadableMock([additionalPerson]), subject)
+            .concat(new ObjectReadableMock([additionalPerson]), createSubject())
             .toArray(),
-        ).to.eql([...data, additionalPerson]));
+        ).to.eql([...data, additionalPerson, ...data]));
       it('one empty and one non-empty arrays', async () =>
         expect(
           await fluentAsync(subject)
@@ -679,6 +680,10 @@ describe('fluent async iterable', () => {
       });
     });
   };
+  describe(
+    'on array',
+    suite(() => data),
+  );
   describe('on generator', suite(generator));
 
   describe('waitAll', () => {

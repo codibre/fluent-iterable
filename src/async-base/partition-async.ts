@@ -3,16 +3,9 @@ async function* readPartition<T>(
   next: IteratorResult<T>,
   size: number,
 ): AsyncIterable<T> {
-  for (; size > 0; --size) {
-    if (next.done) {
-      break;
-    }
-
+  for (; size > 1 && !next.done; size--) {
     yield next.value;
-
-    if (size > 1) {
-      next = await iterator.next();
-    }
+    next = await iterator.next();
   }
 }
 
@@ -26,12 +19,25 @@ export async function* partitionAsync<T>(
     );
   }
 
-  const iterator = this[Symbol.asyncIterator]();
-  for (
-    let next = await iterator.next();
-    !next.done;
-    next = await iterator.next()
-  ) {
-    yield readPartition(iterator, next, size);
+  if (Array.isArray(this)) {
+    let i = 0;
+    while (i < this.length) {
+      const arr = this;
+      yield (async function* () {
+        for (let j = i; i < j + size && i < arr.length; i++) {
+          yield arr[i];
+        }
+      })();
+    }
+  } else {
+    const iterator = this[Symbol.asyncIterator]();
+    for (let next = await iterator.next(); !next.done; ) {
+      yield (async function* () {
+        for (let i = 0; i < size && !next.done; i++) {
+          yield next.value;
+          next = await iterator.next();
+        }
+      })();
+    }
   }
 }

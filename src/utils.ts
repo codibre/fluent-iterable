@@ -36,7 +36,7 @@ async function resolverAsync<T, R>(
  * @param a The async iterable
  */
 async function* iterateAsync<T>(
-  a: AsyncIterable<T> | PromiseLike<AnyIterable<T>>,
+  a: AnyIterable<T> | PromiseLike<AnyIterable<T>>,
 ): AsyncIterable<T> {
   yield* await a;
 }
@@ -57,7 +57,7 @@ async function* iterateAllAsync<T>(a: AsyncIterable<AnyIterable<T>>) {
  * @typeparam T the item type of the [[Iterable]]
  * @param a The iterable
  */
-function* iterate<T>(a: Iterable<T>) {
+function* iterate<T>(a: Iterable<T>): Iterable<T> {
   yield* a;
 }
 

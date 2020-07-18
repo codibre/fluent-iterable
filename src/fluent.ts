@@ -7,11 +7,10 @@ import {
   special,
 } from './mounters';
 import { mountIterableFunctions, mountSpecial } from './mounters';
-import { iterate } from './utils';
-import { getExtender, extend } from 'extension-methods';
+import { getExtender, extend, defaultCookFunction } from 'extension-methods';
 
 export const proxyReference: { [key: string]: Function } = {};
-const handler = getExtender(proxyReference);
+const handler = getExtender(proxyReference, defaultCookFunction, 'extender');
 
 /**
  * Tranforms an iterable into a [[FluentIterable]].
@@ -20,7 +19,7 @@ const handler = getExtender(proxyReference);
  * @returns The [[FluentIterable]] instance.
  */
 function fluent<T>(iterable: Iterable<T>): FluentIterable<T> {
-  return extend(iterate(iterable), handler) as any;
+  return extend(iterable, handler) as any;
 }
 
 Object.assign(proxyReference, {

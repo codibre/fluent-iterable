@@ -1,21 +1,3 @@
-function* readPartition<T>(
-  iterator: Iterator<T>,
-  next: IteratorResult<T>,
-  size: number,
-): Iterable<T> {
-  for (; size > 0; --size) {
-    if (next.done) {
-      break;
-    }
-
-    yield next.value;
-
-    if (size > 1) {
-      next = iterator.next();
-    }
-  }
-}
-
 export function* partition<T>(
   this: Iterable<T>,
   size: number,
@@ -26,8 +8,26 @@ export function* partition<T>(
     );
   }
 
-  const iterator = this[Symbol.iterator]();
-  for (let next = iterator.next(); !next.done; next = iterator.next()) {
-    yield readPartition(iterator, next, size);
+  if (Array.isArray(this)) {
+    let i = 0;
+    while (i < this.length) {
+      const arr = this;
+      yield (function* () {
+        for (let j = i; i < j + size && i < arr.length; i++) {
+          yield arr[i];
+        }
+      })();
+    }
+  } else {
+    const iterator = this[Symbol.iterator]();
+    let next = iterator.next();
+    while (!next.done) {
+      yield (function* () {
+        for (let i = 0; i < size && !next.done; i++) {
+          yield next.value;
+          next = iterator.next();
+        }
+      })();
+    }
   }
 }

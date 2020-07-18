@@ -1,4 +1,4 @@
 import { concatRecipe } from '../recipes';
-import { flattenAsync } from './flatten-async';
+import { iterateAllAsync } from '../utils';
 
-export const concatAsync = concatRecipe(flattenAsync);
+export const concatAsync = concatRecipe(iterateAllAsync);

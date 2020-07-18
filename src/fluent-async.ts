@@ -7,10 +7,10 @@ import {
 import { mountIterableFunctions, mountSpecial } from './mounters';
 import { AnyIterable } from './types-internal';
 import { iterateAsync } from './utils';
-import { getExtender, extend } from 'extension-methods';
+import { getExtender, extend, defaultCookFunction } from 'extension-methods';
 
 export const proxyReference: { [key: string]: Function } = {};
-const handler = getExtender(proxyReference);
+const handler = getExtender(proxyReference, defaultCookFunction, 'extender');
 
 /**
  * Tranforms an asynchronous iterable into a [[FluentAsyncIterable]].
@@ -19,7 +19,7 @@ const handler = getExtender(proxyReference);
  * @returns The [[FluentAsyncIterable]] instance.
  */
 function fluentAsync<T>(
-  iterable: AsyncIterable<T> | PromiseLike<AnyIterable<T>>,
+  iterable: AnyIterable<T> | PromiseLike<AnyIterable<T>>,
 ): FluentAsyncIterable<T> {
   return extend(iterateAsync(iterable), handler) as any;
 }

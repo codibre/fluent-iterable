@@ -1,10 +1,10 @@
 import { AnyIterable } from '../types-internal';
 
-export function concatRecipe(flatten: Function) {
+export function concatRecipe(iterateAll: Function) {
   return function <T>(
     this: AnyIterable<T>,
     ...iterables: Array<AnyIterable<T>>
   ) {
-    return flatten.call([this, ...iterables]);
+    return iterateAll([this, ...iterables]);
   };
 }

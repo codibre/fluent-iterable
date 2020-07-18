@@ -1,3 +1,5 @@
+import { AnyIterable } from './types-internal';
+
 export interface ErrorCallback {
   (error: Error, index: number): unknown;
 }
@@ -858,7 +860,7 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
    * @param iterables The iterables to concatenate.
    * @returns The [[FluentAsyncIterable]] of the concatenated iterables.
    */
-  concat(...iterables: Array<AsyncIterable<T>>): FluentAsyncIterable<T>;
+  concat(...iterables: Array<AnyIterable<T>>): FluentAsyncIterable<T>;
 
   /**
    * Repeats the elements of the iterable a specified amount of times.
