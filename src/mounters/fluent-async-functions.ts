@@ -33,6 +33,7 @@ import {
   containsAsync,
   waitAllAsync,
   combineAsync,
+  partitionAsync,
 } from '../async';
 import {
   forEachAsync,
@@ -41,7 +42,6 @@ import {
   mapAsync,
   merge,
   mergeCatching,
-  partitionAsync,
 } from '../async-base';
 
 export const asyncIterableFuncs = {

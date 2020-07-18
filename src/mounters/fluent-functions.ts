@@ -34,6 +34,7 @@ import {
   reduceAndMap,
   waitAll,
   combine,
+  partition,
 } from '../sync';
 import {
   allAsync,
@@ -58,7 +59,7 @@ import {
   sumAsync,
   combineAsync,
 } from '../async';
-import { forEach, map, filter, takeWhile, partition } from '../sync-base';
+import { forEach, map, filter, takeWhile } from '../sync-base';
 import {
   forEachAsync,
   mapAsync,

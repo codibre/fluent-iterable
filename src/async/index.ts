@@ -18,6 +18,7 @@ export * from './join-async';
 export * from './last-async';
 export * from './max-async';
 export * from './min-async';
+export * from './partition-async';
 export * from './prepend-async';
 export * from './reduce-and-map-async';
 export * from './reduce-async';

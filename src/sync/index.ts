@@ -18,6 +18,7 @@ export * from './join';
 export * from './last';
 export * from './max';
 export * from './min';
+export * from './partition';
 export * from './prepend';
 export * from './reduce';
 export * from './reduce-and-map';
