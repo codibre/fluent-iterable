@@ -9,7 +9,7 @@
   ],
   "reporter": "spec",
   "slow": 75,
-  "timeout": 2000,
+  "timeout": 999999,
   "ui": "bdd",
   "recursive": true,
   "require": "@codibre/confs/ts-node-register.js"

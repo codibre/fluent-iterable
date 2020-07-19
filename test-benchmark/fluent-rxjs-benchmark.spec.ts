@@ -75,14 +75,14 @@ describe('fluent x rxjs', () => {
           memRxJs = process.memoryUsage().heapUsed;
           const startRxjs = process.hrtime();
           await src.fluent(src.interval(1, total)).forEachAsync(async () => {
-            const array: any[] = [];
-            await rxjs
+            const array = (await rxjs
               .from(src.interval(1, items))
               .pipe(
                 rxjsOp.map((x) => x * 7),
                 rxjsOp.filter((x) => x % 3 !== 0),
+                rxjsOp.toArray(),
               )
-              .forEach((x) => array.push(x));
+              .toPromise()) as any;
             itemsProcessedRxjs = array.length;
             exampleValueRxjs = array[Math.floor(array.length / 2)];
           });
