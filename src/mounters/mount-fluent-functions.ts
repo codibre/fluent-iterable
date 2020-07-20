@@ -1,6 +1,6 @@
 /* eslint-disable guard-for-in */
 
-import { AnyIterable } from '../types-internal';
+import { AnyIterable } from 'augmentative-iterable';
 import { transformObjValues } from '../transform-obj-values';
 
 const getDefinition = <Func extends Function>(

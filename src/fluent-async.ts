@@ -5,7 +5,7 @@ import {
   asyncSpecial,
 } from './mounters';
 import { mountIterableFunctions, mountSpecial } from './mounters';
-import { AnyIterable } from './types-internal';
+import { AnyIterable } from 'augmentative-iterable';
 import { iterateAsync } from './utils';
 import { getExtender, extend, defaultCookFunction } from 'extension-methods';
 

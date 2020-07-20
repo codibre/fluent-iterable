@@ -1,3 +1,3 @@
-import { augmentativeForEach } from '../types-internal';
+import { augmentativeForEach } from 'augmentative-iterable';
 
 export const forEach = augmentativeForEach;

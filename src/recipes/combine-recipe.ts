@@ -1,4 +1,4 @@
-import { AnyIterable } from '../types-internal';
+import { AnyIterable } from 'augmentative-iterable';
 
 export function combineRecipe(map: Function, flatten: Function) {
   return function <T, U>(this: AnyIterable<T>, iterable: AnyIterable<U>) {

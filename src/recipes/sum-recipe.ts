@@ -1,6 +1,6 @@
 import { AsyncMapper } from '../types';
 import { identity } from '../utils';
-import { AnyIterable } from '../types-internal';
+import { AnyIterable } from 'augmentative-iterable';
 
 export function sumRecipe(reduce: Function) {
   return function <T>(

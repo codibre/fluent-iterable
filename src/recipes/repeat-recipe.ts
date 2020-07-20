@@ -1,4 +1,4 @@
-import { AnyIterable } from '../types-internal';
+import { AnyIterable } from 'augmentative-iterable';
 
 function* repeat<T>(times: number, cache: T[]) {
   for (let i = 1; i < times; ++i) {

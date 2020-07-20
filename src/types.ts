@@ -1,4 +1,4 @@
-import { AnyIterable } from './types-internal';
+import { AnyIterable } from 'augmentative-iterable';
 
 export interface ErrorCallback {
   (error: Error, index: number): unknown;

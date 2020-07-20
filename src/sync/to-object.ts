@@ -1,4 +1,4 @@
-import { resolver } from '../utils';
+import { resolver } from 'augmentative-iterable';
 import { toObjectRecipe } from '../recipes';
 import { reduce } from './reduce';
 

@@ -1,6 +1,6 @@
 import { identity } from '../utils';
 import { AnyMapper } from '../types-internal';
-import { AnyIterable } from '../types-internal';
+import { AnyIterable } from 'augmentative-iterable';
 
 export function joinRecipe<T>(
   reduce: Function,

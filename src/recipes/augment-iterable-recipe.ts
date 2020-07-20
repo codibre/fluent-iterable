@@ -1,4 +1,4 @@
-import { AnyIterable, AugmentType } from '../types-internal';
+import { AnyIterable, AugmentType } from 'augmentative-iterable';
 import { AsyncAction } from '../types';
 
 export function augmentIterableRecipe(

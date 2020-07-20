@@ -1,4 +1,4 @@
-import { AnyIterable } from './any-iterable';
+import { AnyIterable } from 'augmentative-iterable';
 
 export interface Iterate {
   (it: any): AnyIterable<any>;

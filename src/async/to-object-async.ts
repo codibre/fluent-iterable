@@ -1,4 +1,4 @@
-import { resolverAsync } from '../utils';
+import { resolverAsync } from 'augmentative-iterable';
 import { toObjectRecipe } from '../recipes';
 import { reduceAsync } from './reduce-async';
 

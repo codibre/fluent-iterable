@@ -1,4 +1,4 @@
-import { resolverAsync } from '../utils';
+import { resolverAsync } from 'augmentative-iterable';
 import { comparisonRecipe } from '../recipes';
 import { countAsync } from './count-async';
 import { takeAsync } from './take-async';

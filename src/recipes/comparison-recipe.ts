@@ -1,4 +1,4 @@
-import { AnyIterable } from '../types-internal';
+import { AnyIterable } from 'augmentative-iterable';
 import { ResolverType, CompareProvider } from '../types-internal';
 
 export function comparisonRecipe(

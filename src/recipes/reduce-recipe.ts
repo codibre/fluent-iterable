@@ -1,5 +1,5 @@
 import { identity } from '../utils';
-import { AnyIterable } from '../types-internal';
+import { AnyIterable } from 'augmentative-iterable';
 import { AsyncReducer } from '../types';
 
 export function reduceRecipe(reduceAndMap: Function) {

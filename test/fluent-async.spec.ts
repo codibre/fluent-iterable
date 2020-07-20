@@ -4,7 +4,7 @@ import { ObjectReadableMock } from 'stream-mock';
 import { Person, data, Gender, picker } from './fluent.spec';
 import delay from 'delay';
 import { stub } from 'sinon';
-import { AnyIterable } from '../src/types-internal';
+import { AnyIterable } from 'augmentative-iterable';
 
 async function* generator(): AsyncIterable<Person> {
   yield* data;

@@ -1,5 +1,6 @@
 import { AsyncMapper } from '../types';
-import { AnyIterable, ResolverType } from '../types-internal';
+import { AnyIterable } from 'augmentative-iterable';
+import { ResolverType } from '../types-internal';
 
 export function waitAllRecipe(forEach: Function, resolver: ResolverType) {
   return function <T, R>(this: AnyIterable<T>, mapper: AsyncMapper<T, R>) {

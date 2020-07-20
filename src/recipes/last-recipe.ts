@@ -1,5 +1,5 @@
 import { truth } from '../utils';
-import { AnyIterable } from '../types-internal';
+import { AnyIterable } from 'augmentative-iterable';
 
 export function lastRecipe(
   reduce: Function,

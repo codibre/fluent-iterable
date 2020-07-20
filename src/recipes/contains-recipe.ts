@@ -1,4 +1,4 @@
-import { AnyIterable } from '../types-internal';
+import { AnyIterable } from 'augmentative-iterable';
 
 export function containsRecipe(any: Function) {
   return function <T>(this: AnyIterable<T>, item: T) {

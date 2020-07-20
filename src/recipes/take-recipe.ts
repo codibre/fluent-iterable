@@ -1,4 +1,4 @@
-import { AnyIterable } from '../types-internal';
+import { AnyIterable } from 'augmentative-iterable';
 
 export function takeRecipe(takeWhile: Function) {
   return function <T>(this: AnyIterable<T>, n: number) {

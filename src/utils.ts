@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import fluent from './fluent';
 import { Group, FluentGroup, Predicate, AsyncPredicate } from './types';
-import { AnyIterable } from './types-internal';
+import { AnyIterable } from 'augmentative-iterable';
 
 /**
  * Returns exactly the informed parameter
@@ -9,31 +9,6 @@ import { AnyIterable } from './types-internal';
  */
 function identity<T>(param: T): T {
   return param;
-}
-
-/**
- * Pass the informed value to the callback and returns it's result
- * @typeparam T input type of the callback
- * @typeparam R the result type of the callback
- * @param value The value to be passed on
- * @param callback The callback
- */
-function resolver<T, R>(value: T, callback: (c: T) => R) {
-  return callback(value);
-}
-
-/**
- * Resolves a promise like value and pass the result to a callback and returns it's result
- * @typeparam T input type of the callback
- * @typeparam R the result type of the callback
- * @param promise The promise like value
- * @param callback The callback
- */
-async function resolverAsync<T, R>(
-  promise: PromiseLike<T>,
-  callback: (c: T) => R,
-) {
-  return callback(await promise);
 }
 
 /**
@@ -220,8 +195,6 @@ export {
   negation,
   asyncNegation,
   fluentGroup,
-  resolver,
-  resolverAsync,
   eq,
   ge,
   gt,

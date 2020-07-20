@@ -1,4 +1,4 @@
-import { AnyIterable } from '../types-internal';
+import { AnyIterable } from 'augmentative-iterable';
 
 export function* yieldArrayPartition<T>(arr: T[], size: number): any {
   let i = 0;

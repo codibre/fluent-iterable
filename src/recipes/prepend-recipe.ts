@@ -1,4 +1,4 @@
-import { AnyIterable } from '../types-internal';
+import { AnyIterable } from 'augmentative-iterable';
 
 export function prependRecipe(concat: Function): any {
   return function <T>(this: AnyIterable<T>, item: T) {

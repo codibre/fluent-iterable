@@ -1,5 +1,5 @@
 import { fluentGroup } from '../utils';
-import { AnyIterable } from '../types-internal';
+import { AnyIterable } from 'augmentative-iterable';
 
 export type SpecialType = {
   [key in 'group' | 'groupAsync' | 'partition']: Function;

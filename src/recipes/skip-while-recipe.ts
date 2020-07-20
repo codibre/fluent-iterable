@@ -1,5 +1,5 @@
 import { AsyncPredicate } from '../types';
-import { AnyIterable } from '../types-internal';
+import { AnyIterable } from 'augmentative-iterable';
 
 export function skipWhileRecipe(
   filter: Function,

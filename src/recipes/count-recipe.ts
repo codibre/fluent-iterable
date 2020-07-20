@@ -1,4 +1,4 @@
-import { AnyIterable } from '../types-internal';
+import { AnyIterable } from 'augmentative-iterable';
 import { truth } from '../utils';
 
 export function countRecipe(reduce: Function, filter: Function) {

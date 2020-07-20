@@ -1,6 +1,7 @@
 import { identity } from '../utils';
-import { AnyIterable, ResolverType } from '../types-internal';
+import { ResolverType } from '../types-internal';
 import { AnyMapper } from '../types-internal';
+import { AnyIterable } from 'augmentative-iterable';
 
 export function toObjectRecipe(reduce: Function, resolver: ResolverType) {
   return function <T, V, R extends { [key: string]: V }>(

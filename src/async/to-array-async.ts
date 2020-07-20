@@ -1,3 +1,3 @@
-import { augmentativeToArrayAsync } from '../types-internal';
+import { augmentativeToArrayAsync } from 'augmentative-iterable';
 
 export const toArrayAsync = augmentativeToArrayAsync;

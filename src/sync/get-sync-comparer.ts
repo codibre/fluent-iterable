@@ -1,4 +1,4 @@
-import { resolver } from '../utils';
+import { resolver } from 'augmentative-iterable';
 import { comparisonRecipe } from '../recipes';
 import { count } from './count';
 import { take } from './take';

@@ -1,4 +1,4 @@
-import { AnyIterable } from '../types-internal/any-iterable';
+import { AnyIterable } from 'augmentative-iterable';
 
 export function getChooseIteration<T, R>(
   iterateAsArray1: (arr: T[], ...args: any[]) => R,

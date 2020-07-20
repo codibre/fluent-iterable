@@ -65,6 +65,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "augmentative-iterable": "github:Codibre/augmentative-iterable#v0.0.1",
     "extension-methods": "^0.1.1"
   },
   "devDependencies": {
