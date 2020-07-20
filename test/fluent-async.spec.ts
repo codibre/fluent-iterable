@@ -648,8 +648,10 @@ describe('fluent async iterable', () => {
         })();
 
         const result = await fluentAsync(it1).merge(it2).toArray();
+        const sorted = result.concat().sort();
 
-        expect(result).to.be.deep.equal(['a', 1, 2, 'b', 'c', 3]);
+        expect(sorted).to.be.not.eql(result);
+        expect(sorted).to.be.deep.equal([1, 2, 3, 'a', 'b', 'c']);
       });
     });
 

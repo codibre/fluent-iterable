@@ -1,8 +1,10 @@
 # This is a basic workflow to help you get started with Actions
 
-name: benchmark
+name: test-coverage
 on:
-  workflow_dispatch:
+  push:
+    branches: [master]
+  pull_request:
     branches: [master]
 
 jobs:
@@ -10,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [10.x]
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
@@ -19,5 +21,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: install
         run: npm ci
-      - name: "Benchmark"
-        run: npm run test:benchmark
+      - name: "Test"
+        uses: paambaati/codeclimate-action@v2.6.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageCommand: npm run test:coverage
+          coverageLocations: ${{github.workspace}}/coverage/lcov.info:lcov

@@ -1,20 +1,4 @@
-import { Predicate } from '../types';
-import { getChooseIteration } from '../recipes';
+import { augmentIterable, STOP } from '../types-internal';
+import { augmentIterableRecipe } from '../recipes';
 
-function* iterateAsArray<T>(arr: T[], condition: Predicate<T>): Iterable<T> {
-  for (let i = 0; i < arr.length && condition(arr[i]); i++) {
-    yield arr[i];
-  }
-}
-
-function* iterate<T>(arr: Iterable<T>, condition: Predicate<T>): Iterable<T> {
-  for (const t of arr) {
-    if (!condition(t)) {
-      break;
-    }
-
-    yield t;
-  }
-}
-
-export const takeWhile = getChooseIteration(iterateAsArray, iterate);
+export const takeWhile = augmentIterableRecipe(augmentIterable, STOP);

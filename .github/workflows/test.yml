@@ -9,10 +9,11 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [10.x]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+        node-version: [10.x, 12.x, 14.x]
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
@@ -21,10 +22,5 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: install
         run: npm ci
-      - name: 'Test'
-        uses: paambaati/codeclimate-action@v2.6.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          coverageCommand: npm run test:coverage
-          coverageLocations: ${{github.workspace}}/coverage/lcov.info:lcov
+      - name: "Test"
+        run: npm test

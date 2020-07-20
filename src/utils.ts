@@ -1,9 +1,15 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import fluent from './fluent';
-import { Group, FluentGroup, Predicate, AsyncPredicate, Mapper } from './types';
-import { AnyIterable, AnyMapper } from './types-internal';
-import { toObject } from './sync/to-object';
-import { first } from './sync/first';
+import { Group, FluentGroup, Predicate, AsyncPredicate } from './types';
+import { AnyIterable } from './types-internal';
+
+/**
+ * Returns exactly the informed parameter
+ * @param param The informed parameter to be returned
+ */
+function identity<T>(param: T): T {
+  return param;
+}
 
 /**
  * Pass the informed value to the callback and returns it's result
@@ -31,14 +37,25 @@ async function resolverAsync<T, R>(
 }
 
 /**
+ * @internal
+ */
+async function* promiseIterateAsync<T>(
+  a: PromiseLike<AnyIterable<T>>,
+): AsyncIterable<T> {
+  yield* await a;
+}
+
+/**
  * Iterates all element of an async iterable
  * @typeparam T the item type of the [[Iterable]]
  * @param a The async iterable
  */
-async function* iterateAsync<T>(
+function iterateAsync<T>(
   a: AnyIterable<T> | PromiseLike<AnyIterable<T>>,
 ): AsyncIterable<T> {
-  yield* await a;
+  return ((a as any).then || (a as any)[Symbol.iterator]
+    ? promiseIterateAsync(a as any)
+    : a) as any;
 }
 
 /**
@@ -57,9 +74,7 @@ async function* iterateAllAsync<T>(a: AsyncIterable<AnyIterable<T>>) {
  * @typeparam T the item type of the [[Iterable]]
  * @param a The iterable
  */
-function* iterate<T>(a: Iterable<T>): Iterable<T> {
-  yield* a;
-}
+const iterate = identity;
 
 /**
  * Iterates in all elements of an iterable of iterables
@@ -148,14 +163,6 @@ function* empty(): Iterable<undefined> {}
  * Provides an empty async iterable
  */
 async function* emptyAsync(): AsyncIterable<undefined> {}
-
-/**
- * Returns exactly the informed parameter
- * @param param The informed parameter to be returned
- */
-function identity<T>(param: T): T {
-  return param;
-}
 
 /**
  * Always returns true

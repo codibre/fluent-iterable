@@ -1,3 +1,3 @@
-export function toArray<T>(this: Iterable<T>) {
-  return Array.from(this);
-}
+import { augmentativeToArray } from '../types-internal';
+
+export const toArray = augmentativeToArray;
