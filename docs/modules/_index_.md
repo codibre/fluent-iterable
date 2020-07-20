@@ -1,4 +1,4 @@
-[fluent-iterable - v1.0.4](../README.md) › ["index"](_index_.md)
+[fluent-iterable - v1.1.0](../README.md) › ["index"](_index_.md)
 
 # Module: "index"
 
@@ -31,8 +31,6 @@
 * [le](_index_.md#le)
 * [lt](_index_.md#lt)
 * [negation](_index_.md#negation)
-* [resolver](_index_.md#resolver)
-* [resolverAsync](_index_.md#resolverasync)
 * [transformObjValues](_index_.md#transformobjvalues)
 * [truth](_index_.md#truth)
 
@@ -185,18 +183,6 @@ ___
 ###  negation
 
 • **negation**:
-
-___
-
-###  resolver
-
-• **resolver**:
-
-___
-
-###  resolverAsync
-
-• **resolverAsync**:
 
 ___
 

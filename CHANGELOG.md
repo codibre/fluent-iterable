@@ -1,5 +1,12 @@
 
-## 1.0.4
+## 1.1.0
+* 7642f22 Bump lodash from 4.17.15 to 4.17.19 (#7)
+* 56255e0 External lib augmentable (#6)
+* 9a2368d fixing benchmark test
+* ac96995 Augmentable iterable (#4)
+* 4dff0de Feature/use rxjs (#1)
+## v1.0.4
+* c0ad330 1.0.4
 * 34fbf75 Reorganizing files after resolving duplications
 * d32fad7 refactoring and removing more duplications
 * 0ef496a fixing duplications

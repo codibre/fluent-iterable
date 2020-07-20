@@ -1,8 +1,12 @@
-[fluent-iterable - v1.0.4](../README.md) › ["utils"](_utils_.md)
+[fluent-iterable - v1.1.0](../README.md) › ["utils"](_utils_.md)
 
 # Module: "utils"
 
 ## Index
+
+### Variables
+
+* [iterate](_utils_.md#const-iterate)
 
 ### Functions
 
@@ -15,7 +19,6 @@
 * [ge](_utils_.md#ge)
 * [gt](_utils_.md#gt)
 * [identity](_utils_.md#identity)
-* [iterate](_utils_.md#iterate)
 * [iterateAll](_utils_.md#iterateall)
 * [iterateAllAsync](_utils_.md#iterateallasync)
 * [iterateAsync](_utils_.md#iterateasync)
@@ -24,9 +27,20 @@
 * [le](_utils_.md#le)
 * [lt](_utils_.md#lt)
 * [negation](_utils_.md#negation)
-* [resolver](_utils_.md#resolver)
-* [resolverAsync](_utils_.md#resolverasync)
+* [promiseIterateAsync](_utils_.md#promiseiterateasync)
 * [truth](_utils_.md#truth)
+
+## Variables
+
+### `Const` iterate
+
+• **iterate**: *[identity](_utils_.md#identity)* = identity
+
+Iterates all element of an iterable
+
+**`typeparam`** the item type of the [[Iterable]]
+
+**`param`** The iterable
 
 ## Functions
 
@@ -191,28 +205,6 @@ Name | Type | Description |
 `param` | T | The informed parameter to be returned  |
 
 **Returns:** *T*
-
-___
-
-###  iterate
-
-▸ **iterate**‹**T**›(`a`: Iterable‹T›): *Iterable‹T›*
-
-Iterates all element of an iterable
-
-**Type parameters:**
-
-▪ **T**
-
-the item type of the [[Iterable]]
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`a` | Iterable‹T› | The iterable  |
-
-**Returns:** *Iterable‹T›*
 
 ___
 
@@ -388,79 +380,23 @@ Name | Type | Description |
 
 ___
 
-###  resolver
+###  promiseIterateAsync
 
-▸ **resolver**‹**T**, **R**›(`value`: T, `callback`: function): *R*
+▸ **promiseIterateAsync**‹**T**›(`a`: PromiseLike‹AnyIterable‹T››): *AsyncIterable‹T›*
 
-Pass the informed value to the callback and returns it's result
-
-**Type parameters:**
-
-▪ **T**
-
-input type of the callback
-
-▪ **R**
-
-the result type of the callback
-
-**Parameters:**
-
-▪ **value**: *T*
-
-The value to be passed on
-
-▪ **callback**: *function*
-
-The callback
-
-▸ (`c`: T): *R*
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`c` | T |
-
-**Returns:** *R*
-
-___
-
-###  resolverAsync
-
-▸ **resolverAsync**‹**T**, **R**›(`promise`: PromiseLike‹T›, `callback`: function): *Promise‹R›*
-
-Resolves a promise like value and pass the result to a callback and returns it's result
+**`internal`** 
 
 **Type parameters:**
 
 ▪ **T**
 
-input type of the callback
-
-▪ **R**
-
-the result type of the callback
-
-**Parameters:**
-
-▪ **promise**: *PromiseLike‹T›*
-
-The promise like value
-
-▪ **callback**: *function*
-
-The callback
-
-▸ (`c`: T): *R*
-
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
-`c` | T |
+`a` | PromiseLike‹AnyIterable‹T›› |
 
-**Returns:** *Promise‹R›*
+**Returns:** *AsyncIterable‹T›*
 
 ___
 
