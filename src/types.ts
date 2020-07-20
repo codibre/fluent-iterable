@@ -1,4 +1,9 @@
-import { AnyIterable } from 'augmentative-iterable';
+import {
+  AnyIterable,
+  AsyncPredicate,
+  Mapper,
+  AsyncMapper,
+} from 'augmentative-iterable';
 
 export interface ErrorCallback {
   (error: Error, index: number): unknown;
@@ -16,51 +21,6 @@ interface Predicate<T> {
    * @returns `true` if the predicate passed on `item`; otherwise `false`.
    */
   (item: T): any;
-}
-
-/**
- * Represents an asynchronous predicate on type `T`.<br>
- *   Example: `const userExists: AsyncPredicate<User> = async user => !!(await getUser(user.id))`
- * @typeparam T The type the predicate is defined on.
- */
-interface AsyncPredicate<T> {
-  /**
-   * Asynchronously evaluates an item of type `T`.
-   * @param item The item evaluated.
-   * @returns A promise of `true` if the predicate passed on `item`; otherwise a promise of `false`.
-   */
-  (item: T): Promise<any> | any;
-}
-
-/**
- * Represents a mapping operation from type `T` to type `R`.<br>
- *   Example: ``const userToPrintable: Mapper<User, string> = user => `${user.name} (id: ${user.id})` ``
- * @typeparam T The source type.
- * @typeparam R The destination type.
- */
-interface Mapper<T, R> {
-  /**
-   * Maps an item of type `T` into an instance of type `R`.
-   * @param item The item to map.
-   * @returns The map of `item`.
-   */
-  (item: T): R;
-}
-
-/**
- * Represents a asynchronous mapping operation from type `T` to type `R`.<br>
- *   Example: `const idToUser: AsyncMapper<number, User> = async id => await getUser(id)`<br>
- *   Note: in the example above, `getUser` function is already an [[AsyncMapper]].
- * @typeparam T The source type.
- * @typeparam R The destination type.
- */
-interface AsyncMapper<T, R> {
-  /**
-   * Asynchronously maps an item of type `T` into an instance of type `R`.
-   * @param item The item to map.
-   * @returns A promise of the map of `item`.
-   */
-  (item: T): Promise<R> | R;
 }
 
 /**
