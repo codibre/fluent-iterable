@@ -92,8 +92,8 @@ describe('fluent x rxjs', () => {
 
           memFluent = process.memoryUsage().heapUsed;
           await src.fluent(src.interval(1, total)).forEachAsync(async () => {
-            const array = await src
-              .fluentAsync(src.interval(1, items))
+            const array = src
+              .fluent(src.interval(1, items))
               .map((x) => x * 7)
               .filter((x) => x % 3)
               .toArray();
