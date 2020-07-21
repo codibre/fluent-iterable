@@ -1,5 +1,8 @@
 
-## 1.1.1
+## 1.1.2
+* 638c250 updating augmentative-iterable
+## v1.1.1
+* 3fe0987 1.1.1
 * 14e171b updating augmentative iterables
 * 0eea035 making augmentative-iterable imported from npm
 * 0ffaa3e using favorable scenario in benchmark
