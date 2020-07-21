@@ -1,4 +1,4 @@
-[fluent-iterable - v1.1.0](../README.md) › ["utils"](_utils_.md)
+[fluent-iterable - v1.1.1](../README.md) › ["utils"](_utils_.md)
 
 # Module: "utils"
 
@@ -46,7 +46,7 @@ Iterates all element of an iterable
 
 ###  asyncNegation
 
-▸ **asyncNegation**‹**T**›(`predicate`: [AsyncPredicate](../interfaces/_types_.asyncpredicate.md)‹T›): *[AsyncPredicate](../interfaces/_types_.asyncpredicate.md)‹T›*
+▸ **asyncNegation**‹**T**›(`predicate`: AsyncPredicate‹T›): *AsyncPredicate‹T›*
 
 Provides a function that negates the informed async predicate
 
@@ -54,15 +54,15 @@ Provides a function that negates the informed async predicate
 
 ▪ **T**
 
-the item type of the [AsyncPredicate](../interfaces/_types_.asyncpredicate.md)
+the item type of the [[AsyncPredicate]]
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate` | [AsyncPredicate](../interfaces/_types_.asyncpredicate.md)‹T› | The async predicate to be negated  |
+`predicate` | AsyncPredicate‹T› | The async predicate to be negated  |
 
-**Returns:** *[AsyncPredicate](../interfaces/_types_.asyncpredicate.md)‹T›*
+**Returns:** *AsyncPredicate‹T›*
 
 ___
 

@@ -1,4 +1,4 @@
-[fluent-iterable - v1.1.0](../README.md) › ["types"](../modules/_types_.md) › [FluentIterable](_types_.fluentiterable.md)
+[fluent-iterable - v1.1.1](../README.md) › ["types"](../modules/_types_.md) › [FluentIterable](_types_.fluentiterable.md)
 
 # Interface: FluentIterable ‹**T**›
 
@@ -125,7 +125,7 @@ ___
 
 ###  allAsync
 
-▸ **allAsync**(`predicate`: [AsyncPredicate](_types_.asyncpredicate.md)‹T›): *Promise‹boolean›*
+▸ **allAsync**(`predicate`: AsyncPredicate‹T›): *Promise‹boolean›*
 
 Determines whether all elements of the iterable satisfy an asynchronous condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
   Note: This operation stops reading elements from the iterable as soon as the result can be determined.
@@ -134,7 +134,7 @@ Determines whether all elements of the iterable satisfy an asynchronous conditio
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate` | [AsyncPredicate](_types_.asyncpredicate.md)‹T› | The asynchronous condition checked for all elements in the iterable. |
+`predicate` | AsyncPredicate‹T› | The asynchronous condition checked for all elements in the iterable. |
 
 **Returns:** *Promise‹boolean›*
 
@@ -169,7 +169,7 @@ ___
 
 ###  anyAsync
 
-▸ **anyAsync**(`predicate?`: [AsyncPredicate](_types_.asyncpredicate.md)‹T›): *Promise‹boolean›*
+▸ **anyAsync**(`predicate?`: AsyncPredicate‹T›): *Promise‹boolean›*
 
 Determines whether any element of the iterable exists or satisfies an asynchronous condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
   Note: This operation stops reading elements from the iterable as soon as the result can be determined.
@@ -178,7 +178,7 @@ Determines whether any element of the iterable exists or satisfies an asynchrono
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | [AsyncPredicate](_types_.asyncpredicate.md)‹T› | The asynchronous condition checked for the elements in the iterable. |
+`predicate?` | AsyncPredicate‹T› | The asynchronous condition checked for the elements in the iterable. |
 
 **Returns:** *Promise‹boolean›*
 
@@ -207,7 +207,7 @@ ___
 
 ###  avg
 
-▸ **avg**(`mapper?`: [Mapper](_types_.mapper.md)‹T, number›): *number*
+▸ **avg**(`mapper?`: Mapper‹T, number›): *number*
 
 Calculates the average of the elements of the iterable projected into a `number`. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Examples:<br>
@@ -218,7 +218,7 @@ Calculates the average of the elements of the iterable projected into a `number`
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper?` | [Mapper](_types_.mapper.md)‹T, number› | The function which projects the elements of the iterable into `number`s. Falls back to the identity function if omitted. |
+`mapper?` | Mapper‹T, number› | The function which projects the elements of the iterable into `number`s. Falls back to the identity function if omitted. |
 
 **Returns:** *number*
 
@@ -228,7 +228,7 @@ ___
 
 ###  avgAsync
 
-▸ **avgAsync**(`mapper?`: [AsyncMapper](_types_.asyncmapper.md)‹T, number›): *Promise‹number›*
+▸ **avgAsync**(`mapper?`: AsyncMapper‹T, number›): *Promise‹number›*
 
 Calculates the average of the elements of the iterable asynchronously projected into a `number`. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -236,7 +236,7 @@ Calculates the average of the elements of the iterable asynchronously projected 
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper?` | [AsyncMapper](_types_.asyncmapper.md)‹T, number› | The asynchronous function which projects the elements of the iterable into `number`s. Falls back to the identity function if omitted. |
+`mapper?` | AsyncMapper‹T, number› | The asynchronous function which projects the elements of the iterable into `number`s. Falls back to the identity function if omitted. |
 
 **Returns:** *Promise‹number›*
 
@@ -364,7 +364,7 @@ ___
 
 ###  countAsync
 
-▸ **countAsync**(`predicate?`: [AsyncPredicate](_types_.asyncpredicate.md)‹T›): *Promise‹number›*
+▸ **countAsync**(`predicate?`: AsyncPredicate‹T›): *Promise‹number›*
 
 Returns the number of elements that matches an asynchronous predicate in the iterable. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -372,7 +372,7 @@ Returns the number of elements that matches an asynchronous predicate in the ite
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | [AsyncPredicate](_types_.asyncpredicate.md)‹T› | The count will consider elements which match this asynchronous predicate. |
+`predicate?` | AsyncPredicate‹T› | The count will consider elements which match this asynchronous predicate. |
 
 **Returns:** *Promise‹number›*
 
@@ -382,7 +382,7 @@ ___
 
 ###  distinct
 
-▸ **distinct**‹**R**›(`mapper?`: [Mapper](_types_.mapper.md)‹T, R›): *[FluentIterable](_types_.fluentiterable.md)‹T›*
+▸ **distinct**‹**R**›(`mapper?`: Mapper‹T, R›): *[FluentIterable](_types_.fluentiterable.md)‹T›*
 
 Returns distinct elements from the iterable from a certain projections perspective.<br>
   Examples:<br>
@@ -399,7 +399,7 @@ The type of the data the element equality is based on.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper?` | [Mapper](_types_.mapper.md)‹T, R› | The projection to use to determine element equality. Identity mapping is used if omitted. |
+`mapper?` | Mapper‹T, R› | The projection to use to determine element equality. Identity mapping is used if omitted. |
 
 **Returns:** *[FluentIterable](_types_.fluentiterable.md)‹T›*
 
@@ -409,7 +409,7 @@ ___
 
 ###  distinctAsync
 
-▸ **distinctAsync**‹**R**›(`mapper`: [AsyncMapper](_types_.asyncmapper.md)‹T, R›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+▸ **distinctAsync**‹**R**›(`mapper`: AsyncMapper‹T, R›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
 Returns distinct elements from the iterable from a certain asynchronous projections perspective.
 
@@ -423,7 +423,7 @@ The type of the data the element equality is based on.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper` | [AsyncMapper](_types_.asyncmapper.md)‹T, R› | The asynchronous projection to use to determine element equality. Identity mapping is used if omitted. |
+`mapper` | AsyncMapper‹T, R› | The asynchronous projection to use to determine element equality. Identity mapping is used if omitted. |
 
 **Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
@@ -491,7 +491,7 @@ ___
 
 ###  filterAsync
 
-▸ **filterAsync**(`predicate`: [AsyncPredicate](_types_.asyncpredicate.md)‹T›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+▸ **filterAsync**(`predicate`: AsyncPredicate‹T›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
 Filters the iterable of `T` based on an asynchronous predicate.
 
@@ -499,7 +499,7 @@ Filters the iterable of `T` based on an asynchronous predicate.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate` | [AsyncPredicate](_types_.asyncpredicate.md)‹T› | An asynchronous predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`. |
+`predicate` | AsyncPredicate‹T› | An asynchronous predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`. |
 
 **Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
@@ -532,7 +532,7 @@ ___
 
 ###  firstAsync
 
-▸ **firstAsync**(`predicate?`: [AsyncPredicate](_types_.asyncpredicate.md)‹T›): *Promise‹T | undefined›*
+▸ **firstAsync**(`predicate?`: AsyncPredicate‹T›): *Promise‹T | undefined›*
 
 Returns the first element of the iterable matching an asynchronous predicate, or `undefined` value if no such element is found. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
 
@@ -540,7 +540,7 @@ Returns the first element of the iterable matching an asynchronous predicate, or
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | [AsyncPredicate](_types_.asyncpredicate.md)‹T› | The first element is to be returned which matches this asynchronous predicate. |
+`predicate?` | AsyncPredicate‹T› | The first element is to be returned which matches this asynchronous predicate. |
 
 **Returns:** *Promise‹T | undefined›*
 
@@ -550,7 +550,7 @@ ___
 
 ###  flatten
 
-▸ **flatten**‹**R**›(`mapper?`: [Mapper](_types_.mapper.md)‹T, Iterable‹R››): *[FluentIterable](_types_.fluentiterable.md)‹R›*
+▸ **flatten**‹**R**›(`mapper?`: Mapper‹T, Iterable‹R››): *[FluentIterable](_types_.fluentiterable.md)‹R›*
 
 Projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.<br>
 Examples:<br>
@@ -567,7 +567,7 @@ The type of the elements in the inner iterable.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper?` | [Mapper](_types_.mapper.md)‹T, Iterable‹R›› | Specifies the projection from the elements of `T` to iterables of `R`. Identity mapping is applied (taking the elements as iterables) if omitted. |
+`mapper?` | Mapper‹T, Iterable‹R›› | Specifies the projection from the elements of `T` to iterables of `R`. Identity mapping is applied (taking the elements as iterables) if omitted. |
 
 **Returns:** *[FluentIterable](_types_.fluentiterable.md)‹R›*
 
@@ -577,7 +577,7 @@ ___
 
 ###  flattenAsync
 
-▸ **flattenAsync**‹**R**›(`mapper?`: [AsyncMapper](_types_.asyncmapper.md)‹T, Iterable‹R››): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹R›*
+▸ **flattenAsync**‹**R**›(`mapper?`: AsyncMapper‹T, Iterable‹R››): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹R›*
 
 Asynchronously projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.
 
@@ -591,7 +591,7 @@ The type of the elements in the inner iterable.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper?` | [AsyncMapper](_types_.asyncmapper.md)‹T, Iterable‹R›› | Specifies the asynchronous projection from the elements of `T` to iterables of `R`. |
+`mapper?` | AsyncMapper‹T, Iterable‹R›› | Specifies the asynchronous projection from the elements of `T` to iterables of `R`. |
 
 **Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹R›*
 
@@ -618,7 +618,7 @@ ___
 
 ###  forEachAsync
 
-▸ **forEachAsync**‹**R**›(`mapper`: [AsyncMapper](_types_.asyncmapper.md)‹T, R›): *Promise‹void›*
+▸ **forEachAsync**‹**R**›(`mapper`: AsyncMapper‹T, R›): *Promise‹void›*
 
 Iterates through the iterable and executes an asynchronous action against each element. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -630,7 +630,7 @@ Iterates through the iterable and executes an asynchronous action against each e
 
 Name | Type |
 ------ | ------ |
-`mapper` | [AsyncMapper](_types_.asyncmapper.md)‹T, R› |
+`mapper` | AsyncMapper‹T, R› |
 
 **Returns:** *Promise‹void›*
 
@@ -640,7 +640,7 @@ ___
 
 ###  group
 
-▸ **group**‹**R**›(`mapper`: [Mapper](_types_.mapper.md)‹T, R›): *[FluentIterable](_types_.fluentiterable.md)‹[FluentGroup](_types_.fluentgroup.md)‹T, R››*
+▸ **group**‹**R**›(`mapper`: Mapper‹T, R›): *[FluentIterable](_types_.fluentiterable.md)‹[FluentGroup](_types_.fluentgroup.md)‹T, R››*
 
 Groups the elements of the iterable keyed by equality of data at the specified projection.<br>
   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).group(word => word[0])` yields { key: 'a', values: ['anchor', 'almond', 'alpine'] } and { key: 'b', values: ['bound'] }.
@@ -655,7 +655,7 @@ The type of the groups' key.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper` | [Mapper](_types_.mapper.md)‹T, R› | Projects the elements of the iterable into the group key they belong to. |
+`mapper` | Mapper‹T, R› | Projects the elements of the iterable into the group key they belong to. |
 
 **Returns:** *[FluentIterable](_types_.fluentiterable.md)‹[FluentGroup](_types_.fluentgroup.md)‹T, R››*
 
@@ -665,7 +665,7 @@ ___
 
 ###  groupAsync
 
-▸ **groupAsync**‹**R**›(`mapper`: [AsyncMapper](_types_.asyncmapper.md)‹T, R›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[FluentGroup](_types_.fluentgroup.md)‹T, R››*
+▸ **groupAsync**‹**R**›(`mapper`: AsyncMapper‹T, R›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[FluentGroup](_types_.fluentgroup.md)‹T, R››*
 
 Groups the elements of the iterable keyed by equality of data at the specified asynchronous projection.
 
@@ -679,7 +679,7 @@ The type of the groups key.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper` | [AsyncMapper](_types_.asyncmapper.md)‹T, R› | Asynchronously projects the elements of the iterable into the group key they belong to. |
+`mapper` | AsyncMapper‹T, R› | Asynchronously projects the elements of the iterable into the group key they belong to. |
 
 **Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[FluentGroup](_types_.fluentgroup.md)‹T, R››*
 
@@ -743,7 +743,7 @@ ___
 
 ###  join
 
-▸ **join**(`separator`: string, `mapper?`: [Mapper](_types_.mapper.md)‹T, string›): *string*
+▸ **join**(`separator`: string, `mapper?`: Mapper‹T, string›): *string*
 
 Projects and concatenates the elements of the iterable into a `string` using a separator. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Examples:<br>
@@ -754,7 +754,7 @@ Projects and concatenates the elements of the iterable into a `string` using a s
 Name | Type | Description |
 ------ | ------ | ------ |
 `separator` | string | The separator to use in between the elements of the iterable. |
-`mapper?` | [Mapper](_types_.mapper.md)‹T, string› | The function which projects the elements of the iterable into `string`s. Falls back to the identity function if omitted. |
+`mapper?` | Mapper‹T, string› | The function which projects the elements of the iterable into `string`s. Falls back to the identity function if omitted. |
 
 **Returns:** *string*
 
@@ -764,7 +764,7 @@ ___
 
 ###  joinAsync
 
-▸ **joinAsync**(`separator`: string, `mapper`: [AsyncMapper](_types_.asyncmapper.md)‹T, string›): *Promise‹string›*
+▸ **joinAsync**(`separator`: string, `mapper`: AsyncMapper‹T, string›): *Promise‹string›*
 
 Asynchronously projects and concatenates the elements of the iterable into a `string` using a separator. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -773,7 +773,7 @@ Asynchronously projects and concatenates the elements of the iterable into a `st
 Name | Type | Description |
 ------ | ------ | ------ |
 `separator` | string | The separator to use in between the elements of the iterable. |
-`mapper` | [AsyncMapper](_types_.asyncmapper.md)‹T, string› | The function which asynchronously projects the elements of the iterable into `string`s. Falls back to the identity function if omitted. |
+`mapper` | AsyncMapper‹T, string› | The function which asynchronously projects the elements of the iterable into `string`s. Falls back to the identity function if omitted. |
 
 **Returns:** *Promise‹string›*
 
@@ -806,7 +806,7 @@ ___
 
 ###  lastAsync
 
-▸ **lastAsync**(`predicate?`: [AsyncPredicate](_types_.asyncpredicate.md)‹T›): *Promise‹T | undefined›*
+▸ **lastAsync**(`predicate?`: AsyncPredicate‹T›): *Promise‹T | undefined›*
 
 Returns the last element of the iterable matching an asynchronous predicate, or `undefined` value if no such element is found. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -814,7 +814,7 @@ Returns the last element of the iterable matching an asynchronous predicate, or 
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | [AsyncPredicate](_types_.asyncpredicate.md)‹T› | The last element is to be returned which matches this asynchronous predicate. |
+`predicate?` | AsyncPredicate‹T› | The last element is to be returned which matches this asynchronous predicate. |
 
 **Returns:** *Promise‹T | undefined›*
 
@@ -824,7 +824,7 @@ ___
 
 ###  map
 
-▸ **map**‹**R**›(`mapper`: [Mapper](_types_.mapper.md)‹T, R›): *[FluentIterable](_types_.fluentiterable.md)‹R›*
+▸ **map**‹**R**›(`mapper`: Mapper‹T, R›): *[FluentIterable](_types_.fluentiterable.md)‹R›*
 
 Transforms the iterable of `T` into an iterable of `R` by mapping all elements to an element of `R`.<br>
   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).map(word => word.toUpperCase())` yields *ANCHOR*, *ALMOND*, *BOUND* and *ALPINE*.
@@ -839,7 +839,7 @@ The destination type of the mapping.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper` | [Mapper](_types_.mapper.md)‹T, R› | The operation which maps an instance of `T` into an instance of `R`. |
+`mapper` | Mapper‹T, R› | The operation which maps an instance of `T` into an instance of `R`. |
 
 **Returns:** *[FluentIterable](_types_.fluentiterable.md)‹R›*
 
@@ -849,7 +849,7 @@ ___
 
 ###  mapAsync
 
-▸ **mapAsync**‹**R**›(`mapper`: [AsyncMapper](_types_.asyncmapper.md)‹T, R›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹R›*
+▸ **mapAsync**‹**R**›(`mapper`: AsyncMapper‹T, R›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹R›*
 
 Transforms the iterable of `T` into an iterable of `R` by mapping all elements to an element of `R`.
 
@@ -863,7 +863,7 @@ The destination type of the mapping.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper` | [AsyncMapper](_types_.asyncmapper.md)‹T, R› | The asynchronous operation which maps an instance of `T` into an instance of `R`. |
+`mapper` | AsyncMapper‹T, R› | The asynchronous operation which maps an instance of `T` into an instance of `R`. |
 
 **Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹R›*
 
@@ -873,7 +873,7 @@ ___
 
 ###  max
 
-▸ **max**(`mapper?`: [Mapper](_types_.mapper.md)‹T, number›): *T | undefined*
+▸ **max**(`mapper?`: Mapper‹T, number›): *T | undefined*
 
 Finds the numeric maximum element of the iterable using a projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).max(word => word.charCodeAt(0))` returns *bound*, since it begins with the character 'b' which has a highest character code than character 'a' with which all the other words begins with
@@ -882,7 +882,7 @@ Finds the numeric maximum element of the iterable using a projection. This is a 
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper?` | [Mapper](_types_.mapper.md)‹T, number› | The function which projects the elements of the iterable into numbers. Falls back to the identity function if omitted. |
+`mapper?` | Mapper‹T, number› | The function which projects the elements of the iterable into numbers. Falls back to the identity function if omitted. |
 
 **Returns:** *T | undefined*
 
@@ -892,7 +892,7 @@ ___
 
 ###  maxAsync
 
-▸ **maxAsync**(`mapper?`: [AsyncMapper](_types_.asyncmapper.md)‹T, number›): *Promise‹T | undefined›*
+▸ **maxAsync**(`mapper?`: AsyncMapper‹T, number›): *Promise‹T | undefined›*
 
 Finds the numeric maximum element of the iterable using an asynchronous projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -900,7 +900,7 @@ Finds the numeric maximum element of the iterable using an asynchronous projecti
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper?` | [AsyncMapper](_types_.asyncmapper.md)‹T, number› | The function which asynchronously projects the elements of the iterable into numbers. |
+`mapper?` | AsyncMapper‹T, number› | The function which asynchronously projects the elements of the iterable into numbers. |
 
 **Returns:** *Promise‹T | undefined›*
 
@@ -910,7 +910,7 @@ ___
 
 ###  min
 
-▸ **min**(`mapper?`: [Mapper](_types_.mapper.md)‹T, number›): *T | undefined*
+▸ **min**(`mapper?`: Mapper‹T, number›): *T | undefined*
 
 Finds the numeric minimum element of the iterable using a projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).min(word => word.length)` returns *bound*, the shortest word in the iterable
@@ -919,7 +919,7 @@ Finds the numeric minimum element of the iterable using a projection. This is a 
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper?` | [Mapper](_types_.mapper.md)‹T, number› | The function which projects the elements of the iterable into numbers. Falls back to the identity function if omitted. |
+`mapper?` | Mapper‹T, number› | The function which projects the elements of the iterable into numbers. Falls back to the identity function if omitted. |
 
 **Returns:** *T | undefined*
 
@@ -929,7 +929,7 @@ ___
 
 ###  minAsync
 
-▸ **minAsync**(`mapper?`: [AsyncMapper](_types_.asyncmapper.md)‹T, number›): *Promise‹T | undefined›*
+▸ **minAsync**(`mapper?`: AsyncMapper‹T, number›): *Promise‹T | undefined›*
 
 Finds the numeric minimum element of the iterable using an asynchronous projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -937,7 +937,7 @@ Finds the numeric minimum element of the iterable using an asynchronous projecti
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper?` | [AsyncMapper](_types_.asyncmapper.md)‹T, number› | The asynchronous function which projects the elements of the iterable into numbers. |
+`mapper?` | AsyncMapper‹T, number› | The asynchronous function which projects the elements of the iterable into numbers. |
 
 **Returns:** *Promise‹T | undefined›*
 
@@ -1018,7 +1018,7 @@ ___
 
 ###  reduceAndMap
 
-▸ **reduceAndMap**‹**A**, **R**›(`reducer`: [Reducer](_types_.reducer.md)‹T, A›, `initial`: A, `result`: [Mapper](_types_.mapper.md)‹A, R›): *R*
+▸ **reduceAndMap**‹**A**, **R**›(`reducer`: [Reducer](_types_.reducer.md)‹T, A›, `initial`: A, `result`: Mapper‹A, R›): *R*
 
 Aggregates the iterable by applying an accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value, and the specified map function is used to project the result value from the accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Example:<br>
@@ -1049,7 +1049,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `reducer` | [Reducer](_types_.reducer.md)‹T, A› | The accumulator function, provides the next accumulator value out of the last accumulator value and the next element in the iterable. |
 `initial` | A | The initial (aka *seed*) value of the accumulator. |
-`result` | [Mapper](_types_.mapper.md)‹A, R› | The mapping function, projects the accumulator value of type `A` to the result value of type `R`. |
+`result` | Mapper‹A, R› | The mapping function, projects the accumulator value of type `A` to the result value of type `R`. |
 
 **Returns:** *R*
 
@@ -1059,7 +1059,7 @@ ___
 
 ###  reduceAndMapAsync
 
-▸ **reduceAndMapAsync**‹**A**, **R**›(`reducer`: [AsyncReducer](_types_.asyncreducer.md)‹T, A›, `initial`: A, `result`: [AsyncMapper](_types_.asyncmapper.md)‹A, R›): *Promise‹R›*
+▸ **reduceAndMapAsync**‹**A**, **R**›(`reducer`: [AsyncReducer](_types_.asyncreducer.md)‹T, A›, `initial`: A, `result`: AsyncMapper‹A, R›): *Promise‹R›*
 
 Aggregates the iterable by applying an asynchronous accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value, and the specified asynchronous map function is used to project the result value from the accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -1079,7 +1079,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `reducer` | [AsyncReducer](_types_.asyncreducer.md)‹T, A› | The asynchronous accumulator function, provides the next accumulator value out of the last accumulator value and the next element in the iterable. |
 `initial` | A | The initial (aka *seed*) value of the accumulator. |
-`result` | [AsyncMapper](_types_.asyncmapper.md)‹A, R› | The asynchronous mapping function, projects the accumulator value of type `A` to the result value of type `R`. |
+`result` | AsyncMapper‹A, R› | The asynchronous mapping function, projects the accumulator value of type `A` to the result value of type `R`. |
 
 **Returns:** *Promise‹R›*
 
@@ -1171,7 +1171,7 @@ ___
 
 ###  skipWhileAsync
 
-▸ **skipWhileAsync**(`condition`: [AsyncPredicate](_types_.asyncpredicate.md)‹T›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+▸ **skipWhileAsync**(`condition`: AsyncPredicate‹T›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
 Bypasses elements in the iterable as long as a specified asynchronous condition is true and then returns the remaining elements.
 
@@ -1179,7 +1179,7 @@ Bypasses elements in the iterable as long as a specified asynchronous condition 
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`condition` | [AsyncPredicate](_types_.asyncpredicate.md)‹T› | An asynchronous predicate of `T`. All elements are skipped from the iterable until this evaluates to `false` for the first time. |
+`condition` | AsyncPredicate‹T› | An asynchronous predicate of `T`. All elements are skipped from the iterable until this evaluates to `false` for the first time. |
 
 **Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
@@ -1212,7 +1212,7 @@ ___
 
 ###  sum
 
-▸ **sum**(`mapper?`: [Mapper](_types_.mapper.md)‹T, number›): *number*
+▸ **sum**(`mapper?`: Mapper‹T, number›): *number*
 
 Calculates the sum of the elements of the iterable projected into a `number`. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Examples:<br>
@@ -1223,7 +1223,7 @@ Calculates the sum of the elements of the iterable projected into a `number`. Th
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper?` | [Mapper](_types_.mapper.md)‹T, number› | The function which projects the elements of the iterable into `number`s. Falls back to the identity function if omitted. |
+`mapper?` | Mapper‹T, number› | The function which projects the elements of the iterable into `number`s. Falls back to the identity function if omitted. |
 
 **Returns:** *number*
 
@@ -1233,7 +1233,7 @@ ___
 
 ###  sumAsync
 
-▸ **sumAsync**(`mapper?`: [AsyncMapper](_types_.asyncmapper.md)‹T, number›): *Promise‹number›*
+▸ **sumAsync**(`mapper?`: AsyncMapper‹T, number›): *Promise‹number›*
 
 Calculates the sum of the elements of the iterable asynchronously projected into a `number`. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -1241,7 +1241,7 @@ Calculates the sum of the elements of the iterable asynchronously projected into
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper?` | [AsyncMapper](_types_.asyncmapper.md)‹T, number› | The asynchronous function which projects the elements of the iterable into `number`s. Falls back to the identity function if omitted. |
+`mapper?` | AsyncMapper‹T, number› | The asynchronous function which projects the elements of the iterable into `number`s. Falls back to the identity function if omitted. |
 
 **Returns:** *Promise‹number›*
 
@@ -1289,7 +1289,7 @@ ___
 
 ###  takeWhileAsync
 
-▸ **takeWhileAsync**(`condition`: [AsyncPredicate](_types_.asyncpredicate.md)‹T›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+▸ **takeWhileAsync**(`condition`: AsyncPredicate‹T›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
 Returns elements from the iterable as long as a specified asynchronous condition is met.
 
@@ -1297,7 +1297,7 @@ Returns elements from the iterable as long as a specified asynchronous condition
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`condition` | [AsyncPredicate](_types_.asyncpredicate.md)‹T› | An asynchronous predicate of `T`. All elements are yielded from the iterable until this evaluates to `false` for the first time. |
+`condition` | AsyncPredicate‹T› | An asynchronous predicate of `T`. All elements are yielded from the iterable until this evaluates to `false` for the first time. |
 
 **Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
@@ -1332,7 +1332,7 @@ ___
 
 ###  toObject
 
-▸ **toObject**‹**R**›(`keySelector`: [Mapper](_types_.mapper.md)‹T, keyof R›, `valueSelector?`: [Mapper](_types_.mapper.md)‹T, R[keyof R]›): *R*
+▸ **toObject**‹**R**›(`keySelector`: Mapper‹T, keyof R›, `valueSelector?`: Mapper‹T, R[keyof R]›): *R*
 
 Translates the iterable into an object using the elements of the iterable as representations of fields as specified by a key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Examples:<br>
@@ -1349,8 +1349,8 @@ The expected type of the object. Cannot be enforced, this is strictly informal.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`keySelector` | [Mapper](_types_.mapper.md)‹T, keyof R› | Projects an element of the iterable into the key of the corresponding field. |
-`valueSelector?` | [Mapper](_types_.mapper.md)‹T, R[keyof R]› | Projects an element of the iterable into the value of the corresponding field. The identity function is being used if omitted. |
+`keySelector` | Mapper‹T, keyof R› | Projects an element of the iterable into the key of the corresponding field. |
+`valueSelector?` | Mapper‹T, R[keyof R]› | Projects an element of the iterable into the value of the corresponding field. The identity function is being used if omitted. |
 
 **Returns:** *R*
 
@@ -1360,7 +1360,7 @@ ___
 
 ###  toObjectAsync
 
-▸ **toObjectAsync**‹**R**›(`keySelector`: [AsyncMapper](_types_.asyncmapper.md)‹T, keyof R›, `valueSelector?`: [AsyncMapper](_types_.asyncmapper.md)‹T, R[keyof R]›): *Promise‹R›*
+▸ **toObjectAsync**‹**R**›(`keySelector`: AsyncMapper‹T, keyof R›, `valueSelector?`: AsyncMapper‹T, R[keyof R]›): *Promise‹R›*
 
 Translates the iterable into an object using the elements of the iterable as representations of fields as specified by an asynchronous key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -1374,8 +1374,8 @@ The expected type of the object. Cannot be enforced, this is strictly informal.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`keySelector` | [AsyncMapper](_types_.asyncmapper.md)‹T, keyof R› | Asynchronously projects an element of the iterable into the key of the corresponding field. |
-`valueSelector?` | [AsyncMapper](_types_.asyncmapper.md)‹T, R[keyof R]› | Asynchronously projects an element of the iterable into the value of the corresponding field. |
+`keySelector` | AsyncMapper‹T, keyof R› | Asynchronously projects an element of the iterable into the key of the corresponding field. |
+`valueSelector?` | AsyncMapper‹T, R[keyof R]› | Asynchronously projects an element of the iterable into the value of the corresponding field. |
 
 **Returns:** *Promise‹R›*
 
@@ -1385,7 +1385,7 @@ ___
 
 ###  top
 
-▸ **top**‹**R**›(`mapper`: [Mapper](_types_.mapper.md)‹T, R›, `comparer`: [Comparer](_types_.comparer.md)‹R›): *T | undefined*
+▸ **top**‹**R**›(`mapper`: Mapper‹T, R›, `comparer`: [Comparer](_types_.comparer.md)‹R›): *T | undefined*
 
 Calculates the top element of the iterable using a projection and a comparer. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Examples:<br>
@@ -1402,7 +1402,7 @@ The type of the projected elements used for comparison.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper` | [Mapper](_types_.mapper.md)‹T, R› | The function which projects the elements of the iterable into comparable. |
+`mapper` | Mapper‹T, R› | The function which projects the elements of the iterable into comparable. |
 `comparer` | [Comparer](_types_.comparer.md)‹R› | The comparison function. |
 
 **Returns:** *T | undefined*
@@ -1413,7 +1413,7 @@ ___
 
 ###  topAsync
 
-▸ **topAsync**‹**R**›(`mapper`: [AsyncMapper](_types_.asyncmapper.md)‹T, R›, `comparer`: [Comparer](_types_.comparer.md)‹R›): *Promise‹T | undefined›*
+▸ **topAsync**‹**R**›(`mapper`: AsyncMapper‹T, R›, `comparer`: [Comparer](_types_.comparer.md)‹R›): *Promise‹T | undefined›*
 
 Calculates the top element of the iterable using an asynchronous projection and a comparer. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -1427,7 +1427,7 @@ The type of the projected elements used for comparison.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper` | [AsyncMapper](_types_.asyncmapper.md)‹T, R› | The asynchronous function which projects the elements of the iterable into comparable. |
+`mapper` | AsyncMapper‹T, R› | The asynchronous function which projects the elements of the iterable into comparable. |
 `comparer` | [Comparer](_types_.comparer.md)‹R› | The comparison function. |
 
 **Returns:** *Promise‹T | undefined›*
@@ -1438,7 +1438,7 @@ ___
 
 ###  waitAll
 
-▸ **waitAll**‹**R**›(`mapper`: [AsyncMapper](_types_.asyncmapper.md)‹T, R›): *PromiseLike‹R[]›*
+▸ **waitAll**‹**R**›(`mapper`: AsyncMapper‹T, R›): *PromiseLike‹R[]›*
 
 Applies a async transformation for every element in the array and, then, wait for they conclusion with Promise.all. This is a resolving operation.
 
@@ -1450,7 +1450,7 @@ Applies a async transformation for every element in the array and, then, wait fo
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper` | [AsyncMapper](_types_.asyncmapper.md)‹T, R› | The asynchronous function which projects the elements of the iterable into promises. |
+`mapper` | AsyncMapper‹T, R› | The asynchronous function which projects the elements of the iterable into promises. |
 
 **Returns:** *PromiseLike‹R[]›*
 

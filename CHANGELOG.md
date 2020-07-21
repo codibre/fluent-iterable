@@ -1,5 +1,13 @@
 
-## 1.1.0
+## 1.1.1
+* 14e171b updating augmentative iterables
+* 0eea035 making augmentative-iterable imported from npm
+* 0ffaa3e using favorable scenario in benchmark
+* b98599c updating augmentative-iterable
+* 62e9b19 updating bench tests
+* 0fa4915 updating benchmark test
+## v1.1.0
+* 8ed53fd 1.1.0
 * 7642f22 Bump lodash from 4.17.15 to 4.17.19 (#7)
 * 56255e0 External lib augmentable (#6)
 * 9a2368d fixing benchmark test

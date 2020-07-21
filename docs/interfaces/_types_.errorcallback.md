@@ -1,4 +1,4 @@
-[fluent-iterable - v1.1.0](../README.md) › ["types"](../modules/_types_.md) › [ErrorCallback](_types_.errorcallback.md)
+[fluent-iterable - v1.1.1](../README.md) › ["types"](../modules/_types_.md) › [ErrorCallback](_types_.errorcallback.md)
 
 # Interface: ErrorCallback
 

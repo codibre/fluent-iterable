@@ -1,4 +1,4 @@
-[fluent-iterable - v1.1.0](../README.md) › ["transform-obj-values"](_transform_obj_values_.md)
+[fluent-iterable - v1.1.1](../README.md) › ["transform-obj-values"](_transform_obj_values_.md)
 
 # Module: "transform-obj-values"
 
@@ -12,7 +12,7 @@
 
 ###  transformObjValues
 
-▸ **transformObjValues**‹**T**›(`obj`: T, `mapper`: [Mapper](../interfaces/_types_.mapper.md)‹[keyof T, T[keyof T]], unknown›): *object*
+▸ **transformObjValues**‹**T**›(`obj`: T, `mapper`: Mapper‹[keyof T, T[keyof T]], unknown›): *object*
 
 Applies a transformation to the value of all pro
 
@@ -25,7 +25,7 @@ Applies a transformation to the value of all pro
 Name | Type | Description |
 ------ | ------ | ------ |
 `obj` | T | The object to be iterated with |
-`mapper` | [Mapper](../interfaces/_types_.mapper.md)‹[keyof T, T[keyof T]], unknown› | the mapper to be applied to each value  |
+`mapper` | Mapper‹[keyof T, T[keyof T]], unknown› | the mapper to be applied to each value  |
 
 **Returns:** *object*
 

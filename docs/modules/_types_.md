@@ -1,4 +1,4 @@
-[fluent-iterable - v1.1.0](../README.md) › ["types"](_types_.md)
+[fluent-iterable - v1.1.1](../README.md) › ["types"](_types_.md)
 
 # Module: "types"
 
@@ -8,8 +8,6 @@
 
 * [Action](../interfaces/_types_.action.md)
 * [AsyncAction](../interfaces/_types_.asyncaction.md)
-* [AsyncMapper](../interfaces/_types_.asyncmapper.md)
-* [AsyncPredicate](../interfaces/_types_.asyncpredicate.md)
 * [AsyncReducer](../interfaces/_types_.asyncreducer.md)
 * [Comparer](../interfaces/_types_.comparer.md)
 * [ErrorCallback](../interfaces/_types_.errorcallback.md)
@@ -18,7 +16,6 @@
 * [FluentIterable](../interfaces/_types_.fluentiterable.md)
 * [Group](../interfaces/_types_.group.md)
 * [Indexed](../interfaces/_types_.indexed.md)
-* [Mapper](../interfaces/_types_.mapper.md)
 * [Page](../interfaces/_types_.page.md)
 * [Pager](../interfaces/_types_.pager.md)
 * [Predicate](../interfaces/_types_.predicate.md)
