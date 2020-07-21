@@ -29,6 +29,10 @@ describe('fluent x rxjs', () => {
             let time = process.hrtime();
             const preparation = rxjs.from(src.interval(1, items)).pipe(
               rxjsOp.map((x) => x * 7),
+              rxjsOp.map((x) => x + 2),
+              rxjsOp.map((x) => x / 3),
+              rxjsOp.map((x) => x * 4),
+              rxjsOp.takeWhile((x) => x < 10),
               rxjsOp.filter((x) => x % 3 !== 0),
               rxjsOp.toArray(),
             );
@@ -47,6 +51,10 @@ describe('fluent x rxjs', () => {
             const prepared = src
               .fluent(src.interval(1, items))
               .map((x) => x * 7)
+              .map((x) => x + 2)
+              .map((x) => x / 3)
+              .map((x) => x * 4)
+              .takeWhile((x) => x < 10)
               .filter((x) => x % 3);
             time = process.hrtime(time);
             startFluent += time[0] + time[1] / 1e9;
@@ -82,7 +90,7 @@ describe('fluent x rxjs', () => {
         console.log(`Fluent....: ${avgTotalFluent}`);
         console.log(`Proportion: ${avgTotalFluent / avgTotalRxjs}\n`);
         console.log('-----------------------------------------');
-        // expect(avgTotalRxjs > avgTotalFluent).to.be.true;
+        expect(avgTotalRxjs > avgTotalFluent).to.be.true;
       });
     };
   }
