@@ -1,4 +1,4 @@
-[fluent-iterable - v1.1.2](../README.md) › ["depaginator"](_depaginator_.md)
+[fluent-iterable - v1.1.3](../README.md) › ["depaginator"](_depaginator_.md)
 
 # Module: "depaginator"
 

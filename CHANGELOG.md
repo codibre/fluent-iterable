@@ -1,5 +1,8 @@
 
-## 1.1.2
+## 1.1.3
+* 6210abc updating augmentative-iterable to 0.1.5
+## v1.1.2
+* 9c692c1 1.1.2
 * 638c250 updating augmentative-iterable
 ## v1.1.1
 * 3fe0987 1.1.1
