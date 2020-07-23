@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable no-magic-numbers */
-import rxjs = require('rxjs');
-import rxjsOp = require('rxjs/operators');
 import src = require('../src');
 import { expect } from 'chai';
 
