@@ -11,7 +11,17 @@ import { expect } from 'chai';
  * Currently, as expected, rxjs have a better performance than this library, but still fluent-iterable is
  * performing very well too and it seems like irrelevant micro differences for most use cases.
  * To run these test, run "npm run test:benchmark in your console command"
+ * IMPORTANT!
+ * Rxjs is extremely optimized and this tests use an scenario where this library is faster, but this is not
+ * the truth overall. The specific case is about the takeWhile operator, which have quite different behaviors
+ * between the two libraries: while Rxjs keep iterating over all operators BEFORE the takeWhile, even though
+ * in the final result it will be ignored, fluent-iterable, as it's built over the iterable protocol, will
+ * just stop to iterate. If you want to try this test without takeWhile, just change the variable below
+ * to false.
  */
+
+const TAKE_WHILE_THRESHOLD = 200;
+const USE_TAKE_WHILE = true;
 
 describe('fluent x rxjs', () => {
   function executionSuite(repetition: number, total: number, items: number) {
@@ -21,25 +31,35 @@ describe('fluent x rxjs', () => {
         const startsRxjs: number[] = [];
         const execsFluent: number[] = [];
         const execsRxjs: number[] = [];
+        let resultFluent: any;
+        let resultRxjs: any;
 
         await src.fluent(src.interval(1, repetition)).forEachAsync(async () => {
           let startRxjs = 0;
           let execRxjs = 0;
           await src.fluent(src.interval(1, total)).forEachAsync(async () => {
             let time = process.hrtime();
-            const preparation = rxjs.from(src.interval(1, items)).pipe(
-              rxjsOp.map((x) => x * 7),
-              rxjsOp.map((x) => x + 2),
-              rxjsOp.map((x) => x / 3),
-              rxjsOp.map((x) => x * 4),
-              rxjsOp.takeWhile((x) => x < 10),
+            let preparation: rxjs.Observable<any> = rxjs
+              .from(src.interval(1, items))
+              .pipe(
+                rxjsOp.map((x) => x * 7),
+                rxjsOp.map((x) => x + 2),
+                rxjsOp.map((x) => x / 3),
+                rxjsOp.map((x) => x * 4),
+              );
+            if (USE_TAKE_WHILE) {
+              preparation = preparation.pipe(
+                rxjsOp.takeWhile((x) => x < TAKE_WHILE_THRESHOLD),
+              );
+            }
+            preparation = preparation.pipe(
               rxjsOp.filter((x) => x % 3 !== 0),
               rxjsOp.toArray(),
             );
             time = process.hrtime(time);
             startRxjs += time[0] + time[1] / 1e9;
             time = process.hrtime();
-            await preparation.toPromise();
+            resultRxjs = await preparation.toPromise();
             time = process.hrtime(time);
             execRxjs += time[0] + time[1] / 1e9;
           });
@@ -48,18 +68,20 @@ describe('fluent x rxjs', () => {
           let execFluent = 0;
           await src.fluent(src.interval(1, total)).forEachAsync(async () => {
             let time = process.hrtime();
-            const prepared = src
+            let prepared = src
               .fluent(src.interval(1, items))
               .map((x) => x * 7)
               .map((x) => x + 2)
               .map((x) => x / 3)
-              .map((x) => x * 4)
-              .takeWhile((x) => x < 10)
-              .filter((x) => x % 3);
+              .map((x) => x * 4);
+            if (USE_TAKE_WHILE) {
+              prepared = prepared.takeWhile((x) => x < TAKE_WHILE_THRESHOLD);
+            }
+            prepared = prepared.filter((x) => x % 3);
             time = process.hrtime(time);
             startFluent += time[0] + time[1] / 1e9;
             time = process.hrtime();
-            prepared.toArray();
+            resultFluent = prepared.toArray();
             time = process.hrtime(time);
             execFluent += time[0] + time[1] / 1e9;
           });
@@ -91,6 +113,7 @@ describe('fluent x rxjs', () => {
         console.log(`Proportion: ${avgTotalFluent / avgTotalRxjs}\n`);
         console.log('-----------------------------------------');
         expect(avgTotalRxjs > avgTotalFluent).to.be.true;
+        expect(resultFluent).to.be.eql(resultRxjs);
       });
     };
   }
@@ -98,5 +121,5 @@ describe('fluent x rxjs', () => {
   describe('Execution for 1 iteration', executionSuite(100, 1, 10000));
   describe('Execution for 10 iteration', executionSuite(100, 10, 10000));
   describe('Execution for 100 iteration', executionSuite(100, 100, 10000));
-  describe('Execution for 1000 iteration', executionSuite(10, 1000, 1000));
+  describe('Execution for 1000 iteration', executionSuite(100, 1000, 10000));
 });

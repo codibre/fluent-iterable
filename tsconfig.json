@@ -1,6 +1,7 @@
 {
   "extends": "@codibre/confs/tsconfig.json",
   "compilerOptions": {
+    "target": "es2018",
     "rootDir": "./src",
     "outDir": "./dist",
     "declaration": true

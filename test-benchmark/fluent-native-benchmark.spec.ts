@@ -5,8 +5,17 @@ import { expect } from 'chai';
 
 /**
  * This test suite is meant to benchmark fluent-iterable against native, methods, as our primary
- * purpose is to offer something with no drawbacks to use it
+ * purpose is to offer something with no drawbacks to use it*
+ * IMPORTANT!
+ * Native engine have a pretty decent perform but it looses to fluent-iterable in many scenarios.
+ * One scenario, thought, it wins, if you want to test, is if you put a lesser threshold for the
+ * takeWhile operator in this test, as you may want to try. But you'll that, in many scenarios,
+ * even though fluent-iterable is faster. Also, if you disable the operator, is likely that
+ * fluent-iterable will also win.
  */
+
+const TAKE_WHILE_THRESHOLD = 3000;
+const USE_TAKE_WHILE = true;
 
 function* mapTimes7(iterable: Iterable<number>) {
   for (const item of iterable) {
@@ -41,14 +50,14 @@ function* mapFilter3(iterable: Iterable<number>) {
 
 function* mapTakeWhile(iterable: Iterable<number>) {
   for (const item of iterable) {
-    if (item < 10) {
+    if (item >= TAKE_WHILE_THRESHOLD) {
       break;
     }
     yield item;
   }
 }
 
-describe.only('fluent x native', () => {
+describe('fluent x native', () => {
   function executionSuite(repetition: number, total: number, items: number) {
     return () => {
       it(`fluent should be faster than native with ${total} times and ${items} items`, async () => {
@@ -56,6 +65,8 @@ describe.only('fluent x native', () => {
         const startsNative: number[] = [];
         const execsFluent: number[] = [];
         const execsNative: number[] = [];
+        let resultFluent: any;
+        let resultNative: any;
 
         await src.fluent(src.interval(1, repetition)).forEachAsync(async () => {
           let startNative = 0;
@@ -67,12 +78,14 @@ describe.only('fluent x native', () => {
             it = mapPlus2(it);
             it = mapDiv3(it);
             it = mapTimes4(it);
-            it = mapTakeWhile(it);
+            if (USE_TAKE_WHILE) {
+              it = mapTakeWhile(it);
+            }
             it = mapFilter3(it);
             time = process.hrtime(time);
             startNative += time[0] + time[1] / 1e9;
             time = process.hrtime();
-            Array.from(it);
+            resultNative = Array.from(it);
             time = process.hrtime(time);
             execNative += time[0] + time[1] / 1e9;
           });
@@ -81,18 +94,20 @@ describe.only('fluent x native', () => {
           let execFluent = 0;
           await src.fluent(src.interval(1, total)).forEachAsync(async () => {
             let time = process.hrtime();
-            const prepared = src
+            let prepared = src
               .fluent(src.interval(1, items))
               .map((x) => x * 7)
               .map((x) => x + 2)
               .map((x) => x / 3)
-              .map((x) => x * 4)
-              .takeWhile((x) => x < 10)
-              .filter((x) => x % 3);
+              .map((x) => x * 4);
+            if (USE_TAKE_WHILE) {
+              prepared = prepared.takeWhile((x) => x < TAKE_WHILE_THRESHOLD);
+            }
+            prepared = prepared.filter((x) => x % 3);
             time = process.hrtime(time);
             startFluent += time[0] + time[1] / 1e9;
             time = process.hrtime();
-            prepared.toArray();
+            resultFluent = prepared.toArray();
             time = process.hrtime(time);
             execFluent += time[0] + time[1] / 1e9;
           });
@@ -124,6 +139,7 @@ describe.only('fluent x native', () => {
         console.log(`Proportion: ${avgTotalFluent / avgTotalNative}\n`);
         console.log('-----------------------------------------');
         expect(avgTotalNative > avgTotalFluent).to.be.true;
+        expect(resultFluent).to.be.eql(resultNative);
       });
     };
   }
@@ -131,5 +147,5 @@ describe.only('fluent x native', () => {
   describe('Execution for 1 iteration', executionSuite(100, 1, 10000));
   describe('Execution for 10 iteration', executionSuite(100, 10, 10000));
   describe('Execution for 100 iteration', executionSuite(100, 100, 10000));
-  describe('Execution for 1000 iteration', executionSuite(10, 1000, 1000));
+  describe('Execution for 1000 iteration', executionSuite(100, 1000, 10000));
 });
