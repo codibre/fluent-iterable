@@ -596,6 +596,38 @@ describe('fluent async iterable', () => {
           [Gender.NonBinary]: 'name B',
           [Gender.Male]: 'name C',
         }));
+      it('default mapper', async () =>
+        expect(
+          await fluentAsync(
+            new ObjectReadableMock([
+              {
+                gender: Gender.Female,
+                name: 'name A',
+              },
+              {
+                gender: Gender.NonBinary,
+                name: 'name B',
+              },
+              {
+                gender: Gender.Male,
+                name: 'name C',
+              },
+            ]) as AsyncIterable<Person>,
+          ).toObject((x) => x.gender as string),
+        ).to.be.deep.equal({
+          [Gender.Female]: {
+            gender: Gender.Female,
+            name: 'name A',
+          },
+          [Gender.NonBinary]: {
+            gender: Gender.NonBinary,
+            name: 'name B',
+          },
+          [Gender.Male]: {
+            gender: Gender.Male,
+            name: 'name C',
+          },
+        }));
     });
     describe('hasLessThan', () => {
       it('false', async () =>
@@ -607,6 +639,14 @@ describe('fluent async iterable', () => {
           await fluentAsync(new ObjectReadableMock([1, 2, 3])).hasLessThan(4),
         ).to.true);
     });
+    describe('hasLessOrExactly', () => {
+      it('false', async () =>
+        expect(await fluentAsync([1, 2, 3]).hasLessOrExactly(2)).to.false);
+      it('true', async () =>
+        expect(await fluent([1, 2, 3]).hasLessOrExactly(3)).to.true);
+      it('true for less', async () =>
+        expect(await fluentAsync([1, 2, 3]).hasLessOrExactly(4)).to.true);
+    });
     describe('hasMoreThan', () => {
       it('false', async () =>
         expect(
@@ -617,6 +657,14 @@ describe('fluent async iterable', () => {
           await fluentAsync(new ObjectReadableMock([1, 2, 3])).hasMoreThan(2),
         ).to.true);
     });
+    describe('hasMoreOrExactly', () => {
+      it('false', async () =>
+        expect(await fluentAsync([1, 2, 3]).hasMoreOrExactly(4)).to.false);
+      it('true', async () =>
+        expect(await fluentAsync([1, 2, 3]).hasMoreOrExactly(3)).to.true);
+      it('true for more', async () =>
+        expect(await fluentAsync([1, 2, 3]).hasMoreOrExactly(2)).to.true);
+    });
     describe('hasExactly', () => {
       it('false', async () =>
         expect(
@@ -626,6 +674,16 @@ describe('fluent async iterable', () => {
         expect(
           await fluentAsync(new ObjectReadableMock([1, 2, 3])).hasExactly(3),
         ).to.true);
+    });
+    describe('execute', () => {
+      it('should run what is passed', async () => {
+        const action = stub();
+
+        const result = await fluentAsync([1, 2, 3]).execute(action).toArray();
+
+        expect(action).to.have.callsLike([1], [2], [3]);
+        expect(result).to.be.eql([1, 2, 3]);
+      });
     });
 
     describe('merge', () => {
@@ -653,6 +711,15 @@ describe('fluent async iterable', () => {
         expect(sorted).to.be.not.eql(result);
         expect(sorted).to.be.deep.equal([1, 2, 3, 'a', 'b', 'c']);
       });
+    });
+    it('should thrown an error when partition size is not valid', () => {
+      let error: any;
+      try {
+        fluentAsync([]).partition(0);
+      } catch (err) {
+        error = err;
+      }
+      expect(error).to.be.instanceOf(Error);
     });
 
     describe('mergeCatching', () => {

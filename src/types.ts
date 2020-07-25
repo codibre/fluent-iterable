@@ -712,11 +712,25 @@ interface FluentIterable<T> extends Iterable<T> {
   hasLessThan(threshold: number): boolean;
 
   /**
+   * Checks if the number of elements of the iterable is less or equal the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
+   * @param threshold The validation threshold
+   * @returns True if the number of elements of the iterable is lesser or equal the threshold and false if it is not.
+   */
+  hasLessOrExactly(threshold: number): boolean;
+
+  /**
    * Checks if the number of elements of the iterable is more than the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
    * @param threshold The validation threshold
    * @returns True if the number of elements of the iterable is greater than the threshold and false if it is not.
    */
   hasMoreThan(threshold: number): boolean;
+
+  /**
+   * Checks if the number of elements of the iterable is more or equal the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
+   * @param threshold The validation threshold
+   * @returns True if the number of elements of the iterable is greater or equal the threshold and false if it is not.
+   */
+  hasMoreOrExactly(threshold: number): boolean;
 
   /**
    * Applies a async transformation for every element in the array and, then, wait for they conclusion with Promise.all. This is a resolving operation.
@@ -1020,11 +1034,25 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
   hasLessThan(threshold: number): Promise<boolean>;
 
   /**
+   * Checks if the number of elements of the iterable is less or equal the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
+   * @param threshold The validation threshold
+   * @returns True if the number of elements of the iterable is lesser or equal the threshold and false if it is not.
+   */
+  hasLessOrExactly(threshold: number): Promise<boolean>;
+
+  /**
    * Checks if the number of elements of the iterable is more than the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
    * @param threshold The validation threshold
    * @returns A promise that resolves to true if the number of elements of the iterable is greater than the threshold and false if it is not.
    */
   hasMoreThan(threshold: number): Promise<boolean>;
+
+  /**
+   * Checks if the number of elements of the iterable is more or equal the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
+   * @param threshold The validation threshold
+   * @returns True if the number of elements of the iterable is greater or equal the threshold and false if it is not.
+   */
+  hasMoreOrExactly(threshold: number): Promise<boolean>;
 
   /**
    * Merge the iterable with the informed ones.

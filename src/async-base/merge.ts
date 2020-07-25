@@ -2,7 +2,7 @@ import { mergeIterators, getIterators } from './merging';
 
 export function merge<T, R>(
   this: AsyncIterable<T>,
-  ...items: Array<AsyncIterable<R> | AsyncIterator<R>>
+  ...items: Array<AsyncIterable<R>>
 ): AsyncIterable<T | R> {
   return mergeIterators(
     undefined,

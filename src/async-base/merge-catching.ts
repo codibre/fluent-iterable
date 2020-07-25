@@ -4,7 +4,7 @@ import { ErrorCallback } from '../types';
 export function mergeCatching<T, R>(
   this: AsyncIterable<T>,
   callback: ErrorCallback,
-  ...items: Array<AsyncIterable<R> | AsyncIterator<R>>
+  ...items: Array<AsyncIterable<R>>
 ): AsyncIterable<T | R> {
   return mergeIterators(
     callback,

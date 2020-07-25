@@ -1,3 +1,4 @@
+/* eslint-disable guard-for-in */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import fluent from './fluent';
 import { Group, FluentGroup, Predicate, AsyncPredicate } from './types';
@@ -68,9 +69,7 @@ function* iterateAll<T>(a: Iterable<Iterable<T>>) {
  */
 function* iterateObjProps<T extends object>(obj: T): Iterable<keyof T> {
   for (const property in obj) {
-    if (obj.hasOwnProperty(property)) {
-      yield property;
-    }
+    yield property;
   }
 }
 

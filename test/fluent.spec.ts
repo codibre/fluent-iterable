@@ -1,6 +1,8 @@
 import { fluent, interval } from '../src';
 import expect, { flatMap, pick } from './tools';
 import delay from 'delay';
+import { stub } from 'sinon';
+import 'chai-callslike';
 
 export enum Gender {
   Male = 'Male',
@@ -339,6 +341,27 @@ describe('fluent iterable', () => {
             [4, 5, 6],
             [7, 8],
           ]);
+        });
+        it('should divide result in blocks of the specified size when input it not an array', () => {
+          expect(
+            fluent([1, 2, 3, 4, 5, 6, 7, 8][Symbol.iterator]())
+              .partition(3)
+              .map((x) => x.toArray())
+              .toArray(),
+          ).to.be.eql([
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8],
+          ]);
+        });
+        it('should thrown an error when partition size is not valid', () => {
+          let error: any;
+          try {
+            fluent([]).partition(0);
+          } catch (err) {
+            error = err;
+          }
+          expect(error).to.be.instanceOf(Error);
         });
       });
       describe('append', () => {
@@ -762,6 +785,36 @@ describe('fluent iterable', () => {
             [Gender.NonBinary]: 'name B',
             [Gender.Male]: 'name C',
           }));
+        it('default mapper', async () =>
+          expect(
+            await fluent([
+              {
+                gender: Gender.Female,
+                name: 'name A',
+              },
+              {
+                gender: Gender.NonBinary,
+                name: 'name B',
+              },
+              {
+                gender: Gender.Male,
+                name: 'name C',
+              },
+            ] as Iterable<Person>).toObject((x) => x.gender as string),
+          ).to.be.deep.equal({
+            [Gender.Female]: {
+              gender: Gender.Female,
+              name: 'name A',
+            },
+            [Gender.NonBinary]: {
+              gender: Gender.NonBinary,
+              name: 'name B',
+            },
+            [Gender.Male]: {
+              gender: Gender.Male,
+              name: 'name C',
+            },
+          }));
       });
       describe('toObjectAsync', () => {
         it('empty', async () =>
@@ -812,9 +865,33 @@ describe('fluent iterable', () => {
         it('false', () => expect(fluent([1, 2, 3]).hasLessThan(3)).to.false);
         it('true', () => expect(fluent([1, 2, 3]).hasLessThan(4)).to.true);
       });
+      describe('hasLessOrExactly', () => {
+        it('false', () =>
+          expect(fluent([1, 2, 3]).hasLessOrExactly(2)).to.false);
+        it('true', () => expect(fluent([1, 2, 3]).hasLessOrExactly(3)).to.true);
+        it('true for less', () =>
+          expect(fluent([1, 2, 3]).hasLessOrExactly(4)).to.true);
+      });
       describe('hasMoreThan', () => {
         it('false', () => expect(fluent([1, 2, 3]).hasMoreThan(3)).to.false);
         it('true', () => expect(fluent([1, 2, 3]).hasMoreThan(2)).to.true);
+      });
+      describe('hasMoreOrExactly', () => {
+        it('false', () =>
+          expect(fluent([1, 2, 3]).hasMoreOrExactly(4)).to.false);
+        it('true', () => expect(fluent([1, 2, 3]).hasMoreOrExactly(3)).to.true);
+        it('true for more', () =>
+          expect(fluent([1, 2, 3]).hasMoreOrExactly(2)).to.true);
+      });
+      describe('execute', () => {
+        it('should run what is passed', () => {
+          const action = stub();
+
+          const result = fluent([1, 2, 3]).execute(action).toArray();
+
+          expect(action).to.have.callsLike([1], [2], [3]);
+          expect(result).to.be.eql([1, 2, 3]);
+        });
       });
     });
 
