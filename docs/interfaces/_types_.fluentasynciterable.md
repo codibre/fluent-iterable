@@ -1,4 +1,4 @@
-[fluent-iterable - v1.1.3](../README.md) › ["types"](../modules/_types_.md) › [FluentAsyncIterable](_types_.fluentasynciterable.md)
+[fluent-iterable - v1.2.0](../README.md) › ["types"](../modules/_types_.md) › [FluentAsyncIterable](_types_.fluentasynciterable.md)
 
 # Interface: FluentAsyncIterable ‹**T**›
 
@@ -38,7 +38,9 @@ The type of the items in the asynchronous iterable.
 * [forEach](_types_.fluentasynciterable.md#foreach)
 * [group](_types_.fluentasynciterable.md#group)
 * [hasExactly](_types_.fluentasynciterable.md#hasexactly)
+* [hasLessOrExactly](_types_.fluentasynciterable.md#haslessorexactly)
 * [hasLessThan](_types_.fluentasynciterable.md#haslessthan)
+* [hasMoreOrExactly](_types_.fluentasynciterable.md#hasmoreorexactly)
 * [hasMoreThan](_types_.fluentasynciterable.md#hasmorethan)
 * [join](_types_.fluentasynciterable.md#join)
 * [last](_types_.fluentasynciterable.md#last)
@@ -386,6 +388,24 @@ A promise that resolves to true if the number of elements of the iterable is equ
 
 ___
 
+###  hasLessOrExactly
+
+▸ **hasLessOrExactly**(`threshold`: number): *Promise‹boolean›*
+
+Checks if the number of elements of the iterable is less or equal the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`threshold` | number | The validation threshold |
+
+**Returns:** *Promise‹boolean›*
+
+True if the number of elements of the iterable is lesser or equal the threshold and false if it is not.
+
+___
+
 ###  hasLessThan
 
 ▸ **hasLessThan**(`threshold`: number): *Promise‹boolean›*
@@ -401,6 +421,24 @@ Name | Type | Description |
 **Returns:** *Promise‹boolean›*
 
 A promise that resolves to true if the number of elements of the iterable is lesser than the threshold and false if it is not.
+
+___
+
+###  hasMoreOrExactly
+
+▸ **hasMoreOrExactly**(`threshold`: number): *Promise‹boolean›*
+
+Checks if the number of elements of the iterable is more or equal the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`threshold` | number | The validation threshold |
+
+**Returns:** *Promise‹boolean›*
+
+True if the number of elements of the iterable is greater or equal the threshold and false if it is not.
 
 ___
 

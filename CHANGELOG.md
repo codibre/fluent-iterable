@@ -1,5 +1,11 @@
 
-## 1.1.3
+## 1.2.0
+* 05c5953 completing coverage and adding more methods
+* 2d52b34 calibrating performing test
+* 73fcb08 removing rxjs reference
+* c2562fb creating benchmark agains native
+## v1.1.3
+* 176a884 1.1.3
 * 6210abc updating augmentative-iterable to 0.1.5
 ## v1.1.2
 * 9c692c1 1.1.2
