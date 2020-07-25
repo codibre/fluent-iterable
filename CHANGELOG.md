@@ -1,5 +1,9 @@
 
-## 1.2.0
+## 1.2.1
+* 4c95d7a updating package lock"
+* d7f049a updating packages
+## v1.2.0
+* 0db8262 1.2.0
 * 05c5953 completing coverage and adding more methods
 * 2d52b34 calibrating performing test
 * 73fcb08 removing rxjs reference
