@@ -1,4 +1,4 @@
-[fluent-iterable - v1.2.1](../README.md) › ["interval"](_interval_.md)
+[fluent-iterable - v1.2.2](../README.md) › ["interval"](_interval_.md)
 
 # Module: "interval"
 
@@ -6,13 +6,29 @@
 
 ### Functions
 
+* [internalInterval](_interval_.md#internalinterval)
 * [interval](_interval_.md#interval)
 
 ## Functions
 
+###  internalInterval
+
+▸ **internalInterval**(`fromInclusive`: number | undefined, `count`: number | undefined): *Generator‹number, void, unknown›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`fromInclusive` | number &#124; undefined |
+`count` | number &#124; undefined |
+
+**Returns:** *Generator‹number, void, unknown›*
+
+___
+
 ###  interval
 
-▸ **interval**(`fromInclusive?`: undefined | number, `count?`: undefined | number): *Iterable‹number›*
+▸ **interval**(`fromInclusive?`: undefined | number, `count?`: undefined | number): *[FluentIterable](../interfaces/_types_.fluentiterable.md)‹number›*
 
 Generates a `count` long sequential integer interval starting from `fromInclusive`.
 
@@ -33,6 +49,6 @@ Name | Type | Description |
 `fromInclusive?` | undefined &#124; number | Specifies the start of the interval. Defaults to zero. |
 `count?` | undefined &#124; number | Specifies the length of the interval. The interval provides numbers indefinitely if omitted. |
 
-**Returns:** *Iterable‹number›*
+**Returns:** *[FluentIterable](../interfaces/_types_.fluentiterable.md)‹number›*
 
 The iterable of numbers in the interval.

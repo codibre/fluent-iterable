@@ -1,5 +1,10 @@
 
-## 1.2.1
+## 1.2.2
+* 8505952 updating version
+* 72cde26 updating version
+* 29c5b69 adding memory test and fluent interface for interval
+## v1.2.1
+* a3821ba 1.2.1
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
