@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 import { interval, fluent, truth, identity } from '../src';
 
 const SIZE = 1000;
@@ -10,10 +11,10 @@ let heapMax = 0;
 interval(1, TIMES).forEach((x) => {
   let lastPercent = '';
   fluent(arr)
-    .map((x) => x * 2)
+    .map((y) => y * 2)
     .filter(truth)
-    .group((x) => x % 2)
-    .flatten((x) => x.values)
+    .group((y) => y % 2)
+    .flatten((y) => y.values)
     .partition(10)
     .flatten(identity)
     .sort()
