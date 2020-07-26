@@ -1,3 +1,16 @@
+import fluent from './fluent';
+import { FluentIterable } from './types';
+
+function* internalInterval(
+  fromInclusive: number | undefined,
+  count: number | undefined,
+) {
+  const from = fromInclusive || 0;
+  for (let offset = 0; count ? offset < count : true; ++offset) {
+    yield from + offset;
+  }
+}
+
 /**
  * Generates a `count` long sequential integer interval starting from `fromInclusive`.
  *
@@ -14,12 +27,9 @@
  * @param count Specifies the length of the interval. The interval provides numbers indefinitely if omitted.
  * @returns The iterable of numbers in the interval.
  */
-export function* interval(
+export function interval(
   fromInclusive?: number,
   count?: number,
-): Iterable<number> {
-  const from = fromInclusive || 0;
-  for (let offset = 0; count ? offset < count : true; ++offset) {
-    yield from + offset;
-  }
+): FluentIterable<number> {
+  return fluent(internalInterval(fromInclusive, count));
 }

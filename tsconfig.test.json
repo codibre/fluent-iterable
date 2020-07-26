@@ -11,5 +11,5 @@
       "sinon-chai-calls-assertion"
     ]
   },
-  "include": ["./src", "./test", "./test-benchmark"]
+  "include": ["./src", "./test", "./test-benchmark", "./test-memory"]
 }
