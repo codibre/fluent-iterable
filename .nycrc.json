@@ -1,3 +1,20 @@
 {
-  "extends": "node_modules/@codibre/confs/nycrc.json"
+  "check-coverage": true,
+  "lines": 80,
+  "branches": 80,
+  "functions": 80,
+  "exclude": [
+    "**/*.js",
+    "test*",
+    "dist"
+  ],
+  "reporter": [
+    "html",
+    "text",
+    "lcov"
+  ],
+  "extension": [
+    ".ts"
+  ],
+  "all": true
 }
