@@ -28,6 +28,7 @@
     "test:coverage": "nyc npm test",
     "test:benchmark": "mocha --config .mocharc-benchmark.json",
     "test:memory": "ts-node test-memory/run.ts",
+    "test:memory-native": "ts-node test-memory/run.ts",
     "prepublishOnly": "npm run build && npm run test:coverage",
     "preversion": "npm run build && npm run test:coverage",
     "changelog": "scripts/prepare $npm_package_version",
