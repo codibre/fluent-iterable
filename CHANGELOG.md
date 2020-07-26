@@ -1,5 +1,7 @@
 
-## 1.2.2
+## 1.2.3
+* d149a28 fixing lint
+* f6e6bba updating changelog and docs
 * 8505952 updating version
 * 72cde26 updating version
 * 29c5b69 adding memory test and fluent interface for interval
