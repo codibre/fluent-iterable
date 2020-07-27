@@ -1,5 +1,8 @@
 
-## 1.2.4
+## 1.2.5
+* 680df96 updating to stable version of dependencies
+## v1.2.4
+* 526cd40 1.2.4
 * c032cc6 updating version of augmentative for the one with strict mode
 * f78c49a Adding memory test or native approach
 * fe96d52 1.2.3

@@ -1,4 +1,4 @@
-[fluent-iterable - v1.2.4](../README.md) › ["interval"](_interval_.md)
+[fluent-iterable - v1.2.5](../README.md) › ["interval"](_interval_.md)
 
 # Module: "interval"
 
