@@ -68,8 +68,8 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "augmentative-iterable": "^0.1.7",
-    "extension-methods": "^0.1.1"
+    "augmentative-iterable": "^1.0.0",
+    "extension-methods": "^1.0.0"
   },
   "devDependencies": {
     "@codibre/confs": "0.0.6",
