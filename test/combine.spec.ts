@@ -97,6 +97,23 @@ describe('combine', () => {
     });
 
     it('should join two iterables resulting in the matching combinations when key expressions are provided', async () => {
+      const result = await fluent([1, 2])
+        .combineAsync(
+          new ObjectReadableMock(['a', 'b']),
+          constant(1),
+          constant(1),
+        )
+        .toArray();
+
+      expect(result).to.be.eql([
+        [1, 'a'],
+        [1, 'b'],
+        [2, 'a'],
+        [2, 'b'],
+      ]);
+    });
+
+    it('should join two iterables resulting in the matching combinations when key expressions are provided', async () => {
       const result = await fluent([1, 2, 3])
         .combineAsync(
           new ObjectReadableMock(['a', 'b', 'c', 'd']),
@@ -160,6 +177,19 @@ describe('combine', () => {
         .toArray();
 
       expect(result).to.be.eql(expected);
+    });
+
+    it('should join two iterables resulting in the matching combinations when key expressions are provided', async () => {
+      const result = await fluentAsync([1, 2])
+        .combine(new ObjectReadableMock(['a', 'b']), constant(1), constant(1))
+        .toArray();
+
+      expect(result).to.be.eql([
+        [1, 'a'],
+        [1, 'b'],
+        [2, 'a'],
+        [2, 'b'],
+      ]);
     });
 
     it('should join the async iterable with an iterable as an NxN combination', async () => {
