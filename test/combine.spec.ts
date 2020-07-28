@@ -1,4 +1,4 @@
-import { fluent, fluentAsync, identity } from '../src';
+import { fluent, fluentAsync, identity, constant } from '../src';
 import { expect } from 'chai';
 import { ObjectReadableMock } from 'stream-mock';
 
@@ -40,6 +40,19 @@ describe('combine', () => {
         [1, 'd'],
         [2, 'b'],
         [2, 'c'],
+      ]);
+    });
+
+    it('should join two iterables resulting in the matching combinations when key expressions are provided', () => {
+      const result = fluent([1, 2])
+        .combine(['a', 'b'], constant(1), constant(1))
+        .toArray();
+
+      expect(result).to.be.eql([
+        [1, 'a'],
+        [1, 'b'],
+        [2, 'a'],
+        [2, 'b'],
       ]);
     });
 

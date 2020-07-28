@@ -53,6 +53,16 @@ async function* iterateAllAsync<T>(a: AsyncIterable<AnyIterable<T>>) {
 const iterate = identity;
 
 /**
+ * Returns a function that always returns the informed value
+ * @param value the constant value
+ */
+function constant<T>(value: T) {
+  return function constantValue() {
+    return value;
+  };
+}
+
+/**
  * Iterates in all elements of an iterable of iterables
  * @typeparam T the item type of the internal [[Iterable]]
  * @param a The iterable
@@ -186,6 +196,7 @@ function fluentGroup<Key, Value>(
 }
 
 export {
+  constant,
   empty,
   emptyAsync,
   identity,
