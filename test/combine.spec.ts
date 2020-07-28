@@ -1,4 +1,4 @@
-import { fluent, fluentAsync } from '../src';
+import { fluent, fluentAsync, identity } from '../src';
 import { expect } from 'chai';
 import { ObjectReadableMock } from 'stream-mock';
 
@@ -20,6 +20,58 @@ describe('combine', () => {
 
       expect(result).to.be.eql(expected);
     });
+
+    it('should join two iterables resulting in the matching combinations when key expressions are provided', () => {
+      const result = fluent([1, 2, 3])
+        .combine(['a', 'b', 'c', 'd'], identity, (b) => {
+          switch (b) {
+            case 'd':
+              return 1;
+            case 'b':
+            case 'c':
+              return 2;
+            default:
+              return 4;
+          }
+        })
+        .toArray();
+
+      expect(result).to.be.eql([
+        [1, 'd'],
+        [2, 'b'],
+        [2, 'c'],
+      ]);
+    });
+
+    it('should throw an error when only keyA is provided', () => {
+      let error: any;
+      try {
+        fluent([1, 2, 3]).combine(
+          ['a', 'b', 'c', 'd'],
+          identity,
+          undefined as any,
+        );
+      } catch (err) {
+        error = err;
+      }
+
+      expect(error).to.be.instanceOf(Error);
+    });
+
+    it('should throw an error when only keyB is provided', () => {
+      let error: any;
+      try {
+        fluent([1, 2, 3]).combine(
+          ['a', 'b', 'c', 'd'],
+          undefined as any,
+          identity,
+        );
+      } catch (err) {
+        error = err;
+      }
+
+      expect(error).to.be.instanceOf(Error);
+    });
   });
 
   context('fluent.combineAsync', async () => {
@@ -29,6 +81,62 @@ describe('combine', () => {
         .toArray();
 
       expect(result).to.be.eql(expected);
+    });
+
+    it('should join two iterables resulting in the matching combinations when key expressions are provided', async () => {
+      const result = await fluent([1, 2, 3])
+        .combineAsync(
+          new ObjectReadableMock(['a', 'b', 'c', 'd']),
+          (a) => a,
+          (b) => {
+            switch (b) {
+              case 'd':
+                return 1;
+              case 'b':
+              case 'c':
+                return 2;
+              default:
+                return 4;
+            }
+          },
+        )
+        .toArray();
+
+      expect(result).to.be.eql([
+        [1, 'd'],
+        [2, 'b'],
+        [2, 'c'],
+      ]);
+    });
+
+    it('should throw an error when only keyA is provided', () => {
+      let error: any;
+      try {
+        fluent([1, 2, 3]).combineAsync(
+          new ObjectReadableMock(['a', 'b', 'c', 'd']),
+          identity,
+          undefined as any,
+        );
+      } catch (err) {
+        error = err;
+      }
+
+      expect(error).to.be.instanceOf(Error);
+    });
+
+    it('should throw an error when only keyB is provided', () => {
+      let error: any;
+      try {
+        fluent([1, 2, 3]).combineAsync(
+          new ObjectReadableMock(['a', 'b', 'c', 'd']),
+          undefined as any,
+          identity,
+        );
+      } catch (err) {
+        error = err;
+      }
+
+      expect(error).to.be.instanceOf(Error);
     });
   });
 
@@ -47,6 +155,62 @@ describe('combine', () => {
         .toArray();
 
       expect(result).to.be.eql(expected);
+    });
+
+    it('should join two iterables resulting in the matching combinations when key expressions are provided', async () => {
+      const result = await fluentAsync([1, 2, 3])
+        .combine(
+          new ObjectReadableMock(['a', 'b', 'c', 'd']),
+          (a) => a,
+          (b) => {
+            switch (b) {
+              case 'd':
+                return 1;
+              case 'b':
+              case 'c':
+                return 2;
+              default:
+                return 4;
+            }
+          },
+        )
+        .toArray();
+
+      expect(result).to.be.eql([
+        [1, 'd'],
+        [2, 'b'],
+        [2, 'c'],
+      ]);
+    });
+
+    it('should throw an error when only keyA is provided', () => {
+      let error: any;
+      try {
+        fluentAsync([1, 2, 3]).combine(
+          new ObjectReadableMock(['a', 'b', 'c', 'd']),
+          identity,
+          undefined as any,
+        );
+      } catch (err) {
+        error = err;
+      }
+
+      expect(error).to.be.instanceOf(Error);
+    });
+
+    it('should throw an error when only keyB is provided', () => {
+      let error: any;
+      try {
+        fluentAsync([1, 2, 3]).combine(
+          new ObjectReadableMock(['a', 'b', 'c', 'd']),
+          undefined as any,
+          identity,
+        );
+      } catch (err) {
+        error = err;
+      }
+
+      expect(error).to.be.instanceOf(Error);
     });
   });
 });
