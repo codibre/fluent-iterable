@@ -1,4 +1,4 @@
-[fluent-iterable - v1.2.5](../README.md) › ["types"](../modules/_types_.md) › [FluentIterable](_types_.fluentiterable.md)
+[fluent-iterable - v1.3.0](../README.md) › ["types"](../modules/_types_.md) › [FluentIterable](_types_.fluentiterable.md)
 
 # Interface: FluentIterable ‹**T**›
 
@@ -264,6 +264,26 @@ Name | Type | Description |
 
 **Returns:** *[FluentIterable](_types_.fluentiterable.md)‹[T, U]›*
 
+▸ **combine**‹**U**, **K**›(`iterable`: Iterable‹U›, `keyA`: Mapper‹T, K›, `keyB`: Mapper‹U, K›): *[FluentIterable](_types_.fluentiterable.md)‹[T, U]›*
+
+Join the iterable with another one, returning a new iterable with the inner matching combinations
+
+**Type parameters:**
+
+▪ **U**
+
+▪ **K**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`iterable` | Iterable‹U› | The right iterable to be combined |
+`keyA` | Mapper‹T, K› | A mapper that returns the key map value from the left iterable |
+`keyB` | Mapper‹U, K› | A mapper that returns the key map value from the right iterable  |
+
+**Returns:** *[FluentIterable](_types_.fluentiterable.md)‹[T, U]›*
+
 ___
 
 ###  combineAsync
@@ -281,6 +301,26 @@ Join the iterable with an async one, returning a new async iterable with a NxN c
 Name | Type | Description |
 ------ | ------ | ------ |
 `iterable` | AsyncIterable‹U› | The iterable to be combined  |
+
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[T, U]›*
+
+▸ **combineAsync**‹**U**, **K**›(`iterable`: AsyncIterable‹U›, `keyA`: Mapper‹T, K›, `keyB`: Mapper‹U, K›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[T, U]›*
+
+Join the iterable with another one, returning a new async iterable with the inner matching combinations
+
+**Type parameters:**
+
+▪ **U**
+
+▪ **K**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`iterable` | AsyncIterable‹U› | The right iterable to be combined |
+`keyA` | Mapper‹T, K› | A mapper that returns the key map value from the left iterable |
+`keyB` | Mapper‹U, K› | A mapper that returns the key map value from the right iterable  |
 
 **Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[T, U]›*
 

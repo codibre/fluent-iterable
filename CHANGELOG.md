@@ -1,5 +1,8 @@
 
-## 1.2.5
+## 1.3.0
+* f889db1 creating key combiner
+## v1.2.5
+* a6e5243 1.2.5
 * 680df96 updating to stable version of dependencies
 ## v1.2.4
 * 526cd40 1.2.4
