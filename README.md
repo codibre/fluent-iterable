@@ -367,6 +367,51 @@ fluentAsync(depaginate(pager))
   .then(() => console.log('done'));
 ```
 
+### Doing an inner join between two iterables:
+
+```typescript
+import { fluent, identity } from 'fluent-iterable';
+
+const genders = [
+  { code: 'm', description: 'male' },
+  { code: 'f', description: 'female' },
+  { code: 'n', description: 'non binary' },
+];
+
+const persons = [
+  {
+    name: 'Steve',
+    gender: 'm',
+  },
+  {
+    name: 'Natasha',
+    gender: 'f',
+  },
+  {
+    name: 'Lucius',
+    gender: 'n',
+  },
+  {
+    name: 'Jonathan',
+    gender: 'm',
+  },
+  {
+    name: 'Nicole',
+    gender: 'f',
+  },
+  {
+    name: 'Emmy',
+    gender: 'n',
+  },
+];
+
+fluent(genders)
+  .combine(persons, (p) => p.gender, identity)
+  .forEach(([gender, person]) =>
+    console.log(`name: ${person.name}, gender: ${gender.description}`),
+  );
+```
+
 #### Bonus: How to Scan DynamoDB like a pro
 
 ```typescript
