@@ -406,7 +406,11 @@ const persons = [
 ];
 
 fluent(genders)
-  .combine(persons, (p) => p.gender, identity)
+  .combine(
+    persons,
+    (g) => g.code,
+    (p) => p.gender,
+  )
   .forEach(([gender, person]) =>
     console.log(`name: ${person.name}, gender: ${gender.description}`),
   );
