@@ -5,10 +5,10 @@ import { resolverAsync } from 'augmentative-iterable';
 import { forEachAsync } from './for-each-async';
 import { filterAsync } from './filter-async';
 
-export const combineAsync = combineRecipe(
-  mapAsync,
-  flattenAsync,
-  resolverAsync,
-  forEachAsync,
-  filterAsync,
-);
+export const combineAsync = combineRecipe({
+  map: mapAsync,
+  flatten: flattenAsync,
+  resolver: resolverAsync,
+  forEach: forEachAsync,
+  filter: filterAsync,
+});
