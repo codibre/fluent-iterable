@@ -1,5 +1,14 @@
 
-## 1.3.0
+## 1.3.1
+* bca0c2b Using iterative mean algorithm http://www.heikohoffmann.de/htmlthesis/node134.html to calculate avg
+* a961e58 updating readme"
+* b8b8fe1 updating readme
+* c00ff3d adding faulting case tests
+* 2b8a126 refactoring combine
+* e1622b3 refactoring combine
+* 1a67cd0 adding one more test case
+## v1.3.0
+* 2596ded 1.3.0
 * f889db1 creating key combiner
 ## v1.2.5
 * a6e5243 1.2.5

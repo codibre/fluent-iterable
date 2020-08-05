@@ -1,4 +1,4 @@
-[fluent-iterable - v1.3.0](../README.md) › ["utils"](_utils_.md)
+[fluent-iterable - v1.3.1](../README.md) › ["utils"](_utils_.md)
 
 # Module: "utils"
 
@@ -11,6 +11,7 @@
 ### Functions
 
 * [asyncNegation](_utils_.md#asyncnegation)
+* [constant](_utils_.md#constant)
 * [empty](_utils_.md#empty)
 * [emptyAsync](_utils_.md#emptyasync)
 * [eq](_utils_.md#eq)
@@ -63,6 +64,26 @@ Name | Type | Description |
 `predicate` | AsyncPredicate‹T› | The async predicate to be negated  |
 
 **Returns:** *AsyncPredicate‹T›*
+
+___
+
+###  constant
+
+▸ **constant**‹**T**›(`value`: T): *constantValue*
+
+Returns a function that always returns the informed value
+
+**Type parameters:**
+
+▪ **T**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`value` | T | the constant value  |
+
+**Returns:** *constantValue*
 
 ___
 
