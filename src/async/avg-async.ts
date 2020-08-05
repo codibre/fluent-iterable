@@ -1,11 +1,5 @@
 import { reduceAndMapAsync } from './reduce-and-map-async';
 import { avgRecipe } from '../recipes';
+import { resolverAsync } from 'augmentative-iterable';
 
-export const avgAsync = avgRecipe(
-  reduceAndMapAsync,
-  (mapper) => async (current, next) => {
-    current.sum += await mapper(next);
-    current.count++;
-    return current;
-  },
-);
+export const avgAsync = avgRecipe(reduceAndMapAsync, resolverAsync);

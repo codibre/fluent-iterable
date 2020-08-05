@@ -1,22 +1,15 @@
 import { identity } from '../utils';
-import { AnyMapper } from '../types-internal';
+import { ResolverType } from '../types-internal';
 
-interface AvgCalc {
-  sum: number;
-  count: number;
-}
-
-export function avgRecipe(
-  reduceAndMap: Function,
-  getSumming: <T>(mapper: AnyMapper<T>) => (current: AvgCalc, next: T) => any,
-) {
+export function avgRecipe(reduceAndMap: Function, resolver: ResolverType) {
   return function <T>(this: Iterable<T>, mapper: any = identity) {
-    const summing = getSumming(mapper);
+    let div = 0;
     return reduceAndMap.call(
       this,
-      summing,
-      { sum: 0, count: 0 },
-      (acc: AvgCalc) => acc.sum / acc.count,
+      (avg: number, x: T) =>
+        resolver(mapper(x), (y) => avg + (y - avg) / ++div),
+      0,
+      (avg: number) => (div ? avg : NaN),
     );
   };
 }
