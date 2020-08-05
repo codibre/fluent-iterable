@@ -9,8 +9,8 @@
 <img src="resources/preview.png">
 </p>
 
-Provides [fluent api](https://en.wikipedia.org/wiki/Fluent_interface) operations on iterables and async iterables - similar to what defined on arrays. Especially useful until [relevant ESNext features](https://tc39.es/proposal-iterator-helpers/#sec-iteration) are being delivered.
-This library are a fork from [kataik fluent-iterable repository](https://github.com/kataik/fluent-iterable) where more functionalities was added.
+Provides [fluent api](https://en.wikipedia.org/wiki/Fluent_interface) operations on iterables and async iterables - similar to what's defined on arrays. Especially useful until [relevant ESNext features](https://tc39.es/proposal-iterator-helpers/#sec-iteration) are being delivered.
+This library is a fork from [kataik fluent-iterable repository](https://github.com/kataik/fluent-iterable) where more functionalities was added.
 
 ## Description
 
