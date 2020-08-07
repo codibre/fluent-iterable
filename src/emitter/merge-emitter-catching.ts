@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import { FluentEmitOptions, ErrorCallback } from '../types-base';
 import { mergeCatching } from '../async-base';
-import { forEmitOf } from '../for-emit-of';
+import forEmitOf from 'for-emit-of';
 
 export function mergeEmitterCatching<T>(
   this: AsyncIterable<T>,

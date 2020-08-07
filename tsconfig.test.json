@@ -9,7 +9,8 @@
       "chai",
       "sinon-chai",
       "sinon-chai-calls-assertion"
-    ]
+    ],
+    "esModuleInterop": true
   },
   "include": ["./src", "./test", "./test-benchmark", "./test-memory"]
 }

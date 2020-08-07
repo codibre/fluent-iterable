@@ -10,7 +10,7 @@ import { AnyIterable } from 'augmentative-iterable';
 import { iterateAsync } from './utils';
 import { getExtender, extend, defaultCookFunction } from 'extension-methods';
 import { EventEmitter } from 'events';
-import { forEmitOf } from './for-emit-of';
+import forEmitOf from 'for-emit-of';
 
 export const proxyReference: { [key: string]: Function } = {};
 const handler = getExtender(proxyReference, defaultCookFunction, 'extender');
