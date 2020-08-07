@@ -1,7 +1,7 @@
 import { AnyIterable } from 'augmentative-iterable';
 import { EventEmitter } from 'events';
 import { FluentEmitOptions } from '../types-base';
-import forEmitOf from 'for-emit-of';
+import { getIterableFromEmitter } from './get-iterable-from-emitter';
 
 export function getBaseEmittingConversion(operation: Function) {
   return function <T>(
@@ -9,6 +9,6 @@ export function getBaseEmittingConversion(operation: Function) {
     eventEmitter: EventEmitter,
     options?: FluentEmitOptions,
   ) {
-    return operation.call(this, forEmitOf(eventEmitter, { ...options }));
+    return operation.call(this, getIterableFromEmitter(eventEmitter, options));
   };
 }

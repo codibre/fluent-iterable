@@ -2,7 +2,7 @@ import { AnyIterable, Mapper } from 'augmentative-iterable';
 import { combineAsync } from '../async';
 import { EventEmitter } from 'events';
 import { FluentEmitOptions } from '../types-base';
-import forEmitOf from 'for-emit-of';
+import { getIterableFromEmitter } from './get-iterable-from-emitter';
 
 export function combineEmitter<T>(
   this: AnyIterable<T>,
@@ -17,7 +17,7 @@ export function combineEmitter<T>(
   }
   return combineAsync.call(
     this,
-    forEmitOf(eventEmitter, { ...options }),
+    getIterableFromEmitter(eventEmitter, options),
     optionsOrKeyA as Mapper<any, any>,
     keyB,
   );

@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import { FluentEmitOptions, ErrorCallback } from '../types-base';
 import { mergeCatching } from '../async-base';
-import forEmitOf from 'for-emit-of';
+import { getIterableFromEmitter } from './get-iterable-from-emitter';
 
 export function mergeEmitterCatching<T>(
   this: AsyncIterable<T>,
@@ -12,6 +12,6 @@ export function mergeEmitterCatching<T>(
   return mergeCatching.call(
     this,
     errorCallback,
-    forEmitOf(eventEmitter, { ...options }),
+    getIterableFromEmitter(eventEmitter, options),
   );
 }

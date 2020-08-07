@@ -10,7 +10,7 @@ import { AnyIterable } from 'augmentative-iterable';
 import { iterateAsync } from './utils';
 import { getExtender, extend, defaultCookFunction } from 'extension-methods';
 import { EventEmitter } from 'events';
-import forEmitOf from 'for-emit-of';
+import { getIterableFromEmitter } from './emitter';
 
 export const proxyReference: { [key: string]: Function } = {};
 const handler = getExtender(proxyReference, defaultCookFunction, 'extender');
@@ -48,10 +48,7 @@ function fluentEmit<T = any>(
   emitter: EventEmitter,
   options?: FluentEmitOptions,
 ): FluentAsyncIterable<T> {
-  return extend(
-    forEmitOf<T>(emitter, { ...options }),
-    handler,
-  ) as any;
+  return extend(getIterableFromEmitter<T>(emitter, options), handler) as any;
 }
 
 Object.assign(proxyReference, {
