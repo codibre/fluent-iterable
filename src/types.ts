@@ -4,6 +4,30 @@ import {
   Mapper,
   AsyncMapper,
 } from 'augmentative-iterable';
+import { EventEmitter } from 'events';
+
+/**
+ * represent the options that can be used with fluentEmit
+ */
+export interface FluentEmitOptions {
+  /**
+   * The event which yields a new iterable item. Default 'data'
+   */
+  event?: string;
+  /**
+   * The event which throws an error. Default 'error'
+   */
+  error?: string;
+  /**
+   * The list of events which ends the iterable. Default ['end', 'close']
+   */
+  end?: string[];
+  /**
+   * The timeout for event awaiting. If specified, an error will be thrown when no event is emitted
+   * before the deadline
+   */
+  timeout?: number;
+}
 
 export interface ErrorCallback {
   (error: Error, index: number): unknown;
@@ -141,11 +165,51 @@ interface Indexed<T> {
 }
 
 /**
+ * Represents the operations using EventEmitters
+ * @typeparam T The type of the items in the iterable.
+ */
+interface FluentIterableEmitter<T> {
+  /**
+   * Concatenates the specified Emitter to the async iterable.
+   * @param emitter The EventEmitter
+   * @param options The EventEmitter options. Optional
+   * @returns The [[FluentAsyncIterable]] of the concatenated async iterables.
+   */
+  concatEmitter(
+    emitter: EventEmitter,
+    options?: FluentEmitOptions,
+  ): FluentAsyncIterable<T>;
+  /**
+   * Join the iterable with an EventEmitter, returning a new async iterable with a NxN combination
+   * @param emitter The EventEmitter
+   * @param options The EventEmitter options. Optional
+   */
+  combineEmitter<U = any>(
+    emitter: EventEmitter,
+    options?: FluentEmitOptions,
+  ): FluentAsyncIterable<[T, U]>;
+
+  /**
+   * Join the iterable with another the EventEmitter, returning a new async iterable with the inner matching combinations
+   * @param emitter The EventEmitter
+   * @param options The EventEmitter options. Optional
+   * @param keyA A mapper that returns the key map value from the left iterable
+   * @param keyB A mapper that returns the key map value from the right iterable
+   */
+  combineEmitter<U, K>(
+    emitter: EventEmitter,
+    keyA: Mapper<T, K>,
+    keyB: Mapper<U, K>,
+    options?: FluentEmitOptions,
+  ): FluentAsyncIterable<[T, U]>;
+}
+
+/**
  * Represents an iterable extended with common processing and mutating capabilities.<br>
  *   The capabilities introduced are defined as a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) and thus they support *method chaining*.
  * @typeparam T The type of the items in the iterable.
  */
-interface FluentIterable<T> extends Iterable<T> {
+interface FluentIterable<T> extends Iterable<T>, FluentIterableEmitter<T> {
   /**
    * Maps all elements of the iterable to an instance of [[Indexed]], an index-value pair constructed of the original element in the iterable and it's index (starting from 0 for the first element in the iterable).<br>
    *   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).withIndex()` yields `{ idx: 0, value: 'anchor' }`, `{ idx: 1, value: 'almond' }` and so on.
@@ -781,7 +845,9 @@ interface FluentIterable<T> extends Iterable<T> {
  *   The capabilities introduced are defined as a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) and thus they support *method chaining*.
  * @typeparam T The type of the items in the asynchronous iterable.
  */
-interface FluentAsyncIterable<T> extends AsyncIterable<T> {
+interface FluentAsyncIterable<T>
+  extends AsyncIterable<T>,
+    FluentIterableEmitter<T> {
   /**
    * Maps all elements of the iterable to an instance of [[Indexed]], an index-value pair constructed of the original element in the iterable and it's index (starting from 0 for the first element in the iterable).
    * @returns A [[FluentAsyncIterable]] of [[Indexed]].
@@ -1094,6 +1160,30 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
   mergeCatching<R>(
     errorCallback: ErrorCallback,
     ...iterables: AsyncIterable<R>[]
+  ): FluentAsyncIterable<T | R>;
+
+  /**
+   * Merge the iterable with the informed EventEmitter.
+   * @param emitter The EventEmitter
+   * @param options The EventEmitter options. Optional
+   * @returns A new iterable that returns the elements of all others in the order of which resolves first
+   */
+  mergeEmitter<R>(
+    emitter: EventEmitter,
+    options?: FluentEmitOptions,
+  ): FluentAsyncIterable<T | R>;
+
+  /**
+   * Merge the iterable with the informed EventEmitter, catching the errors of any of the iterables that fails, so the process can continue until all the successful iterables ends.
+   * @param emitter The EventEmitter
+   * @param errorCallback A callback to be called if any of the iterables fail
+   * @param options The EventEmitter options. Optional
+   * @returns A new iterable that returns the elements of all others in the order of which resolves first
+   */
+  mergeEmitterCatching<R>(
+    errorCallback: ErrorCallback,
+    emitter: EventEmitter,
+    options?: FluentEmitOptions,
   ): FluentAsyncIterable<T | R>;
 
   /**

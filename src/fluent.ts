@@ -1,4 +1,4 @@
-import fluentAsync from './fluent-async';
+import { fluentAsync } from './fluent-async';
 import { FluentIterable } from './types';
 import {
   iterableFuncs,

@@ -69,7 +69,8 @@
   "license": "MIT",
   "dependencies": {
     "augmentative-iterable": "^1.0.0",
-    "extension-methods": "^1.0.0"
+    "extension-methods": "^1.0.0",
+    "for-emit-of": "^1.2.0"
   },
   "devDependencies": {
     "@codibre/confs": "0.0.6",

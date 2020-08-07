@@ -17,7 +17,7 @@ import {
 } from './types';
 
 import fluent from './fluent';
-import fluentAsync from './fluent-async';
+import { fluentAsync, fluentEmit } from './fluent-async';
 import depaginate from './depaginator';
 import { interval } from './interval';
 import { mergeIterators } from './async-base/merging';
@@ -43,6 +43,7 @@ export {
   Pager,
   fluent,
   fluentAsync,
+  fluentEmit,
   depaginate,
   interval,
   mergeIterators,

@@ -69,6 +69,7 @@ import {
   filterAsync,
   takeWhileAsync,
 } from '../async';
+import { combineEmitter, concatEmitter } from '../emitter';
 
 export const iterableFuncs = {
   withIndex,
@@ -100,6 +101,8 @@ export const iterableAsyncFuncs = {
   executeAsync,
   toAsync,
   combineAsync,
+  combineEmitter,
+  concatEmitter,
 };
 
 export const special = {

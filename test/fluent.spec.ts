@@ -3,6 +3,7 @@ import expect, { flatMap, pick } from './tools';
 import delay from 'delay';
 import { stub } from 'sinon';
 import 'chai-callslike';
+import { ObjectReadableMock } from 'stream-mock';
 
 export enum Gender {
   Male = 'Male',
@@ -407,6 +408,21 @@ describe('fluent iterable', () => {
         it('one empty and one non-empty arrays', () =>
           expect(
             fluent(subject).concat([], [additionalPerson]).toArray(),
+          ).to.eql([...data, additionalPerson]));
+      });
+
+      describe('concatEmitter', () => {
+        it('one empty array', async () =>
+          expect(
+            await fluent(subject)
+              .concatEmitter(new ObjectReadableMock([]))
+              .toArray(),
+          ).to.eql(data));
+        it('one non-empty arrays', async () =>
+          expect(
+            await fluent(subject)
+              .concatEmitter(new ObjectReadableMock([additionalPerson]))
+              .toArray(),
           ).to.eql([...data, additionalPerson]));
       });
       describe('repeat', () => {
