@@ -1,12 +1,4 @@
-import { EventEmitter } from 'events';
-import { FluentEmitOptions } from '../types-base';
 import { merge } from '../async-base';
-import { forEmitOf } from '../for-emit-of';
+import { getBaseEmittingConversion } from './base-emitting-conversion';
 
-export function mergeEmitter<T>(
-  this: AsyncIterable<T>,
-  eventEmitter: EventEmitter,
-  options?: FluentEmitOptions,
-) {
-  return merge.call(this, forEmitOf(eventEmitter, { ...options }));
-}
+export const mergeEmitter = getBaseEmittingConversion(merge);

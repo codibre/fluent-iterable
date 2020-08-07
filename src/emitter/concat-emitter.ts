@@ -1,14 +1,4 @@
-import { iterateAllAsync } from '../utils';
-import { AnyIterable } from 'augmentative-iterable';
 import { concatAsync } from '../async';
-import { EventEmitter } from 'events';
-import { FluentEmitOptions } from '../types-base';
-import { forEmitOf } from '../for-emit-of';
+import { getBaseEmittingConversion } from './base-emitting-conversion';
 
-export function concatEmitter<T>(
-  this: AnyIterable<T>,
-  eventEmitter: EventEmitter,
-  options?: FluentEmitOptions,
-) {
-  return concatAsync.call(this, forEmitOf(eventEmitter, { ...options }));
-}
+export const concatEmitter = getBaseEmittingConversion(concatAsync);
