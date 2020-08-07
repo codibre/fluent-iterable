@@ -1,5 +1,13 @@
 
-## 1.3.1
+## 1.3.2
+* 2d9f968 updating codeclimate after repo remaking
+* 6bf1722 just a change to make codeclimate update numbers
+* 8fef128 Adding workflow
+* 00bba4c Removing workflow
+* f55529f Merge branch 'master' of github.com:Codibre/fluent-iterable
+* 580969e Update README.md
+## v1.3.1
+* 931880b 1.3.1
 * bca0c2b Using iterative mean algorithm http://www.heikohoffmann.de/htmlthesis/node134.html to calculate avg
 * a961e58 updating readme"
 * b8b8fe1 updating readme

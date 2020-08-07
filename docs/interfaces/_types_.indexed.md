@@ -1,4 +1,4 @@
-[fluent-iterable - v1.3.1](../README.md) › ["types"](../modules/_types_.md) › [Indexed](_types_.indexed.md)
+[fluent-iterable - v1.3.2](../README.md) › ["types"](../modules/_types_.md) › [Indexed](_types_.indexed.md)
 
 # Interface: Indexed ‹**T**›
 
