@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import { FluentEmitOptions, ErrorCallback } from '../types';
+import { FluentEmitOptions, ErrorCallback } from '../types-base';
 import { mergeCatching } from '../async-base';
 import { forEmitOf } from '../for-emit-of';
 

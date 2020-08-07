@@ -1,4 +1,5 @@
-import { Reducer, Mapper } from '../types';
+import { Mapper } from '../types';
+import { Reducer } from '../types-base';
 import { ResolverType } from '../types-internal';
 
 export function reduceAndMapRecipe(forEach: Function, resolver: ResolverType) {

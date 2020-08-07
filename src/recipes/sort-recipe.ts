@@ -1,4 +1,4 @@
-import { Comparer } from '../types';
+import { Comparer } from '../types-base';
 import { ResolverType, Iterate } from '../types-internal';
 
 export function sortRecipe(

@@ -2,7 +2,7 @@ import { iterateAllAsync } from '../utils';
 import { AnyIterable } from 'augmentative-iterable';
 import { concatAsync } from '../async';
 import { EventEmitter } from 'events';
-import { FluentEmitOptions } from '../types';
+import { FluentEmitOptions } from '../types-base';
 import { forEmitOf } from '../for-emit-of';
 
 export function concatEmitter<T>(

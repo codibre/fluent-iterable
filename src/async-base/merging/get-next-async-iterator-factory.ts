@@ -1,6 +1,6 @@
 import { GetNextAsyncIterator, NextResult } from './merge-types';
 import { getNextAsyncIterator } from './get-next-async-iterator';
-import { ErrorCallback } from '../../types';
+import { ErrorCallback } from '../../types-base';
 
 export function getNextAsyncIteratorFactory<T>(
   callback?: ErrorCallback,

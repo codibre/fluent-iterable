@@ -1,20 +1,22 @@
 import {
-  Predicate,
   AsyncPredicate,
   Mapper,
   AsyncMapper,
+  Page,
+  Pager,
+  FluentIterable,
+  FluentAsyncIterable,
+} from './types';
+import {
+  Predicate,
   Reducer,
   AsyncReducer,
   Comparer,
   Action,
   AsyncAction,
   Group,
-  Page,
-  Pager,
-  FluentIterable,
-  FluentAsyncIterable,
   FluentGroup,
-} from './types';
+} from './types-base';
 
 import fluent from './fluent';
 import { fluentAsync, fluentEmit } from './fluent-async';
