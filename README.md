@@ -1,8 +1,8 @@
 [![Actions Status](https://github.com/Codibre/fluent-iterable/workflows/build/badge.svg)](https://github.com/Codibre/fluent-iterable/actions)
 [![Actions Status](https://github.com/Codibre/fluent-iterable/workflows/test/badge.svg)](https://github.com/Codibre/fluent-iterable/actions)
 [![Actions Status](https://github.com/Codibre/fluent-iterable/workflows/lint/badge.svg)](https://github.com/Codibre/fluent-iterable/actions)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/ead6c08b3f629f094362/test_coverage)](https://codeclimate.com/github/Codibre/fluent-iterable/test_coverage)
-[![Maintainability](https://api.codeclimate.com/v1/badges/ead6c08b3f629f094362/maintainability)](https://codeclimate.com/github/Codibre/fluent-iterable/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/069043968e0e72b2b5aa/test_coverage)](https://codeclimate.com/github/Codibre/fluent-iterable/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/069043968e0e72b2b5aa/maintainability)](https://codeclimate.com/github/Codibre/fluent-iterable/maintainability)
 [![npm version](https://badge.fury.io/js/%40codibre%2Ffluent-iterable.svg)](https://badge.fury.io/js/%40codibre%2Ffluent-iterable)
 
 <p align="center">
