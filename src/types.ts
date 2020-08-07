@@ -25,6 +25,15 @@ import {
 interface FluentIterableEmitter<T> {
   /**
    * Concatenates the specified Emitter to the async iterable.
+   *
+   * **IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
+   * emission generates a new yielded result. The default key event is **'data'**.
+   *
+   * Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
+   * The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
+   * to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
+   *
+   * If you need to change the key event or other characteristics, you can do it through the **options** parameter
    * @param emitter The EventEmitter
    * @param options The EventEmitter options. Optional
    * @returns The [[FluentAsyncIterable]] of the concatenated async iterables.
@@ -35,6 +44,15 @@ interface FluentIterableEmitter<T> {
   ): FluentAsyncIterable<T>;
   /**
    * Join the iterable with an EventEmitter, returning a new async iterable with a NxN combination
+   *
+   * **IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
+   * emission generates a new yielded result. The default key event is **'data'**.
+   *
+   * Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
+   * The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
+   * to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
+   *
+   * If you need to change the key event or other characteristics, you can do it through the **options** parameter
    * @param emitter The EventEmitter
    * @param options The EventEmitter options. Optional
    */
@@ -45,6 +63,15 @@ interface FluentIterableEmitter<T> {
 
   /**
    * Join the iterable with another the EventEmitter, returning a new async iterable with the inner matching combinations
+   *
+   * **IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
+   * emission generates a new yielded result. The default key event is **'data'**.
+   *
+   * Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
+   * The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
+   * to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
+   *
+   * If you need to change the key event or other characteristics, you can do it through the **options** parameter
    * @param emitter The EventEmitter
    * @param options The EventEmitter options. Optional
    * @param keyA A mapper that returns the key map value from the left iterable
@@ -1018,6 +1045,15 @@ interface FluentAsyncIterable<T>
 
   /**
    * Merge the iterable with the informed EventEmitter.
+   *
+   * **IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
+   * emission generates a new yielded result. The default key event is **'data'**.
+   *
+   * Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
+   * The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
+   * to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
+   *
+   * If you need to change the key event or other characteristics, you can do it through the **options** parameter
    * @param emitter The EventEmitter
    * @param options The EventEmitter options. Optional
    * @returns A new iterable that returns the elements of all others in the order of which resolves first
@@ -1029,6 +1065,15 @@ interface FluentAsyncIterable<T>
 
   /**
    * Merge the iterable with the informed EventEmitter, catching the errors of any of the iterables that fails, so the process can continue until all the successful iterables ends.
+   *
+   * **IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
+   * emission generates a new yielded result. The default key event is **'data'**.
+   *
+   * Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
+   * The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
+   * to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
+   *
+   * If you need to change the key event or other characteristics, you can do it through the **options** parameter
    * @param emitter The EventEmitter
    * @param errorCallback A callback to be called if any of the iterables fail
    * @param options The EventEmitter options. Optional
