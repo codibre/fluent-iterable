@@ -1,4 +1,4 @@
-[fluent-iterable - v1.3.1](../README.md) › ["types"](../modules/_types_.md) › [AsyncAction](_types_.asyncaction.md)
+[fluent-iterable - v1.3.2](../README.md) › ["types"](../modules/_types_.md) › [AsyncAction](_types_.asyncaction.md)
 
 # Interface: AsyncAction ‹**T**›
 
