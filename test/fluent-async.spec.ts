@@ -820,7 +820,7 @@ describe('fluent async iterable', () => {
           .toArray();
 
         expect(callback).to.have.been.calledOnceWithExactly(testError, 1);
-        expect(result).to.be.deep.equal(['a', 1, 2, 3]);
+        expect(result.sort()).to.be.deep.equal([1, 2, 3, 'a']);
       });
     });
   };

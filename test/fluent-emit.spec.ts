@@ -13,7 +13,7 @@ const sleep = promisify(setTimeout);
 export function emitGenerator(items: AnyIterable<any> = data): EventEmitter {
   const eventEmitter = new EventEmitter();
 
-  setImmediate(async () => {
+  setTimeout(async () => {
     try {
       for await (const item of items) {
         eventEmitter.emit('data', item);
@@ -23,7 +23,7 @@ export function emitGenerator(items: AnyIterable<any> = data): EventEmitter {
     } catch (err) {
       eventEmitter.emit('error', err);
     }
-  });
+  }, 10);
 
   return eventEmitter;
 }
