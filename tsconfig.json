@@ -4,8 +4,7 @@
     "target": "es2018",
     "rootDir": "./src",
     "outDir": "./dist",
-    "declaration": true,
-    "esModuleInterop": true
+    "declaration": true
   },
   "include": ["./src"]
 }

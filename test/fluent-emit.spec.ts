@@ -7,7 +7,7 @@ import { EventEmitter } from 'events';
 import { promisify } from 'util';
 import { AnyIterable } from 'augmentative-iterable';
 import { ObjectReadableMock } from 'stream-mock';
-import forEmitOf from 'for-emit-of';
+import forEmitOf = require('for-emit-of');
 
 const sleep = promisify(setTimeout);
 export function emitGenerator(items: AnyIterable<any> = data): EventEmitter {

@@ -1,6 +1,7 @@
 import { FluentEmitOptions } from '../types-base';
 import { EventEmitter } from 'events';
-import forEmitOf from 'for-emit-of';
+import forEmitOf = require('for-emit-of');
+
 export function getIterableFromEmitter<T = any>(
   emitter: EventEmitter,
   options: FluentEmitOptions | undefined,
