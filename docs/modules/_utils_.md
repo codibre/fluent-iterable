@@ -1,4 +1,4 @@
-[fluent-iterable - v1.3.2](../README.md) › ["utils"](_utils_.md)
+[fluent-iterable - v1.3.3](../README.md) › ["utils"](_utils_.md)
 
 # Module: "utils"
 
@@ -297,7 +297,7 @@ ___
 
 ###  iterateObjEntries
 
-▸ **iterateObjEntries**‹**T**›(`obj`: T): *Generator‹(keyof T | T[keyof T])[], void, unknown›*
+▸ **iterateObjEntries**‹**T**›(`obj`: T): *Generator‹keyof T | T[keyof T][], void, unknown›*
 
 Iterates over all owned entries of given object
 
@@ -311,7 +311,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `obj` | T | The object to iterate with  |
 
-**Returns:** *Generator‹(keyof T | T[keyof T])[], void, unknown›*
+**Returns:** *Generator‹keyof T | T[keyof T][], void, unknown›*
 
 ___
 
