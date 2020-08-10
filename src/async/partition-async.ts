@@ -10,6 +10,7 @@ async function* iterate<T>(arr: AsyncIterable<T>, size: number) {
       }
     })();
   }
+  iterator.return?.call(iterator);
 }
 
 export const partitionAsync = getPartition(iterate);

@@ -1,4 +1,4 @@
-[fluent-iterable - v1.3.2](../README.md) › ["add-custom-method"](_add_custom_method_.md)
+[fluent-iterable - v1.3.4](../README.md) › ["add-custom-method"](_add_custom_method_.md)
 
 # Module: "add-custom-method"
 

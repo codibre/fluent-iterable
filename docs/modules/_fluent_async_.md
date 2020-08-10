@@ -1,4 +1,4 @@
-[fluent-iterable - v1.3.2](../README.md) › ["fluent-async"](_fluent_async_.md)
+[fluent-iterable - v1.3.4](../README.md) › ["fluent-async"](_fluent_async_.md)
 
 # Module: "fluent-async"
 
