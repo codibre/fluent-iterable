@@ -1,5 +1,8 @@
 
-## 1.3.3
+## 1.3.4
+* e387454 adding return call for cases where next is used
+## v1.3.3
+* 3ba3c6d 1.3.3
 * 63199c8 updating augmentative iterable for Iterator.return properly call support
 * 8e08d88 Merge branch 'master' of github.com:Codibre/fluent-iterable
 * 06588d6 Update README.md
