@@ -68,7 +68,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "augmentative-iterable": "^1.0.0",
+    "augmentative-iterable": "^1.0.1",
     "extension-methods": "^1.0.0"
   },
   "devDependencies": {
