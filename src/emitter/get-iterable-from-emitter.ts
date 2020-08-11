@@ -44,6 +44,12 @@ export function getIterableFromEmitter<T = any>(
         },
         async return(value?: any) {
           customEmitter.emit('cancel');
+          let done: any;
+          do {
+            const nextValue = await iterator.next();
+            done = nextValue.done;
+          } while (!done);
+
           return { done: true, value };
         },
       };
