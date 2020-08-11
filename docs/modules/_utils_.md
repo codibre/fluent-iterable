@@ -1,4 +1,4 @@
-[fluent-iterable - v1.3.4](../README.md) › ["utils"](_utils_.md)
+[fluent-iterable - v1.4.0](../README.md) › ["utils"](_utils_.md)
 
 # Module: "utils"
 
@@ -141,9 +141,9 @@ ___
 
 ###  fluentGroup
 
-▸ **fluentGroup**‹**Key**, **Value**›(`grp`: [Group](../interfaces/_types_.group.md)‹Value, Key›): *[FluentGroup](../interfaces/_types_.fluentgroup.md)‹Value, Key›*
+▸ **fluentGroup**‹**Key**, **Value**›(`grp`: [Group](../interfaces/_types_base_.group.md)‹Value, Key›): *[FluentGroup](../interfaces/_types_base_.fluentgroup.md)‹Value, Key›*
 
-Convert a simple [Group](../interfaces/_types_.group.md) to a [FluentGroup](../interfaces/_types_.fluentgroup.md)
+Convert a simple [Group](../interfaces/_types_base_.group.md) to a [FluentGroup](../interfaces/_types_base_.fluentgroup.md)
 
 **Type parameters:**
 
@@ -159,9 +159,9 @@ the type of the items of the value property
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`grp` | [Group](../interfaces/_types_.group.md)‹Value, Key› | the [Group](../interfaces/_types_.group.md) to be converted  |
+`grp` | [Group](../interfaces/_types_base_.group.md)‹Value, Key› | the [Group](../interfaces/_types_base_.group.md) to be converted  |
 
-**Returns:** *[FluentGroup](../interfaces/_types_.fluentgroup.md)‹Value, Key›*
+**Returns:** *[FluentGroup](../interfaces/_types_base_.fluentgroup.md)‹Value, Key›*
 
 ___
 
@@ -297,7 +297,7 @@ ___
 
 ###  iterateObjEntries
 
-▸ **iterateObjEntries**‹**T**›(`obj`: T): *Generator‹keyof T | T[keyof T][], void, unknown›*
+▸ **iterateObjEntries**‹**T**›(`obj`: T): *Generator‹(keyof T | T[keyof T])[], void, unknown›*
 
 Iterates over all owned entries of given object
 
@@ -311,7 +311,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `obj` | T | The object to iterate with  |
 
-**Returns:** *Generator‹keyof T | T[keyof T][], void, unknown›*
+**Returns:** *Generator‹(keyof T | T[keyof T])[], void, unknown›*
 
 ___
 
@@ -381,7 +381,7 @@ ___
 
 ###  negation
 
-▸ **negation**‹**T**›(`predicate`: [Predicate](../interfaces/_types_.predicate.md)‹T›): *[Predicate](../interfaces/_types_.predicate.md)‹T›*
+▸ **negation**‹**T**›(`predicate`: [Predicate](../interfaces/_types_base_.predicate.md)‹T›): *[Predicate](../interfaces/_types_base_.predicate.md)‹T›*
 
 Provides a function that negates the informed predicate
 
@@ -389,15 +389,15 @@ Provides a function that negates the informed predicate
 
 ▪ **T**
 
-the item type of the [Predicate](../interfaces/_types_.predicate.md)
+the item type of the [Predicate](../interfaces/_types_base_.predicate.md)
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate` | [Predicate](../interfaces/_types_.predicate.md)‹T› | The predicate to be negated  |
+`predicate` | [Predicate](../interfaces/_types_base_.predicate.md)‹T› | The predicate to be negated  |
 
-**Returns:** *[Predicate](../interfaces/_types_.predicate.md)‹T›*
+**Returns:** *[Predicate](../interfaces/_types_base_.predicate.md)‹T›*
 
 ___
 

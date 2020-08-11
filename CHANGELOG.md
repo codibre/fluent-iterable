@@ -1,5 +1,22 @@
 
-## 1.3.4
+## 1.4.0
+* 7db5dc2 Merge pull request #4 from Codibre/issue-1-Implementing_fluentEvent
+* 6511552 updating for-emit-of
+* 37da974 ending events cache
+* d26e007 adding custom treatment for break using in the for await
+* 1200ab0 sync with master
+* 93b85b2 Merge branch 'master' of github.com:Codibre/fluent-iterable into issue-1-Implementing_fluentEvent
+* 1d672b3 updating forEmitOf library
+* 8b0b9f2 Merge branch 'master' of github.com:Codibre/fluent-iterable into issue-1-Implementing_fluentEvent
+* 6915268 updating libraries and centralizing forEmitOf using
+* b473d47 adding tsdoc information about EventEmitter Iterables
+* 265bf66 fixing forEmitOf importing
+* 81b567e changing test setup as promise handling works slightly different since node 12.x in the matter of setImmediate functionality (it's too imediately for our test)
+* e40922d fixing duplicated code
+* dbd5e17 fixing types size
+* e51cc6e implementing fluentEmit and EventEmitter operators
+## v1.3.4
+* ea61ebe 1.3.4
 * e387454 adding return call for cases where next is used
 ## v1.3.3
 * 3ba3c6d 1.3.3

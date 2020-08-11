@@ -1,4 +1,4 @@
-[fluent-iterable - v1.3.4](../README.md) › ["types"](../modules/_types_.md) › [FluentAsyncIterable](_types_.fluentasynciterable.md)
+[fluent-iterable - v1.4.0](../README.md) › ["types"](../modules/_types_.md) › [FluentAsyncIterable](_types_.fluentasynciterable.md)
 
 # Interface: FluentAsyncIterable ‹**T**›
 
@@ -15,6 +15,8 @@ The type of the items in the asynchronous iterable.
 
 * AsyncIterable‹T›
 
+* [FluentIterableEmitter](_types_.fluentiterableemitter.md)‹T›
+
   ↳ **FluentAsyncIterable**
 
 ## Index
@@ -27,7 +29,9 @@ The type of the items in the asynchronous iterable.
 * [append](_types_.fluentasynciterable.md#append)
 * [avg](_types_.fluentasynciterable.md#avg)
 * [combine](_types_.fluentasynciterable.md#combine)
+* [combineEmitter](_types_.fluentasynciterable.md#combineemitter)
 * [concat](_types_.fluentasynciterable.md#concat)
+* [concatEmitter](_types_.fluentasynciterable.md#concatemitter)
 * [contains](_types_.fluentasynciterable.md#contains)
 * [count](_types_.fluentasynciterable.md#count)
 * [distinct](_types_.fluentasynciterable.md#distinct)
@@ -48,6 +52,8 @@ The type of the items in the asynchronous iterable.
 * [max](_types_.fluentasynciterable.md#max)
 * [merge](_types_.fluentasynciterable.md#merge)
 * [mergeCatching](_types_.fluentasynciterable.md#mergecatching)
+* [mergeEmitter](_types_.fluentasynciterable.md#mergeemitter)
+* [mergeEmitterCatching](_types_.fluentasynciterable.md#mergeemittercatching)
 * [min](_types_.fluentasynciterable.md#min)
 * [partition](_types_.fluentasynciterable.md#partition)
 * [prepend](_types_.fluentasynciterable.md#prepend)
@@ -190,6 +196,70 @@ Name | Type | Description |
 
 ___
 
+###  combineEmitter
+
+▸ **combineEmitter**‹**U**›(`emitter`: EventEmitter, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[T, U]›*
+
+*Inherited from [FluentIterableEmitter](_types_.fluentiterableemitter.md).[combineEmitter](_types_.fluentiterableemitter.md#combineemitter)*
+
+Join the iterable with an EventEmitter, returning a new async iterable with a NxN combination
+
+**IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
+emission generates a new yielded result. The default key event is **'data'**.
+
+Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
+The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
+to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
+
+If you need to change the key event or other characteristics, you can do it through the **options** parameter
+
+**Type parameters:**
+
+▪ **U**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`emitter` | EventEmitter | The EventEmitter |
+`options?` | [FluentEmitOptions](_types_base_.fluentemitoptions.md) | The EventEmitter options. Optional  |
+
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[T, U]›*
+
+▸ **combineEmitter**‹**U**, **K**›(`emitter`: EventEmitter, `keyA`: Mapper‹T, K›, `keyB`: Mapper‹U, K›, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[T, U]›*
+
+*Inherited from [FluentIterableEmitter](_types_.fluentiterableemitter.md).[combineEmitter](_types_.fluentiterableemitter.md#combineemitter)*
+
+Join the iterable with another the EventEmitter, returning a new async iterable with the inner matching combinations
+
+**IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
+emission generates a new yielded result. The default key event is **'data'**.
+
+Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
+The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
+to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
+
+If you need to change the key event or other characteristics, you can do it through the **options** parameter
+
+**Type parameters:**
+
+▪ **U**
+
+▪ **K**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`emitter` | EventEmitter | The EventEmitter |
+`keyA` | Mapper‹T, K› | A mapper that returns the key map value from the left iterable |
+`keyB` | Mapper‹U, K› | A mapper that returns the key map value from the right iterable  |
+`options?` | [FluentEmitOptions](_types_base_.fluentemitoptions.md) | The EventEmitter options. Optional |
+
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[T, U]›*
+
+___
+
 ###  concat
 
 ▸ **concat**(...`iterables`: Array‹AnyIterable‹T››): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
@@ -205,6 +275,36 @@ Name | Type | Description |
 **Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
 The [FluentAsyncIterable](_types_.fluentasynciterable.md) of the concatenated iterables.
+
+___
+
+###  concatEmitter
+
+▸ **concatEmitter**(`emitter`: EventEmitter, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+
+*Inherited from [FluentIterableEmitter](_types_.fluentiterableemitter.md).[concatEmitter](_types_.fluentiterableemitter.md#concatemitter)*
+
+Concatenates the specified Emitter to the async iterable.
+
+**IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
+emission generates a new yielded result. The default key event is **'data'**.
+
+Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
+The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
+to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
+
+If you need to change the key event or other characteristics, you can do it through the **options** parameter
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`emitter` | EventEmitter | The EventEmitter |
+`options?` | [FluentEmitOptions](_types_base_.fluentemitoptions.md) | The EventEmitter options. Optional |
+
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+
+The [FluentAsyncIterable](_types_.fluentasynciterable.md) of the concatenated async iterables.
 
 ___
 
@@ -270,7 +370,7 @@ ___
 
 ###  execute
 
-▸ **execute**(`action`: [AsyncAction](_types_.asyncaction.md)‹T›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+▸ **execute**(`action`: [AsyncAction](_types_base_.asyncaction.md)‹T›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
 Translate an iterable into one which executes an action against each element before yield them.
 
@@ -278,7 +378,7 @@ Translate an iterable into one which executes an action against each element bef
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`action` | [AsyncAction](_types_.asyncaction.md)‹T› | The action to execute against each element. |
+`action` | [AsyncAction](_types_base_.asyncaction.md)‹T› | The action to execute against each element. |
 
 **Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
@@ -368,7 +468,7 @@ ___
 
 ###  group
 
-▸ **group**‹**R**›(`mapper`: AsyncMapper‹T, R›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[FluentGroup](_types_.fluentgroup.md)‹T, R››*
+▸ **group**‹**R**›(`mapper`: AsyncMapper‹T, R›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[FluentGroup](_types_base_.fluentgroup.md)‹T, R››*
 
 Groups the elements of the iterable keyed by equality of data at the specified projection.
 
@@ -384,7 +484,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `mapper` | AsyncMapper‹T, R› | Projects the elements of the iterable into the group key they belong to. |
 
-**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[FluentGroup](_types_.fluentgroup.md)‹T, R››*
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[FluentGroup](_types_base_.fluentgroup.md)‹T, R››*
 
 The [FluentAsyncIterable](_types_.fluentasynciterable.md) of the distinct groups.
 
@@ -583,7 +683,7 @@ ___
 
 ###  mergeCatching
 
-▸ **mergeCatching**‹**R**›(`errorCallback`: [ErrorCallback](_types_.errorcallback.md), ...`iterables`: AsyncIterable‹R›[]): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T | R›*
+▸ **mergeCatching**‹**R**›(`errorCallback`: [ErrorCallback](_types_base_.errorcallback.md), ...`iterables`: AsyncIterable‹R›[]): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T | R›*
 
 Merge the iterable with the informed ones, catching the errors of any of the iterables that fails, so the process can continue until all the successful iterables ends.
 
@@ -595,8 +695,73 @@ Merge the iterable with the informed ones, catching the errors of any of the ite
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`errorCallback` | [ErrorCallback](_types_.errorcallback.md) | A callback to be called if any of the iterables fail |
+`errorCallback` | [ErrorCallback](_types_base_.errorcallback.md) | A callback to be called if any of the iterables fail |
 `...iterables` | AsyncIterable‹R›[] | The iterables to be merged |
+
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T | R›*
+
+A new iterable that returns the elements of all others in the order of which resolves first
+
+___
+
+###  mergeEmitter
+
+▸ **mergeEmitter**‹**R**›(`emitter`: EventEmitter, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T | R›*
+
+Merge the iterable with the informed EventEmitter.
+
+**IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
+emission generates a new yielded result. The default key event is **'data'**.
+
+Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
+The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
+to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
+
+If you need to change the key event or other characteristics, you can do it through the **options** parameter
+
+**Type parameters:**
+
+▪ **R**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`emitter` | EventEmitter | The EventEmitter |
+`options?` | [FluentEmitOptions](_types_base_.fluentemitoptions.md) | The EventEmitter options. Optional |
+
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T | R›*
+
+A new iterable that returns the elements of all others in the order of which resolves first
+
+___
+
+###  mergeEmitterCatching
+
+▸ **mergeEmitterCatching**‹**R**›(`errorCallback`: [ErrorCallback](_types_base_.errorcallback.md), `emitter`: EventEmitter, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T | R›*
+
+Merge the iterable with the informed EventEmitter, catching the errors of any of the iterables that fails, so the process can continue until all the successful iterables ends.
+
+**IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
+emission generates a new yielded result. The default key event is **'data'**.
+
+Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
+The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
+to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
+
+If you need to change the key event or other characteristics, you can do it through the **options** parameter
+
+**Type parameters:**
+
+▪ **R**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`errorCallback` | [ErrorCallback](_types_base_.errorcallback.md) | A callback to be called if any of the iterables fail |
+`emitter` | EventEmitter | The EventEmitter |
+`options?` | [FluentEmitOptions](_types_base_.fluentemitoptions.md) | The EventEmitter options. Optional |
 
 **Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T | R›*
 
@@ -661,7 +826,7 @@ ___
 
 ###  reduce
 
-▸ **reduce**‹**R**›(`reducer`: [AsyncReducer](_types_.asyncreducer.md)‹T, R›, `initial`: R): *Promise‹R›*
+▸ **reduce**‹**R**›(`reducer`: [AsyncReducer](_types_base_.asyncreducer.md)‹T, R›, `initial`: R): *Promise‹R›*
 
 Aggregates the iterable by applying an accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -675,7 +840,7 @@ The type of the accumulator value.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`reducer` | [AsyncReducer](_types_.asyncreducer.md)‹T, R› | The accumulator function, provides the next accumulator value out of the last accumulator value and the next element in the iterable. |
+`reducer` | [AsyncReducer](_types_base_.asyncreducer.md)‹T, R› | The accumulator function, provides the next accumulator value out of the last accumulator value and the next element in the iterable. |
 `initial` | R | The initial (aka *seed*) value of the accumulator. |
 
 **Returns:** *Promise‹R›*
@@ -686,7 +851,7 @@ ___
 
 ###  reduceAndMap
 
-▸ **reduceAndMap**‹**A**, **R**›(`reducer`: [AsyncReducer](_types_.asyncreducer.md)‹T, A›, `initial`: A, `result`: AsyncMapper‹A, R›): *Promise‹R›*
+▸ **reduceAndMap**‹**A**, **R**›(`reducer`: [AsyncReducer](_types_base_.asyncreducer.md)‹T, A›, `initial`: A, `result`: AsyncMapper‹A, R›): *Promise‹R›*
 
 Aggregates the iterable by applying an accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value, and the specified map function is used to project the result value from the accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -704,7 +869,7 @@ The type of the aggregation result.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`reducer` | [AsyncReducer](_types_.asyncreducer.md)‹T, A› | The accumulator function, provides the next accumulator value out of the last accumulator value and the next element in the iterable. |
+`reducer` | [AsyncReducer](_types_base_.asyncreducer.md)‹T, A› | The accumulator function, provides the next accumulator value out of the last accumulator value and the next element in the iterable. |
 `initial` | A | The initial (aka *seed*) value of the accumulator. |
 `result` | AsyncMapper‹A, R› | The mapping function, projects the accumulator value of type `A` to the result value of type `R`. |
 
@@ -770,7 +935,7 @@ ___
 
 ###  sort
 
-▸ **sort**(`comparer?`: [Comparer](_types_.comparer.md)‹T›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+▸ **sort**(`comparer?`: [Comparer](_types_base_.comparer.md)‹T›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
 Sorts the elements of the iterable based on a specified comparer. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -778,7 +943,7 @@ Sorts the elements of the iterable based on a specified comparer. This is a reso
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`comparer?` | [Comparer](_types_.comparer.md)‹T› | The comparer operation to use to determine the order of elements. Alphabetical ascending is used for [[string]] elements and numerical ascending is used for [[number]] |
+`comparer?` | [Comparer](_types_base_.comparer.md)‹T› | The comparer operation to use to determine the order of elements. Alphabetical ascending is used for [[string]] elements and numerical ascending is used for [[number]] |
 
 **Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
@@ -879,7 +1044,7 @@ ___
 
 ###  top
 
-▸ **top**‹**R**›(`mapper`: AsyncMapper‹T, R›, `comparer`: [Comparer](_types_.comparer.md)‹R›): *Promise‹T | undefined›*
+▸ **top**‹**R**›(`mapper`: AsyncMapper‹T, R›, `comparer`: [Comparer](_types_base_.comparer.md)‹R›): *Promise‹T | undefined›*
 
 Calculates the top element of the iterable using a projection and a comparer. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -894,7 +1059,7 @@ The type of the projected elements used for comparison.
 Name | Type | Description |
 ------ | ------ | ------ |
 `mapper` | AsyncMapper‹T, R› | The function which projects the elements of the iterable into comparable. |
-`comparer` | [Comparer](_types_.comparer.md)‹R› | The comparison function. |
+`comparer` | [Comparer](_types_base_.comparer.md)‹R› | The comparison function. |
 
 **Returns:** *Promise‹T | undefined›*
 
@@ -926,10 +1091,10 @@ ___
 
 ###  withIndex
 
-▸ **withIndex**(): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[Indexed](_types_.indexed.md)‹T››*
+▸ **withIndex**(): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[Indexed](_types_base_.indexed.md)‹T››*
 
-Maps all elements of the iterable to an instance of [Indexed](_types_.indexed.md), an index-value pair constructed of the original element in the iterable and it's index (starting from 0 for the first element in the iterable).
+Maps all elements of the iterable to an instance of [Indexed](_types_base_.indexed.md), an index-value pair constructed of the original element in the iterable and it's index (starting from 0 for the first element in the iterable).
 
-**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[Indexed](_types_.indexed.md)‹T››*
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[Indexed](_types_base_.indexed.md)‹T››*
 
-A [FluentAsyncIterable](_types_.fluentasynciterable.md) of [Indexed](_types_.indexed.md).
+A [FluentAsyncIterable](_types_.fluentasynciterable.md) of [Indexed](_types_base_.indexed.md).

@@ -1,4 +1,4 @@
-[fluent-iterable - v1.3.4](../README.md) › ["extend"](_extend_.md)
+[fluent-iterable - v1.4.0](../README.md) › ["extend"](_extend_.md)
 
 # Module: "extend"
 

@@ -1,4 +1,4 @@
-[fluent-iterable - v1.3.4](../README.md) › ["types"](../modules/_types_.md) › [FluentIterable](_types_.fluentiterable.md)
+[fluent-iterable - v1.4.0](../README.md) › ["types"](../modules/_types_.md) › [FluentIterable](_types_.fluentiterable.md)
 
 # Interface: FluentIterable ‹**T**›
 
@@ -14,6 +14,8 @@ The type of the items in the iterable.
 ## Hierarchy
 
 * Iterable‹T›
+
+* [FluentIterableEmitter](_types_.fluentiterableemitter.md)‹T›
 
   ↳ **FluentIterable**
 
@@ -31,8 +33,10 @@ The type of the items in the iterable.
 * [avgAsync](_types_.fluentiterable.md#avgasync)
 * [combine](_types_.fluentiterable.md#combine)
 * [combineAsync](_types_.fluentiterable.md#combineasync)
+* [combineEmitter](_types_.fluentiterable.md#combineemitter)
 * [concat](_types_.fluentiterable.md#concat)
 * [concatAsync](_types_.fluentiterable.md#concatasync)
+* [concatEmitter](_types_.fluentiterable.md#concatemitter)
 * [contains](_types_.fluentiterable.md#contains)
 * [count](_types_.fluentiterable.md#count)
 * [countAsync](_types_.fluentiterable.md#countasync)
@@ -104,7 +108,7 @@ ___
 
 ###  all
 
-▸ **all**(`predicate`: [Predicate](_types_.predicate.md)‹T›): *boolean*
+▸ **all**(`predicate`: [Predicate](_types_base_.predicate.md)‹T›): *boolean*
 
 Determines whether all elements of the iterable satisfy a condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
   Note: This operation stops reading elements from the iterable as soon as the result can be determined.<br>
@@ -117,7 +121,7 @@ Determines whether all elements of the iterable satisfy a condition. This is a p
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate` | [Predicate](_types_.predicate.md)‹T› | The condition checked for all elements in the iterable. |
+`predicate` | [Predicate](_types_base_.predicate.md)‹T› | The condition checked for all elements in the iterable. |
 
 **Returns:** *boolean*
 
@@ -146,7 +150,7 @@ ___
 
 ###  any
 
-▸ **any**(`predicate?`: [Predicate](_types_.predicate.md)‹T›): *boolean*
+▸ **any**(`predicate?`: [Predicate](_types_base_.predicate.md)‹T›): *boolean*
 
 Determines whether any element of the iterable exists or satisfies a condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
   Note: This operation stops reading elements from the iterable as soon as the result can be determined.<br>
@@ -161,7 +165,7 @@ Determines whether any element of the iterable exists or satisfies a condition. 
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | [Predicate](_types_.predicate.md)‹T› | The condition checked for the elements in the iterable. Defaults to the always true function and thus, returns if the iterable is empty. |
+`predicate?` | [Predicate](_types_base_.predicate.md)‹T› | The condition checked for the elements in the iterable. Defaults to the always true function and thus, returns if the iterable is empty. |
 
 **Returns:** *boolean*
 
@@ -326,6 +330,70 @@ Name | Type | Description |
 
 ___
 
+###  combineEmitter
+
+▸ **combineEmitter**‹**U**›(`emitter`: EventEmitter, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[T, U]›*
+
+*Inherited from [FluentIterableEmitter](_types_.fluentiterableemitter.md).[combineEmitter](_types_.fluentiterableemitter.md#combineemitter)*
+
+Join the iterable with an EventEmitter, returning a new async iterable with a NxN combination
+
+**IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
+emission generates a new yielded result. The default key event is **'data'**.
+
+Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
+The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
+to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
+
+If you need to change the key event or other characteristics, you can do it through the **options** parameter
+
+**Type parameters:**
+
+▪ **U**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`emitter` | EventEmitter | The EventEmitter |
+`options?` | [FluentEmitOptions](_types_base_.fluentemitoptions.md) | The EventEmitter options. Optional  |
+
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[T, U]›*
+
+▸ **combineEmitter**‹**U**, **K**›(`emitter`: EventEmitter, `keyA`: Mapper‹T, K›, `keyB`: Mapper‹U, K›, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[T, U]›*
+
+*Inherited from [FluentIterableEmitter](_types_.fluentiterableemitter.md).[combineEmitter](_types_.fluentiterableemitter.md#combineemitter)*
+
+Join the iterable with another the EventEmitter, returning a new async iterable with the inner matching combinations
+
+**IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
+emission generates a new yielded result. The default key event is **'data'**.
+
+Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
+The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
+to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
+
+If you need to change the key event or other characteristics, you can do it through the **options** parameter
+
+**Type parameters:**
+
+▪ **U**
+
+▪ **K**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`emitter` | EventEmitter | The EventEmitter |
+`keyA` | Mapper‹T, K› | A mapper that returns the key map value from the left iterable |
+`keyB` | Mapper‹U, K› | A mapper that returns the key map value from the right iterable  |
+`options?` | [FluentEmitOptions](_types_base_.fluentemitoptions.md) | The EventEmitter options. Optional |
+
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[T, U]›*
+
+___
+
 ###  concat
 
 ▸ **concat**(...`iterables`: Array‹Iterable‹T››): *[FluentIterable](_types_.fluentiterable.md)‹T›*
@@ -364,6 +432,36 @@ The [FluentAsyncIterable](_types_.fluentasynciterable.md) of the concatenated as
 
 ___
 
+###  concatEmitter
+
+▸ **concatEmitter**(`emitter`: EventEmitter, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+
+*Inherited from [FluentIterableEmitter](_types_.fluentiterableemitter.md).[concatEmitter](_types_.fluentiterableemitter.md#concatemitter)*
+
+Concatenates the specified Emitter to the async iterable.
+
+**IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
+emission generates a new yielded result. The default key event is **'data'**.
+
+Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
+The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
+to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
+
+If you need to change the key event or other characteristics, you can do it through the **options** parameter
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`emitter` | EventEmitter | The EventEmitter |
+`options?` | [FluentEmitOptions](_types_base_.fluentemitoptions.md) | The EventEmitter options. Optional |
+
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+
+The [FluentAsyncIterable](_types_.fluentasynciterable.md) of the concatenated async iterables.
+
+___
+
 ###  contains
 
 ▸ **contains**(`item`: T): *boolean*
@@ -385,7 +483,7 @@ ___
 
 ###  count
 
-▸ **count**(`predicate?`: [Predicate](_types_.predicate.md)‹T›): *number*
+▸ **count**(`predicate?`: [Predicate](_types_base_.predicate.md)‹T›): *number*
 
 Returns the number of elements that matches a predicate in the iterable. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Examples:<br>
@@ -396,7 +494,7 @@ Returns the number of elements that matches a predicate in the iterable. This is
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | [Predicate](_types_.predicate.md)‹T› | The count will consider elements which match this predicate. Defaults to the always true function and thus, counts all the elements in the iterable if omitted. |
+`predicate?` | [Predicate](_types_base_.predicate.md)‹T› | The count will consider elements which match this predicate. Defaults to the always true function and thus, counts all the elements in the iterable if omitted. |
 
 **Returns:** *number*
 
@@ -475,7 +573,7 @@ ___
 
 ###  execute
 
-▸ **execute**(`action`: [Action](_types_.action.md)‹T›): *[FluentIterable](_types_.fluentiterable.md)‹T›*
+▸ **execute**(`action`: [Action](_types_base_.action.md)‹T›): *[FluentIterable](_types_.fluentiterable.md)‹T›*
 
 Translate an iterable into one which executes an action against each element before yield them.<br>
   Examples:<br>
@@ -486,7 +584,7 @@ Translate an iterable into one which executes an action against each element bef
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`action` | [Action](_types_.action.md)‹T› | The action to execute against each element. |
+`action` | [Action](_types_base_.action.md)‹T› | The action to execute against each element. |
 
 **Returns:** *[FluentIterable](_types_.fluentiterable.md)‹T›*
 
@@ -496,7 +594,7 @@ ___
 
 ###  executeAsync
 
-▸ **executeAsync**(`action`: [AsyncAction](_types_.asyncaction.md)‹T›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+▸ **executeAsync**(`action`: [AsyncAction](_types_base_.asyncaction.md)‹T›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
 Translate an iterable into one which executes an asynchronous action against each element before yield them.
 
@@ -504,7 +602,7 @@ Translate an iterable into one which executes an asynchronous action against eac
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`action` | [AsyncAction](_types_.asyncaction.md)‹T› | The asynchronous action to execute against each element. |
+`action` | [AsyncAction](_types_base_.asyncaction.md)‹T› | The asynchronous action to execute against each element. |
 
 **Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
@@ -514,7 +612,7 @@ ___
 
 ###  filter
 
-▸ **filter**(`predicate`: [Predicate](_types_.predicate.md)‹T›): *[FluentIterable](_types_.fluentiterable.md)‹T›*
+▸ **filter**(`predicate`: [Predicate](_types_base_.predicate.md)‹T›): *[FluentIterable](_types_.fluentiterable.md)‹T›*
 
 Filters the iterable of `T` based on a predicate.<br>
   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).filter(word => word[0] === 'a')` yields *anchor*, *almond*, and *alpine*.
@@ -523,7 +621,7 @@ Filters the iterable of `T` based on a predicate.<br>
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate` | [Predicate](_types_.predicate.md)‹T› | A predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`. |
+`predicate` | [Predicate](_types_base_.predicate.md)‹T› | A predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`. |
 
 **Returns:** *[FluentIterable](_types_.fluentiterable.md)‹T›*
 
@@ -551,7 +649,7 @@ ___
 
 ###  first
 
-▸ **first**(`predicate?`: [Predicate](_types_.predicate.md)‹T›): *T | undefined*
+▸ **first**(`predicate?`: [Predicate](_types_base_.predicate.md)‹T›): *T | undefined*
 
 Returns the first element of the iterable matching a predicate, or `undefined` value if no such element is found. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
   Examples:<br>
@@ -564,7 +662,7 @@ Returns the first element of the iterable matching a predicate, or `undefined` v
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | [Predicate](_types_.predicate.md)‹T› | The first element is to be returned which matches this predicate. Defaults to the always true function and thus, returns the first element in the iterable if omitted. |
+`predicate?` | [Predicate](_types_base_.predicate.md)‹T› | The first element is to be returned which matches this predicate. Defaults to the always true function and thus, returns the first element in the iterable if omitted. |
 
 **Returns:** *T | undefined*
 
@@ -643,7 +741,7 @@ ___
 
 ###  forEach
 
-▸ **forEach**(`action`: [Action](_types_.action.md)‹T›): *void*
+▸ **forEach**(`action`: [Action](_types_base_.action.md)‹T›): *void*
 
 Iterates through the iterable and executes an action against each element. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).forEach(console.log)` prints *anchor*, *almond*, *bound* and *alpine*
@@ -652,7 +750,7 @@ Iterates through the iterable and executes an action against each element. This 
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`action` | [Action](_types_.action.md)‹T› | The action to execute against each element.  |
+`action` | [Action](_types_base_.action.md)‹T› | The action to execute against each element.  |
 
 **Returns:** *void*
 
@@ -682,7 +780,7 @@ ___
 
 ###  group
 
-▸ **group**‹**R**›(`mapper`: Mapper‹T, R›): *[FluentIterable](_types_.fluentiterable.md)‹[FluentGroup](_types_.fluentgroup.md)‹T, R››*
+▸ **group**‹**R**›(`mapper`: Mapper‹T, R›): *[FluentIterable](_types_.fluentiterable.md)‹[FluentGroup](_types_base_.fluentgroup.md)‹T, R››*
 
 Groups the elements of the iterable keyed by equality of data at the specified projection.<br>
   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).group(word => word[0])` yields { key: 'a', values: ['anchor', 'almond', 'alpine'] } and { key: 'b', values: ['bound'] }.
@@ -699,7 +797,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `mapper` | Mapper‹T, R› | Projects the elements of the iterable into the group key they belong to. |
 
-**Returns:** *[FluentIterable](_types_.fluentiterable.md)‹[FluentGroup](_types_.fluentgroup.md)‹T, R››*
+**Returns:** *[FluentIterable](_types_.fluentiterable.md)‹[FluentGroup](_types_base_.fluentgroup.md)‹T, R››*
 
 The [FluentIterable](_types_.fluentiterable.md) of the distinct groups.
 
@@ -707,7 +805,7 @@ ___
 
 ###  groupAsync
 
-▸ **groupAsync**‹**R**›(`mapper`: AsyncMapper‹T, R›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[FluentGroup](_types_.fluentgroup.md)‹T, R››*
+▸ **groupAsync**‹**R**›(`mapper`: AsyncMapper‹T, R›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[FluentGroup](_types_base_.fluentgroup.md)‹T, R››*
 
 Groups the elements of the iterable keyed by equality of data at the specified asynchronous projection.
 
@@ -723,7 +821,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `mapper` | AsyncMapper‹T, R› | Asynchronously projects the elements of the iterable into the group key they belong to. |
 
-**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[FluentGroup](_types_.fluentgroup.md)‹T, R››*
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[FluentGroup](_types_base_.fluentgroup.md)‹T, R››*
 
 The [FluentAsyncIterable](_types_.fluentasynciterable.md) of the distinct groups.
 
@@ -861,7 +959,7 @@ ___
 
 ###  last
 
-▸ **last**(`predicate?`: [Predicate](_types_.predicate.md)‹T›): *T | undefined*
+▸ **last**(`predicate?`: [Predicate](_types_base_.predicate.md)‹T›): *T | undefined*
 
 Returns the last element of the iterable matching a predicate, or `undefined` value if no such element is found. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Examples:<br>
@@ -874,7 +972,7 @@ Returns the last element of the iterable matching a predicate, or `undefined` va
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | [Predicate](_types_.predicate.md)‹T› | The last element is to be returned which matches this predicate. Defaults to the always true function and thus, returns the last element in the iterable if omitted. |
+`predicate?` | [Predicate](_types_base_.predicate.md)‹T› | The last element is to be returned which matches this predicate. Defaults to the always true function and thus, returns the last element in the iterable if omitted. |
 
 **Returns:** *T | undefined*
 
@@ -1064,7 +1162,7 @@ ___
 
 ###  reduce
 
-▸ **reduce**‹**R**›(`reducer`: [Reducer](_types_.reducer.md)‹T, R›, `initial`: R): *R*
+▸ **reduce**‹**R**›(`reducer`: [Reducer](_types_base_.reducer.md)‹T, R›, `initial`: R): *R*
 
 Aggregates the iterable by applying an accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Example:<br>
@@ -1085,7 +1183,7 @@ The type of the accumulator value.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`reducer` | [Reducer](_types_.reducer.md)‹T, R› | The accumulator function, provides the next accumulator value out of the last accumulator value and the next element in the iterable. |
+`reducer` | [Reducer](_types_base_.reducer.md)‹T, R› | The accumulator function, provides the next accumulator value out of the last accumulator value and the next element in the iterable. |
 `initial` | R | The initial (aka *seed*) value of the accumulator. |
 
 **Returns:** *R*
@@ -1096,7 +1194,7 @@ ___
 
 ###  reduceAndMap
 
-▸ **reduceAndMap**‹**A**, **R**›(`reducer`: [Reducer](_types_.reducer.md)‹T, A›, `initial`: A, `result`: Mapper‹A, R›): *R*
+▸ **reduceAndMap**‹**A**, **R**›(`reducer`: [Reducer](_types_base_.reducer.md)‹T, A›, `initial`: A, `result`: Mapper‹A, R›): *R*
 
 Aggregates the iterable by applying an accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value, and the specified map function is used to project the result value from the accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Example:<br>
@@ -1125,7 +1223,7 @@ The type of the aggregation result.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`reducer` | [Reducer](_types_.reducer.md)‹T, A› | The accumulator function, provides the next accumulator value out of the last accumulator value and the next element in the iterable. |
+`reducer` | [Reducer](_types_base_.reducer.md)‹T, A› | The accumulator function, provides the next accumulator value out of the last accumulator value and the next element in the iterable. |
 `initial` | A | The initial (aka *seed*) value of the accumulator. |
 `result` | Mapper‹A, R› | The mapping function, projects the accumulator value of type `A` to the result value of type `R`. |
 
@@ -1137,7 +1235,7 @@ ___
 
 ###  reduceAndMapAsync
 
-▸ **reduceAndMapAsync**‹**A**, **R**›(`reducer`: [AsyncReducer](_types_.asyncreducer.md)‹T, A›, `initial`: A, `result`: AsyncMapper‹A, R›): *Promise‹R›*
+▸ **reduceAndMapAsync**‹**A**, **R**›(`reducer`: [AsyncReducer](_types_base_.asyncreducer.md)‹T, A›, `initial`: A, `result`: AsyncMapper‹A, R›): *Promise‹R›*
 
 Aggregates the iterable by applying an asynchronous accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value, and the specified asynchronous map function is used to project the result value from the accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -1155,7 +1253,7 @@ The type of the aggregation result.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`reducer` | [AsyncReducer](_types_.asyncreducer.md)‹T, A› | The asynchronous accumulator function, provides the next accumulator value out of the last accumulator value and the next element in the iterable. |
+`reducer` | [AsyncReducer](_types_base_.asyncreducer.md)‹T, A› | The asynchronous accumulator function, provides the next accumulator value out of the last accumulator value and the next element in the iterable. |
 `initial` | A | The initial (aka *seed*) value of the accumulator. |
 `result` | AsyncMapper‹A, R› | The asynchronous mapping function, projects the accumulator value of type `A` to the result value of type `R`. |
 
@@ -1167,7 +1265,7 @@ ___
 
 ###  reduceAsync
 
-▸ **reduceAsync**‹**R**›(`reducer`: [AsyncReducer](_types_.asyncreducer.md)‹T, R›, `initial`: R): *Promise‹R›*
+▸ **reduceAsync**‹**R**›(`reducer`: [AsyncReducer](_types_base_.asyncreducer.md)‹T, R›, `initial`: R): *Promise‹R›*
 
 Aggregates the iterable by applying an asynchronous accumulator function over the elements of the iterable. The specified seed value is used as the initial accumulator value. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -1181,7 +1279,7 @@ The type of the accumulator value.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`reducer` | [AsyncReducer](_types_.asyncreducer.md)‹T, R› | The asynchronous accumulator function, provides the next accumulator value out of the last accumulator value and the next element in the iterable. |
+`reducer` | [AsyncReducer](_types_base_.asyncreducer.md)‹T, R› | The asynchronous accumulator function, provides the next accumulator value out of the last accumulator value and the next element in the iterable. |
 `initial` | R | The initial (aka *seed*) value of the accumulator. |
 
 **Returns:** *Promise‹R›*
@@ -1230,7 +1328,7 @@ ___
 
 ###  skipWhile
 
-▸ **skipWhile**(`condition`: [Predicate](_types_.predicate.md)‹T›): *[FluentIterable](_types_.fluentiterable.md)‹T›*
+▸ **skipWhile**(`condition`: [Predicate](_types_base_.predicate.md)‹T›): *[FluentIterable](_types_.fluentiterable.md)‹T›*
 
 Bypasses elements in the iterable as long as a specified condition is true and then returns the remaining elements.<br>
   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).skipWhile(word => word[0] === 'a')` yields *bound* and *alpine*.
@@ -1239,7 +1337,7 @@ Bypasses elements in the iterable as long as a specified condition is true and t
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`condition` | [Predicate](_types_.predicate.md)‹T› | A predicate of `T`. All elements are skipped from the iterable until this evaluates to `false` for the first time. |
+`condition` | [Predicate](_types_base_.predicate.md)‹T› | A predicate of `T`. All elements are skipped from the iterable until this evaluates to `false` for the first time. |
 
 **Returns:** *[FluentIterable](_types_.fluentiterable.md)‹T›*
 
@@ -1267,7 +1365,7 @@ ___
 
 ###  sort
 
-▸ **sort**(`comparer?`: [Comparer](_types_.comparer.md)‹T›): *[FluentIterable](_types_.fluentiterable.md)‹T›*
+▸ **sort**(`comparer?`: [Comparer](_types_base_.comparer.md)‹T›): *[FluentIterable](_types_.fluentiterable.md)‹T›*
 
 Sorts the elements of the iterable based on a specified comparer. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Examples:<br>
@@ -1280,7 +1378,7 @@ Sorts the elements of the iterable based on a specified comparer. This is a reso
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`comparer?` | [Comparer](_types_.comparer.md)‹T› | The comparer operation to use to determine the order of elements. Alphabetical ascending is used for [[string]] elements and numerical ascending is used for [[number]] |
+`comparer?` | [Comparer](_types_base_.comparer.md)‹T› | The comparer operation to use to determine the order of elements. Alphabetical ascending is used for [[string]] elements and numerical ascending is used for [[number]] |
 
 **Returns:** *[FluentIterable](_types_.fluentiterable.md)‹T›*
 
@@ -1348,7 +1446,7 @@ ___
 
 ###  takeWhile
 
-▸ **takeWhile**(`condition`: [Predicate](_types_.predicate.md)‹T›): *[FluentIterable](_types_.fluentiterable.md)‹T›*
+▸ **takeWhile**(`condition`: [Predicate](_types_base_.predicate.md)‹T›): *[FluentIterable](_types_.fluentiterable.md)‹T›*
 
 Returns elements from the iterable as long as a specified condition is met.<br>
   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).takeWhile(word => word[0] === 'a')` yields *anchor* and *almond*.
@@ -1357,7 +1455,7 @@ Returns elements from the iterable as long as a specified condition is met.<br>
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`condition` | [Predicate](_types_.predicate.md)‹T› | A predicate of `T`. All elements are yielded from the iterable until this evaluates to `false` for the first time. |
+`condition` | [Predicate](_types_base_.predicate.md)‹T› | A predicate of `T`. All elements are yielded from the iterable until this evaluates to `false` for the first time. |
 
 **Returns:** *[FluentIterable](_types_.fluentiterable.md)‹T›*
 
@@ -1463,7 +1561,7 @@ ___
 
 ###  top
 
-▸ **top**‹**R**›(`mapper`: Mapper‹T, R›, `comparer`: [Comparer](_types_.comparer.md)‹R›): *T | undefined*
+▸ **top**‹**R**›(`mapper`: Mapper‹T, R›, `comparer`: [Comparer](_types_base_.comparer.md)‹R›): *T | undefined*
 
 Calculates the top element of the iterable using a projection and a comparer. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Examples:<br>
@@ -1481,7 +1579,7 @@ The type of the projected elements used for comparison.
 Name | Type | Description |
 ------ | ------ | ------ |
 `mapper` | Mapper‹T, R› | The function which projects the elements of the iterable into comparable. |
-`comparer` | [Comparer](_types_.comparer.md)‹R› | The comparison function. |
+`comparer` | [Comparer](_types_base_.comparer.md)‹R› | The comparison function. |
 
 **Returns:** *T | undefined*
 
@@ -1491,7 +1589,7 @@ ___
 
 ###  topAsync
 
-▸ **topAsync**‹**R**›(`mapper`: AsyncMapper‹T, R›, `comparer`: [Comparer](_types_.comparer.md)‹R›): *Promise‹T | undefined›*
+▸ **topAsync**‹**R**›(`mapper`: AsyncMapper‹T, R›, `comparer`: [Comparer](_types_base_.comparer.md)‹R›): *Promise‹T | undefined›*
 
 Calculates the top element of the iterable using an asynchronous projection and a comparer. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -1506,7 +1604,7 @@ The type of the projected elements used for comparison.
 Name | Type | Description |
 ------ | ------ | ------ |
 `mapper` | AsyncMapper‹T, R› | The asynchronous function which projects the elements of the iterable into comparable. |
-`comparer` | [Comparer](_types_.comparer.md)‹R› | The comparison function. |
+`comparer` | [Comparer](_types_base_.comparer.md)‹R› | The comparison function. |
 
 **Returns:** *Promise‹T | undefined›*
 
@@ -1538,11 +1636,11 @@ ___
 
 ###  withIndex
 
-▸ **withIndex**(): *[FluentIterable](_types_.fluentiterable.md)‹[Indexed](_types_.indexed.md)‹T››*
+▸ **withIndex**(): *[FluentIterable](_types_.fluentiterable.md)‹[Indexed](_types_base_.indexed.md)‹T››*
 
-Maps all elements of the iterable to an instance of [Indexed](_types_.indexed.md), an index-value pair constructed of the original element in the iterable and it's index (starting from 0 for the first element in the iterable).<br>
+Maps all elements of the iterable to an instance of [Indexed](_types_base_.indexed.md), an index-value pair constructed of the original element in the iterable and it's index (starting from 0 for the first element in the iterable).<br>
   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).withIndex()` yields `{ idx: 0, value: 'anchor' }`, `{ idx: 1, value: 'almond' }` and so on.
 
-**Returns:** *[FluentIterable](_types_.fluentiterable.md)‹[Indexed](_types_.indexed.md)‹T››*
+**Returns:** *[FluentIterable](_types_.fluentiterable.md)‹[Indexed](_types_base_.indexed.md)‹T››*
 
-A [FluentIterable](_types_.fluentiterable.md) of [Indexed](_types_.indexed.md).
+A [FluentIterable](_types_.fluentiterable.md) of [Indexed](_types_base_.indexed.md).

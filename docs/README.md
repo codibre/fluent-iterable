@@ -1,6 +1,6 @@
-[fluent-iterable - v1.3.4](README.md)
+[fluent-iterable - v1.4.0](README.md)
 
-# fluent-iterable - v1.3.4
+# fluent-iterable - v1.4.0
 
 ## Index
 
@@ -17,6 +17,13 @@
 * ["async-base/merging/merge-iterators"](modules/_async_base_merging_merge_iterators_.md)
 * ["async-base/merging/merge-types"](modules/_async_base_merging_merge_types_.md)
 * ["depaginator"](modules/_depaginator_.md)
+* ["emitter/base-emitting-conversion"](modules/_emitter_base_emitting_conversion_.md)
+* ["emitter/combine-emitter"](modules/_emitter_combine_emitter_.md)
+* ["emitter/concat-emitter"](modules/_emitter_concat_emitter_.md)
+* ["emitter/get-iterable-from-emitter"](modules/_emitter_get_iterable_from_emitter_.md)
+* ["emitter/index"](modules/_emitter_index_.md)
+* ["emitter/merge-emitter"](modules/_emitter_merge_emitter_.md)
+* ["emitter/merge-emitter-catching"](modules/_emitter_merge_emitter_catching_.md)
 * ["extend"](modules/_extend_.md)
 * ["extend-async"](modules/_extend_async_.md)
 * ["fluent"](modules/_fluent_.md)
@@ -25,4 +32,5 @@
 * ["interval"](modules/_interval_.md)
 * ["transform-obj-values"](modules/_transform_obj_values_.md)
 * ["types"](modules/_types_.md)
+* ["types-base"](modules/_types_base_.md)
 * ["utils"](modules/_utils_.md)

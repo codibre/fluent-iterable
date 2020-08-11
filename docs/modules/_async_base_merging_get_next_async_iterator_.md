@@ -1,4 +1,4 @@
-[fluent-iterable - v1.3.4](../README.md) › ["async-base/merging/get-next-async-iterator"](_async_base_merging_get_next_async_iterator_.md)
+[fluent-iterable - v1.4.0](../README.md) › ["async-base/merging/get-next-async-iterator"](_async_base_merging_get_next_async_iterator_.md)
 
 # Module: "async-base/merging/get-next-async-iterator"
 

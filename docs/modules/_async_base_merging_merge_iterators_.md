@@ -1,4 +1,4 @@
-[fluent-iterable - v1.3.4](../README.md) › ["async-base/merging/merge-iterators"](_async_base_merging_merge_iterators_.md)
+[fluent-iterable - v1.4.0](../README.md) › ["async-base/merging/merge-iterators"](_async_base_merging_merge_iterators_.md)
 
 # Module: "async-base/merging/merge-iterators"
 
@@ -27,7 +27,7 @@ ___
 
 ###  mergeIterators
 
-▸ **mergeIterators**‹**T**›(`callback`: [ErrorCallback](../interfaces/_types_.errorcallback.md) | undefined, ...`iterators`: AsyncIterator‹T›[]): *AsyncIterable‹T›*
+▸ **mergeIterators**‹**T**›(`callback`: [ErrorCallback](../interfaces/_types_base_.errorcallback.md) | undefined, ...`iterators`: AsyncIterator‹T›[]): *AsyncIterable‹T›*
 
 **Type parameters:**
 
@@ -37,7 +37,7 @@ ___
 
 Name | Type |
 ------ | ------ |
-`callback` | [ErrorCallback](../interfaces/_types_.errorcallback.md) &#124; undefined |
+`callback` | [ErrorCallback](../interfaces/_types_base_.errorcallback.md) &#124; undefined |
 `...iterators` | AsyncIterator‹T›[] |
 
 **Returns:** *AsyncIterable‹T›*
