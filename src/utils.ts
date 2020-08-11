@@ -1,7 +1,8 @@
 /* eslint-disable guard-for-in */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import fluent from './fluent';
-import { Group, FluentGroup, Predicate, AsyncPredicate } from './types';
+import { AsyncPredicate } from './types';
+import { Group, FluentGroup, Predicate } from './types-base';
 import { AnyIterable } from 'augmentative-iterable';
 
 /**

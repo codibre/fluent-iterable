@@ -1,23 +1,25 @@
 import {
-  Predicate,
   AsyncPredicate,
   Mapper,
   AsyncMapper,
+  Page,
+  Pager,
+  FluentIterable,
+  FluentAsyncIterable,
+} from './types';
+import {
+  Predicate,
   Reducer,
   AsyncReducer,
   Comparer,
   Action,
   AsyncAction,
   Group,
-  Page,
-  Pager,
-  FluentIterable,
-  FluentAsyncIterable,
   FluentGroup,
-} from './types';
+} from './types-base';
 
 import fluent from './fluent';
-import fluentAsync from './fluent-async';
+import { fluentAsync, fluentEmit } from './fluent-async';
 import depaginate from './depaginator';
 import { interval } from './interval';
 import { mergeIterators } from './async-base/merging';
@@ -43,6 +45,7 @@ export {
   Pager,
   fluent,
   fluentAsync,
+  fluentEmit,
   depaginate,
   interval,
   mergeIterators,

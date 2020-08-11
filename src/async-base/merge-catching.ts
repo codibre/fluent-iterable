@@ -1,5 +1,5 @@
 import { mergeIterators, getIterators } from './merging';
-import { ErrorCallback } from '../types';
+import { ErrorCallback } from '../types-base';
 
 export function mergeCatching<T, R>(
   this: AsyncIterable<T>,

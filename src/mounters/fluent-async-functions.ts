@@ -41,6 +41,12 @@ import {
   filterAsync,
   mapAsync,
 } from '../async';
+import {
+  combineEmitter,
+  concatEmitter,
+  mergeEmitter,
+  mergeEmitterCatching,
+} from '../emitter';
 import { merge, mergeCatching } from '../async-base';
 
 export const asyncIterableFuncs = {
@@ -67,6 +73,10 @@ export const asyncIterableFuncs = {
   merge,
   mergeCatching,
   combine: combineAsync,
+  combineEmitter,
+  concatEmitter,
+  mergeEmitter,
+  mergeEmitterCatching,
 };
 
 export const asyncSpecial = {

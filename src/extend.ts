@@ -3,7 +3,7 @@ import { addCustomMethod } from './add-custom-method';
 import { AnyIterable } from 'augmentative-iterable';
 import { proxyReference } from './fluent';
 import { fluent } from '.';
-import fluentAsync from './fluent-async';
+import { fluentAsync } from './fluent-async';
 
 /**
  * An operation that returns an Iterable

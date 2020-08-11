@@ -4,140 +4,85 @@ import {
   Mapper,
   AsyncMapper,
 } from 'augmentative-iterable';
-
-export interface ErrorCallback {
-  (error: Error, index: number): unknown;
-}
-
-/**
- * Represents a predicate on type `T`.<br>
- *   Example: `const evenNumber: Predicate<number> = n => (n % 2) === 0;`
- * @typeparam T The type the predicate is defined on.
- */
-interface Predicate<T> {
-  /**
-   * Evaluates an item of type `T`.
-   * @param item The item evaluated.
-   * @returns `true` if the predicate passed on `item`; otherwise `false`.
-   */
-  (item: T): any;
-}
+import { EventEmitter } from 'events';
+import {
+  FluentEmitOptions,
+  Indexed,
+  Predicate,
+  Comparer,
+  FluentGroup,
+  Reducer,
+  AsyncReducer,
+  Action,
+  AsyncAction,
+  ErrorCallback,
+} from './types-base';
 
 /**
- * Represents a reducer of type `T` into the accumulator type `A`.<br>
- *   Example: `const sumReducer: Reducer<number, number> = (sum, next) => sum + next;`
- * @typeparam T The source type.
- * @typeparam A The accumulator type.
+ * Represents the operations using EventEmitters
+ * @typeparam T The type of the items in the iterable.
  */
-interface Reducer<T, A> {
+interface FluentIterableEmitter<T> {
   /**
-   * Generates the next accumulator item based on the previous one and the next item under reduce.
-   * @param current The previous accumulator value.
-   * @param next The next item.
-   * @returns The new accumulator value.
+   * Concatenates the specified Emitter to the async iterable.
+   *
+   * **IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
+   * emission generates a new yielded result. The default key event is **'data'**.
+   *
+   * Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
+   * The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
+   * to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
+   *
+   * If you need to change the key event or other characteristics, you can do it through the **options** parameter
+   * @param emitter The EventEmitter
+   * @param options The EventEmitter options. Optional
+   * @returns The [[FluentAsyncIterable]] of the concatenated async iterables.
    */
-  (current: A, next: T): A;
-}
+  concatEmitter(
+    emitter: EventEmitter,
+    options?: FluentEmitOptions,
+  ): FluentAsyncIterable<T>;
+  /**
+   * Join the iterable with an EventEmitter, returning a new async iterable with a NxN combination
+   *
+   * **IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
+   * emission generates a new yielded result. The default key event is **'data'**.
+   *
+   * Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
+   * The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
+   * to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
+   *
+   * If you need to change the key event or other characteristics, you can do it through the **options** parameter
+   * @param emitter The EventEmitter
+   * @param options The EventEmitter options. Optional
+   */
+  combineEmitter<U = any>(
+    emitter: EventEmitter,
+    options?: FluentEmitOptions,
+  ): FluentAsyncIterable<[T, U]>;
 
-/**
- * Represents an asynchronous reducer of type `T` into the accumulator type `A`.<br>
- *   Example: `const sumReducer: AsyncReducer<Channel, number> = async (sum, next) => sum + await getNumberOfMessages(next)`
- * @typeparam T The source type.
- * @typeparam A The accumulator type.
- */
-interface AsyncReducer<T, A> {
   /**
-   * Asynchronously generates the next accumulator item based on the previous one and the next item under reduce.
-   * @param current The previous accumulator value.
-   * @param next The next item.
-   * @returns A promise of the new accumulator value.
+   * Join the iterable with another the EventEmitter, returning a new async iterable with the inner matching combinations
+   *
+   * **IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
+   * emission generates a new yielded result. The default key event is **'data'**.
+   *
+   * Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
+   * The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
+   * to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
+   *
+   * If you need to change the key event or other characteristics, you can do it through the **options** parameter
+   * @param emitter The EventEmitter
+   * @param options The EventEmitter options. Optional
+   * @param keyA A mapper that returns the key map value from the left iterable
+   * @param keyB A mapper that returns the key map value from the right iterable
    */
-  (current: A, next: T): Promise<A> | A;
-}
-
-/**
- * Compares two instances of type `T`.<br>
- *   Example: `const levelComparer: Comparer<User> = (userA, userB) => userA.level - userB.level;`
- * @typeparam T The type of the compared instances.
- */
-interface Comparer<T> {
-  /**
-   * Compares `a` and `b`.
-   * @param a The first instance (the left hand side of the comparison).
-   * @param b The second instance (the right hand side of the comparison).
-   * @returns A number which represents the result of the comparison. If **negative**, `a` precedes `b`, if **positive**, `b` precedes `a`, if **zero**, `a` equals to `b` in the comparison.
-   */
-  (a: T, b: T): number;
-}
-
-/**
- * Represents an action on an item of type `T`.<br>
- *   Example: ``const logUserAction: Action<User> = user => console.log(`User ${user.name} (id: ${user.id})`);``
- * @typeparam T The type of the item the action is defined on.
- */
-interface Action<T> {
-  /**
-   * Specifies the action to perform on `item`.
-   * @param item The item the action is performed against.
-   */
-  (item: T): void;
-}
-
-/**
- * Represents an asynchronous action on an item of type `T`.<br>
- *   Example: `const createUserAction: AsyncAction<User> = async user => await database.put(user);`
- * @typeparam T The type of the item the action is defined on.
- */
-interface AsyncAction<T> {
-  /**
-   * Specifies the asynchronous action to perform on `item`.
-   * @param item The item the action is performed against.
-   * @returns The promise of any action.
-   */
-  (item: T): Promise<unknown> | unknown;
-}
-
-/**
- * Represents a group of items of type `T` with a key of type `R`.
- * @typeparam T The type of the items in the [[Group]].
- * @typeparam R The type of the key of the [[Group]].
- */
-interface Group<T, R> {
-  /**
-   * The key of the [[Group]].
-   */
-  key: R;
-  /**
-   * The items in the [[Group]].
-   */
-  values: Iterable<T>;
-}
-
-/**
- * Represents a group of [[fluent]] items of type `T` with a key of type `R`.
- * @typeparam T The type of the items in the [[FluentGroup]].
- * @typeparam R The type of the key of the [[FluentGroup]].
- */
-interface FluentGroup<T, R> extends Group<T, R> {
-  /**
-   * The [[fluent]] items in the [[FluentGroup]].
-   */
-  values: FluentIterable<T>;
-}
-
-/**
- * Represents an indexed value of type `T`.
- * @typeparam T The type of the value the index is associated to.
- */
-interface Indexed<T> {
-  /**
-   * The index of the value.
-   */
-  idx: number;
-  /**
-   * The value.
-   */
-  value: T;
+  combineEmitter<U, K>(
+    emitter: EventEmitter,
+    keyA: Mapper<T, K>,
+    keyB: Mapper<U, K>,
+    options?: FluentEmitOptions,
+  ): FluentAsyncIterable<[T, U]>;
 }
 
 /**
@@ -145,7 +90,7 @@ interface Indexed<T> {
  *   The capabilities introduced are defined as a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) and thus they support *method chaining*.
  * @typeparam T The type of the items in the iterable.
  */
-interface FluentIterable<T> extends Iterable<T> {
+interface FluentIterable<T> extends Iterable<T>, FluentIterableEmitter<T> {
   /**
    * Maps all elements of the iterable to an instance of [[Indexed]], an index-value pair constructed of the original element in the iterable and it's index (starting from 0 for the first element in the iterable).<br>
    *   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).withIndex()` yields `{ idx: 0, value: 'anchor' }`, `{ idx: 1, value: 'almond' }` and so on.
@@ -781,7 +726,9 @@ interface FluentIterable<T> extends Iterable<T> {
  *   The capabilities introduced are defined as a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) and thus they support *method chaining*.
  * @typeparam T The type of the items in the asynchronous iterable.
  */
-interface FluentAsyncIterable<T> extends AsyncIterable<T> {
+interface FluentAsyncIterable<T>
+  extends AsyncIterable<T>,
+    FluentIterableEmitter<T> {
   /**
    * Maps all elements of the iterable to an instance of [[Indexed]], an index-value pair constructed of the original element in the iterable and it's index (starting from 0 for the first element in the iterable).
    * @returns A [[FluentAsyncIterable]] of [[Indexed]].
@@ -1097,6 +1044,48 @@ interface FluentAsyncIterable<T> extends AsyncIterable<T> {
   ): FluentAsyncIterable<T | R>;
 
   /**
+   * Merge the iterable with the informed EventEmitter.
+   *
+   * **IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
+   * emission generates a new yielded result. The default key event is **'data'**.
+   *
+   * Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
+   * The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
+   * to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
+   *
+   * If you need to change the key event or other characteristics, you can do it through the **options** parameter
+   * @param emitter The EventEmitter
+   * @param options The EventEmitter options. Optional
+   * @returns A new iterable that returns the elements of all others in the order of which resolves first
+   */
+  mergeEmitter<R>(
+    emitter: EventEmitter,
+    options?: FluentEmitOptions,
+  ): FluentAsyncIterable<T | R>;
+
+  /**
+   * Merge the iterable with the informed EventEmitter, catching the errors of any of the iterables that fails, so the process can continue until all the successful iterables ends.
+   *
+   * **IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
+   * emission generates a new yielded result. The default key event is **'data'**.
+   *
+   * Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
+   * The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
+   * to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
+   *
+   * If you need to change the key event or other characteristics, you can do it through the **options** parameter
+   * @param emitter The EventEmitter
+   * @param errorCallback A callback to be called if any of the iterables fail
+   * @param options The EventEmitter options. Optional
+   * @returns A new iterable that returns the elements of all others in the order of which resolves first
+   */
+  mergeEmitterCatching<R>(
+    errorCallback: ErrorCallback,
+    emitter: EventEmitter,
+    options?: FluentEmitOptions,
+  ): FluentAsyncIterable<T | R>;
+
+  /**
    * Applies a async transformation for every element in the array and, then, wait for they conclusion with Promise.all. This is a resolving operation.
    * @param mapper The asynchronous function which projects the elements of the iterable into promises.
    * @returns a promises that resolves into an array with the result of all mappings.
@@ -1164,7 +1153,6 @@ export {
   Comparer,
   Action,
   AsyncAction,
-  Group,
   FluentGroup,
   Indexed,
   FluentIterable,

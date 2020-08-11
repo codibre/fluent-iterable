@@ -1,5 +1,5 @@
 import { AnyIterable } from 'augmentative-iterable';
-import { AsyncAction } from '../types';
+import { AsyncAction } from '../types-base';
 
 export function augmentIterableRecipe(augmentIterableAsync: Function) {
   return function <T>(
