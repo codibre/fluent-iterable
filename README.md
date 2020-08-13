@@ -4,6 +4,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/069043968e0e72b2b5aa/test_coverage)](https://codeclimate.com/github/Codibre/fluent-iterable/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/069043968e0e72b2b5aa/maintainability)](https://codeclimate.com/github/Codibre/fluent-iterable/maintainability)
 [![npm version](https://badge.fury.io/js/%40codibre%2Ffluent-iterable.svg)](https://badge.fury.io/js/%40codibre%2Ffluent-iterable)
+![downlods per month](https://img.shields.io/npm/dm/@codibre/fluent-iterable)
 
 <p align="center">
 <img src="resources/preview.png">
