@@ -1,4 +1,4 @@
-[fluent-iterable - v1.4.0](../README.md) › ["utils"](_utils_.md)
+[fluent-iterable - v1.5.0](../README.md) › ["utils"](_utils_.md)
 
 # Module: "utils"
 
@@ -18,6 +18,7 @@
 * [falsity](_utils_.md#falsity)
 * [fluentGroup](_utils_.md#fluentgroup)
 * [ge](_utils_.md#ge)
+* [getAverageStepper](_utils_.md#getaveragestepper)
 * [gt](_utils_.md#gt)
 * [identity](_utils_.md#identity)
 * [iterateAll](_utils_.md#iterateall)
@@ -184,6 +185,16 @@ Name | Type | Description |
 `b` | any | the value for comparison  |
 
 **Returns:** *(Anonymous function)*
+
+___
+
+###  getAverageStepper
+
+▸ **getAverageStepper**(): *[AverageStepper](../interfaces/_types_base_.averagestepper.md)*
+
+Returns an object to calculates incremental average/iterative means
+
+**Returns:** *[AverageStepper](../interfaces/_types_base_.averagestepper.md)*
 
 ___
 

@@ -1,4 +1,4 @@
-[fluent-iterable - v1.4.0](../README.md) › ["types"](../modules/_types_.md) › [FluentIterableEmitter](_types_.fluentiterableemitter.md)
+[fluent-iterable - v1.5.0](../README.md) › ["types"](../modules/_types_.md) › [FluentIterableEmitter](_types_.fluentiterableemitter.md)
 
 # Interface: FluentIterableEmitter ‹**T**›
 

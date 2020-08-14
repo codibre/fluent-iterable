@@ -1,5 +1,10 @@
 
-## 1.4.0
+## 1.5.0
+* 0518e30 Merge branch 'master' of github.com:Codibre/fluent-iterable
+* a695499 separating average from iterative means calculation for a more utils exporting
+* fc04398 Update README.md
+## v1.4.0
+* 1102727 1.4.0
 * 7db5dc2 Merge pull request #4 from Codibre/issue-1-Implementing_fluentEvent
 * 6511552 updating for-emit-of
 * 37da974 ending events cache

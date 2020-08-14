@@ -1,4 +1,4 @@
-[fluent-iterable - v1.4.0](../README.md) › ["types-base"](_types_base_.md)
+[fluent-iterable - v1.5.0](../README.md) › ["types-base"](_types_base_.md)
 
 # Module: "types-base"
 
@@ -9,6 +9,7 @@
 * [Action](../interfaces/_types_base_.action.md)
 * [AsyncAction](../interfaces/_types_base_.asyncaction.md)
 * [AsyncReducer](../interfaces/_types_base_.asyncreducer.md)
+* [AverageStepper](../interfaces/_types_base_.averagestepper.md)
 * [Comparer](../interfaces/_types_base_.comparer.md)
 * [ErrorCallback](../interfaces/_types_base_.errorcallback.md)
 * [FluentEmitOptions](../interfaces/_types_base_.fluentemitoptions.md)

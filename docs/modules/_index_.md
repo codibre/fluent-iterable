@@ -1,4 +1,4 @@
-[fluent-iterable - v1.4.0](../README.md) › ["index"](_index_.md)
+[fluent-iterable - v1.5.0](../README.md) › ["index"](_index_.md)
 
 # Module: "index"
 
@@ -21,6 +21,7 @@
 * [falsity](_index_.md#falsity)
 * [fluentGroup](_index_.md#fluentgroup)
 * [ge](_index_.md#ge)
+* [getAverageStepper](_index_.md#getaveragestepper)
 * [gt](_index_.md#gt)
 * [identity](_index_.md#identity)
 * [iterate](_index_.md#iterate)
@@ -124,6 +125,12 @@ ___
 ###  ge
 
 • **ge**:
+
+___
+
+###  getAverageStepper
+
+• **getAverageStepper**:
 
 ___
 

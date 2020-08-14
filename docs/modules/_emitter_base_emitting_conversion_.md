@@ -1,4 +1,4 @@
-[fluent-iterable - v1.4.0](../README.md) › ["emitter/base-emitting-conversion"](_emitter_base_emitting_conversion_.md)
+[fluent-iterable - v1.5.0](../README.md) › ["emitter/base-emitting-conversion"](_emitter_base_emitting_conversion_.md)
 
 # Module: "emitter/base-emitting-conversion"
 
