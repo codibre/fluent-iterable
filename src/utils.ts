@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import fluent from './fluent';
 import { AsyncPredicate } from './types';
-import { Group, FluentGroup, Predicate } from './types-base';
+import { Group, FluentGroup, Predicate, AverageStepper } from './types-base';
 import { AnyIterable } from 'augmentative-iterable';
 
 /**
@@ -196,6 +196,22 @@ function fluentGroup<Key, Value>(
   };
 }
 
+/**
+ * Returns an object to calculates incremental average/iterative means
+ */
+function getAverageStepper() {
+  let avg = 0;
+  let count = 0;
+  const wrapper: AverageStepper = {
+    get avg() {
+      return count ? avg : NaN;
+    },
+    step: (y: number) => (avg = avg + (y - avg) / ++count),
+  };
+
+  return wrapper;
+}
+
 export {
   constant,
   empty,
@@ -206,6 +222,7 @@ export {
   negation,
   asyncNegation,
   fluentGroup,
+  getAverageStepper,
   eq,
   ge,
   gt,

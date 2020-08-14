@@ -148,3 +148,19 @@ export interface Indexed<T> {
    */
   value: T;
 }
+
+/**
+ * A Function that controls the calculus of iterative means
+ */
+export interface AverageStepper {
+  /**
+   * Return the current avg/mean
+   */
+  readonly avg: number;
+
+  /**
+   * Calculates next avg
+   * @param y the next number to be considered
+   */
+  step(y: number): number;
+}
