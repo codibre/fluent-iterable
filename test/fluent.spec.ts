@@ -594,6 +594,8 @@ describe('fluent iterable', () => {
         it('one element', () => expect(fluent([2]).min()).to.equal(2));
         it('multiple elements', () =>
           expect(fluent([1, 3, 4, 5]).min()).to.equal(1));
+        it('multiple non numeric elements', () =>
+          expect(fluent(['a', 'b', 'c', 'd', 'e']).min()).to.equal('a'));
         it('multiple elements with predicate', () =>
           expect(fluent(subject).min((x) => x.emails.length)).to.eql({
             emails: [],
@@ -872,6 +874,8 @@ describe('fluent iterable', () => {
         it('should return the max number from a transformation when a parameter is informed', () => {
           expect(fluent([1, 2, 3]).max((x) => 3 - x)).to.be.eq(1);
         });
+        it('should return the max value from an array of multiple non numeric elements', () =>
+          expect(fluent(['a', 'b', 'c', 'd', 'e']).max()).to.equal('e'));
       });
       describe('hasExactly', () => {
         it('false', () => expect(fluent([1, 2, 3]).hasExactly(2)).to.false);

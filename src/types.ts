@@ -616,32 +616,32 @@ interface FluentIterable<T> extends Iterable<T>, FluentIterableEmitter<T> {
   /**
    * Finds the numeric minimum element of the iterable using a projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
    *   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).min(word => word.length)` returns *bound*, the shortest word in the iterable
-   * @param mapper The function which projects the elements of the iterable into numbers. Falls back to the identity function if omitted.
+   * @param mapper The function which projects the elements of the iterable into the comparable value. Falls back to the identity function if omitted.
    * @returns The minimum of the iterable's projected elements.
    */
-  min(mapper?: Mapper<T, number>): T | undefined;
+  min<R = T>(mapper?: Mapper<T, R>): T | undefined;
 
   /**
    * Finds the numeric minimum element of the iterable using an asynchronous projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.
-   * @param mapper The asynchronous function which projects the elements of the iterable into numbers.
+   * @param mapper The asynchronous function which projects the elements of the iterable into the comparable value. Falls back to the identity function if omitted.
    * @returns A promise of the minimum of the iterable's projected elements.
    */
-  minAsync(mapper?: AsyncMapper<T, number>): Promise<T | undefined>;
+  minAsync<R = T>(mapper?: AsyncMapper<T, R>): Promise<T | undefined>;
 
   /**
    * Finds the numeric maximum element of the iterable using a projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
    *   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).max(word => word.charCodeAt(0))` returns *bound*, since it begins with the character 'b' which has a highest character code than character 'a' with which all the other words begins with
-   * @param mapper The function which projects the elements of the iterable into numbers. Falls back to the identity function if omitted.
+   * @param mapper The function which projects the elements of the iterable into comparable values. Falls back to the identity function if omitted.
    * @returns The maximum of the iterable's projected elements.
    */
-  max(mapper?: Mapper<T, number>): T | undefined;
+  max<R = T>(mapper?: Mapper<T, R>): T | undefined;
 
   /**
    * Finds the numeric maximum element of the iterable using an asynchronous projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.
-   * @param mapper The function which asynchronously projects the elements of the iterable into numbers.
+   * @param mapper The function which asynchronously projects the elements of the iterable into the comparable values. Falls back to the identity function if omitted.
    * @returns A promise of the maximum of the iterable's projected elements.
    */
-  maxAsync(mapper?: AsyncMapper<T, number>): Promise<T | undefined>;
+  maxAsync<R = T>(mapper?: AsyncMapper<T, R>): Promise<T | undefined>;
 
   /**
    * Checks if the number of elements of the iterable is equal to the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
@@ -991,17 +991,17 @@ interface FluentAsyncIterable<T>
 
   /**
    * Finds the numeric minimum element of the iterable using a projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.
-   * @param mapper The function which projects the elements of the iterable into numbers. Falls back to the identity function if omitted.
+   * @param mapper The function which projects the elements of the iterable into the comparable values. Falls back to the identity function if omitted.
    * @returns A promise of the minimum of the iterable's projected elements.
    */
-  min(mapper?: AsyncMapper<T, number>): Promise<T | undefined>;
+  min<R = T>(mapper?: AsyncMapper<T, R>): Promise<T | undefined>;
 
   /**
    * Finds the numeric maximum element of the iterable using a projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.
-   * @param mapper The function which projects the elements of the iterable into numbers. Falls back to the identity function if omitted.
+   * @param mapper The function which projects the elements of the iterable into the comparable values. Falls back to the identity function if omitted.
    * @returns A promise of the maximum of the iterable's projected elements.
    */
-  max(mapper?: AsyncMapper<T, number>): Promise<T | undefined>;
+  max<R = T>(mapper?: AsyncMapper<T, R>): Promise<T | undefined>;
 
   /**
    * Checks if the number of elements of the iterable is equal to the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
