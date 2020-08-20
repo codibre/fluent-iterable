@@ -6,6 +6,7 @@ import {
   Pager,
   FluentIterable,
   FluentAsyncIterable,
+  FluentGroup,
 } from './types';
 import {
   Predicate,
@@ -15,7 +16,7 @@ import {
   Action,
   AsyncAction,
   Group,
-  FluentGroup,
+  FluentEmitter,
 } from './types-base';
 
 import fluent from './fluent';
@@ -46,6 +47,7 @@ export {
   fluent,
   fluentAsync,
   fluentEmit,
+  FluentEmitter,
   depaginate,
   interval,
   mergeIterators,
