@@ -6,6 +6,7 @@ export * from './concat-recipe';
 export * from './contains-recipe';
 export * from './count-recipe';
 export * from './distinct-recipe';
+export * from './emit-recipe';
 export * from './execute-recipe';
 export * from './flatten-recipe';
 export * from './get-choose-iteration';

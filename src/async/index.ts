@@ -7,6 +7,7 @@ export * from './concat-async';
 export * from './contains-async';
 export * from './count-async';
 export * from './distinct-async';
+export * from './emit-async';
 export * from './execute-async';
 export * from './filter-async';
 export * from './first-async';

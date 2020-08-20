@@ -1,4 +1,5 @@
-import { FluentIterable } from './types';
+import TypedEmitter from 'typed-emitter';
+
 /**
  * represent the options that can be used with fluentEmit
  */
@@ -123,17 +124,7 @@ export interface Group<T, R> {
    */
   values: Iterable<T>;
 }
-/**
- * Represents a group of [[fluent]] items of type `T` with a key of type `R`.
- * @typeparam T The type of the items in the [[FluentGroup]].
- * @typeparam R The type of the key of the [[FluentGroup]].
- */
-export interface FluentGroup<T, R> extends Group<T, R> {
-  /**
-   * The [[fluent]] items in the [[FluentGroup]].
-   */
-  values: FluentIterable<T>;
-}
+
 /**
  * Represents an indexed value of type `T`.
  * @typeparam T The type of the value the index is associated to.
@@ -150,7 +141,7 @@ export interface Indexed<T> {
 }
 
 /**
- * A Function that controls the calculus of iterative means
+ * A structure to controls the calculation of iterative means
  */
 export interface AverageStepper {
   /**
@@ -164,3 +155,28 @@ export interface AverageStepper {
    */
   step(y: number): number;
 }
+
+interface BaseFluentObserver<T, R> {
+  next: (value: T) => R;
+  error: (err: any) => R;
+  complete: () => R;
+}
+
+/**
+ * Contract for subscription over an Iterable
+ */
+export interface FluentObserver<T> extends BaseFluentObserver<T, any> {}
+
+/**
+ * Contract for subscription over an Iterable
+ */
+export interface FluentAsyncObserver<T>
+  extends BaseFluentObserver<T, Promise<any>> {}
+
+interface FluentEvents<T> {
+  data(t: T): void;
+  error(error: any): void;
+  end(): void;
+}
+
+export interface FluentEmitter<T> extends TypedEmitter<FluentEvents<T>> {}

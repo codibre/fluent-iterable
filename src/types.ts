@@ -10,12 +10,13 @@ import {
   Indexed,
   Predicate,
   Comparer,
-  FluentGroup,
   Reducer,
   AsyncReducer,
   Action,
   AsyncAction,
   ErrorCallback,
+  Group,
+  FluentEmitter,
 } from './types-base';
 
 /**
@@ -719,6 +720,18 @@ interface FluentIterable<T> extends Iterable<T>, FluentIterableEmitter<T> {
     keyA: Mapper<T, K>,
     keyB: Mapper<U, K>,
   ): FluentAsyncIterable<[T, U]>;
+
+  /**
+   * Converts the iterable into an EventEmitter. This is a resolving operation.
+   *
+   * This EventEmitter may emit three different events:
+   *
+   *
+   * * data: for each item of the iterable;
+   * * error: in case an error occurs. Notice that, if this method is not listened, the error will be thrown as unhandled;
+   * * end: when the iterable ends. Notice that, if the iterable is infinite, this event will never be emitted.
+   */
+  emit(): FluentEmitter<T>;
 }
 
 /**
@@ -1111,6 +1124,18 @@ interface FluentAsyncIterable<T>
     keyA: Mapper<T, K>,
     keyB: Mapper<U, K>,
   ): FluentAsyncIterable<[T, U]>;
+
+  /**
+   * Converts the iterable into an EventEmitter. This is a resolving operation.
+   *
+   * This EventEmitter may emit three different events:
+   *
+   *
+   * * data: for each item of the iterable;
+   * * error: in case an error occurs. Notice that, if this method is not listened, the error will be thrown as unhandled;
+   * * end: when the iterable ends. Notice that, if the iterable is infinite, this event will never be emitted.
+   */
+  emit(): FluentEmitter<T>;
 }
 
 /**
@@ -1141,6 +1166,18 @@ interface Pager<T, TToken> {
    * @returns A promise of the page requested.
    */
   (nextPageToken?: TToken): Promise<Page<T, TToken> | undefined>;
+}
+
+/**
+ * Represents a group of [[fluent]] items of type `T` with a key of type `R`.
+ * @typeparam T The type of the items in the [[FluentGroup]].
+ * @typeparam R The type of the key of the [[FluentGroup]].
+ */
+interface FluentGroup<T, R> extends Group<T, R> {
+  /**
+   * The [[fluent]] items in the [[FluentGroup]].
+   */
+  values: FluentIterable<T>;
 }
 
 export {

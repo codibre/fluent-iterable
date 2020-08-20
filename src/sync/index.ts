@@ -7,6 +7,7 @@ export * from './concat';
 export * from './contains';
 export * from './count';
 export * from './distinct';
+export * from './emit';
 export * from './execute';
 export * from './filter';
 export * from './first';

@@ -2,6 +2,7 @@ import {
   any,
   contains,
   count,
+  emit,
   first,
   hasExactly,
   hasLessOrExactly,
@@ -113,6 +114,7 @@ export const special = {
 export const resolvingFuncs = {
   count,
   countAsync,
+  emit,
   first,
   firstAsync,
   last,
