@@ -156,23 +156,6 @@ export interface AverageStepper {
   step(y: number): number;
 }
 
-interface BaseFluentObserver<T, R> {
-  next: (value: T) => R;
-  error: (err: any) => R;
-  complete: () => R;
-}
-
-/**
- * Contract for subscription over an Iterable
- */
-export interface FluentObserver<T> extends BaseFluentObserver<T, any> {}
-
-/**
- * Contract for subscription over an Iterable
- */
-export interface FluentAsyncObserver<T>
-  extends BaseFluentObserver<T, Promise<any>> {}
-
 interface FluentEvents<T> {
   data(t: T): void;
   error(error: any): void;
