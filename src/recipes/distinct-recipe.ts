@@ -11,9 +11,9 @@ function inc(map: Map<any, number>, y: any) {
 export function incPredicate<T>(
   resolver: ResolverType,
   mapper: AnyMapper<T>,
-  map: Map<any, number>,
   maxOcurrences: number,
 ): any {
+  const map = new Map<any, number>();
   return (x: T) => resolver(mapper(x), (y) => inc(map, y) <= maxOcurrences);
 }
 
@@ -27,10 +27,9 @@ export function distinctRecipe(filterOrAll: Function, resolver: ResolverType) {
       maxOcurrences = mapper;
       mapper = identity;
     }
-    const map = new Map<R, number>();
     return filterOrAll.call(
       this,
-      incPredicate(resolver, mapper, map, maxOcurrences),
+      incPredicate(resolver, mapper, maxOcurrences),
     );
   };
 }
