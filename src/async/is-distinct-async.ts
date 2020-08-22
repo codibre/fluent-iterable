@@ -1,18 +1,18 @@
 import { resolverAsync } from 'augmentative-iterable';
 import { distinctRecipe, orderedDistinctRecipe } from '../recipes';
-import { filterAsync } from './filter-async';
+import { allAsync } from './all-async';
 import { hasLessOrExactlyAsync } from './has-less-or-exactly-async';
 import { mapAsync } from './map-async';
 import { partitionAsync } from './partition-async';
 
-export const distinctAsync = distinctRecipe(
-  filterAsync,
+export const isDistinctAsync = distinctRecipe(
+  allAsync,
   resolverAsync,
   orderedDistinctRecipe(
     mapAsync,
     resolverAsync,
     partitionAsync,
-    filterAsync,
+    allAsync,
     hasLessOrExactlyAsync,
   ),
 );

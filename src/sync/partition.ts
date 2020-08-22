@@ -1,16 +1,26 @@
-import { getPartition } from '../recipes/partition-recipe';
+import { getPartitionComparer } from '../recipes/get-partition-comparer';
+import { partitionRecipe } from '../recipes/partition-recipe';
+import { Equality } from '../types-base';
 
-function* iterate<T>(arr: Iterable<T>, size: number) {
+function* iterate<T>(arr: Iterable<T>, size: number | Equality<T>) {
   const iterator = arr[Symbol.iterator]();
+  const comparer = getPartitionComparer(size);
   let next = iterator.next();
   while (!next.done) {
     yield (function* () {
-      for (let i = 0; i < size && !next.done; i++) {
+      let previous = next.value;
+      yield previous;
+      next = iterator.next();
+      while (!next.done && comparer(previous, next.value)) {
         yield next.value;
+        previous = next.value;
         next = iterator.next();
       }
     })();
   }
+  if (iterator.return) {
+    iterator.return();
+  }
 }
 
-export const partition = getPartition(iterate);
+export const partition = partitionRecipe(iterate);

@@ -156,6 +156,10 @@ export interface AverageStepper {
   step(y: number): number;
 }
 
+export interface Equality<T> {
+  (a: T, b: T): boolean;
+}
+
 interface FluentEvents<T> {
   data(t: T): void;
   error(error: any): void;

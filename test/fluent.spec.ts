@@ -1,4 +1,4 @@
-import { fluent, interval } from '../src';
+import { assureOrder, fluent, identity, interval } from '../src';
 import expect, { flatMap, pick } from './tools';
 import delay from 'delay';
 import { stub } from 'sinon';
@@ -554,6 +554,27 @@ describe('fluent iterable', () => {
               data.filter((p) => p.gender === grp.key),
             );
           }
+        });
+        it('assuring order', () => {
+          const items = [
+            { k: 1, v: 1 },
+            { k: 1, v: 2 },
+            { k: 2, v: 1 },
+            { k: 2, v: 2 },
+            { k: 1, v: 1 },
+            { k: 1, v: 2 },
+          ];
+          const groups = fluent(items)
+            .group(assureOrder((x) => x.k))
+            .toArray();
+          expect(groups.length).to.eql(3);
+          expect(groups.map((grp) => grp.key)).to.have.members([1, 2, 1]);
+
+          groups.forEach(({ values }, i) => {
+            values.withIndex().forEach(({ value, idx }) => {
+              expect(value).to.be.eq(items[i * 2 + idx]);
+            });
+          });
         });
       });
       describe('groupAsync', () => {

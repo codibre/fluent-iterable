@@ -1,12 +1,14 @@
 import { reduceAndMapAsync } from './reduce-and-map-async';
-import { groupRecipe } from '../recipes';
+import { groupRecipe, orderedGroupRecipe } from '../recipes';
 import { iterateAsync } from '../utils';
-import { map } from '../sync';
 import { resolverAsync } from 'augmentative-iterable';
+import { partitionAsync } from './partition-async';
+import { mapAsync } from './map-async';
+import { forEachAsync } from './for-each-async';
 
 export const groupAsync = groupRecipe(
   reduceAndMapAsync,
   resolverAsync,
-  map,
   iterateAsync,
+  orderedGroupRecipe(mapAsync, resolverAsync, partitionAsync, forEachAsync),
 );

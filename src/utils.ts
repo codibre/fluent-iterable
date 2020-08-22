@@ -4,6 +4,7 @@ import fluent from './fluent';
 import { AsyncPredicate, FluentGroup } from './types';
 import { Group, Predicate, AverageStepper } from './types-base';
 import { AnyIterable } from 'augmentative-iterable';
+import { orderAssured } from './types-internal';
 
 /**
  * Returns exactly the informed parameter
@@ -212,7 +213,26 @@ function getAverageStepper() {
   return wrapper;
 }
 
+/**
+ * Returns a new instance of a function with a order assuring mark.
+ * Fluent Iterable will treat order Assuring marked function as if
+ * they're guaranteed to return ordered result in regard some iterable
+ * where they're applied. The actual order, though, is of responsibility
+ * of the code using this package.
+ *
+ * This is useful to have access to faster versions of some algorithms, but
+ * the output may not match expectation if the resulting order is not actually right.
+ *
+ * All operations order assuring ready will have this specified in their documentation
+ * @param f the function to assure order
+ */
+function assureOrder<F extends Function>(f: F): F {
+  (f as any)[orderAssured] = true;
+  return f;
+}
+
 export {
+  assureOrder,
   constant,
   empty,
   emptyAsync,

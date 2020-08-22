@@ -17,6 +17,7 @@ import {
   ErrorCallback,
   Group,
   FluentEmitter,
+  Equality,
 } from './types-base';
 
 /**
@@ -177,14 +178,13 @@ interface FluentIterable<T> extends Iterable<T>, FluentIterableEmitter<T> {
    */
   filterAsync(predicate: AsyncPredicate<T>): FluentAsyncIterable<T>;
 
-  /**
+  /*
    * Groups the elements of the iterable into partitions of a specified size.<br>
-   *   Note: the last partition size can be smaller than the specified size.<br>
-   *   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).partition(3)` yields an iterable of *anchor*, *almond* and *bound* and an iterable of *alpine*.
-   * @param size The expected size of the partitions. Has to be larger than zero.
+   *   Note: the last partition size can be smaller than the specified size.
+   * @param criteria The expected size of the partitions or a equality to determine of two consecutive items must be in the same partition.
    * @returns The [[FluentIterable]] of partitions.
    */
-  partition(size: number): FluentIterable<FluentIterable<T>>;
+  partition(size: number | Equality<T>): FluentIterable<FluentIterable<T>>;
 
   /**
    * Appends a value to the end of the iterable.<br>
@@ -794,10 +794,12 @@ interface FluentAsyncIterable<T>
   /**
    * Groups the elements of the iterable into partitions of a specified size.<br>
    *   Note: the last partition size can be smaller than the specified size.
-   * @param size The expected size of the partitions. Has to be larger than zero.
+   * @param criteria The expected size of the partitions or a equality to determine of two consecutive items must be in the same partition.
    * @returns The [[FluentAsyncIterable]] of partitions.
    */
-  partition(size: number): FluentAsyncIterable<FluentAsyncIterable<T>>;
+  partition(
+    criteria: number | Equality<T>,
+  ): FluentAsyncIterable<FluentAsyncIterable<T>>;
 
   /**
    * Appends a value to the end of the iterable.

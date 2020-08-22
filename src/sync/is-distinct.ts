@@ -1,12 +1,12 @@
 import { resolver } from 'augmentative-iterable';
 import { distinctRecipe, orderedDistinctRecipe } from '../recipes';
-import { filter } from './filter';
+import { all } from './all';
 import { hasLessOrExactly } from './has-less-or-exactly';
 import { map } from './map';
 import { partition } from './partition';
 
-export const distinct = distinctRecipe(
-  filter,
+export const isDistinct = distinctRecipe(
+  all,
   resolver,
-  orderedDistinctRecipe(map, resolver, partition, filter, hasLessOrExactly),
+  orderedDistinctRecipe(map, resolver, partition, all, hasLessOrExactly),
 );

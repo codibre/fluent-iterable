@@ -15,6 +15,8 @@ export * from './join-recipe';
 export * from './last-recipe';
 export * from './max-recipe';
 export * from './min-recipe';
+export * from './ordered-distinct-recipe';
+export * from './ordered-group-recipe';
 export * from './prepend-recipe';
 export * from './reduce-and-map-recipe';
 export * from './reduce-recipe';
