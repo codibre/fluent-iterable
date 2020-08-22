@@ -41,6 +41,7 @@ import {
   takeWhileAsync,
   filterAsync,
   mapAsync,
+  isDistinctAsync,
 } from '../async';
 import {
   combineEmitter,
@@ -110,4 +111,5 @@ export const asyncResolvingFuncs = {
   hasMoreOrExactly: hasMoreOrExactlyAsync,
   hasMoreThan: hasMoreThanAsync,
   waitAll: waitAllAsync,
+  isDistinct: isDistinctAsync,
 };

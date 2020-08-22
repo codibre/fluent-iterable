@@ -1,9 +1,20 @@
-import { assureOrder, identity } from '../utils';
+import { identity } from '../utils';
 import { AnyIterable } from 'augmentative-iterable';
 import { AnyMapper, isOrderAssured, ResolverType } from '../types-internal';
 
-interface Checker {
-  (value: any): boolean;
+function inc(map: Map<any, number>, y: any) {
+  const result = (map.get(y) || 0) + 1;
+  map.set(y, result);
+
+  return result;
+}
+export function incPredicate<T>(
+  resolver: ResolverType,
+  mapper: AnyMapper<T>,
+  maxOcurrences: number,
+): any {
+  const map = new Map<any, number>();
+  return (x: T) => resolver(mapper(x), (y) => inc(map, y) <= maxOcurrences);
 }
 
 export function distinctRecipe(
@@ -13,7 +24,8 @@ export function distinctRecipe(
 ) {
   return function distinct<T, R>(
     this: AnyIterable<T>,
-    mapper: AnyMapper<T> = identity,
+    mapper: AnyMapper<T> | number = identity,
+    maxOcurrences = 1,
   ) {
     if (typeof mapper === 'number') {
       maxOcurrences = mapper;
