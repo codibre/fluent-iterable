@@ -1,29 +1,36 @@
 import { identity } from '../utils';
 import { AnyIterable } from 'augmentative-iterable';
-import { AnyMapper } from '../types-internal';
+import { AnyMapper, ResolverType } from '../types-internal';
 
-interface Checker {
-  (value: any): boolean;
+function inc(map: Map<any, number>, y: any) {
+  const result = (map.get(y) || 0) + 1;
+  map.set(y, result);
+
+  return result;
+}
+export function incPredicate<T>(
+  resolver: ResolverType,
+  mapper: AnyMapper<T>,
+  map: Map<any, number>,
+  maxOcurrences: number,
+): any {
+  return (x: T) => resolver(mapper(x), (y) => inc(map, y) <= maxOcurrences);
 }
 
-export function distinctRecipe(
-  filter: Function,
-  checkUnicity: <T>(value: T, mapper: AnyMapper<T>, checker: Checker) => any,
-) {
+export function distinctRecipe(filterOrAll: Function, resolver: ResolverType) {
   return function distinct<T, R>(
     this: AnyIterable<T>,
-    mapper: AnyMapper<T> = identity,
+    mapper: AnyMapper<T> | number = identity,
+    maxOcurrences = 1,
   ) {
-    const set = new Set<R>();
-    return filter.call(this, (value: T) =>
-      checkUnicity(value, mapper, (mappedValue: R) => {
-        if (set.has(mappedValue)) {
-          return false;
-        }
-        set.add(mappedValue);
-
-        return true;
-      }),
+    if (typeof mapper === 'number') {
+      maxOcurrences = mapper;
+      mapper = identity;
+    }
+    const map = new Map<R, number>();
+    return filterOrAll.call(
+      this,
+      incPredicate(resolver, mapper, map, maxOcurrences),
     );
   };
 }

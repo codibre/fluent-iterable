@@ -42,6 +42,7 @@ import {
   map,
   filter,
   takeWhile,
+  isDistinct,
 } from '../sync';
 import {
   allAsync,
@@ -69,6 +70,7 @@ import {
   mapAsync,
   filterAsync,
   takeWhileAsync,
+  isDistinctAsync,
 } from '../async';
 import { combineEmitter, concatEmitter } from '../emitter';
 
@@ -111,6 +113,7 @@ export const special = {
   group,
   groupAsync,
 };
+
 export const resolvingFuncs = {
   count,
   countAsync,
@@ -151,4 +154,6 @@ export const resolvingFuncs = {
   hasMoreOrExactly,
   hasMoreThan,
   waitAll,
+  isDistinct,
+  isDistinctAsync,
 };

@@ -1,5 +1,5 @@
 import { resolver } from 'augmentative-iterable';
 import { distinctRecipe } from '../recipes';
-import { filter } from './filter';
+import { all } from './all';
 
-export const distinct = distinctRecipe(filter, resolver);
+export const isDistinct = distinctRecipe(all, resolver);

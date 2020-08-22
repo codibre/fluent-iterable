@@ -19,6 +19,7 @@ export * from './has-less-or-exactly-async';
 export * from './has-less-than-async';
 export * from './has-more-or-exactly-async';
 export * from './has-more-than-async';
+export * from './is-distinct-async';
 export * from './join-async';
 export * from './last-async';
 export * from './map-async';
