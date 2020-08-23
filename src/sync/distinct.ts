@@ -1,5 +1,4 @@
-import { resolver } from 'augmentative-iterable';
-import { resolveAndMapIngredients } from '../async/ingredients-async';
+import { resolveAndMapIngredients } from './ingredients';
 import { distinctRecipe } from '../recipes';
 import { all } from './all';
 import { filter } from './filter';

@@ -2,12 +2,12 @@ import { distinctRecipe } from '../recipes';
 import { allAsync } from './all-async';
 import { filterAsync } from './filter-async';
 import { hasLessOrExactlyAsync } from './has-less-or-exactly-async';
-import { resolveAndMapIngredients } from './ingredients-async';
+import { resolveAndMapIngredientsAsync } from './ingredients-async';
 import { partitionAsync } from './partition-async';
 
 function distinctAsyncRecipe(filterOrAll: Function) {
   return distinctRecipe({
-    ...resolveAndMapIngredients,
+    ...resolveAndMapIngredientsAsync,
     partition: partitionAsync,
     filterOrAll,
     hasLessOrExactly: hasLessOrExactlyAsync,
