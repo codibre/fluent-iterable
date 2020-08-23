@@ -1,7 +1,7 @@
 import { identity, getAverageStepper } from '../utils';
-import { ResolverType } from '../types-internal';
+import { BasicIngredients } from './ingredients';
 
-export function avgRecipe(forEach: Function, resolver: ResolverType) {
+export function avgRecipe({ forEach, resolver }: BasicIngredients) {
   return function <T>(this: Iterable<T>, mapper: any = identity) {
     const stepper = getAverageStepper();
     return resolver(

@@ -1,5 +1,4 @@
 import { avgRecipe } from '../recipes';
-import { resolverAsync } from 'augmentative-iterable';
-import { forEachAsync } from './for-each-async';
+import { basicAsync } from './basic-ingredients-async';
 
-export const avgAsync = avgRecipe(forEachAsync, resolverAsync);
+export const avgAsync = avgRecipe(basicAsync);

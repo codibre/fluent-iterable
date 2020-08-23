@@ -1,6 +1,6 @@
 import { AnyIterable, Mapper } from 'augmentative-iterable';
 import { identity } from '../utils';
-import { CombineFuncs } from './ingredients';
+import { CombineIngredients } from './ingredients';
 
 function getMapItems<U>(m: Map<unknown, U[]>, keyB: (u: U) => unknown) {
   return (u: U) => {
@@ -47,7 +47,7 @@ function getInnerJoin({
   forEach,
   filter,
   map,
-}: CombineFuncs) {
+}: CombineIngredients) {
   return function <T, U>(
     itThis: AnyIterable<T>,
     iterable: AnyIterable<U>,
@@ -63,7 +63,7 @@ function getInnerJoin({
   };
 }
 
-export function combineRecipe(combineFuncs: CombineFuncs) {
+export function combineRecipe(combineFuncs: CombineIngredients) {
   const { flatten, map } = combineFuncs;
   const innerJoin = getInnerJoin(combineFuncs);
   const combineNN = getCombineNN(map, flatten);

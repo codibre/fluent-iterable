@@ -3,12 +3,6 @@ import { groupRecipe, orderedGroupRecipe } from '../recipes';
 import { iterate } from '../utils';
 import { resolver } from 'augmentative-iterable';
 import { partition } from './partition';
-import { map } from './map';
-import { forEach } from './for-each';
+import { basicReduce } from './basic-reduce-ingredients';
 
-export const group = groupRecipe(
-  reduceAndMap,
-  resolver,
-  iterate,
-  orderedGroupRecipe(map, resolver, partition, forEach),
-);
+export const group = groupRecipe({ ...basicReduce, partition });

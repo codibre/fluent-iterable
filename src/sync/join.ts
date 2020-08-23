@@ -1,5 +1,4 @@
-import { reduce } from './reduce';
 import { joinRecipe } from '../recipes';
-import { resolver } from 'augmentative-iterable';
+import { basicReduce } from './basic-reduce-ingredients';
 
-export const join = joinRecipe(reduce, resolver);
+export const join = joinRecipe(basicReduce);

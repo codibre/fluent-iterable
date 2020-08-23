@@ -1,8 +1,4 @@
-import { forEachAsync } from './for-each-async';
 import { reduceAndMapRecipe } from '../recipes';
-import { resolverAsync } from 'augmentative-iterable';
+import { basicAsync } from './basic-ingredients-async';
 
-export const reduceAndMapAsync = reduceAndMapRecipe(
-  forEachAsync,
-  resolverAsync,
-);
+export const reduceAndMapAsync = reduceAndMapRecipe(basicAsync);

@@ -1,5 +1,4 @@
-import { forEach } from './for-each';
 import { reduceAndMapRecipe } from '../recipes';
-import { resolver } from 'augmentative-iterable';
+import { basic } from './basic-ingredients';
 
-export const reduceAndMap = reduceAndMapRecipe(forEach, resolver);
+export const reduceAndMap = reduceAndMapRecipe(basic);

@@ -1,8 +1,4 @@
 import { lastRecipe } from '../recipes';
-import { reduceAsync } from './reduce-async';
+import { basicReduceAsync } from './basic-reduce-ingredients-async';
 
-export const lastAsync = lastRecipe(
-  reduceAsync,
-  (predicate) => async (current, next) =>
-    (await predicate(next)) ? next : current,
-);
+export const lastAsync = lastRecipe(basicReduceAsync);

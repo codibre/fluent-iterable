@@ -2,13 +2,12 @@ import { ResolverType, Iterate, isOrderAssured } from '../types-internal';
 import { AnyMapper } from '../types-internal';
 import { AnyIterable } from 'augmentative-iterable';
 import { map } from '../sync/map';
+import { orderedGroupRecipe } from './ordered-group-recipe';
+import { GroupIngredients } from './ingredients';
 
-export function groupRecipe(
-  reduceAndMap: Function,
-  resolver: ResolverType,
-  iterate: Iterate,
-  orderedGroup: Function,
-) {
+export function groupRecipe(ingredients: GroupIngredients) {
+  const orderedGroup = orderedGroupRecipe(ingredients);
+  const { reduceAndMap, resolver, iterate } = ingredients;
   return function <T, R>(this: AnyIterable<T>, mapper: AnyMapper<T>) {
     if (isOrderAssured(mapper)) {
       return orderedGroup.call(this, mapper);

@@ -38,5 +38,5 @@ export * from './take-while-async';
 export * from './to-array-async';
 export * from './to-object-async';
 export * from './top-async';
-export * from './wait-all';
+export * from './wait-all-async';
 export * from './with-index-async';

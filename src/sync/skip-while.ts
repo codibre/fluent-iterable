@@ -1,5 +1,4 @@
 import { skipWhileRecipe } from '../recipes';
-import { filter } from './filter';
-import { resolver } from 'augmentative-iterable';
+import { basic } from './basic-ingredients';
 
-export const skipWhile = skipWhileRecipe(filter, resolver);
+export const skipWhile = skipWhileRecipe(basic);

@@ -1,6 +1,4 @@
 import { sortRecipe } from '../recipes';
-import { iterateAsync } from '../utils';
-import { toArrayAsync } from './to-array-async';
-import { resolverAsync } from 'augmentative-iterable';
+import { basicAsync } from './basic-ingredients-async';
 
-export const sortAsync = sortRecipe(toArrayAsync, resolverAsync, iterateAsync);
+export const sortAsync = sortRecipe(basicAsync);

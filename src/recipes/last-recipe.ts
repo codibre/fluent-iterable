@@ -1,14 +1,14 @@
 import { truth } from '../utils';
 import { AnyIterable } from 'augmentative-iterable';
+import { BasicReduceIngredients } from './ingredients';
 
-export function lastRecipe(
-  reduce: Function,
-  getTransform: <T>(
-    predicate: Function,
-  ) => (current: T | undefined, next: T) => any,
-) {
+export function lastRecipe({ reduce, resolver }: BasicReduceIngredients) {
   return function <T>(this: AnyIterable<T>, predicate: any = truth) {
-    const reduction = getTransform(predicate);
-    return reduce.call(this, reduction, undefined as T | undefined);
+    return reduce.call(
+      this,
+      (current: T, t: T) =>
+        resolver(predicate(t), (next) => (next ? t : current)),
+      undefined as T | undefined,
+    );
   };
 }

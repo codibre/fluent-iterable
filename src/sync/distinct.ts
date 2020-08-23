@@ -1,4 +1,4 @@
-import { resolveAndMapIngredients } from './ingredients';
+import { basic } from './basic-ingredients';
 import { distinctRecipe } from '../recipes';
 import { all } from './all';
 import { filter } from './filter';
@@ -7,7 +7,7 @@ import { partition } from './partition';
 
 function distinctSyncRecipe(filterOrAll: Function) {
   return distinctRecipe({
-    ...resolveAndMapIngredients,
+    ...basic,
     partition,
     filterOrAll,
     hasLessOrExactly,

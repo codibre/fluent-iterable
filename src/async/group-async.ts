@@ -1,14 +1,8 @@
-import { reduceAndMapAsync } from './reduce-and-map-async';
-import { groupRecipe, orderedGroupRecipe } from '../recipes';
-import { iterateAsync } from '../utils';
-import { resolverAsync } from 'augmentative-iterable';
+import { groupRecipe } from '../recipes';
 import { partitionAsync } from './partition-async';
-import { mapAsync } from './map-async';
-import { forEachAsync } from './for-each-async';
+import { basicReduceAsync } from './basic-reduce-ingredients-async';
 
-export const groupAsync = groupRecipe(
-  reduceAndMapAsync,
-  resolverAsync,
-  iterateAsync,
-  orderedGroupRecipe(mapAsync, resolverAsync, partitionAsync, forEachAsync),
-);
+export const groupAsync = groupRecipe({
+  ...basicReduceAsync,
+  partition: partitionAsync,
+});
