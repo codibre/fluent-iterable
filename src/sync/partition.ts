@@ -18,9 +18,7 @@ function* iterate<T>(arr: Iterable<T>, size: number | Equality<T>) {
       }
     })();
   }
-  if (iterator.return) {
-    iterator.return();
-  }
+  iterator.return?.call(iterator);
 }
 
 export const partition = partitionRecipe(iterate);
