@@ -1,14 +1,7 @@
 import { AnyMapper, ResolverType } from '../types-internal';
 import { orderedOperationRecipe } from './ordered-operation-recipe';
 import { AnyIterable } from 'augmentative-iterable';
-
-interface OrderedDistinctIngredients {
-  map: Function;
-  resolver: ResolverType;
-  partition: Function;
-  filterOrAll: Function;
-  hasLessOrExactly: Function;
-}
+import { OrderedDistinctIngredients } from './ingredients';
 
 export function orderedDistinctRecipe({
   map,
