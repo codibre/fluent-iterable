@@ -11,7 +11,7 @@ export interface CombineFuncs extends ResolveAndMapIngredients {
   filter: Function;
 }
 
-export interface OrderedDistinctIngredients extends ResolveAndMapIngredients {
+export interface DistinctIngredients extends ResolveAndMapIngredients {
   partition: Function;
   filterOrAll: Function;
   hasLessOrExactly: Function;
