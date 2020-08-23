@@ -1,4 +1,4 @@
-import { fluentAsync, interval, fluent, assureOrder } from '../src';
+import { fluentAsync, interval, fluent, o } from '../src';
 import expect, { flatMap } from './tools';
 import { ObjectReadableMock } from 'stream-mock';
 import { Person, data, Gender, picker } from './fluent.spec';
@@ -411,7 +411,7 @@ describe('fluent async iterable', () => {
           { k: 1, v: 2 },
         ];
         const groups = await fluentAsync(items)
-          .group(assureOrder((x) => x.k))
+          .group(o((x) => x.k))
           .toArray();
         expect(groups.length).to.eql(3);
         expect(groups.map((grp) => grp.key)).to.have.members([1, 2, 1]);
