@@ -21,7 +21,7 @@ async function* iterate<T>(
       }
     })();
   }
-  iterator.return?.call(iterator);
+  await iterator.return?.call(iterator);
 }
 
 export const partitionAsync = partitionRecipe(iterate);
