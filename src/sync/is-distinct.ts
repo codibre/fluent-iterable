@@ -8,5 +8,11 @@ import { partition } from './partition';
 export const isDistinct = distinctRecipe(
   all,
   resolver,
-  orderedDistinctRecipe(map, resolver, partition, all, hasLessOrExactly),
+  orderedDistinctRecipe({
+    map,
+    resolver,
+    partition,
+    filterOrAll: all,
+    hasLessOrExactly,
+  }),
 );

@@ -2,13 +2,21 @@ import { AnyMapper, ResolverType } from '../types-internal';
 import { orderedOperationRecipe } from './ordered-operation-recipe';
 import { AnyIterable } from 'augmentative-iterable';
 
-export function orderedDistinctRecipe(
-  map: Function,
-  resolver: ResolverType,
-  partition: Function,
-  filterOrAll: Function,
-  hasLessOrExactly: Function,
-) {
+interface OrderedDistinctIngredients {
+  map: Function;
+  resolver: ResolverType;
+  partition: Function;
+  filterOrAll: Function;
+  hasLessOrExactly: Function;
+}
+
+export function orderedDistinctRecipe({
+  map,
+  resolver,
+  partition,
+  filterOrAll,
+  hasLessOrExactly,
+}: OrderedDistinctIngredients) {
   const ordered = orderedOperationRecipe(map, resolver, partition);
   return function distinct<T>(
     this: AnyIterable<T>,

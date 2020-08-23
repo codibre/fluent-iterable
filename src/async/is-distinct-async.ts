@@ -8,11 +8,11 @@ import { partitionAsync } from './partition-async';
 export const isDistinctAsync = distinctRecipe(
   allAsync,
   resolverAsync,
-  orderedDistinctRecipe(
-    mapAsync,
-    resolverAsync,
-    partitionAsync,
-    allAsync,
-    hasLessOrExactlyAsync,
-  ),
+  orderedDistinctRecipe({
+    map: mapAsync,
+    resolver: resolverAsync,
+    partition: partitionAsync,
+    filterOrAll: allAsync,
+    hasLessOrExactly: hasLessOrExactlyAsync,
+  }),
 );
