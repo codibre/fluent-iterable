@@ -1,15 +1,13 @@
-import { resolverAsync } from 'augmentative-iterable';
 import { distinctRecipe } from '../recipes';
 import { allAsync } from './all-async';
 import { filterAsync } from './filter-async';
 import { hasLessOrExactlyAsync } from './has-less-or-exactly-async';
-import { mapAsync } from './map-async';
+import { resolveAndMapIngredients } from './ingredients-async';
 import { partitionAsync } from './partition-async';
 
 function distinctAsyncRecipe(filterOrAll: Function) {
   return distinctRecipe({
-    map: mapAsync,
-    resolver: resolverAsync,
+    ...resolveAndMapIngredients,
     partition: partitionAsync,
     filterOrAll,
     hasLessOrExactly: hasLessOrExactlyAsync,

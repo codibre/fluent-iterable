@@ -1,14 +1,12 @@
 import { combineRecipe } from '../recipes/combine-recipe';
-import { mapAsync } from './map-async';
 import { flattenAsync } from './flatten-async';
-import { resolverAsync } from 'augmentative-iterable';
 import { forEachAsync } from './for-each-async';
 import { filterAsync } from './filter-async';
+import { resolveAndMapIngredients } from './ingredients-async';
 
 export const combineAsync = combineRecipe({
-  map: mapAsync,
+  ...resolveAndMapIngredients,
   flatten: flattenAsync,
-  resolver: resolverAsync,
   forEach: forEachAsync,
   filter: filterAsync,
 });
