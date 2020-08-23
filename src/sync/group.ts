@@ -1,7 +1,4 @@
-import { reduceAndMap } from './reduce-and-map';
-import { groupRecipe, orderedGroupRecipe } from '../recipes';
-import { iterate } from '../utils';
-import { resolver } from 'augmentative-iterable';
+import { groupRecipe } from '../recipes';
 import { partition } from './partition';
 import { basicReduce } from './basic-reduce-ingredients';
 
