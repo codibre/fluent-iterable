@@ -646,6 +646,14 @@ describe('fluent iterable', () => {
           expect(fluent(subject).count((x) => x.emails.length > 0)).to.equal(
             8,
           ));
+        it('not assuring order', () =>
+          expect(fluent([1, 2, 4, 5, 6]).count((x) => x % 2 === 0)).to.equal(
+            3,
+          ));
+        it('assuring order', () =>
+          expect(fluent([1, 2, 4, 5, 6]).count(o((x) => x % 2 === 0))).to.equal(
+            2,
+          ));
       });
       describe('countAsync', () => {
         it('empty', async () =>
@@ -917,6 +925,12 @@ describe('fluent iterable', () => {
         });
         it('should return the max value from an array of multiple non numeric elements', () =>
           expect(fluent(['a', 'b', 'c', 'd', 'e']).max()).to.equal('e'));
+        it('not assuring order', () => {
+          expect(fluent([1, 2, 3, 4, 3, 5]).max(identity)).to.be.eq(5);
+        });
+        it('assuring order', () => {
+          expect(fluent([1, 2, 3, 4, 3, 5]).max(o(identity))).to.be.eq(4);
+        });
       });
       describe('hasExactly', () => {
         it('false', () => expect(fluent([1, 2, 3]).hasExactly(2)).to.false);

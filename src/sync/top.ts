@@ -1,4 +1,4 @@
 import { topRecipe } from '../recipes';
-import { reduceAndMap } from './reduce-and-map';
+import { basicReduce } from './basic-reduce-ingredients';
 
-export const top = topRecipe(reduceAndMap);
+export const top = topRecipe(basicReduce);
