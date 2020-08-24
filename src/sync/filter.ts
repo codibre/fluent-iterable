@@ -1,4 +1,5 @@
-import { filterIterable } from 'augmentative-iterable';
-import { augmentIterableRecipe } from '../recipes';
+import { filterIterable, resolver } from 'augmentative-iterable';
+import { filterRecipe } from '../recipes/filter-recipe';
+import { takeWhile } from './take-while';
 
-export const filter = augmentIterableRecipe(filterIterable);
+export const filter = filterRecipe(filterIterable, takeWhile, resolver);

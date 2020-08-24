@@ -309,6 +309,20 @@ describe('fluent iterable', () => {
               .filter((p) => p.gender === Gender.Female)
               .toArray(),
           ).to.eql(picker(4, 7, 10)));
+        it('assuring order', () => {
+          const call = stub();
+          expect(
+            fluent([1, 2, 3, 4, 3])
+              .filter(
+                o((p) => {
+                  call();
+                  return 2 <= p && p <= 3;
+                }),
+              )
+              .toArray(),
+          ).to.eql([2, 3]);
+          expect(call).to.have.callCount(4);
+        });
       });
       describe('filterAsync', () => {
         it('with always false predicate', async () =>
