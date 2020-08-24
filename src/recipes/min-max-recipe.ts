@@ -1,10 +1,39 @@
 import { AnyIterable } from 'augmentative-iterable';
-import { isDescendingOrderAssured, isOrderAssured } from '../types-internal';
+import {
+  isDescendingOrderAssured,
+  isOrderAssured,
+  ResolverType,
+} from '../types-internal';
 import { assureOrder, identity } from '../utils';
 import { MinMaxIngredients } from './ingredients';
 
 type FunctionChecker = (f: Function, it: AnyIterable<any>) => boolean;
 type CheckAcceptance = (last: any, current: any) => boolean;
+
+interface MinMaxWrapper<T> {
+  lastMapped?: any;
+  firstItem: boolean;
+  lastItem?: T;
+}
+
+function getPredicate<T>(
+  resolver: ResolverType,
+  mapper: any,
+  wrapper: MinMaxWrapper<T>,
+  accept: CheckAcceptance,
+) {
+  return (c: T) =>
+    resolver(mapper(c), (mapped) => {
+      if (wrapper.firstItem || accept(wrapper.lastMapped, mapped)) {
+        wrapper.firstItem = false;
+        wrapper.lastMapped = mapped;
+        wrapper.lastItem = c;
+        return true;
+      }
+
+      return wrapper.lastMapped === mapped;
+    });
+}
 
 function minMaxRecipe(
   accept: CheckAcceptance,
@@ -13,20 +42,10 @@ function minMaxRecipe(
 ) {
   return function ({ filter, resolver, first, last }: MinMaxIngredients) {
     return function <T>(this: any, mapper: any = identity): any {
-      let lastMapped: any;
-      let firstItem = true;
-      let lastItem: T | undefined;
-      const predicate = (c: T) =>
-        resolver(mapper(c), (mapped) => {
-          if (firstItem || accept(lastMapped, mapped)) {
-            firstItem = false;
-            lastMapped = mapped;
-            lastItem = c;
-            return true;
-          }
-
-          return lastMapped === mapped;
-        });
+      const wrapper: MinMaxWrapper<T> = {
+        firstItem: true,
+      };
+      const predicate = getPredicate(resolver, mapper, wrapper, accept);
       let operation: any;
       if (lastChecker(mapper, this)) {
         operation = last.call(filter.call(this, assureOrder(predicate)));
@@ -36,7 +55,7 @@ function minMaxRecipe(
         operation = last.call(filter.call(this, predicate));
       }
 
-      return resolver(operation, () => lastItem);
+      return resolver(operation, () => wrapper.lastItem);
     };
   };
 }
