@@ -5,16 +5,14 @@ export const descendingOrderAssured = Symbol.for(
   'FluentIterableOrderAssuredDescending',
 );
 
-export function isOrderAssured(f: Function, it: AnyIterable<any>) {
-  return f.hasOwnProperty(orderAssured) || it.hasOwnProperty(orderAssured);
+function getIsAssured(symbol: symbol) {
+  return function (f: Function, it: AnyIterable<any>) {
+    return f.hasOwnProperty(symbol) || it.hasOwnProperty(symbol);
+  };
 }
 
-export function isDescendingOrderAssured(f: Function, it: AnyIterable<any>) {
-  return (
-    f.hasOwnProperty(descendingOrderAssured) ||
-    it.hasOwnProperty(descendingOrderAssured)
-  );
-}
+export const isOrderAssured = getIsAssured(orderAssured);
+export const isDescendingOrderAssured = getIsAssured(descendingOrderAssured);
 
 export function isAnyOrderAssured(f: Function, it: AnyIterable<any>) {
   return isOrderAssured(f, it) || isDescendingOrderAssured(f, it);
