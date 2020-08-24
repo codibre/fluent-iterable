@@ -227,8 +227,9 @@ function getAverageStepper() {
  * @param f the function to assure order
  */
 function assureOrder<F extends Function>(f: F): F {
-  (f as any)[orderAssured] = true;
-  return f;
+  const result = (...args: any[]) => f(...args);
+  (result as any)[orderAssured] = true;
+  return result as any;
 }
 
 export {
