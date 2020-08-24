@@ -5,6 +5,7 @@ import {
   AsyncMapper,
 } from 'augmentative-iterable';
 import { EventEmitter } from 'events';
+import { OrderAssurable } from './assure-order-types';
 import {
   FluentEmitOptions,
   Indexed,
@@ -92,7 +93,10 @@ interface FluentIterableEmitter<T> {
  *   The capabilities introduced are defined as a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) and thus they support *method chaining*.
  * @typeparam T The type of the items in the iterable.
  */
-interface FluentIterable<T> extends Iterable<T>, FluentIterableEmitter<T> {
+interface FluentIterable<T>
+  extends Iterable<T>,
+    OrderAssurable<FluentAsyncIterable<T>>,
+    FluentIterableEmitter<T> {
   /**
    * Maps all elements of the iterable to an instance of [[Indexed]], an index-value pair constructed of the original element in the iterable and it's index (starting from 0 for the first element in the iterable).<br>
    *   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).withIndex()` yields `{ idx: 0, value: 'anchor' }`, `{ idx: 1, value: 'almond' }` and so on.
@@ -802,6 +806,7 @@ interface FluentIterable<T> extends Iterable<T>, FluentIterableEmitter<T> {
  */
 interface FluentAsyncIterable<T>
   extends AsyncIterable<T>,
+    OrderAssurable<FluentAsyncIterable<T>>,
     FluentIterableEmitter<T> {
   /**
    * Maps all elements of the iterable to an instance of [[Indexed]], an index-value pair constructed of the original element in the iterable and it's index (starting from 0 for the first element in the iterable).

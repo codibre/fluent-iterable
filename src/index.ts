@@ -8,6 +8,7 @@ import {
   FluentAsyncIterable,
   FluentGroup,
 } from './types';
+import { OrderAssurable } from './assure-order-types';
 import {
   Predicate,
   Reducer,
@@ -32,6 +33,7 @@ export * from './transform-obj-values';
 export {
   o,
   od,
+  OrderAssurable,
   FluentIterable,
   FluentAsyncIterable,
   Predicate,

@@ -50,8 +50,10 @@ import {
   mergeEmitterCatching,
 } from '../emitter';
 import { merge, mergeCatching } from '../async-base';
+import * as common from '../common';
 
 export const asyncIterableFuncs = {
+  ...common,
   withIndex: withIndexAsync,
   takeWhile: takeWhileAsync,
   takeWhileAsync,

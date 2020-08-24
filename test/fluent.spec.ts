@@ -1025,7 +1025,7 @@ describe('fluent iterable', () => {
           expect(fluent([1, 2, 3, 4, 3, 5]).max(identity)).to.be.eq(5);
         });
         it('assuring order', () => {
-          expect(fluent([1, 2, 3, 4, 3, 5]).max(o(identity))).to.be.eq(4);
+          expect(o(fluent([1, 2, 3, 4, 3, 5])).max(identity)).to.be.eq(4);
         });
         it('assuring descending order', () => {
           expect(fluent([1, 2, 3, 4, 3, 5]).max(od(identity))).to.be.eq(1);

@@ -56,7 +56,7 @@ export function groupRecipe(ingredients: GroupIngredients) {
   const orderedGroup = orderedGroupRecipe(ingredients);
   const { reduceAndMap, resolver, iterate } = ingredients;
   return function <T, R>(this: AnyIterable<T>, mapper: AnyMapper<T>) {
-    if (isAnyOrderAssured(mapper)) {
+    if (isAnyOrderAssured(mapper, this)) {
       return orderedGroup.call(this, mapper);
     } else {
       const reduced = reduceGroup(this, reduceAndMap, resolver, mapper);

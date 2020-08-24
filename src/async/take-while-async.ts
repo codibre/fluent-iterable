@@ -1,4 +1,4 @@
 import { takeWhileAsyncIterable } from 'augmentative-iterable';
-import { augmentIterableRecipe } from '../recipes';
+import { takeWhileRecipe } from '../recipes';
 
-export const takeWhileAsync = augmentIterableRecipe(takeWhileAsyncIterable);
+export const takeWhileAsync = takeWhileRecipe(takeWhileAsyncIterable);

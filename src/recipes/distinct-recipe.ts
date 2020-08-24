@@ -57,7 +57,7 @@ export function distinctRecipe(ingredients: DistinctIngredients) {
       maxOcurrences = mapper;
       mapper = identity;
     }
-    return isAnyOrderAssured(mapper)
+    return isAnyOrderAssured(mapper, this)
       ? ordered.call(this, mapper, maxOcurrences)
       : filterOrAll.call(this, incPredicate(resolver, mapper, maxOcurrences));
   };

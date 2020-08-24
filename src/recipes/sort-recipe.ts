@@ -1,5 +1,4 @@
 import { Comparer } from '../types-base';
-import { ResolverType, Iterate } from '../types-internal';
 import { BasicIngredients } from './ingredients';
 
 export function sortRecipe({ toArray, resolver, iterate }: BasicIngredients) {

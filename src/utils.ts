@@ -1,7 +1,12 @@
 /* eslint-disable guard-for-in */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import fluent from './fluent';
-import { AsyncPredicate, FluentGroup } from './types';
+import {
+  AsyncPredicate,
+  FluentAsyncIterable,
+  FluentGroup,
+  FluentIterable,
+} from './types';
 import { Group, Predicate, AverageStepper } from './types-base';
 import { AnyIterable } from 'augmentative-iterable';
 import { descendingOrderAssured, orderAssured } from './types-internal';
@@ -212,6 +217,13 @@ function getAverageStepper() {
 
   return wrapper;
 }
+function getItemToAssure<
+  F extends Function | FluentIterable<any> | FluentAsyncIterable<any>
+>(f: F): any {
+  return typeof f === 'function'
+    ? (...args: any[]) => (f as Function)(...args)
+    : f;
+}
 
 /**
  * Returns a new instance of a function with a order assuring mark.
@@ -225,11 +237,14 @@ function getAverageStepper() {
  *
  * @param f the function to assure order
  */
-function assureOrder<F extends Function>(f: F): F {
-  const result = (...args: any[]) => f(...args);
-  (result as any)[orderAssured] = true;
-  return result as any;
+function assureOrder<
+  F extends Function | FluentIterable<any> | FluentAsyncIterable<any>
+>(f: F): F {
+  const result = getItemToAssure(f);
+  result[orderAssured] = true;
+  return result;
 }
+
 /**
  * Returns a new instance of a function with a descending order assuring mark.
  * Fluent Iterable will treat descending order assuring marked functions as if
@@ -242,10 +257,12 @@ function assureOrder<F extends Function>(f: F): F {
  *
  * @param f the function to assure order
  */
-function assureOrderDescending<F extends Function>(f: F): F {
-  const result = (...args: any[]) => f(...args);
-  (result as any)[descendingOrderAssured] = true;
-  return result as any;
+function assureOrderDescending<
+  F extends Function | FluentIterable<any> | FluentAsyncIterable<any>
+>(f: F): F {
+  const result = getItemToAssure(f);
+  result[descendingOrderAssured] = true;
+  return result;
 }
 
 export {

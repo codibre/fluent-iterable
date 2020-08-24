@@ -1,4 +1,4 @@
 import { takeWhileIterable } from 'augmentative-iterable';
-import { augmentIterableRecipe } from '../recipes';
+import { takeWhileRecipe } from '../recipes';
 
-export const takeWhile = augmentIterableRecipe(takeWhileIterable);
+export const takeWhile = takeWhileRecipe(takeWhileIterable);

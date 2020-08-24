@@ -23,6 +23,7 @@ export * from './skip-while-recipe';
 export * from './sort-recipe';
 export * from './sum-recipe';
 export * from './take-recipe';
+export * from './take-while-recipe';
 export * from './to-object-recipe';
 export * from './top-recipe';
 export * from './with-index-recipe';

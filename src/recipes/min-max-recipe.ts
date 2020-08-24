@@ -1,8 +1,9 @@
+import { AnyIterable } from 'augmentative-iterable';
 import { isDescendingOrderAssured, isOrderAssured } from '../types-internal';
 import { assureOrder, identity } from '../utils';
 import { MinMaxIngredients } from './ingredients';
 
-type FunctionChecker = (f: Function) => boolean;
+type FunctionChecker = (f: Function, it: AnyIterable<any>) => boolean;
 type CheckAcceptance = (last: any, current: any) => boolean;
 
 function minMaxRecipe(
@@ -27,9 +28,9 @@ function minMaxRecipe(
         return lastMapped === mapped;
       });
     let operation: any;
-    if (lastChecker(mapper)) {
+    if (lastChecker(mapper, this)) {
       operation = last.call(filter.call(this, assureOrder(predicate)));
-    } else if (firstChecker(mapper)) {
+    } else if (firstChecker(mapper, this)) {
       operation = first.call(this, predicate);
     } else {
       operation = last.call(filter.call(this, predicate));

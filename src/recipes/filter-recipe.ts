@@ -2,7 +2,7 @@ import { AnyIterable } from 'augmentative-iterable';
 import { AsyncAction } from '../types-base';
 import {
   isAnyOrderAssured,
-  isOrderAssured,
+  keepOrderAssuring,
   ResolverType,
 } from '../types-internal';
 import { augmentIterableRecipe } from './augment-iterable-recipe';
@@ -13,12 +13,13 @@ export function filterRecipe(
   resolver: ResolverType,
 ) {
   const baseFilter = augmentIterableRecipe(filterIterable);
+  const takeWhile = augmentIterableRecipe(takeWhileIterable);
 
   return function <T>(this: AnyIterable<T>, predicate: AsyncAction<any>) {
-    if (isAnyOrderAssured(predicate)) {
+    if (isAnyOrderAssured(predicate, this)) {
       let alreadyTrue = false;
       let lastResult = false;
-      const takeWhilePredicate = (t: T) =>
+      const takeWhilePredicate = (t: any) =>
         resolver(predicate(t), (result) => {
           alreadyTrue = alreadyTrue || result;
           lastResult = result;
@@ -26,9 +27,9 @@ export function filterRecipe(
           return !alreadyTrue || lastResult;
         });
       const action = () => lastResult;
-      return baseFilter.call(
-        takeWhileIterable.call(this, takeWhilePredicate),
-        action,
+      return keepOrderAssuring(
+        baseFilter.call(takeWhile.call(this, takeWhilePredicate), action),
+        this,
       );
     }
 
