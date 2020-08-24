@@ -533,10 +533,10 @@ describe('fluent async iterable', () => {
         ).to.be.equal(1));
       it('with predicate', async () =>
         expect(
-          await fluentAsync(new ObjectReadableMock([3, 1, 2, 6])).last(
+          await fluentAsync(new ObjectReadableMock([3, 1, 2, 6, 3, 8])).last(
             (x) => x % 2 === 0,
           ),
-        ).to.be.equal(6));
+        ).to.be.equal(8));
       it('assuring order', async () =>
         expect(
           await fluentAsync([3, 1, 2, 6, 3, 8]).last(o((x) => x % 2 === 0)),
