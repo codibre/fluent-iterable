@@ -690,6 +690,10 @@ describe('fluent iterable', () => {
         it('not empty', () => expect(fluent([3, 1]).last()).to.be.equal(1));
         it('with predicate', () =>
           expect(fluent([3, 1, 2, 6]).last((x) => x % 2 === 0)).to.be.equal(6));
+        it('assuring order', () =>
+          expect(
+            fluent([3, 1, 2, 6, 3, 8]).last(o((x) => x % 2 === 0)),
+          ).to.be.equal(6));
       });
 
       describe('lastAsync', () => {

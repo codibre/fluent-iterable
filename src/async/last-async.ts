@@ -1,4 +1,4 @@
 import { lastRecipe } from '../recipes';
-import { basicReduceAsync } from './basic-reduce-ingredients-async';
+import { basicAsync } from './basic-ingredients-async';
 
-export const lastAsync = lastRecipe(basicReduceAsync);
+export const lastAsync = lastRecipe(basicAsync);

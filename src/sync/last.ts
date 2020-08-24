@@ -1,4 +1,4 @@
 import { lastRecipe } from '../recipes';
-import { basicReduce } from './basic-reduce-ingredients';
+import { basic } from './basic-ingredients';
 
-export const last = lastRecipe(basicReduce);
+export const last = lastRecipe(basic);

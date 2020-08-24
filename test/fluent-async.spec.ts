@@ -537,6 +537,10 @@ describe('fluent async iterable', () => {
             (x) => x % 2 === 0,
           ),
         ).to.be.equal(6));
+      it('assuring order', async () =>
+        expect(
+          await fluentAsync([3, 1, 2, 6, 3, 8]).last(o((x) => x % 2 === 0)),
+        ).to.be.equal(6));
     });
     describe('reduceAndMap', () => {
       it('empty', async () =>
