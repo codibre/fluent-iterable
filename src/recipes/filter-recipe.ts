@@ -14,14 +14,14 @@ export function filterRecipe(
     if (isOrderAssured(predicate)) {
       let alreadyTrue = false;
       let lastResult = false;
-      const takeWhilePredicate = () => !alreadyTrue || lastResult;
-      const action = (t: any) =>
+      const takeWhilePredicate = (t: T) =>
         resolver(predicate(t), (result) => {
           alreadyTrue = alreadyTrue || result;
           lastResult = result;
 
-          return lastResult;
+          return !alreadyTrue || lastResult;
         });
+      const action = () => lastResult;
       return baseFilter.call(
         takeWhileIterable.call(this, takeWhilePredicate),
         action,
