@@ -1,6 +1,10 @@
 import { AnyIterable } from 'augmentative-iterable';
 import { AsyncAction } from '../types-base';
-import { isOrderAssured, ResolverType } from '../types-internal';
+import {
+  isAnyOrderAssured,
+  isOrderAssured,
+  ResolverType,
+} from '../types-internal';
 import { augmentIterableRecipe } from './augment-iterable-recipe';
 
 export function filterRecipe(
@@ -11,7 +15,7 @@ export function filterRecipe(
   const baseFilter = augmentIterableRecipe(filterIterable);
 
   return function <T>(this: AnyIterable<T>, predicate: AsyncAction<any>) {
-    if (isOrderAssured(predicate)) {
+    if (isAnyOrderAssured(predicate)) {
       let alreadyTrue = false;
       let lastResult = false;
       const takeWhilePredicate = (t: T) =>

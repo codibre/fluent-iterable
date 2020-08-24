@@ -1,4 +1,8 @@
-import { isOrderAssured, ResolverType } from '../types-internal';
+import {
+  isAnyOrderAssured,
+  isOrderAssured,
+  ResolverType,
+} from '../types-internal';
 import { AnyMapper } from '../types-internal';
 import { AnyIterable } from 'augmentative-iterable';
 import { map as mapSync } from '../sync/map';
@@ -52,7 +56,7 @@ export function groupRecipe(ingredients: GroupIngredients) {
   const orderedGroup = orderedGroupRecipe(ingredients);
   const { reduceAndMap, resolver, iterate } = ingredients;
   return function <T, R>(this: AnyIterable<T>, mapper: AnyMapper<T>) {
-    if (isOrderAssured(mapper)) {
+    if (isAnyOrderAssured(mapper)) {
       return orderedGroup.call(this, mapper);
     } else {
       const reduced = reduceGroup(this, reduceAndMap, resolver, mapper);

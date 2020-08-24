@@ -1,4 +1,4 @@
-import { o, fluent, identity, interval } from '../src';
+import { o, fluent, identity, interval, od } from '../src';
 import expect, { flatMap, pick } from './tools';
 import delay from 'delay';
 import { stub } from 'sinon';
@@ -309,12 +309,38 @@ describe('fluent iterable', () => {
               .filter((p) => p.gender === Gender.Female)
               .toArray(),
           ).to.eql(picker(4, 7, 10)));
+        it('not assuring order', () => {
+          const call = stub();
+          expect(
+            fluent([1, 2, 3, 4, 3])
+              .filter((p) => {
+                call();
+                return 2 <= p && p <= 3;
+              })
+              .toArray(),
+          ).to.eql([2, 3, 3]);
+          expect(call).to.have.callCount(5);
+        });
         it('assuring order', () => {
           const call = stub();
           expect(
             fluent([1, 2, 3, 4, 3])
               .filter(
                 o((p) => {
+                  call();
+                  return 2 <= p && p <= 3;
+                }),
+              )
+              .toArray(),
+          ).to.eql([2, 3]);
+          expect(call).to.have.callCount(4);
+        });
+        it('assuring order descending', () => {
+          const call = stub();
+          expect(
+            fluent([1, 2, 3, 4, 3])
+              .filter(
+                od((p) => {
                   call();
                   return 2 <= p && p <= 3;
                 }),
@@ -569,6 +595,25 @@ describe('fluent iterable', () => {
             );
           }
         });
+        it('not assuring order', () => {
+          const items = [
+            { k: 1, v: 1 },
+            { k: 1, v: 2 },
+            { k: 2, v: 1 },
+            { k: 2, v: 2 },
+            { k: 1, v: 1 },
+            { k: 1, v: 2 },
+          ];
+          const groups = fluent(items)
+            .group((x) => x.k)
+            .toArray();
+          expect(groups.length).to.eql(2);
+          expect(groups.map((grp) => grp.key)).to.have.members([1, 2]);
+
+          groups.forEach(({ key, values }) => {
+            expect(values.toArray()).to.eql(items.filter((x) => x.k === key));
+          });
+        });
         it('assuring order', () => {
           const items = [
             { k: 1, v: 1 },
@@ -580,6 +625,27 @@ describe('fluent iterable', () => {
           ];
           const groups = fluent(items)
             .group(o((x) => x.k))
+            .toArray();
+          expect(groups.length).to.eql(3);
+          expect(groups.map((grp) => grp.key)).to.have.members([1, 2, 1]);
+
+          groups.forEach(({ values }, i) => {
+            values.withIndex().forEach(({ value, idx }) => {
+              expect(value).to.be.eq(items[i * 2 + idx]);
+            });
+          });
+        });
+        it('assuring order descending', () => {
+          const items = [
+            { k: 1, v: 1 },
+            { k: 1, v: 2 },
+            { k: 2, v: 1 },
+            { k: 2, v: 2 },
+            { k: 1, v: 1 },
+            { k: 1, v: 2 },
+          ];
+          const groups = fluent(items)
+            .group(od((x) => x.k))
             .toArray();
           expect(groups.length).to.eql(3);
           expect(groups.map((grp) => grp.key)).to.have.members([1, 2, 1]);
@@ -636,6 +702,15 @@ describe('fluent iterable', () => {
             emails: [],
             name: '0: w/o gender & 0 emails',
           }));
+        it('not assuring order', () => {
+          expect(fluent([5, 4, 3, 4, 1]).min()).to.be.eq(1);
+        });
+        it('assuring order', () => {
+          expect(fluent([5, 4, 3, 4, 1]).min(o(identity))).to.be.eq(5);
+        });
+        it('assuring descending order', () => {
+          expect(fluent([5, 4, 3, 4, 1]).min(od(identity))).to.be.eq(3);
+        });
       });
       describe('count', () => {
         it('empty', () => expect(fluent([]).count()).to.equal(0));
@@ -696,13 +771,17 @@ describe('fluent iterable', () => {
       describe('last', () => {
         it('empty', () => expect(fluent([]).last()).to.be.undefined);
         it('not empty', () => expect(fluent([3, 1]).last()).to.be.equal(1));
-        it('with predicate', () =>
+        it('with predicate, not assuring order', () =>
           expect(
             fluent([3, 1, 2, 6, 3, 8]).last((x) => x % 2 === 0),
           ).to.be.equal(8));
         it('assuring order', () =>
           expect(
             fluent([3, 1, 2, 6, 3, 8]).last(o((x) => x % 2 === 0)),
+          ).to.be.equal(6));
+        it('assuring order descending', () =>
+          expect(
+            fluent([3, 1, 2, 6, 3, 8]).last(od((x) => x % 2 === 0)),
           ).to.be.equal(6));
       });
 
@@ -930,6 +1009,9 @@ describe('fluent iterable', () => {
         });
         it('assuring order', () => {
           expect(fluent([1, 2, 3, 4, 3, 5]).max(o(identity))).to.be.eq(4);
+        });
+        it('assuring descending order', () => {
+          expect(fluent([1, 2, 3, 4, 3, 5]).max(od(identity))).to.be.eq(1);
         });
       });
       describe('hasExactly', () => {

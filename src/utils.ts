@@ -4,7 +4,7 @@ import fluent from './fluent';
 import { AsyncPredicate, FluentGroup } from './types';
 import { Group, Predicate, AverageStepper } from './types-base';
 import { AnyIterable } from 'augmentative-iterable';
-import { orderAssured } from './types-internal';
+import { descendingOrderAssured, orderAssured } from './types-internal';
 
 /**
  * Returns exactly the informed parameter
@@ -223,7 +223,6 @@ function getAverageStepper() {
  * This is useful to have access to faster versions of some algorithms, but
  * the output may not match expectation if the resulting order is not actually right.
  *
- * All operations order assuring ready will have this specified in their documentation
  * @param f the function to assure order
  */
 function assureOrder<F extends Function>(f: F): F {
@@ -231,9 +230,27 @@ function assureOrder<F extends Function>(f: F): F {
   (result as any)[orderAssured] = true;
   return result as any;
 }
+/**
+ * Returns a new instance of a function with a descending order assuring mark.
+ * Fluent Iterable will treat descending order assuring marked functions as if
+ * they're guaranteed to return descending ordered results in regard some iterable
+ * where they're applied. The actual order, though, is of responsibility
+ * of the code using this package.
+ *
+ * This is useful to have access to faster versions of some algorithms, but
+ * the output may not match expectation if the resulting order is not actually right.
+ *
+ * @param f the function to assure order
+ */
+function assureOrderDescending<F extends Function>(f: F): F {
+  const result = (...args: any[]) => f(...args);
+  (result as any)[descendingOrderAssured] = true;
+  return result as any;
+}
 
 export {
   assureOrder,
+  assureOrderDescending,
   constant,
   empty,
   emptyAsync,

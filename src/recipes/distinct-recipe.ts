@@ -1,6 +1,11 @@
 import { identity } from '../utils';
 import { AnyIterable } from 'augmentative-iterable';
-import { AnyMapper, isOrderAssured, ResolverType } from '../types-internal';
+import {
+  AnyMapper,
+  isAnyOrderAssured,
+  isOrderAssured,
+  ResolverType,
+} from '../types-internal';
 import { DistinctIngredients } from './ingredients';
 import { orderedOperationRecipe } from './ordered-operation-recipe';
 
@@ -52,7 +57,7 @@ export function distinctRecipe(ingredients: DistinctIngredients) {
       maxOcurrences = mapper;
       mapper = identity;
     }
-    return isOrderAssured(mapper)
+    return isAnyOrderAssured(mapper)
       ? ordered.call(this, mapper, maxOcurrences)
       : filterOrAll.call(this, incPredicate(resolver, mapper, maxOcurrences));
   };

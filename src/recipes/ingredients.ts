@@ -29,3 +29,8 @@ export interface DistinctIngredients extends BasicIngredients {
 export interface GroupIngredients extends BasicReduceIngredients {
   partition: Function;
 }
+
+export interface MinMaxIngredients extends BasicIngredients {
+  first: Function;
+  last: Function;
+}
