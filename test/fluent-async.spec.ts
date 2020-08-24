@@ -469,7 +469,9 @@ describe('fluent async iterable', () => {
           await fluentAsync(new ObjectReadableMock([2, 3, 4, 5])).min(),
         ).to.equal(2));
       it('multiple elements with predicate', async () =>
-        expect(await fluentAsync(subject).min((x) => x.emails.length)).to.eql({
+        expect(
+          await fluentAsync(subject).min(async (x) => x.emails.length),
+        ).to.eql({
           emails: [],
           name: '0: w/o gender & 0 emails',
         }));
@@ -750,12 +752,29 @@ describe('fluent async iterable', () => {
         ).to.be.eq(1);
       });
     });
+    describe('top', () => {
+      it('should return the max number from a numeric array when no parameter is informed', async () => {
+        expect(
+          await fluentAsync([1, 2, 3]).top(identity, (a, b) => a - b),
+        ).to.be.eq(3);
+      });
+      it('should return the max number from a transformation when a parameter is informed', async () => {
+        expect(
+          await fluentAsync([1, 2, 3]).top(
+            async (x) => 3 - x,
+            (a, b) => a - b,
+          ),
+        ).to.be.eq(1);
+      });
+    });
     describe('max', () => {
       it('should return the max number from a numeric array when no parameter is informed', async () => {
         expect(await fluentAsync([1, 2, 3]).max()).to.be.eq(3);
       });
       it('should return the max number from a transformation when a parameter is informed', async () => {
-        expect(await fluentAsync([1, 2, 3]).max((x) => 3 - x)).to.be.eq(1);
+        expect(await fluentAsync([1, 2, 3]).max(async (x) => 3 - x)).to.be.eq(
+          1,
+        );
       });
       it('should return the max value from an array of multiple non numeric elements', async () =>
         expect(await fluentAsync(['a', 'b', 'c', 'd', 'e']).max()).to.equal(
