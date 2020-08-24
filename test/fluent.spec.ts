@@ -729,6 +729,10 @@ describe('fluent iterable', () => {
           expect(fluent([1, 2, 4, 5, 6]).count(o((x) => x % 2 === 0))).to.equal(
             2,
           ));
+        it('assuring descending order', () =>
+          expect(fluent([1, 2, 4, 5, 6]).count(o((x) => x % 2 === 0))).to.equal(
+            2,
+          ));
       });
       describe('countAsync', () => {
         it('empty', async () =>
@@ -994,6 +998,19 @@ describe('fluent iterable', () => {
             [Gender.NonBinary]: 'name B',
             [Gender.Male]: 'name C',
           }));
+      });
+      describe('top', () => {
+        it('should return the max number from a numeric array when no parameter is informed', () => {
+          expect(fluent([1, 2, 3]).top(identity, (a, b) => a - b)).to.be.eq(3);
+        });
+        it('should return the max number from a transformation when a parameter is informed', () => {
+          expect(
+            fluent([1, 2, 3]).top(
+              (x) => 3 - x,
+              (a, b) => a - b,
+            ),
+          ).to.be.eq(1);
+        });
       });
       describe('max', () => {
         it('should return the max number from a numeric array when no parameter is informed', () => {

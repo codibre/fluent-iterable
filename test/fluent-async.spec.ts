@@ -1,4 +1,4 @@
-import { fluentAsync, interval, fluent, o } from '../src';
+import { fluentAsync, interval, fluent, o, identity, od } from '../src';
 import expect, { flatMap } from './tools';
 import { ObjectReadableMock } from 'stream-mock';
 import { Person, data, Gender, picker } from './fluent.spec';
@@ -492,6 +492,34 @@ describe('fluent async iterable', () => {
           12,
         ));
     });
+    describe('min', () => {
+      it('empty', async () =>
+        expect(await fluentAsync([]).min()).to.eql(undefined));
+      it('one element', async () =>
+        expect(await fluentAsync([2]).min()).to.equal(2));
+      it('multiple elements', async () =>
+        expect(await fluentAsync([1, 3, 4, 5]).min()).to.equal(1));
+      it('multiple non numeric elements', async () =>
+        expect(await fluentAsync(['a', 'b', 'c', 'd', 'e']).min()).to.equal(
+          'a',
+        ));
+      it('multiple elements with predicate', async () =>
+        expect(await fluentAsync(subject).min((x) => x.emails.length)).to.eql({
+          emails: [],
+          name: '0: w/o gender & 0 emails',
+        }));
+      it('not assuring order', async () => {
+        expect(await fluentAsync([5, 4, 3, 4, 1]).min()).to.be.eq(1);
+      });
+      it('assuring order', async () => {
+        expect(await fluentAsync([5, 4, 3, 4, 1]).min(o(identity))).to.be.eq(5);
+      });
+      it('assuring descending order', async () => {
+        expect(await fluentAsync([5, 4, 3, 4, 1]).min(od(identity))).to.be.eq(
+          3,
+        );
+      });
+    });
     describe('count', () => {
       it('empty', async () =>
         expect(await fluentAsync(new ObjectReadableMock([])).count()).to.equal(
@@ -507,6 +535,18 @@ describe('fluent async iterable', () => {
         expect(
           await fluentAsync(subject).count((x) => x.emails.length > 0),
         ).to.equal(8));
+      it('not assuring order', async () =>
+        expect(
+          await fluentAsync([1, 2, 4, 5, 6]).count((x) => x % 2 === 0),
+        ).to.equal(3));
+      it('assuring order', async () =>
+        expect(
+          await fluentAsync([1, 2, 4, 5, 6]).count(o((x) => x % 2 === 0)),
+        ).to.equal(2));
+      it('assuring descending order', async () =>
+        expect(
+          await fluentAsync([1, 2, 4, 5, 6]).count(o((x) => x % 2 === 0)),
+        ).to.equal(2));
     });
     describe('first', () => {
       it('empty', async () =>
@@ -695,6 +735,45 @@ describe('fluent async iterable', () => {
             name: 'name C',
           },
         }));
+    });
+
+    describe('top', () => {
+      it('should return the max number from a numeric array when no parameter is informed', () => {
+        expect(fluent([1, 2, 3]).top(identity, (a, b) => a - b)).to.be.eq(3);
+      });
+      it('should return the max number from a transformation when a parameter is informed', () => {
+        expect(
+          fluent([1, 2, 3]).top(
+            (x) => 3 - x,
+            (a, b) => a - b,
+          ),
+        ).to.be.eq(1);
+      });
+    });
+    describe('max', () => {
+      it('should return the max number from a numeric array when no parameter is informed', async () => {
+        expect(await fluentAsync([1, 2, 3]).max()).to.be.eq(3);
+      });
+      it('should return the max number from a transformation when a parameter is informed', async () => {
+        expect(await fluentAsync([1, 2, 3]).max((x) => 3 - x)).to.be.eq(1);
+      });
+      it('should return the max value from an array of multiple non numeric elements', async () =>
+        expect(await fluentAsync(['a', 'b', 'c', 'd', 'e']).max()).to.equal(
+          'e',
+        ));
+      it('not assuring order', async () => {
+        expect(await fluentAsync([1, 2, 3, 4, 3, 5]).max(identity)).to.be.eq(5);
+      });
+      it('assuring order', async () => {
+        expect(await fluentAsync([1, 2, 3, 4, 3, 5]).max(o(identity))).to.be.eq(
+          4,
+        );
+      });
+      it('assuring descending order', async () => {
+        expect(
+          await fluentAsync([1, 2, 3, 4, 3, 5]).max(od(identity)),
+        ).to.be.eq(1);
+      });
     });
     describe('hasLessThan', () => {
       it('false', async () =>
