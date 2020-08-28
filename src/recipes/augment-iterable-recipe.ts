@@ -5,7 +5,7 @@ export function augmentIterableRecipe(augmentIterableAsync: Function) {
   return function <T>(
     this: AnyIterable<T>,
     action: AsyncAction<T>,
-  ): AsyncIterable<T> {
+  ): AnyIterable<T> {
     return augmentIterableAsync(this, action);
   };
 }

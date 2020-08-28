@@ -19,7 +19,6 @@ export * from './has-less-or-exactly';
 export * from './has-less-than';
 export * from './has-more-or-exactly';
 export * from './has-more-than';
-export * from './is-distinct';
 export * from './join';
 export * from './last';
 export * from './map';

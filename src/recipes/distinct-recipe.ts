@@ -1,6 +1,13 @@
 import { identity } from '../utils';
 import { AnyIterable } from 'augmentative-iterable';
-import { AnyMapper, ResolverType } from '../types-internal';
+import {
+  AnyMapper,
+  isAnyOrderAssured,
+  isOrderAssured,
+  ResolverType,
+} from '../types-internal';
+import { DistinctIngredients } from './ingredients';
+import { orderedOperationRecipe } from './ordered-operation-recipe';
 
 function inc(map: Map<any, number>, y: any) {
   const result = (map.get(y) || 0) + 1;
@@ -17,7 +24,30 @@ export function incPredicate<T>(
   return (x: T) => resolver(mapper(x), (y) => inc(map, y) <= maxOcurrences);
 }
 
-export function distinctRecipe(filterOrAll: Function, resolver: ResolverType) {
+function orderedDistinctRecipe({
+  map,
+  resolver,
+  partition,
+  filterOrAll,
+  hasLessOrExactly,
+}: DistinctIngredients) {
+  const ordered = orderedOperationRecipe(map, resolver, partition);
+  return function distinct<T>(
+    this: AnyIterable<T>,
+    mapper: AnyMapper<any>,
+    maxOcurrences: number,
+  ) {
+    const partitioned = ordered.call(this, mapper);
+    return filterOrAll.call(partitioned, (part: AnyIterable<any>) =>
+      hasLessOrExactly.call(part, maxOcurrences),
+    );
+  };
+}
+
+export function distinctRecipe(ingredients: DistinctIngredients) {
+  const ordered = orderedDistinctRecipe(ingredients);
+  const { filterOrAll, resolver } = ingredients;
+
   return function distinct<T, R>(
     this: AnyIterable<T>,
     mapper: AnyMapper<T> | number = identity,
@@ -27,9 +57,8 @@ export function distinctRecipe(filterOrAll: Function, resolver: ResolverType) {
       maxOcurrences = mapper;
       mapper = identity;
     }
-    return filterOrAll.call(
-      this,
-      incPredicate(resolver, mapper, maxOcurrences),
-    );
+    return isAnyOrderAssured(mapper, this)
+      ? ordered.call(this, mapper, maxOcurrences)
+      : filterOrAll.call(this, incPredicate(resolver, mapper, maxOcurrences));
   };
 }

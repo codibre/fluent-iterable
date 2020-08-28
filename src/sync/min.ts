@@ -1,4 +1,4 @@
 import { minRecipe } from '../recipes';
-import { top } from './top';
+import { minMaxIngredients } from './min-max-ingredients';
 
-export const min = minRecipe(top);
+export const min = minRecipe(minMaxIngredients);

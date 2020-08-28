@@ -73,8 +73,10 @@ import {
   isDistinctAsync,
 } from '../async';
 import { combineEmitter, concatEmitter } from '../emitter';
+import * as common from '../common';
 
 export const iterableFuncs = {
+  ...common,
   withIndex,
   takeWhile,
   take,

@@ -484,6 +484,104 @@ declare module '@codibre/fluent-iterable' {
 
 Notice that, when you import a code like the above, all the next created FluentAsyncIterable will have the declared methods, so use it with caution!
 
+## Assuring order for faster operations!
+
+One thing you can do to get the best performance from this package is to signalize when determined predicate
+will generate or analyze results in order. Take this example:
+
+```ts
+const result = fluent([1, 2, 3, 4, 5])
+  .filter((x) => x < 3)
+  .toArray();
+
+console.log(result); // prints [1, 2]
+```
+
+The way it is declared, this operation will print 2 items, but will validate 5. The original array is in order,
+though, so, why we need validate all items?
+We can avoid this if you assure for fluent-iterable that the filter predicate will treat elements in order:
+
+```ts
+const result = fluent([1, 2, 3, 4, 5])
+  .filter(assureOrder((x) => x < 3))
+  .toArray();
+
+console.log(result); // prints [1, 2]
+```
+
+This result will be the same, but this operation will only validate 3 items! The third item will be 3 and will make the iteration to stop!
+You can also do the same operation with an alias for **assureOrder**:
+
+```ts
+const result = fluent([1, 2, 3, 4, 5])
+  .filter(o((x) => x < 3))
+  .toArray();
+
+console.log(result); // prints [1, 2]
+```
+
+You can also assure the order for a whole iterable
+
+```ts
+const result = fluent(o([1, 2, 3, 4, 5])) // or o(fluent([1, 2, 3, 4, 5]))
+  .assureOrder() // you can also use alias .o()
+  .filter((x) => x < 3)
+  .toArray();
+
+console.log(result); // prints [1, 2]
+```
+
+Or you can use the fluent syntax:
+
+```ts
+const result = fluent([1, 2, 3, 4, 5])
+  .assureOrder() // you can also use alias .o()
+  .filter((x) => x < 3)
+  .toArray();
+
+console.log(result); // prints [1, 2]
+```
+
+But these later ones have a behavior slight different from assuring a predicate order: the order will actually be assured for all consecutive operations where the original elements will not change. Practically speaking, for any consecutive **filter** and **takeWhile** operations, fluent will remember the assuring.
+
+So, something like this:
+
+```ts
+const result = fluent([1, 2, 3, 4, 5])
+  .o()
+  .filter((x) => x < 3)
+  .max();
+
+console.log(result); // prints 2
+```
+
+Will be executed with max performance possible!
+But **max** is a particular operation that could take a benefit much greater from a descending assuring, as it
+simply become equivalent to **first**. If you fall into such situation, you can also indicate it to fluent,
+like this:
+
+```ts
+const result = fluent([5, 4, 3, 2, 1])
+  .od() // you can also use alias .assureOrderDescending()
+  .filter((x) => x < 3)
+  .max();
+
+console.log(result); // prints 2
+```
+
+On the other hand, **min** works better with an ascending iterable so it takes more benefits more from an ascending assuring.
+
+Finally, some fluent operations benefits equally from an ascending or descending assuring, and they are:
+
+- count;
+- distinct;
+- filter;
+- group;
+- isDistinct;
+- last;
+
+So, if you find yourself in some situation where you can assure the order, asc or desc, do it and get the best performance you could with your fluent operations!
+
 ## License
 
 Licensed under [MIT](https://en.wikipedia.org/wiki/MIT_License).

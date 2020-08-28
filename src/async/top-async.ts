@@ -1,4 +1,4 @@
 import { topRecipe } from '../recipes';
-import { reduceAndMapAsync } from './reduce-and-map-async';
+import { basicReduceAsync } from './basic-reduce-ingredients-async';
 
-export const topAsync = topRecipe(reduceAndMapAsync);
+export const topAsync = topRecipe(basicReduceAsync);

@@ -1,4 +1,4 @@
-import { fluentAsync, interval, fluent } from '../src';
+import { fluentAsync, interval, fluent, o, identity, od } from '../src';
 import expect, { flatMap } from './tools';
 import { ObjectReadableMock } from 'stream-mock';
 import { Person, data, Gender, picker } from './fluent.spec';
@@ -189,6 +189,20 @@ describe('fluent async iterable', () => {
             .filter((p) => p.gender === Gender.Female)
             .toArray(),
         ).to.eql(picker(4, 7, 10)));
+      it('assuring order', async () => {
+        const call = stub();
+        expect(
+          await fluentAsync([1, 2, 3, 4, 3])
+            .filter(
+              o((p) => {
+                call();
+                return 2 <= p && p <= 3;
+              }),
+            )
+            .toArray(),
+        ).to.eql([2, 3]);
+        expect(call).to.have.callCount(4);
+      });
     });
     describe('partition', () => {
       it('should divide result in blocks of the specified size', async () => {
@@ -401,6 +415,27 @@ describe('fluent async iterable', () => {
           );
         }
       });
+      it('assuring order', async () => {
+        const items = [
+          { k: 1, v: 1 },
+          { k: 1, v: 2 },
+          { k: 2, v: 1 },
+          { k: 2, v: 2 },
+          { k: 1, v: 1 },
+          { k: 1, v: 2 },
+        ];
+        const groups = await fluentAsync(items)
+          .group(o((x) => x.k))
+          .toArray();
+        expect(groups.length).to.eql(3);
+        expect(groups.map((grp) => grp.key)).to.have.members([1, 2, 1]);
+
+        groups.forEach(({ values }, i) => {
+          values.withIndex().forEach(({ value, idx }) => {
+            expect(value).to.be.eq(items[i * 2 + idx]);
+          });
+        });
+      });
     });
     describe('avg', () => {
       it('empty', async () =>
@@ -434,7 +469,9 @@ describe('fluent async iterable', () => {
           await fluentAsync(new ObjectReadableMock([2, 3, 4, 5])).min(),
         ).to.equal(2));
       it('multiple elements with predicate', async () =>
-        expect(await fluentAsync(subject).min((x) => x.emails.length)).to.eql({
+        expect(
+          await fluentAsync(subject).min(async (x) => x.emails.length),
+        ).to.eql({
           emails: [],
           name: '0: w/o gender & 0 emails',
         }));
@@ -457,6 +494,34 @@ describe('fluent async iterable', () => {
           12,
         ));
     });
+    describe('min', () => {
+      it('empty', async () =>
+        expect(await fluentAsync([]).min()).to.eql(undefined));
+      it('one element', async () =>
+        expect(await fluentAsync([2]).min()).to.equal(2));
+      it('multiple elements', async () =>
+        expect(await fluentAsync([1, 3, 4, 5]).min()).to.equal(1));
+      it('multiple non numeric elements', async () =>
+        expect(await fluentAsync(['a', 'b', 'c', 'd', 'e']).min()).to.equal(
+          'a',
+        ));
+      it('multiple elements with predicate', async () =>
+        expect(await fluentAsync(subject).min((x) => x.emails.length)).to.eql({
+          emails: [],
+          name: '0: w/o gender & 0 emails',
+        }));
+      it('not assuring order', async () => {
+        expect(await fluentAsync([5, 4, 3, 4, 1]).min()).to.be.eq(1);
+      });
+      it('assuring order', async () => {
+        expect(await fluentAsync([5, 4, 3, 4, 1]).min(o(identity))).to.be.eq(5);
+      });
+      it('assuring descending order', async () => {
+        expect(await fluentAsync([5, 4, 3, 4, 1]).min(od(identity))).to.be.eq(
+          3,
+        );
+      });
+    });
     describe('count', () => {
       it('empty', async () =>
         expect(await fluentAsync(new ObjectReadableMock([])).count()).to.equal(
@@ -472,6 +537,18 @@ describe('fluent async iterable', () => {
         expect(
           await fluentAsync(subject).count((x) => x.emails.length > 0),
         ).to.equal(8));
+      it('not assuring order', async () =>
+        expect(
+          await fluentAsync([1, 2, 4, 5, 6]).count((x) => x % 2 === 0),
+        ).to.equal(3));
+      it('assuring order', async () =>
+        expect(
+          await fluentAsync([1, 2, 4, 5, 6]).count(o((x) => x % 2 === 0)),
+        ).to.equal(2));
+      it('assuring descending order', async () =>
+        expect(
+          await fluentAsync([1, 2, 4, 5, 6]).count(o((x) => x % 2 === 0)),
+        ).to.equal(2));
     });
     describe('first', () => {
       it('empty', async () =>
@@ -498,9 +575,13 @@ describe('fluent async iterable', () => {
         ).to.be.equal(1));
       it('with predicate', async () =>
         expect(
-          await fluentAsync(new ObjectReadableMock([3, 1, 2, 6])).last(
+          await fluentAsync(new ObjectReadableMock([3, 1, 2, 6, 3, 8])).last(
             (x) => x % 2 === 0,
           ),
+        ).to.be.equal(8));
+      it('assuring order', async () =>
+        expect(
+          await fluentAsync([3, 1, 2, 6, 3, 8]).last(o((x) => x % 2 === 0)),
         ).to.be.equal(6));
     });
     describe('reduceAndMap', () => {
@@ -656,6 +737,62 @@ describe('fluent async iterable', () => {
             name: 'name C',
           },
         }));
+    });
+
+    describe('top', () => {
+      it('should return the max number from a numeric array when no parameter is informed', () => {
+        expect(fluent([1, 2, 3]).top(identity, (a, b) => a - b)).to.be.eq(3);
+      });
+      it('should return the max number from a transformation when a parameter is informed', () => {
+        expect(
+          fluent([1, 2, 3]).top(
+            (x) => 3 - x,
+            (a, b) => a - b,
+          ),
+        ).to.be.eq(1);
+      });
+    });
+    describe('top', () => {
+      it('should return the max number from a numeric array when no parameter is informed', async () => {
+        expect(
+          await fluentAsync([1, 2, 3]).top(identity, (a, b) => a - b),
+        ).to.be.eq(3);
+      });
+      it('should return the max number from a transformation when a parameter is informed', async () => {
+        expect(
+          await fluentAsync([1, 2, 3]).top(
+            async (x) => 3 - x,
+            (a, b) => a - b,
+          ),
+        ).to.be.eq(1);
+      });
+    });
+    describe('max', () => {
+      it('should return the max number from a numeric array when no parameter is informed', async () => {
+        expect(await fluentAsync([1, 2, 3]).max()).to.be.eq(3);
+      });
+      it('should return the max number from a transformation when a parameter is informed', async () => {
+        expect(await fluentAsync([1, 2, 3]).max(async (x) => 3 - x)).to.be.eq(
+          1,
+        );
+      });
+      it('should return the max value from an array of multiple non numeric elements', async () =>
+        expect(await fluentAsync(['a', 'b', 'c', 'd', 'e']).max()).to.equal(
+          'e',
+        ));
+      it('not assuring order', async () => {
+        expect(await fluentAsync([1, 2, 3, 4, 3, 5]).max(identity)).to.be.eq(5);
+      });
+      it('assuring order', async () => {
+        expect(await fluentAsync([1, 2, 3, 4, 3, 5]).max(o(identity))).to.be.eq(
+          4,
+        );
+      });
+      it('assuring descending order', async () => {
+        expect(
+          await fluentAsync([1, 2, 3, 4, 3, 5]).max(od(identity)),
+        ).to.be.eq(1);
+      });
     });
     describe('hasLessThan', () => {
       it('false', async () =>

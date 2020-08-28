@@ -1,5 +1,4 @@
 import { waitAllRecipe } from '../recipes/wait-all-recipe';
-import { resolver } from 'augmentative-iterable';
-import { forEach } from './for-each';
+import { basic } from './basic-ingredients';
 
-export const waitAll = waitAllRecipe(forEach, resolver);
+export const waitAll = waitAllRecipe(basic);

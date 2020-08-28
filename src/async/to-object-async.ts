@@ -1,5 +1,4 @@
-import { resolverAsync } from 'augmentative-iterable';
 import { toObjectRecipe } from '../recipes';
-import { reduceAsync } from './reduce-async';
+import { basicReduceAsync } from './basic-reduce-ingredients-async';
 
-export const toObjectAsync = toObjectRecipe(reduceAsync, resolverAsync);
+export const toObjectAsync = toObjectRecipe(basicReduceAsync);

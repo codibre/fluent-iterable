@@ -1,5 +1,4 @@
 import { skipWhileRecipe } from '../recipes';
-import { filterAsync } from './filter-async';
-import { resolverAsync } from 'augmentative-iterable';
+import { basicAsync } from './basic-ingredients-async';
 
-export const skipWhileAsync = skipWhileRecipe(filterAsync, resolverAsync);
+export const skipWhileAsync = skipWhileRecipe(basicAsync);

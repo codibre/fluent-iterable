@@ -1,8 +1,8 @@
 import { Mapper } from '../types';
 import { Reducer } from '../types-base';
-import { ResolverType } from '../types-internal';
+import { BasicIngredients } from './ingredients';
 
-export function reduceAndMapRecipe(forEach: Function, resolver: ResolverType) {
+export function reduceAndMapRecipe({ forEach, resolver }: BasicIngredients) {
   return function <T, A, R>(
     this: Iterable<T>,
     reducer: Reducer<T, A>,

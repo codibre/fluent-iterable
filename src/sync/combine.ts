@@ -1,14 +1,10 @@
 import { combineRecipe } from '../recipes/combine-recipe';
-import { map } from './map';
 import { flatten } from './flatten';
-import { resolver } from 'augmentative-iterable';
-import { forEach } from './for-each';
 import { filter } from './filter';
+import { basic } from './basic-ingredients';
 
 export const combine = combineRecipe({
-  map,
+  ...basic,
   flatten,
-  resolver,
-  forEach,
   filter,
 });

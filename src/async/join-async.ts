@@ -1,5 +1,4 @@
-import { reduceAsync } from './reduce-async';
 import { joinRecipe } from '../recipes';
-import { resolverAsync } from 'augmentative-iterable';
+import { basicReduceAsync } from './basic-reduce-ingredients-async';
 
-export const joinAsync = joinRecipe(reduceAsync, resolverAsync);
+export const joinAsync = joinRecipe(basicReduceAsync);

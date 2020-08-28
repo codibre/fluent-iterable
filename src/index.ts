@@ -8,6 +8,7 @@ import {
   FluentAsyncIterable,
   FluentGroup,
 } from './types';
+import { OrderAssurable } from './assure-order-types';
 import {
   Predicate,
   Reducer,
@@ -24,11 +25,15 @@ import { fluentAsync, fluentEmit } from './fluent-async';
 import depaginate from './depaginator';
 import { interval } from './interval';
 import { mergeIterators } from './async-base/merging';
+import { assureOrder as o, assureOrderDescending as od } from './utils';
 
 export * from './extend-async';
 export * from './extend';
 export * from './transform-obj-values';
 export {
+  o,
+  od,
+  OrderAssurable,
   FluentIterable,
   FluentAsyncIterable,
   Predicate,

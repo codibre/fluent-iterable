@@ -1,5 +1,4 @@
-import { resolver } from 'augmentative-iterable';
 import { toObjectRecipe } from '../recipes';
-import { reduce } from './reduce';
+import { basicReduce } from './basic-reduce-ingredients';
 
-export const toObject = toObjectRecipe(reduce, resolver);
+export const toObject = toObjectRecipe(basicReduce);

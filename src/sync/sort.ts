@@ -1,6 +1,4 @@
-import { toArray } from './to-array';
 import { sortRecipe } from '../recipes';
-import { iterate } from '../utils';
-import { resolver } from 'augmentative-iterable';
+import { basic } from './basic-ingredients';
 
-export const sort = sortRecipe(toArray, resolver, iterate);
+export const sort = sortRecipe(basic);

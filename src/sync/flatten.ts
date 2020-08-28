@@ -1,5 +1,4 @@
-import { map } from './map';
-import { iterateAll } from '../utils';
 import { flattenRecipe } from '../recipes';
+import { basic } from './basic-ingredients';
 
-export const flatten = flattenRecipe(iterateAll, map);
+export const flatten = flattenRecipe(basic);

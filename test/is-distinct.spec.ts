@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { fluent, fluentAsync, identity } from '../src';
+import { o, fluent, fluentAsync, identity } from '../src';
 
 describe('isDistinct()', () => {
   context('iterable', () => {
@@ -37,6 +37,18 @@ describe('isDistinct()', () => {
       const result = fluent([1, 2, 3]).isDistinct((x) => x % 2, 2);
 
       expect(result).to.be.true;
+    });
+
+    it('should return true when all consecutive elements are distinct and order is assured', () => {
+      const result = fluent([1, 2, 3, 2, 3, 4]).isDistinct(o((x) => x * 2));
+
+      expect(result).to.be.true;
+    });
+
+    it('should return false when some consecutive elements are not distinct and order is assured', () => {
+      const result = fluent([1, 2, 3, 3, 4]).isDistinct((x) => x * 2);
+
+      expect(result).to.be.false;
     });
   });
 

@@ -1,4 +1,4 @@
 import { maxRecipe } from '../recipes';
-import { topAsync } from './top-async';
+import { minMaxIngredientsAsync } from './min-max-ingredients-async';
 
-export const maxAsync = maxRecipe(topAsync);
+export const maxAsync = maxRecipe(minMaxIngredientsAsync);

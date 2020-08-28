@@ -1,5 +1,4 @@
-import { mapAsync } from './map-async';
 import { flattenRecipe } from '../recipes';
-import { iterateAllAsync } from '../utils';
+import { basicAsync } from './basic-ingredients-async';
 
-export const flattenAsync = flattenRecipe(iterateAllAsync, mapAsync);
+export const flattenAsync = flattenRecipe(basicAsync);

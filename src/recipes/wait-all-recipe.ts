@@ -1,8 +1,8 @@
 import { AsyncMapper } from '../types';
 import { AnyIterable } from 'augmentative-iterable';
-import { ResolverType } from '../types-internal';
+import { BasicIngredients } from './ingredients';
 
-export function waitAllRecipe(forEach: Function, resolver: ResolverType) {
+export function waitAllRecipe({ forEach, resolver }: BasicIngredients) {
   return function <T, R>(this: AnyIterable<T>, mapper: AsyncMapper<T, R>) {
     const promises: Array<PromiseLike<R> | R> = [];
     const unresolved = forEach.call(this, (x: T) => promises.push(mapper(x)));

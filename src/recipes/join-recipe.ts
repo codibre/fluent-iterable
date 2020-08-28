@@ -1,11 +1,9 @@
 import { identity } from '../utils';
 import { AnyMapper } from '../types-internal';
 import { AnyIterable } from 'augmentative-iterable';
+import { BasicReduceIngredients } from './ingredients';
 
-export function joinRecipe<T>(
-  reduce: Function,
-  delegator: (a: any, m: (b: any) => string) => any,
-) {
+export function joinRecipe<T>({ reduce, resolver }: BasicReduceIngredients) {
   return function (
     this: AnyIterable<T>,
     separator: string,
@@ -14,7 +12,7 @@ export function joinRecipe<T>(
     return reduce.call(
       this,
       (current: any, next: any) =>
-        delegator(mapper(next), (nextStr: string) =>
+        resolver(mapper(next), (nextStr: string) =>
           current ? `${current}${separator}${nextStr}` : nextStr,
         ),
       '',

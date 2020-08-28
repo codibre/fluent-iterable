@@ -1,9 +1,15 @@
 /* eslint-disable guard-for-in */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import fluent from './fluent';
-import { AsyncPredicate, FluentGroup } from './types';
+import {
+  AsyncPredicate,
+  FluentAsyncIterable,
+  FluentGroup,
+  FluentIterable,
+} from './types';
 import { Group, Predicate, AverageStepper } from './types-base';
 import { AnyIterable } from 'augmentative-iterable';
+import { descendingOrderAssured, orderAssured } from './types-internal';
 
 /**
  * Returns exactly the informed parameter
@@ -211,8 +217,57 @@ function getAverageStepper() {
 
   return wrapper;
 }
+function getItemToAssure<
+  F extends Function | FluentIterable<any> | FluentAsyncIterable<any>
+>(f: F): any {
+  return typeof f === 'function'
+    ? (...args: any[]) => (f as Function)(...args)
+    : f;
+}
+
+/**
+ * Returns a new instance of a function with a order assuring mark.
+ * Fluent Iterable will treat order Assuring marked function as if
+ * they're guaranteed to return ordered result in regard some iterable
+ * where they're applied. The actual order, though, is of responsibility
+ * of the code using this package.
+ *
+ * This is useful to have access to faster versions of some algorithms, but
+ * the output may not match expectation if the resulting order is not actually right.
+ *
+ * @param f the function to assure order
+ */
+function assureOrder<
+  F extends Function | FluentIterable<any> | FluentAsyncIterable<any>
+>(f: F): F {
+  const result = getItemToAssure(f);
+  result[orderAssured] = true;
+  return result;
+}
+
+/**
+ * Returns a new instance of a function with a descending order assuring mark.
+ * Fluent Iterable will treat descending order assuring marked functions as if
+ * they're guaranteed to return descending ordered results in regard some iterable
+ * where they're applied. The actual order, though, is of responsibility
+ * of the code using this package.
+ *
+ * This is useful to have access to faster versions of some algorithms, but
+ * the output may not match expectation if the resulting order is not actually right.
+ *
+ * @param f the function to assure order
+ */
+function assureOrderDescending<
+  F extends Function | FluentIterable<any> | FluentAsyncIterable<any>
+>(f: F): F {
+  const result = getItemToAssure(f);
+  result[descendingOrderAssured] = true;
+  return result;
+}
 
 export {
+  assureOrder,
+  assureOrderDescending,
   constant,
   empty,
   emptyAsync,
