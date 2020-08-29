@@ -2,12 +2,13 @@ import { identity } from '../utils';
 import { AnyIterable } from 'augmentative-iterable';
 import {
   AnyMapper,
+  FunctionAnyMapper,
   isAnyOrderAssured,
-  isOrderAssured,
   ResolverType,
 } from '../types-internal';
 import { DistinctIngredients } from './ingredients';
 import { orderedOperationRecipe } from './ordered-operation-recipe';
+import { prepare } from '../types-internal/prepare';
 
 function inc(map: Map<any, number>, y: any) {
   const result = (map.get(y) || 0) + 1;
@@ -17,7 +18,7 @@ function inc(map: Map<any, number>, y: any) {
 }
 export function incPredicate<T>(
   resolver: ResolverType,
-  mapper: AnyMapper<T>,
+  mapper: FunctionAnyMapper<T>,
   maxOcurrences: number,
 ): any {
   const map = new Map<any, number>();
@@ -34,7 +35,7 @@ function orderedDistinctRecipe({
   const ordered = orderedOperationRecipe(map, resolver, partition);
   return function distinct<T>(
     this: AnyIterable<T>,
-    mapper: AnyMapper<any>,
+    mapper: FunctionAnyMapper<any>,
     maxOcurrences: number,
   ) {
     const partitioned = ordered.call(this, mapper);
@@ -50,13 +51,14 @@ export function distinctRecipe(ingredients: DistinctIngredients) {
 
   return function distinct<T, R>(
     this: AnyIterable<T>,
-    mapper: AnyMapper<T> | number = identity,
+    baseMapper: AnyMapper<T> | number = identity,
     maxOcurrences = 1,
   ) {
-    if (typeof mapper === 'number') {
-      maxOcurrences = mapper;
-      mapper = identity;
+    if (typeof baseMapper === 'number') {
+      maxOcurrences = baseMapper;
+      baseMapper = identity;
     }
+    const mapper = prepare(baseMapper);
     return isAnyOrderAssured(mapper, this)
       ? ordered.call(this, mapper, maxOcurrences)
       : filterOrAll.call(this, incPredicate(resolver, mapper, maxOcurrences));

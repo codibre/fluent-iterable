@@ -1,4 +1,5 @@
 import { AnyIterable } from 'augmentative-iterable';
+import { ConcatIngredient, EmptyIngredient, Ingredient } from './ingredients';
 
 function* repeat<T>(times: number, cache: T[]) {
   for (let i = 1; i < times; ++i) {
@@ -6,7 +7,11 @@ function* repeat<T>(times: number, cache: T[]) {
   }
 }
 
-export function repeatRecipe(map: Function, concat: Function, empty: Function) {
+export function repeatRecipe(
+  map: Ingredient,
+  concat: ConcatIngredient,
+  empty: EmptyIngredient,
+) {
   return function <T>(this: AnyIterable<T>, n: number): any {
     if (n >= 1) {
       const cache: T[] = [];

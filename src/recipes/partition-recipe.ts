@@ -1,8 +1,9 @@
 import { yieldArrayPartition } from './yield-array-partition';
 import { getChooseIteration } from '../recipes';
 import { Equality } from '../types-base';
+import { PartitionBaseIngredient } from './ingredients';
 
-export function partitionRecipe(iterate: any) {
+export function partitionRecipe(iterate: PartitionBaseIngredient) {
   const partitioning = getChooseIteration(yieldArrayPartition, iterate);
   return function <T>(
     this: Iterable<T>,

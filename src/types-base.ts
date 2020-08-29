@@ -1,4 +1,8 @@
 import TypedEmitter from 'typed-emitter';
+import {
+  Predicate as FunctionPredicate,
+  AsyncPredicate as AsyncFunctionPredicate,
+} from 'augmentative-iterable';
 
 /**
  * represent the options that can be used with fluentEmit
@@ -27,19 +31,10 @@ export interface FluentEmitOptions {
 export interface ErrorCallback {
   (error: Error, index: number): unknown;
 }
-/**
- * Represents a predicate on type `T`.<br>
- *   Example: `const evenNumber: Predicate<number> = n => (n % 2) === 0;`
- * @typeparam T The type the predicate is defined on.
- */
-export interface Predicate<T> {
-  /**
-   * Evaluates an item of type `T`.
-   * @param item The item evaluated.
-   * @returns `true` if the predicate passed on `item`; otherwise `false`.
-   */
-  (item: T): any;
-}
+
+export type Predicate<T> = FunctionPredicate<T> | keyof T;
+export type AsyncPredicate<T> = AsyncFunctionPredicate<T> | keyof T;
+
 /**
  * Represents a reducer of type `T` into the accumulator type `A`.<br>
  *   Example: `const sumReducer: Reducer<number, number> = (sum, next) => sum + next;`

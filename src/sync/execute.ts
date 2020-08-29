@@ -1,7 +1,4 @@
 import { executeRecipe } from '../recipes';
-import { map } from './map';
+import { basic } from './basic-ingredients';
 
-export const execute = executeRecipe(map, (action) => (t) => {
-  action(t);
-  return t;
-});
+export const execute = executeRecipe(basic);

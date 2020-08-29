@@ -20,6 +20,7 @@ import {
   FluentEmitter,
   Equality,
 } from './types-base';
+import { FluentIterableKey } from './types-key';
 
 /**
  * Represents the operations using EventEmitters
@@ -96,7 +97,8 @@ interface FluentIterableEmitter<T> {
 interface FluentIterable<T>
   extends Iterable<T>,
     OrderAssurable<FluentAsyncIterable<T>>,
-    FluentIterableEmitter<T> {
+    FluentIterableEmitter<T>,
+    FluentIterableKey<T> {
   /**
    * Maps all elements of the iterable to an instance of [[Indexed]], an index-value pair constructed of the original element in the iterable and it's index (starting from 0 for the first element in the iterable).<br>
    *   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).withIndex()` yields `{ idx: 0, value: 'anchor' }`, `{ idx: 1, value: 'almond' }` and so on.

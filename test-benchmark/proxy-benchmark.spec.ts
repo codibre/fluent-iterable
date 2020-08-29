@@ -14,6 +14,16 @@ import { interval } from '../src';
 import { expect } from 'chai';
 import { getExtender } from 'extension-methods';
 
+interface Something {
+  ab: string;
+  cd: {
+    a: {
+      c: 3;
+    };
+    b: 2;
+  };
+}
+
 function explicitWay() {
   return Object.assign({
     ...mountIterableFunctions(iterableFuncs, fluent),

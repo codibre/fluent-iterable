@@ -1,3 +1,4 @@
 import { augmentativeForEach } from 'augmentative-iterable';
+import { forEachRecipe } from '../recipes';
 
-export const forEach = augmentativeForEach;
+export const forEach = forEachRecipe(augmentativeForEach);

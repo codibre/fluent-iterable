@@ -1,3 +1,5 @@
+import { AnyMapper } from '../types-internal';
+import { prepare } from '../types-internal/prepare';
 import { identity } from '../utils';
 
 export function caseCheckRecipe(
@@ -8,9 +10,9 @@ export function caseCheckRecipe(
 ) {
   return function <T>(
     this: Iterable<T>,
-    givenPredicate: Function = defaultPredicate as any,
+    givenPredicate: AnyMapper<T> = defaultPredicate as any,
   ) {
-    const predicate = predicateTransform(givenPredicate);
+    const predicate = predicateTransform(prepare(givenPredicate));
     for (const t of this) {
       if (predicate(t)) {
         return ifTrue(t);

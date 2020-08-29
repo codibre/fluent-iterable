@@ -1,11 +1,12 @@
 import { AnyIterable } from 'augmentative-iterable';
-import { AsyncAction } from '../types-base';
+import { AnyMapper } from '../types-internal';
+import { prepare } from '../types-internal/prepare';
 
 export function augmentIterableRecipe(augmentIterableAsync: Function) {
   return function <T>(
     this: AnyIterable<T>,
-    action: AsyncAction<T>,
+    action: AnyMapper<T>,
   ): AnyIterable<T> {
-    return augmentIterableAsync(this, action);
+    return augmentIterableAsync(this, prepare(action));
   };
 }

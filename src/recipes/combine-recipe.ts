@@ -1,4 +1,6 @@
 import { AnyIterable, Mapper } from 'augmentative-iterable';
+import { AnyMapper } from '../types-internal';
+import { prepare } from '../types-internal/prepare';
 import { identity } from '../utils';
 import { CombineIngredients } from './ingredients';
 
@@ -51,9 +53,11 @@ function getInnerJoin({
   return function <T, U>(
     itThis: AnyIterable<T>,
     iterable: AnyIterable<U>,
-    keyA: Mapper<T, unknown>,
-    keyB: Mapper<U, unknown>,
+    baseKeyA: AnyMapper<T>,
+    baseKeyB: AnyMapper<U>,
   ) {
+    const keyA = prepare(baseKeyA);
+    const keyB = prepare(baseKeyB);
     const m = new Map<unknown, U[]>();
     return resolver(forEach.call(iterable, getMapItems(m, keyB)), () =>
       flatten.call(

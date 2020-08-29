@@ -8,6 +8,7 @@ import {
   FluentAsyncIterable,
   FluentGroup,
 } from './types';
+import './types-key';
 import { OrderAssurable } from './assure-order-types';
 import {
   Predicate,

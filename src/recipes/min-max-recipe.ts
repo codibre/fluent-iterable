@@ -1,9 +1,11 @@
 import { AnyIterable } from 'augmentative-iterable';
 import {
+  AnyMapper,
   isDescendingOrderAssured,
   isOrderAssured,
   ResolverType,
 } from '../types-internal';
+import { prepare } from '../types-internal/prepare';
 import { assureOrder, identity } from '../utils';
 import { MinMaxIngredients } from './ingredients';
 
@@ -41,10 +43,11 @@ function minMaxRecipe(
   firstChecker: FunctionChecker,
 ) {
   return function ({ filter, resolver, first, last }: MinMaxIngredients) {
-    return function <T>(this: any, mapper: any = identity): any {
+    return function <T>(this: any, baseMapper: AnyMapper<T> = identity): any {
       const wrapper: MinMaxWrapper<T> = {
         firstItem: true,
       };
+      const mapper = prepare(baseMapper);
       const predicate = getPredicate(resolver, mapper, wrapper, accept);
       let operation: any;
       if (lastChecker(mapper, this)) {

@@ -1,6 +1,6 @@
 import {
+  FunctionAnyMapper,
   isAnyOrderAssured,
-  isOrderAssured,
   ResolverType,
 } from '../types-internal';
 import { AnyMapper } from '../types-internal';
@@ -8,6 +8,7 @@ import { AnyIterable } from 'augmentative-iterable';
 import { map as mapSync } from '../sync/map';
 import { GroupIngredients } from './ingredients';
 import { orderedOperationRecipe } from './ordered-operation-recipe';
+import { prepare } from '../types-internal/prepare';
 
 function orderedGroupRecipe({
   map,
@@ -16,7 +17,7 @@ function orderedGroupRecipe({
   forEach,
 }: GroupIngredients) {
   const ordered = orderedOperationRecipe(map, resolver, partition);
-  return function <T>(this: AnyIterable<T>, mapper: AnyMapper<any>) {
+  return function <T>(this: AnyIterable<T>, mapper: FunctionAnyMapper<any>) {
     const partitioned = ordered.call(this, mapper);
     return map.call(partitioned, (part: Iterable<any[]>) => {
       let key!: any;
@@ -36,7 +37,7 @@ function reduceGroup<T, R>(
   iterable: AnyIterable<T>,
   reduceAndMap: Function,
   resolver: ResolverType,
-  mapper: AnyMapper<T>,
+  mapper: FunctionAnyMapper<T>,
 ) {
   return reduceAndMap.call(
     iterable,
@@ -55,7 +56,8 @@ function reduceGroup<T, R>(
 export function groupRecipe(ingredients: GroupIngredients) {
   const orderedGroup = orderedGroupRecipe(ingredients);
   const { reduceAndMap, resolver, iterate } = ingredients;
-  return function <T, R>(this: AnyIterable<T>, mapper: AnyMapper<T>) {
+  return function <T>(this: AnyIterable<T>, baseMapper: AnyMapper<T>) {
+    const mapper = prepare(baseMapper);
     if (isAnyOrderAssured(mapper, this)) {
       return orderedGroup.call(this, mapper);
     } else {
