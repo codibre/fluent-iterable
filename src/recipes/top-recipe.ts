@@ -1,7 +1,14 @@
+import { AnyMapper } from '../types-internal';
+import { prepare } from '../types-internal/prepare';
 import { BasicReduceIngredients } from './ingredients';
 
 export function topRecipe({ reduceAndMap, resolver }: BasicReduceIngredients) {
-  return function (this: any, mapper: Function, comparer: Function): any {
+  return function <T>(
+    this: any,
+    baseMapper: AnyMapper<T>,
+    comparer: Function,
+  ): any {
+    const mapper = prepare(baseMapper);
     return reduceAndMap.call(
       this,
       (current: any, next: any) => {

@@ -1,5 +1,6 @@
-import { Mapper } from '../types';
 import { Reducer } from '../types-base';
+import { AnyMapper } from '../types-internal';
+import { prepare } from '../types-internal/prepare';
 import { BasicIngredients } from './ingredients';
 
 export function reduceAndMapRecipe({ forEach, resolver }: BasicIngredients) {
@@ -7,9 +8,10 @@ export function reduceAndMapRecipe({ forEach, resolver }: BasicIngredients) {
     this: Iterable<T>,
     reducer: Reducer<T, A>,
     initial: A,
-    result: Mapper<A, R>,
+    baseResult: AnyMapper<A>,
   ): R {
     let accumulator: A = initial;
+    const result = prepare(baseResult);
     return resolver(
       forEach.call(this, (t: any) =>
         resolver(reducer(accumulator, t), (r) => (accumulator = r)),

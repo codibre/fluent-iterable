@@ -922,6 +922,23 @@ describe('fluent iterable', () => {
           expect(fluent(['1', '2', '3']).join('-', (x) => `a${x}`)).to.be.equal(
             'a1-a2-a3',
           ));
+        it('should work using key string', () =>
+          expect(
+            fluent([{ a: '1' }, { a: '2' }, { a: '3' }]).join('-', 'a'),
+          ).to.be.equal('1-2-3'));
+      });
+      describe('joinAsync', () => {
+        it('many with predicate', async () =>
+          expect(
+            await fluent(['1', '2', '3']).joinAsync('-', (x) => `a${x}`),
+          ).to.be.equal('a1-a2-a3'));
+        it('should work using key string', async () =>
+          expect(
+            await fluent([{ a: '1' }, { a: '2' }, { a: '3' }]).joinAsync(
+              '-',
+              'a',
+            ),
+          ).to.be.equal('1-2-3'));
       });
       describe('first', () => {
         it('empty', () => expect(fluent([]).first()).to.be.undefined);
@@ -980,7 +997,6 @@ describe('fluent iterable', () => {
             await fluent([{ a: 1 }, { a: 11 }, { a: 0 }]).lastAsync('a'),
           ).to.eql({ a: 11 }));
       });
-      // TODO: Keep implementing key string tests from here
       describe('reduceAndMap', () => {
         it('empty', async () =>
           expect(
@@ -998,6 +1014,17 @@ describe('fluent iterable', () => {
               (a) => a * 10 + 1,
             ),
           ).to.be.equals(61));
+        it('should work with key string', () =>
+          expect(
+            fluent([1, 2, 3]).reduceAndMap(
+              (a, b) => {
+                a.a += b;
+                return a;
+              },
+              { a: 0 },
+              'a',
+            ),
+          ).to.be.equals(6));
       });
       describe('reduceAndMapAsync', () => {
         it('empty', async () =>
@@ -1016,6 +1043,17 @@ describe('fluent iterable', () => {
               async (a) => a * 10 + 1,
             ),
           ).to.be.equals(61));
+        it('should work with key string', async () =>
+          expect(
+            await fluent([1, 2, 3]).reduceAndMapAsync(
+              (a, b) => {
+                a.a += b;
+                return a;
+              },
+              { a: 0 },
+              'a',
+            ),
+          ).to.be.equals(6));
       });
       describe('reduce', () => {
         it('empty', async () =>
@@ -1043,6 +1081,10 @@ describe('fluent iterable', () => {
             .false);
         it('true', async () =>
           expect(fluent([2, 4, 6]).all((a: number) => a % 2 === 0)).to.be.true);
+        it('should work with key string when result is true', () =>
+          expect(fluent([{ a: 1 }, { a: 2 }, { a: 3 }]).all('a')).to.true);
+        it('should work with key string when result is true', () =>
+          expect(fluent([{ a: 1 }, { a: 0 }, { a: 3 }]).all('a')).to.false);
       });
       describe('allAsync', () => {
         it('empty', async () =>
@@ -1056,6 +1098,12 @@ describe('fluent iterable', () => {
           expect(
             await fluent([2, 4, 6]).allAsync(async (a: number) => a % 2 === 0),
           ).to.be.true);
+        it('should work with key string when result is true', async () =>
+          expect(await fluent([{ a: 1 }, { a: 2 }, { a: 3 }]).allAsync('a')).to
+            .true);
+        it('should work with key string when result is true', async () =>
+          expect(await fluent([{ a: 1 }, { a: 0 }, { a: 3 }]).allAsync('a')).to
+            .false);
       });
       describe('any', () => {
         it('empty', async () =>
@@ -1065,8 +1113,12 @@ describe('fluent iterable', () => {
             .false);
         it('true', async () =>
           expect(fluent([1, 2, 3]).any((a: number) => a % 2 === 0)).to.be.true);
+        it('should work with key string when result is true', () =>
+          expect(fluent([{ a: 1 }, { a: 2 }, { a: 0 }]).any('a')).to.true);
+        it('should work with key string when result is true', () =>
+          expect(fluent([{ a: false }, { a: 0 }, { a: 0 }]).any('a')).to.false);
       });
-      describe('allAsync', () => {
+      describe('anyAsync', () => {
         it('empty', async () =>
           expect(await fluent([]).anyAsync(async (a: number) => a % 2 === 0)).to
             .be.false);
@@ -1078,6 +1130,13 @@ describe('fluent iterable', () => {
           expect(
             await fluent([1, 2, 3]).anyAsync(async (a: number) => a % 2 === 0),
           ).to.be.true);
+        it('should work with key string when result is true', async () =>
+          expect(await fluent([{ a: 1 }, { a: 2 }, { a: 3 }]).anyAsync('a')).to
+            .true);
+        it('should work with key string when result is true', async () =>
+          expect(
+            await fluent([{ a: false }, { a: 0 }, { a: null }]).anyAsync('a'),
+          ).to.false);
       });
       describe('contains', () => {
         it('empty', async () =>
@@ -1088,16 +1147,16 @@ describe('fluent iterable', () => {
           expect(fluent([1, 2, 4]).contains(4)).to.be.true);
       });
       describe('toObject', () => {
-        it('empty', async () =>
+        it('empty', () =>
           expect(
-            await fluent([] as Iterable<Person>).toObject(
+            fluent([] as Iterable<Person>).toObject(
               (x) => x.gender as string,
               (x) => x.name,
             ),
           ).to.be.deep.equal({}));
-        it('not empty', async () =>
+        it('not empty', () =>
           expect(
-            await fluent([
+            fluent([
               {
                 gender: Gender.Female,
                 name: 'name A',
@@ -1119,9 +1178,9 @@ describe('fluent iterable', () => {
             [Gender.NonBinary]: 'name B',
             [Gender.Male]: 'name C',
           }));
-        it('default mapper', async () =>
+        it('default mapper', () =>
           expect(
-            await fluent([
+            fluent([
               {
                 gender: Gender.Female,
                 name: 'name A',
@@ -1148,6 +1207,78 @@ describe('fluent iterable', () => {
               gender: Gender.Male,
               name: 'name C',
             },
+          }));
+        it('should work with key string key mapper', () =>
+          expect(
+            fluent([
+              {
+                gender: Gender.Female,
+                name: 'name A',
+              },
+              {
+                gender: Gender.NonBinary,
+                name: 'name B',
+              },
+              {
+                gender: Gender.Male,
+                name: 'name C',
+              },
+            ]).toObject('gender', (x) => x.name),
+          ).to.be.deep.equal({
+            [Gender.Female]: 'name A',
+            [Gender.NonBinary]: 'name B',
+            [Gender.Male]: 'name C',
+          }));
+        it('should work with key string key mapper and default value mapper', () =>
+          expect(
+            fluent([
+              {
+                gender: Gender.Female,
+                name: 'name A',
+              },
+              {
+                gender: Gender.NonBinary,
+                name: 'name B',
+              },
+              {
+                gender: Gender.Male,
+                name: 'name C',
+              },
+            ] as Iterable<Person>).toObject('gender'),
+          ).to.be.deep.equal({
+            [Gender.Female]: {
+              gender: Gender.Female,
+              name: 'name A',
+            },
+            [Gender.NonBinary]: {
+              gender: Gender.NonBinary,
+              name: 'name B',
+            },
+            [Gender.Male]: {
+              gender: Gender.Male,
+              name: 'name C',
+            },
+          }));
+        it('should work with key string for key mapper and value mapper', () =>
+          expect(
+            fluent([
+              {
+                gender: Gender.Female,
+                name: 'name A',
+              },
+              {
+                gender: Gender.NonBinary,
+                name: 'name B',
+              },
+              {
+                gender: Gender.Male,
+                name: 'name C',
+              },
+            ] as Iterable<Person>).toObject('gender', 'name'),
+          ).to.be.deep.equal({
+            [Gender.Female]: 'name A',
+            [Gender.NonBinary]: 'name B',
+            [Gender.Male]: 'name C',
           }));
       });
       describe('toObjectAsync', () => {
@@ -1182,6 +1313,78 @@ describe('fluent iterable', () => {
             [Gender.NonBinary]: 'name B',
             [Gender.Male]: 'name C',
           }));
+        it('should work with key string key mapper', async () =>
+          expect(
+            await fluent([
+              {
+                gender: Gender.Female,
+                name: 'name A',
+              },
+              {
+                gender: Gender.NonBinary,
+                name: 'name B',
+              },
+              {
+                gender: Gender.Male,
+                name: 'name C',
+              },
+            ]).toObjectAsync('gender', (x) => x.name),
+          ).to.be.deep.equal({
+            [Gender.Female]: 'name A',
+            [Gender.NonBinary]: 'name B',
+            [Gender.Male]: 'name C',
+          }));
+        it('should work with key string key mapper and default value mapper', async () =>
+          expect(
+            await fluent([
+              {
+                gender: Gender.Female,
+                name: 'name A',
+              },
+              {
+                gender: Gender.NonBinary,
+                name: 'name B',
+              },
+              {
+                gender: Gender.Male,
+                name: 'name C',
+              },
+            ] as Iterable<Person>).toObjectAsync('gender'),
+          ).to.be.deep.equal({
+            [Gender.Female]: {
+              gender: Gender.Female,
+              name: 'name A',
+            },
+            [Gender.NonBinary]: {
+              gender: Gender.NonBinary,
+              name: 'name B',
+            },
+            [Gender.Male]: {
+              gender: Gender.Male,
+              name: 'name C',
+            },
+          }));
+        it('should work with key string for key mapper and value mapper', async () =>
+          expect(
+            await fluent([
+              {
+                gender: Gender.Female,
+                name: 'name A',
+              },
+              {
+                gender: Gender.NonBinary,
+                name: 'name B',
+              },
+              {
+                gender: Gender.Male,
+                name: 'name C',
+              },
+            ] as Iterable<Person>).toObjectAsync('gender', 'name'),
+          ).to.be.deep.equal({
+            [Gender.Female]: 'name A',
+            [Gender.NonBinary]: 'name B',
+            [Gender.Male]: 'name C',
+          }));
       });
       describe('top', () => {
         it('should return the max number from a numeric array when no parameter is informed', () => {
@@ -1195,6 +1398,10 @@ describe('fluent iterable', () => {
             ),
           ).to.be.eq(1);
         });
+        it('should work with key string', () =>
+          expect(
+            fluent([{ a: 3 }, { a: 1 }, { a: 2 }]).top('a', (a, b) => a - b),
+          ).to.eql({ a: 3 }));
       });
       describe('max', () => {
         it('should return the max number from a numeric array when no parameter is informed', () => {
@@ -1214,6 +1421,10 @@ describe('fluent iterable', () => {
         it('assuring descending order', () => {
           expect(fluent([1, 2, 3, 4, 3, 5]).max(od(identity))).to.be.eq(1);
         });
+        it('should work with key string', () =>
+          expect(fluent([{ a: 1 }, { a: 3 }, { a: 2 }]).max('a')).to.eql({
+            a: 3,
+          }));
       });
       describe('hasExactly', () => {
         it('false', () => expect(fluent([1, 2, 3]).hasExactly(2)).to.false);
@@ -1251,6 +1462,16 @@ describe('fluent iterable', () => {
           expect(result).to.be.eql([1, 2, 3]);
         });
       });
+      describe('executeAsync', () => {
+        it('should run what is passed', async () => {
+          const action = stub();
+
+          const result = await fluent([1, 2, 3]).executeAsync(action).toArray();
+
+          expect(action).to.have.callsLike([1], [2], [3]);
+          expect(result).to.be.eql([1, 2, 3]);
+        });
+      });
     });
 
     describe('asynchronous', () => {
@@ -1278,6 +1499,24 @@ describe('fluent iterable', () => {
             resolve(x);
           }),
       );
+
+      expect(resolved).to.be.eq(0);
+      const result = await promise;
+      expect(resolved).to.be.eq(10);
+      expect(result).to.be.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    });
+    it('should return a promises with resolves when all promises are resolved using a key string', async () => {
+      let resolved = 0;
+
+      const promise = fluent(interval(1, 10))
+        .map((x) => ({
+          p: new Promise(async (resolve) => {
+            await delay(1);
+            resolved++;
+            resolve(x);
+          }),
+        }))
+        .waitAll('p');
 
       expect(resolved).to.be.eq(0);
       const result = await promise;
