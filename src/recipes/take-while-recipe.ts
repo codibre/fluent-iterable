@@ -1,12 +1,13 @@
 import { AnyIterable } from 'augmentative-iterable';
-import { AsyncAction } from '..';
 import { augmentIterableRecipe } from '../recipes';
-import { keepOrderAssuring } from '../types-internal';
+import { AnyMapper, keepOrderAssuring } from '../types-internal';
+import { prepare } from '../types-internal/prepare';
 
 export function takeWhileRecipe(takeWhileIterable: Function) {
   const base = augmentIterableRecipe(takeWhileIterable);
 
-  return function <T>(this: AnyIterable<T>, action: AsyncAction<any>) {
+  return function <T>(this: AnyIterable<T>, baseAction: AnyMapper<any>) {
+    const action = prepare(baseAction);
     return keepOrderAssuring(base.call(this, action), this);
   };
 }

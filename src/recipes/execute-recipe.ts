@@ -1,10 +1,9 @@
 import { AnyIterable } from 'augmentative-iterable';
+import { FunctionAnyMapper } from '../types-internal';
+import { BasicIngredients } from './ingredients';
 
-export function executeRecipe(
-  map: Function,
-  getMapping: (action: Function) => <T>(t: T) => any,
-) {
-  return function <T>(this: AnyIterable<T>, action: Function) {
-    return map.call(this, getMapping(action));
+export function executeRecipe({ map, resolver }: BasicIngredients) {
+  return function <T>(this: AnyIterable<T>, action: FunctionAnyMapper<T>) {
+    return map.call(this, (x) => resolver(action(x), () => x));
   };
 }

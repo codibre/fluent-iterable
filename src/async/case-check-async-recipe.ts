@@ -1,5 +1,7 @@
 import { identity } from '../utils';
 import { AnyIterable } from 'augmentative-iterable';
+import { AnyMapper } from '../types-internal';
+import { prepare } from '../types-internal/prepare';
 
 export function caseCheckAsyncRecipe(
   ifTrue: Function,
@@ -9,9 +11,9 @@ export function caseCheckAsyncRecipe(
 ) {
   return async function <T>(
     this: AnyIterable<T>,
-    givenPredicate: Function = defaultPredicate as any,
+    givenPredicate: AnyMapper<T> = defaultPredicate as any,
   ) {
-    const predicate = predicateTransform(givenPredicate);
+    const predicate = predicateTransform(prepare(givenPredicate));
     for await (const t of this) {
       if (await predicate(t)) {
         return ifTrue(t);

@@ -9,6 +9,7 @@ export * from './distinct-recipe';
 export * from './emit-recipe';
 export * from './execute-recipe';
 export * from './flatten-recipe';
+export * from './for-each-recipe';
 export * from './get-choose-iteration';
 export * from './group-recipe';
 export * from './join-recipe';

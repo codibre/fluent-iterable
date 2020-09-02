@@ -4,8 +4,9 @@ import { all } from './all';
 import { filter } from './filter';
 import { hasLessOrExactly } from './has-less-or-exactly';
 import { partition } from './partition';
+import { Ingredient, ResolverIngredient } from '../recipes/ingredients';
 
-function distinctSyncRecipe(filterOrAll: Function) {
+function distinctSyncRecipe(filterOrAll: Ingredient | ResolverIngredient) {
   return distinctRecipe({
     ...basic,
     partition,

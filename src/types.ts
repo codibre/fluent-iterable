@@ -6,6 +6,7 @@ import {
 } from 'augmentative-iterable';
 import { EventEmitter } from 'events';
 import { OrderAssurable } from './assure-order-types';
+import { FluentIterableEmitter } from './types-emitter';
 import {
   FluentEmitOptions,
   Indexed,
@@ -20,73 +21,6 @@ import {
   FluentEmitter,
   Equality,
 } from './types-base';
-
-/**
- * Represents the operations using EventEmitters
- * @typeparam T The type of the items in the iterable.
- */
-interface FluentIterableEmitter<T> {
-  /**
-   * Concatenates the specified Emitter to the async iterable.
-   *
-   * **IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
-   * emission generates a new yielded result. The default key event is **'data'**.
-   *
-   * Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
-   * The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
-   * to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
-   *
-   * If you need to change the key event or other characteristics, you can do it through the **options** parameter
-   * @param emitter The EventEmitter
-   * @param options The EventEmitter options. Optional
-   * @returns The [[FluentAsyncIterable]] of the concatenated async iterables.
-   */
-  concatEmitter(
-    emitter: EventEmitter,
-    options?: FluentEmitOptions,
-  ): FluentAsyncIterable<T>;
-  /**
-   * Join the iterable with an EventEmitter, returning a new async iterable with a NxN combination
-   *
-   * **IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
-   * emission generates a new yielded result. The default key event is **'data'**.
-   *
-   * Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
-   * The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
-   * to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
-   *
-   * If you need to change the key event or other characteristics, you can do it through the **options** parameter
-   * @param emitter The EventEmitter
-   * @param options The EventEmitter options. Optional
-   */
-  combineEmitter<U = any>(
-    emitter: EventEmitter,
-    options?: FluentEmitOptions,
-  ): FluentAsyncIterable<[T, U]>;
-
-  /**
-   * Join the iterable with another the EventEmitter, returning a new async iterable with the inner matching combinations
-   *
-   * **IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
-   * emission generates a new yielded result. The default key event is **'data'**.
-   *
-   * Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
-   * The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
-   * to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
-   *
-   * If you need to change the key event or other characteristics, you can do it through the **options** parameter
-   * @param emitter The EventEmitter
-   * @param options The EventEmitter options. Optional
-   * @param keyA A mapper that returns the key map value from the left iterable
-   * @param keyB A mapper that returns the key map value from the right iterable
-   */
-  combineEmitter<U, K>(
-    emitter: EventEmitter,
-    keyA: Mapper<T, K>,
-    keyB: Mapper<U, K>,
-    options?: FluentEmitOptions,
-  ): FluentAsyncIterable<[T, U]>;
-}
 
 /**
  * Represents an iterable extended with common processing and mutating capabilities.<br>
@@ -548,7 +482,7 @@ interface FluentIterable<T>
    * @param valueSelector Projects an element of the iterable into the value of the corresponding field. The identity function is being used if omitted.
    * @returns The object composed of the elements of the iterable as fields.
    */
-  toObject<R = T>(
+  toObject<R = any>(
     keySelector: Mapper<T, keyof R>,
     valueSelector?: Mapper<T, R[keyof R]>,
   ): R;
@@ -560,7 +494,7 @@ interface FluentIterable<T>
    * @param valueSelector Asynchronously projects an element of the iterable into the value of the corresponding field.
    * @returns A promise of the object composed of the elements of the iterable as fields.
    */
-  toObjectAsync<R = T>(
+  toObjectAsync<R = any>(
     keySelector: AsyncMapper<T, keyof R>,
     valueSelector?: AsyncMapper<T, R[keyof R]>,
   ): Promise<R>;

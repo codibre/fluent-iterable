@@ -1,7 +1,4 @@
 import { executeRecipe } from '../recipes';
-import { mapAsync } from './map-async';
+import { basicAsync } from './basic-ingredients-async';
 
-export const executeAsync = executeRecipe(mapAsync, (action) => async (t) => {
-  await action(t);
-  return t;
-});
+export const executeAsync = executeRecipe(basicAsync);

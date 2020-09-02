@@ -56,6 +56,60 @@ describe('combine', () => {
       ]);
     });
 
+    it('should join two iterables resulting in the matching combinations when a key string is provided for iterable a and an expression for b', () => {
+      const result = fluent([{ id: 1 }, { id: 2 }])
+        .combine(
+          [
+            { a: 'a', k: 2 },
+            { a: 'b', k: 1 },
+          ],
+          'id',
+          (x) => x.k,
+        )
+        .toArray();
+
+      expect(result).to.be.eql([
+        [{ id: 1 }, { a: 'b', k: 1 }],
+        [{ id: 2 }, { a: 'a', k: 2 }],
+      ]);
+    });
+
+    it('should join two iterables resulting in the matching combinations when an expression is provided for iterable a and a key string for b', () => {
+      const result = fluent([{ id: 1 }, { id: 2 }])
+        .combine(
+          [
+            { a: 'a', k: 2 },
+            { a: 'b', k: 1 },
+          ],
+          (x) => x.id,
+          'k',
+        )
+        .toArray();
+
+      expect(result).to.be.eql([
+        [{ id: 1 }, { a: 'b', k: 1 }],
+        [{ id: 2 }, { a: 'a', k: 2 }],
+      ]);
+    });
+
+    it('should join two iterables resulting in the matching combinations when key strings are provided for both iterables', () => {
+      const result = fluent([{ id: 1 }, { id: 2 }])
+        .combine(
+          [
+            { a: 'a', k: 2 },
+            { a: 'b', k: 1 },
+          ],
+          'id',
+          'k',
+        )
+        .toArray();
+
+      expect(result).to.be.eql([
+        [{ id: 1 }, { a: 'b', k: 1 }],
+        [{ id: 2 }, { a: 'a', k: 2 }],
+      ]);
+    });
+
     it('should throw an error when only keyA is provided', () => {
       let error: any;
       try {
@@ -139,6 +193,60 @@ describe('combine', () => {
       ]);
     });
 
+    it('should join two iterables resulting in the matching combinations when a key string is provided for iterable a and an expression for b', async () => {
+      const result = await fluent([{ id: 1 }, { id: 2 }])
+        .combineAsync(
+          new ObjectReadableMock([
+            { a: 'a', k: 2 },
+            { a: 'b', k: 1 },
+          ]),
+          'id',
+          (x) => x.k,
+        )
+        .toArray();
+
+      expect(result).to.be.eql([
+        [{ id: 1 }, { a: 'b', k: 1 }],
+        [{ id: 2 }, { a: 'a', k: 2 }],
+      ]);
+    });
+
+    it('should join two iterables resulting in the matching combinations when an expression is provided for iterable a and a key string for b', async () => {
+      const result = await fluent([{ id: 1 }, { id: 2 }])
+        .combineAsync(
+          new ObjectReadableMock([
+            { a: 'a', k: 2 },
+            { a: 'b', k: 1 },
+          ]),
+          (x) => x.id,
+          'k',
+        )
+        .toArray();
+
+      expect(result).to.be.eql([
+        [{ id: 1 }, { a: 'b', k: 1 }],
+        [{ id: 2 }, { a: 'a', k: 2 }],
+      ]);
+    });
+
+    it('should join two iterables resulting in the matching combinations when key strings are provided for both iterables', async () => {
+      const result = await fluent([{ id: 1 }, { id: 2 }])
+        .combineAsync(
+          new ObjectReadableMock([
+            { a: 'a', k: 2 },
+            { a: 'b', k: 1 },
+          ]),
+          'id',
+          'k',
+        )
+        .toArray();
+
+      expect(result).to.be.eql([
+        [{ id: 1 }, { a: 'b', k: 1 }],
+        [{ id: 2 }, { a: 'a', k: 2 }],
+      ]);
+    });
+
     it('should throw an error when only keyA is provided', () => {
       let error: any;
       try {
@@ -219,6 +327,24 @@ describe('combine', () => {
         [1, 'd'],
         [2, 'b'],
         [2, 'c'],
+      ]);
+    });
+
+    it('should join two iterables resulting in the matching combinations when a key string is provided for iterable a and an expression for b', async () => {
+      const result = await fluent([{ id: 1 }, { id: 2 }])
+        .combineEmitter(
+          new ObjectReadableMock([
+            { a: 'a', k: 2 },
+            { a: 'b', k: 1 },
+          ]),
+          'id',
+          (x: any) => x.k,
+        )
+        .toArray();
+
+      expect(result).to.be.eql([
+        [{ id: 1 }, { a: 'b', k: 1 }],
+        [{ id: 2 }, { a: 'a', k: 2 }],
       ]);
     });
 
@@ -306,6 +432,60 @@ describe('combine', () => {
         [1, 'd'],
         [2, 'b'],
         [2, 'c'],
+      ]);
+    });
+
+    it('should join two iterables resulting in the matching combinations when a key string is provided for iterable a and an expression for b', async () => {
+      const result = await fluentAsync([{ id: 1 }, { id: 2 }])
+        .combine(
+          new ObjectReadableMock([
+            { a: 'a', k: 2 },
+            { a: 'b', k: 1 },
+          ]),
+          'id',
+          (x) => x.k,
+        )
+        .toArray();
+
+      expect(result).to.be.eql([
+        [{ id: 1 }, { a: 'b', k: 1 }],
+        [{ id: 2 }, { a: 'a', k: 2 }],
+      ]);
+    });
+
+    it('should join two iterables resulting in the matching combinations when an expression is provided for iterable a and a key string for b', async () => {
+      const result = await fluentAsync([{ id: 1 }, { id: 2 }])
+        .combine(
+          new ObjectReadableMock([
+            { a: 'a', k: 2 },
+            { a: 'b', k: 1 },
+          ]),
+          (x) => x.id,
+          'k',
+        )
+        .toArray();
+
+      expect(result).to.be.eql([
+        [{ id: 1 }, { a: 'b', k: 1 }],
+        [{ id: 2 }, { a: 'a', k: 2 }],
+      ]);
+    });
+
+    it('should join two iterables resulting in the matching combinations when key strings are provided for both iterables', async () => {
+      const result = await fluentAsync([{ id: 1 }, { id: 2 }])
+        .combine(
+          new ObjectReadableMock([
+            { a: 'a', k: 2 },
+            { a: 'b', k: 1 },
+          ]),
+          'id',
+          'k',
+        )
+        .toArray();
+
+      expect(result).to.be.eql([
+        [{ id: 1 }, { a: 'b', k: 1 }],
+        [{ id: 2 }, { a: 'a', k: 2 }],
       ]);
     });
 
