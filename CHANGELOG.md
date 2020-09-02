@@ -1,5 +1,12 @@
 
-## 1.5.0
+## 1.6.0
+* 760da33 Issue 14 make fluent accept strings in place of functions (#15)
+* 712fa57 Issue 11 order assuring option for faster opertations (#12)
+* 4060526 Issue 9 implement method is dinstinct (#10)
+* c75cd5d adding emit methods (#8)
+* 0fe6265 expanding min and max contracts to accepts non numeric values (#6)
+## v1.5.0
+* e1ff83d 1.5.0
 * 0518e30 Merge branch 'master' of github.com:Codibre/fluent-iterable
 * a695499 separating average from iterative means calculation for a more utils exporting
 * fc04398 Update README.md

@@ -1,4 +1,4 @@
-[fluent-iterable - v1.5.0](../README.md) › ["emitter/get-iterable-from-emitter"](_emitter_get_iterable_from_emitter_.md)
+[fluent-iterable - v1.6.0](../README.md) › ["emitter/get-iterable-from-emitter"](_emitter_get_iterable_from_emitter_.md)
 
 # Module: "emitter/get-iterable-from-emitter"
 

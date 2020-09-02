@@ -1,4 +1,4 @@
-[fluent-iterable - v1.5.0](../README.md) › ["types"](../modules/_types_.md) › [FluentIterable](_types_.fluentiterable.md)
+[fluent-iterable - v1.6.0](../README.md) › ["types"](../modules/_types_.md) › [FluentIterable](_types_.fluentiterable.md)
 
 # Interface: FluentIterable ‹**T**›
 
@@ -15,7 +15,9 @@ The type of the items in the iterable.
 
 * Iterable‹T›
 
-* [FluentIterableEmitter](_types_.fluentiterableemitter.md)‹T›
+* [OrderAssurable](_assure_order_types_.orderassurable.md)‹[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T››
+
+* [FluentIterableEmitter](_types_emitter_.fluentiterableemitter.md)‹T›
 
   ↳ **FluentIterable**
 
@@ -29,6 +31,8 @@ The type of the items in the iterable.
 * [any](_types_.fluentiterable.md#any)
 * [anyAsync](_types_.fluentiterable.md#anyasync)
 * [append](_types_.fluentiterable.md#append)
+* [assureOrder](_types_.fluentiterable.md#assureorder)
+* [assureOrderDescending](_types_.fluentiterable.md#assureorderdescending)
 * [avg](_types_.fluentiterable.md#avg)
 * [avgAsync](_types_.fluentiterable.md#avgasync)
 * [combine](_types_.fluentiterable.md#combine)
@@ -42,6 +46,7 @@ The type of the items in the iterable.
 * [countAsync](_types_.fluentiterable.md#countasync)
 * [distinct](_types_.fluentiterable.md#distinct)
 * [distinctAsync](_types_.fluentiterable.md#distinctasync)
+* [emit](_types_.fluentiterable.md#emit)
 * [execute](_types_.fluentiterable.md#execute)
 * [executeAsync](_types_.fluentiterable.md#executeasync)
 * [filter](_types_.fluentiterable.md#filter)
@@ -59,6 +64,8 @@ The type of the items in the iterable.
 * [hasLessThan](_types_.fluentiterable.md#haslessthan)
 * [hasMoreOrExactly](_types_.fluentiterable.md#hasmoreorexactly)
 * [hasMoreThan](_types_.fluentiterable.md#hasmorethan)
+* [isDistinct](_types_.fluentiterable.md#isdistinct)
+* [isDistinctAsync](_types_.fluentiterable.md#isdistinctasync)
 * [join](_types_.fluentiterable.md#join)
 * [joinAsync](_types_.fluentiterable.md#joinasync)
 * [last](_types_.fluentiterable.md#last)
@@ -69,6 +76,8 @@ The type of the items in the iterable.
 * [maxAsync](_types_.fluentiterable.md#maxasync)
 * [min](_types_.fluentiterable.md#min)
 * [minAsync](_types_.fluentiterable.md#minasync)
+* [o](_types_.fluentiterable.md#o)
+* [od](_types_.fluentiterable.md#od)
 * [partition](_types_.fluentiterable.md#partition)
 * [prepend](_types_.fluentiterable.md#prepend)
 * [reduce](_types_.fluentiterable.md#reduce)
@@ -108,7 +117,7 @@ ___
 
 ###  all
 
-▸ **all**(`predicate`: [Predicate](_types_base_.predicate.md)‹T›): *boolean*
+▸ **all**(`predicate`: [Predicate](../modules/_types_base_.md#predicate)‹T›): *boolean*
 
 Determines whether all elements of the iterable satisfy a condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
   Note: This operation stops reading elements from the iterable as soon as the result can be determined.<br>
@@ -121,7 +130,7 @@ Determines whether all elements of the iterable satisfy a condition. This is a p
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate` | [Predicate](_types_base_.predicate.md)‹T› | The condition checked for all elements in the iterable. |
+`predicate` | [Predicate](../modules/_types_base_.md#predicate)‹T› | The condition checked for all elements in the iterable. |
 
 **Returns:** *boolean*
 
@@ -150,7 +159,7 @@ ___
 
 ###  any
 
-▸ **any**(`predicate?`: [Predicate](_types_base_.predicate.md)‹T›): *boolean*
+▸ **any**(`predicate?`: [Predicate](../modules/_types_base_.md#predicate)‹T›): *boolean*
 
 Determines whether any element of the iterable exists or satisfies a condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
   Note: This operation stops reading elements from the iterable as soon as the result can be determined.<br>
@@ -165,7 +174,7 @@ Determines whether any element of the iterable exists or satisfies a condition. 
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | [Predicate](_types_base_.predicate.md)‹T› | The condition checked for the elements in the iterable. Defaults to the always true function and thus, returns if the iterable is empty. |
+`predicate?` | [Predicate](../modules/_types_base_.md#predicate)‹T› | The condition checked for the elements in the iterable. Defaults to the always true function and thus, returns if the iterable is empty. |
 
 **Returns:** *boolean*
 
@@ -175,7 +184,7 @@ ___
 
 ###  anyAsync
 
-▸ **anyAsync**(`predicate?`: AsyncPredicate‹T›): *Promise‹boolean›*
+▸ **anyAsync**(`predicate?`: [AsyncPredicate](../modules/_types_base_.md#asyncpredicate)‹T›): *Promise‹boolean›*
 
 Determines whether any element of the iterable exists or satisfies an asynchronous condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
   Note: This operation stops reading elements from the iterable as soon as the result can be determined.
@@ -184,7 +193,7 @@ Determines whether any element of the iterable exists or satisfies an asynchrono
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | AsyncPredicate‹T› | The asynchronous condition checked for the elements in the iterable. |
+`predicate?` | [AsyncPredicate](../modules/_types_base_.md#asyncpredicate)‹T› | The asynchronous condition checked for the elements in the iterable. |
 
 **Returns:** *Promise‹boolean›*
 
@@ -208,6 +217,38 @@ Name | Type | Description |
 **Returns:** *[FluentIterable](_types_.fluentiterable.md)‹T›*
 
 The [FluentIterable](_types_.fluentiterable.md) appended with the element.
+
+___
+
+###  assureOrder
+
+▸ **assureOrder**(): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+
+*Inherited from [OrderAssurable](_assure_order_types_.orderassurable.md).[assureOrder](_assure_order_types_.orderassurable.md#assureorder)*
+
+Assures the order of the object. For the next operations to be used,
+it will be assumed that the order, no matter the predicate used, will
+be ascending, and this will affect the way some operations works.
+
+Be sure to use this method only if you know the order will be right
+
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+
+___
+
+###  assureOrderDescending
+
+▸ **assureOrderDescending**(): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+
+*Inherited from [OrderAssurable](_assure_order_types_.orderassurable.md).[assureOrderDescending](_assure_order_types_.orderassurable.md#assureorderdescending)*
+
+Assures the descending order of the object. For the next operations to be used,
+it will be assumed that the order, no matter the predicate used, will
+be descending, and this will affect the way some operations works.
+
+Be sure to use this method only if you know the order will be right
+
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
 ___
 
@@ -252,7 +293,7 @@ ___
 
 ###  combine
 
-▸ **combine**‹**U**›(`iterable`: Iterable‹U›): *[FluentIterable](_types_.fluentiterable.md)‹[T, U]›*
+▸ **combine**‹**U**›(`iterable`: Iterable‹U›): *[FluentIterable](_types_.fluentiterable.md)‹[]›*
 
 Join the iterable with another one, returning a new iterable with a NxN combination
 
@@ -266,9 +307,9 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `iterable` | Iterable‹U› | The iterable to be combined  |
 
-**Returns:** *[FluentIterable](_types_.fluentiterable.md)‹[T, U]›*
+**Returns:** *[FluentIterable](_types_.fluentiterable.md)‹[]›*
 
-▸ **combine**‹**U**, **K**›(`iterable`: Iterable‹U›, `keyA`: Mapper‹T, K›, `keyB`: Mapper‹U, K›): *[FluentIterable](_types_.fluentiterable.md)‹[T, U]›*
+▸ **combine**‹**U**, **K**›(`iterable`: Iterable‹U›, `keyA`: Mapper‹T, K›, `keyB`: Mapper‹U, K›): *[FluentIterable](_types_.fluentiterable.md)‹[]›*
 
 Join the iterable with another one, returning a new iterable with the inner matching combinations
 
@@ -286,13 +327,13 @@ Name | Type | Description |
 `keyA` | Mapper‹T, K› | A mapper that returns the key map value from the left iterable |
 `keyB` | Mapper‹U, K› | A mapper that returns the key map value from the right iterable  |
 
-**Returns:** *[FluentIterable](_types_.fluentiterable.md)‹[T, U]›*
+**Returns:** *[FluentIterable](_types_.fluentiterable.md)‹[]›*
 
 ___
 
 ###  combineAsync
 
-▸ **combineAsync**‹**U**›(`iterable`: AsyncIterable‹U›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[T, U]›*
+▸ **combineAsync**‹**U**›(`iterable`: AsyncIterable‹U›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[]›*
 
 Join the iterable with an async one, returning a new async iterable with a NxN combination
 
@@ -306,9 +347,9 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `iterable` | AsyncIterable‹U› | The iterable to be combined  |
 
-**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[T, U]›*
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[]›*
 
-▸ **combineAsync**‹**U**, **K**›(`iterable`: AsyncIterable‹U›, `keyA`: Mapper‹T, K›, `keyB`: Mapper‹U, K›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[T, U]›*
+▸ **combineAsync**‹**U**, **K**›(`iterable`: AsyncIterable‹U›, `keyA`: Mapper‹T, K›, `keyB`: Mapper‹U, K›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[]›*
 
 Join the iterable with another one, returning a new async iterable with the inner matching combinations
 
@@ -326,15 +367,15 @@ Name | Type | Description |
 `keyA` | Mapper‹T, K› | A mapper that returns the key map value from the left iterable |
 `keyB` | Mapper‹U, K› | A mapper that returns the key map value from the right iterable  |
 
-**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[T, U]›*
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[]›*
 
 ___
 
 ###  combineEmitter
 
-▸ **combineEmitter**‹**U**›(`emitter`: EventEmitter, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[T, U]›*
+▸ **combineEmitter**‹**U**›(`emitter`: EventEmitter, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[]›*
 
-*Inherited from [FluentIterableEmitter](_types_.fluentiterableemitter.md).[combineEmitter](_types_.fluentiterableemitter.md#combineemitter)*
+*Inherited from [FluentIterableEmitter](_types_emitter_.fluentiterableemitter.md).[combineEmitter](_types_emitter_.fluentiterableemitter.md#combineemitter)*
 
 Join the iterable with an EventEmitter, returning a new async iterable with a NxN combination
 
@@ -358,11 +399,11 @@ Name | Type | Description |
 `emitter` | EventEmitter | The EventEmitter |
 `options?` | [FluentEmitOptions](_types_base_.fluentemitoptions.md) | The EventEmitter options. Optional  |
 
-**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[T, U]›*
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[]›*
 
-▸ **combineEmitter**‹**U**, **K**›(`emitter`: EventEmitter, `keyA`: Mapper‹T, K›, `keyB`: Mapper‹U, K›, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[T, U]›*
+▸ **combineEmitter**‹**U**, **K**›(`emitter`: EventEmitter, `keyA`: Mapper‹T, K›, `keyB`: Mapper‹U, K›, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[]›*
 
-*Inherited from [FluentIterableEmitter](_types_.fluentiterableemitter.md).[combineEmitter](_types_.fluentiterableemitter.md#combineemitter)*
+*Inherited from [FluentIterableEmitter](_types_emitter_.fluentiterableemitter.md).[combineEmitter](_types_emitter_.fluentiterableemitter.md#combineemitter)*
 
 Join the iterable with another the EventEmitter, returning a new async iterable with the inner matching combinations
 
@@ -390,7 +431,39 @@ Name | Type | Description |
 `keyB` | Mapper‹U, K› | A mapper that returns the key map value from the right iterable  |
 `options?` | [FluentEmitOptions](_types_base_.fluentemitoptions.md) | The EventEmitter options. Optional |
 
-**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[T, U]›*
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[]›*
+
+▸ **combineEmitter**‹**U**, **K**›(`emitter`: EventEmitter, `keyA`: keyof T, `keyB`: Mapper‹U, K›, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[]›*
+
+*Inherited from [FluentIterableEmitter](_types_emitter_.fluentiterableemitter.md).[combineEmitter](_types_emitter_.fluentiterableemitter.md#combineemitter)*
+
+Join the iterable with another the EventEmitter, returning a new async iterable with the inner matching combinations
+
+**IMPORTANT**: the AsyncIterable created from the EventEmitter is always based on a key event which every
+emission generates a new yielded result. The default key event is **'data'**.
+
+Also, the generated AsyncIterable will be infinite unless an ending event is emitted at some point.
+The defaults ending events are **'end'** and **'close'**. So, it's important to have in mind this behavior
+to use this feature properly. Operations that requires finiteness to be used may fall into an infinite loop.
+
+If you need to change the key event or other characteristics, you can do it through the **options** parameter
+
+**Type parameters:**
+
+▪ **U**
+
+▪ **K**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`emitter` | EventEmitter | The EventEmitter |
+`keyA` | keyof T | A mapper that returns the key map value from the left iterable |
+`keyB` | Mapper‹U, K› | A mapper that returns the key map value from the right iterable  |
+`options?` | [FluentEmitOptions](_types_base_.fluentemitoptions.md) | The EventEmitter options. Optional |
+
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[]›*
 
 ___
 
@@ -436,7 +509,7 @@ ___
 
 ▸ **concatEmitter**(`emitter`: EventEmitter, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
-*Inherited from [FluentIterableEmitter](_types_.fluentiterableemitter.md).[concatEmitter](_types_.fluentiterableemitter.md#concatemitter)*
+*Inherited from [FluentIterableEmitter](_types_emitter_.fluentiterableemitter.md).[concatEmitter](_types_emitter_.fluentiterableemitter.md#concatemitter)*
 
 Concatenates the specified Emitter to the async iterable.
 
@@ -483,7 +556,7 @@ ___
 
 ###  count
 
-▸ **count**(`predicate?`: [Predicate](_types_base_.predicate.md)‹T›): *number*
+▸ **count**(`predicate?`: [Predicate](../modules/_types_base_.md#predicate)‹T›): *number*
 
 Returns the number of elements that matches a predicate in the iterable. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Examples:<br>
@@ -494,7 +567,7 @@ Returns the number of elements that matches a predicate in the iterable. This is
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | [Predicate](_types_base_.predicate.md)‹T› | The count will consider elements which match this predicate. Defaults to the always true function and thus, counts all the elements in the iterable if omitted. |
+`predicate?` | [Predicate](../modules/_types_base_.md#predicate)‹T› | The count will consider elements which match this predicate. Defaults to the always true function and thus, counts all the elements in the iterable if omitted. |
 
 **Returns:** *number*
 
@@ -504,7 +577,7 @@ ___
 
 ###  countAsync
 
-▸ **countAsync**(`predicate?`: AsyncPredicate‹T›): *Promise‹number›*
+▸ **countAsync**(`predicate?`: [AsyncPredicate](../modules/_types_base_.md#asyncpredicate)‹T›): *Promise‹number›*
 
 Returns the number of elements that matches an asynchronous predicate in the iterable. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -512,7 +585,7 @@ Returns the number of elements that matches an asynchronous predicate in the ite
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | AsyncPredicate‹T› | The count will consider elements which match this asynchronous predicate. |
+`predicate?` | [AsyncPredicate](../modules/_types_base_.md#asyncpredicate)‹T› | The count will consider elements which match this asynchronous predicate. |
 
 **Returns:** *Promise‹number›*
 
@@ -522,7 +595,7 @@ ___
 
 ###  distinct
 
-▸ **distinct**‹**R**›(`mapper?`: Mapper‹T, R›): *[FluentIterable](_types_.fluentiterable.md)‹T›*
+▸ **distinct**‹**R**›(`mapper?`: Mapper‹T, R›, `maxOcurrences?`: undefined | number): *[FluentIterable](_types_.fluentiterable.md)‹T›*
 
 Returns distinct elements from the iterable from a certain projections perspective.<br>
   Examples:<br>
@@ -540,6 +613,26 @@ The type of the data the element equality is based on.
 Name | Type | Description |
 ------ | ------ | ------ |
 `mapper?` | Mapper‹T, R› | The projection to use to determine element equality. Identity mapping is used if omitted. |
+`maxOcurrences?` | undefined &#124; number | The number of accepted occurrences for each item. Default: 1 |
+
+**Returns:** *[FluentIterable](_types_.fluentiterable.md)‹T›*
+
+The [FluentIterable](_types_.fluentiterable.md) of the distinct elements.
+
+▸ **distinct**(`maxOcurrences?`: undefined | number): *[FluentIterable](_types_.fluentiterable.md)‹T›*
+
+Returns distinct elements from the iterable.<br>
+  Examples:<br>
+    * `fluent(['anchor', 'almond', 'anchor', 'alpine']).distinct()` yields *anchor*, *almond* and *alpine*<br>
+    * `fluent(['anchor', 'almond', 'bound', 'alpine']).distinct(word => word[0])` yields *anchor* and *bound*
+
+**`typeparam`** The type of the data the element equality is based on.
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`maxOcurrences?` | undefined &#124; number |
 
 **Returns:** *[FluentIterable](_types_.fluentiterable.md)‹T›*
 
@@ -549,7 +642,7 @@ ___
 
 ###  distinctAsync
 
-▸ **distinctAsync**‹**R**›(`mapper`: AsyncMapper‹T, R›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+▸ **distinctAsync**‹**R**›(`mapper`: AsyncMapper‹T, R›, `maxOcurrences?`: undefined | number): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
 Returns distinct elements from the iterable from a certain asynchronous projections perspective.
 
@@ -564,10 +657,27 @@ The type of the data the element equality is based on.
 Name | Type | Description |
 ------ | ------ | ------ |
 `mapper` | AsyncMapper‹T, R› | The asynchronous projection to use to determine element equality. Identity mapping is used if omitted. |
+`maxOcurrences?` | undefined &#124; number | The number of accepted occurrences for each item. Default: 1 |
 
 **Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
 The [FluentAsyncIterable](_types_.fluentasynciterable.md) of the distinct elements.
+
+___
+
+###  emit
+
+▸ **emit**(): *[FluentEmitter](_types_base_.fluentemitter.md)‹T›*
+
+Converts the iterable into an EventEmitter. This is a resolving operation.
+
+This EventEmitter may emit three different events:
+
+* data: for each item of the iterable;
+* error: in case an error occurs. Notice that, if this method is not listened, the error will be thrown as unhandled;
+* end: when the iterable ends. Notice that, if the iterable is infinite, this event will never be emitted.
+
+**Returns:** *[FluentEmitter](_types_base_.fluentemitter.md)‹T›*
 
 ___
 
@@ -612,7 +722,7 @@ ___
 
 ###  filter
 
-▸ **filter**(`predicate`: [Predicate](_types_base_.predicate.md)‹T›): *[FluentIterable](_types_.fluentiterable.md)‹T›*
+▸ **filter**(`predicate`: [Predicate](../modules/_types_base_.md#predicate)‹T›): *[FluentIterable](_types_.fluentiterable.md)‹T›*
 
 Filters the iterable of `T` based on a predicate.<br>
   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).filter(word => word[0] === 'a')` yields *anchor*, *almond*, and *alpine*.
@@ -621,7 +731,7 @@ Filters the iterable of `T` based on a predicate.<br>
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate` | [Predicate](_types_base_.predicate.md)‹T› | A predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`. |
+`predicate` | [Predicate](../modules/_types_base_.md#predicate)‹T› | A predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`. |
 
 **Returns:** *[FluentIterable](_types_.fluentiterable.md)‹T›*
 
@@ -649,7 +759,7 @@ ___
 
 ###  first
 
-▸ **first**(`predicate?`: [Predicate](_types_base_.predicate.md)‹T›): *T | undefined*
+▸ **first**(`predicate?`: [Predicate](../modules/_types_base_.md#predicate)‹T›): *T | undefined*
 
 Returns the first element of the iterable matching a predicate, or `undefined` value if no such element is found. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
   Examples:<br>
@@ -662,7 +772,7 @@ Returns the first element of the iterable matching a predicate, or `undefined` v
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | [Predicate](_types_base_.predicate.md)‹T› | The first element is to be returned which matches this predicate. Defaults to the always true function and thus, returns the first element in the iterable if omitted. |
+`predicate?` | [Predicate](../modules/_types_base_.md#predicate)‹T› | The first element is to be returned which matches this predicate. Defaults to the always true function and thus, returns the first element in the iterable if omitted. |
 
 **Returns:** *T | undefined*
 
@@ -672,7 +782,7 @@ ___
 
 ###  firstAsync
 
-▸ **firstAsync**(`predicate?`: AsyncPredicate‹T›): *Promise‹T | undefined›*
+▸ **firstAsync**(`predicate?`: [AsyncPredicate](../modules/_types_base_.md#asyncpredicate)‹T›): *Promise‹T | undefined›*
 
 Returns the first element of the iterable matching an asynchronous predicate, or `undefined` value if no such element is found. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
 
@@ -680,7 +790,7 @@ Returns the first element of the iterable matching an asynchronous predicate, or
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | AsyncPredicate‹T› | The first element is to be returned which matches this asynchronous predicate. |
+`predicate?` | [AsyncPredicate](../modules/_types_base_.md#asyncpredicate)‹T› | The first element is to be returned which matches this asynchronous predicate. |
 
 **Returns:** *Promise‹T | undefined›*
 
@@ -780,7 +890,7 @@ ___
 
 ###  group
 
-▸ **group**‹**R**›(`mapper`: Mapper‹T, R›): *[FluentIterable](_types_.fluentiterable.md)‹[FluentGroup](_types_base_.fluentgroup.md)‹T, R››*
+▸ **group**‹**R**›(`mapper`: Mapper‹T, R›): *[FluentIterable](_types_.fluentiterable.md)‹[FluentGroup](_types_.fluentgroup.md)‹T, R››*
 
 Groups the elements of the iterable keyed by equality of data at the specified projection.<br>
   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).group(word => word[0])` yields { key: 'a', values: ['anchor', 'almond', 'alpine'] } and { key: 'b', values: ['bound'] }.
@@ -797,7 +907,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `mapper` | Mapper‹T, R› | Projects the elements of the iterable into the group key they belong to. |
 
-**Returns:** *[FluentIterable](_types_.fluentiterable.md)‹[FluentGroup](_types_base_.fluentgroup.md)‹T, R››*
+**Returns:** *[FluentIterable](_types_.fluentiterable.md)‹[FluentGroup](_types_.fluentgroup.md)‹T, R››*
 
 The [FluentIterable](_types_.fluentiterable.md) of the distinct groups.
 
@@ -805,7 +915,7 @@ ___
 
 ###  groupAsync
 
-▸ **groupAsync**‹**R**›(`mapper`: AsyncMapper‹T, R›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[FluentGroup](_types_base_.fluentgroup.md)‹T, R››*
+▸ **groupAsync**‹**R**›(`mapper`: AsyncMapper‹T, R›): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[FluentGroup](_types_.fluentgroup.md)‹T, R››*
 
 Groups the elements of the iterable keyed by equality of data at the specified asynchronous projection.
 
@@ -821,7 +931,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `mapper` | AsyncMapper‹T, R› | Asynchronously projects the elements of the iterable into the group key they belong to. |
 
-**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[FluentGroup](_types_base_.fluentgroup.md)‹T, R››*
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[FluentGroup](_types_.fluentgroup.md)‹T, R››*
 
 The [FluentAsyncIterable](_types_.fluentasynciterable.md) of the distinct groups.
 
@@ -917,6 +1027,85 @@ True if the number of elements of the iterable is greater than the threshold and
 
 ___
 
+###  isDistinct
+
+▸ **isDistinct**‹**R**›(`mapper?`: Mapper‹T, R›, `maxOcurrences?`: undefined | number): *boolean*
+
+Checks if the given projection have only distinct elements. This is a partial resolving operation,
+and will return the result after as soon as an item got more occurrences than the specified
+
+  Examples:
+
+    * `fluent(['anchor', 'almond', 'anchor', 'alpine']).isDistinct()` returns true
+    * `fluent(['anchor', 'almond', 'bound', 'alpine']).isDistinct(word => word[0])` returns false
+    * `fluent(['anchor', 'almond', 'bound', 'alpine']).isDistinct(word => word[0], 2)` returns true
+
+**Type parameters:**
+
+▪ **R**
+
+The type of the data the element equality is based on.
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`mapper?` | Mapper‹T, R› | The projection to use to determine element equality. Identity mapping is used if omitted. |
+`maxOcurrences?` | undefined &#124; number | The number of accepted occurrences for each item. Default: 1  |
+
+**Returns:** *boolean*
+
+▸ **isDistinct**(`maxOcurrences?`: undefined | number): *boolean*
+
+Checks if the given iterable have only distinct elements. This is a partial resolving operation,
+and will return the result after as soon as an item got more occurrences than the specified
+
+  Examples:
+
+    * `fluent(['anchor', 'almond', 'anchor', 'alpine']).isDistinct()` returns true
+    * `fluent(['anchor', 'almond', 'bound', 'alpine']).isDistinct(word => word[0])` returns false
+    * `fluent(['anchor', 'almond', 'bound', 'alpine']).isDistinct(word => word[0], 2)` returns true
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`maxOcurrences?` | undefined &#124; number | The number of accepted occurrences for each item. Default: 1  |
+
+**Returns:** *boolean*
+
+___
+
+###  isDistinctAsync
+
+▸ **isDistinctAsync**‹**R**›(`mapper`: AsyncMapper‹T, R›, `maxOcurrences?`: undefined | number): *Promise‹boolean›*
+
+Checks if the given projection have only distinct elements. This is a partial resolving operation,
+and will return the result after as soon as an item got more occurrences than the specified
+
+  Examples:
+
+    * `fluent(['anchor', 'almond', 'anchor', 'alpine']).isDistinctAsync()` returns true
+    * `fluent(['anchor', 'almond', 'bound', 'alpine']).isDistinctAsync(word => word[0])` returns false
+    * `fluent(['anchor', 'almond', 'bound', 'alpine']).isDistinctAsync(word => word[0], 2)` returns true
+
+**Type parameters:**
+
+▪ **R**
+
+The type of the data the element equality is based on.
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`mapper` | AsyncMapper‹T, R› | The asynchronous projection to use to determine element equality. Identity mapping is used if omitted. |
+`maxOcurrences?` | undefined &#124; number | The number of accepted occurrences for each item. Default: 1  |
+
+**Returns:** *Promise‹boolean›*
+
+___
+
 ###  join
 
 ▸ **join**(`separator`: string, `mapper?`: Mapper‹T, string›): *string*
@@ -959,7 +1148,7 @@ ___
 
 ###  last
 
-▸ **last**(`predicate?`: [Predicate](_types_base_.predicate.md)‹T›): *T | undefined*
+▸ **last**(`predicate?`: [Predicate](../modules/_types_base_.md#predicate)‹T›): *T | undefined*
 
 Returns the last element of the iterable matching a predicate, or `undefined` value if no such element is found. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Examples:<br>
@@ -972,7 +1161,7 @@ Returns the last element of the iterable matching a predicate, or `undefined` va
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | [Predicate](_types_base_.predicate.md)‹T› | The last element is to be returned which matches this predicate. Defaults to the always true function and thus, returns the last element in the iterable if omitted. |
+`predicate?` | [Predicate](../modules/_types_base_.md#predicate)‹T› | The last element is to be returned which matches this predicate. Defaults to the always true function and thus, returns the last element in the iterable if omitted. |
 
 **Returns:** *T | undefined*
 
@@ -982,7 +1171,7 @@ ___
 
 ###  lastAsync
 
-▸ **lastAsync**(`predicate?`: AsyncPredicate‹T›): *Promise‹T | undefined›*
+▸ **lastAsync**(`predicate?`: [AsyncPredicate](../modules/_types_base_.md#asyncpredicate)‹T›): *Promise‹T | undefined›*
 
 Returns the last element of the iterable matching an asynchronous predicate, or `undefined` value if no such element is found. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -990,7 +1179,7 @@ Returns the last element of the iterable matching an asynchronous predicate, or 
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | AsyncPredicate‹T› | The last element is to be returned which matches this asynchronous predicate. |
+`predicate?` | [AsyncPredicate](../modules/_types_base_.md#asyncpredicate)‹T› | The last element is to be returned which matches this asynchronous predicate. |
 
 **Returns:** *Promise‹T | undefined›*
 
@@ -1049,16 +1238,20 @@ ___
 
 ###  max
 
-▸ **max**(`mapper?`: Mapper‹T, number›): *T | undefined*
+▸ **max**‹**R**›(`mapper?`: Mapper‹T, R›): *T | undefined*
 
 Finds the numeric maximum element of the iterable using a projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).max(word => word.charCodeAt(0))` returns *bound*, since it begins with the character 'b' which has a highest character code than character 'a' with which all the other words begins with
+
+**Type parameters:**
+
+▪ **R**
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper?` | Mapper‹T, number› | The function which projects the elements of the iterable into numbers. Falls back to the identity function if omitted. |
+`mapper?` | Mapper‹T, R› | The function which projects the elements of the iterable into comparable values. Falls back to the identity function if omitted. |
 
 **Returns:** *T | undefined*
 
@@ -1068,15 +1261,19 @@ ___
 
 ###  maxAsync
 
-▸ **maxAsync**(`mapper?`: AsyncMapper‹T, number›): *Promise‹T | undefined›*
+▸ **maxAsync**‹**R**›(`mapper?`: AsyncMapper‹T, R›): *Promise‹T | undefined›*
 
 Finds the numeric maximum element of the iterable using an asynchronous projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.
+
+**Type parameters:**
+
+▪ **R**
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper?` | AsyncMapper‹T, number› | The function which asynchronously projects the elements of the iterable into numbers. |
+`mapper?` | AsyncMapper‹T, R› | The function which asynchronously projects the elements of the iterable into the comparable values. Falls back to the identity function if omitted. |
 
 **Returns:** *Promise‹T | undefined›*
 
@@ -1086,16 +1283,20 @@ ___
 
 ###  min
 
-▸ **min**(`mapper?`: Mapper‹T, number›): *T | undefined*
+▸ **min**‹**R**›(`mapper?`: Mapper‹T, R›): *T | undefined*
 
 Finds the numeric minimum element of the iterable using a projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).min(word => word.length)` returns *bound*, the shortest word in the iterable
+
+**Type parameters:**
+
+▪ **R**
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper?` | Mapper‹T, number› | The function which projects the elements of the iterable into numbers. Falls back to the identity function if omitted. |
+`mapper?` | Mapper‹T, R› | The function which projects the elements of the iterable into the comparable value. Falls back to the identity function if omitted. |
 
 **Returns:** *T | undefined*
 
@@ -1105,15 +1306,19 @@ ___
 
 ###  minAsync
 
-▸ **minAsync**(`mapper?`: AsyncMapper‹T, number›): *Promise‹T | undefined›*
+▸ **minAsync**‹**R**›(`mapper?`: AsyncMapper‹T, R›): *Promise‹T | undefined›*
 
 Finds the numeric minimum element of the iterable using an asynchronous projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.
+
+**Type parameters:**
+
+▪ **R**
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper?` | AsyncMapper‹T, number› | The asynchronous function which projects the elements of the iterable into numbers. |
+`mapper?` | AsyncMapper‹T, R› | The asynchronous function which projects the elements of the iterable into the comparable value. Falls back to the identity function if omitted. |
 
 **Returns:** *Promise‹T | undefined›*
 
@@ -1121,23 +1326,53 @@ A promise of the minimum of the iterable's projected elements.
 
 ___
 
+###  o
+
+▸ **o**(): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+
+*Inherited from [OrderAssurable](_assure_order_types_.orderassurable.md).[o](_assure_order_types_.orderassurable.md#o)*
+
+Alias for assureOrder
+
+Assures the order of the object. For the next operations to be used,
+it will be assumed that the order, no matter the predicate used, will
+be ascending, and this will affect the way some operations works.
+
+Be sure to use this method only if you know the order will be right
+
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+
+___
+
+###  od
+
+▸ **od**(): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+
+*Inherited from [OrderAssurable](_assure_order_types_.orderassurable.md).[od](_assure_order_types_.orderassurable.md#od)*
+
+alias for assureOrderDescending
+
+Assures the descending order of the object. For the next operations to be used,
+it will be assumed that the order, no matter the predicate used, will
+be descending, and this will affect the way some operations works.
+
+Be sure to use this method only if you know the order will be right
+
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+
+___
+
 ###  partition
 
-▸ **partition**(`size`: number): *[FluentIterable](_types_.fluentiterable.md)‹[FluentIterable](_types_.fluentiterable.md)‹T››*
-
-Groups the elements of the iterable into partitions of a specified size.<br>
-  Note: the last partition size can be smaller than the specified size.<br>
-  Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).partition(3)` yields an iterable of *anchor*, *almond* and *bound* and an iterable of *alpine*.
+▸ **partition**(`size`: number | [Equality](_types_base_.equality.md)‹T›): *[FluentIterable](_types_.fluentiterable.md)‹[FluentIterable](_types_.fluentiterable.md)‹T››*
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`size` | number | The expected size of the partitions. Has to be larger than zero. |
+Name | Type |
+------ | ------ |
+`size` | number &#124; [Equality](_types_base_.equality.md)‹T› |
 
 **Returns:** *[FluentIterable](_types_.fluentiterable.md)‹[FluentIterable](_types_.fluentiterable.md)‹T››*
-
-The [FluentIterable](_types_.fluentiterable.md) of partitions.
 
 ___
 
@@ -1328,7 +1563,7 @@ ___
 
 ###  skipWhile
 
-▸ **skipWhile**(`condition`: [Predicate](_types_base_.predicate.md)‹T›): *[FluentIterable](_types_.fluentiterable.md)‹T›*
+▸ **skipWhile**(`condition`: [Predicate](../modules/_types_base_.md#predicate)‹T›): *[FluentIterable](_types_.fluentiterable.md)‹T›*
 
 Bypasses elements in the iterable as long as a specified condition is true and then returns the remaining elements.<br>
   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).skipWhile(word => word[0] === 'a')` yields *bound* and *alpine*.
@@ -1337,7 +1572,7 @@ Bypasses elements in the iterable as long as a specified condition is true and t
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`condition` | [Predicate](_types_base_.predicate.md)‹T› | A predicate of `T`. All elements are skipped from the iterable until this evaluates to `false` for the first time. |
+`condition` | [Predicate](../modules/_types_base_.md#predicate)‹T› | A predicate of `T`. All elements are skipped from the iterable until this evaluates to `false` for the first time. |
 
 **Returns:** *[FluentIterable](_types_.fluentiterable.md)‹T›*
 
@@ -1446,7 +1681,7 @@ ___
 
 ###  takeWhile
 
-▸ **takeWhile**(`condition`: [Predicate](_types_base_.predicate.md)‹T›): *[FluentIterable](_types_.fluentiterable.md)‹T›*
+▸ **takeWhile**(`condition`: [Predicate](../modules/_types_base_.md#predicate)‹T›): *[FluentIterable](_types_.fluentiterable.md)‹T›*
 
 Returns elements from the iterable as long as a specified condition is met.<br>
   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).takeWhile(word => word[0] === 'a')` yields *anchor* and *almond*.
@@ -1455,7 +1690,7 @@ Returns elements from the iterable as long as a specified condition is met.<br>
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`condition` | [Predicate](_types_base_.predicate.md)‹T› | A predicate of `T`. All elements are yielded from the iterable until this evaluates to `false` for the first time. |
+`condition` | [Predicate](../modules/_types_base_.md#predicate)‹T› | A predicate of `T`. All elements are yielded from the iterable until this evaluates to `false` for the first time. |
 
 **Returns:** *[FluentIterable](_types_.fluentiterable.md)‹T›*
 

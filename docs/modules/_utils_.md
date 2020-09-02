@@ -1,4 +1,4 @@
-[fluent-iterable - v1.5.0](../README.md) › ["utils"](_utils_.md)
+[fluent-iterable - v1.6.0](../README.md) › ["utils"](_utils_.md)
 
 # Module: "utils"
 
@@ -10,6 +10,8 @@
 
 ### Functions
 
+* [assureOrder](_utils_.md#assureorder)
+* [assureOrderDescending](_utils_.md#assureorderdescending)
 * [asyncNegation](_utils_.md#asyncnegation)
 * [constant](_utils_.md#constant)
 * [empty](_utils_.md#empty)
@@ -19,6 +21,7 @@
 * [fluentGroup](_utils_.md#fluentgroup)
 * [ge](_utils_.md#ge)
 * [getAverageStepper](_utils_.md#getaveragestepper)
+* [getItemToAssure](_utils_.md#getitemtoassure)
 * [gt](_utils_.md#gt)
 * [identity](_utils_.md#identity)
 * [iterateAll](_utils_.md#iterateall)
@@ -46,6 +49,60 @@ Iterates all element of an iterable
 
 ## Functions
 
+###  assureOrder
+
+▸ **assureOrder**‹**F**›(`f`: F): *F*
+
+Returns a new instance of a function with a order assuring mark.
+Fluent Iterable will treat order Assuring marked function as if
+they're guaranteed to return ordered result in regard some iterable
+where they're applied. The actual order, though, is of responsibility
+of the code using this package.
+
+This is useful to have access to faster versions of some algorithms, but
+the output may not match expectation if the resulting order is not actually right.
+
+**Type parameters:**
+
+▪ **F**: *Function | [FluentIterable](../interfaces/_types_.fluentiterable.md)‹any› | [FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)‹any›*
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`f` | F | the function to assure order  |
+
+**Returns:** *F*
+
+___
+
+###  assureOrderDescending
+
+▸ **assureOrderDescending**‹**F**›(`f`: F): *F*
+
+Returns a new instance of a function with a descending order assuring mark.
+Fluent Iterable will treat descending order assuring marked functions as if
+they're guaranteed to return descending ordered results in regard some iterable
+where they're applied. The actual order, though, is of responsibility
+of the code using this package.
+
+This is useful to have access to faster versions of some algorithms, but
+the output may not match expectation if the resulting order is not actually right.
+
+**Type parameters:**
+
+▪ **F**: *Function | [FluentIterable](../interfaces/_types_.fluentiterable.md)‹any› | [FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)‹any›*
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`f` | F | the function to assure order  |
+
+**Returns:** *F*
+
+___
+
 ###  asyncNegation
 
 ▸ **asyncNegation**‹**T**›(`predicate`: AsyncPredicate‹T›): *AsyncPredicate‹T›*
@@ -56,7 +113,7 @@ Provides a function that negates the informed async predicate
 
 ▪ **T**
 
-the item type of the [[AsyncPredicate]]
+the item type of the [AsyncPredicate](_types_base_.md#asyncpredicate)
 
 **Parameters:**
 
@@ -142,9 +199,9 @@ ___
 
 ###  fluentGroup
 
-▸ **fluentGroup**‹**Key**, **Value**›(`grp`: [Group](../interfaces/_types_base_.group.md)‹Value, Key›): *[FluentGroup](../interfaces/_types_base_.fluentgroup.md)‹Value, Key›*
+▸ **fluentGroup**‹**Key**, **Value**›(`grp`: [Group](../interfaces/_types_base_.group.md)‹Value, Key›): *[FluentGroup](../interfaces/_types_.fluentgroup.md)‹Value, Key›*
 
-Convert a simple [Group](../interfaces/_types_base_.group.md) to a [FluentGroup](../interfaces/_types_base_.fluentgroup.md)
+Convert a simple [Group](../interfaces/_types_base_.group.md) to a [FluentGroup](../interfaces/_types_.fluentgroup.md)
 
 **Type parameters:**
 
@@ -162,7 +219,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `grp` | [Group](../interfaces/_types_base_.group.md)‹Value, Key› | the [Group](../interfaces/_types_base_.group.md) to be converted  |
 
-**Returns:** *[FluentGroup](../interfaces/_types_base_.fluentgroup.md)‹Value, Key›*
+**Returns:** *[FluentGroup](../interfaces/_types_.fluentgroup.md)‹Value, Key›*
 
 ___
 
@@ -195,6 +252,24 @@ ___
 Returns an object to calculates incremental average/iterative means
 
 **Returns:** *[AverageStepper](../interfaces/_types_base_.averagestepper.md)*
+
+___
+
+###  getItemToAssure
+
+▸ **getItemToAssure**‹**F**›(`f`: F): *any*
+
+**Type parameters:**
+
+▪ **F**: *Function | [FluentIterable](../interfaces/_types_.fluentiterable.md)‹any› | [FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)‹any›*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`f` | F |
+
+**Returns:** *any*
 
 ___
 
@@ -392,7 +467,7 @@ ___
 
 ###  negation
 
-▸ **negation**‹**T**›(`predicate`: [Predicate](../interfaces/_types_base_.predicate.md)‹T›): *[Predicate](../interfaces/_types_base_.predicate.md)‹T›*
+▸ **negation**‹**T**›(`predicate`: Predicate‹T›): *Predicate‹T›*
 
 Provides a function that negates the informed predicate
 
@@ -400,15 +475,15 @@ Provides a function that negates the informed predicate
 
 ▪ **T**
 
-the item type of the [Predicate](../interfaces/_types_base_.predicate.md)
+the item type of the [Predicate](_types_base_.md#predicate)
 
 **Parameters:**
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate` | [Predicate](../interfaces/_types_base_.predicate.md)‹T› | The predicate to be negated  |
+`predicate` | Predicate‹T› | The predicate to be negated  |
 
-**Returns:** *[Predicate](../interfaces/_types_base_.predicate.md)‹T›*
+**Returns:** *Predicate‹T›*
 
 ___
 

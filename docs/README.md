@@ -1,12 +1,13 @@
-[fluent-iterable - v1.5.0](README.md)
+[fluent-iterable - v1.6.0](README.md)
 
-# fluent-iterable - v1.5.0
+# fluent-iterable - v1.6.0
 
 ## Index
 
 ### Modules
 
 * ["add-custom-method"](modules/_add_custom_method_.md)
+* ["assure-order-types"](modules/_assure_order_types_.md)
 * ["async-base/index"](modules/_async_base_index_.md)
 * ["async-base/merge"](modules/_async_base_merge_.md)
 * ["async-base/merge-catching"](modules/_async_base_merge_catching_.md)
@@ -33,4 +34,6 @@
 * ["transform-obj-values"](modules/_transform_obj_values_.md)
 * ["types"](modules/_types_.md)
 * ["types-base"](modules/_types_base_.md)
+* ["types-emitter"](modules/_types_emitter_.md)
+* ["types-key"](modules/_types_key_.md)
 * ["utils"](modules/_utils_.md)

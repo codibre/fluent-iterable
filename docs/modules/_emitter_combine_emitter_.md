@@ -1,4 +1,4 @@
-[fluent-iterable - v1.5.0](../README.md) › ["emitter/combine-emitter"](_emitter_combine_emitter_.md)
+[fluent-iterable - v1.6.0](../README.md) › ["emitter/combine-emitter"](_emitter_combine_emitter_.md)
 
 # Module: "emitter/combine-emitter"
 
