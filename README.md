@@ -28,12 +28,12 @@ The library provides the common transformation, filtering and aggregation operat
 
 ## Quick start guide
 
-Install from [Node Package Manager](https://www.npmjs.com/): `npm i fluent-iterable`
+Install from [Node Package Manager](https://www.npmjs.com/): `npm i @codibre/fluent-iterable`
 
 Add the following code to your index file (ts example):
 
 ```typescript
-import { fluent, FluentIterable } from 'fluent-iterable';
+import { fluent, FluentIterable } from '@codibre/fluent-iterable';
 
 const numbers: number[] = [3, 1, 8, 6, 9, 2];
 const iterable: FluentIterable<number> = fluent(numbers);
@@ -60,7 +60,7 @@ import {
   fluentAsync,
   FluentIterable,
   FluentAsyncIterable,
-} from 'fluent-iterable';
+} from '@codibre/fluent-iterable';
 
 const iterableOfArray: FluentIterable<number> = fluent([3, 1, 8, 6, 9, 2]);
 
@@ -169,7 +169,7 @@ The [interval()](docs/modules/_utils_.md#interval) function generates a continuo
 Note: remember, generator functions are state machines, calling the function will not actually generate the numbers. They are generated on the fly until new number are being read from it:
 
 ```typescript
-import { fluent, interval } from 'fluent-iterable';
+import { fluent, interval } from '@codibre/fluent-iterable';
 
 const numbers: Iterable<number> = interval();
 const iterable: FluentIterable<number> = fluent(numbers);
@@ -190,7 +190,7 @@ for (const number of iterable.take(10)) {
 The [depaginate()](docs/modules/_depaginator_.md#depaginate) is a handy little generator function when it comes down to dealing paginated resources. It is designed to translate the paginated resource into a non-paginated iterable of elements. The function takes one parameter of type [Pager](docs/modules/_types_.md), which defines how to retrieve a single [page](docs/interfaces/_types_.page.md) from the resource.
 
 ```typescript
-import { fluentAsync, depaginate, Page, Pager } from 'fluent-iterable';
+import { fluentAsync, depaginate, Page, Pager } from '@codibre/fluent-iterable';
 
 interface Data { .. } // The type of the data stored in the paginated resource
 type NextPageToken = ..; // The type of the next page token (e.g. page number, DDB token string, etc)
@@ -212,7 +212,7 @@ const firstItems: FluentAsyncIterable<Data> = fluentAsync(depaginate(pager)).tak
 #### Playing with Fibonacci generator
 
 ```typescript
-import { fluent } from 'fluent-iterable';
+import { fluent } from '@codibre/fluent-iterable';
 
 function* naiveFibonacci(): Iterable<number> {
   yield 0;
@@ -259,7 +259,7 @@ console.log(
 #### Playing with object arrays
 
 ```typescript
-import { fluent } from 'fluent-iterable';
+import { fluent } from '@codibre/fluent-iterable';
 
 enum Gender {
   Male = 'Male',
@@ -342,7 +342,7 @@ console.log(
 
 ```typescript
 import fetch from 'node-fetch';
-import { fluentAsync, Pager } from 'fluent-iterable';
+import { fluentAsync, Pager } from '@codibre/fluent-iterable';
 
 interface Data {
   id: number;
@@ -371,7 +371,7 @@ fluentAsync(depaginate(pager))
 ### Doing an inner join between two iterables:
 
 ```typescript
-import { fluent, identity } from 'fluent-iterable';
+import { fluent, identity } from '@codibre/fluent-iterable';
 
 const genders = [
   { code: 'm', description: 'male' },
@@ -422,7 +422,7 @@ fluent(genders)
 ```typescript
 import { DynamoDB } from 'aws-sdk';
 import { Key } from 'aws-sdk/clients/dynamodb';
-import { depaginate, fluentAsync, Pager } from 'fluent-iterable';
+import { depaginate, fluentAsync, Pager } from '@codibre/fluent-iterable';
 
 async function *scan<TData>(
   input: DynamoDB.DocumentClient.ScanInput
