@@ -12,7 +12,7 @@ const valueTypes = ['string', 'number', 'boolean'];
  * Returns exactly the informed parameter
  * @param param The informed parameter to be returned
  */
-function identity<T>(param: T): T {
+export function identity<T>(param: T): T {
   return param;
 }
 
@@ -30,7 +30,7 @@ async function* promiseIterateAsync<T>(
  * @typeparam T the item type of the [[Iterable]]
  * @param a The async iterable
  */
-function iterateAsync<T>(
+export function iterateAsync<T>(
   a: AnyIterable<T> | PromiseLike<AnyIterable<T>>,
 ): AsyncIterable<T> {
   return ((a as any).then || (a as any)[Symbol.iterator]
@@ -43,7 +43,7 @@ function iterateAsync<T>(
  * @typeparam T the item type of the internal [[Iterable/AsyncIterable]]
  * @param a The async iterable
  */
-async function* iterateAllAsync<T>(a: AsyncIterable<AnyIterable<T>>) {
+export async function* iterateAllAsync<T>(a: AsyncIterable<AnyIterable<T>>) {
   for await (const it of a) {
     yield* it;
   }
@@ -54,13 +54,13 @@ async function* iterateAllAsync<T>(a: AsyncIterable<AnyIterable<T>>) {
  * @typeparam T the item type of the [[Iterable]]
  * @param a The iterable
  */
-const iterate = identity;
+export const iterate = identity;
 
 /**
  * Returns a function that always returns the informed value
  * @param value the constant value
  */
-function constant<T>(value: T) {
+export function constant<T>(value: T) {
   return function constantValue() {
     return value;
   };
@@ -71,7 +71,7 @@ function constant<T>(value: T) {
  * @typeparam T the item type of the internal [[Iterable]]
  * @param a The iterable
  */
-function* iterateAll<T>(a: Iterable<Iterable<T>>) {
+export function* iterateAll<T>(a: Iterable<Iterable<T>>) {
   for (const it of a) {
     yield* it;
   }
@@ -81,7 +81,7 @@ function* iterateAll<T>(a: Iterable<Iterable<T>>) {
  * Iterates over all owned properties of the given object
  * @param obj The object to iterate with
  */
-function* iterateObjProps<T extends object>(obj: T): Iterable<keyof T> {
+export function* iterateObjProps<T extends object>(obj: T): Iterable<keyof T> {
   for (const property in obj) {
     yield property;
   }
@@ -91,7 +91,7 @@ function* iterateObjProps<T extends object>(obj: T): Iterable<keyof T> {
  * Iterates over all owned entries of given object
  * @param obj The object to iterate with
  */
-function* iterateObjEntries<T extends object>(obj: T) {
+export function* iterateObjEntries<T extends object>(obj: T) {
   for (const property of iterateObjProps(obj)) {
     yield [property, obj[property]];
   }
@@ -102,7 +102,7 @@ function* iterateObjEntries<T extends object>(obj: T) {
  * @typeparam T the type of b
  * @param b the value for comparison
  */
-function eq<T>(b: any) {
+export function eq<T>(b: any) {
   return (a: T) => a === b;
 }
 
@@ -111,7 +111,7 @@ function eq<T>(b: any) {
  * @typeparam T the type of b
  * @param b the value for comparison
  */
-function gt<T>(b: any) {
+export function gt<T>(b: any) {
   return (a: T) => a > b;
 }
 
@@ -120,7 +120,7 @@ function gt<T>(b: any) {
  * @typeparam T the type of b
  * @param b the value for comparison
  */
-function ge<T>(b: any) {
+export function ge<T>(b: any) {
   return (a: T) => a >= b;
 }
 
@@ -129,7 +129,7 @@ function ge<T>(b: any) {
  * @typeparam T the type of b
  * @param b the value for comparison
  */
-function lt<T>(b: any) {
+export function lt<T>(b: any) {
   return (a: T) => a < b;
 }
 
@@ -138,31 +138,31 @@ function lt<T>(b: any) {
  * @typeparam T the type of b
  * @param b the value for comparison
  */
-function le<T>(b: any) {
+export function le<T>(b: any) {
   return (a: T) => a <= b;
 }
 
 /**
  * Provides an empty iterable
  */
-function* empty(): Iterable<undefined> {}
+export function* empty(): Iterable<undefined> {}
 
 /**
  * Provides an empty async iterable
  */
-async function* emptyAsync(): AsyncIterable<undefined> {}
+export async function* emptyAsync(): AsyncIterable<undefined> {}
 
 /**
  * Always returns true
  */
-function truth(): boolean {
+export function truth(): boolean {
   return true;
 }
 
 /**
  * Always returns false
  */
-function falsity(): boolean {
+export function falsity(): boolean {
   return false;
 }
 
@@ -171,7 +171,7 @@ function falsity(): boolean {
  * @typeparam T the item type of the [[Predicate]]
  * @param predicate The predicate to be negated
  */
-function negation<T>(predicate: Predicate<T>): Predicate<T> {
+export function negation<T>(predicate: Predicate<T>): Predicate<T> {
   return (item: T) => !predicate(item);
 }
 
@@ -180,7 +180,9 @@ function negation<T>(predicate: Predicate<T>): Predicate<T> {
  * @typeparam T the item type of the [[AsyncPredicate]]
  * @param predicate The async predicate to be negated
  */
-function asyncNegation<T>(predicate: AsyncPredicate<T>): AsyncPredicate<T> {
+export function asyncNegation<T>(
+  predicate: AsyncPredicate<T>,
+): AsyncPredicate<T> {
   return async (item: T) => !(await predicate(item));
 }
 
@@ -190,7 +192,7 @@ function asyncNegation<T>(predicate: AsyncPredicate<T>): AsyncPredicate<T> {
  * @typeparam Value the type of the items of the value property
  * @param {Group} grp the [[Group]] to be converted
  */
-function fluentGroup<Key, Value>(
+export function fluentGroup<Key, Value>(
   grp: Group<Value, Key>,
 ): FluentGroup<Value, Key> {
   return {
@@ -202,7 +204,7 @@ function fluentGroup<Key, Value>(
 /**
  * Returns an object to calculates incremental average/iterative means
  */
-function getAverageStepper() {
+export function getAverageStepper() {
   let avg = 0;
   let count = 0;
   const wrapper: AverageStepper = {
@@ -234,7 +236,7 @@ function getItemToAssure<
  *
  * @param f the function to assure order
  */
-function assureOrder<
+export function assureOrder<
   F extends Function | FluentIterable<any> | FluentAsyncIterable<any>
 >(f: F): F {
   const result = getItemToAssure(f);
@@ -254,7 +256,7 @@ function assureOrder<
  *
  * @param f the function to assure order
  */
-function assureOrderDescending<
+export function assureOrderDescending<
   F extends Function | FluentIterable<any> | FluentAsyncIterable<any>
 >(f: F): F {
   const result = getItemToAssure(f);
@@ -271,7 +273,7 @@ function isValueType(f: any) {
  * Mark a field name or a mapper as ascending, for use with sortBy
  * @param f the mapper or the field name
  */
-function asc<F>(f: F): F {
+export function asc<F>(f: F): F {
   return assureOrder((isValueType(f) ? { [valueTypeWrapper]: f } : f) as any);
 }
 
@@ -279,36 +281,8 @@ function asc<F>(f: F): F {
  * Mark a field name or a mapper as descending, for use with sortBy
  * @param f the mapper or the field name
  */
-function desc<F>(f: F): F {
+export function desc<F>(f: F): F {
   return assureOrderDescending(
     (isValueType(f) ? { [valueTypeWrapper]: f } : f) as any,
   );
 }
-
-export {
-  assureOrder,
-  asc,
-  assureOrderDescending,
-  desc,
-  constant,
-  empty,
-  emptyAsync,
-  identity,
-  truth,
-  falsity,
-  negation,
-  asyncNegation,
-  fluentGroup,
-  getAverageStepper,
-  eq,
-  ge,
-  gt,
-  le,
-  lt,
-  iterateAsync,
-  iterateAllAsync,
-  iterate,
-  iterateAll,
-  iterateObjProps,
-  iterateObjEntries,
-};
