@@ -4,8 +4,10 @@ import fluent from './fluent';
 import { FluentAsyncIterable, FluentGroup, FluentIterable } from './types';
 import { Group, AverageStepper } from './types-base';
 import { AnyIterable, AsyncPredicate, Predicate } from 'augmentative-iterable';
-import { descendingOrderAssured, orderAssured } from './types-internal';
+import { orderAssured } from './types-internal';
+import { valueTypeWrapper } from './types-internal/string-wrapper';
 
+const valueTypes = ['string', 'number', 'boolean'];
 /**
  * Returns exactly the informed parameter
  * @param param The informed parameter to be returned
@@ -236,7 +238,7 @@ function assureOrder<
   F extends Function | FluentIterable<any> | FluentAsyncIterable<any>
 >(f: F): F {
   const result = getItemToAssure(f);
-  result[orderAssured] = true;
+  result[orderAssured] = 1;
   return result;
 }
 
@@ -256,13 +258,38 @@ function assureOrderDescending<
   F extends Function | FluentIterable<any> | FluentAsyncIterable<any>
 >(f: F): F {
   const result = getItemToAssure(f);
-  result[descendingOrderAssured] = true;
+  result[orderAssured] = -1;
   return result;
+}
+
+function isValueType(f: any) {
+  const tp = typeof f;
+  return valueTypes.includes(tp);
+}
+
+/**
+ * Mark a field name or a mapper as ascending, for use with sortBy
+ * @param f the mapper or the field name
+ */
+function asc<F>(f: F): F {
+  return assureOrder((isValueType(f) ? { [valueTypeWrapper]: f } : f) as any);
+}
+
+/**
+ * Mark a field name or a mapper as descending, for use with sortBy
+ * @param f the mapper or the field name
+ */
+function desc<F>(f: F): F {
+  return assureOrderDescending(
+    (isValueType(f) ? { [valueTypeWrapper]: f } : f) as any,
+  );
 }
 
 export {
   assureOrder,
+  asc,
   assureOrderDescending,
+  desc,
   constant,
   empty,
   emptyAsync,

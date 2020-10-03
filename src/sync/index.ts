@@ -32,6 +32,7 @@ export * from './repeat';
 export * from './skip';
 export * from './skip-while';
 export * from './sort';
+export * from './sort-by';
 export * from './sum';
 export * from './take';
 export * from './take-while';
