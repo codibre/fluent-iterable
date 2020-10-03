@@ -13,7 +13,8 @@ export function sumRecipe({ reduce, resolver }: BasicReduceIngredients) {
     const prepared = prepare(mapper);
     return reduce.call(
       this,
-      (current: any, next: any) => resolver(prepared(next), (r) => current + r),
+      (current: any, next: any) =>
+        resolver(prepared(next), (r) => +r + current),
       0,
     );
   };
