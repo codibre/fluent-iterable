@@ -5,7 +5,7 @@ import { BasicReduceIngredients } from './ingredients';
 import { AnyMapper } from '../types-internal';
 import { prepare } from '../types-internal/prepare';
 
-export function sumRecipe({reduce, resolver}: BasicReduceIngredients) {
+export function sumRecipe({ reduce, resolver }: BasicReduceIngredients) {
   return function <T>(
     this: AnyIterable<T>,
     mapper: AnyMapper<T> = identity as AsyncMapper<T, number>,
