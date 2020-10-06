@@ -1,16 +1,20 @@
 import { AsyncMapper } from '../types';
 import { identity } from '../utils';
 import { AnyIterable } from 'augmentative-iterable';
-import { ReduceIngredient } from './ingredients';
+import { BasicReduceIngredients } from './ingredients';
+import { AnyMapper } from '../types-internal';
+import { prepare } from '../types-internal/prepare';
 
-export function sumRecipe(reduce: ReduceIngredient) {
+export function sumRecipe({ reduce, resolver }: BasicReduceIngredients) {
   return function <T>(
     this: AnyIterable<T>,
-    mapper: AsyncMapper<T, number> = identity as AsyncMapper<T, number>,
+    mapper: AnyMapper<T> = identity as AsyncMapper<T, number>,
   ) {
+    const prepared = prepare(mapper);
     return reduce.call(
       this,
-      (current: any, next: any) => current + mapper(next),
+      (current: any, next: any) =>
+        resolver(prepared(next), (r) => +r + current),
       0,
     );
   };
