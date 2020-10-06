@@ -21,6 +21,7 @@ export * from './reduce-recipe';
 export * from './repeat-recipe';
 export * from './skip-recipe';
 export * from './skip-while-recipe';
+export * from './sort-by-recipe';
 export * from './sort-recipe';
 export * from './sum-recipe';
 export * from './take-recipe';
