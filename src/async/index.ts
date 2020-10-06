@@ -32,6 +32,7 @@ export * from './repeat-async';
 export * from './skip-async';
 export * from './skip-while-async';
 export * from './sort-async';
+export * from './sort-by-async';
 export * from './sum-async';
 export * from './take-async';
 export * from './take-while-async';
