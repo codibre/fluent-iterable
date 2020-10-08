@@ -1,4 +1,4 @@
-[fluent-iterable - v1.6.0](../README.md) › ["types-base"](../modules/_types_base_.md) › [Equality](_types_base_.equality.md)
+[fluent-iterable - v1.7.0](../README.md) › ["types-base"](../modules/_types_base_.md) › [Equality](_types_base_.equality.md)
 
 # Interface: Equality ‹**T**›
 

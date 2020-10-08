@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: test
+name: publish
 on:
   push:
     branches: [master]
@@ -16,7 +16,7 @@ jobs:
           node-version: 10.x
       - name: install
         run: npm ci
-      - name: "Test"
+      - name: "Test & Publish"
         run: npm run test:coverage
       - name: Publish to npm
         uses: pascalgn/npm-publish-action@1.3.3

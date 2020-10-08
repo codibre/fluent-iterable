@@ -1,4 +1,4 @@
-[fluent-iterable - v1.6.0](../README.md) › ["emitter/merge-emitter-catching"](_emitter_merge_emitter_catching_.md)
+[fluent-iterable - v1.7.0](../README.md) › ["emitter/merge-emitter-catching"](_emitter_merge_emitter_catching_.md)
 
 # Module: "emitter/merge-emitter-catching"
 

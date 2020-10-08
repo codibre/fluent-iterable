@@ -1,4 +1,4 @@
-[fluent-iterable - v1.6.0](../README.md) › ["async-base/merging/merge-types"](../modules/_async_base_merging_merge_types_.md) › [GetNextAsyncIterator](_async_base_merging_merge_types_.getnextasynciterator.md)
+[fluent-iterable - v1.7.0](../README.md) › ["async-base/merging/merge-types"](../modules/_async_base_merging_merge_types_.md) › [GetNextAsyncIterator](_async_base_merging_merge_types_.getnextasynciterator.md)
 
 # Interface: GetNextAsyncIterator ‹**T**›
 

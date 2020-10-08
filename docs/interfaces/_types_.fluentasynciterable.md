@@ -1,4 +1,4 @@
-[fluent-iterable - v1.6.0](../README.md) › ["types"](../modules/_types_.md) › [FluentAsyncIterable](_types_.fluentasynciterable.md)
+[fluent-iterable - v1.7.0](../README.md) › ["types"](../modules/_types_.md) › [FluentAsyncIterable](_types_.fluentasynciterable.md)
 
 # Interface: FluentAsyncIterable ‹**T**›
 
@@ -71,6 +71,7 @@ The type of the items in the asynchronous iterable.
 * [skip](_types_.fluentasynciterable.md#skip)
 * [skipWhile](_types_.fluentasynciterable.md#skipwhile)
 * [sort](_types_.fluentasynciterable.md#sort)
+* [sortBy](_types_.fluentasynciterable.md#sortby)
 * [sum](_types_.fluentasynciterable.md#sum)
 * [take](_types_.fluentasynciterable.md#take)
 * [takeWhile](_types_.fluentasynciterable.md#takewhile)
@@ -1144,6 +1145,27 @@ Name | Type | Description |
 **Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
 
 The sorted [FluentAsyncIterable](_types_.fluentasynciterable.md).
+
+___
+
+###  sortBy
+
+▸ **sortBy**(...`mappers`: (Mapper‹T, any› | keyof T)[]): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+
+Sorts the elements of the iterable based on a specified fields. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
+  Examples:<br>
+    * Alphabetical, ascending: `fluentAsync([{ a: 'anchor' }, { a: 'almond' }, { a: 'bound' }, { a: 'alpine' }]).sortBy((x) => x.a)` yields *almond*, *alpine*, *anchor* and *bound*.<br>
+    * Alphabetical, descending: `fluentAsync([{ a: 'anchor' }, { a: 'almond' }, { a: 'bound' }, { a: 'alpine' }]).sortBy(desc((x) => x.a))` yields *bound*, *anchor*, *alpine* and *almond*.<br>
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`...mappers` | (Mapper‹T, any› &#124; keyof T)[] |
+
+**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+
+The sorted [FluentIterable](_types_.fluentiterable.md).
 
 ___
 

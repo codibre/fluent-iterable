@@ -1,4 +1,4 @@
-[fluent-iterable - v1.6.0](../README.md) › ["types-key"](_types_key_.md)
+[fluent-iterable - v1.7.0](../README.md) › ["types-key"](_types_key_.md)
 
 # Module: "types-key"
 

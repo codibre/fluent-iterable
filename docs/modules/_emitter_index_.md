@@ -1,4 +1,4 @@
-[fluent-iterable - v1.6.0](../README.md) › ["emitter/index"](_emitter_index_.md)
+[fluent-iterable - v1.7.0](../README.md) › ["emitter/index"](_emitter_index_.md)
 
 # Module: "emitter/index"
 
