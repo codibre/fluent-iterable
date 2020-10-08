@@ -1,4 +1,4 @@
-[fluent-iterable - v1.6.0](../README.md) › ["types-emitter"](_types_emitter_.md)
+[fluent-iterable - v1.7.0](../README.md) › ["types-emitter"](_types_emitter_.md)
 
 # Module: "types-emitter"
 

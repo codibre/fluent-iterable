@@ -1,4 +1,4 @@
-[fluent-iterable - v1.6.0](../README.md) › ["utils"](_utils_.md)
+[fluent-iterable - v1.7.0](../README.md) › ["utils"](_utils_.md)
 
 # Module: "utils"
 
@@ -7,13 +7,16 @@
 ### Variables
 
 * [iterate](_utils_.md#const-iterate)
+* [valueTypes](_utils_.md#const-valuetypes)
 
 ### Functions
 
+* [asc](_utils_.md#asc)
 * [assureOrder](_utils_.md#assureorder)
 * [assureOrderDescending](_utils_.md#assureorderdescending)
 * [asyncNegation](_utils_.md#asyncnegation)
 * [constant](_utils_.md#constant)
+* [desc](_utils_.md#desc)
 * [empty](_utils_.md#empty)
 * [emptyAsync](_utils_.md#emptyasync)
 * [eq](_utils_.md#eq)
@@ -24,6 +27,7 @@
 * [getItemToAssure](_utils_.md#getitemtoassure)
 * [gt](_utils_.md#gt)
 * [identity](_utils_.md#identity)
+* [isValueType](_utils_.md#isvaluetype)
 * [iterateAll](_utils_.md#iterateall)
 * [iterateAllAsync](_utils_.md#iterateallasync)
 * [iterateAsync](_utils_.md#iterateasync)
@@ -47,7 +51,33 @@ Iterates all element of an iterable
 
 **`param`** The iterable
 
+___
+
+### `Const` valueTypes
+
+• **valueTypes**: *string[]* = ['string', 'number', 'boolean']
+
 ## Functions
+
+###  asc
+
+▸ **asc**‹**F**›(`f`: F): *F*
+
+Mark a field name or a mapper as ascending, for use with sortBy
+
+**Type parameters:**
+
+▪ **F**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`f` | F | the mapper or the field name  |
+
+**Returns:** *F*
+
+___
 
 ###  assureOrder
 
@@ -142,6 +172,26 @@ Name | Type | Description |
 `value` | T | the constant value  |
 
 **Returns:** *constantValue*
+
+___
+
+###  desc
+
+▸ **desc**‹**F**›(`f`: F): *F*
+
+Mark a field name or a mapper as descending, for use with sortBy
+
+**Type parameters:**
+
+▪ **F**
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`f` | F | the mapper or the field name  |
+
+**Returns:** *F*
 
 ___
 
@@ -312,6 +362,20 @@ Name | Type | Description |
 `param` | T | The informed parameter to be returned  |
 
 **Returns:** *T*
+
+___
+
+###  isValueType
+
+▸ **isValueType**(`f`: any): *boolean*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`f` | any |
+
+**Returns:** *boolean*
 
 ___
 

@@ -1,4 +1,4 @@
-[fluent-iterable - v1.6.0](../README.md) › ["types"](../modules/_types_.md) › [FluentIterable](_types_.fluentiterable.md)
+[fluent-iterable - v1.7.0](../README.md) › ["types"](../modules/_types_.md) › [FluentIterable](_types_.fluentiterable.md)
 
 # Interface: FluentIterable ‹**T**›
 
@@ -89,6 +89,7 @@ The type of the items in the iterable.
 * [skipWhile](_types_.fluentiterable.md#skipwhile)
 * [skipWhileAsync](_types_.fluentiterable.md#skipwhileasync)
 * [sort](_types_.fluentiterable.md#sort)
+* [sortBy](_types_.fluentiterable.md#sortby)
 * [sum](_types_.fluentiterable.md#sum)
 * [sumAsync](_types_.fluentiterable.md#sumasync)
 * [take](_types_.fluentiterable.md#take)
@@ -1614,6 +1615,27 @@ Sorts the elements of the iterable based on a specified comparer. This is a reso
 Name | Type | Description |
 ------ | ------ | ------ |
 `comparer?` | [Comparer](_types_base_.comparer.md)‹T› | The comparer operation to use to determine the order of elements. Alphabetical ascending is used for [[string]] elements and numerical ascending is used for [[number]] |
+
+**Returns:** *[FluentIterable](_types_.fluentiterable.md)‹T›*
+
+The sorted [FluentIterable](_types_.fluentiterable.md).
+
+___
+
+###  sortBy
+
+▸ **sortBy**(...`mappers`: (keyof T | Mapper‹T, any›)[]): *[FluentIterable](_types_.fluentiterable.md)‹T›*
+
+Sorts the elements of the iterable based on a specified fields. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
+  Examples:<br>
+    * Alphabetical, ascending: `fluent([{ a: 'anchor' }, { a: 'almond' }, { a: 'bound' }, { a: 'alpine' }]).sortBy((x) => x.a)` yields *almond*, *alpine*, *anchor* and *bound*.<br>
+    * Alphabetical, descending: `fluent([{ a: 'anchor' }, { a: 'almond' }, { a: 'bound' }, { a: 'alpine' }]).sortBy(desc((x) => x.a))` yields *bound*, *anchor*, *alpine* and *almond*.<br>
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`...mappers` | (keyof T &#124; Mapper‹T, any›)[] |
 
 **Returns:** *[FluentIterable](_types_.fluentiterable.md)‹T›*
 

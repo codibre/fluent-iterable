@@ -1,4 +1,4 @@
-[fluent-iterable - v1.6.0](../README.md) › ["async-base/merging/merge-types"](_async_base_merging_merge_types_.md)
+[fluent-iterable - v1.7.0](../README.md) › ["async-base/merging/merge-types"](_async_base_merging_merge_types_.md)
 
 # Module: "async-base/merging/merge-types"
 

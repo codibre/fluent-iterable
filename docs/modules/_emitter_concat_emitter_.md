@@ -1,4 +1,4 @@
-[fluent-iterable - v1.6.0](../README.md) › ["emitter/concat-emitter"](_emitter_concat_emitter_.md)
+[fluent-iterable - v1.7.0](../README.md) › ["emitter/concat-emitter"](_emitter_concat_emitter_.md)
 
 # Module: "emitter/concat-emitter"
 

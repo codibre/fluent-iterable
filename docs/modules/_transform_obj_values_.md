@@ -1,4 +1,4 @@
-[fluent-iterable - v1.6.0](../README.md) › ["transform-obj-values"](_transform_obj_values_.md)
+[fluent-iterable - v1.7.0](../README.md) › ["transform-obj-values"](_transform_obj_values_.md)
 
 # Module: "transform-obj-values"
 

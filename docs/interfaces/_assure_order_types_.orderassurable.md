@@ -1,4 +1,4 @@
-[fluent-iterable - v1.6.0](../README.md) › ["assure-order-types"](../modules/_assure_order_types_.md) › [OrderAssurable](_assure_order_types_.orderassurable.md)
+[fluent-iterable - v1.7.0](../README.md) › ["assure-order-types"](../modules/_assure_order_types_.md) › [OrderAssurable](_assure_order_types_.orderassurable.md)
 
 # Interface: OrderAssurable ‹**T**›
 

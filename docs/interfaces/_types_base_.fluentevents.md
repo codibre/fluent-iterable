@@ -1,4 +1,4 @@
-[fluent-iterable - v1.6.0](../README.md) › ["types-base"](../modules/_types_base_.md) › [FluentEvents](_types_base_.fluentevents.md)
+[fluent-iterable - v1.7.0](../README.md) › ["types-base"](../modules/_types_base_.md) › [FluentEvents](_types_base_.fluentevents.md)
 
 # Interface: FluentEvents ‹**T**›
 

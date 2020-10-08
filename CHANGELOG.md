@@ -1,5 +1,12 @@
 
-## 1.6.0
+## 1.7.0
+* 2a64d19 fixing sum (#21)
+* 2f8fbb4 creating sortBy method (#22)
+* 00ced81 fixing import name lib in readme file (#19)
+* 95af91f creating publish action (#17)
+* 63ed241 1.6.0 (#16)
+## v1.6.0
+* a4f849d 1.6.0
 * 760da33 Issue 14 make fluent accept strings in place of functions (#15)
 * 712fa57 Issue 11 order assuring option for faster opertations (#12)
 * 4060526 Issue 9 implement method is dinstinct (#10)

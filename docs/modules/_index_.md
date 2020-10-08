@@ -1,4 +1,4 @@
-[fluent-iterable - v1.6.0](../README.md) › ["index"](_index_.md)
+[fluent-iterable - v1.7.0](../README.md) › ["index"](_index_.md)
 
 # Module: "index"
 
@@ -11,10 +11,12 @@
 * [IterableOperation](_index_.md#iterableoperation)
 * [IterableOperationAsync](_index_.md#iterableoperationasync)
 * [IterableResolvingOperation](_index_.md#iterableresolvingoperation)
+* [asc](_index_.md#asc)
 * [assureOrder](_index_.md#assureorder)
 * [assureOrderDescending](_index_.md#assureorderdescending)
 * [asyncNegation](_index_.md#asyncnegation)
 * [constant](_index_.md#constant)
+* [desc](_index_.md#desc)
 * [empty](_index_.md#empty)
 * [emptyAsync](_index_.md#emptyasync)
 * [eq](_index_.md#eq)
@@ -70,6 +72,12 @@ ___
 
 ___
 
+###  asc
+
+• **asc**:
+
+___
+
 ###  assureOrder
 
 • **assureOrder**:
@@ -91,6 +99,12 @@ ___
 ###  constant
 
 • **constant**:
+
+___
+
+###  desc
+
+• **desc**:
 
 ___
 
