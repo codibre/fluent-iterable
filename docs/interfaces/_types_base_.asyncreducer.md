@@ -1,19 +1,18 @@
-[fluent-iterable - v1.7.0](../README.md) › ["types-base"](../modules/_types_base_.md) › [AsyncReducer](_types_base_.asyncreducer.md)
+**[fluent-iterable - v1.7.1](../README.md)**
 
-# Interface: AsyncReducer ‹**T, A**›
+> [Globals](../README.md) / ["types-base"](../modules/_types_base_.md) / AsyncReducer
+
+# Interface: AsyncReducer\<T, A>
 
 Represents an asynchronous reducer of type `T` into the accumulator type `A`.<br>
   Example: `const sumReducer: AsyncReducer<Channel, number> = async (sum, next) => sum + await getNumberOfMessages(next)`
 
 ## Type parameters
 
-▪ **T**
-
-The source type.
-
-▪ **A**
-
-The accumulator type.
+Name | Description |
+------ | ------ |
+`T` | The source type. |
+`A` | The accumulator type.  |
 
 ## Hierarchy
 
@@ -21,17 +20,17 @@ The accumulator type.
 
 ## Callable
 
-▸ (`current`: A, `next`: T): *Promise‹A› | A*
+▸ (`current`: A, `next`: T): Promise\<A> \| A
 
 Asynchronously generates the next accumulator item based on the previous one and the next item under reduce.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
 `current` | A | The previous accumulator value. |
 `next` | T | The next item. |
 
-**Returns:** *Promise‹A› | A*
+**Returns:** Promise\<A> \| A
 
 A promise of the new accumulator value.

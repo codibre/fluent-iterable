@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["types"](_types_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "types"
 
 # Module: "types"
 

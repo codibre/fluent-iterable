@@ -1,10 +1,14 @@
-[fluent-iterable - v1.7.0](../README.md) › ["assure-order-types"](../modules/_assure_order_types_.md) › [OrderAssurable](_assure_order_types_.orderassurable.md)
+**[fluent-iterable - v1.7.1](../README.md)**
 
-# Interface: OrderAssurable ‹**T**›
+> [Globals](../README.md) / ["assure-order-types"](../modules/_assure_order_types_.md) / OrderAssurable
+
+# Interface: OrderAssurable\<T>
 
 ## Type parameters
 
-▪ **T**
+Name |
+------ |
+`T` |
 
 ## Hierarchy
 
@@ -25,9 +29,9 @@
 
 ## Methods
 
-###  assureOrder
+### assureOrder
 
-▸ **assureOrder**(): *T*
+▸ **assureOrder**(): T
 
 Assures the order of the object. For the next operations to be used,
 it will be assumed that the order, no matter the predicate used, will
@@ -35,13 +39,13 @@ be ascending, and this will affect the way some operations works.
 
 Be sure to use this method only if you know the order will be right
 
-**Returns:** *T*
+**Returns:** T
 
 ___
 
-###  assureOrderDescending
+### assureOrderDescending
 
-▸ **assureOrderDescending**(): *T*
+▸ **assureOrderDescending**(): T
 
 Assures the descending order of the object. For the next operations to be used,
 it will be assumed that the order, no matter the predicate used, will
@@ -49,13 +53,13 @@ be descending, and this will affect the way some operations works.
 
 Be sure to use this method only if you know the order will be right
 
-**Returns:** *T*
+**Returns:** T
 
 ___
 
-###  o
+### o
 
-▸ **o**(): *T*
+▸ **o**(): T
 
 Alias for assureOrder
 
@@ -65,13 +69,13 @@ be ascending, and this will affect the way some operations works.
 
 Be sure to use this method only if you know the order will be right
 
-**Returns:** *T*
+**Returns:** T
 
 ___
 
-###  od
+### od
 
-▸ **od**(): *T*
+▸ **od**(): T
 
 alias for assureOrderDescending
 
@@ -81,4 +85,4 @@ be descending, and this will affect the way some operations works.
 
 Be sure to use this method only if you know the order will be right
 
-**Returns:** *T*
+**Returns:** T

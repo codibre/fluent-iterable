@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["async-base/merging/get-next-async-iterator"](_async_base_merging_get_next_async_iterator_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "async-base/merging/get-next-async-iterator"
 
 # Module: "async-base/merging/get-next-async-iterator"
 
@@ -10,19 +12,21 @@
 
 ## Functions
 
-###  getNextAsyncIterator
+### getNextAsyncIterator
 
-▸ **getNextAsyncIterator**‹**T**›(`asyncIterator`: AsyncIterator‹T›, `index`: number): *Promise‹[NextResult](../interfaces/_async_base_merging_merge_types_.nextresult.md)‹T››*
+▸ **getNextAsyncIterator**\<T>(`asyncIterator`: AsyncIterator\<T>, `index`: number): Promise\<[NextResult](../interfaces/_async_base_merging_merge_types_.nextresult.md)\<T>>
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **T**
+Name |
+------ |
+`T` |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
-`asyncIterator` | AsyncIterator‹T› |
+`asyncIterator` | AsyncIterator\<T> |
 `index` | number |
 
-**Returns:** *Promise‹[NextResult](../interfaces/_async_base_merging_merge_types_.nextresult.md)‹T››*
+**Returns:** Promise\<[NextResult](../interfaces/_async_base_merging_merge_types_.nextresult.md)\<T>>

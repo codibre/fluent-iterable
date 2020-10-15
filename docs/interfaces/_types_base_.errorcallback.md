@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["types-base"](../modules/_types_base_.md) › [ErrorCallback](_types_base_.errorcallback.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / ["types-base"](../modules/_types_base_.md) / ErrorCallback
 
 # Interface: ErrorCallback
 
@@ -8,13 +10,13 @@
 
 ## Callable
 
-▸ (`error`: Error, `index`: number): *unknown*
+▸ (`error`: Error, `index`: number): unknown
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `error` | Error |
 `index` | number |
 
-**Returns:** *unknown*
+**Returns:** unknown

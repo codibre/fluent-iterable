@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["emitter/merge-emitter"](_emitter_merge_emitter_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "emitter/merge-emitter"
 
 # Module: "emitter/merge-emitter"
 
@@ -6,10 +8,10 @@
 
 ### Variables
 
-* [mergeEmitter](_emitter_merge_emitter_.md#const-mergeemitter)
+* [mergeEmitter](_emitter_merge_emitter_.md#mergeemitter)
 
 ## Variables
 
-### `Const` mergeEmitter
+### mergeEmitter
 
-• **mergeEmitter**: *(Anonymous function)* = getBaseEmittingConversion(merge)
+• `Const` **mergeEmitter**: (Anonymous function) = getBaseEmittingConversion(merge)

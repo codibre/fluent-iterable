@@ -1,5 +1,9 @@
 
-## 1.7.0
+## 1.7.1
+* 19cc29e updating augmentative-iterable
+* bd79851 fixing pipeline
+## v1.7.0
+* a457dd6 1.7.0
 * 2a64d19 fixing sum (#21)
 * 2f8fbb4 creating sortBy method (#22)
 * 00ced81 fixing import name lib in readme file (#19)

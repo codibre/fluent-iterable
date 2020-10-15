@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["add-custom-method"](_add_custom_method_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "add-custom-method"
 
 # Module: "add-custom-method"
 
@@ -10,15 +12,15 @@
 
 ## Functions
 
-###  addCustomMethod
+### addCustomMethod
 
-▸ **addCustomMethod**(`proxyReference`: ProxyReference, `methods`: object): *void*
+▸ **addCustomMethod**(`proxyReference`: ProxyReference, `methods`: { [name:string]: Function;  }): void
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `proxyReference` | ProxyReference |
-`methods` | object |
+`methods` | { [name:string]: Function;  } |
 
-**Returns:** *void*
+**Returns:** void

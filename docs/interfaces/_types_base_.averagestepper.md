@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["types-base"](../modules/_types_base_.md) › [AverageStepper](_types_base_.averagestepper.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / ["types-base"](../modules/_types_base_.md) / AverageStepper
 
 # Interface: AverageStepper
 
@@ -12,7 +14,7 @@ A structure to controls the calculation of iterative means
 
 ### Properties
 
-* [avg](_types_base_.averagestepper.md#readonly-avg)
+* [avg](_types_base_.averagestepper.md#avg)
 
 ### Methods
 
@@ -20,24 +22,24 @@ A structure to controls the calculation of iterative means
 
 ## Properties
 
-### `Readonly` avg
+### avg
 
-• **avg**: *number*
+• `Readonly` **avg**: number
 
 Return the current avg/mean
 
 ## Methods
 
-###  step
+### step
 
-▸ **step**(`y`: number): *number*
+▸ **step**(`y`: number): number
 
 Calculates next avg
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
 `y` | number | the next number to be considered  |
 
-**Returns:** *number*
+**Returns:** number

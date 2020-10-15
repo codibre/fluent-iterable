@@ -1,10 +1,14 @@
-[fluent-iterable - v1.7.0](../README.md) › ["types-base"](../modules/_types_base_.md) › [FluentEvents](_types_base_.fluentevents.md)
+**[fluent-iterable - v1.7.1](../README.md)**
 
-# Interface: FluentEvents ‹**T**›
+> [Globals](../README.md) / ["types-base"](../modules/_types_base_.md) / FluentEvents
+
+# Interface: FluentEvents\<T>
 
 ## Type parameters
 
-▪ **T**
+Name |
+------ |
+`T` |
 
 ## Hierarchy
 
@@ -20,36 +24,36 @@
 
 ## Methods
 
-###  data
+### data
 
-▸ **data**(`t`: T): *void*
+▸ **data**(`t`: T): void
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `t` | T |
 
-**Returns:** *void*
+**Returns:** void
 
 ___
 
-###  end
+### end
 
-▸ **end**(): *void*
+▸ **end**(): void
 
-**Returns:** *void*
+**Returns:** void
 
 ___
 
-###  error
+### error
 
-▸ **error**(`error`: any): *void*
+▸ **error**(`error`: any): void
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `error` | any |
 
-**Returns:** *void*
+**Returns:** void

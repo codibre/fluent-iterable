@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["extend"](_extend_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "extend"
 
 # Module: "extend"
 
@@ -12,82 +14,37 @@
 
 ### Object literals
 
-* [extend](_extend_.md#const-extend)
+* [extend](_extend_.md#extend)
 
 ## Type aliases
 
-###  IterableOperation
+### IterableOperation
 
-Ƭ **IterableOperation**: *function*
+Ƭ  **IterableOperation**: \<T>(this: Iterable\<T>,...args: any[]) => Iterable\<any>
 
 An operation that returns an Iterable
 
-#### Type declaration:
-
-▸ ‹**T**›(`this`: Iterable‹T›, ...`args`: any[]): *Iterable‹any›*
-
-**Type parameters:**
-
-▪ **T**
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`this` | Iterable‹T› |
-`...args` | any[] |
-
 ___
 
-###  IterableOperationAsync
+### IterableOperationAsync
 
-Ƭ **IterableOperationAsync**: *function*
+Ƭ  **IterableOperationAsync**: \<T>(this: Iterable\<T>,...args: any[]) => AsyncIterable\<any> \| PromiseLike\<AnyIterable\<any>>
 
 An operation that returns an AsyncIterable
 
-#### Type declaration:
-
-▸ ‹**T**›(`this`: Iterable‹T›, ...`args`: any[]): *AsyncIterable‹any› | PromiseLike‹AnyIterable‹any››*
-
-**Type parameters:**
-
-▪ **T**
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`this` | Iterable‹T› |
-`...args` | any[] |
-
 ___
 
-###  IterableResolvingOperation
+### IterableResolvingOperation
 
-Ƭ **IterableResolvingOperation**: *function*
+Ƭ  **IterableResolvingOperation**: \<T>(this: Iterable\<T>,...args: any[]) => any
 
 A resolving operation
 
-#### Type declaration:
-
-▸ ‹**T**›(`this`: Iterable‹T›, ...`args`: any[]): *any*
-
-**Type parameters:**
-
-▪ **T**
-
-**Parameters:**
-
-Name | Type |
------- | ------ |
-`this` | Iterable‹T› |
-`...args` | any[] |
-
 ## Object literals
 
-### `Const` extend
+### extend
 
-### ▪ **extend**: *object*
+▪ `Const` **extend**: object
 
 Used to add custom methods for the next fluent async iterables created
 Is recommendable to also declare the method in the interface so it can be visible to typescript, like this:
@@ -99,47 +56,10 @@ declare module '@codibre/fluent-iterable'{
 }
 ```
 
-###  use
+#### Properties:
 
-▸ **use**(`name`: string, `operation`: [IterableOperation](_extend_.md#iterableoperation)): *void*
-
-Add a method that returns another FluentAsyncIterable
-
-**Parameters:**
-
-Name | Type | Description |
+Name | Type | Value |
 ------ | ------ | ------ |
-`name` | string | The name of the method |
-`operation` | [IterableOperation](_extend_.md#iterableoperation) | The operation to be made  |
-
-**Returns:** *void*
-
-###  useAsync
-
-▸ **useAsync**(`name`: string, `operation`: [IterableOperationAsync](_extend_.md#iterableoperationasync)): *void*
-
-Add a method that returns another FluentAsyncIterable
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`name` | string | The name of the method |
-`operation` | [IterableOperationAsync](_extend_.md#iterableoperationasync) | The operation to be made  |
-
-**Returns:** *void*
-
-###  useResolving
-
-▸ **useResolving**(`name`: string, `operation`: [IterableResolvingOperation](_extend_.md#iterableresolvingoperation)): *void*
-
-Add a resolving method
-
-**Parameters:**
-
-Name | Type | Description |
------- | ------ | ------ |
-`name` | string | The name of the method |
-`operation` | [IterableResolvingOperation](_extend_.md#iterableresolvingoperation) | The resolving operation to be made  |
-
-**Returns:** *void*
+`use` | function | (name: string,operation: [IterableOperation](\_extend\_.md#iterableoperation)) => void |
+`useAsync` | function | (name: string,operation: [IterableOperationAsync](\_extend\_.md#iterableoperationasync)) => void |
+`useResolving` | function | (name: string,operation: [IterableResolvingOperation](\_extend\_.md#iterableresolvingoperation)) => void |

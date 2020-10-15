@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["emitter/merge-emitter-catching"](_emitter_merge_emitter_catching_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "emitter/merge-emitter-catching"
 
 # Module: "emitter/merge-emitter-catching"
 
@@ -10,21 +12,23 @@
 
 ## Functions
 
-###  mergeEmitterCatching
+### mergeEmitterCatching
 
-▸ **mergeEmitterCatching**‹**T**›(`this`: AsyncIterable‹T›, `errorCallback`: [ErrorCallback](../interfaces/_types_base_.errorcallback.md), `eventEmitter`: EventEmitter, `options?`: [FluentEmitOptions](../interfaces/_types_base_.fluentemitoptions.md)): *AsyncIterable‹unknown›*
+▸ **mergeEmitterCatching**\<T>(`this`: AsyncIterable\<T>, `errorCallback`: [ErrorCallback](../interfaces/_types_base_.errorcallback.md), `eventEmitter`: EventEmitter, `options?`: [FluentEmitOptions](../interfaces/_types_base_.fluentemitoptions.md)): AsyncIterable\<unknown>
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **T**
+Name |
+------ |
+`T` |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
-`this` | AsyncIterable‹T› |
+`this` | AsyncIterable\<T> |
 `errorCallback` | [ErrorCallback](../interfaces/_types_base_.errorcallback.md) |
 `eventEmitter` | EventEmitter |
 `options?` | [FluentEmitOptions](../interfaces/_types_base_.fluentemitoptions.md) |
 
-**Returns:** *AsyncIterable‹unknown›*
+**Returns:** AsyncIterable\<unknown>

@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["emitter/index"](_emitter_index_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "emitter/index"
 
 # Module: "emitter/index"
 
@@ -14,30 +16,30 @@
 
 ## References
 
-###  combineEmitter
+### combineEmitter
 
-• **combineEmitter**:
-
-___
-
-###  concatEmitter
-
-• **concatEmitter**:
+Re-exports: [combineEmitter](_emitter_combine_emitter_.md#combineemitter)
 
 ___
 
-###  getIterableFromEmitter
+### concatEmitter
 
-• **getIterableFromEmitter**:
-
-___
-
-###  mergeEmitter
-
-• **mergeEmitter**:
+Re-exports: [concatEmitter](_emitter_concat_emitter_.md#concatemitter)
 
 ___
 
-###  mergeEmitterCatching
+### getIterableFromEmitter
 
-• **mergeEmitterCatching**:
+Re-exports: [getIterableFromEmitter](_emitter_get_iterable_from_emitter_.md#getiterablefromemitter)
+
+___
+
+### mergeEmitter
+
+Re-exports: [mergeEmitter](_emitter_merge_emitter_.md#mergeemitter)
+
+___
+
+### mergeEmitterCatching
+
+Re-exports: [mergeEmitterCatching](_emitter_merge_emitter_catching_.md#mergeemittercatching)

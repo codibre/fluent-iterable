@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["interval"](_interval_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "interval"
 
 # Module: "interval"
 
@@ -11,24 +13,24 @@
 
 ## Functions
 
-###  internalInterval
+### internalInterval
 
-▸ **internalInterval**(`fromInclusive`: number | undefined, `count`: number | undefined): *Generator‹number, void, unknown›*
+▸ **internalInterval**(`fromInclusive`: number \| undefined, `count`: number \| undefined): Generator\<number, void, unknown>
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
-`fromInclusive` | number &#124; undefined |
-`count` | number &#124; undefined |
+`fromInclusive` | number \| undefined |
+`count` | number \| undefined |
 
-**Returns:** *Generator‹number, void, unknown›*
+**Returns:** Generator\<number, void, unknown>
 
 ___
 
-###  interval
+### interval
 
-▸ **interval**(`fromInclusive?`: undefined | number, `count?`: undefined | number): *[FluentIterable](../interfaces/_types_.fluentiterable.md)‹number›*
+▸ **interval**(`fromInclusive?`: undefined \| number, `count?`: undefined \| number): [FluentIterable](../interfaces/_types_.fluentiterable.md)\<number>
 
 Generates a `count` long sequential integer interval starting from `fromInclusive`.
 
@@ -42,13 +44,13 @@ Examples:
 3. `interval()` generates an interval of `[0, 1, 2, ...]`
 4. `fluent(interval(1)).take(10).forEach(console.log)` prints all numbers between 1 and 10 using [fluent](_fluent_.md#fluent).
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`fromInclusive?` | undefined &#124; number | Specifies the start of the interval. Defaults to zero. |
-`count?` | undefined &#124; number | Specifies the length of the interval. The interval provides numbers indefinitely if omitted. |
+`fromInclusive?` | undefined \| number | Specifies the start of the interval. Defaults to zero. |
+`count?` | undefined \| number | Specifies the length of the interval. The interval provides numbers indefinitely if omitted. |
 
-**Returns:** *[FluentIterable](../interfaces/_types_.fluentiterable.md)‹number›*
+**Returns:** [FluentIterable](../interfaces/_types_.fluentiterable.md)\<number>
 
 The iterable of numbers in the interval.

@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["types-base"](_types_base_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "types-base"
 
 # Module: "types-base"
 
@@ -27,12 +29,24 @@
 
 ## Type aliases
 
-###  AsyncPredicate
+### AsyncPredicate
 
-Ƭ **AsyncPredicate**: *AsyncFunctionPredicate‹T› | keyof T*
+Ƭ  **AsyncPredicate**\<T>: AsyncFunctionPredicate\<T> \| keyof T
+
+#### Type parameters:
+
+Name |
+------ |
+`T` |
 
 ___
 
-###  Predicate
+### Predicate
 
-Ƭ **Predicate**: *FunctionPredicate‹T› | keyof T*
+Ƭ  **Predicate**\<T>: FunctionPredicate\<T> \| keyof T
+
+#### Type parameters:
+
+Name |
+------ |
+`T` |

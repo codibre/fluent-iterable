@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["emitter/base-emitting-conversion"](_emitter_base_emitting_conversion_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "emitter/base-emitting-conversion"
 
 # Module: "emitter/base-emitting-conversion"
 
@@ -10,14 +12,14 @@
 
 ## Functions
 
-###  getBaseEmittingConversion
+### getBaseEmittingConversion
 
-▸ **getBaseEmittingConversion**(`operation`: Function): *(Anonymous function)*
+▸ **getBaseEmittingConversion**(`operation`: Function): (Anonymous function)
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `operation` | Function |
 
-**Returns:** *(Anonymous function)*
+**Returns:** (Anonymous function)

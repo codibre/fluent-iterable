@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["emitter/combine-emitter"](_emitter_combine_emitter_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "emitter/combine-emitter"
 
 # Module: "emitter/combine-emitter"
 
@@ -10,22 +12,24 @@
 
 ## Functions
 
-###  combineEmitter
+### combineEmitter
 
-▸ **combineEmitter**‹**T**›(`this`: AnyIterable‹T›, `eventEmitter`: EventEmitter, `optionsOrKeyA?`: [FluentEmitOptions](../interfaces/_types_base_.fluentemitoptions.md) | Mapper‹any, any›, `keyB?`: Mapper‹any, any›, `options?`: [FluentEmitOptions](../interfaces/_types_base_.fluentemitoptions.md)): *any*
+▸ **combineEmitter**\<T>(`this`: AnyIterable\<T>, `eventEmitter`: EventEmitter, `optionsOrKeyA?`: [FluentEmitOptions](../interfaces/_types_base_.fluentemitoptions.md) \| Mapper\<any, any>, `keyB?`: Mapper\<any, any>, `options?`: [FluentEmitOptions](../interfaces/_types_base_.fluentemitoptions.md)): any
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **T**
+Name |
+------ |
+`T` |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
-`this` | AnyIterable‹T› |
+`this` | AnyIterable\<T> |
 `eventEmitter` | EventEmitter |
-`optionsOrKeyA?` | [FluentEmitOptions](../interfaces/_types_base_.fluentemitoptions.md) &#124; Mapper‹any, any› |
-`keyB?` | Mapper‹any, any› |
+`optionsOrKeyA?` | [FluentEmitOptions](../interfaces/_types_base_.fluentemitoptions.md) \| Mapper\<any, any> |
+`keyB?` | Mapper\<any, any> |
 `options?` | [FluentEmitOptions](../interfaces/_types_base_.fluentemitoptions.md) |
 
-**Returns:** *any*
+**Returns:** any

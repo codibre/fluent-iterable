@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["emitter/get-iterable-from-emitter"](_emitter_get_iterable_from_emitter_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "emitter/get-iterable-from-emitter"
 
 # Module: "emitter/get-iterable-from-emitter"
 
@@ -14,25 +16,27 @@
 
 ## Variables
 
-###  forEmitOf
+### forEmitOf
 
-• **forEmitOf**: *[forEmitOf](_emitter_get_iterable_from_emitter_.md#foremitof)*
+•  **forEmitOf**: [forEmitOf](_emitter_get_iterable_from_emitter_.md#foremitof)
 
 ## Functions
 
-###  getIterableFromEmitter
+### getIterableFromEmitter
 
-▸ **getIterableFromEmitter**‹**T**›(`emitter`: EventEmitter, `options`: [FluentEmitOptions](../interfaces/_types_base_.fluentemitoptions.md) | undefined): *AsyncIterable‹T›*
+▸ **getIterableFromEmitter**\<T>(`emitter`: EventEmitter, `options`: [FluentEmitOptions](../interfaces/_types_base_.fluentemitoptions.md) \| undefined): AsyncIterable\<T>
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **T**
+Name | Default |
+------ | ------ |
+`T` | any |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `emitter` | EventEmitter |
-`options` | [FluentEmitOptions](../interfaces/_types_base_.fluentemitoptions.md) &#124; undefined |
+`options` | [FluentEmitOptions](../interfaces/_types_base_.fluentemitoptions.md) \| undefined |
 
-**Returns:** *AsyncIterable‹T›*
+**Returns:** AsyncIterable\<T>

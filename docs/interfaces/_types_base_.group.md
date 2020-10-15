@@ -1,18 +1,17 @@
-[fluent-iterable - v1.7.0](../README.md) › ["types-base"](../modules/_types_base_.md) › [Group](_types_base_.group.md)
+**[fluent-iterable - v1.7.1](../README.md)**
 
-# Interface: Group ‹**T, R**›
+> [Globals](../README.md) / ["types-base"](../modules/_types_base_.md) / Group
+
+# Interface: Group\<T, R>
 
 Represents a group of items of type `T` with a key of type `R`.
 
 ## Type parameters
 
-▪ **T**
-
-The type of the items in the [Group](_types_base_.group.md).
-
-▪ **R**
-
-The type of the key of the [Group](_types_base_.group.md).
+Name | Description |
+------ | ------ |
+`T` | The type of the items in the [Group](_types_base_.group.md). |
+`R` | The type of the key of the [Group](_types_base_.group.md).  |
 
 ## Hierarchy
 
@@ -29,16 +28,16 @@ The type of the key of the [Group](_types_base_.group.md).
 
 ## Properties
 
-###  key
+### key
 
-• **key**: *R*
+•  **key**: R
 
 The key of the [Group](_types_base_.group.md).
 
 ___
 
-###  values
+### values
 
-• **values**: *Iterable‹T›*
+•  **values**: Iterable\<T>
 
 The items in the [Group](_types_base_.group.md).

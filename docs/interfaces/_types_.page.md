@@ -1,18 +1,17 @@
-[fluent-iterable - v1.7.0](../README.md) › ["types"](../modules/_types_.md) › [Page](_types_.page.md)
+**[fluent-iterable - v1.7.1](../README.md)**
 
-# Interface: Page ‹**T, TToken**›
+> [Globals](../README.md) / ["types"](../modules/_types_.md) / Page
+
+# Interface: Page\<T, TToken>
 
 Represents a page of a paginated resource.
 
 ## Type parameters
 
-▪ **T**
-
-The type of the elements of the page.
-
-▪ **TToken**
-
-The type of the next page token associated to the page.
+Name | Description |
+------ | ------ |
+`T` | The type of the elements of the page. |
+`TToken` | The type of the next page token associated to the page.  |
 
 ## Hierarchy
 
@@ -22,21 +21,21 @@ The type of the next page token associated to the page.
 
 ### Properties
 
-* [nextPageToken](_types_.page.md#optional-nextpagetoken)
+* [nextPageToken](_types_.page.md#nextpagetoken)
 * [results](_types_.page.md#results)
 
 ## Properties
 
-### `Optional` nextPageToken
+### nextPageToken
 
-• **nextPageToken**? : *TToken*
+• `Optional` **nextPageToken**: TToken
 
 The next page token associated to the page.
 
 ___
 
-###  results
+### results
 
-• **results**: *T[]*
+•  **results**: T[]
 
 The elements of the page.
