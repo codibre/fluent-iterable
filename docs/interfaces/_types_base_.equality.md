@@ -1,10 +1,14 @@
-[fluent-iterable - v1.7.0](../README.md) › ["types-base"](../modules/_types_base_.md) › [Equality](_types_base_.equality.md)
+**[fluent-iterable - v1.7.1](../README.md)**
 
-# Interface: Equality ‹**T**›
+> [Globals](../README.md) / ["types-base"](../modules/_types_base_.md) / Equality
+
+# Interface: Equality\<T>
 
 ## Type parameters
 
-▪ **T**
+Name |
+------ |
+`T` |
 
 ## Hierarchy
 
@@ -12,13 +16,13 @@
 
 ## Callable
 
-▸ (`a`: T, `b`: T): *boolean*
+▸ (`a`: T, `b`: T): boolean
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `a` | T |
 `b` | T |
 
-**Returns:** *boolean*
+**Returns:** boolean

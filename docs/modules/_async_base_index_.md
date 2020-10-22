@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["async-base/index"](_async_base_index_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "async-base/index"
 
 # Module: "async-base/index"
 
@@ -11,12 +13,12 @@
 
 ## References
 
-###  merge
+### merge
 
-• **merge**:
+Re-exports: [merge](_async_base_merge_.md#merge)
 
 ___
 
-###  mergeCatching
+### mergeCatching
 
-• **mergeCatching**:
+Re-exports: [mergeCatching](_async_base_merge_catching_.md#mergecatching)

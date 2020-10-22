@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["fluent"](_fluent_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "fluent"
 
 # Module: "fluent"
 
@@ -6,8 +8,8 @@
 
 ### Variables
 
-* [handler](_fluent_.md#const-handler)
-* [proxyReference](_fluent_.md#const-proxyreference)
+* [handler](_fluent_.md#handler)
+* [proxyReference](_fluent_.md#proxyreference)
 
 ### Functions
 
@@ -15,40 +17,36 @@
 
 ## Variables
 
-### `Const` handler
+### handler
 
-• **handler**: *Extender‹object›* = getExtender(proxyReference, defaultCookFunction, 'extender')
+• `Const` **handler**: Extender\<{ [key:string]: Function;  }> = getExtender(proxyReference, defaultCookFunction, 'extender')
 
 ___
 
-### `Const` proxyReference
+### proxyReference
 
-• **proxyReference**: *object*
-
-#### Type declaration:
-
-* \[ **key**: *string*\]: Function
+• `Const` **proxyReference**: object
 
 ## Functions
 
-###  fluent
+### fluent
 
-▸ **fluent**‹**T**›(`iterable`: Iterable‹T›): *[FluentIterable](../interfaces/_types_.fluentiterable.md)‹T›*
+▸ **fluent**\<T>(`iterable`: Iterable\<T>): [FluentIterable](../interfaces/_types_.fluentiterable.md)\<T>
 
 Tranforms an iterable into a [FluentIterable](../interfaces/_types_.fluentiterable.md).
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **T**
+Name | Description |
+------ | ------ |
+`T` | The type of the items in the iterable. |
 
-The type of the items in the iterable.
-
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`iterable` | Iterable‹T› | The iterable instance. |
+`iterable` | Iterable\<T> | The iterable instance. |
 
-**Returns:** *[FluentIterable](../interfaces/_types_.fluentiterable.md)‹T›*
+**Returns:** [FluentIterable](../interfaces/_types_.fluentiterable.md)\<T>
 
 The [FluentIterable](../interfaces/_types_.fluentiterable.md) instance.

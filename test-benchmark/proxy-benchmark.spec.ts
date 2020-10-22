@@ -9,7 +9,7 @@ import {
   special,
 } from '../src/mounters';
 import fluent from '../src/fluent';
-import fluentAsync from '../src/fluent-async';
+import { fluentAsync } from '../src/fluent-async';
 import { interval } from '../src';
 import { expect } from 'chai';
 import { getExtender } from 'extension-methods';

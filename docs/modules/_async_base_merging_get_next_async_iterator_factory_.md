@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["async-base/merging/get-next-async-iterator-factory"](_async_base_merging_get_next_async_iterator_factory_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "async-base/merging/get-next-async-iterator-factory"
 
 # Module: "async-base/merging/get-next-async-iterator-factory"
 
@@ -10,18 +12,20 @@
 
 ## Functions
 
-###  getNextAsyncIteratorFactory
+### getNextAsyncIteratorFactory
 
-▸ **getNextAsyncIteratorFactory**‹**T**›(`callback?`: [ErrorCallback](../interfaces/_types_base_.errorcallback.md)): *[GetNextAsyncIterator](../interfaces/_async_base_merging_merge_types_.getnextasynciterator.md)‹T›*
+▸ **getNextAsyncIteratorFactory**\<T>(`callback?`: [ErrorCallback](../interfaces/_types_base_.errorcallback.md)): [GetNextAsyncIterator](../interfaces/_async_base_merging_merge_types_.getnextasynciterator.md)\<T>
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **T**
+Name |
+------ |
+`T` |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `callback?` | [ErrorCallback](../interfaces/_types_base_.errorcallback.md) |
 
-**Returns:** *[GetNextAsyncIterator](../interfaces/_async_base_merging_merge_types_.getnextasynciterator.md)‹T›*
+**Returns:** [GetNextAsyncIterator](../interfaces/_async_base_merging_merge_types_.getnextasynciterator.md)\<T>

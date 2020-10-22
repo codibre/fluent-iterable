@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["async-base/merging/index"](_async_base_merging_index_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "async-base/merging/index"
 
 # Module: "async-base/merging/index"
 
@@ -11,12 +13,12 @@
 
 ## References
 
-###  getIterators
+### getIterators
 
-• **getIterators**:
+Re-exports: [getIterators](_async_base_merging_get_iterators_.md#getiterators)
 
 ___
 
-###  mergeIterators
+### mergeIterators
 
-• **mergeIterators**:
+Re-exports: [mergeIterators](_async_base_merging_merge_iterators_.md#mergeiterators)

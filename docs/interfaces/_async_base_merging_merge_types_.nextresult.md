@@ -1,10 +1,14 @@
-[fluent-iterable - v1.7.0](../README.md) › ["async-base/merging/merge-types"](../modules/_async_base_merging_merge_types_.md) › [NextResult](_async_base_merging_merge_types_.nextresult.md)
+**[fluent-iterable - v1.7.1](../README.md)**
 
-# Interface: NextResult ‹**T**›
+> [Globals](../README.md) / ["async-base/merging/merge-types"](../modules/_async_base_merging_merge_types_.md) / NextResult
+
+# Interface: NextResult\<T>
 
 ## Type parameters
 
-▪ **T**
+Name |
+------ |
+`T` |
 
 ## Hierarchy
 
@@ -19,12 +23,12 @@
 
 ## Properties
 
-###  index
+### index
 
-• **index**: *number*
+•  **index**: number
 
 ___
 
-###  result
+### result
 
-• **result**: *IteratorResult‹T›*
+•  **result**: IteratorResult\<T>

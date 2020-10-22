@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["async-base/merge-catching"](_async_base_merge_catching_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "async-base/merge-catching"
 
 # Module: "async-base/merge-catching"
 
@@ -10,22 +12,23 @@
 
 ## Functions
 
-###  mergeCatching
+### mergeCatching
 
-▸ **mergeCatching**‹**T**, **R**›(`this`: AsyncIterable‹T›, `callback`: [ErrorCallback](../interfaces/_types_base_.errorcallback.md), ...`items`: Array‹AsyncIterable‹R››): *AsyncIterable‹T | R›*
+▸ **mergeCatching**\<T, R>(`this`: AsyncIterable\<T>, `callback`: [ErrorCallback](../interfaces/_types_base_.errorcallback.md), ...`items`: Array\<AsyncIterable\<R>>): AsyncIterable\<T \| R>
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **T**
+Name |
+------ |
+`T` |
+`R` |
 
-▪ **R**
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
-`this` | AsyncIterable‹T› |
+`this` | AsyncIterable\<T> |
 `callback` | [ErrorCallback](../interfaces/_types_base_.errorcallback.md) |
-`...items` | Array‹AsyncIterable‹R›› |
+`...items` | Array\<AsyncIterable\<R>> |
 
-**Returns:** *AsyncIterable‹T | R›*
+**Returns:** AsyncIterable\<T \| R>

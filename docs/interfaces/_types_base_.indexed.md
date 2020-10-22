@@ -1,14 +1,16 @@
-[fluent-iterable - v1.7.0](../README.md) › ["types-base"](../modules/_types_base_.md) › [Indexed](_types_base_.indexed.md)
+**[fluent-iterable - v1.7.1](../README.md)**
 
-# Interface: Indexed ‹**T**›
+> [Globals](../README.md) / ["types-base"](../modules/_types_base_.md) / Indexed
+
+# Interface: Indexed\<T>
 
 Represents an indexed value of type `T`.
 
 ## Type parameters
 
-▪ **T**
-
-The type of the value the index is associated to.
+Name | Description |
+------ | ------ |
+`T` | The type of the value the index is associated to.  |
 
 ## Hierarchy
 
@@ -23,16 +25,16 @@ The type of the value the index is associated to.
 
 ## Properties
 
-###  idx
+### idx
 
-• **idx**: *number*
+•  **idx**: number
 
 The index of the value.
 
 ___
 
-###  value
+### value
 
-• **value**: *T*
+•  **value**: T
 
 The value.

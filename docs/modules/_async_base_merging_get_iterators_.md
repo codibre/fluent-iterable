@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["async-base/merging/get-iterators"](_async_base_merging_get_iterators_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "async-base/merging/get-iterators"
 
 # Module: "async-base/merging/get-iterators"
 
@@ -10,18 +12,20 @@
 
 ## Functions
 
-###  getIterators
+### getIterators
 
-▸ **getIterators**‹**T**›(`items`: AsyncIterable‹T›[]): *AsyncIterator‹T›[]*
+▸ **getIterators**\<T>(`items`: AsyncIterable\<T>[]): AsyncIterator\<T>[]
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **T**
+Name |
+------ |
+`T` |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
-`items` | AsyncIterable‹T›[] |
+`items` | AsyncIterable\<T>[] |
 
-**Returns:** *AsyncIterator‹T›[]*
+**Returns:** AsyncIterator\<T>[]

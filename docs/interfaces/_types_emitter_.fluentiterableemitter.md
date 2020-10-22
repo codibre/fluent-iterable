@@ -1,14 +1,16 @@
-[fluent-iterable - v1.7.0](../README.md) › ["types-emitter"](../modules/_types_emitter_.md) › [FluentIterableEmitter](_types_emitter_.fluentiterableemitter.md)
+**[fluent-iterable - v1.7.1](../README.md)**
 
-# Interface: FluentIterableEmitter ‹**T**›
+> [Globals](../README.md) / ["types-emitter"](../modules/_types_emitter_.md) / FluentIterableEmitter
+
+# Interface: FluentIterableEmitter\<T>
 
 Represents the operations using EventEmitters
 
 ## Type parameters
 
-▪ **T**
-
-The type of the items in the iterable.
+Name | Description |
+------ | ------ |
+`T` | The type of the items in the iterable.  |
 
 ## Hierarchy
 
@@ -27,9 +29,9 @@ The type of the items in the iterable.
 
 ## Methods
 
-###  combineEmitter
+### combineEmitter
 
-▸ **combineEmitter**‹**U**›(`emitter`: EventEmitter, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[]›*
+▸ **combineEmitter**\<U>(`emitter`: EventEmitter, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): [FluentAsyncIterable](_types_.fluentasynciterable.md)\<[T, U]>
 
 Join the iterable with an EventEmitter, returning a new async iterable with a NxN combination
 
@@ -42,20 +44,22 @@ to use this feature properly. Operations that requires finiteness to be used may
 
 If you need to change the key event or other characteristics, you can do it through the **options** parameter
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **U**
+Name | Default |
+------ | ------ |
+`U` | any |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
 `emitter` | EventEmitter | The EventEmitter |
 `options?` | [FluentEmitOptions](_types_base_.fluentemitoptions.md) | The EventEmitter options. Optional  |
 
-**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[]›*
+**Returns:** [FluentAsyncIterable](_types_.fluentasynciterable.md)\<[T, U]>
 
-▸ **combineEmitter**‹**U**, **K**›(`emitter`: EventEmitter, `keyA`: Mapper‹T, K›, `keyB`: Mapper‹U, K›, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[]›*
+▸ **combineEmitter**\<U, K>(`emitter`: EventEmitter, `keyA`: Mapper\<T, K>, `keyB`: Mapper\<U, K>, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): [FluentAsyncIterable](_types_.fluentasynciterable.md)\<[T, U]>
 
 Join the iterable with another the EventEmitter, returning a new async iterable with the inner matching combinations
 
@@ -68,24 +72,25 @@ to use this feature properly. Operations that requires finiteness to be used may
 
 If you need to change the key event or other characteristics, you can do it through the **options** parameter
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **U**
+Name |
+------ |
+`U` |
+`K` |
 
-▪ **K**
-
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
 `emitter` | EventEmitter | The EventEmitter |
-`keyA` | Mapper‹T, K› | A mapper that returns the key map value from the left iterable |
-`keyB` | Mapper‹U, K› | A mapper that returns the key map value from the right iterable  |
+`keyA` | Mapper\<T, K> | A mapper that returns the key map value from the left iterable |
+`keyB` | Mapper\<U, K> | A mapper that returns the key map value from the right iterable  |
 `options?` | [FluentEmitOptions](_types_base_.fluentemitoptions.md) | The EventEmitter options. Optional |
 
-**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[]›*
+**Returns:** [FluentAsyncIterable](_types_.fluentasynciterable.md)\<[T, U]>
 
-▸ **combineEmitter**‹**U**, **K**›(`emitter`: EventEmitter, `keyA`: keyof T, `keyB`: Mapper‹U, K›, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[]›*
+▸ **combineEmitter**\<U, K>(`emitter`: EventEmitter, `keyA`: keyof T, `keyB`: Mapper\<U, K>, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): [FluentAsyncIterable](_types_.fluentasynciterable.md)\<[T, U]>
 
 Join the iterable with another the EventEmitter, returning a new async iterable with the inner matching combinations
 
@@ -98,28 +103,29 @@ to use this feature properly. Operations that requires finiteness to be used may
 
 If you need to change the key event or other characteristics, you can do it through the **options** parameter
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **U**
+Name |
+------ |
+`U` |
+`K` |
 
-▪ **K**
-
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
 `emitter` | EventEmitter | The EventEmitter |
 `keyA` | keyof T | A mapper that returns the key map value from the left iterable |
-`keyB` | Mapper‹U, K› | A mapper that returns the key map value from the right iterable  |
+`keyB` | Mapper\<U, K> | A mapper that returns the key map value from the right iterable  |
 `options?` | [FluentEmitOptions](_types_base_.fluentemitoptions.md) | The EventEmitter options. Optional |
 
-**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹[]›*
+**Returns:** [FluentAsyncIterable](_types_.fluentasynciterable.md)\<[T, U]>
 
 ___
 
-###  concatEmitter
+### concatEmitter
 
-▸ **concatEmitter**(`emitter`: EventEmitter, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+▸ **concatEmitter**(`emitter`: EventEmitter, `options?`: [FluentEmitOptions](_types_base_.fluentemitoptions.md)): [FluentAsyncIterable](_types_.fluentasynciterable.md)\<T>
 
 Concatenates the specified Emitter to the async iterable.
 
@@ -132,13 +138,13 @@ to use this feature properly. Operations that requires finiteness to be used may
 
 If you need to change the key event or other characteristics, you can do it through the **options** parameter
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
 `emitter` | EventEmitter | The EventEmitter |
 `options?` | [FluentEmitOptions](_types_base_.fluentemitoptions.md) | The EventEmitter options. Optional |
 
-**Returns:** *[FluentAsyncIterable](_types_.fluentasynciterable.md)‹T›*
+**Returns:** [FluentAsyncIterable](_types_.fluentasynciterable.md)\<T>
 
 The [FluentAsyncIterable](_types_.fluentasynciterable.md) of the concatenated async iterables.

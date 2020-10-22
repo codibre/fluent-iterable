@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["fluent-async"](_fluent_async_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "fluent-async"
 
 # Module: "fluent-async"
 
@@ -6,8 +8,8 @@
 
 ### Variables
 
-* [handler](_fluent_async_.md#const-handler)
-* [proxyReference](_fluent_async_.md#const-proxyreference)
+* [handler](_fluent_async_.md#handler)
+* [proxyReference](_fluent_async_.md#proxyreference)
 
 ### Functions
 
@@ -16,49 +18,45 @@
 
 ## Variables
 
-### `Const` handler
+### handler
 
-• **handler**: *Extender‹object›* = getExtender(proxyReference, defaultCookFunction, 'extender')
+• `Const` **handler**: Extender\<{ [key:string]: Function;  }> = getExtender(proxyReference, defaultCookFunction, 'extender')
 
 ___
 
-### `Const` proxyReference
+### proxyReference
 
-• **proxyReference**: *object*
-
-#### Type declaration:
-
-* \[ **key**: *string*\]: Function
+• `Const` **proxyReference**: object
 
 ## Functions
 
-###  fluentAsync
+### fluentAsync
 
-▸ **fluentAsync**‹**T**›(`iterable`: AnyIterable‹T› | PromiseLike‹AnyIterable‹T››): *[FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)‹T›*
+▸ **fluentAsync**\<T>(`iterable`: AnyIterable\<T> \| PromiseLike\<AnyIterable\<T>>): [FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)\<T>
 
 Tranforms an asynchronous iterable into a [FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md).
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **T**
+Name | Description |
+------ | ------ |
+`T` | The type of the items in the async iterable. |
 
-The type of the items in the async iterable.
-
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`iterable` | AnyIterable‹T› &#124; PromiseLike‹AnyIterable‹T›› | The asynchronous iterable instance. |
+`iterable` | AnyIterable\<T> \| PromiseLike\<AnyIterable\<T>> | The asynchronous iterable instance. |
 
-**Returns:** *[FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)‹T›*
+**Returns:** [FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)\<T>
 
 The [FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md) instance.
 
 ___
 
-###  fluentEmit
+### fluentEmit
 
-▸ **fluentEmit**‹**T**›(`emitter`: EventEmitter, `options?`: [FluentEmitOptions](../interfaces/_types_base_.fluentemitoptions.md)): *[FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)‹T›*
+▸ **fluentEmit**\<T>(`emitter`: EventEmitter, `options?`: [FluentEmitOptions](../interfaces/_types_base_.fluentemitoptions.md)): [FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)\<T>
 
 Transforms an EventEmitter into a [FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md).
 
@@ -71,19 +69,19 @@ to use this feature properly. Operations that requires finiteness to be used may
 
 If you need to change the key event or other characteristics, you can do it through the **options** parameter
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **T**
+Name | Default | Description |
+------ | ------ | ------ |
+`T` | any | The type of the items in the created FluentAsyncIterable. |
 
-The type of the items in the created FluentAsyncIterable.
-
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
 `emitter` | EventEmitter | The EventEmitter |
 `options?` | [FluentEmitOptions](../interfaces/_types_base_.fluentemitoptions.md) | The EventEmitter options. Optional |
 
-**Returns:** *[FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)‹T›*
+**Returns:** [FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md)\<T>
 
 The [FluentAsyncIterable](../interfaces/_types_.fluentasynciterable.md) instance.

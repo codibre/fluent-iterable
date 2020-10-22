@@ -1,22 +1,21 @@
-[fluent-iterable - v1.7.0](../README.md) › ["types"](../modules/_types_.md) › [FluentGroup](_types_.fluentgroup.md)
+**[fluent-iterable - v1.7.1](../README.md)**
 
-# Interface: FluentGroup ‹**T, R**›
+> [Globals](../README.md) / ["types"](../modules/_types_.md) / FluentGroup
+
+# Interface: FluentGroup\<T, R>
 
 Represents a group of [fluent](../modules/_fluent_.md#fluent) items of type `T` with a key of type `R`.
 
 ## Type parameters
 
-▪ **T**
-
-The type of the items in the [FluentGroup](_types_.fluentgroup.md).
-
-▪ **R**
-
-The type of the key of the [FluentGroup](_types_.fluentgroup.md).
+Name | Description |
+------ | ------ |
+`T` | The type of the items in the [FluentGroup](_types_.fluentgroup.md). |
+`R` | The type of the key of the [FluentGroup](_types_.fluentgroup.md).  |
 
 ## Hierarchy
 
-* [Group](_types_base_.group.md)‹T, R›
+* [Group](_types_base_.group.md)\<T, R>
 
   ↳ **FluentGroup**
 
@@ -29,9 +28,9 @@ The type of the key of the [FluentGroup](_types_.fluentgroup.md).
 
 ## Properties
 
-###  key
+### key
 
-• **key**: *R*
+•  **key**: R
 
 *Inherited from [Group](_types_base_.group.md).[key](_types_base_.group.md#key)*
 
@@ -39,9 +38,9 @@ The key of the [Group](_types_base_.group.md).
 
 ___
 
-###  values
+### values
 
-• **values**: *[FluentIterable](_types_.fluentiterable.md)‹T›*
+•  **values**: [FluentIterable](_types_.fluentiterable.md)\<T>
 
 *Overrides [Group](_types_base_.group.md).[values](_types_base_.group.md#values)*
 

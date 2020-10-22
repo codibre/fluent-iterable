@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["async-base/merging/merge-iterators"](_async_base_merging_merge_iterators_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "async-base/merging/merge-iterators"
 
 # Module: "async-base/merging/merge-iterators"
 
@@ -11,33 +13,35 @@
 
 ## Functions
 
-###  getNextValue
+### getNextValue
 
-▸ **getNextValue**(`asyncIteratorsValues`: Map‹any, any›): *Promise‹[NextResult](../interfaces/_async_base_merging_merge_types_.nextresult.md)‹any››*
+▸ **getNextValue**(`asyncIteratorsValues`: Map\<any, any>): Promise\<[NextResult](../interfaces/_async_base_merging_merge_types_.nextresult.md)\<any>>
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
-`asyncIteratorsValues` | Map‹any, any› |
+`asyncIteratorsValues` | Map\<any, any> |
 
-**Returns:** *Promise‹[NextResult](../interfaces/_async_base_merging_merge_types_.nextresult.md)‹any››*
+**Returns:** Promise\<[NextResult](../interfaces/_async_base_merging_merge_types_.nextresult.md)\<any>>
 
 ___
 
-###  mergeIterators
+### mergeIterators
 
-▸ **mergeIterators**‹**T**›(`callback`: [ErrorCallback](../interfaces/_types_base_.errorcallback.md) | undefined, ...`iterators`: AsyncIterator‹T›[]): *AsyncIterable‹T›*
+▸ **mergeIterators**\<T>(`callback`: [ErrorCallback](../interfaces/_types_base_.errorcallback.md) \| undefined, ...`iterators`: AsyncIterator\<T>[]): AsyncIterable\<T>
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **T**
+Name |
+------ |
+`T` |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
-`callback` | [ErrorCallback](../interfaces/_types_base_.errorcallback.md) &#124; undefined |
-`...iterators` | AsyncIterator‹T›[] |
+`callback` | [ErrorCallback](../interfaces/_types_base_.errorcallback.md) \| undefined |
+`...iterators` | AsyncIterator\<T>[] |
 
-**Returns:** *AsyncIterable‹T›*
+**Returns:** AsyncIterable\<T>

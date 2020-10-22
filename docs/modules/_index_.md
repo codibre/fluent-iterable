@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["index"](_index_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "index"
 
 # Module: "index"
 
@@ -42,198 +44,198 @@
 
 ## References
 
-###  AsyncIterableOperation
+### AsyncIterableOperation
 
-• **AsyncIterableOperation**:
-
-___
-
-###  AsyncIterableResolvingOperation
-
-• **AsyncIterableResolvingOperation**:
+Re-exports: [AsyncIterableOperation](_extend_async_.md#asynciterableoperation)
 
 ___
 
-###  IterableOperation
+### AsyncIterableResolvingOperation
 
-• **IterableOperation**:
-
-___
-
-###  IterableOperationAsync
-
-• **IterableOperationAsync**:
+Re-exports: [AsyncIterableResolvingOperation](_extend_async_.md#asynciterableresolvingoperation)
 
 ___
 
-###  IterableResolvingOperation
+### IterableOperation
 
-• **IterableResolvingOperation**:
-
-___
-
-###  asc
-
-• **asc**:
+Re-exports: [IterableOperation](_extend_.md#iterableoperation)
 
 ___
 
-###  assureOrder
+### IterableOperationAsync
 
-• **assureOrder**:
-
-___
-
-###  assureOrderDescending
-
-• **assureOrderDescending**:
+Re-exports: [IterableOperationAsync](_extend_.md#iterableoperationasync)
 
 ___
 
-###  asyncNegation
+### IterableResolvingOperation
 
-• **asyncNegation**:
-
-___
-
-###  constant
-
-• **constant**:
+Re-exports: [IterableResolvingOperation](_extend_.md#iterableresolvingoperation)
 
 ___
 
-###  desc
+### asc
 
-• **desc**:
-
-___
-
-###  empty
-
-• **empty**:
+Re-exports: [asc](_utils_.md#asc)
 
 ___
 
-###  emptyAsync
+### assureOrder
 
-• **emptyAsync**:
-
-___
-
-###  eq
-
-• **eq**:
+Re-exports: [assureOrder](_utils_.md#assureorder)
 
 ___
 
-###  extend
+### assureOrderDescending
 
-• **extend**:
-
-___
-
-###  extendAsync
-
-• **extendAsync**:
+Re-exports: [assureOrderDescending](_utils_.md#assureorderdescending)
 
 ___
 
-###  falsity
+### asyncNegation
 
-• **falsity**:
-
-___
-
-###  fluentGroup
-
-• **fluentGroup**:
+Re-exports: [asyncNegation](_utils_.md#asyncnegation)
 
 ___
 
-###  ge
+### constant
 
-• **ge**:
-
-___
-
-###  getAverageStepper
-
-• **getAverageStepper**:
+Re-exports: [constant](_utils_.md#constant)
 
 ___
 
-###  gt
+### desc
 
-• **gt**:
-
-___
-
-###  identity
-
-• **identity**:
+Re-exports: [desc](_utils_.md#desc)
 
 ___
 
-###  iterate
+### empty
 
-• **iterate**:
-
-___
-
-###  iterateAll
-
-• **iterateAll**:
+Re-exports: [empty](_utils_.md#empty)
 
 ___
 
-###  iterateAllAsync
+### emptyAsync
 
-• **iterateAllAsync**:
-
-___
-
-###  iterateAsync
-
-• **iterateAsync**:
+Re-exports: [emptyAsync](_utils_.md#emptyasync)
 
 ___
 
-###  iterateObjEntries
+### eq
 
-• **iterateObjEntries**:
-
-___
-
-###  iterateObjProps
-
-• **iterateObjProps**:
+Re-exports: [eq](_utils_.md#eq)
 
 ___
 
-###  le
+### extend
 
-• **le**:
-
-___
-
-###  lt
-
-• **lt**:
+Re-exports: [extend](_extend_.md#extend)
 
 ___
 
-###  negation
+### extendAsync
 
-• **negation**:
-
-___
-
-###  transformObjValues
-
-• **transformObjValues**:
+Re-exports: [extendAsync](_extend_async_.md#extendasync)
 
 ___
 
-###  truth
+### falsity
 
-• **truth**:
+Re-exports: [falsity](_utils_.md#falsity)
+
+___
+
+### fluentGroup
+
+Re-exports: [fluentGroup](_utils_.md#fluentgroup)
+
+___
+
+### ge
+
+Re-exports: [ge](_utils_.md#ge)
+
+___
+
+### getAverageStepper
+
+Re-exports: [getAverageStepper](_utils_.md#getaveragestepper)
+
+___
+
+### gt
+
+Re-exports: [gt](_utils_.md#gt)
+
+___
+
+### identity
+
+Re-exports: [identity](_utils_.md#identity)
+
+___
+
+### iterate
+
+Re-exports: [iterate](_utils_.md#iterate)
+
+___
+
+### iterateAll
+
+Re-exports: [iterateAll](_utils_.md#iterateall)
+
+___
+
+### iterateAllAsync
+
+Re-exports: [iterateAllAsync](_utils_.md#iterateallasync)
+
+___
+
+### iterateAsync
+
+Re-exports: [iterateAsync](_utils_.md#iterateasync)
+
+___
+
+### iterateObjEntries
+
+Re-exports: [iterateObjEntries](_utils_.md#iterateobjentries)
+
+___
+
+### iterateObjProps
+
+Re-exports: [iterateObjProps](_utils_.md#iterateobjprops)
+
+___
+
+### le
+
+Re-exports: [le](_utils_.md#le)
+
+___
+
+### lt
+
+Re-exports: [lt](_utils_.md#lt)
+
+___
+
+### negation
+
+Re-exports: [negation](_utils_.md#negation)
+
+___
+
+### transformObjValues
+
+Re-exports: [transformObjValues](_transform_obj_values_.md#transformobjvalues)
+
+___
+
+### truth
+
+Re-exports: [truth](_utils_.md#truth)

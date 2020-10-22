@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["types-base"](../modules/_types_base_.md) › [FluentEmitOptions](_types_base_.fluentemitoptions.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / ["types-base"](../modules/_types_base_.md) / FluentEmitOptions
 
 # Interface: FluentEmitOptions
 
@@ -12,40 +14,40 @@ represent the options that can be used with fluentEmit
 
 ### Properties
 
-* [end](_types_base_.fluentemitoptions.md#optional-end)
-* [error](_types_base_.fluentemitoptions.md#optional-error)
-* [event](_types_base_.fluentemitoptions.md#optional-event)
-* [timeout](_types_base_.fluentemitoptions.md#optional-timeout)
+* [end](_types_base_.fluentemitoptions.md#end)
+* [error](_types_base_.fluentemitoptions.md#error)
+* [event](_types_base_.fluentemitoptions.md#event)
+* [timeout](_types_base_.fluentemitoptions.md#timeout)
 
 ## Properties
 
-### `Optional` end
+### end
 
-• **end**? : *string[]*
+• `Optional` **end**: string[]
 
 The list of events which ends the iterable. Default ['end', 'close']
 
 ___
 
-### `Optional` error
+### error
 
-• **error**? : *undefined | string*
+• `Optional` **error**: undefined \| string
 
 The event which throws an error. Default 'error'
 
 ___
 
-### `Optional` event
+### event
 
-• **event**? : *undefined | string*
+• `Optional` **event**: undefined \| string
 
 The event which yields a new iterable item. Default 'data'
 
 ___
 
-### `Optional` timeout
+### timeout
 
-• **timeout**? : *undefined | number*
+• `Optional` **timeout**: undefined \| number
 
 The timeout for event awaiting. If specified, an error will be thrown when no event is emitted
 before the deadline

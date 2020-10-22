@@ -1,15 +1,17 @@
-[fluent-iterable - v1.7.0](../README.md) › ["types-base"](../modules/_types_base_.md) › [Action](_types_base_.action.md)
+**[fluent-iterable - v1.7.1](../README.md)**
 
-# Interface: Action ‹**T**›
+> [Globals](../README.md) / ["types-base"](../modules/_types_base_.md) / Action
+
+# Interface: Action\<T>
 
 Represents an action on an item of type `T`.<br>
   Example: ``const logUserAction: Action<User> = user => console.log(`User ${user.name} (id: ${user.id})`);``
 
 ## Type parameters
 
-▪ **T**
-
-The type of the item the action is defined on.
+Name | Description |
+------ | ------ |
+`T` | The type of the item the action is defined on.  |
 
 ## Hierarchy
 
@@ -17,14 +19,14 @@ The type of the item the action is defined on.
 
 ## Callable
 
-▸ (`item`: T): *void*
+▸ (`item`: T): void
 
 Specifies the action to perform on `item`.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
 `item` | T | The item the action is performed against.  |
 
-**Returns:** *void*
+**Returns:** void

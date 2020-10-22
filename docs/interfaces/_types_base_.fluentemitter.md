@@ -1,14 +1,18 @@
-[fluent-iterable - v1.7.0](../README.md) › ["types-base"](../modules/_types_base_.md) › [FluentEmitter](_types_base_.fluentemitter.md)
+**[fluent-iterable - v1.7.1](../README.md)**
 
-# Interface: FluentEmitter ‹**T**›
+> [Globals](../README.md) / ["types-base"](../modules/_types_base_.md) / FluentEmitter
+
+# Interface: FluentEmitter\<T>
 
 ## Type parameters
 
-▪ **T**
+Name |
+------ |
+`T` |
 
 ## Hierarchy
 
-* TypedEventEmitter‹[FluentEvents](_types_base_.fluentevents.md)‹T››
+* TypedEventEmitter\<[FluentEvents](_types_base_.fluentevents.md)\<T>>
 
   ↳ **FluentEmitter**
 
@@ -34,284 +38,308 @@
 
 ## Methods
 
-###  addListener
+### addListener
 
-▸ **addListener**‹**E**›(`event`: E, `listener`: FluentEvents‹T›[E]): *this*
+▸ **addListener**\<E>(`event`: E, `listener`: FluentEvents\<T>[E]): this
 
 *Inherited from [FluentEmitter](_types_base_.fluentemitter.md).[addListener](_types_base_.fluentemitter.md#addlistener)*
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **E**: *keyof FluentEvents<T>*
+Name | Type |
+------ | ------ |
+`E` | keyof [FluentEvents](_types_base_.fluentevents.md)\<T> |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `event` | E |
-`listener` | FluentEvents‹T›[E] |
+`listener` | FluentEvents\<T>[E] |
 
-**Returns:** *this*
+**Returns:** this
 
 ___
 
-###  emit
+### emit
 
-▸ **emit**‹**E**›(`event`: E, ...`args`: Arguments‹FluentEvents‹T›[E]›): *boolean*
+▸ **emit**\<E>(`event`: E, ...`args`: Arguments\<FluentEvents\<T>[E]>): boolean
 
 *Inherited from [FluentEmitter](_types_base_.fluentemitter.md).[emit](_types_base_.fluentemitter.md#emit)*
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **E**: *keyof FluentEvents<T>*
+Name | Type |
+------ | ------ |
+`E` | keyof [FluentEvents](_types_base_.fluentevents.md)\<T> |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `event` | E |
-`...args` | Arguments‹FluentEvents‹T›[E]› |
+`...args` | Arguments\<FluentEvents\<T>[E]> |
 
-**Returns:** *boolean*
+**Returns:** boolean
 
 ___
 
-###  eventNames
+### eventNames
 
-▸ **eventNames**(): *(string | symbol | keyof Events)[]*
+▸ **eventNames**(): (keyof [FluentEvents](_types_base_.fluentevents.md)\<T> \| string \| symbol)[]
 
 *Inherited from [FluentEmitter](_types_base_.fluentemitter.md).[eventNames](_types_base_.fluentemitter.md#eventnames)*
 
-**Returns:** *(string | symbol | keyof Events)[]*
+**Returns:** (keyof [FluentEvents](_types_base_.fluentevents.md)\<T> \| string \| symbol)[]
 
 ___
 
-###  getMaxListeners
+### getMaxListeners
 
-▸ **getMaxListeners**(): *number*
+▸ **getMaxListeners**(): number
 
 *Inherited from [FluentEmitter](_types_base_.fluentemitter.md).[getMaxListeners](_types_base_.fluentemitter.md#getmaxlisteners)*
 
-**Returns:** *number*
+**Returns:** number
 
 ___
 
-###  listenerCount
+### listenerCount
 
-▸ **listenerCount**‹**E**›(`event`: E): *number*
+▸ **listenerCount**\<E>(`event`: E): number
 
 *Inherited from [FluentEmitter](_types_base_.fluentemitter.md).[listenerCount](_types_base_.fluentemitter.md#listenercount)*
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **E**: *keyof FluentEvents<T>*
+Name | Type |
+------ | ------ |
+`E` | keyof [FluentEvents](_types_base_.fluentevents.md)\<T> |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `event` | E |
 
-**Returns:** *number*
+**Returns:** number
 
 ___
 
-###  listeners
+### listeners
 
-▸ **listeners**‹**E**›(`event`: E): *Function[]*
+▸ **listeners**\<E>(`event`: E): Function[]
 
 *Inherited from [FluentEmitter](_types_base_.fluentemitter.md).[listeners](_types_base_.fluentemitter.md#listeners)*
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **E**: *keyof FluentEvents<T>*
+Name | Type |
+------ | ------ |
+`E` | keyof [FluentEvents](_types_base_.fluentevents.md)\<T> |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `event` | E |
 
-**Returns:** *Function[]*
+**Returns:** Function[]
 
 ___
 
-###  off
+### off
 
-▸ **off**‹**E**›(`event`: E, `listener`: FluentEvents‹T›[E]): *this*
+▸ **off**\<E>(`event`: E, `listener`: FluentEvents\<T>[E]): this
 
 *Inherited from [FluentEmitter](_types_base_.fluentemitter.md).[off](_types_base_.fluentemitter.md#off)*
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **E**: *keyof FluentEvents<T>*
+Name | Type |
+------ | ------ |
+`E` | keyof [FluentEvents](_types_base_.fluentevents.md)\<T> |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `event` | E |
-`listener` | FluentEvents‹T›[E] |
+`listener` | FluentEvents\<T>[E] |
 
-**Returns:** *this*
+**Returns:** this
 
 ___
 
-###  on
+### on
 
-▸ **on**‹**E**›(`event`: E, `listener`: FluentEvents‹T›[E]): *this*
+▸ **on**\<E>(`event`: E, `listener`: FluentEvents\<T>[E]): this
 
 *Inherited from [FluentEmitter](_types_base_.fluentemitter.md).[on](_types_base_.fluentemitter.md#on)*
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **E**: *keyof FluentEvents<T>*
+Name | Type |
+------ | ------ |
+`E` | keyof [FluentEvents](_types_base_.fluentevents.md)\<T> |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `event` | E |
-`listener` | FluentEvents‹T›[E] |
+`listener` | FluentEvents\<T>[E] |
 
-**Returns:** *this*
+**Returns:** this
 
 ___
 
-###  once
+### once
 
-▸ **once**‹**E**›(`event`: E, `listener`: FluentEvents‹T›[E]): *this*
+▸ **once**\<E>(`event`: E, `listener`: FluentEvents\<T>[E]): this
 
 *Inherited from [FluentEmitter](_types_base_.fluentemitter.md).[once](_types_base_.fluentemitter.md#once)*
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **E**: *keyof FluentEvents<T>*
+Name | Type |
+------ | ------ |
+`E` | keyof [FluentEvents](_types_base_.fluentevents.md)\<T> |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `event` | E |
-`listener` | FluentEvents‹T›[E] |
+`listener` | FluentEvents\<T>[E] |
 
-**Returns:** *this*
+**Returns:** this
 
 ___
 
-###  prependListener
+### prependListener
 
-▸ **prependListener**‹**E**›(`event`: E, `listener`: FluentEvents‹T›[E]): *this*
+▸ **prependListener**\<E>(`event`: E, `listener`: FluentEvents\<T>[E]): this
 
 *Inherited from [FluentEmitter](_types_base_.fluentemitter.md).[prependListener](_types_base_.fluentemitter.md#prependlistener)*
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **E**: *keyof FluentEvents<T>*
+Name | Type |
+------ | ------ |
+`E` | keyof [FluentEvents](_types_base_.fluentevents.md)\<T> |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `event` | E |
-`listener` | FluentEvents‹T›[E] |
+`listener` | FluentEvents\<T>[E] |
 
-**Returns:** *this*
+**Returns:** this
 
 ___
 
-###  prependOnceListener
+### prependOnceListener
 
-▸ **prependOnceListener**‹**E**›(`event`: E, `listener`: FluentEvents‹T›[E]): *this*
+▸ **prependOnceListener**\<E>(`event`: E, `listener`: FluentEvents\<T>[E]): this
 
 *Inherited from [FluentEmitter](_types_base_.fluentemitter.md).[prependOnceListener](_types_base_.fluentemitter.md#prependoncelistener)*
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **E**: *keyof FluentEvents<T>*
+Name | Type |
+------ | ------ |
+`E` | keyof [FluentEvents](_types_base_.fluentevents.md)\<T> |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `event` | E |
-`listener` | FluentEvents‹T›[E] |
+`listener` | FluentEvents\<T>[E] |
 
-**Returns:** *this*
+**Returns:** this
 
 ___
 
-###  rawListeners
+### rawListeners
 
-▸ **rawListeners**‹**E**›(`event`: E): *Function[]*
+▸ **rawListeners**\<E>(`event`: E): Function[]
 
 *Inherited from [FluentEmitter](_types_base_.fluentemitter.md).[rawListeners](_types_base_.fluentemitter.md#rawlisteners)*
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **E**: *keyof FluentEvents<T>*
+Name | Type |
+------ | ------ |
+`E` | keyof [FluentEvents](_types_base_.fluentevents.md)\<T> |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `event` | E |
 
-**Returns:** *Function[]*
+**Returns:** Function[]
 
 ___
 
-###  removeAllListeners
+### removeAllListeners
 
-▸ **removeAllListeners**‹**E**›(`event?`: E): *this*
+▸ **removeAllListeners**\<E>(`event?`: E): this
 
 *Inherited from [FluentEmitter](_types_base_.fluentemitter.md).[removeAllListeners](_types_base_.fluentemitter.md#removealllisteners)*
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **E**: *keyof FluentEvents<T>*
+Name | Type |
+------ | ------ |
+`E` | keyof [FluentEvents](_types_base_.fluentevents.md)\<T> |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `event?` | E |
 
-**Returns:** *this*
+**Returns:** this
 
 ___
 
-###  removeListener
+### removeListener
 
-▸ **removeListener**‹**E**›(`event`: E, `listener`: FluentEvents‹T›[E]): *this*
+▸ **removeListener**\<E>(`event`: E, `listener`: FluentEvents\<T>[E]): this
 
 *Inherited from [FluentEmitter](_types_base_.fluentemitter.md).[removeListener](_types_base_.fluentemitter.md#removelistener)*
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **E**: *keyof FluentEvents<T>*
+Name | Type |
+------ | ------ |
+`E` | keyof [FluentEvents](_types_base_.fluentevents.md)\<T> |
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `event` | E |
-`listener` | FluentEvents‹T›[E] |
+`listener` | FluentEvents\<T>[E] |
 
-**Returns:** *this*
+**Returns:** this
 
 ___
 
-###  setMaxListeners
+### setMaxListeners
 
-▸ **setMaxListeners**(`maxListeners`: number): *this*
+▸ **setMaxListeners**(`maxListeners`: number): this
 
 *Inherited from [FluentEmitter](_types_base_.fluentemitter.md).[setMaxListeners](_types_base_.fluentemitter.md#setmaxlisteners)*
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `maxListeners` | number |
 
-**Returns:** *this*
+**Returns:** this

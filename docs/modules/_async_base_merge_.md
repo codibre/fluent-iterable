@@ -1,4 +1,6 @@
-[fluent-iterable - v1.7.0](../README.md) › ["async-base/merge"](_async_base_merge_.md)
+**[fluent-iterable - v1.7.1](../README.md)**
+
+> [Globals](../README.md) / "async-base/merge"
 
 # Module: "async-base/merge"
 
@@ -10,21 +12,22 @@
 
 ## Functions
 
-###  merge
+### merge
 
-▸ **merge**‹**T**, **R**›(`this`: AsyncIterable‹T›, ...`items`: Array‹AsyncIterable‹R››): *AsyncIterable‹T | R›*
+▸ **merge**\<T, R>(`this`: AsyncIterable\<T>, ...`items`: Array\<AsyncIterable\<R>>): AsyncIterable\<T \| R>
 
-**Type parameters:**
+#### Type parameters:
 
-▪ **T**
+Name |
+------ |
+`T` |
+`R` |
 
-▪ **R**
-
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
-`this` | AsyncIterable‹T› |
-`...items` | Array‹AsyncIterable‹R›› |
+`this` | AsyncIterable\<T> |
+`...items` | Array\<AsyncIterable\<R>> |
 
-**Returns:** *AsyncIterable‹T | R›*
+**Returns:** AsyncIterable\<T \| R>
