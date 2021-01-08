@@ -572,7 +572,7 @@ ___
 
 ▸ **promiseIterateAsync**\<T>(`a`: PromiseLike\<AnyIterable\<T>>): AsyncIterable\<T>
 
-**`internal`** 
+**`internal`**
 
 #### Type parameters:
 
