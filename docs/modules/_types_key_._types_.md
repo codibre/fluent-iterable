@@ -22,6 +22,8 @@
 
 Ƭ  **AsyncItemType**\<T>: T *extends* AnyIterable\<*infer* R> ? R : never
 
+Represents the type of the item of an iterable or an async iterable
+
 #### Type parameters:
 
 Name |
@@ -33,6 +35,8 @@ ___
 ### ItemType
 
 Ƭ  **ItemType**\<T>: T *extends* Iterable\<*infer* R> ? R : never
+
+Represents the type of the item of an iterable
 
 #### Type parameters:
 

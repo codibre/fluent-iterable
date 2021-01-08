@@ -3,7 +3,14 @@ import { FluentGroup } from './types';
 import { Comparer, Reducer, AsyncReducer } from './types-base';
 
 declare module './types' {
+  /**
+   * Represents the type of the item of an iterable
+   */
   type ItemType<T> = T extends Iterable<infer R> ? R : never;
+
+  /**
+   * Represents the type of the item of an iterable or an async iterable
+   */
   type AsyncItemType<T> = T extends AnyIterable<infer R> ? R : never;
 
   /**
