@@ -1,4 +1,4 @@
-**[fluent-iterable - v1.7.2](../README.md)**
+**[fluent-iterable - v1.7.3](../README.md)**
 
 > [Globals](../README.md) / ["types-key"](../modules/_types_key_.md) / ["types"](../modules/_types_key_._types_.md) / FluentAsyncIterable
 
@@ -263,6 +263,22 @@ A promise of the first element matching the specified predicate, or `undefined` 
 ___
 
 ### flatten
+
+▸ **flatten**\<R>(): [FluentAsyncIterable](_types_.fluentasynciterable.md)\<R>
+
+Projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.<br>
+Examples:<br>
+  * `fluent([['anchor', 'almond'], ['bound', 'alpine']]).flatten()` yields *anchor*, *almond*, *bound* and *alpine*.<br>
+
+#### Type parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`R` | [ItemType](../modules/_types_key_._types_.md#itemtype)\<T> | The type of the elements in the inner iterable. |
+
+**Returns:** [FluentAsyncIterable](_types_.fluentasynciterable.md)\<R>
+
+The [FluentAsyncIterable](_types_key_._types_.fluentasynciterable.md) of the flattened iterable.
 
 ▸ **flatten**\<K, R>(`mapper?`: K): [FluentAsyncIterable](_types_.fluentasynciterable.md)\<R>
 

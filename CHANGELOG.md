@@ -1,5 +1,9 @@
 
-## 1.7.2
+## 1.7.3
+* 326de0b fixing type of flatten with no parameters
+* dc6391a updating typedoc
+## v1.7.2
+* e6d4211 1.7.2
 * 1e2e8f7 Fixing return type of flatten
 * 2dde58d Release (#24)
 * 82f25ea Release (#23)

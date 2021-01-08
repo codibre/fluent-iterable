@@ -1,4 +1,4 @@
-**[fluent-iterable - v1.7.2](../README.md)**
+**[fluent-iterable - v1.7.3](../README.md)**
 
 > [Globals](../README.md) / "async-base/merging/index"
 
