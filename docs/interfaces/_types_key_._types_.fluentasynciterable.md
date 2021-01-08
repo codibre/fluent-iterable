@@ -274,7 +274,7 @@ Examples:<br>
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`R` | [ItemType](../modules/_types_key_._types_.md#itemtype)\<T> | The type of the elements in the inner iterable. |
+`R` | [AsyncItemType](../modules/_types_key_._types_.md#asyncitemtype)\<T> | The type of the elements in the inner iterable. |
 
 **Returns:** [FluentAsyncIterable](_types_.fluentasynciterable.md)\<R>
 

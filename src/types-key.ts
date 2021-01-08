@@ -650,7 +650,7 @@ declare module './types' {
      * @typeparam R The type of the elements in the inner iterable.
      * @returns The [[FluentAsyncIterable]] of the flattened iterable.
      */
-    flatten<R extends ItemType<T>>(): FluentAsyncIterable<R>;
+    flatten<R extends AsyncItemType<T>>(): FluentAsyncIterable<R>;
 
     /**
      * Projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.
