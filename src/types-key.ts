@@ -1,14 +1,11 @@
-import { AsyncMapper, Mapper } from 'augmentative-iterable';
-import { EventEmitter } from 'events';
+import { AsyncMapper, Mapper, AnyIterable } from 'augmentative-iterable';
 import { FluentGroup } from './types';
-import {
-  FluentEmitOptions,
-  Comparer,
-  Reducer,
-  AsyncReducer,
-} from './types-base';
+import { Comparer, Reducer, AsyncReducer } from './types-base';
 
 declare module './types' {
+  type ItemType<T> = T extends Iterable<infer R> ? R : never;
+  type AsyncItemType<T> = T extends AnyIterable<infer R> ? R : never;
+
   /**
    * Represents an iterable extended with common processing and mutating capabilities.<br>
    *   The capabilities introduced are defined as a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) and thus they support *method chaining*.
@@ -86,7 +83,9 @@ declare module './types' {
      * @param mapper Specifies the projection from the elements of `T` to iterables of `R`. Identity mapping is applied (taking the elements as iterables) if omitted.
      * @returns The [[FluentIterable]] of the flattened iterable.
      */
-    flatten<R extends keyof T>(mapper?: R): FluentIterable<T[R]>;
+    flatten<K extends keyof T, R extends ItemType<T[K]>>(
+      mapper?: K,
+    ): FluentIterable<R>;
 
     /**
      * Asynchronously projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.
@@ -94,7 +93,9 @@ declare module './types' {
      * @param mapper Specifies the asynchronous projection from the elements of `T` to iterables of `R`.
      * @returns The flattened [[FluentAsyncIterable]].
      */
-    flattenAsync<R extends keyof T>(mapper?: R): FluentAsyncIterable<T[R]>;
+    flattenAsync<K extends keyof T, R extends AsyncItemType<T[K]>>(
+      mapper?: K,
+    ): FluentAsyncIterable<R>;
 
     /**
      * Returns distinct elements from the iterable from a certain projections perspective.<br>
@@ -633,7 +634,9 @@ declare module './types' {
      * @param mapper Specifies the projection from the elements of `T` to iterables of `R`. Identity mapping is applied (taking the elements as iterables) if omitted.
      * @returns The [[FluentAsyncIterable]] of the flattened iterable.
      */
-    flatten<R extends keyof T>(mapper?: R): FluentAsyncIterable<T[R]>;
+    flatten<K extends keyof T, R extends AsyncItemType<T[K]>>(
+      mapper?: K,
+    ): FluentAsyncIterable<R>;
 
     /**
      * Returns distinct elements from the iterable from a certain projections perspective.
