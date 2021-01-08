@@ -1,5 +1,10 @@
 
-## 1.7.1
+## 1.7.2
+* 1e2e8f7 Fixing return type of flatten
+* 2dde58d Release (#24)
+* 82f25ea Release (#23)
+## v1.7.1
+* 9fa0210 1.7.1
 * 19cc29e updating augmentative-iterable
 * bd79851 fixing pipeline
 ## v1.7.0
