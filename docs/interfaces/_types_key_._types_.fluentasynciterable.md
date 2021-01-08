@@ -1,4 +1,4 @@
-**[fluent-iterable - v1.7.1](../README.md)**
+**[fluent-iterable - v1.7.2](../README.md)**
 
 > [Globals](../README.md) / ["types-key"](../modules/_types_key_.md) / ["types"](../modules/_types_key_._types_.md) / FluentAsyncIterable
 
@@ -264,7 +264,7 @@ ___
 
 ### flatten
 
-▸ **flatten**\<R>(`mapper?`: R): [FluentAsyncIterable](_types_.fluentasynciterable.md)\<T[R]>
+▸ **flatten**\<K, R>(`mapper?`: K): [FluentAsyncIterable](_types_.fluentasynciterable.md)\<R>
 
 Projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.
 
@@ -272,15 +272,16 @@ Projects each element of the iterable to an iterable and flattens the resulting 
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`R` | keyof T | The type of the elements in the inner iterable. |
+`K` | keyof T | - |
+`R` | [AsyncItemType](../modules/_types_key_._types_.md#asyncitemtype)\<T[K]> | The type of the elements in the inner iterable. |
 
 #### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`mapper?` | R | Specifies the projection from the elements of `T` to iterables of `R`. Identity mapping is applied (taking the elements as iterables) if omitted. |
+`mapper?` | K | Specifies the projection from the elements of `T` to iterables of `R`. Identity mapping is applied (taking the elements as iterables) if omitted. |
 
-**Returns:** [FluentAsyncIterable](_types_.fluentasynciterable.md)\<T[R]>
+**Returns:** [FluentAsyncIterable](_types_.fluentasynciterable.md)\<R>
 
 The [FluentAsyncIterable](_types_key_._types_.fluentasynciterable.md) of the flattened iterable.
 

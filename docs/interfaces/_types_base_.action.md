@@ -1,4 +1,4 @@
-**[fluent-iterable - v1.7.1](../README.md)**
+**[fluent-iterable - v1.7.2](../README.md)**
 
 > [Globals](../README.md) / ["types-base"](../modules/_types_base_.md) / Action
 

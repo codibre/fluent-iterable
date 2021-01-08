@@ -353,6 +353,10 @@ describe('fluent async iterable', () => {
             .flatten((p) => p.emails)
             .toArray(),
         ).to.eql(flatMap(picker(1, 2, 6, 7, 8, 9, 10, 11), (p) => p.emails)));
+      it('with property key', async () =>
+        expect(await fluentAsync(subject).flatten('emails').toArray()).to.eql(
+          flatMap(picker(1, 2, 6, 7, 8, 9, 10, 11), (p) => p.emails),
+        ));
     });
     describe('sort', () => {
       it('empty', async () =>

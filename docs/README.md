@@ -1,8 +1,8 @@
-**[fluent-iterable - v1.7.1](README.md)**
+**[fluent-iterable - v1.7.2](README.md)**
 
 > Globals
 
-# fluent-iterable - v1.7.1
+# fluent-iterable - v1.7.2
 
 ## Index
 
