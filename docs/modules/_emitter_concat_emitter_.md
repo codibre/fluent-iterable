@@ -1,4 +1,4 @@
-**[fluent-iterable - v1.7.3](../README.md)**
+**[fluent-iterable - v1.7.4](../README.md)**
 
 > [Globals](../README.md) / "emitter/concat-emitter"
 

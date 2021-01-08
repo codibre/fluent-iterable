@@ -1,5 +1,8 @@
 
-## 1.7.3
+## 1.7.4
+* 88a79f8 fixing typing for async flatten
+## v1.7.3
+* 82f9310 1.7.3
 * 326de0b fixing type of flatten with no parameters
 * dc6391a updating typedoc
 ## v1.7.2
