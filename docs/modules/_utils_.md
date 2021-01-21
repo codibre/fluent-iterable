@@ -1,4 +1,4 @@
-**[fluent-iterable - v1.7.2](../README.md)**
+**[fluent-iterable - v1.7.4](../README.md)**
 
 > [Globals](../README.md) / "utils"
 
@@ -572,7 +572,7 @@ ___
 
 ▸ **promiseIterateAsync**\<T>(`a`: PromiseLike\<AnyIterable\<T>>): AsyncIterable\<T>
 
-**`internal`** 
+**`internal`**
 
 #### Type parameters:
 

@@ -1,4 +1,4 @@
-**[fluent-iterable - v1.7.2](../README.md)**
+**[fluent-iterable - v1.7.4](../README.md)**
 
 > [Globals](../README.md) / ["types-emitter"](../modules/_types_emitter_.md) / FluentIterableEmitter
 
