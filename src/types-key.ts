@@ -87,13 +87,21 @@ declare module './types' {
      * Projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.<br>
      * Examples:<br>
      *   * `fluent([['anchor', 'almond'], ['bound', 'alpine']]).flatten()` yields *anchor*, *almond*, *bound* and *alpine*.<br>
+     * @typeparam R The type of the elements in the inner iterable.
+     * @returns The [[FluentIterable]] of the flattened iterable.
+     */
+    flatten<R extends ItemType<T>>(): FluentIterable<R>;
+
+    /**
+     * Projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.<br>
+     * Examples:<br>
      *   * `fluent([ { values: ['anchor', 'almond'] }, { values: ['bound', 'alpine'] }]).flatten(obj => obj.values)` yields *anchor*, *almond*, *bound* and *alpine*.
      * @typeparam R The type of the elements in the inner iterable.
      * @param mapper Specifies the projection from the elements of `T` to iterables of `R`. Identity mapping is applied (taking the elements as iterables) if omitted.
      * @returns The [[FluentIterable]] of the flattened iterable.
      */
     flatten<K extends keyof T, R extends ItemType<T[K]>>(
-      mapper?: K,
+      mapper: K,
     ): FluentIterable<R>;
 
     /**
@@ -636,6 +644,15 @@ declare module './types' {
      * @returns A [[FluentAsyncIterable]] of the elements against which the predicate evaluates to `true`.
      */
     filter(predicate: keyof T): FluentAsyncIterable<T>;
+
+    /**
+     * Projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.<br>
+     * Examples:<br>
+     *   * `fluent([['anchor', 'almond'], ['bound', 'alpine']]).flatten()` yields *anchor*, *almond*, *bound* and *alpine*.<br>
+     * @typeparam R The type of the elements in the inner iterable.
+     * @returns The [[FluentAsyncIterable]] of the flattened iterable.
+     */
+    flatten<R extends AsyncItemType<T>>(): FluentAsyncIterable<R>;
 
     /**
      * Projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.

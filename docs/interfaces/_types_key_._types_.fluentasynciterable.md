@@ -264,6 +264,22 @@ ___
 
 ### flatten
 
+▸ **flatten**\<R>(): [FluentAsyncIterable](_types_.fluentasynciterable.md)\<R>
+
+Projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.<br>
+Examples:<br>
+  * `fluent([['anchor', 'almond'], ['bound', 'alpine']]).flatten()` yields *anchor*, *almond*, *bound* and *alpine*.<br>
+
+#### Type parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`R` | [AsyncItemType](../modules/_types_key_._types_.md#asyncitemtype)\<T> | The type of the elements in the inner iterable. |
+
+**Returns:** [FluentAsyncIterable](_types_.fluentasynciterable.md)\<R>
+
+The [FluentAsyncIterable](_types_key_._types_.fluentasynciterable.md) of the flattened iterable.
+
 ▸ **flatten**\<K, R>(`mapper?`: K): [FluentAsyncIterable](_types_.fluentasynciterable.md)\<R>
 
 Projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.
