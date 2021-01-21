@@ -1,4 +1,4 @@
-**[fluent-iterable - v1.7.3](../README.md)**
+**[fluent-iterable - v1.7.4](../README.md)**
 
 > [Globals](../README.md) / ["async-base/merging/merge-types"](../modules/_async_base_merging_merge_types_.md) / GetNextAsyncIterator
 

@@ -1,5 +1,6 @@
 
-## 1.7.3
+## 1.7.4
+* c4fa462 1.7.3
 * 107736b Fixing to-object object type when key string is used
 * e7a095a Issue 26 bug with typing when flatten uses string field property (#28)
 ## v1.7.4
