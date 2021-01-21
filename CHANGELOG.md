@@ -1,5 +1,16 @@
 
-## 1.7.2
+## 1.7.3
+* 107736b Fixing to-object object type when key string is used
+* e7a095a Issue 26 bug with typing when flatten uses string field property (#28)
+## v1.7.4
+* 9e5bfa9 1.7.4
+* 88a79f8 fixing typing for async flatten
+## v1.7.3
+* 82f9310 1.7.3
+* 326de0b fixing type of flatten with no parameters
+* dc6391a updating typedoc
+## v1.7.2
+* e6d4211 1.7.2
 * 1e2e8f7 Fixing return type of flatten
 * 2dde58d Release (#24)
 * 82f25ea Release (#23)

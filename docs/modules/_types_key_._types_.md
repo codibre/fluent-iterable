@@ -1,4 +1,4 @@
-**[fluent-iterable - v1.7.2](../README.md)**
+**[fluent-iterable - v1.7.3](../README.md)**
 
 > [Globals](../README.md) / ["types-key"](_types_key_.md) / "types"
 
@@ -15,6 +15,7 @@
 
 * [AsyncItemType](_types_key_._types_.md#asyncitemtype)
 * [ItemType](_types_key_._types_.md#itemtype)
+* [ToObjectKeyType](_types_key_._types_.md#toobjectkeytype)
 
 ## Type aliases
 
@@ -43,3 +44,16 @@ Represents the type of the item of an iterable
 Name |
 ------ |
 `T` |
+
+___
+
+### ToObjectKeyType
+
+Ƭ  **ToObjectKeyType**\<T, R1>: T[R1] *extends* string \| number \| symbol ? T[R1] : any
+
+#### Type parameters:
+
+Name | Type |
+------ | ------ |
+`T` | - |
+`R1` | keyof T |
