@@ -13,7 +13,12 @@ declare module './types' {
    */
   type AsyncItemType<T> = T extends AnyIterable<infer R> ? R : never;
 
-  type ToObjectKeyType<T, R1 extends keyof T> = (T[R1] extends string | number | symbol ? T[R1] : any);
+  type ToObjectKeyType<T, R1 extends keyof T> = T[R1] extends
+    | string
+    | number
+    | symbol
+    ? T[R1]
+    : any;
 
   /**
    * Represents an iterable extended with common processing and mutating capabilities.<br>
@@ -758,7 +763,7 @@ declare module './types' {
     toObject<R1 extends keyof T, R = T[R1]>(
       keySelector: R1,
       valueSelector?: AsyncMapper<T, R>,
-    ): Promise<{ [key in R1]: R}>;
+    ): Promise<{ [key in R1]: R }>;
 
     /**
      * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by a key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -770,7 +775,7 @@ declare module './types' {
     toObject<K extends string | symbol | number, R2 extends keyof T>(
       keySelector: AsyncMapper<T, K>,
       valueSelector: R2,
-    ): Promise<{ [key in K]: R2}>;
+    ): Promise<{ [key in K]: R2 }>;
 
     /**
      * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by a key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -782,7 +787,7 @@ declare module './types' {
     toObject<R1 extends keyof T, R2 extends keyof T>(
       keySelector: R1,
       valueSelector: R2,
-    ): Promise<{ [key in R1]: R2}>;
+    ): Promise<{ [key in R1]: R2 }>;
 
     /**
      * Iterates through the iterable and executes an action against each element. This is a resolving operation, will cause a full loop through all the elements of the iterable.
