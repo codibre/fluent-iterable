@@ -13,6 +13,13 @@ declare module './types' {
    */
   type AsyncItemType<T> = T extends AnyIterable<infer R> ? R : never;
 
+  type ToObjectKeyType<T, R1 extends keyof T> = T[R1] extends
+    | string
+    | number
+    | symbol
+    ? T[R1]
+    : any;
+
   /**
    * Represents an iterable extended with common processing and mutating capabilities.<br>
    *   The capabilities introduced are defined as a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) and thus they support *method chaining*.
@@ -355,7 +362,7 @@ declare module './types' {
     toObject<R1 extends keyof T, R = T[R1]>(
       keySelector: R1,
       valueSelector?: Mapper<T, R>,
-    ): any;
+    ): { [key in ToObjectKeyType<T, R1>]: R };
 
     /**
      * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by a key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -367,10 +374,10 @@ declare module './types' {
      * @param valueSelector Projects an element of the iterable into the value of the corresponding field. The identity function is being used if omitted.
      * @returns The object composed of the elements of the iterable as fields.
      */
-    toObject<R2 extends keyof T>(
-      keySelector: Mapper<T, any>,
+    toObject<K extends string | symbol | number, R2 extends keyof T>(
+      keySelector: Mapper<T, K>,
       valueSelector: R2,
-    ): any;
+    ): { [key in K]: T[R2] };
 
     /**
      * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by a key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -385,7 +392,7 @@ declare module './types' {
     toObject<R1 extends keyof T, R2 extends keyof T>(
       keySelector: R1,
       valueSelector: R2,
-    ): any;
+    ): { [key in ToObjectKeyType<T, R1>]: T[R2] };
 
     /**
      * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by an asynchronous key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -397,7 +404,7 @@ declare module './types' {
     toObjectAsync<R1 extends keyof T, R = T[R1]>(
       keySelector: R1,
       valueSelector?: AsyncMapper<T, R>,
-    ): Promise<any>;
+    ): Promise<{ [key in ToObjectKeyType<T, R1>]: R }>;
     /**
      * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by an asynchronous key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
      * @typeparam R The expected type of the object. Cannot be enforced, this is strictly informal.
@@ -405,10 +412,10 @@ declare module './types' {
      * @param valueSelector Asynchronously projects an element of the iterable into the value of the corresponding field.
      * @returns A promise of the object composed of the elements of the iterable as fields.
      */
-    toObjectAsync<R2 extends keyof T>(
-      keySelector: AsyncMapper<T, any>,
+    toObjectAsync<K extends string | symbol | number, R2 extends keyof T>(
+      keySelector: AsyncMapper<T, K>,
       valueSelector: R2,
-    ): Promise<any>;
+    ): Promise<{ [key in K]: T[R2] }>;
 
     /**
      * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by an asynchronous key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -420,7 +427,7 @@ declare module './types' {
     toObjectAsync<R1 extends keyof T, R2 extends keyof T>(
       keySelector: R1,
       valueSelector: R2,
-    ): Promise<any>;
+    ): Promise<{ [key in ToObjectKeyType<T, R1>]: T[R2] }>;
 
     /**
      * Projects and concatenates the elements of the iterable into a `string` using a separator. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -756,7 +763,7 @@ declare module './types' {
     toObject<R1 extends keyof T, R = T[R1]>(
       keySelector: R1,
       valueSelector?: AsyncMapper<T, R>,
-    ): Promise<any>;
+    ): Promise<{ [key in R1]: R }>;
 
     /**
      * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by a key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -765,10 +772,10 @@ declare module './types' {
      * @param valueSelector Projects an element of the iterable into the value of the corresponding field. The identity function is being used if omitted.
      * @returns A promise of the object composed of the elements of the iterable as fields.
      */
-    toObject<R2 extends keyof T>(
-      keySelector: AsyncMapper<T, any>,
+    toObject<K extends string | symbol | number, R2 extends keyof T>(
+      keySelector: AsyncMapper<T, K>,
       valueSelector: R2,
-    ): Promise<any>;
+    ): Promise<{ [key in K]: R2 }>;
 
     /**
      * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by a key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -780,7 +787,7 @@ declare module './types' {
     toObject<R1 extends keyof T, R2 extends keyof T>(
       keySelector: R1,
       valueSelector: R2,
-    ): Promise<any>;
+    ): Promise<{ [key in R1]: R2 }>;
 
     /**
      * Iterates through the iterable and executes an action against each element. This is a resolving operation, will cause a full loop through all the elements of the iterable.

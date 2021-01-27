@@ -1,4 +1,4 @@
-**[fluent-iterable - v1.7.4](../README.md)**
+**[fluent-iterable - v1.7.5](../README.md)**
 
 > [Globals](../README.md) / ["types-key"](../modules/_types_key_.md) / ["types"](../modules/_types_key_._types_.md) / FluentIterable
 
@@ -1100,7 +1100,7 @@ ___
 
 ### toObject
 
-▸ **toObject**\<R1, R>(`keySelector`: R1, `valueSelector?`: Mapper\<T, R>): any
+▸ **toObject**\<R1, R>(`keySelector`: R1, `valueSelector?`: Mapper\<T, R>): object
 
 Translates the iterable into an object using the elements of the iterable as representations of fields as specified by a key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Examples:<br>
@@ -1121,11 +1121,11 @@ Name | Type | Description |
 `keySelector` | R1 | Projects an element of the iterable into the key of the corresponding field. |
 `valueSelector?` | Mapper\<T, R> | Projects an element of the iterable into the value of the corresponding field. The identity function is being used if omitted. |
 
-**Returns:** any
+**Returns:** object
 
 The object composed of the elements of the iterable as fields.
 
-▸ **toObject**\<R2>(`keySelector`: Mapper\<T, any>, `valueSelector`: R2): any
+▸ **toObject**\<K, R2>(`keySelector`: Mapper\<T, K>, `valueSelector`: R2): object
 
 Translates the iterable into an object using the elements of the iterable as representations of fields as specified by a key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Examples:<br>
@@ -1138,20 +1138,21 @@ Translates the iterable into an object using the elements of the iterable as rep
 
 Name | Type |
 ------ | ------ |
+`K` | string \| symbol \| number |
 `R2` | keyof T |
 
 #### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`keySelector` | Mapper\<T, any> | Projects an element of the iterable into the key of the corresponding field. |
+`keySelector` | Mapper\<T, K> | Projects an element of the iterable into the key of the corresponding field. |
 `valueSelector` | R2 | Projects an element of the iterable into the value of the corresponding field. The identity function is being used if omitted. |
 
-**Returns:** any
+**Returns:** object
 
 The object composed of the elements of the iterable as fields.
 
-▸ **toObject**\<R1, R2>(`keySelector`: R1, `valueSelector`: R2): any
+▸ **toObject**\<R1, R2>(`keySelector`: R1, `valueSelector`: R2): object
 
 Translates the iterable into an object using the elements of the iterable as representations of fields as specified by a key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
   Examples:<br>
@@ -1174,7 +1175,7 @@ Name | Type | Description |
 `keySelector` | R1 | Projects an element of the iterable into the key of the corresponding field. |
 `valueSelector` | R2 | Projects an element of the iterable into the value of the corresponding field. The identity function is being used if omitted. |
 
-**Returns:** any
+**Returns:** object
 
 The object composed of the elements of the iterable as fields.
 
@@ -1182,7 +1183,7 @@ ___
 
 ### toObjectAsync
 
-▸ **toObjectAsync**\<R1, R>(`keySelector`: R1, `valueSelector?`: AsyncMapper\<T, R>): Promise\<any>
+▸ **toObjectAsync**\<R1, R>(`keySelector`: R1, `valueSelector?`: AsyncMapper\<T, R>): Promise\<{}>
 
 Translates the iterable into an object using the elements of the iterable as representations of fields as specified by an asynchronous key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -1200,11 +1201,11 @@ Name | Type | Description |
 `keySelector` | R1 | Asynchronously projects an element of the iterable into the key of the corresponding field. |
 `valueSelector?` | AsyncMapper\<T, R> | Asynchronously projects an element of the iterable into the value of the corresponding field. |
 
-**Returns:** Promise\<any>
+**Returns:** Promise\<{}>
 
 A promise of the object composed of the elements of the iterable as fields.
 
-▸ **toObjectAsync**\<R2>(`keySelector`: AsyncMapper\<T, any>, `valueSelector`: R2): Promise\<any>
+▸ **toObjectAsync**\<K, R2>(`keySelector`: AsyncMapper\<T, K>, `valueSelector`: R2): Promise\<{}>
 
 Translates the iterable into an object using the elements of the iterable as representations of fields as specified by an asynchronous key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -1214,20 +1215,21 @@ Translates the iterable into an object using the elements of the iterable as rep
 
 Name | Type |
 ------ | ------ |
+`K` | string \| symbol \| number |
 `R2` | keyof T |
 
 #### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`keySelector` | AsyncMapper\<T, any> | Asynchronously projects an element of the iterable into the key of the corresponding field. |
+`keySelector` | AsyncMapper\<T, K> | Asynchronously projects an element of the iterable into the key of the corresponding field. |
 `valueSelector` | R2 | Asynchronously projects an element of the iterable into the value of the corresponding field. |
 
-**Returns:** Promise\<any>
+**Returns:** Promise\<{}>
 
 A promise of the object composed of the elements of the iterable as fields.
 
-▸ **toObjectAsync**\<R1, R2>(`keySelector`: R1, `valueSelector`: R2): Promise\<any>
+▸ **toObjectAsync**\<R1, R2>(`keySelector`: R1, `valueSelector`: R2): Promise\<{}>
 
 Translates the iterable into an object using the elements of the iterable as representations of fields as specified by an asynchronous key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -1247,7 +1249,7 @@ Name | Type | Description |
 `keySelector` | R1 | Asynchronously projects an element of the iterable into the key of the corresponding field. |
 `valueSelector` | R2 | Asynchronously projects an element of the iterable into the value of the corresponding field. |
 
-**Returns:** Promise\<any>
+**Returns:** Promise\<{}>
 
 A promise of the object composed of the elements of the iterable as fields.
 

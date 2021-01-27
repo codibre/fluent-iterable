@@ -1,4 +1,4 @@
-**[fluent-iterable - v1.7.4](../README.md)**
+**[fluent-iterable - v1.7.5](../README.md)**
 
 > [Globals](../README.md) / ["types-key"](../modules/_types_key_.md) / ["types"](../modules/_types_key_._types_.md) / FluentAsyncIterable
 
@@ -549,7 +549,7 @@ ___
 
 ### toObject
 
-▸ **toObject**\<R1, R>(`keySelector`: R1, `valueSelector?`: AsyncMapper\<T, R>): Promise\<any>
+▸ **toObject**\<R1, R>(`keySelector`: R1, `valueSelector?`: AsyncMapper\<T, R>): Promise\<{}>
 
 Translates the iterable into an object using the elements of the iterable as representations of fields as specified by a key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -567,11 +567,11 @@ Name | Type | Description |
 `keySelector` | R1 | Projects an element of the iterable into the key of the corresponding field. |
 `valueSelector?` | AsyncMapper\<T, R> | Projects an element of the iterable into the value of the corresponding field. The identity function is being used if omitted. |
 
-**Returns:** Promise\<any>
+**Returns:** Promise\<{}>
 
 A promise of the object composed of the elements of the iterable as fields.
 
-▸ **toObject**\<R2>(`keySelector`: AsyncMapper\<T, any>, `valueSelector`: R2): Promise\<any>
+▸ **toObject**\<K, R2>(`keySelector`: AsyncMapper\<T, K>, `valueSelector`: R2): Promise\<{}>
 
 Translates the iterable into an object using the elements of the iterable as representations of fields as specified by a key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -581,20 +581,21 @@ Translates the iterable into an object using the elements of the iterable as rep
 
 Name | Type |
 ------ | ------ |
+`K` | string \| symbol \| number |
 `R2` | keyof T |
 
 #### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`keySelector` | AsyncMapper\<T, any> | Projects an element of the iterable into the key of the corresponding field. |
+`keySelector` | AsyncMapper\<T, K> | Projects an element of the iterable into the key of the corresponding field. |
 `valueSelector` | R2 | Projects an element of the iterable into the value of the corresponding field. The identity function is being used if omitted. |
 
-**Returns:** Promise\<any>
+**Returns:** Promise\<{}>
 
 A promise of the object composed of the elements of the iterable as fields.
 
-▸ **toObject**\<R1, R2>(`keySelector`: R1, `valueSelector`: R2): Promise\<any>
+▸ **toObject**\<R1, R2>(`keySelector`: R1, `valueSelector`: R2): Promise\<{}>
 
 Translates the iterable into an object using the elements of the iterable as representations of fields as specified by a key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -614,7 +615,7 @@ Name | Type | Description |
 `keySelector` | R1 | Projects an element of the iterable into the key of the corresponding field. |
 `valueSelector` | R2 | Projects an element of the iterable into the value of the corresponding field. The identity function is being used if omitted. |
 
-**Returns:** Promise\<any>
+**Returns:** Promise\<{}>
 
 A promise of the object composed of the elements of the iterable as fields.
 
