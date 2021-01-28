@@ -6,6 +6,7 @@ import delay from 'delay';
 import { stub } from 'sinon';
 import { AnyIterable } from 'augmentative-iterable';
 import { emitGenerator } from './fluent-emit.spec';
+import { fluentSymbolAsync } from '../src/types-internal';
 
 async function* generator(): AsyncIterable<Person> {
   yield* data;
@@ -990,5 +991,11 @@ describe('fluent async iterable', () => {
       expect(resolved).to.be.eq(10);
       expect(result).to.be.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     });
+  });
+
+  it('should be identifiable as fluent async', () => {
+    const result: any = fluentAsync(fluentAsync([1, 2, 3]));
+
+    expect(result.fluent).to.be.eq(fluentSymbolAsync);
   });
 });

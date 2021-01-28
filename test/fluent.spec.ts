@@ -1,9 +1,10 @@
+import { fluentSymbol } from './../src/types-internal/fluent-symbol';
 import { o, fluent, identity, interval, od } from '../src';
 import expect, { flatMap, pick } from './tools';
 import delay from 'delay';
-import { match, stub } from 'sinon';
 import 'chai-callslike';
 import { ObjectReadableMock } from 'stream-mock';
+import { stub } from 'chai-callslike';
 
 export enum Gender {
   Male = 'Male',
@@ -1523,5 +1524,11 @@ describe('fluent iterable', () => {
       expect(resolved).to.be.eq(10);
       expect(result).to.be.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     });
+  });
+
+  it('should be identifiable as fluent', () => {
+    const result: any = fluent(fluent([1, 2, 3]));
+
+    expect(result.fluent).to.be.eq(fluentSymbol);
   });
 });
