@@ -20,6 +20,7 @@ import {
   Group,
   FluentEmitter,
   Equality,
+  KVGroupTransform,
 } from './types-base';
 
 /**
@@ -290,19 +291,25 @@ interface FluentIterable<T>
    *   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).group(word => word[0])` yields { key: 'a', values: ['anchor', 'almond', 'alpine'] } and { key: 'b', values: ['bound'] }.
    * @typeparam R The type of the groups' key.
    * @param mapper Projects the elements of the iterable into the group key they belong to.
+   * @param transformValue Optional. Allows a transformation before adding the value to the group. The return must be an iterable
    * @returns The [[FluentIterable]] of the distinct groups.
    */
-  group<R>(mapper: Mapper<T, R>): FluentIterable<FluentGroup<T, R>>;
+  group<R, V = T>(
+    mapper: Mapper<T, R>,
+    transformValue?: KVGroupTransform<R, T, V>,
+  ): FluentIterable<FluentGroup<V, R>>;
 
   /**
    * Groups the elements of the iterable keyed by equality of data at the specified asynchronous projection.
    * @typeparam R The type of the groups key.
    * @param mapper Asynchronously projects the elements of the iterable into the group key they belong to.
+   * @param transformValue Optional. Allows a transformation before adding the value to the group. The return must be an iterable
    * @returns The [[FluentAsyncIterable]] of the distinct groups.
    */
-  groupAsync<R>(
+  groupAsync<R, V = T>(
     mapper: AsyncMapper<T, R>,
-  ): FluentAsyncIterable<FluentGroup<T, R>>;
+    transformValue?: KVGroupTransform<R, T, V>,
+  ): FluentAsyncIterable<FluentGroup<V, R>>;
 
   /**
    * Returns the number of elements that matches a predicate in the iterable. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -918,9 +925,13 @@ interface FluentAsyncIterable<T>
    * Groups the elements of the iterable keyed by equality of data at the specified projection.
    * @typeparam R The type of the groups' key.
    * @param mapper Projects the elements of the iterable into the group key they belong to.
+   * @param transform Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied
    * @returns The [[FluentAsyncIterable]] of the distinct groups.
    */
-  group<R>(mapper: AsyncMapper<T, R>): FluentAsyncIterable<FluentGroup<T, R>>;
+  group<R, V = T>(
+    mapper: AsyncMapper<T, R>,
+    transform?: KVGroupTransform<R, T, V>,
+  ): FluentAsyncIterable<FluentGroup<V, R>>;
 
   /**
    * Returns the number of elements that matches a predicate in the iterable. This is a resolving operation, will cause a full loop through all the elements of the iterable.

@@ -1,3 +1,4 @@
+import { fluentSymbol } from './types-internal/fluent-symbol';
 import { fluentAsync } from './fluent-async';
 import { FluentIterable } from './types';
 import {
@@ -7,7 +8,8 @@ import {
   special,
 } from './mounters';
 import { mountIterableFunctions, mountSpecial } from './mounters';
-import { getExtender, extend, defaultCookFunction } from 'extension-methods';
+import { getExtender, defaultCookFunction } from 'extension-methods';
+import { getFluent } from './types-internal';
 
 export const proxyReference: { [key: string]: Function } = {};
 const handler = getExtender(proxyReference, defaultCookFunction, 'extender');
@@ -19,7 +21,7 @@ const handler = getExtender(proxyReference, defaultCookFunction, 'extender');
  * @returns The [[FluentIterable]] instance.
  */
 function fluent<T>(iterable: Iterable<T>): FluentIterable<T> {
-  return extend(iterable, handler) as any;
+  return getFluent(iterable, handler, fluentSymbol);
 }
 
 Object.assign(proxyReference, {
@@ -27,6 +29,7 @@ Object.assign(proxyReference, {
   ...mountIterableFunctions(iterableAsyncFuncs, fluentAsync),
   ...resolvingFuncs,
   ...mountSpecial(special, fluent, fluentAsync),
+  fluent: fluentSymbol,
 });
 
 export default fluent;

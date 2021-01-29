@@ -11,6 +11,7 @@ import { iterateAsync } from './utils';
 import { getExtender, extend, defaultCookFunction } from 'extension-methods';
 import { EventEmitter } from 'events';
 import { getIterableFromEmitter } from './emitter';
+import { fluentSymbolAsync, getFluent } from './types-internal';
 
 export const proxyReference: { [key: string]: Function } = {};
 const handler = getExtender(proxyReference, defaultCookFunction, 'extender');
@@ -24,7 +25,7 @@ const handler = getExtender(proxyReference, defaultCookFunction, 'extender');
 function fluentAsync<T>(
   iterable: AnyIterable<T> | PromiseLike<AnyIterable<T>>,
 ): FluentAsyncIterable<T> {
-  return extend(iterateAsync(iterable), handler) as any;
+  return getFluent(iterateAsync(iterable), handler, fluentSymbolAsync);
 }
 
 /**
@@ -55,6 +56,7 @@ Object.assign(proxyReference, {
   ...mountIterableFunctions(asyncIterableFuncs, fluentAsync),
   ...mountSpecial(asyncSpecial, fluentAsync, fluentAsync),
   ...asyncResolvingFuncs,
+  fluent: fluentSymbolAsync,
 });
 
 export { fluentAsync, fluentEmit };

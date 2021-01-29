@@ -1,11 +1,23 @@
+import { KVGroupTransform } from './types-base';
 /* eslint-disable guard-for-in */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import fluent from './fluent';
-import { FluentAsyncIterable, FluentGroup, FluentIterable } from './types';
+import {
+  FluentAsyncIterable,
+  FluentGroup,
+  FluentIterable,
+  ItemType,
+} from './types';
 import { Group, AverageStepper } from './types-base';
-import { AnyIterable, AsyncPredicate, Predicate } from 'augmentative-iterable';
+import {
+  AnyIterable,
+  AsyncPredicate,
+  Mapper,
+  Predicate,
+} from 'augmentative-iterable';
 import { orderAssured } from './types-internal';
 import { valueTypeWrapper } from './types-internal/string-wrapper';
+import { prepare } from './types-internal/prepare';
 
 const valueTypes = ['string', 'number', 'boolean'];
 /**
@@ -283,6 +295,72 @@ export function desc<F>(f: F): F {
   return assureOrderDescending(
     (isValueType(f) ? { [valueTypeWrapper]: f } : f) as any,
   );
+}
+
+/**
+ * Return a transformation function for use in group operation to guarantee distinct elements for each group, following the informed grouping mapper
+ * @param valueDistinctMapper must return the unicity key. The unicity is respected by group
+ */
+export function getGroupingDistinct<K, T>(
+  valueDistinctMapper: keyof T,
+): KVGroupTransform<K, T>;
+/**
+ * Return a transformation function for use in group operation to guarantee distinct elements for each group, following the informed grouping mapper
+ * @param valueMapper maps the value for a Iterable of values. Useful if you need to flat map your values per group somehow
+ * @param valueDistinctMapper must return the unicity key. The unicity is respected by group
+ */
+export function getGroupingDistinct<
+  K,
+  T,
+  KT extends keyof T,
+  NewT extends ItemType<T[KT]> = ItemType<T[KT]>
+>(
+  valueMapper: KT,
+  valueDistinctMapper: keyof ItemType<T[KT]>,
+): KVGroupTransform<K, T, NewT>;
+/**
+ * Return a transformation function for use in group operation to guarantee distinct elements for each group, following the informed grouping mapper
+ * @param valueDistinctMapper must return the unicity key. The unicity is respected by group
+ */
+export function getGroupingDistinct<K, T, NewT>(
+  valueDistinctMapper: Mapper<T, NewT>,
+): KVGroupTransform<K, T, NewT>;
+/**
+ * Return a transformation function for use in group operation to guarantee distinct elements for each group, following the informed grouping mapper
+ * @param valueMapper maps the value for a Iterable of values. Useful if you need to flat map your values per group somehow
+ * @param valueDistinctMapper must return the unicity key. The unicity is respected by group
+ */
+export function getGroupingDistinct<K, T, NewT = T[]>(
+  valueMapper: Mapper<T, Iterable<NewT>>,
+  valueDistinctMapper?: Mapper<NewT, unknown> | keyof NewT,
+): KVGroupTransform<K, T, NewT>;
+export function getGroupingDistinct<K, T, NewT = T[]>(
+  baseValueMapper: any,
+  baseValueDistinctMapper?: any,
+): KVGroupTransform<K, T, NewT> {
+  const map = new Map<K, Set<unknown>>();
+  if (!baseValueDistinctMapper) {
+    baseValueDistinctMapper = baseValueMapper;
+    baseValueMapper = (t: T) => [t];
+  }
+  const valueMapper = prepare(baseValueMapper);
+  const valueDistinctMapper = prepare(baseValueDistinctMapper);
+
+  return function* (k: K, v: T) {
+    let set = map.get(k);
+    if (!set) {
+      set = new Set<unknown>();
+      map.set(k, set);
+    }
+
+    for (const nv of valueMapper(v)) {
+      const kv = valueDistinctMapper(nv);
+      if (!set.has(kv)) {
+        set.add(kv);
+        yield nv;
+      }
+    }
+  };
 }
 
 export {
