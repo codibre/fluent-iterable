@@ -297,7 +297,7 @@ interface FluentIterable<T>
   group<R, V = T>(
     mapper: Mapper<T, R>,
     transformValue?: KVGroupTransform<R, T, V>,
-  ): FluentIterable<FluentGroup<T, R>>;
+  ): FluentIterable<FluentGroup<V, R>>;
 
   /**
    * Groups the elements of the iterable keyed by equality of data at the specified asynchronous projection.
@@ -309,7 +309,7 @@ interface FluentIterable<T>
   groupAsync<R, V = T>(
     mapper: AsyncMapper<T, R>,
     transformValue?: KVGroupTransform<R, T, V>,
-  ): FluentAsyncIterable<FluentGroup<T, R>>;
+  ): FluentAsyncIterable<FluentGroup<V, R>>;
 
   /**
    * Returns the number of elements that matches a predicate in the iterable. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -931,7 +931,7 @@ interface FluentAsyncIterable<T>
   group<R, V = T>(
     mapper: AsyncMapper<T, R>,
     transform?: KVGroupTransform<R, T, V>,
-  ): FluentAsyncIterable<FluentGroup<T, R>>;
+  ): FluentAsyncIterable<FluentGroup<V, R>>;
 
   /**
    * Returns the number of elements that matches a predicate in the iterable. This is a resolving operation, will cause a full loop through all the elements of the iterable.

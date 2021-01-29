@@ -4,9 +4,15 @@ import { KVGroupTransform } from './types-base';
 import fluent from './fluent';
 import { FluentAsyncIterable, FluentGroup, FluentIterable } from './types';
 import { Group, AverageStepper } from './types-base';
-import { AnyIterable, AsyncPredicate, Predicate } from 'augmentative-iterable';
+import {
+  AnyIterable,
+  AsyncPredicate,
+  Mapper,
+  Predicate,
+} from 'augmentative-iterable';
 import { orderAssured } from './types-internal';
 import { valueTypeWrapper } from './types-internal/string-wrapper';
+import { prepare } from './types-internal/prepare';
 
 const valueTypes = ['string', 'number', 'boolean'];
 /**
@@ -287,21 +293,23 @@ export function desc<F>(f: F): F {
 }
 
 export function getGroupingDistinct<K, T, V, NewT = T[]>(
-  valueDistinctMapper: (t: NewT) => V,
+  valueDistinctMapper: Mapper<T, NewT>,
 ): KVGroupTransform<K, T, NewT>;
 export function getGroupingDistinct<K, T, V, NewT = T[]>(
-  valueMapper: (t: T) => Iterable<NewT>,
-  valueDistinctMapper: (t: NewT) => V,
+  valueMapper: Mapper<T, Iterable<NewT>>,
+  valueDistinctMapper: Mapper<NewT, V>,
 ): KVGroupTransform<K, T, NewT>;
 export function getGroupingDistinct<K, T, V, NewT = T[]>(
-  valueMapper: any,
-  valueDistinctMapper?: any,
+  baseValueMapper: any,
+  baseValueDistinctMapper?: any,
 ): KVGroupTransform<K, T, NewT> {
   const map = new Map<K, Set<V>>();
-  if (!valueDistinctMapper) {
-    valueDistinctMapper = valueMapper;
-    valueMapper = (t: T) => [t];
+  if (!baseValueDistinctMapper) {
+    baseValueDistinctMapper = baseValueMapper;
+    baseValueMapper = (t: T) => [t];
   }
+  const valueMapper = prepare(baseValueMapper);
+  const valueDistinctMapper = prepare(baseValueDistinctMapper);
 
   return function* (k: K, v: T) {
     let set = map.get(k);
