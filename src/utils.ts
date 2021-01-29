@@ -297,9 +297,18 @@ export function desc<F>(f: F): F {
   );
 }
 
+/**
+ * Return a transformation function for use in group operation to guarantee distinct elements for each group, following the informed grouping mapper
+ * @param valueDistinctMapper must return the unicity key. The unicity is respected by group
+ */
 export function getGroupingDistinct<K, T>(
   valueDistinctMapper: keyof T,
 ): KVGroupTransform<K, T>;
+/**
+ * Return a transformation function for use in group operation to guarantee distinct elements for each group, following the informed grouping mapper
+ * @param valueMapper maps the value for a Iterable of values. Useful if you need to flat map your values per group somehow
+ * @param valueDistinctMapper must return the unicity key. The unicity is respected by group
+ */
 export function getGroupingDistinct<
   K,
   T,
@@ -309,9 +318,18 @@ export function getGroupingDistinct<
   valueMapper: KT,
   valueDistinctMapper: keyof ItemType<T[KT]>,
 ): KVGroupTransform<K, T, NewT>;
+/**
+ * Return a transformation function for use in group operation to guarantee distinct elements for each group, following the informed grouping mapper
+ * @param valueDistinctMapper must return the unicity key. The unicity is respected by group
+ */
 export function getGroupingDistinct<K, T, NewT>(
   valueDistinctMapper: Mapper<T, NewT>,
 ): KVGroupTransform<K, T, NewT>;
+/**
+ * Return a transformation function for use in group operation to guarantee distinct elements for each group, following the informed grouping mapper
+ * @param valueMapper maps the value for a Iterable of values. Useful if you need to flat map your values per group somehow
+ * @param valueDistinctMapper must return the unicity key. The unicity is respected by group
+ */
 export function getGroupingDistinct<K, T, NewT = T[]>(
   valueMapper: Mapper<T, Iterable<NewT>>,
   valueDistinctMapper?: Mapper<NewT, unknown> | keyof NewT,
