@@ -45,17 +45,6 @@ function groupItem(g: any, key: any, t: any) {
   g.set(key, values);
 }
 
-function getNonDistinctGroup<T>(
-  resolver: ResolverType,
-  mapper: FunctionAnyMapper<T>,
-) {
-  return (g: any, t: any) =>
-    resolver(mapper(t), (key) => {
-      groupItem(g, key, t);
-      return g;
-    });
-}
-
 interface ReduceGroupParameters<T> {
   iterable: AnyIterable<T>;
   reduceAndMap: Function;
