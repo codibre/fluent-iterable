@@ -1,5 +1,9 @@
 
-## 1.8.2
+## 1.8.3
+* 89f544b creating typedoc of getGroupingDistinct
+* 4713044 fixing getGroupingDistinct types
+## v1.8.2
+* 892e497 1.8.2
 * 0f27b5b fixing getGroupingDistinct typing to support property keys and fixing group signatures
 * c51e927 testing uncovered asc
 * 8887b8c removing unused function

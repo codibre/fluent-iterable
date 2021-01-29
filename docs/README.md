@@ -1,6 +1,6 @@
-fluent-iterable - v1.8.2
+fluent-iterable - v1.8.3
 
-# fluent-iterable - v1.8.2
+# fluent-iterable - v1.8.3
 
 ## Table of contents
 
@@ -493,26 +493,70 @@ ___
 
 ### getGroupingDistinct
 
-▸ **getGroupingDistinct**<K, T, V, NewT\>(`valueDistinctMapper`: [*Mapper*](interfaces/mapper.md)<T, NewT\>): *KVGroupTransform*<K, T, NewT\>
+▸ **getGroupingDistinct**<K, T\>(`valueDistinctMapper`: keyof T): *KVGroupTransform*<K, T\>
+
+Return a transformation function for use in group operation to guarantee distinct elements for each group, following the informed grouping mapper
 
 #### Type parameters:
 
-Name | Default |
------- | ------ |
-`K` | - |
-`T` | - |
-`V` | - |
-`NewT` | T[] |
+Name |
+------ |
+`K` |
+`T` |
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`valueDistinctMapper` | [*Mapper*](interfaces/mapper.md)<T, NewT\> |
+Name | Type | Description |
+------ | ------ | ------ |
+`valueDistinctMapper` | keyof T | must return the unicity key. The unicity is respected by group    |
+
+**Returns:** *KVGroupTransform*<K, T\>
+
+▸ **getGroupingDistinct**<K, T, KT, NewT\>(`valueMapper`: KT, `valueDistinctMapper`: keyof *ItemType*<T[KT]\>): *KVGroupTransform*<K, T, NewT\>
+
+Return a transformation function for use in group operation to guarantee distinct elements for each group, following the informed grouping mapper
+
+#### Type parameters:
+
+Name | Type | Default |
+------ | ------ | ------ |
+`K` | - | - |
+`T` | - | - |
+`KT` | *string* \| *number* \| *symbol* | - |
+`NewT` | *unknown* | *ItemType*<T[KT]\> |
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`valueMapper` | KT | maps the value for a Iterable of values. Useful if you need to flat map your values per group somehow   |
+`valueDistinctMapper` | keyof *ItemType*<T[KT]\> | must return the unicity key. The unicity is respected by group    |
 
 **Returns:** *KVGroupTransform*<K, T, NewT\>
 
-▸ **getGroupingDistinct**<K, T, V, NewT\>(`valueMapper`: [*Mapper*](interfaces/mapper.md)<T, *Iterable*<NewT\>\>, `valueDistinctMapper`: [*Mapper*](interfaces/mapper.md)<NewT, V\>): *KVGroupTransform*<K, T, NewT\>
+▸ **getGroupingDistinct**<K, T, NewT\>(`valueDistinctMapper`: [*Mapper*](interfaces/mapper.md)<T, NewT\>): *KVGroupTransform*<K, T, NewT\>
+
+Return a transformation function for use in group operation to guarantee distinct elements for each group, following the informed grouping mapper
+
+#### Type parameters:
+
+Name |
+------ |
+`K` |
+`T` |
+`NewT` |
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`valueDistinctMapper` | [*Mapper*](interfaces/mapper.md)<T, NewT\> | must return the unicity key. The unicity is respected by group    |
+
+**Returns:** *KVGroupTransform*<K, T, NewT\>
+
+▸ **getGroupingDistinct**<K, T, NewT\>(`valueMapper`: [*Mapper*](interfaces/mapper.md)<T, *Iterable*<NewT\>\>, `valueDistinctMapper?`: [*Mapper*](interfaces/mapper.md)<NewT, *unknown*\> \| keyof NewT): *KVGroupTransform*<K, T, NewT\>
+
+Return a transformation function for use in group operation to guarantee distinct elements for each group, following the informed grouping mapper
 
 #### Type parameters:
 
@@ -520,15 +564,14 @@ Name | Default |
 ------ | ------ |
 `K` | - |
 `T` | - |
-`V` | - |
 `NewT` | T[] |
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`valueMapper` | [*Mapper*](interfaces/mapper.md)<T, *Iterable*<NewT\>\> |
-`valueDistinctMapper` | [*Mapper*](interfaces/mapper.md)<NewT, V\> |
+Name | Type | Description |
+------ | ------ | ------ |
+`valueMapper` | [*Mapper*](interfaces/mapper.md)<T, *Iterable*<NewT\>\> | maps the value for a Iterable of values. Useful if you need to flat map your values per group somehow   |
+`valueDistinctMapper?` | [*Mapper*](interfaces/mapper.md)<NewT, *unknown*\> \| keyof NewT | must return the unicity key. The unicity is respected by group    |
 
 **Returns:** *KVGroupTransform*<K, T, NewT\>
 
