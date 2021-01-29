@@ -6,7 +6,11 @@ import {
 import { AnyMapper } from '../types-internal';
 import { AnyIterable } from 'augmentative-iterable';
 import { map as mapSync } from '../sync/map';
-import { GroupIngredients } from './ingredients';
+import {
+  GroupIngredients,
+  IterateIngredient,
+  ReduceAndMapIngredient,
+} from './ingredients';
 import { orderedOperationRecipe } from './ordered-operation-recipe';
 import { prepare } from '../types-internal/prepare';
 
@@ -112,6 +116,33 @@ function reduceGroup<T, R>({
   );
 }
 
+function nonOrderedGroup<T>(
+  {
+    iterable,
+    reduceAndMap,
+    resolver,
+    mapper,
+    distinct,
+  }: ReduceGroupParameters<T>,
+  iterate: IterateIngredient,
+) {
+  const reduced = reduceGroup({
+    iterable,
+    reduceAndMap,
+    resolver,
+    mapper,
+    distinct,
+  });
+
+  const resolved = resolver(reduced, (r) =>
+    mapSync.call(r, (([key, values]: [any, any]) => ({
+      key,
+      values,
+    })) as any),
+  );
+  return iterate(resolved);
+}
+
 export function groupRecipe(ingredients: GroupIngredients) {
   const orderedGroup = orderedGroupRecipe(ingredients);
   const { reduceAndMap, resolver, iterate } = ingredients;
@@ -125,21 +156,10 @@ export function groupRecipe(ingredients: GroupIngredients) {
     if (isAnyOrderAssured(mapper, this)) {
       return orderedGroup.call(this, mapper, distinct);
     } else {
-      const reduced = reduceGroup({
-        iterable: this,
-        reduceAndMap,
-        resolver,
-        mapper,
-        distinct,
-      });
-
-      const resolved = resolver(reduced, (r) =>
-        mapSync.call(r, (([key, values]: [any, any]) => ({
-          key,
-          values,
-        })) as any),
+      return nonOrderedGroup<T>(
+        { iterable: this, reduceAndMap, resolver, mapper, distinct },
+        iterate,
       );
-      return iterate(resolved);
     }
   };
 }
