@@ -1,4 +1,4 @@
-[fluent-iterable - v1.8.1](../README.md) / FluentIterable
+[fluent-iterable - v1.8.2](../README.md) / FluentIterable
 
 # Interface: FluentIterable<T\>
 
@@ -1316,7 +1316,7 @@ ___
 
 ### group
 
-▸ **group**<R, V\>(`mapper`: [*Mapper*](mapper.md)<T, R\>, `transformValue?`: *KVGroupTransform*<R, T, V\>): [*FluentIterable*](fluentiterable.md)<[*FluentGroup*](fluentgroup.md)<T, R\>\>
+▸ **group**<R, V\>(`mapper`: [*Mapper*](mapper.md)<T, R\>, `transformValue?`: *KVGroupTransform*<R, T, V\>): [*FluentIterable*](fluentiterable.md)<[*FluentGroup*](fluentgroup.md)<V, R\>\>
 
 Groups the elements of the iterable keyed by equality of data at the specified projection.<br>
   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).group(word => word[0])` yields { key: 'a', values: ['anchor', 'almond', 'alpine'] } and { key: 'b', values: ['bound'] }.
@@ -1335,11 +1335,11 @@ Name | Type | Description |
 `mapper` | [*Mapper*](mapper.md)<T, R\> | Projects the elements of the iterable into the group key they belong to.   |
 `transformValue?` | *KVGroupTransform*<R, T, V\> | Optional. Allows a transformation before adding the value to the group. The return must be an iterable   |
 
-**Returns:** [*FluentIterable*](fluentiterable.md)<[*FluentGroup*](fluentgroup.md)<T, R\>\>
+**Returns:** [*FluentIterable*](fluentiterable.md)<[*FluentGroup*](fluentgroup.md)<V, R\>\>
 
 The [FluentIterable](fluentiterable.md) of the distinct groups.
 
-▸ **group**<R, V\>(`mapper`: R, `transformValue?`: *KVGroupTransform*<R, T, V\>): [*FluentIterable*](fluentiterable.md)<[*FluentGroup*](fluentgroup.md)<T, T[R]\>\>
+▸ **group**<R, V\>(`mapper`: R, `transformValue?`: *KVGroupTransform*<R, T, V\>): [*FluentIterable*](fluentiterable.md)<[*FluentGroup*](fluentgroup.md)<V, T[R]\>\>
 
 Groups the elements of the iterable keyed by equality of data at the specified projection.<br>
   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).group(word => word[0])` yields { key: 'a', values: ['anchor', 'almond', 'alpine'] } and { key: 'b', values: ['bound'] }.
@@ -1358,7 +1358,7 @@ Name | Type | Description |
 `mapper` | R | Projects the elements of the iterable into the group key they belong to.   |
 `transformValue?` | *KVGroupTransform*<R, T, V\> | Optional. Allows a transformation before adding the value to the group. The return must be an iterable   |
 
-**Returns:** [*FluentIterable*](fluentiterable.md)<[*FluentGroup*](fluentgroup.md)<T, T[R]\>\>
+**Returns:** [*FluentIterable*](fluentiterable.md)<[*FluentGroup*](fluentgroup.md)<V, T[R]\>\>
 
 The [FluentIterable](fluentiterable.md) of the distinct groups.
 
@@ -1366,7 +1366,7 @@ ___
 
 ### groupAsync
 
-▸ **groupAsync**<R, V\>(`mapper`: [*AsyncMapper*](asyncmapper.md)<T, R\>, `transformValue?`: *KVGroupTransform*<R, T, V\>): [*FluentAsyncIterable*](fluentasynciterable.md)<[*FluentGroup*](fluentgroup.md)<T, R\>\>
+▸ **groupAsync**<R, V\>(`mapper`: [*AsyncMapper*](asyncmapper.md)<T, R\>, `transformValue?`: *KVGroupTransform*<R, T, V\>): [*FluentAsyncIterable*](fluentasynciterable.md)<[*FluentGroup*](fluentgroup.md)<V, R\>\>
 
 Groups the elements of the iterable keyed by equality of data at the specified asynchronous projection.
 
@@ -1384,11 +1384,11 @@ Name | Type | Description |
 `mapper` | [*AsyncMapper*](asyncmapper.md)<T, R\> | Asynchronously projects the elements of the iterable into the group key they belong to.   |
 `transformValue?` | *KVGroupTransform*<R, T, V\> | Optional. Allows a transformation before adding the value to the group. The return must be an iterable   |
 
-**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<[*FluentGroup*](fluentgroup.md)<T, R\>\>
+**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<[*FluentGroup*](fluentgroup.md)<V, R\>\>
 
 The [FluentAsyncIterable](fluentasynciterable.md) of the distinct groups.
 
-▸ **groupAsync**<R, V\>(`mapper`: R, `transformValue?`: *KVGroupTransform*<R, T, V\>): [*FluentAsyncIterable*](fluentasynciterable.md)<[*FluentGroup*](fluentgroup.md)<T, T[R]\>\>
+▸ **groupAsync**<R, V\>(`mapper`: R, `transformValue?`: *KVGroupTransform*<R, T, V\>): [*FluentAsyncIterable*](fluentasynciterable.md)<[*FluentGroup*](fluentgroup.md)<V, T[R]\>\>
 
 Groups the elements of the iterable keyed by equality of data at the specified asynchronous projection.
 
@@ -1406,7 +1406,7 @@ Name | Type | Description |
 `mapper` | R | Asynchronously projects the elements of the iterable into the group key they belong to.   |
 `transformValue?` | *KVGroupTransform*<R, T, V\> | Optional. Allows a transformation before adding the value to the group. The return must be an iterable   |
 
-**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<[*FluentGroup*](fluentgroup.md)<T, T[R]\>\>
+**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<[*FluentGroup*](fluentgroup.md)<V, T[R]\>\>
 
 The [FluentAsyncIterable](fluentasynciterable.md) of the distinct groups.
 

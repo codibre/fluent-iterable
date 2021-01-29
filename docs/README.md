@@ -1,6 +1,6 @@
-fluent-iterable - v1.8.1
+fluent-iterable - v1.8.2
 
-# fluent-iterable - v1.8.1
+# fluent-iterable - v1.8.2
 
 ## Table of contents
 
@@ -493,7 +493,7 @@ ___
 
 ### getGroupingDistinct
 
-▸ **getGroupingDistinct**<K, T, V, NewT\>(`valueDistinctMapper`: (`t`: NewT) => V): *KVGroupTransform*<K, T, NewT\>
+▸ **getGroupingDistinct**<K, T, V, NewT\>(`valueDistinctMapper`: [*Mapper*](interfaces/mapper.md)<T, NewT\>): *KVGroupTransform*<K, T, NewT\>
 
 #### Type parameters:
 
@@ -508,11 +508,11 @@ Name | Default |
 
 Name | Type |
 ------ | ------ |
-`valueDistinctMapper` | (`t`: NewT) => V |
+`valueDistinctMapper` | [*Mapper*](interfaces/mapper.md)<T, NewT\> |
 
 **Returns:** *KVGroupTransform*<K, T, NewT\>
 
-▸ **getGroupingDistinct**<K, T, V, NewT\>(`valueMapper`: (`t`: T) => *Iterable*<NewT\>, `valueDistinctMapper`: (`t`: NewT) => V): *KVGroupTransform*<K, T, NewT\>
+▸ **getGroupingDistinct**<K, T, V, NewT\>(`valueMapper`: [*Mapper*](interfaces/mapper.md)<T, *Iterable*<NewT\>\>, `valueDistinctMapper`: [*Mapper*](interfaces/mapper.md)<NewT, V\>): *KVGroupTransform*<K, T, NewT\>
 
 #### Type parameters:
 
@@ -527,8 +527,8 @@ Name | Default |
 
 Name | Type |
 ------ | ------ |
-`valueMapper` | (`t`: T) => *Iterable*<NewT\> |
-`valueDistinctMapper` | (`t`: NewT) => V |
+`valueMapper` | [*Mapper*](interfaces/mapper.md)<T, *Iterable*<NewT\>\> |
+`valueDistinctMapper` | [*Mapper*](interfaces/mapper.md)<NewT, V\> |
 
 **Returns:** *KVGroupTransform*<K, T, NewT\>
 

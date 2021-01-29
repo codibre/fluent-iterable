@@ -1,5 +1,9 @@
 
-## 1.8.1
+## 1.8.2
+* 0f27b5b fixing getGroupingDistinct typing to support property keys and fixing group signatures
+* c51e927 testing uncovered asc
+* 8887b8c removing unused function
+* d351c5a updating docs
 * 9c84721 changing group second parameters for a better one
 * cb97849 updating docs
 * aba20cc fixing group recipe

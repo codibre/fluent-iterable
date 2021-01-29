@@ -1,4 +1,4 @@
-[fluent-iterable - v1.8.1](../README.md) / FluentAsyncIterable
+[fluent-iterable - v1.8.2](../README.md) / FluentAsyncIterable
 
 # Interface: FluentAsyncIterable<T\>
 
@@ -797,7 +797,7 @@ ___
 
 ### group
 
-▸ **group**<R, V\>(`mapper`: [*AsyncMapper*](asyncmapper.md)<T, R\>, `transform?`: *KVGroupTransform*<R, T, V\>): [*FluentAsyncIterable*](fluentasynciterable.md)<[*FluentGroup*](fluentgroup.md)<T, R\>\>
+▸ **group**<R, V\>(`mapper`: [*AsyncMapper*](asyncmapper.md)<T, R\>, `transform?`: *KVGroupTransform*<R, T, V\>): [*FluentAsyncIterable*](fluentasynciterable.md)<[*FluentGroup*](fluentgroup.md)<V, R\>\>
 
 Groups the elements of the iterable keyed by equality of data at the specified projection.
 
@@ -815,11 +815,11 @@ Name | Type | Description |
 `mapper` | [*AsyncMapper*](asyncmapper.md)<T, R\> | Projects the elements of the iterable into the group key they belong to.   |
 `transform?` | *KVGroupTransform*<R, T, V\> | Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied   |
 
-**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<[*FluentGroup*](fluentgroup.md)<T, R\>\>
+**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<[*FluentGroup*](fluentgroup.md)<V, R\>\>
 
 The [FluentAsyncIterable](fluentasynciterable.md) of the distinct groups.
 
-▸ **group**<R, V\>(`mapper`: R, `distinct?`: *KVGroupTransform*<R, T, V\>): [*FluentAsyncIterable*](fluentasynciterable.md)<[*FluentGroup*](fluentgroup.md)<T, T[R]\>\>
+▸ **group**<R, V\>(`mapper`: R, `transformValue?`: *KVGroupTransform*<R, T, V\>): [*FluentAsyncIterable*](fluentasynciterable.md)<[*FluentGroup*](fluentgroup.md)<V, T[R]\>\>
 
 Groups the elements of the iterable keyed by equality of data at the specified projection.
 
@@ -835,53 +835,9 @@ Name | Type | Default | Description |
 Name | Type | Description |
 ------ | ------ | ------ |
 `mapper` | R | Projects the elements of the iterable into the group key they belong to.   |
-`distinct?` | *KVGroupTransform*<R, T, V\> | Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied   |
+`transformValue?` | *KVGroupTransform*<R, T, V\> | - |
 
-**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<[*FluentGroup*](fluentgroup.md)<T, T[R]\>\>
-
-The [FluentAsyncIterable](fluentasynciterable.md) of the distinct groups.
-
-▸ **group**<R, V\>(`mapper`: R, `distinct?`: *KVGroupTransform*<R, T, V\>): [*FluentAsyncIterable*](fluentasynciterable.md)<[*FluentGroup*](fluentgroup.md)<T, T[R]\>\>
-
-Groups the elements of the iterable keyed by equality of data at the specified projection.
-
-#### Type parameters:
-
-Name | Type | Default | Description |
------- | ------ | ------ | ------ |
-`R` | *string* \| *number* \| *symbol* | - | The type of the groups' key.   |
-`V` | - | T | - |
-
-#### Parameters:
-
-Name | Type | Description |
------- | ------ | ------ |
-`mapper` | R | Projects the elements of the iterable into the group key they belong to.   |
-`distinct?` | *KVGroupTransform*<R, T, V\> | Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied   |
-
-**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<[*FluentGroup*](fluentgroup.md)<T, T[R]\>\>
-
-The [FluentAsyncIterable](fluentasynciterable.md) of the distinct groups.
-
-▸ **group**<R, V\>(`mapper`: [*AsyncMapper*](asyncmapper.md)<T, R\>, `distinct?`: *KVGroupTransform*<R, T, V\>): [*FluentAsyncIterable*](fluentasynciterable.md)<[*FluentGroup*](fluentgroup.md)<T, R\>\>
-
-Groups the elements of the iterable keyed by equality of data at the specified projection.
-
-#### Type parameters:
-
-Name | Default | Description |
------- | ------ | ------ |
-`R` | - | The type of the groups' key.   |
-`V` | T | - |
-
-#### Parameters:
-
-Name | Type | Description |
------- | ------ | ------ |
-`mapper` | [*AsyncMapper*](asyncmapper.md)<T, R\> | Projects the elements of the iterable into the group key they belong to.   |
-`distinct?` | *KVGroupTransform*<R, T, V\> | Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied   |
-
-**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<[*FluentGroup*](fluentgroup.md)<T, R\>\>
+**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<[*FluentGroup*](fluentgroup.md)<V, T[R]\>\>
 
 The [FluentAsyncIterable](fluentasynciterable.md) of the distinct groups.
 
