@@ -1,4 +1,4 @@
-**[fluent-iterable - v1.7.6](../README.md)**
+**[fluent-iterable - v1.8.0](../README.md)**
 
 > [Globals](../README.md) / ["types"](../modules/_types_.md) / FluentAsyncIterable
 
@@ -583,7 +583,7 @@ ___
 
 ### group
 
-▸ **group**\<R>(`mapper`: AsyncMapper\<T, R>): [FluentAsyncIterable](_types_.fluentasynciterable.md)\<[FluentGroup](_types_.fluentgroup.md)\<T, R>>
+▸ **group**\<R>(`mapper`: AsyncMapper\<T, R>, `distinct?`: Mapper\<T, unknown>): [FluentAsyncIterable](_types_.fluentasynciterable.md)\<[FluentGroup](_types_.fluentgroup.md)\<T, R>>
 
 Groups the elements of the iterable keyed by equality of data at the specified projection.
 
@@ -598,6 +598,7 @@ Name | Description |
 Name | Type | Description |
 ------ | ------ | ------ |
 `mapper` | AsyncMapper\<T, R> | Projects the elements of the iterable into the group key they belong to. |
+`distinct?` | Mapper\<T, unknown> | Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied |
 
 **Returns:** [FluentAsyncIterable](_types_.fluentasynciterable.md)\<[FluentGroup](_types_.fluentgroup.md)\<T, R>>
 

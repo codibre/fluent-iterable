@@ -1,5 +1,8 @@
 
-## 1.7.6
+## 1.8.0
+* d136a3f Adding parameter distinct in group methods
+## v1.7.6
+* 88790c6 1.7.6
 * 4403eeb fixing dist package exposing
 * 79f70b2 Fixing to object return type with key (#30)
 * ec2c2ea bug with typing when flatten with no parameter (#29)
