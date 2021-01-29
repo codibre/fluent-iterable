@@ -1,7 +1,7 @@
 import { ObjectReadableMock } from 'stream-mock';
 import { sortBy } from './../src/sync/sort-by';
 import { expect } from 'chai';
-import { desc, fluent, fluentAsync } from '../src';
+import { asc, desc, fluent, fluentAsync } from '../src';
 
 interface Test {
   a: string;
@@ -45,7 +45,7 @@ describe('sort', () => {
       expect(
         fluent(base)
           .sortBy(
-            'a',
+            asc('a'),
             desc((x) => x.b),
           )
           .toArray(),
