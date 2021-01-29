@@ -1,8 +1,6 @@
-**[fluent-iterable - v1.8.0](../README.md)**
+[fluent-iterable - v1.8.1](../README.md) / AsyncAction
 
-> [Globals](../README.md) / ["types-base"](../modules/_types_base_.md) / AsyncAction
-
-# Interface: AsyncAction\<T>
+# Interface: AsyncAction<T\>
 
 Represents an asynchronous action on an item of type `T`.<br>
   Example: `const createUserAction: AsyncAction<User> = async user => await database.put(user);`
@@ -11,7 +9,7 @@ Represents an asynchronous action on an item of type `T`.<br>
 
 Name | Description |
 ------ | ------ |
-`T` | The type of the item the action is defined on.  |
+`T` | The type of the item the action is defined on.    |
 
 ## Hierarchy
 
@@ -19,7 +17,7 @@ Name | Description |
 
 ## Callable
 
-▸ (`item`: T): Promise\<unknown> \| unknown
+▸ **AsyncAction**(`item`: T): *unknown*
 
 Specifies the asynchronous action to perform on `item`.
 
@@ -27,8 +25,8 @@ Specifies the asynchronous action to perform on `item`.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`item` | T | The item the action is performed against. |
+`item` | T | The item the action is performed against.   |
 
-**Returns:** Promise\<unknown> \| unknown
+**Returns:** *unknown*
 
 The promise of any action.

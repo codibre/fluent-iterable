@@ -1,8 +1,6 @@
-**[fluent-iterable - v1.8.0](../README.md)**
+[fluent-iterable - v1.8.1](../README.md) / Reducer
 
-> [Globals](../README.md) / ["types-base"](../modules/_types_base_.md) / Reducer
-
-# Interface: Reducer\<T, A>
+# Interface: Reducer<T, A\>
 
 Represents a reducer of type `T` into the accumulator type `A`.<br>
   Example: `const sumReducer: Reducer<number, number> = (sum, next) => sum + next;`
@@ -11,8 +9,8 @@ Represents a reducer of type `T` into the accumulator type `A`.<br>
 
 Name | Description |
 ------ | ------ |
-`T` | The source type. |
-`A` | The accumulator type.  |
+`T` | The source type.   |
+`A` | The accumulator type.    |
 
 ## Hierarchy
 
@@ -20,7 +18,7 @@ Name | Description |
 
 ## Callable
 
-▸ (`current`: A, `next`: T): A
+▸ **Reducer**(`current`: A, `next`: T): A
 
 Generates the next accumulator item based on the previous one and the next item under reduce.
 
@@ -28,8 +26,8 @@ Generates the next accumulator item based on the previous one and the next item 
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`current` | A | The previous accumulator value. |
-`next` | T | The next item. |
+`current` | A | The previous accumulator value.   |
+`next` | T | The next item.   |
 
 **Returns:** A
 

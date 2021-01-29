@@ -1,8 +1,6 @@
-**[fluent-iterable - v1.8.0](../README.md)**
+[fluent-iterable - v1.8.1](../README.md) / Comparer
 
-> [Globals](../README.md) / ["types-base"](../modules/_types_base_.md) / Comparer
-
-# Interface: Comparer\<T>
+# Interface: Comparer<T\>
 
 Compares two instances of type `T`.<br>
   Example: `const levelComparer: Comparer<User> = (userA, userB) => userA.level - userB.level;`
@@ -11,7 +9,7 @@ Compares two instances of type `T`.<br>
 
 Name | Description |
 ------ | ------ |
-`T` | The type of the compared instances.  |
+`T` | The type of the compared instances.    |
 
 ## Hierarchy
 
@@ -19,7 +17,7 @@ Name | Description |
 
 ## Callable
 
-▸ (`a`: T, `b`: T): number
+▸ **Comparer**(`a`: T, `b`: T): *number*
 
 Compares `a` and `b`.
 
@@ -27,9 +25,9 @@ Compares `a` and `b`.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`a` | T | The first instance (the left hand side of the comparison). |
-`b` | T | The second instance (the right hand side of the comparison). |
+`a` | T | The first instance (the left hand side of the comparison).   |
+`b` | T | The second instance (the right hand side of the comparison).   |
 
-**Returns:** number
+**Returns:** *number*
 
 A number which represents the result of the comparison. If **negative**, `a` precedes `b`, if **positive**, `b` precedes `a`, if **zero**, `a` equals to `b` in the comparison.

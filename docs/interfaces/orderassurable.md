@@ -1,8 +1,6 @@
-**[fluent-iterable - v1.8.0](../README.md)**
+[fluent-iterable - v1.8.1](../README.md) / OrderAssurable
 
-> [Globals](../README.md) / ["assure-order-types"](../modules/_assure_order_types_.md) / OrderAssurable
-
-# Interface: OrderAssurable\<T>
+# Interface: OrderAssurable<T\>
 
 ## Type parameters
 
@@ -14,18 +12,18 @@ Name |
 
 * **OrderAssurable**
 
-  ↳ [FluentIterable](_types_.fluentiterable.md)
+  ↳ [*FluentIterable*](fluentiterable.md)
 
-  ↳ [FluentAsyncIterable](_types_.fluentasynciterable.md)
+  ↳ [*FluentAsyncIterable*](fluentasynciterable.md)
 
-## Index
+## Table of contents
 
 ### Methods
 
-* [assureOrder](_assure_order_types_.orderassurable.md#assureorder)
-* [assureOrderDescending](_assure_order_types_.orderassurable.md#assureorderdescending)
-* [o](_assure_order_types_.orderassurable.md#o)
-* [od](_assure_order_types_.orderassurable.md#od)
+- [assureOrder](orderassurable.md#assureorder)
+- [assureOrderDescending](orderassurable.md#assureorderdescending)
+- [o](orderassurable.md#o)
+- [od](orderassurable.md#od)
 
 ## Methods
 

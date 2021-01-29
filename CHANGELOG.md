@@ -1,7 +1,10 @@
 
-## 1.8.0
+## 1.8.1
+* 9c84721 changing group second parameters for a better one
+* cb97849 updating docs
 * aba20cc fixing group recipe
 * 6506880 fixing group distinct with ordering
+## v1.8.0
 * 115377c 1.8.0
 * d136a3f Adding parameter distinct in group methods
 ## v1.7.6

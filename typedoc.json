@@ -1,12 +1,14 @@
 {
   "hideGenerator": true,
-  "mode": "modules",
   "theme": "markdown",
   "out": "docs",
   "readme": "none",
   "name": "fluent-iterable",
   "includeVersion": true,
   "disableSources": true,
+  "entryPoints": [
+    "./src/index.ts"
+  ],
   "exclude": [
     "src/fluentFunctions.ts",
     "src/fluentAsyncFunctions.ts",
