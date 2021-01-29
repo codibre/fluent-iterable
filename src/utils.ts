@@ -2,7 +2,12 @@ import { KVGroupTransform } from './types-base';
 /* eslint-disable guard-for-in */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import fluent from './fluent';
-import { FluentAsyncIterable, FluentGroup, FluentIterable } from './types';
+import {
+  FluentAsyncIterable,
+  FluentGroup,
+  FluentIterable,
+  ItemType,
+} from './types';
 import { Group, AverageStepper } from './types-base';
 import {
   AnyIterable,
@@ -292,18 +297,30 @@ export function desc<F>(f: F): F {
   );
 }
 
-export function getGroupingDistinct<K, T, V, NewT = T[]>(
+export function getGroupingDistinct<K, T>(
+  valueDistinctMapper: keyof T,
+): KVGroupTransform<K, T>;
+export function getGroupingDistinct<
+  K,
+  T,
+  KT extends keyof T,
+  NewT extends ItemType<T[KT]> = ItemType<T[KT]>
+>(
+  valueMapper: KT,
+  valueDistinctMapper: keyof ItemType<T[KT]>,
+): KVGroupTransform<K, T, NewT>;
+export function getGroupingDistinct<K, T, NewT>(
   valueDistinctMapper: Mapper<T, NewT>,
 ): KVGroupTransform<K, T, NewT>;
-export function getGroupingDistinct<K, T, V, NewT = T[]>(
+export function getGroupingDistinct<K, T, NewT = T[]>(
   valueMapper: Mapper<T, Iterable<NewT>>,
-  valueDistinctMapper: Mapper<NewT, V>,
+  valueDistinctMapper?: Mapper<NewT, unknown> | keyof NewT,
 ): KVGroupTransform<K, T, NewT>;
-export function getGroupingDistinct<K, T, V, NewT = T[]>(
+export function getGroupingDistinct<K, T, NewT = T[]>(
   baseValueMapper: any,
   baseValueDistinctMapper?: any,
 ): KVGroupTransform<K, T, NewT> {
-  const map = new Map<K, Set<V>>();
+  const map = new Map<K, Set<unknown>>();
   if (!baseValueDistinctMapper) {
     baseValueDistinctMapper = baseValueMapper;
     baseValueMapper = (t: T) => [t];
@@ -314,7 +331,7 @@ export function getGroupingDistinct<K, T, V, NewT = T[]>(
   return function* (k: K, v: T) {
     let set = map.get(k);
     if (!set) {
-      set = new Set<V>();
+      set = new Set<unknown>();
       map.set(k, set);
     }
 

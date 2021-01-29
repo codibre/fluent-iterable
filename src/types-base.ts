@@ -163,6 +163,6 @@ interface FluentEvents<T> {
 
 export interface FluentEmitter<T> extends TypedEmitter<FluentEvents<T>> {}
 
-export interface KVGroupTransform<K, V, NewV> {
+export interface KVGroupTransform<K, V, NewV = V> {
   (key: K, value: V): Iterable<NewV>;
 }
