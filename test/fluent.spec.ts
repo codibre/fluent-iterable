@@ -795,6 +795,19 @@ describe('fluent iterable', () => {
             );
           }
         });
+        it('should work with distinct expression', () => {
+          const groups = fluent([1, 2, 2, 3, 4, 4, 5, 5, 5])
+            .group((x) => x % 2, identity)
+            .toArray();
+          expect(groups.length).to.eql(2);
+          expect(groups.map((grp) => grp.key)).to.have.members([0, 1]);
+          expect(
+            groups.find(({ key }) => key === 0)!.values.toArray(),
+          ).to.be.eql([2, 4]);
+          expect(
+            groups.find(({ key }) => key === 1)!.values.toArray(),
+          ).to.be.eql([1, 3, 5]);
+        });
       });
       describe('groupAsync', () => {
         it('empty', async () =>
@@ -834,6 +847,19 @@ describe('fluent iterable', () => {
               data.filter((p) => p.gender === grp.key),
             );
           }
+        });
+        it('should work with distinct expression', async () => {
+          const groups = await fluent([1, 2, 2, 3, 4, 4, 5, 5, 5])
+            .groupAsync((x) => x % 2, identity)
+            .toArray();
+          expect(groups.length).to.eql(2);
+          expect(groups.map((grp) => grp.key)).to.have.members([0, 1]);
+          expect(
+            groups.find(({ key }) => key === 0)!.values.toArray(),
+          ).to.be.eql([2, 4]);
+          expect(
+            groups.find(({ key }) => key === 1)!.values.toArray(),
+          ).to.be.eql([1, 3, 5]);
         });
       });
       describe('avg', () => {

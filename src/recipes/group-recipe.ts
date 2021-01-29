@@ -33,35 +33,80 @@ function orderedGroupRecipe({
   };
 }
 
+function groupItem(g: any, key: any, t: any) {
+  const values = g.get(key) || [];
+  values.push(t);
+  g.set(key, values);
+}
+
+function getNonDistinctGroup<T>(
+  resolver: ResolverType,
+  mapper: FunctionAnyMapper<T>,
+) {
+  return (g: any, t: any) =>
+    resolver(mapper(t), (key) => {
+      groupItem(g, key, t);
+      return g;
+    });
+}
+
+function getDistinctGroup<T>(
+  resolver: ResolverType,
+  mapper: FunctionAnyMapper<T>,
+  distinct: FunctionAnyMapper<T>,
+) {
+  const distinctKeys = new Map<unknown, Set<unknown>>();
+  return (g: any, t: any) =>
+    resolver(mapper(t), (key) => {
+      let set = distinctKeys.get(key);
+      if (!set) {
+        set = new Set<unknown>();
+        distinctKeys.set(key, set);
+      }
+      const distinctKey = distinct(t);
+      if (!set.has(distinctKey)) {
+        set.add(distinctKey);
+        groupItem(g, key, t);
+      }
+      return g;
+    });
+}
+
 function reduceGroup<T, R>(
   iterable: AnyIterable<T>,
   reduceAndMap: Function,
   resolver: ResolverType,
   mapper: FunctionAnyMapper<T>,
+  distinct: FunctionAnyMapper<T> | undefined,
 ) {
-  return reduceAndMap.call(
-    iterable,
-    (g: any, t: any) =>
-      resolver(mapper(t), (key) => {
-        const values = g.get(key) || [];
-        values.push(t);
-        g.set(key, values);
-        return g;
-      }),
-    new Map<R, T[]>(),
-    (x: any) => x.entries(),
+  const reduce = distinct
+    ? getDistinctGroup(resolver, mapper, distinct)
+    : getNonDistinctGroup<T>(resolver, mapper);
+  return reduceAndMap.call(iterable, reduce, new Map<R, T[]>(), (x: any) =>
+    x.entries(),
   );
 }
 
 export function groupRecipe(ingredients: GroupIngredients) {
   const orderedGroup = orderedGroupRecipe(ingredients);
   const { reduceAndMap, resolver, iterate } = ingredients;
-  return function <T>(this: AnyIterable<T>, baseMapper: AnyMapper<T>) {
+  return function <T>(
+    this: AnyIterable<T>,
+    baseMapper: AnyMapper<T>,
+    baseDistinct?: AnyMapper<T>,
+  ) {
     const mapper = prepare(baseMapper);
+    const distinct = baseDistinct ? prepare(baseDistinct) : undefined;
     if (isAnyOrderAssured(mapper, this)) {
       return orderedGroup.call(this, mapper);
     } else {
-      const reduced = reduceGroup(this, reduceAndMap, resolver, mapper);
+      const reduced = reduceGroup(
+        this,
+        reduceAndMap,
+        resolver,
+        mapper,
+        distinct,
+      );
 
       const resolved = resolver(reduced, (r) =>
         mapSync.call(r, (([key, values]: [any, any]) => ({
