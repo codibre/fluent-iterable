@@ -441,6 +441,42 @@ describe('fluent async iterable', () => {
           });
         });
       });
+      it('assuring order with distinct', async () => {
+        const items = [
+          { k: 1, v: 1 },
+          { k: 1, v: 1 },
+          { k: 1, v: 2 },
+          { k: 2, v: 1 },
+          { k: 2, v: 2 },
+          { k: 2, v: 2 },
+          { k: 2, v: 2 },
+          { k: 1, v: 1 },
+          { k: 1, v: 2 },
+          { k: 1, v: 2 },
+        ];
+        const expected = [
+          { k: 1, v: 1 },
+          { k: 1, v: 2 },
+          { k: 2, v: 1 },
+          { k: 2, v: 2 },
+          { k: 1, v: 1 },
+          { k: 1, v: 2 },
+        ];
+        const groups = await fluentAsync(items)
+          .group(
+            o((x) => x.k),
+            'v',
+          )
+          .toArray();
+        expect(groups.length).to.eql(3);
+        expect(groups.map((grp) => grp.key)).to.have.members([1, 2, 1]);
+
+        groups.forEach(({ values }, i) => {
+          values.withIndex().forEach(({ value, idx }) => {
+            expect(value).to.be.eql(expected[i * 2 + idx]);
+          });
+        });
+      });
       it('should work with distinct expression', async () => {
         const groups = await fluentAsync(
           new ObjectReadableMock([1, 2, 2, 3, 4, 4, 5, 5, 5]),

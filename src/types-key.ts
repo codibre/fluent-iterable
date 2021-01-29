@@ -1,4 +1,3 @@
-import { distinct } from './sync/distinct';
 import { AsyncMapper, Mapper, AnyIterable } from 'augmentative-iterable';
 import { FluentGroup } from './types';
 import { Comparer, Reducer, AsyncReducer } from './types-base';
@@ -220,6 +219,19 @@ declare module './types' {
     ): FluentIterable<FluentGroup<T, T[R]>>;
 
     /**
+     * Groups the elements of the iterable keyed by equality of data at the specified projection.<br>
+     *   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).group(word => word[0])` yields { key: 'a', values: ['anchor', 'almond', 'alpine'] } and { key: 'b', values: ['bound'] }.
+     * @typeparam R The type of the groups' key.
+     * @param mapper Projects the elements of the iterable into the group key they belong to.
+     * @param distinct Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied
+     * @returns The [[FluentIterable]] of the distinct groups.
+     */
+    group<R, D extends keyof T = never>(
+      mapper: Mapper<T, R>,
+      distinct: D,
+    ): FluentIterable<FluentGroup<T, R>>;
+
+    /**
      * Groups the elements of the iterable keyed by equality of data at the specified asynchronous projection.
      * @typeparam R The type of the groups key.
      * @param mapper Asynchronously projects the elements of the iterable into the group key they belong to.
@@ -230,6 +242,18 @@ declare module './types' {
       mapper: R,
       distinct?: Mapper<T, unknown>,
     ): FluentAsyncIterable<FluentGroup<T, T[R]>>;
+
+    /**
+     * Groups the elements of the iterable keyed by equality of data at the specified asynchronous projection.
+     * @typeparam R The type of the groups key.
+     * @param mapper Asynchronously projects the elements of the iterable into the group key they belong to.
+     * @param distinct Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied
+     * @returns The [[FluentAsyncIterable]] of the distinct groups.
+     */
+    groupAsync<R, D extends keyof T = never>(
+      mapper: AsyncMapper<T, R>,
+      distinct: D,
+    ): FluentAsyncIterable<FluentGroup<T, R>>;
 
     /**
      * Groups the elements of the iterable keyed by equality of data at the specified asynchronous projection.
@@ -729,11 +753,37 @@ declare module './types' {
      * Groups the elements of the iterable keyed by equality of data at the specified projection.
      * @typeparam R The type of the groups' key.
      * @param mapper Projects the elements of the iterable into the group key they belong to.
+     * @param distinct Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied
      * @returns The [[FluentAsyncIterable]] of the distinct groups.
      */
     group<R extends keyof T>(
       mapper: R,
+      distinct?: Mapper<T, unknown>,
     ): FluentAsyncIterable<FluentGroup<T, T[R]>>;
+
+    /**
+     * Groups the elements of the iterable keyed by equality of data at the specified projection.
+     * @typeparam R The type of the groups' key.
+     * @param mapper Projects the elements of the iterable into the group key they belong to.
+     * @param distinct Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied
+     * @returns The [[FluentAsyncIterable]] of the distinct groups.
+     */
+    group<R extends keyof T, D extends keyof T = never>(
+      mapper: R,
+      distinct?: D,
+    ): FluentAsyncIterable<FluentGroup<T, T[R]>>;
+
+    /**
+     * Groups the elements of the iterable keyed by equality of data at the specified projection.
+     * @typeparam R The type of the groups' key.
+     * @param mapper Projects the elements of the iterable into the group key they belong to.
+     * @param distinct Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied
+     * @returns The [[FluentAsyncIterable]] of the distinct groups.
+     */
+    group<R, D extends keyof T = never>(
+      mapper: AsyncMapper<T, R>,
+      distinct?: D,
+    ): FluentAsyncIterable<FluentGroup<T, R>>;
 
     /**
      * Returns the number of elements that matches a predicate in the iterable. This is a resolving operation, will cause a full loop through all the elements of the iterable.

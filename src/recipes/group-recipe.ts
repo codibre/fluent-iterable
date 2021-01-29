@@ -10,6 +10,23 @@ import { GroupIngredients } from './ingredients';
 import { orderedOperationRecipe } from './ordered-operation-recipe';
 import { prepare } from '../types-internal/prepare';
 
+function distinctKVFactory(distinct: Function) {
+  const distinctKeys = new Map<unknown, Set<unknown>>();
+  return (k: any, v: any) => {
+    let set = distinctKeys.get(k);
+    if (!set) {
+      set = new Set<unknown>();
+      distinctKeys.set(k, set);
+    }
+    const distinctKey = distinct(v);
+    if (!set.has(distinctKey)) {
+      set.add(distinctKey);
+      return true;
+    }
+    return false;
+  };
+}
+
 function orderedGroupRecipe({
   map,
   resolver,
@@ -17,15 +34,22 @@ function orderedGroupRecipe({
   forEach,
 }: GroupIngredients) {
   const ordered = orderedOperationRecipe(map, resolver, partition);
-  return function <T>(this: AnyIterable<T>, mapper: FunctionAnyMapper<any>) {
+  return function <T>(
+    this: AnyIterable<T>,
+    mapper: FunctionAnyMapper<any>,
+    distinct?: FunctionAnyMapper<any>,
+  ) {
     const partitioned = ordered.call(this, mapper);
+    const distinctKV = distinct ? distinctKVFactory(distinct) : undefined;
     return map.call(partitioned, (part: Iterable<any[]>) => {
       let key!: any;
       const values: any[] = [];
       return resolver(
         forEach.call(part, ([k, v]: any) => {
           key = k;
-          values.push(v);
+          if (!distinctKV || distinctKV(key, v)) {
+            values.push(v);
+          }
         }),
         () => ({ key, values }),
       );
@@ -55,30 +79,31 @@ function getDistinctGroup<T>(
   mapper: FunctionAnyMapper<T>,
   distinct: FunctionAnyMapper<T>,
 ) {
-  const distinctKeys = new Map<unknown, Set<unknown>>();
+  const distinctKV = distinctKVFactory(distinct);
   return (g: any, t: any) =>
     resolver(mapper(t), (key) => {
-      let set = distinctKeys.get(key);
-      if (!set) {
-        set = new Set<unknown>();
-        distinctKeys.set(key, set);
-      }
-      const distinctKey = distinct(t);
-      if (!set.has(distinctKey)) {
-        set.add(distinctKey);
+      if (distinctKV(key, t)) {
         groupItem(g, key, t);
       }
       return g;
     });
 }
 
-function reduceGroup<T, R>(
-  iterable: AnyIterable<T>,
-  reduceAndMap: Function,
-  resolver: ResolverType,
-  mapper: FunctionAnyMapper<T>,
-  distinct: FunctionAnyMapper<T> | undefined,
-) {
+interface ReduceGroupParameters<T> {
+  iterable: AnyIterable<T>;
+  reduceAndMap: Function;
+  resolver: ResolverType;
+  mapper: FunctionAnyMapper<T>;
+  distinct: FunctionAnyMapper<T> | undefined;
+}
+
+function reduceGroup<T, R>({
+  iterable,
+  reduceAndMap,
+  resolver,
+  mapper,
+  distinct,
+}: ReduceGroupParameters<T>) {
   const reduce = distinct
     ? getDistinctGroup(resolver, mapper, distinct)
     : getNonDistinctGroup<T>(resolver, mapper);
@@ -98,15 +123,15 @@ export function groupRecipe(ingredients: GroupIngredients) {
     const mapper = prepare(baseMapper);
     const distinct = baseDistinct ? prepare(baseDistinct) : undefined;
     if (isAnyOrderAssured(mapper, this)) {
-      return orderedGroup.call(this, mapper);
+      return orderedGroup.call(this, mapper, distinct);
     } else {
-      const reduced = reduceGroup(
-        this,
+      const reduced = reduceGroup({
+        iterable: this,
         reduceAndMap,
         resolver,
         mapper,
         distinct,
-      );
+      });
 
       const resolved = resolver(reduced, (r) =>
         mapSync.call(r, (([key, values]: [any, any]) => ({
