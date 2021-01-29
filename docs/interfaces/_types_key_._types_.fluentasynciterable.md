@@ -321,7 +321,7 @@ ___
 
 ### group
 
-▸ **group**\<R>(`mapper`: R): [FluentAsyncIterable](_types_.fluentasynciterable.md)\<[FluentGroup](_types_.fluentgroup.md)\<T, T[R]>>
+▸ **group**\<R>(`mapper`: R, `distinct?`: Mapper\<T, unknown>): [FluentAsyncIterable](_types_.fluentasynciterable.md)\<[FluentGroup](_types_.fluentgroup.md)\<T, T[R]>>
 
 Groups the elements of the iterable keyed by equality of data at the specified projection.
 
@@ -336,8 +336,53 @@ Name | Type | Description |
 Name | Type | Description |
 ------ | ------ | ------ |
 `mapper` | R | Projects the elements of the iterable into the group key they belong to. |
+`distinct?` | Mapper\<T, unknown> | Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied |
 
 **Returns:** [FluentAsyncIterable](_types_.fluentasynciterable.md)\<[FluentGroup](_types_.fluentgroup.md)\<T, T[R]>>
+
+The [FluentAsyncIterable](_types_key_._types_.fluentasynciterable.md) of the distinct groups.
+
+▸ **group**\<R, D>(`mapper`: R, `distinct?`: D): [FluentAsyncIterable](_types_.fluentasynciterable.md)\<[FluentGroup](_types_.fluentgroup.md)\<T, T[R]>>
+
+Groups the elements of the iterable keyed by equality of data at the specified projection.
+
+#### Type parameters:
+
+Name | Type | Default | Description |
+------ | ------ | ------ | ------ |
+`R` | keyof T | - | The type of the groups' key. |
+`D` | keyof T | never | - |
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`mapper` | R | Projects the elements of the iterable into the group key they belong to. |
+`distinct?` | D | Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied |
+
+**Returns:** [FluentAsyncIterable](_types_.fluentasynciterable.md)\<[FluentGroup](_types_.fluentgroup.md)\<T, T[R]>>
+
+The [FluentAsyncIterable](_types_key_._types_.fluentasynciterable.md) of the distinct groups.
+
+▸ **group**\<R, D>(`mapper`: AsyncMapper\<T, R>, `distinct?`: D): [FluentAsyncIterable](_types_.fluentasynciterable.md)\<[FluentGroup](_types_.fluentgroup.md)\<T, R>>
+
+Groups the elements of the iterable keyed by equality of data at the specified projection.
+
+#### Type parameters:
+
+Name | Type | Default | Description |
+------ | ------ | ------ | ------ |
+`R` | - | - | The type of the groups' key. |
+`D` | keyof T | never | - |
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`mapper` | AsyncMapper\<T, R> | Projects the elements of the iterable into the group key they belong to. |
+`distinct?` | D | Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied |
+
+**Returns:** [FluentAsyncIterable](_types_.fluentasynciterable.md)\<[FluentGroup](_types_.fluentgroup.md)\<T, R>>
 
 The [FluentAsyncIterable](_types_key_._types_.fluentasynciterable.md) of the distinct groups.
 

@@ -1,5 +1,8 @@
 
 ## 1.8.0
+* aba20cc fixing group recipe
+* 6506880 fixing group distinct with ordering
+* 115377c 1.8.0
 * d136a3f Adding parameter distinct in group methods
 ## v1.7.6
 * 88790c6 1.7.6
