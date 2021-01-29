@@ -1,4 +1,12 @@
-import { fluentAsync, interval, fluent, o, identity, od } from '../src';
+import {
+  fluentAsync,
+  interval,
+  fluent,
+  o,
+  identity,
+  od,
+  getGroupingDistinct,
+} from '../src';
 import expect, { flatMap } from './tools';
 import { ObjectReadableMock } from 'stream-mock';
 import { Person, data, Gender, picker } from './fluent.spec';
@@ -465,7 +473,10 @@ describe('fluent async iterable', () => {
         const groups = await fluentAsync(items)
           .group(
             o((x) => x.k),
-            'v',
+            getGroupingDistinct(
+              (x) => [x.v.toString()],
+              (x) => x[0],
+            ),
           )
           .toArray();
         expect(groups.length).to.eql(3);
@@ -473,15 +484,15 @@ describe('fluent async iterable', () => {
 
         groups.forEach(({ values }, i) => {
           values.withIndex().forEach(({ value, idx }) => {
-            expect(value).to.be.eql(expected[i * 2 + idx]);
+            expect(value).to.be.eql(expected[i * 2 + idx].v.toString());
           });
         });
       });
-      it('should work with distinct expression', async () => {
+      it('should work with transformation expression', async () => {
         const groups = await fluentAsync(
           new ObjectReadableMock([1, 2, 2, 3, 4, 4, 5, 5, 5]),
         )
-          .group((x) => x % 2, identity)
+          .group((x) => x % 2, getGroupingDistinct(identity))
           .toArray();
         expect(groups.length).to.eql(2);
         expect(groups.map((grp) => grp.key)).to.have.members([0, 1]);

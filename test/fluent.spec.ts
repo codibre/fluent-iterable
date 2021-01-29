@@ -1,5 +1,5 @@
 import { fluentSymbol } from './../src/types-internal/fluent-symbol';
-import { o, fluent, identity, interval, od } from '../src';
+import { o, fluent, identity, interval, od, getGroupingDistinct } from '../src';
 import expect, { flatMap, pick } from './tools';
 import delay from 'delay';
 import 'chai-callslike';
@@ -780,7 +780,7 @@ describe('fluent iterable', () => {
             });
           });
         });
-        it('assuring order with distinct', () => {
+        it('assuring order with value transformation', () => {
           const items = [
             { k: 1, v: 1 },
             { k: 1, v: 1 },
@@ -804,7 +804,10 @@ describe('fluent iterable', () => {
           const groups = fluent(items)
             .group(
               o((x) => x.k),
-              'v',
+              getGroupingDistinct(
+                (x) => [x.v.toString()],
+                (x) => x[0],
+              ),
             )
             .toArray();
           expect(groups.length).to.eql(3);
@@ -812,7 +815,7 @@ describe('fluent iterable', () => {
 
           groups.forEach(({ values }, i) => {
             values.withIndex().forEach(({ value, idx }) => {
-              expect(value).to.be.eql(expected[i * 2 + idx]);
+              expect(value).to.be.eql(expected[i * 2 + idx].v.toString());
             });
           });
         });
@@ -831,9 +834,9 @@ describe('fluent iterable', () => {
             );
           }
         });
-        it('should work with distinct expression', () => {
+        it('should work with transformation expression', () => {
           const groups = fluent([1, 2, 2, 3, 4, 4, 5, 5, 5])
-            .group((x) => x % 2, identity)
+            .group((x) => x % 2, getGroupingDistinct(identity))
             .toArray();
           expect(groups.length).to.eql(2);
           expect(groups.map((grp) => grp.key)).to.have.members([0, 1]);
@@ -884,7 +887,7 @@ describe('fluent iterable', () => {
             );
           }
         });
-        it('assuring order with distinct', async () => {
+        it('assuring order with value transformation', async () => {
           const items = [
             { k: 1, v: 1 },
             { k: 1, v: 1 },
@@ -908,7 +911,10 @@ describe('fluent iterable', () => {
           const groups = await fluent(items)
             .groupAsync(
               o((x) => x.k),
-              'v',
+              getGroupingDistinct(
+                (x) => [x.v.toString()],
+                (x) => x[0],
+              ),
             )
             .toArray();
           expect(groups.length).to.eql(3);
@@ -916,13 +922,14 @@ describe('fluent iterable', () => {
 
           groups.forEach(({ values }, i) => {
             values.withIndex().forEach(({ value, idx }) => {
-              expect(value).to.be.eql(expected[i * 2 + idx]);
+              expect(value).to.be.eql(expected[i * 2 + idx].v.toString());
             });
           });
         });
         it('should work with distinct expression', async () => {
+          const set = new Set<number>();
           const groups = await fluent([1, 2, 2, 3, 4, 4, 5, 5, 5])
-            .groupAsync((x) => x % 2, identity)
+            .groupAsync((x) => x % 2, getGroupingDistinct(identity))
             .toArray();
           expect(groups.length).to.eql(2);
           expect(groups.map((grp) => grp.key)).to.have.members([0, 1]);

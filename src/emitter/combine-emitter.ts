@@ -1,12 +1,11 @@
 import { AnyIterable, Mapper } from 'augmentative-iterable';
 import { combineAsync } from '../async';
-import { EventEmitter } from 'events';
 import { FluentEmitOptions } from '../types-base';
 import { getIterableFromEmitter } from './get-iterable-from-emitter';
 
 export function combineEmitter<T>(
   this: AnyIterable<T>,
-  eventEmitter: EventEmitter,
+  eventEmitter: any,
   optionsOrKeyA?: FluentEmitOptions | Mapper<any, any>,
   keyB?: Mapper<any, any>,
   options?: FluentEmitOptions,

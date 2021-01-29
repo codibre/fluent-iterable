@@ -1,3 +1,4 @@
+import { KVGroupTransform } from './types-base';
 /* eslint-disable guard-for-in */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import fluent from './fluent';
@@ -283,6 +284,40 @@ export function desc<F>(f: F): F {
   return assureOrderDescending(
     (isValueType(f) ? { [valueTypeWrapper]: f } : f) as any,
   );
+}
+
+export function getGroupingDistinct<K, T, V, NewT = T[]>(
+  valueDistinctMapper: (t: NewT) => V,
+): KVGroupTransform<K, T, NewT>;
+export function getGroupingDistinct<K, T, V, NewT = T[]>(
+  valueMapper: (t: T) => Iterable<NewT>,
+  valueDistinctMapper: (t: NewT) => V,
+): KVGroupTransform<K, T, NewT>;
+export function getGroupingDistinct<K, T, V, NewT = T[]>(
+  valueMapper: any,
+  valueDistinctMapper?: any,
+): KVGroupTransform<K, T, NewT> {
+  const map = new Map<K, Set<V>>();
+  if (!valueDistinctMapper) {
+    valueDistinctMapper = valueMapper;
+    valueMapper = (t: T) => [t];
+  }
+
+  return function* (k: K, v: T) {
+    let set = map.get(k);
+    if (!set) {
+      set = new Set<V>();
+      map.set(k, set);
+    }
+
+    for (const nv of valueMapper(v)) {
+      const kv = valueDistinctMapper(nv);
+      if (!set.has(kv)) {
+        set.add(kv);
+        yield nv;
+      }
+    }
+  };
 }
 
 export {

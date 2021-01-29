@@ -6,30 +6,9 @@ import {
 import { AnyMapper } from '../types-internal';
 import { AnyIterable } from 'augmentative-iterable';
 import { map as mapSync } from '../sync/map';
-import {
-  GroupIngredients,
-  IterateIngredient,
-  ReduceAndMapIngredient,
-} from './ingredients';
+import { GroupIngredients, IterateIngredient } from './ingredients';
 import { orderedOperationRecipe } from './ordered-operation-recipe';
 import { prepare } from '../types-internal/prepare';
-
-function distinctKVFactory(distinct: Function) {
-  const distinctKeys = new Map<unknown, Set<unknown>>();
-  return (k: any, v: any) => {
-    let set = distinctKeys.get(k);
-    if (!set) {
-      set = new Set<unknown>();
-      distinctKeys.set(k, set);
-    }
-    const distinctKey = distinct(v);
-    if (!set.has(distinctKey)) {
-      set.add(distinctKey);
-      return true;
-    }
-    return false;
-  };
-}
 
 function orderedGroupRecipe({
   map,
@@ -41,18 +20,17 @@ function orderedGroupRecipe({
   return function <T>(
     this: AnyIterable<T>,
     mapper: FunctionAnyMapper<any>,
-    distinct?: FunctionAnyMapper<any>,
+    transformValue: Function,
   ) {
     const partitioned = ordered.call(this, mapper);
-    const distinctKV = distinct ? distinctKVFactory(distinct) : undefined;
     return map.call(partitioned, (part: Iterable<any[]>) => {
       let key!: any;
       const values: any[] = [];
       return resolver(
         forEach.call(part, ([k, v]: any) => {
           key = k;
-          if (!distinctKV || distinctKV(key, v)) {
-            values.push(v);
+          for (const item of transformValue(key, v)) {
+            values.push(item);
           }
         }),
         () => ({ key, values }),
@@ -78,27 +56,12 @@ function getNonDistinctGroup<T>(
     });
 }
 
-function getDistinctGroup<T>(
-  resolver: ResolverType,
-  mapper: FunctionAnyMapper<T>,
-  distinct: FunctionAnyMapper<T>,
-) {
-  const distinctKV = distinctKVFactory(distinct);
-  return (g: any, t: any) =>
-    resolver(mapper(t), (key) => {
-      if (distinctKV(key, t)) {
-        groupItem(g, key, t);
-      }
-      return g;
-    });
-}
-
 interface ReduceGroupParameters<T> {
   iterable: AnyIterable<T>;
   reduceAndMap: Function;
   resolver: ResolverType;
   mapper: FunctionAnyMapper<T>;
-  distinct: FunctionAnyMapper<T> | undefined;
+  transformValue: Function;
 }
 
 function reduceGroup<T, R>({
@@ -106,13 +69,19 @@ function reduceGroup<T, R>({
   reduceAndMap,
   resolver,
   mapper,
-  distinct,
+  transformValue,
 }: ReduceGroupParameters<T>) {
-  const reduce = distinct
-    ? getDistinctGroup(resolver, mapper, distinct)
-    : getNonDistinctGroup<T>(resolver, mapper);
-  return reduceAndMap.call(iterable, reduce, new Map<R, T[]>(), (x: any) =>
-    x.entries(),
+  return reduceAndMap.call(
+    iterable,
+    (g: any, t: any) =>
+      resolver(mapper(t), (key) => {
+        for (const item of transformValue(key, t)) {
+          groupItem(g, key, item);
+        }
+        return g;
+      }),
+    new Map<R, T[]>(),
+    (x: any) => x.entries(),
   );
 }
 
@@ -122,7 +91,7 @@ function nonOrderedGroup<T>(
     reduceAndMap,
     resolver,
     mapper,
-    distinct,
+    transformValue,
   }: ReduceGroupParameters<T>,
   iterate: IterateIngredient,
 ) {
@@ -131,7 +100,7 @@ function nonOrderedGroup<T>(
     reduceAndMap,
     resolver,
     mapper,
-    distinct,
+    transformValue,
   });
 
   const resolved = resolver(reduced, (r) =>
@@ -143,21 +112,27 @@ function nonOrderedGroup<T>(
   return iterate(resolved);
 }
 
+export function singleItem<T>(_k: any, t: T) {
+  return [t];
+}
+
 export function groupRecipe(ingredients: GroupIngredients) {
   const orderedGroup = orderedGroupRecipe(ingredients);
   const { reduceAndMap, resolver, iterate } = ingredients;
   return function <T>(
     this: AnyIterable<T>,
     baseMapper: AnyMapper<T>,
-    baseDistinct?: AnyMapper<T>,
+    baseTransformValue?: AnyMapper<T>,
   ) {
     const mapper = prepare(baseMapper);
-    const distinct = baseDistinct ? prepare(baseDistinct) : undefined;
+    const transformValue = baseTransformValue
+      ? prepare(baseTransformValue)
+      : singleItem;
     if (isAnyOrderAssured(mapper, this)) {
-      return orderedGroup.call(this, mapper, distinct);
+      return orderedGroup.call(this, mapper, transformValue);
     } else {
       return nonOrderedGroup<T>(
-        { iterable: this, reduceAndMap, resolver, mapper, distinct },
+        { iterable: this, reduceAndMap, resolver, mapper, transformValue },
         iterate,
       );
     }

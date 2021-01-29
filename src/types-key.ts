@@ -1,6 +1,11 @@
 import { AsyncMapper, Mapper, AnyIterable } from 'augmentative-iterable';
 import { FluentGroup } from './types';
-import { Comparer, Reducer, AsyncReducer } from './types-base';
+import {
+  Comparer,
+  Reducer,
+  AsyncReducer,
+  KVGroupTransform,
+} from './types-base';
 
 declare module './types' {
   /**
@@ -197,74 +202,24 @@ declare module './types' {
      *   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).group(word => word[0])` yields { key: 'a', values: ['anchor', 'almond', 'alpine'] } and { key: 'b', values: ['bound'] }.
      * @typeparam R The type of the groups' key.
      * @param mapper Projects the elements of the iterable into the group key they belong to.
-     * @param distinct Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied
+     * @param transformValue Optional. Allows a transformation before adding the value to the group. The return must be an iterable
      * @returns The [[FluentIterable]] of the distinct groups.
      */
-    group<R extends keyof T>(
+    group<R extends keyof T, V = T>(
       mapper: R,
-      distinct?: Mapper<T, unknown>,
+      transformValue?: KVGroupTransform<R, T, V>,
     ): FluentIterable<FluentGroup<T, T[R]>>;
 
     /**
-     * Groups the elements of the iterable keyed by equality of data at the specified projection.<br>
-     *   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).group(word => word[0])` yields { key: 'a', values: ['anchor', 'almond', 'alpine'] } and { key: 'b', values: ['bound'] }.
-     * @typeparam R The type of the groups' key.
-     * @param mapper Projects the elements of the iterable into the group key they belong to.
-     * @param distinct Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied
-     * @returns The [[FluentIterable]] of the distinct groups.
-     */
-    group<R extends keyof T, D extends keyof T = never>(
-      mapper: R,
-      distinct?: D,
-    ): FluentIterable<FluentGroup<T, T[R]>>;
-
-    /**
-     * Groups the elements of the iterable keyed by equality of data at the specified projection.<br>
-     *   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).group(word => word[0])` yields { key: 'a', values: ['anchor', 'almond', 'alpine'] } and { key: 'b', values: ['bound'] }.
-     * @typeparam R The type of the groups' key.
-     * @param mapper Projects the elements of the iterable into the group key they belong to.
-     * @param distinct Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied
-     * @returns The [[FluentIterable]] of the distinct groups.
-     */
-    group<R, D extends keyof T = never>(
-      mapper: Mapper<T, R>,
-      distinct: D,
-    ): FluentIterable<FluentGroup<T, R>>;
-
-    /**
      * Groups the elements of the iterable keyed by equality of data at the specified asynchronous projection.
      * @typeparam R The type of the groups key.
      * @param mapper Asynchronously projects the elements of the iterable into the group key they belong to.
-     * @param distinct Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied
+     * @param transformValue Optional. Allows a transformation before adding the value to the group. The return must be an iterable
      * @returns The [[FluentAsyncIterable]] of the distinct groups.
      */
-    groupAsync<R extends keyof T>(
+    groupAsync<R extends keyof T, V = T>(
       mapper: R,
-      distinct?: Mapper<T, unknown>,
-    ): FluentAsyncIterable<FluentGroup<T, T[R]>>;
-
-    /**
-     * Groups the elements of the iterable keyed by equality of data at the specified asynchronous projection.
-     * @typeparam R The type of the groups key.
-     * @param mapper Asynchronously projects the elements of the iterable into the group key they belong to.
-     * @param distinct Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied
-     * @returns The [[FluentAsyncIterable]] of the distinct groups.
-     */
-    groupAsync<R, D extends keyof T = never>(
-      mapper: AsyncMapper<T, R>,
-      distinct: D,
-    ): FluentAsyncIterable<FluentGroup<T, R>>;
-
-    /**
-     * Groups the elements of the iterable keyed by equality of data at the specified asynchronous projection.
-     * @typeparam R The type of the groups key.
-     * @param mapper Asynchronously projects the elements of the iterable into the group key they belong to.
-     * @param distinct Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied
-     * @returns The [[FluentAsyncIterable]] of the distinct groups.
-     */
-    groupAsync<R extends keyof T, D extends keyof T = never>(
-      mapper: R,
-      distinct?: D,
+      transformValue?: KVGroupTransform<R, T, V>,
     ): FluentAsyncIterable<FluentGroup<T, T[R]>>;
 
     /**
@@ -756,9 +711,9 @@ declare module './types' {
      * @param distinct Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied
      * @returns The [[FluentAsyncIterable]] of the distinct groups.
      */
-    group<R extends keyof T>(
+    group<R extends keyof T, V = T>(
       mapper: R,
-      distinct?: Mapper<T, unknown>,
+      distinct?: KVGroupTransform<R, T, V>,
     ): FluentAsyncIterable<FluentGroup<T, T[R]>>;
 
     /**
@@ -768,9 +723,9 @@ declare module './types' {
      * @param distinct Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied
      * @returns The [[FluentAsyncIterable]] of the distinct groups.
      */
-    group<R extends keyof T, D extends keyof T = never>(
+    group<R extends keyof T, V = T>(
       mapper: R,
-      distinct?: D,
+      distinct?: KVGroupTransform<R, T, V>,
     ): FluentAsyncIterable<FluentGroup<T, T[R]>>;
 
     /**
@@ -780,9 +735,9 @@ declare module './types' {
      * @param distinct Optional. Defines a unicity key, considered by grouped list. If not informed, no unicity is applied
      * @returns The [[FluentAsyncIterable]] of the distinct groups.
      */
-    group<R, D extends keyof T = never>(
+    group<R, V = T>(
       mapper: AsyncMapper<T, R>,
-      distinct?: D,
+      distinct?: KVGroupTransform<R, T, V>,
     ): FluentAsyncIterable<FluentGroup<T, R>>;
 
     /**
