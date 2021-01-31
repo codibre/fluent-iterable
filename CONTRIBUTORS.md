@@ -1,6 +1,6 @@
 * Thiago Santos <thiago.santos@maxmilhas.com.br>
-* Kornel B Katai <korkatai@amazon.com>
 * Thiago Santos <tos.oliveira@gmail.com>
+* Kornel B Katai <korkatai@amazon.com>
 * Farenheith <tos.oliveira@gmail.com>
 * Kornel B Katai <kataik@gmail.com>
 * Thiago Oliveira Santos <tos.oliveira@gmail.com>
