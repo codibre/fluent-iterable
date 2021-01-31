@@ -18,6 +18,8 @@ import {
 import { orderAssured } from './types-internal';
 import { valueTypeWrapper } from './types-internal/string-wrapper';
 import { prepare } from './types-internal/prepare';
+import { map } from './sync/map';
+import { filter } from './sync/filter';
 
 const valueTypes = ['string', 'number', 'boolean'];
 /**
@@ -45,9 +47,7 @@ async function* promiseIterateAsync<T>(
 function iterateAsync<T>(
   a: AnyIterable<T> | PromiseLike<AnyIterable<T>>,
 ): AsyncIterable<T> {
-  return ((a as any).then || (a as any)[Symbol.iterator]
-    ? promiseIterateAsync(a as any)
-    : a) as any;
+  return ((a as any).then ? promiseIterateAsync(a as any) : a) as any;
 }
 
 /**
@@ -66,7 +66,7 @@ async function* iterateAllAsync<T>(a: AsyncIterable<AnyIterable<T>>) {
  * @typeparam T the item type of the [[Iterable]]
  * @param a The iterable
  */
-const iterate = identity;
+const iterate: <T>(a: Iterable<T>) => Iterable<T> = identity;
 
 /**
  * Returns a function that always returns the informed value
@@ -103,10 +103,13 @@ function* iterateObjProps<T extends object>(obj: T): Iterable<keyof T> {
  * Iterates over all owned entries of given object
  * @param obj The object to iterate with
  */
-function* iterateObjEntries<T extends object>(obj: T) {
-  for (const property of iterateObjProps(obj)) {
-    yield [property, obj[property]];
-  }
+function iterateObjEntries<T extends object>(
+  obj: T,
+): Iterable<[keyof T, unknown]> {
+  return map.call(iterateObjProps(obj), (property) => [
+    property,
+    obj[property as keyof T],
+  ]) as Iterable<[keyof T, unknown]>;
 }
 
 /**
@@ -338,7 +341,7 @@ export function getGroupingDistinct<K, T, NewT = T[]>(
   baseValueMapper: any,
   baseValueDistinctMapper?: any,
 ): KVGroupTransform<K, T, NewT> {
-  const map = new Map<K, Set<unknown>>();
+  const groupMap = new Map<K, Set<unknown>>();
   if (!baseValueDistinctMapper) {
     baseValueDistinctMapper = baseValueMapper;
     baseValueMapper = (t: T) => [t];
@@ -346,20 +349,22 @@ export function getGroupingDistinct<K, T, NewT = T[]>(
   const valueMapper = prepare(baseValueMapper);
   const valueDistinctMapper = prepare(baseValueDistinctMapper);
 
-  return function* (k: K, v: T) {
-    let set = map.get(k);
+  return function (k: K, v: T) {
+    let set = groupMap.get(k);
     if (!set) {
       set = new Set<unknown>();
-      map.set(k, set);
+      groupMap.set(k, set);
     }
 
-    for (const nv of valueMapper(v)) {
+    return filter.call(valueMapper(v), (nv: any) => {
       const kv = valueDistinctMapper(nv);
-      if (!set.has(kv)) {
-        set.add(kv);
-        yield nv;
+      const result = !set!.has(kv);
+      if (result) {
+        set!.add(kv);
       }
-    }
+
+      return result;
+    }) as Iterable<any>;
   };
 }
 

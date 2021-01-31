@@ -19,10 +19,6 @@ export type ReduceAndMapIngredient = (
 export type PartitionIngredient = (
   size: number | Equality<any>,
 ) => AnyIterable<AnyIterable<any>>;
-export type PartitionBaseIngredient = (
-  it: any,
-  size: number | Equality<any>,
-) => AnyIterable<AnyIterable<any>>;
 export type ThresholdIngredient = (
   threshold: number,
 ) => AnyIterable<AnyIterable<any>>;
