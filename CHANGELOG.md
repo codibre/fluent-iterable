@@ -1,5 +1,11 @@
 
-## 1.8.5
+## 1.8.6
+* 9502fba fixing cagada
+* 05afc55 covering mergeIterables
+* 48d22ae merging
+* bb5b13c Augmentative iterable update (#33)
+## v1.8.5
+* a6de8f9 1.8.5
 * 536b9dc removing more yields
 * 22430bf reorganizing types
 * e33e82f refactoring functions using yield
