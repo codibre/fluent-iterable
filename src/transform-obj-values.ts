@@ -1,4 +1,4 @@
-import { Mapper } from './types';
+import { Mapper } from 'augmentative-iterable';
 import { toObject } from './sync/to-object';
 import { iterateObjEntries } from './utils';
 

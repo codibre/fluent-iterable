@@ -1,5 +1,5 @@
 import { AnyIterable } from 'augmentative-iterable';
-import { Equality } from '../types-base';
+import { Equality } from '../types/base';
 import { ResolverType } from '../types-internal';
 import { getPartitionComparer } from './get-partition-comparer';
 
@@ -68,21 +68,29 @@ function getValueFactory<T>(
   partIterate: Function,
 ) {
   return () => {
-    return wrapper.next!.done ?
-    { done: true } : {
-        value: partIterate(wrapper),
-      };
-    };
+    return wrapper.next!.done
+      ? { done: true }
+      : {
+          value: partIterate(wrapper),
+        };
+  };
 }
 
-function firstValueFactory<T>(wrapper: PartitionWrapper<T>, callback: () => any) {
-  return (v: IteratorResult<T>, ) => {
+function firstValueFactory<T>(
+  wrapper: PartitionWrapper<T>,
+  callback: () => any,
+) {
+  return (v: IteratorResult<T>) => {
     wrapper.next = v;
     return callback();
   };
 }
 
-function nextFactory<T>(resolver: ResolverType, wrapper: PartitionWrapper<T>, getValue: () => any) {
+function nextFactory<T>(
+  resolver: ResolverType,
+  wrapper: PartitionWrapper<T>,
+  getValue: () => any,
+) {
   let first = true;
   const { iterator } = wrapper;
 
@@ -97,10 +105,7 @@ function nextFactory<T>(resolver: ResolverType, wrapper: PartitionWrapper<T>, ge
 }
 
 function partitionIterateRecipe<T>(symbol: symbol, resolver: ResolverType) {
-  return (
-    arr: AnyIterable<T>,
-    criteria: number | Equality<unknown>,
-  ): any => {
+  return (arr: AnyIterable<T>, criteria: number | Equality<unknown>): any => {
     const iterator = (arr as any)[symbol]();
     const wrapper: PartitionWrapper<T> = {
       iterator,

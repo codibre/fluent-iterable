@@ -1,4 +1,4 @@
-import { Equality } from '../types-base';
+import { Equality } from '../types/base';
 
 function partitionLengthComparer(size: number) {
   let i = 1;

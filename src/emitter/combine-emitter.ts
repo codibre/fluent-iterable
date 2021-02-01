@@ -1,6 +1,6 @@
 import { AnyIterable, Mapper } from 'augmentative-iterable';
 import { combineAsync } from '../async';
-import { FluentEmitOptions } from '../types-base';
+import { FluentEmitOptions } from '../types/base';
 import { getIterableFromEmitter } from './get-iterable-from-emitter';
 
 export function combineEmitter<T>(

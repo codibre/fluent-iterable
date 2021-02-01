@@ -1,6 +1,5 @@
-import { AnyIterable } from 'augmentative-iterable';
-import { AsyncMapper } from '../types';
-import { AsyncReducer, Comparer, Equality } from '../types-base';
+import { AnyIterable, AsyncMapper } from 'augmentative-iterable';
+import { AsyncReducer, Comparer, Equality } from '../types/base';
 import { AnyMapper, CompareProvider, ResolverType } from '../types-internal';
 
 export type IngredientOpt = (predicate?: AnyMapper<any>) => AnyIterable<any>;

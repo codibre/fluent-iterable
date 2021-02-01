@@ -1,4 +1,4 @@
-import { KVGroupTransform } from './types-base';
+import { KVGroupTransform } from './types/base';
 /* eslint-disable guard-for-in */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import fluent from './fluent';
@@ -8,7 +8,7 @@ import {
   FluentIterable,
   ItemType,
 } from './types';
-import { Group, AverageStepper } from './types-base';
+import { Group, AverageStepper } from './types/base';
 import {
   AnyIterable,
   AsyncPredicate,

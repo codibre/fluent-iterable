@@ -1,5 +1,5 @@
 import { AnyIterable } from 'augmentative-iterable';
-import { FluentEmitOptions } from '../types-base';
+import { FluentEmitOptions } from '../types/base';
 import { getIterableFromEmitter } from './get-iterable-from-emitter';
 
 export function getBaseEmittingConversion(operation: Function) {

@@ -1,5 +1,5 @@
 import { FluentAsyncIterable } from './types';
-import { FluentEmitOptions } from './types-base';
+import { FluentEmitOptions } from './types/base';
 import {
   asyncIterableFuncs,
   asyncResolvingFuncs,
