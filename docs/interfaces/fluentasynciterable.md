@@ -1,4 +1,4 @@
-[fluent-iterable - v1.8.4](../README.md) / FluentAsyncIterable
+[fluent-iterable - v1.8.5](../README.md) / FluentAsyncIterable
 
 # Interface: FluentAsyncIterable<T\>
 
@@ -93,7 +93,7 @@ ___
 
 ### all
 
-▸ **all**(`predicate`: [*AsyncPredicate*](asyncpredicate.md)<T\>): *Promise*<*boolean*\>
+▸ **all**(`predicate`: *AsyncPredicate*<T\>): *Promise*<*boolean*\>
 
 Determines whether all elements of the iterable satisfy a condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
 
@@ -101,7 +101,7 @@ Determines whether all elements of the iterable satisfy a condition. This is a p
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate` | [*AsyncPredicate*](asyncpredicate.md)<T\> | The condition checked for all elements in the iterable.   |
+`predicate` | *AsyncPredicate*<T\> | The condition checked for all elements in the iterable.   |
 
 **Returns:** *Promise*<*boolean*\>
 
@@ -125,7 +125,7 @@ ___
 
 ### any
 
-▸ **any**(`predicate?`: [*AsyncPredicate*](asyncpredicate.md)<T\>): *Promise*<*boolean*\>
+▸ **any**(`predicate?`: *AsyncPredicate*<T\>): *Promise*<*boolean*\>
 
 Determines whether any element of the iterable exists or satisfies a condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
 
@@ -133,7 +133,7 @@ Determines whether any element of the iterable exists or satisfies a condition. 
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | [*AsyncPredicate*](asyncpredicate.md)<T\> | The condition checked for the elements in the iterable. Defaults to the always true function and thus, returns if the iterable is empty.   |
+`predicate?` | *AsyncPredicate*<T\> | The condition checked for the elements in the iterable. Defaults to the always true function and thus, returns if the iterable is empty.   |
 
 **Returns:** *Promise*<*boolean*\>
 
@@ -502,7 +502,7 @@ ___
 
 ### count
 
-▸ **count**(`predicate?`: [*AsyncPredicate*](asyncpredicate.md)<T\>): *Promise*<*number*\>
+▸ **count**(`predicate?`: *AsyncPredicate*<T\>): *Promise*<*number*\>
 
 Returns the number of elements that matches a predicate in the iterable. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -510,7 +510,7 @@ Returns the number of elements that matches a predicate in the iterable. This is
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | [*AsyncPredicate*](asyncpredicate.md)<T\> | The count will consider elements which match this predicate. Defaults to the always true function and thus, counts all the elements in the iterable if omitted.   |
+`predicate?` | *AsyncPredicate*<T\> | The count will consider elements which match this predicate. Defaults to the always true function and thus, counts all the elements in the iterable if omitted.   |
 
 **Returns:** *Promise*<*number*\>
 
@@ -638,7 +638,7 @@ ___
 
 ### filter
 
-▸ **filter**(`predicate`: [*AsyncPredicate*](asyncpredicate.md)<T\>): [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
+▸ **filter**(`predicate`: *AsyncPredicate*<T\>): [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
 Filters the iterable of `T` based on a predicate.
 
@@ -646,7 +646,7 @@ Filters the iterable of `T` based on a predicate.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate` | [*AsyncPredicate*](asyncpredicate.md)<T\> | A predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`.   |
+`predicate` | *AsyncPredicate*<T\> | A predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`.   |
 
 **Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
@@ -670,7 +670,7 @@ ___
 
 ### first
 
-▸ **first**(`predicate?`: [*AsyncPredicate*](asyncpredicate.md)<T\>): *Promise*<*undefined* \| T\>
+▸ **first**(`predicate?`: *AsyncPredicate*<T\>): *Promise*<*undefined* \| T\>
 
 Returns the first element of the iterable matching a predicate, or `undefined` value if no such element is found. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
 
@@ -678,7 +678,7 @@ Returns the first element of the iterable matching a predicate, or `undefined` v
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | [*AsyncPredicate*](asyncpredicate.md)<T\> | The first element is to be returned which matches this predicate. Defaults to the always true function and thus, returns the first element in the iterable if omitted.   |
+`predicate?` | *AsyncPredicate*<T\> | The first element is to be returned which matches this predicate. Defaults to the always true function and thus, returns the first element in the iterable if omitted.   |
 
 **Returns:** *Promise*<*undefined* \| T\>
 
@@ -1040,7 +1040,7 @@ ___
 
 ### last
 
-▸ **last**(`predicate?`: [*AsyncPredicate*](asyncpredicate.md)<T\>): *Promise*<*undefined* \| T\>
+▸ **last**(`predicate?`: *AsyncPredicate*<T\>): *Promise*<*undefined* \| T\>
 
 Returns the last element of the iterable matching a predicate, or `undefined` value if no such element is found. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -1048,7 +1048,7 @@ Returns the last element of the iterable matching a predicate, or `undefined` va
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | [*AsyncPredicate*](asyncpredicate.md)<T\> | The last element is to be returned which matches this predicate. Defaults to the always true function and thus, returns the last element in the iterable if omitted.   |
+`predicate?` | *AsyncPredicate*<T\> | The last element is to be returned which matches this predicate. Defaults to the always true function and thus, returns the last element in the iterable if omitted.   |
 
 **Returns:** *Promise*<*undefined* \| T\>
 
@@ -1494,7 +1494,7 @@ ___
 
 ### skipWhile
 
-▸ **skipWhile**(`condition`: [*AsyncPredicate*](asyncpredicate.md)<T\>): [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
+▸ **skipWhile**(`condition`: *AsyncPredicate*<T\>): [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
 Bypasses elements in the iterable as long as a specified condition is true and then returns the remaining elements.
 
@@ -1502,7 +1502,7 @@ Bypasses elements in the iterable as long as a specified condition is true and t
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`condition` | [*AsyncPredicate*](asyncpredicate.md)<T\> | A predicate of `T`. All elements are skipped from the iterable until this evaluates to `false` for the first time.   |
+`condition` | *AsyncPredicate*<T\> | A predicate of `T`. All elements are skipped from the iterable until this evaluates to `false` for the first time.   |
 
 **Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
@@ -1615,7 +1615,7 @@ ___
 
 ### takeWhile
 
-▸ **takeWhile**(`condition`: [*AsyncPredicate*](asyncpredicate.md)<T\>): [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
+▸ **takeWhile**(`condition`: *AsyncPredicate*<T\>): [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
 Returns elements from the iterable as long as a specified condition is met.
 
@@ -1623,7 +1623,7 @@ Returns elements from the iterable as long as a specified condition is met.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`condition` | [*AsyncPredicate*](asyncpredicate.md)<T\> | A predicate of `T`. All elements are yielded from the iterable until this evaluates to `false` for the first time.   |
+`condition` | *AsyncPredicate*<T\> | A predicate of `T`. All elements are yielded from the iterable until this evaluates to `false` for the first time.   |
 
 **Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
