@@ -47,7 +47,9 @@ async function* promiseIterateAsync<T>(
 function iterateAsync<T>(
   a: AnyIterable<T> | PromiseLike<AnyIterable<T>>,
 ): AsyncIterable<T> {
-  return ((a as any).then ? promiseIterateAsync(a as any) : a) as any;
+  return ((a as any).then || (a as any)[Symbol.iterator]
+    ? promiseIterateAsync(a as any)
+    : a) as any;
 }
 
 /**
