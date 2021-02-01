@@ -25,21 +25,6 @@ export function othersFactory(resolver: ResolverType) {
   };
 }
 
-export function getNextValueFactory<T>(
-  wrapper: PartitionWrapper<T>,
-  resolver: ResolverType,
-) {
-  const { iterator, comparer } = wrapper;
-  return () =>
-    resolver(iterator.next(), (next: IteratorResult<T>) => {
-      const previous = wrapper.next!.value;
-      wrapper.next = next;
-      return wrapper.next.done || !comparer(previous, wrapper.next.value)
-        ? { done: true }
-        : wrapper.next;
-    });
-}
-
 export function partIterateFactory<T>(
   symbol: symbol,
   getOthers: <T>(wrapper: PartitionWrapper<T>) => () => any,
