@@ -1,5 +1,9 @@
 
-## 1.8.3
+## 1.8.4
+* 9e6e601 updating augmentative iterable and treating order assurance for map
+* 61822ee Return self when fluent (#32)
+## v1.8.3
+* 869a9d4 1.8.3
 * 89f544b creating typedoc of getGroupingDistinct
 * 4713044 fixing getGroupingDistinct types
 ## v1.8.2

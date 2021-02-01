@@ -1,4 +1,4 @@
-[fluent-iterable - v1.8.3](../README.md) / Pager
+[fluent-iterable - v1.8.4](../README.md) / Pager
 
 # Interface: Pager<T, TToken\>
 
