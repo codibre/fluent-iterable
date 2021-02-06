@@ -592,45 +592,56 @@ describe('fluent iterable', () => {
             ...data,
           ]));
       });
-      describe('flatten', () => {
-        it('empty array', () =>
-          expect(fluent([]).flatten().toArray()).to.be.empty);
-        it('already flat fails', () =>
-          expect(() => fluent(subject).flatten().toArray()).to.throw());
-        it('not flat', () =>
-          expect(
-            fluent([[1, 2], [3, 4, 5], [], [6]])
-              .flatten()
-              .toArray(),
-          ).to.eql([1, 2, 3, 4, 5, 6]));
-        it('with mapper', () =>
-          expect(
-            fluent(subject)
-              .flatten((p) => p.emails)
-              .toArray(),
-          ).to.eql(flatMap(picker(1, 2, 6, 7, 8, 9, 10, 11), (p) => p.emails)));
-        it('should work with key string', () =>
-          expect(fluent(subject).flatten('emails').toArray()).to.eql(
-            flatMap(picker(1, 2, 6, 7, 8, 9, 10, 11), (p) => p.emails),
-          ));
+      const flattens: ['flatten', 'flatMap'] = ['flatten', 'flatMap'];
+      flattens.forEach((func) => {
+        describe(func, () => {
+          it('empty array', () =>
+            expect(fluent([])[func]().toArray()).to.be.empty);
+          it('already flat fails', () =>
+            expect(() => fluent(subject)[func]().toArray()).to.throw());
+          it('not flat', () =>
+            expect(
+              fluent([[1, 2], [3, 4, 5], [], [6]])
+                [func]()
+                .toArray(),
+            ).to.eql([1, 2, 3, 4, 5, 6]));
+          it('with mapper', () =>
+            expect(
+              fluent(subject)
+                [func]((p) => p.emails)
+                .toArray(),
+            ).to.eql(
+              flatMap(picker(1, 2, 6, 7, 8, 9, 10, 11), (p) => p.emails),
+            ));
+          it('should work with key string', () =>
+            expect(fluent(subject)[func]('emails').toArray()).to.eql(
+              flatMap(picker(1, 2, 6, 7, 8, 9, 10, 11), (p) => p.emails),
+            ));
+        });
       });
-      describe('flattenAsync', () => {
-        it('empty array', async () =>
-          expect(
-            await fluent([])
-              .flattenAsync((x) => x)
-              .toArray(),
-          ).to.be.empty);
-        it('not flat', async () =>
-          expect(
-            await fluent([[1, 2], [3, 4, 5], [], [6]])
-              .flattenAsync(async (x) => x)
-              .toArray(),
-          ).to.eql([1, 2, 3, 4, 5, 6]));
-        it('should work with key string', async () =>
-          expect(await fluent(subject).flattenAsync('emails').toArray()).to.eql(
-            flatMap(picker(1, 2, 6, 7, 8, 9, 10, 11), (p) => p.emails),
-          ));
+      const flattensAsync: ['flattenAsync', 'flatMapAsync'] = [
+        'flattenAsync',
+        'flatMapAsync',
+      ];
+      flattensAsync.forEach((func) => {
+        describe(func, () => {
+          it('empty array', async () =>
+            expect(
+              await fluent([])
+                [func]((x) => x)
+                .toArray(),
+            ).to.be.empty);
+          it('not flat', async () =>
+            expect(
+              await fluent([[1, 2], [3, 4, 5], [], [6]])
+                [func](async (x) => x)
+                .toArray(),
+            ).to.eql([1, 2, 3, 4, 5, 6]));
+          it('should work with key string', async () =>
+            expect(await fluent(subject)[func]('emails').toArray()).to.eql(
+              flatMap(picker(1, 2, 6, 7, 8, 9, 10, 11), (p) => p.emails),
+            ));
+        });
       });
       describe('sort', () => {
         it('empty', () => expect(fluent([]).sort().toArray()).to.be.empty);
@@ -1179,70 +1190,85 @@ describe('fluent iterable', () => {
             await fluent([1, 2, 3]).reduceAsync(async (a, b) => (a += b), 0),
           ).to.be.equals(6));
       });
-      describe('all', () => {
-        it('empty', async () =>
-          expect(fluent([]).all((a: number) => a % 2 === 0)).to.be.true);
-        it('false', async () =>
-          expect(fluent([1, 2, 3]).all((a: number) => a % 2 === 0)).to.be
-            .false);
-        it('true', async () =>
-          expect(fluent([2, 4, 6]).all((a: number) => a % 2 === 0)).to.be.true);
-        it('should work with key string when result is true', () =>
-          expect(fluent([{ a: 1 }, { a: 2 }, { a: 3 }]).all('a')).to.true);
-        it('should work with key string when result is true', () =>
-          expect(fluent([{ a: 1 }, { a: 0 }, { a: 3 }]).all('a')).to.false);
+      const all: ['all', 'every'] = ['all', 'every'];
+      all.forEach((func) => {
+        describe('all', () => {
+          it('empty', async () =>
+            expect(fluent([])[func]((a: number) => a % 2 === 0)).to.be.true);
+          it('false', async () =>
+            expect(fluent([1, 2, 3])[func]((a: number) => a % 2 === 0)).to.be
+              .false);
+          it('true', async () =>
+            expect(fluent([2, 4, 6])[func]((a: number) => a % 2 === 0)).to.be
+              .true);
+          it('should work with key string when result is true', () =>
+            expect(fluent([{ a: 1 }, { a: 2 }, { a: 3 }])[func]('a')).to.true);
+          it('should work with key string when result is true', () =>
+            expect(fluent([{ a: 1 }, { a: 0 }, { a: 3 }])[func]('a')).to.false);
+        });
       });
-      describe('allAsync', () => {
-        it('empty', async () =>
-          expect(await fluent([]).allAsync(async (a: number) => a % 2 === 0)).to
-            .be.true);
-        it('false', async () =>
-          expect(
-            await fluent([1, 2, 3]).allAsync(async (a: number) => a % 2 === 0),
-          ).to.be.false);
-        it('true', async () =>
-          expect(
-            await fluent([2, 4, 6]).allAsync(async (a: number) => a % 2 === 0),
-          ).to.be.true);
-        it('should work with key string when result is true', async () =>
-          expect(await fluent([{ a: 1 }, { a: 2 }, { a: 3 }]).allAsync('a')).to
-            .true);
-        it('should work with key string when result is true', async () =>
-          expect(await fluent([{ a: 1 }, { a: 0 }, { a: 3 }]).allAsync('a')).to
-            .false);
+      const allAsync: ['allAsync', 'everyAsync'] = ['allAsync', 'everyAsync'];
+      allAsync.forEach((func) => {
+        describe(func, () => {
+          it('empty', async () =>
+            expect(await fluent([])[func](async (a: number) => a % 2 === 0)).to
+              .be.true);
+          it('false', async () =>
+            expect(
+              await fluent([1, 2, 3])[func](async (a: number) => a % 2 === 0),
+            ).to.be.false);
+          it('true', async () =>
+            expect(
+              await fluent([2, 4, 6])[func](async (a: number) => a % 2 === 0),
+            ).to.be.true);
+          it('should work with key string when result is true', async () =>
+            expect(await fluent([{ a: 1 }, { a: 2 }, { a: 3 }])[func]('a')).to
+              .true);
+          it('should work with key string when result is true', async () =>
+            expect(await fluent([{ a: 1 }, { a: 0 }, { a: 3 }])[func]('a')).to
+              .false);
+        });
       });
-      describe('any', () => {
-        it('empty', async () =>
-          expect(fluent([]).any((a: number) => a % 2 === 0)).to.be.false);
-        it('false', async () =>
-          expect(fluent([1, 3, 5]).any((a: number) => a % 2 === 0)).to.be
-            .false);
-        it('true', async () =>
-          expect(fluent([1, 2, 3]).any((a: number) => a % 2 === 0)).to.be.true);
-        it('should work with key string when result is true', () =>
-          expect(fluent([{ a: 1 }, { a: 2 }, { a: 0 }]).any('a')).to.true);
-        it('should work with key string when result is true', () =>
-          expect(fluent([{ a: false }, { a: 0 }, { a: 0 }]).any('a')).to.false);
+      const anys: ['any', 'some'] = ['any', 'some'];
+      anys.forEach((func) => {
+        describe(func, () => {
+          it('empty', async () =>
+            expect(fluent([])[func]((a: number) => a % 2 === 0)).to.be.false);
+          it('false', async () =>
+            expect(fluent([1, 3, 5])[func]((a: number) => a % 2 === 0)).to.be
+              .false);
+          it('true', async () =>
+            expect(fluent([1, 2, 3])[func]((a: number) => a % 2 === 0)).to.be
+              .true);
+          it('should work with key string when result is true', () =>
+            expect(fluent([{ a: 1 }, { a: 2 }, { a: 0 }])[func]('a')).to.true);
+          it('should work with key string when result is true', () =>
+            expect(fluent([{ a: false }, { a: 0 }, { a: 0 }])[func]('a')).to
+              .false);
+        });
       });
-      describe('anyAsync', () => {
-        it('empty', async () =>
-          expect(await fluent([]).anyAsync(async (a: number) => a % 2 === 0)).to
-            .be.false);
-        it('false', async () =>
-          expect(
-            await fluent([1, 3, 5]).anyAsync(async (a: number) => a % 2 === 0),
-          ).to.be.false);
-        it('true', async () =>
-          expect(
-            await fluent([1, 2, 3]).anyAsync(async (a: number) => a % 2 === 0),
-          ).to.be.true);
-        it('should work with key string when result is true', async () =>
-          expect(await fluent([{ a: 1 }, { a: 2 }, { a: 3 }]).anyAsync('a')).to
-            .true);
-        it('should work with key string when result is true', async () =>
-          expect(
-            await fluent([{ a: false }, { a: 0 }, { a: null }]).anyAsync('a'),
-          ).to.false);
+      const anysAsync: ['anyAsync', 'someAsync'] = ['anyAsync', 'someAsync'];
+      anysAsync.forEach((func) => {
+        describe(func, () => {
+          it('empty', async () =>
+            expect(await fluent([])[func](async (a: number) => a % 2 === 0)).to
+              .be.false);
+          it('false', async () =>
+            expect(
+              await fluent([1, 3, 5])[func](async (a: number) => a % 2 === 0),
+            ).to.be.false);
+          it('true', async () =>
+            expect(
+              await fluent([1, 2, 3])[func](async (a: number) => a % 2 === 0),
+            ).to.be.true);
+          it('should work with key string when result is true', async () =>
+            expect(await fluent([{ a: 1 }, { a: 2 }, { a: 3 }])[func]('a')).to
+              .true);
+          it('should work with key string when result is true', async () =>
+            expect(
+              await fluent([{ a: false }, { a: 0 }, { a: null }])[func]('a'),
+            ).to.false);
+        });
       });
       describe('contains', () => {
         it('empty', async () =>

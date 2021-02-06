@@ -1,4 +1,4 @@
-[fluent-iterable - v1.8.6](../README.md) / AsyncMapper
+[fluent-iterable - v1.9.0](../README.md) / AsyncMapper
 
 # Interface: AsyncMapper<T, R\>
 

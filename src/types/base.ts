@@ -1,13 +1,26 @@
+import { OrderAssurable } from './assure-order-types';
+import { FluentIterableEmitter } from './emitter';
+
 import TypedEmitter from 'typed-emitter';
 import {
   Predicate as FunctionPredicate,
   AsyncPredicate as AsyncFunctionPredicate,
+  AnyIterable,
 } from 'augmentative-iterable';
+
+/**
+ * Represents the type of the item of an iterable
+ */
+export type ItemType<T> = T extends Iterable<infer R> ? R : never;
+
+/**
+ * Represents the type of the item of an iterable or an async iterable
+ */
+export type AsyncItemType<T> = T extends AnyIterable<infer R> ? R : never;
 
 /**
  * represent the options that can be used with fluentEmit
  */
-
 export interface FluentEmitOptions {
   /**
    * The event which yields a new iterable item. Default 'data'
@@ -196,3 +209,42 @@ export interface FluentEmitter<T> extends TypedEmitter<FluentEvents<T>> {}
 export interface KVGroupTransform<K, V, NewV = V> {
   (key: K, value: V): Iterable<NewV>;
 }
+
+/**
+ * Represents a group of [[fluent]] items of type `T` with a key of type `R`.
+ * @typeparam T The type of the items in the [[FluentGroup]].
+ * @typeparam R The type of the key of the [[FluentGroup]].
+ */
+export interface FluentGroup<T, R> extends Group<T, R> {
+  /**
+   * The [[fluent]] items in the [[FluentGroup]].
+   */
+  values: FluentIterable<T>;
+}
+
+export type ToObjectKeyType<T, R1 extends keyof T> = T[R1] extends
+  | string
+  | number
+  | symbol
+  ? T[R1]
+  : any;
+
+/**
+ * Represents an iterable extended with common processing and mutating capabilities.<br>
+ *   The capabilities introduced are defined as a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) and thus they support *method chaining*.
+ * @typeparam T The type of the items in the iterable.
+ */
+export interface FluentIterable<T>
+  extends Iterable<T>,
+    OrderAssurable<FluentIterable<T>>,
+    FluentIterableEmitter<T> {}
+
+/**
+ * Represents an asynchronous iterable extended with common processing and mutating capabilities.<br>
+ *   The capabilities introduced are defined as a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) and thus they support *method chaining*.
+ * @typeparam T The type of the items in the asynchronous iterable.
+ */
+export interface FluentAsyncIterable<T>
+  extends AsyncIterable<T>,
+    OrderAssurable<FluentAsyncIterable<T>>,
+    FluentIterableEmitter<T> {}

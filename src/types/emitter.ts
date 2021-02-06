@@ -1,7 +1,7 @@
 import { Mapper } from 'augmentative-iterable';
 import { EventEmitter } from 'events';
 import { FluentEmitOptions } from './base';
-import { FluentAsyncIterable } from './fluent-async-iterable';
+import { FluentAsyncIterable } from './base';
 
 /**
  * Represents the operations using EventEmitters
