@@ -1,5 +1,7 @@
 
 ## 1.9.0
+## v1.9.0
+* 7561260 1.9.0
 * 489339e adding synonims for any and all: some and every, for easier association with native javascript
 ## v1.8.7
 * dc1e55f 1.8.7

@@ -624,7 +624,7 @@ describe('fluent iterable', () => {
         'flatMapAsync',
       ];
       flattensAsync.forEach((func) => {
-        describe('flattenAsync', () => {
+        describe(func, () => {
           it('empty array', async () =>
             expect(
               await fluent([])
@@ -1209,7 +1209,7 @@ describe('fluent iterable', () => {
       });
       const allAsync: ['allAsync', 'everyAsync'] = ['allAsync', 'everyAsync'];
       allAsync.forEach((func) => {
-        describe('allAsync', () => {
+        describe(func, () => {
           it('empty', async () =>
             expect(await fluent([])[func](async (a: number) => a % 2 === 0)).to
               .be.true);
@@ -1231,7 +1231,7 @@ describe('fluent iterable', () => {
       });
       const anys: ['any', 'some'] = ['any', 'some'];
       anys.forEach((func) => {
-        describe('any', () => {
+        describe(func, () => {
           it('empty', async () =>
             expect(fluent([])[func]((a: number) => a % 2 === 0)).to.be.false);
           it('false', async () =>
@@ -1249,7 +1249,7 @@ describe('fluent iterable', () => {
       });
       const anysAsync: ['anyAsync', 'someAsync'] = ['anyAsync', 'someAsync'];
       anysAsync.forEach((func) => {
-        describe('anyAsync', () => {
+        describe(func, () => {
           it('empty', async () =>
             expect(await fluent([])[func](async (a: number) => a % 2 === 0)).to
               .be.false);

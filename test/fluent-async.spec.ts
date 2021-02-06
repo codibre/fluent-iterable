@@ -332,40 +332,43 @@ describe('fluent async iterable', () => {
           ...data,
         ]));
     });
-    describe('flatten', () => {
-      it('empty array', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([])).flatten().toArray(),
-        ).to.be.empty);
-      it('already flat fails', async () => {
-        let error: unknown;
+    const flattens: ['flatten', 'flatMap'] = ['flatten', 'flatMap'];
+    flattens.forEach((func) => {
+      describe(func, () => {
+        it('empty array', async () =>
+          expect(
+            await fluentAsync(new ObjectReadableMock([]))[func]().toArray(),
+          ).to.be.empty);
+        it('already flat fails', async () => {
+          let error: unknown;
 
-        try {
-          await fluentAsync(subject).flatten().toArray();
-        } catch (err) {
-          error = err;
-        }
+          try {
+            await fluentAsync(subject)[func]().toArray();
+          } catch (err) {
+            error = err;
+          }
 
-        expect(error).to.exist;
+          expect(error).to.exist;
+        });
+        it('not flat', async () =>
+          expect(
+            await fluentAsync(
+              new ObjectReadableMock([[1, 2], [3, 4, 5], [], [6]]),
+            )
+              [func]()
+              .toArray(),
+          ).to.eql([1, 2, 3, 4, 5, 6]));
+        it('with mapper', async () =>
+          expect(
+            await fluentAsync(subject)
+              [func]((p) => p.emails)
+              .toArray(),
+          ).to.eql(flatMap(picker(1, 2, 6, 7, 8, 9, 10, 11), (p) => p.emails)));
+        it('with property key', async () =>
+          expect(await fluentAsync(subject)[func]('emails').toArray()).to.eql(
+            flatMap(picker(1, 2, 6, 7, 8, 9, 10, 11), (p) => p.emails),
+          ));
       });
-      it('not flat', async () =>
-        expect(
-          await fluentAsync(
-            new ObjectReadableMock([[1, 2], [3, 4, 5], [], [6]]),
-          )
-            .flatten()
-            .toArray(),
-        ).to.eql([1, 2, 3, 4, 5, 6]));
-      it('with mapper', async () =>
-        expect(
-          await fluentAsync(subject)
-            .flatten((p) => p.emails)
-            .toArray(),
-        ).to.eql(flatMap(picker(1, 2, 6, 7, 8, 9, 10, 11), (p) => p.emails)));
-      it('with property key', async () =>
-        expect(await fluentAsync(subject).flatten('emails').toArray()).to.eql(
-          flatMap(picker(1, 2, 6, 7, 8, 9, 10, 11), (p) => p.emails),
-        ));
     });
     describe('sort', () => {
       it('empty', async () =>
@@ -685,45 +688,51 @@ describe('fluent async iterable', () => {
           ),
         ).to.be.equals(6));
     });
-    describe('all', () => {
-      it('empty', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([])).all(
-            (a: number) => a % 2 === 0,
-          ),
-        ).to.be.true);
-      it('false', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([1, 2, 3])).all(
-            (a: number) => a % 2 === 0,
-          ),
-        ).to.be.false);
-      it('true', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([2, 4, 6])).all(
-            (a: number) => a % 2 === 0,
-          ),
-        ).to.be.true);
+    const all: ['all', 'every'] = ['all', 'every'];
+    all.forEach((func) => {
+      describe(func, () => {
+        it('empty', async () =>
+          expect(
+            await fluentAsync(new ObjectReadableMock([]))[func](
+              (a: number) => a % 2 === 0,
+            ),
+          ).to.be.true);
+        it('false', async () =>
+          expect(
+            await fluentAsync(new ObjectReadableMock([1, 2, 3]))[func](
+              (a: number) => a % 2 === 0,
+            ),
+          ).to.be.false);
+        it('true', async () =>
+          expect(
+            await fluentAsync(new ObjectReadableMock([2, 4, 6]))[func](
+              (a: number) => a % 2 === 0,
+            ),
+          ).to.be.true);
+      });
     });
-    describe('any', () => {
-      it('empty', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([])).any(
-            (a: number) => a % 2 === 0,
-          ),
-        ).to.be.false);
-      it('false', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([1, 3, 5])).any(
-            (a: number) => a % 2 === 0,
-          ),
-        ).to.be.false);
-      it('true', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([1, 2, 3])).any(
-            (a: number) => a % 2 === 0,
-          ),
-        ).to.be.true);
+    const anys: ['any', 'some'] = ['any', 'some'];
+    anys.forEach((func) => {
+      describe(func, () => {
+        it('empty', async () =>
+          expect(
+            await fluentAsync(new ObjectReadableMock([]))[func](
+              (a: number) => a % 2 === 0,
+            ),
+          ).to.be.false);
+        it('false', async () =>
+          expect(
+            await fluentAsync(new ObjectReadableMock([1, 3, 5]))[func](
+              (a: number) => a % 2 === 0,
+            ),
+          ).to.be.false);
+        it('true', async () =>
+          expect(
+            await fluentAsync(new ObjectReadableMock([1, 2, 3]))[func](
+              (a: number) => a % 2 === 0,
+            ),
+          ).to.be.true);
+      });
     });
     describe('contains', () => {
       it('empty', async () =>
