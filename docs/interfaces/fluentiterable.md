@@ -23,6 +23,10 @@ Name | Description |
 
 ## Table of contents
 
+### Properties
+
+- [flatten](fluentiterable.md#flatten)
+
 ### Methods
 
 - [[Symbol.iterator]](fluentiterable.md#[symbol.iterator])
@@ -53,7 +57,6 @@ Name | Description |
 - [filterAsync](fluentiterable.md#filterasync)
 - [first](fluentiterable.md#first)
 - [firstAsync](fluentiterable.md#firstasync)
-- [flatten](fluentiterable.md#flatten)
 - [flattenAsync](fluentiterable.md#flattenasync)
 - [forEach](fluentiterable.md#foreach)
 - [forEachAsync](fluentiterable.md#foreachasync)
@@ -103,6 +106,12 @@ Name | Description |
 - [topAsync](fluentiterable.md#topasync)
 - [waitAll](fluentiterable.md#waitall)
 - [withIndex](fluentiterable.md#withindex)
+
+## Properties
+
+### flatten
+
+• **flatten**: *FlattenFunction*<T\>
 
 ## Methods
 
@@ -1159,72 +1168,6 @@ Name | Type | Description |
 **Returns:** *Promise*<*undefined* \| T\>
 
 A promise of the first element matching the specified predicate, or `undefined` if no such element found.
-
-___
-
-### flatten
-
-▸ **flatten**<R\>(`mapper?`: [*Mapper*](mapper.md)<T, *Iterable*<R\>\>): [*FluentIterable*](fluentiterable.md)<R\>
-
-Projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.<br>
-Examples:<br>
-  * `fluent([['anchor', 'almond'], ['bound', 'alpine']]).flatten()` yields *anchor*, *almond*, *bound* and *alpine*.<br>
-  * `fluent([ { values: ['anchor', 'almond'] }, { values: ['bound', 'alpine'] }]).flatten(obj => obj.values)` yields *anchor*, *almond*, *bound* and *alpine*.
-
-#### Type parameters:
-
-Name | Description |
------- | ------ |
-`R` | The type of the elements in the inner iterable.   |
-
-#### Parameters:
-
-Name | Type | Description |
------- | ------ | ------ |
-`mapper?` | [*Mapper*](mapper.md)<T, *Iterable*<R\>\> | Specifies the projection from the elements of `T` to iterables of `R`. Identity mapping is applied (taking the elements as iterables) if omitted.   |
-
-**Returns:** [*FluentIterable*](fluentiterable.md)<R\>
-
-The [FluentIterable](fluentiterable.md) of the flattened iterable.
-
-▸ **flatten**<R\>(): [*FluentIterable*](fluentiterable.md)<R\>
-
-Projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.<br>
-Examples:<br>
-  * `fluent([['anchor', 'almond'], ['bound', 'alpine']]).flatten()` yields *anchor*, *almond*, *bound* and *alpine*.<br>
-
-#### Type parameters:
-
-Name | Type | Description |
------- | ------ | ------ |
-`R` | *unknown* | The type of the elements in the inner iterable.   |
-
-**Returns:** [*FluentIterable*](fluentiterable.md)<R\>
-
-The [FluentIterable](fluentiterable.md) of the flattened iterable.
-
-▸ **flatten**<K, R\>(`mapper`: K): [*FluentIterable*](fluentiterable.md)<R\>
-
-Projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.<br>
-Examples:<br>
-  * `fluent([ { values: ['anchor', 'almond'] }, { values: ['bound', 'alpine'] }]).flatten(obj => obj.values)` yields *anchor*, *almond*, *bound* and *alpine*.
-
-#### Type parameters:
-
-Name | Type | Description |
------- | ------ | ------ |
-`K` | *string* \| *number* \| *symbol* | - |
-`R` | *unknown* | The type of the elements in the inner iterable.   |
-
-#### Parameters:
-
-Name | Type | Description |
------- | ------ | ------ |
-`mapper` | K | Specifies the projection from the elements of `T` to iterables of `R`. Identity mapping is applied (taking the elements as iterables) if omitted.   |
-
-**Returns:** [*FluentIterable*](fluentiterable.md)<R\>
-
-The [FluentIterable](fluentiterable.md) of the flattened iterable.
 
 ___
 
