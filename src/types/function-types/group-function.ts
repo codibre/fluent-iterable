@@ -44,7 +44,7 @@ export interface AsyncGroupFunction<T> {
   /**
    * Groups the elements of the iterable keyed by equality of data at the specified asynchronous projection.
    * @typeparam R The type of the groups key.
-   * @param mapper Asynchronously projects the elements of the iterable into the group key they belong to.
+   * @param mapper A property name with value will be used as for comparison with the grouping key
    * @param transformValue Optional. Allows a transformation before adding the value to the group. The return must be an iterable
    * @returns The [[FluentAsyncIterable]] of the distinct groups.
    */

@@ -23,7 +23,7 @@ export interface CombineFunction<T> {
   /**
    * Join the iterable with another one, returning a new iterable with the inner matching combinations
    * @param iterable The right iterable to be combined
-   * @param keyA A mapper that returns the key map value from the left iterable
+   * @param keyA A property name with value will be used as for comparison with the key of the second iterable
    * @param keyB A mapper that returns the key map value from the right iterable
    */
   <U, K>(
@@ -36,7 +36,7 @@ export interface CombineFunction<T> {
    * Join the iterable with another one, returning a new iterable with the inner matching combinations
    * @param iterable The right iterable to be combined
    * @param keyA A mapper that returns the key map value from the left iterable
-   * @param keyB A mapper that returns the key map value from the right iterable
+   * @param keyB A property name with value will be used as for comparison with the key of the first iterable
    */
   <U, K>(
     iterable: Iterable<U>,
@@ -47,8 +47,8 @@ export interface CombineFunction<T> {
   /**
    * Join the iterable with another one, returning a new iterable with the inner matching combinations
    * @param iterable The right iterable to be combined
-   * @param keyA A mapper that returns the key map value from the left iterable
-   * @param keyB A mapper that returns the key map value from the right iterable
+   * @param keyA A property name with value will be used as for comparison with the key of the second iterable
+   * @param keyB A property name with value will be used as for comparison with the key of the first iterable
    */
   <U>(iterable: Iterable<U>, keyA: keyof T, keyB: keyof U): FluentIterable<
     [T, U]
@@ -77,7 +77,7 @@ export interface AsyncCombineFunction<T> {
   /**
    * Join the iterable with another one, returning a new async iterable with the inner matching combinations
    * @param iterable The right iterable to be combined
-   * @param keyA A mapper that returns the key map value from the left iterable
+   * @param keyA A property name with value will be used as for comparison with the key of the second iterable
    * @param keyB A mapper that returns the key map value from the right iterable
    */
   <U, K>(
@@ -90,7 +90,7 @@ export interface AsyncCombineFunction<T> {
    * Join the iterable with another one, returning a new async iterable with the inner matching combinations
    * @param iterable The right iterable to be combined
    * @param keyA A mapper that returns the key map value from the left iterable
-   * @param keyB A mapper that returns the key map value from the right iterable
+   * @param keyB A property name with value will be used as for comparison with the key of the first iterable
    */
   <U, K>(
     iterable: AnyIterable<U>,
@@ -101,8 +101,8 @@ export interface AsyncCombineFunction<T> {
   /**
    * Join the iterable with another one, returning a new async iterable with the inner matching combinations
    * @param iterable The right iterable to be combined
-   * @param keyA A mapper that returns the key map value from the left iterable
-   * @param keyB A mapper that returns the key map value from the right iterable
+   * @param keyA A property name with value will be used as for comparison with the key of the second iterable
+   * @param keyB A property name with value will be used as for comparison with the key of the first iterable
    */
   <U>(
     iterable: AnyIterable<U>,
