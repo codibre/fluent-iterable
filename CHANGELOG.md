@@ -1,5 +1,9 @@
 
-## 1.8.6
+## 1.8.7
+* 106cf94 reorganizing types
+* 140573b Refactoring partition, yields and types (#34)
+## v1.8.6
+* e6f02ea 1.8.6
 * 9502fba fixing cagada
 * 05afc55 covering mergeIterables
 * 48d22ae merging
