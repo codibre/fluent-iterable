@@ -1,178 +1,83 @@
-import { AsyncPredicate, Mapper, AsyncMapper } from 'augmentative-iterable';
-import {
-  Predicate,
-  Comparer,
-  Reducer,
-  AsyncReducer,
-  Action,
-  AsyncAction,
-  FluentEmitter,
-  KVGroupTransform,
-} from './base';
-import {
-  AsyncFlattenFunction,
-  FlattenFunction,
-} from './function-types/flatten-function';
-import { SortFunction } from './function-types/sort-function';
-import { SortByFunction } from './function-types/sort-by-function';
-import {
-  AsyncConcatFunction,
-  AsyncDistinctFunction,
-  AsyncFilterFunction,
-  AsyncIsDistinctFunction,
-  AsyncMapFunction,
-  AsyncSkipWhileFunction,
-  AsyncTakeWhileFunction,
-  ConcatFunction,
-  DistinctFunction,
-  FilterFunction,
-  IsDistinctFunction,
-  MapFunction,
-  PartitionFunction,
-  SkipFunction,
-  SkipWhileFunction,
-  TakeFunction,
-  TakeWhileFunction,
-  WithIndexFunction,
-} from './function-types';
-import { AppendFunction } from './function-types/append-function';
-import { PrependFunction } from './function-types/prepend-function';
-import { RepeatFunction } from './function-types/repeat-function';
-import {
-  AsyncGroupFunction,
-  GroupFunction,
-} from './function-types/group-function';
-import {
-  AsyncCountFunction,
-  CountFunction,
-} from './function-types/count-function';
-import {
-  AsyncFirstFunction,
-  FirstFunction,
-} from './function-types/first-function';
-import {
-  AsyncLastFunction,
-  LastFunction,
-} from './function-types/last-function';
-import {
-  AsyncReduceAndMapFunction,
-  ReduceAndMapFunction,
-} from './function-types/reduce-and-map-function';
-import {
-  AsyncReduceFunction,
-  ReduceFunction,
-} from './function-types/reduce-function';
-import { AllFunction, AsyncAllFunction } from './function-types/all-function';
-import { AnyFunction, AsyncAnyFunction } from './function-types/any-function';
-import { ContainsFunction } from './function-types/contains-function';
-import { ToArrayFunction } from './function-types/to-array-function';
-import {
-  AsyncToObjectFunction,
-  ToObjectFunction,
-} from './function-types/to-object-function';
-import { ToAsyncFunction } from './function-types/to-async-function';
-import {
-  AsyncForEachFunction,
-  ForEachFunction,
-} from './function-types/for-each-function';
-import {
-  AsyncExecuteFunction,
-  ExecuteFunction,
-} from './function-types/execute-function';
-import {
-  AsyncJoinFunction,
-  JoinFunction,
-} from './function-types/join-function';
-import { AsyncSumFunction, SumFunction } from './function-types/sum-function';
-import { AsyncAvgFunction, AvgFunction } from './function-types/avg-function';
-import { AsyncTopFunction, TopFunction } from './function-types/top-function';
-import { AsyncMinFunction, MinFunction } from './function-types/min-function';
-import { AsyncMaxFunction, MaxFunction } from './function-types/max-function';
-import { HasExactlyFunction } from './function-types/has-exactly-fuction';
-import { HasLessThanFunction } from './function-types/has-less-than-function';
-import { HasLessOrExactly } from './function-types/has-less-or-exactly';
-import { HasMoreThanFunction } from './function-types/has-more-than-function';
-import { HasMoreOrExactlyFunction } from './function-types/has-more-or-exactly-function';
-import { WaitAllFunction } from './function-types/wait-all-function';
-import {
-  AsyncCombineFunction,
-  CombineFunction,
-} from './function-types/combine-function';
-import { EmitFunction } from './function-types/emit-function';
+import * as f from './function-types';
 
 declare module './base' {
   interface FluentIterable<T> {
-    withIndex: WithIndexFunction<T>;
-    takeWhile: TakeWhileFunction<T>;
-    takeWhileAsync: AsyncTakeWhileFunction<T>;
-    take: TakeFunction<T>;
-    skipWhile: SkipWhileFunction<T>;
-    skipWhileAsync: AsyncSkipWhileFunction<T>;
-    skip: SkipFunction<T>;
-    map: MapFunction<T>;
-    mapAsync: AsyncMapFunction<T>;
-    filter: FilterFunction<T>;
-    filterAsync: AsyncFilterFunction<T>;
-    partition: PartitionFunction<T>;
-    append: AppendFunction<T>;
-    prepend: PrependFunction<T>;
-    concat: ConcatFunction<T>;
-    concatAsync: AsyncConcatFunction<T>;
-    repeat: RepeatFunction<T>;
-    flatten: FlattenFunction<T>;
-    flatMap: FlattenFunction<T>;
-    flattenAsync: AsyncFlattenFunction<T>;
-    sort: SortFunction<T>;
-    sortBy: SortByFunction<T>;
-    distinct: DistinctFunction<T>;
-    distinctAsync: AsyncDistinctFunction<T>;
-    isDistinct: IsDistinctFunction<T>;
-    isDistinctAsync: AsyncIsDistinctFunction<T>;
-    group: GroupFunction<T>;
-    groupAsync: AsyncGroupFunction<T>;
-    count: CountFunction<T>;
-    countAsync: AsyncCountFunction<T>;
-    first: FirstFunction<T>;
-    firstAsync: AsyncFirstFunction<T>;
-    last: LastFunction<T>;
-    lastAsync: AsyncLastFunction<T>;
-    reduceAndMap: ReduceAndMapFunction<T>;
-    reduceAndMapAsync: AsyncReduceAndMapFunction<T>;
-    reduce: ReduceFunction<T>;
-    reduceAsync: AsyncReduceFunction<T>;
-    all: AllFunction<T>;
-    allAsync: AsyncAllFunction<T>;
-    any: AnyFunction<T>;
-    anyAsync: AsyncAnyFunction<T>;
-    contains: ContainsFunction<T>;
-    toArray: ToArrayFunction<T>;
-    toObject: ToObjectFunction<T>;
-    toObjectAsync: AsyncToObjectFunction<T>;
-    toAsync: ToAsyncFunction<T>;
-    forEach: ForEachFunction<T>;
-    forEachAsync: AsyncForEachFunction<T>;
-    execute: ExecuteFunction<T>;
-    executeAsync: AsyncExecuteFunction<T>;
-    join: JoinFunction<T>;
-    joinAsync: AsyncJoinFunction<T>;
-    sum: SumFunction<T>;
-    sumAsync: AsyncSumFunction<T>;
-    avg: AvgFunction<T>;
-    avgAsync: AsyncAvgFunction<T>;
-    top: TopFunction<T>;
-    topAsync: AsyncTopFunction<T>;
-    min: MinFunction<T>;
-    minAsync: AsyncMinFunction<T>;
-    max: MaxFunction<T>;
-    maxAsync: AsyncMaxFunction<T>;
-    hasExactly: HasExactlyFunction;
-    hasLessThan: HasLessThanFunction;
-    hasLessOrExactly: HasLessOrExactly;
-    hasMoreThan: HasMoreThanFunction;
-    hasMoreOrExactly: HasMoreOrExactlyFunction;
-    waitAll: WaitAllFunction<T>;
-    combine: CombineFunction<T>;
-    combineAsync: AsyncCombineFunction<T>;
-    emit: EmitFunction<T>;
+    withIndex: f.WithIndexFunction<T>;
+    takeWhile: f.TakeWhileFunction<T>;
+    takeWhileAsync: f.AsyncTakeWhileFunction<T>;
+    take: f.TakeFunction<T>;
+    skipWhile: f.SkipWhileFunction<T>;
+    skipWhileAsync: f.AsyncSkipWhileFunction<T>;
+    skip: f.SkipFunction<T>;
+    map: f.MapFunction<T>;
+    mapAsync: f.AsyncMapFunction<T>;
+    filter: f.FilterFunction<T>;
+    filterAsync: f.AsyncFilterFunction<T>;
+    partition: f.PartitionFunction<T>;
+    append: f.AppendFunction<T>;
+    prepend: f.PrependFunction<T>;
+    concat: f.ConcatFunction<T>;
+    concatAsync: f.AsyncConcatFunction<T>;
+    repeat: f.RepeatFunction<T>;
+    flatten: f.FlattenFunction<T>;
+    flatMap: f.FlattenFunction<T>;
+    flattenAsync: f.AsyncFlattenFunction<T>;
+    flatMapAsync: f.AsyncFlattenFunction<T>;
+    sort: f.SortFunction<T>;
+    sortBy: f.SortByFunction<T>;
+    distinct: f.DistinctFunction<T>;
+    distinctAsync: f.AsyncDistinctFunction<T>;
+    isDistinct: f.IsDistinctFunction<T>;
+    isDistinctAsync: f.AsyncIsDistinctFunction<T>;
+    group: f.GroupFunction<T>;
+    groupAsync: f.AsyncGroupFunction<T>;
+    count: f.CountFunction<T>;
+    countAsync: f.AsyncCountFunction<T>;
+    first: f.FirstFunction<T>;
+    firstAsync: f.AsyncFirstFunction<T>;
+    last: f.LastFunction<T>;
+    lastAsync: f.AsyncLastFunction<T>;
+    reduceAndMap: f.ReduceAndMapFunction<T>;
+    reduceAndMapAsync: f.AsyncReduceAndMapFunction<T>;
+    reduce: f.ReduceFunction<T>;
+    reduceAsync: f.AsyncReduceFunction<T>;
+    all: f.AllFunction<T>;
+    allAsync: f.AsyncAllFunction<T>;
+    every: f.AllFunction<T>;
+    everyAsync: f.AsyncAllFunction<T>;
+    any: f.AnyFunction<T>;
+    anyAsync: f.AsyncAnyFunction<T>;
+    some: f.AnyFunction<T>;
+    someAsync: f.AsyncAnyFunction<T>;
+    contains: f.ContainsFunction<T>;
+    toArray: f.ToArrayFunction<T>;
+    toObject: f.ToObjectFunction<T>;
+    toObjectAsync: f.AsyncToObjectFunction<T>;
+    toAsync: f.ToAsyncFunction<T>;
+    forEach: f.ForEachFunction<T>;
+    forEachAsync: f.AsyncForEachFunction<T>;
+    execute: f.ExecuteFunction<T>;
+    executeAsync: f.AsyncExecuteFunction<T>;
+    join: f.JoinFunction<T>;
+    joinAsync: f.AsyncJoinFunction<T>;
+    sum: f.SumFunction<T>;
+    sumAsync: f.AsyncSumFunction<T>;
+    avg: f.AvgFunction<T>;
+    avgAsync: f.AsyncAvgFunction<T>;
+    top: f.TopFunction<T>;
+    topAsync: f.AsyncTopFunction<T>;
+    min: f.MinFunction<T>;
+    minAsync: f.AsyncMinFunction<T>;
+    max: f.MaxFunction<T>;
+    maxAsync: f.AsyncMaxFunction<T>;
+    hasExactly: f.HasExactlyFunction;
+    hasLessThan: f.HasLessThanFunction;
+    hasLessOrExactly: f.HasLessOrExactly;
+    hasMoreThan: f.HasMoreThanFunction;
+    hasMoreOrExactly: f.HasMoreOrExactlyFunction;
+    waitAll: f.WaitAllFunction<T>;
+    combine: f.CombineFunction<T>;
+    combineAsync: f.AsyncCombineFunction<T>;
+    emit: f.EmitFunction<T>;
   }
 }

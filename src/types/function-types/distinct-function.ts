@@ -45,7 +45,7 @@ export interface AsyncDistinctFunction<T> {
    * @returns The [[FluentAsyncIterable]] of the distinct elements.
    */
   <R>(
-    mapper: AsyncMapper<T, R>,
+    mapper?: AsyncMapper<T, R>,
     maxOcurrences?: number,
   ): FluentAsyncIterable<T>;
 
@@ -60,17 +60,4 @@ export interface AsyncDistinctFunction<T> {
     mapper: R,
     maxOcurrences?: number,
   ): FluentAsyncIterable<T>;
-}
-
-export interface FluentAsyncDistinctFunction<T>
-  extends AsyncDistinctFunction<T> {
-  /**
-   * Returns distinct elements from the iterable from a certain projections perspective.<br>
-   *   Examples:<br>
-   *     * `fluent(['anchor', 'almond', 'anchor', 'alpine']).distinct()` yields *anchor*, *almond* and *alpine*<br>
-   * @typeparam R The type of the data the element equality is based on.
-   * @param maxOcurrences The number of accepted occurrences for each item. Default: 1
-   * @returns The [[FluentIterable]] of the distinct elements.
-   */
-  (): FluentAsyncIterable<T>;
 }

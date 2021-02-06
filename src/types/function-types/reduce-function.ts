@@ -28,4 +28,3 @@ export interface AsyncReduceFunction<T> {
    */
   <R>(reducer: AsyncReducer<T, R>, initial: R): Promise<R>;
 }
-export interface FluentAsyncReduceFunction<T> extends AsyncReduceFunction<T> {}

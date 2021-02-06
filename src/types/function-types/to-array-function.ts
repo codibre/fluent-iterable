@@ -7,7 +7,7 @@ export interface ToArrayFunction<T> {
   (): T[];
 }
 
-export interface FluentAsyncToArrayFunction<T> {
+export interface AsyncToArrayFunction<T> {
   /**
    * Translates the iterable into an array. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
    *   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).toArray()` returns `['anchor', 'almond', 'bound', 'alpine']`

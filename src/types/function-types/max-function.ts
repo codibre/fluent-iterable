@@ -23,7 +23,7 @@ export interface AsyncMaxFunction<T> {
    * @param mapper The function which asynchronously projects the elements of the iterable into the comparable values. Falls back to the identity function if omitted.
    * @returns A promise of the maximum of the iterable's projected elements.
    */
-  <R = T>(mapper: AsyncMapper<T, R>): Promise<T | undefined>;
+  <R = T>(mapper?: AsyncMapper<T, R>): Promise<T | undefined>;
 
   /**
    * Finds the numeric maximum element of the iterable using an asynchronous projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -31,12 +31,4 @@ export interface AsyncMaxFunction<T> {
    * @returns A promise of the maximum of the iterable's projected elements.
    */
   <R extends keyof T>(mapper?: R): Promise<T | undefined>;
-}
-export interface FluentAsyncMaxFunction<T> extends AsyncMaxFunction<T> {
-  /**
-   * Finds the numeric maximum element of the iterable using an asynchronous projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.
-   * @param mapper The function which asynchronously projects the elements of the iterable into the comparable values. Falls back to the identity function if omitted.
-   * @returns A promise of the maximum of the iterable's projected elements.
-   */
-  (): Promise<T | undefined>;
 }

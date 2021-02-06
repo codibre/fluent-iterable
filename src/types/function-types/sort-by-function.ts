@@ -24,5 +24,3 @@ export interface AsyncSortByFunction<T> {
    */
   (...mappers: (Mapper<T, any> | keyof T)[]): FluentAsyncIterable<T>;
 }
-
-export interface FluentAsyncSortByFunction<T> extends AsyncSortByFunction<T> {}

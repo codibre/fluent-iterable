@@ -35,6 +35,14 @@ export interface FlattenFunction<T> {
 
 export interface AsyncFlattenFunction<T> {
   /**
+   * Projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.<br>
+   * Examples:<br>
+   *   * `fluent([['anchor', 'almond'], ['bound', 'alpine']]).flatten()` yields *anchor*, *almond*, *bound* and *alpine*.<br>
+   * @typeparam R The type of the elements in the inner iterable.
+   * @returns The [[FluentIterable]] of the flattened iterable.
+   */
+  <R extends ItemType<T>>(): FluentAsyncIterable<R>;
+  /**
    * Asynchronously projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.
    * @typeparam R The type of the elements in the inner iterable.
    * @param mapper Specifies the asynchronous projection from the elements of `T` to iterables of `R`.
@@ -50,15 +58,4 @@ export interface AsyncFlattenFunction<T> {
   <K extends keyof T, R extends AsyncItemType<T[K]>>(
     mapper?: K,
   ): FluentAsyncIterable<R>;
-}
-
-export interface FluentAsyncFlattenFunction<T> {
-  /**
-   * Projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.<br>
-   * Examples:<br>
-   *   * `fluent([['anchor', 'almond'], ['bound', 'alpine']]).flatten()` yields *anchor*, *almond*, *bound* and *alpine*.<br>
-   * @typeparam R The type of the elements in the inner iterable.
-   * @returns The [[FluentIterable]] of the flattened iterable.
-   */
-  <R extends ItemType<T>>(): FluentAsyncIterable<R>;
 }

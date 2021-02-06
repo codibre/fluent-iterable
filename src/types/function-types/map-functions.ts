@@ -35,4 +35,3 @@ export interface AsyncMapFunction<T> {
    */
   <R extends keyof T>(mapper: R): FluentAsyncIterable<T[R]>;
 }
-export interface FluentAsyncMapFunction<T> extends AsyncMapFunction<T> {}

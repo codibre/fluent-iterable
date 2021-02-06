@@ -36,4 +36,3 @@ export interface AsyncSumFunction<T> {
    */
   (mapper: keyof T): Promise<number>;
 }
-export interface FluentAsyncSumFunction<T> extends AsyncSumFunction<T> {}

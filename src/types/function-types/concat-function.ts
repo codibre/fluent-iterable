@@ -19,4 +19,3 @@ export interface AsyncConcatFunction<T> {
    */
   (...iterables: Array<AnyIterable<T>>): FluentAsyncIterable<T>;
 }
-export interface FluentAsyncConcatFunction<T> extends AsyncConcatFunction<T> {}

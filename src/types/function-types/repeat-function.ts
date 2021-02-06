@@ -9,7 +9,7 @@ export interface RepeatFunction<T> {
   (n: number): FluentIterable<T>;
 }
 
-export interface FluentAsyncRepeatFunction<T> {
+export interface AsyncRepeatFunction<T> {
   /**
    * Repeats the elements of the iterable a specified amount of times.
    * @param n The amount of times the iterable is to be repeated.

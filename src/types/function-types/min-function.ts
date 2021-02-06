@@ -22,19 +22,11 @@ export interface AsyncMinFunction<T> {
    * @param mapper The asynchronous function which projects the elements of the iterable into the comparable value. Falls back to the identity function if omitted.
    * @returns A promise of the minimum of the iterable's projected elements.
    */
-  <R = T>(mapper: AsyncMapper<T, R>): Promise<T | undefined>;
+  <R = T>(mapper?: AsyncMapper<T, R>): Promise<T | undefined>;
   /**
    * Finds the numeric minimum element of the iterable using an asynchronous projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.
    * @param mapper The asynchronous function which projects the elements of the iterable into the comparable value. Falls back to the identity function if omitted.
    * @returns A promise of the minimum of the iterable's projected elements.
    */
   <R extends keyof T>(mapper: R): Promise<T | undefined>;
-}
-export interface FluentAsyncMinFunction<T> extends AsyncMinFunction<T> {
-  /**
-   * Finds the numeric minimum element of the iterable using an asynchronous projection. This is a resolving operation, will cause a full loop through all the elements of the iterable.
-   * @param mapper The asynchronous function which projects the elements of the iterable into the comparable value. Falls back to the identity function if omitted.
-   * @returns A promise of the minimum of the iterable's projected elements.
-   */
-  (): Promise<T | undefined>;
 }

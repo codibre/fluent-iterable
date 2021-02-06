@@ -33,6 +33,3 @@ export interface AsyncSkipWhileFunction<T> {
    */
   <R extends keyof T>(condition: R): FluentAsyncIterable<T>;
 }
-
-export interface FluentAsyncSkipWhileFunction<T>
-  extends AsyncSkipWhileFunction<T> {}

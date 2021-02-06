@@ -53,4 +53,3 @@ export interface AsyncGroupFunction<T> {
     transformValue?: KVGroupTransform<R, T, V>,
   ): FluentAsyncIterable<FluentGroup<V, T[R]>>;
 }
-export interface FluentAsyncGroupFunction<T> extends AsyncGroupFunction<T> {}

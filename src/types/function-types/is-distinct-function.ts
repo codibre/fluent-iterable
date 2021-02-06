@@ -46,6 +46,18 @@ export interface IsDistinctFunction<T> {
 }
 export interface AsyncIsDistinctFunction<T> {
   /**
+   * Checks if the given iterable have only distinct elements. This is a partial resolving operation,
+   * and will return the result after as soon as an item got more occurrences than the specified
+   *
+   *   Examples:
+   *
+   *     * `fluent(['anchor', 'almond', 'anchor', 'alpine']).isDistinct()` returns true
+   *     * `fluent(['anchor', 'almond', 'bound', 'alpine']).isDistinct(word => word[0])` returns false
+   *     * `fluent(['anchor', 'almond', 'bound', 'alpine']).isDistinct(word => word[0], 2)` returns true
+   * @param maxOcurrences The number of accepted occurrences for each item. Default: 1
+   */
+  (maxOcurrences?: number): Promise<boolean>;
+  /**
    * Checks if the given projection have only distinct elements. This is a partial resolving operation,
    * and will return the result after as soon as an item got more occurrences than the specified
    *
@@ -73,20 +85,4 @@ export interface AsyncIsDistinctFunction<T> {
    * @param maxOcurrences The number of accepted occurrences for each item. Default: 1
    */
   <R extends keyof T>(mapper: R, maxOcurrences?: number): Promise<boolean>;
-}
-
-export interface FluentAsyncIsDistinctFunction<T>
-  extends AsyncIsDistinctFunction<T> {
-  /**
-   * Checks if the given iterable have only distinct elements. This is a partial resolving operation,
-   * and will return the result after as soon as an item got more occurrences than the specified
-   *
-   *   Examples:
-   *
-   *     * `fluent(['anchor', 'almond', 'anchor', 'alpine']).isDistinct()` returns true
-   *     * `fluent(['anchor', 'almond', 'bound', 'alpine']).isDistinct(word => word[0])` returns false
-   *     * `fluent(['anchor', 'almond', 'bound', 'alpine']).isDistinct(word => word[0], 2)` returns true
-   * @param maxOcurrences The number of accepted occurrences for each item. Default: 1
-   */
-  (maxOcurrences?: number): Promise<boolean>;
 }

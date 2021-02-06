@@ -27,7 +27,7 @@ export interface AsyncAvgFunction<T> {
    * @param mapper The asynchronous function which projects the elements of the iterable into `number`s. Falls back to the identity function if omitted.
    * @returns A promise of the average of the projected elements of the iterable.
    */
-  (mapper: AsyncMapper<T, number>): Promise<number>;
+  (mapper?: AsyncMapper<T, number>): Promise<number>;
 
   /**
    * Calculates the average of the elements of the iterable asynchronously projected into a `number`. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -35,12 +35,4 @@ export interface AsyncAvgFunction<T> {
    * @returns A promise of the average of the projected elements of the iterable.
    */
   (mapper: keyof T): Promise<number>;
-}
-export interface FluentAsyncAvgFunction<T> extends AsyncAvgFunction<T> {
-  /**
-   * Calculates the average of the elements of the iterable asynchronously projected into a `number`. This is a resolving operation, will cause a full loop through all the elements of the iterable.
-   * @param mapper The asynchronous function which projects the elements of the iterable into `number`s. Falls back to the identity function if omitted.
-   * @returns A promise of the average of the projected elements of the iterable.
-   */
-  (): Promise<number>;
 }

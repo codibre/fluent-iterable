@@ -1,7 +1,7 @@
 import { ErrorCallback } from '../base';
 import { FluentAsyncIterable } from '../base';
 
-export interface FluentAsyncMergeCatchingFunction<T> {
+export interface AsyncMergeCatchingFunction<T> {
   /**
    * Merge the iterable with the informed ones, catching the errors of any of the iterables that fails, so the process can continue until all the successful iterables ends.
    * @param errorCallback A callback to be called if any of the iterables fail

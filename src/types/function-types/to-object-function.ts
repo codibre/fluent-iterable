@@ -110,5 +110,3 @@ export interface AsyncToObjectFunction<T> {
     valueSelector: R2,
   ): Promise<{ [key in ToObjectKeyType<T, R1>]: T[R2] }>;
 }
-export interface FluentAsyncToObjectFunction<T>
-  extends AsyncToObjectFunction<T> {}

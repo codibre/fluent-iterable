@@ -9,7 +9,7 @@ export interface TakeFunction<T> {
   (n: number): FluentIterable<T>;
 }
 
-export interface FluentAsyncTakeFunction<T> {
+export interface AsyncTakeFunction<T> {
   /**
    * Returns a specified number of contiguous elements from the start of the iterable.
    * @param n The number of elements to take.

@@ -8,7 +8,7 @@ export interface ContainsFunction<T> {
   (item: T): boolean;
 }
 
-export interface FluentAsyncContainsFunction<T> {
+export interface AsyncContainsFunction<T> {
   /**
    * Determines whether the iterable contains a specified element. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
    *   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).contains('bound')` returns `true`

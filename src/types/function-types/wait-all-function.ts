@@ -16,4 +16,4 @@ export interface WaitAllFunction<T> {
   <R extends keyof T>(mapper: R): PromiseLike<T[R][]>;
 }
 
-export interface FluentAsyncWaitAllFunction<T> extends WaitAllFunction<T> {}
+export interface AsyncWaitAllFunction<T> extends WaitAllFunction<T> {}

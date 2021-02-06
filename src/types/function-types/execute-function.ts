@@ -20,5 +20,3 @@ export interface AsyncExecuteFunction<T> {
    */
   (action: AsyncAction<T>): FluentAsyncIterable<T>;
 }
-export interface FluentAsyncExecuteFunction<T>
-  extends AsyncExecuteFunction<T> {}

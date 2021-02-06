@@ -9,7 +9,7 @@ export interface AppendFunction<T> {
   (item: T): FluentIterable<T>;
 }
 
-export interface FluentAsyncAppendFunction<T> {
+export interface AsyncAppendFunction<T> {
   /**
    * Appends a value to the end of the iterable.
    * @param item The item to be appended to the iterable.

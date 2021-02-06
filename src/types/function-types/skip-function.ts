@@ -9,7 +9,7 @@ export interface SkipFunction<T> {
   (n: number): FluentIterable<T>;
 }
 
-export interface FluentAsyncSkipFunction<T> {
+export interface AsyncSkipFunction<T> {
   /**
    * Bypasses a specified number of elements in the iterable and then returns the remaining elements.
    * @param n The number of elements to skip.

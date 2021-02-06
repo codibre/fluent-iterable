@@ -11,7 +11,7 @@ export interface PartitionFunction<T> {
   (criteria: number | Equality<T>): FluentIterable<FluentIterable<T>>;
 }
 
-export interface FluentAsyncPartitionFunction<T> {
+export interface AsyncPartitionFunction<T> {
   /**
    * Groups the elements of the iterable into partitions of a specified size.<br>
    *   Note: the last partition size can be smaller than the specified size.

@@ -78,5 +78,3 @@ export interface AsyncReduceAndMapFunction<T> {
     result: R,
   ): Promise<A[R]>;
 }
-export interface FluentAsyncReduceAndMapFunction<T>
-  extends AsyncReduceAndMapFunction<T> {}

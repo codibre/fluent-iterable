@@ -9,7 +9,7 @@ export interface PrependFunction<T> {
   (item: T): FluentIterable<T>;
 }
 
-export interface FluentAsyncPrependFunction<T> {
+export interface AsyncPrependFunction<T> {
   /**
    * Adds a value to the beginning of the iterable.
    * @param item The item to be prepended to the iterable.

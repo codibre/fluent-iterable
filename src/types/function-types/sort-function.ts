@@ -21,14 +21,5 @@ export interface AsyncSortFunction<T> {
    * @param comparer The comparer operation to use to determine the order of elements. Alphabetical ascending is used for [[string]] elements and numerical ascending is used for [[number]]
    * @returns The sorted [[FluentAsyncIterable]].
    */
-  (comparer: Comparer<T>): FluentAsyncIterable<T>;
-}
-
-export interface FluentAsyncSortFunction<T> extends AsyncSortFunction<T> {
-  /**
-   * Sorts the elements of the iterable based on a specified comparer. This is a resolving operation, will cause a full loop through all the elements of the iterable.
-   * @param comparer The comparer operation to use to determine the order of elements. Alphabetical ascending is used for [[string]] elements and numerical ascending is used for [[number]]
-   * @returns The sorted [[FluentAsyncIterable]].
-   */
-  (): FluentAsyncIterable<T>;
+  (comparer?: Comparer<T>): FluentAsyncIterable<T>;
 }

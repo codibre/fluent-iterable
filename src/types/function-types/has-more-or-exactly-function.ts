@@ -7,7 +7,7 @@ export interface HasMoreOrExactlyFunction {
   (threshold: number): boolean;
 }
 
-export interface FluentAsyncHasMoreOrExactlyFunction {
+export interface AsyncHasMoreOrExactlyFunction {
   /**
    * Checks if the number of elements of the iterable is more or equal the threshold using a projection. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
    * @param threshold The validation threshold

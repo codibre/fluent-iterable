@@ -36,7 +36,7 @@ export interface AsyncAnyFunction<T> {
    * @param predicate The asynchronous condition checked for the elements in the iterable.
    * @returns A promise of `true` if any of the elements in the iterable satisfy the specified condition, `false` otherwise.
    */
-  (predicate: AsyncPredicate<T>): Promise<boolean>;
+  (predicate?: AsyncPredicate<T>): Promise<boolean>;
 
   /**
    * Determines whether any element of the iterable exists or satisfies an asynchronous condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
@@ -45,13 +45,4 @@ export interface AsyncAnyFunction<T> {
    * @returns A promise of `true` if any of the elements in the iterable satisfy the specified condition, `false` otherwise.
    */
   (predicate: keyof T): Promise<boolean>;
-}
-export interface FluentAsyncAnyFunction<T> extends AsyncAnyFunction<T> {
-  /**
-   * Determines whether any element of the iterable exists or satisfies an asynchronous condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
-   *   Note: This operation stops reading elements from the iterable as soon as the result can be determined.
-   * @param predicate The asynchronous condition checked for the elements in the iterable.
-   * @returns A promise of `true` if any of the elements in the iterable satisfy the specified condition, `false` otherwise.
-   */
-  (): Promise<boolean>;
 }

@@ -31,7 +31,7 @@ export interface AsyncAllFunction<T> {
    * @param predicate The asynchronous condition checked for all elements in the iterable.
    * @returns A promise of `true` if all elements in the iterable satisfy the specified condition, `false` otherwise.
    */
-  (predicate: AsyncPredicate<T>): Promise<boolean>;
+  (predicate?: AsyncPredicate<T>): Promise<boolean>;
 
   /**
    * Determines whether all elements of the iterable satisfy an asynchronous condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
@@ -41,4 +41,3 @@ export interface AsyncAllFunction<T> {
    */
   (predicate: keyof T): Promise<boolean>;
 }
-export interface FluentAsyncAllFunction<T> extends AsyncAllFunction<T> {}

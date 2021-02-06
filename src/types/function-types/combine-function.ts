@@ -110,6 +110,3 @@ export interface AsyncCombineFunction<T> {
     keyB: keyof U,
   ): FluentAsyncIterable<[T, U]>;
 }
-
-export interface FluentAsyncCombineFunction<T>
-  extends AsyncCombineFunction<T> {}

@@ -32,6 +32,3 @@ export interface AsyncTakeWhileFunction<T> {
    */
   (condition: keyof T): FluentAsyncIterable<T>;
 }
-
-export interface FluentAsyncTakeWhileFunction<T>
-  extends AsyncTakeWhileFunction<T> {}

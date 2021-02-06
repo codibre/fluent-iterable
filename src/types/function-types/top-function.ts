@@ -47,4 +47,3 @@ export interface AsyncTopFunction<T> {
     T | undefined
   >;
 }
-export interface FluentAsyncTopFunction<T> extends AsyncTopFunction<T> {}

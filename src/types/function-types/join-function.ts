@@ -38,4 +38,3 @@ export interface AsyncJoinFunction<T> {
    */
   (separator: string, mapper: keyof T): Promise<string>;
 }
-export interface FluentAsyncJoinFunction<T> extends AsyncJoinFunction<T> {}

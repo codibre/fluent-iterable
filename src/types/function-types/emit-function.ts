@@ -14,4 +14,4 @@ export interface EmitFunction<T> {
   (): FluentEmitter<T>;
 }
 
-export interface FluentAsyncEmitFunction<T> extends EmitFunction<T> {}
+export interface AsyncEmitFunction<T> extends EmitFunction<T> {}

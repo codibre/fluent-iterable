@@ -31,4 +31,3 @@ export interface AsyncFilterFunction<T> {
    */
   <R extends keyof T>(predicate: R): FluentAsyncIterable<T>;
 }
-export interface FluentAsyncFilterFunction<T> extends AsyncFilterFunction<T> {}

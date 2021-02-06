@@ -16,5 +16,3 @@ export interface AsyncForEachFunction<T> {
    */
   (mapper: AsyncAction<T>): Promise<void>;
 }
-export interface FluentAsyncForEachFunction<T>
-  extends AsyncForEachFunction<T> {}

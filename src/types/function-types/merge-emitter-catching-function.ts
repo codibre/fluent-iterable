@@ -2,7 +2,7 @@ import EventEmitter = require('events');
 import { ErrorCallback, FluentEmitOptions } from '../base';
 import { FluentAsyncIterable } from '../base';
 
-export interface FluentAsyncMergeEmitterCatchingFunction<T> {
+export interface AsyncMergeEmitterCatchingFunction<T> {
   /**
    * Merge the iterable with the informed EventEmitter, catching the errors of any of the iterables that fails, so the process can continue until all the successful iterables ends.
    *

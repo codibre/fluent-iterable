@@ -31,7 +31,7 @@ export interface AsyncLastFunction<T> {
    * @param predicate The last element is to be returned which matches this asynchronous predicate.
    * @returns A promise of the last element matching the specified predicate, or `undefined` if no such element found.
    */
-  (predicate: AsyncPredicate<T>): Promise<T | undefined>;
+  (predicate?: AsyncPredicate<T>): Promise<T | undefined>;
 
   /**
    * Returns the last element of the iterable matching an asynchronous predicate, or `undefined` value if no such element is found. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -39,11 +39,4 @@ export interface AsyncLastFunction<T> {
    * @returns A promise of the last element matching the specified predicate, or `undefined` if no such element found.
    */
   (predicate: keyof T): Promise<T | undefined>;
-}
-export interface FluentAsyncLastFunction<T> extends AsyncLastFunction<T> {
-  /**
-   * Returns the last element of the iterable matching an asynchronous predicate, or `undefined` value if no such element is found. This is a resolving operation, will cause a full loop through all the elements of the iterable.
-   * @returns A promise of the last element matching the specified predicate, or `undefined` if no such element found.
-   */
-  (): Promise<T | undefined>;
 }

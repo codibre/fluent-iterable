@@ -2,7 +2,7 @@ import EventEmitter = require('events');
 import { FluentEmitOptions } from '../base';
 import { FluentAsyncIterable } from '../base';
 
-export interface FluentAsyncMergeEmitterFunction<T> {
+export interface AsyncMergeEmitterFunction<T> {
   /**
    * Merge the iterable with the informed EventEmitter.
    *
