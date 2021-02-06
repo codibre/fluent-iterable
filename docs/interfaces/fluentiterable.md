@@ -1,4 +1,4 @@
-[fluent-iterable - v1.8.7](../README.md) / FluentIterable
+[fluent-iterable - v1.9.0](../README.md) / FluentIterable
 
 # Interface: FluentIterable<T\>
 
@@ -42,6 +42,8 @@ Name | Description |
 - [distinct](fluentiterable.md#distinct)
 - [distinctAsync](fluentiterable.md#distinctasync)
 - [emit](fluentiterable.md#emit)
+- [every](fluentiterable.md#every)
+- [everyAsync](fluentiterable.md#everyasync)
 - [execute](fluentiterable.md#execute)
 - [executeAsync](fluentiterable.md#executeasync)
 - [filter](fluentiterable.md#filter)
@@ -49,6 +51,7 @@ Name | Description |
 - [first](fluentiterable.md#first)
 - [firstAsync](fluentiterable.md#firstasync)
 - [flatMap](fluentiterable.md#flatmap)
+- [flatMapAsync](fluentiterable.md#flatmapasync)
 - [flatten](fluentiterable.md#flatten)
 - [flattenAsync](fluentiterable.md#flattenasync)
 - [forEach](fluentiterable.md#foreach)
@@ -82,6 +85,8 @@ Name | Description |
 - [skip](fluentiterable.md#skip)
 - [skipWhile](fluentiterable.md#skipwhile)
 - [skipWhileAsync](fluentiterable.md#skipwhileasync)
+- [some](fluentiterable.md#some)
+- [someAsync](fluentiterable.md#someasync)
 - [sort](fluentiterable.md#sort)
 - [sortBy](fluentiterable.md#sortby)
 - [sum](fluentiterable.md#sum)
@@ -212,6 +217,18 @@ ___
 
 ___
 
+### every
+
+• **every**: *AllFunction*<T\>
+
+___
+
+### everyAsync
+
+• **everyAsync**: *AsyncAllFunction*<T\>
+
+___
+
 ### execute
 
 • **execute**: *ExecuteFunction*<T\>
@@ -251,6 +268,12 @@ ___
 ### flatMap
 
 • **flatMap**: *FlattenFunction*<T\>
+
+___
+
+### flatMapAsync
+
+• **flatMapAsync**: *AsyncFlattenFunction*<T\>
 
 ___
 
@@ -449,6 +472,18 @@ ___
 ### skipWhileAsync
 
 • **skipWhileAsync**: *AsyncSkipWhileFunction*<T\>
+
+___
+
+### some
+
+• **some**: *AnyFunction*<T\>
+
+___
+
+### someAsync
+
+• **someAsync**: *AsyncAnyFunction*<T\>
 
 ___
 

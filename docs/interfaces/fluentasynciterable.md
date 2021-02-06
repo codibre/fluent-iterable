@@ -1,4 +1,4 @@
-[fluent-iterable - v1.8.7](../README.md) / FluentAsyncIterable
+[fluent-iterable - v1.9.0](../README.md) / FluentAsyncIterable
 
 # Interface: FluentAsyncIterable<T\>
 
@@ -35,9 +35,11 @@ Name | Description |
 - [count](fluentasynciterable.md#count)
 - [distinct](fluentasynciterable.md#distinct)
 - [emit](fluentasynciterable.md#emit)
+- [every](fluentasynciterable.md#every)
 - [execute](fluentasynciterable.md#execute)
 - [filter](fluentasynciterable.md#filter)
 - [first](fluentasynciterable.md#first)
+- [flatMap](fluentasynciterable.md#flatmap)
 - [flatten](fluentasynciterable.md#flatten)
 - [forEach](fluentasynciterable.md#foreach)
 - [group](fluentasynciterable.md#group)
@@ -63,6 +65,7 @@ Name | Description |
 - [repeat](fluentasynciterable.md#repeat)
 - [skip](fluentasynciterable.md#skip)
 - [skipWhile](fluentasynciterable.md#skipwhile)
+- [some](fluentasynciterable.md#some)
 - [sort](fluentasynciterable.md#sort)
 - [sortBy](fluentasynciterable.md#sortby)
 - [sum](fluentasynciterable.md#sum)
@@ -88,79 +91,91 @@ Name | Description |
 
 ### all
 
-• **all**: *FluentAsyncAllFunction*<T\>
+• **all**: *AsyncAllFunction*<T\>
 
 ___
 
 ### any
 
-• **any**: *FluentAsyncAnyFunction*<T\>
+• **any**: *AsyncAnyFunction*<T\>
 
 ___
 
 ### append
 
-• **append**: *FluentAsyncAppendFunction*<T\>
+• **append**: *AsyncAppendFunction*<T\>
 
 ___
 
 ### avg
 
-• **avg**: *FluentAsyncAvgFunction*<T\>
+• **avg**: *AsyncAvgFunction*<T\>
 
 ___
 
 ### combine
 
-• **combine**: *FluentAsyncCombineFunction*<T\>
+• **combine**: *AsyncCombineFunction*<T\>
 
 ___
 
 ### concat
 
-• **concat**: *FluentAsyncConcatFunction*<T\>
+• **concat**: *AsyncConcatFunction*<T\>
 
 ___
 
 ### contains
 
-• **contains**: *FluentAsyncContainsFunction*<T\>
+• **contains**: *AsyncContainsFunction*<T\>
 
 ___
 
 ### count
 
-• **count**: *FluentAsyncCountFunction*<T\>
+• **count**: *AsyncCountFunction*<T\>
 
 ___
 
 ### distinct
 
-• **distinct**: *FluentAsyncDistinctFunction*<T\>
+• **distinct**: *AsyncDistinctFunction*<T\>
 
 ___
 
 ### emit
 
-• **emit**: *FluentAsyncEmitFunction*<T\>
+• **emit**: *AsyncEmitFunction*<T\>
+
+___
+
+### every
+
+• **every**: *AsyncAllFunction*<T\>
 
 ___
 
 ### execute
 
-• **execute**: *FluentAsyncExecuteFunction*<T\>
+• **execute**: *AsyncExecuteFunction*<T\>
 
 ___
 
 ### filter
 
-• **filter**: *FluentAsyncFilterFunction*<T\>
+• **filter**: *AsyncFilterFunction*<T\>
 
 ___
 
 ### first
 
-• **first**: *FluentAsyncFirstFunction*<T\>
+• **first**: *AsyncFirstFunction*<T\>
+
+___
+
+### flatMap
+
+• **flatMap**: *AsyncFlattenFunction*<T\>
 
 ___
 
@@ -172,151 +187,157 @@ ___
 
 ### forEach
 
-• **forEach**: *FluentAsyncForEachFunction*<T\>
+• **forEach**: *AsyncForEachFunction*<T\>
 
 ___
 
 ### group
 
-• **group**: *FluentAsyncGroupFunction*<T\>
+• **group**: *AsyncGroupFunction*<T\>
 
 ___
 
 ### hasExactly
 
-• **hasExactly**: FluentAsyncHasExactlyFunction
+• **hasExactly**: AsyncHasExactlyFunction
 
 ___
 
 ### hasLessOrExactly
 
-• **hasLessOrExactly**: FluentAsyncHasLessOrExactly
+• **hasLessOrExactly**: AsyncHasLessOrExactly
 
 ___
 
 ### hasLessThan
 
-• **hasLessThan**: FluentAsyncHasLessThanFunction
+• **hasLessThan**: AsyncHasLessThanFunction
 
 ___
 
 ### hasMoreOrExactly
 
-• **hasMoreOrExactly**: FluentAsyncHasMoreOrExactlyFunction
+• **hasMoreOrExactly**: AsyncHasMoreOrExactlyFunction
 
 ___
 
 ### hasMoreThan
 
-• **hasMoreThan**: FluentAsyncHasMoreThanFunction
+• **hasMoreThan**: AsyncHasMoreThanFunction
 
 ___
 
 ### isDistinct
 
-• **isDistinct**: *FluentAsyncIsDistinctFunction*<T\>
+• **isDistinct**: *AsyncIsDistinctFunction*<T\>
 
 ___
 
 ### join
 
-• **join**: *FluentAsyncJoinFunction*<T\>
+• **join**: *AsyncJoinFunction*<T\>
 
 ___
 
 ### last
 
-• **last**: *FluentAsyncLastFunction*<T\>
+• **last**: *AsyncLastFunction*<T\>
 
 ___
 
 ### map
 
-• **map**: *FluentAsyncMapFunction*<T\>
+• **map**: *AsyncMapFunction*<T\>
 
 ___
 
 ### max
 
-• **max**: *FluentAsyncMaxFunction*<T\>
+• **max**: *AsyncMaxFunction*<T\>
 
 ___
 
 ### merge
 
-• **merge**: *FluentAsyncMergeFunction*<T\>
+• **merge**: *AsyncMergeFunction*<T\>
 
 ___
 
 ### mergeCatching
 
-• **mergeCatching**: *FluentAsyncMergeCatchingFunction*<T\>
+• **mergeCatching**: *AsyncMergeCatchingFunction*<T\>
 
 ___
 
 ### mergeEmitter
 
-• **mergeEmitter**: *FluentAsyncMergeEmitterFunction*<T\>
+• **mergeEmitter**: *AsyncMergeEmitterFunction*<T\>
 
 ___
 
 ### mergeEmitterCatching
 
-• **mergeEmitterCatching**: *FluentAsyncMergeEmitterCatchingFunction*<T\>
+• **mergeEmitterCatching**: *AsyncMergeEmitterCatchingFunction*<T\>
 
 ___
 
 ### min
 
-• **min**: *FluentAsyncMinFunction*<T\>
+• **min**: *AsyncMinFunction*<T\>
 
 ___
 
 ### partition
 
-• **partition**: *FluentAsyncPartitionFunction*<T\>
+• **partition**: *AsyncPartitionFunction*<T\>
 
 ___
 
 ### prepend
 
-• **prepend**: *FluentAsyncPrependFunction*<T\>
+• **prepend**: *AsyncPrependFunction*<T\>
 
 ___
 
 ### reduce
 
-• **reduce**: *FluentAsyncReduceFunction*<T\>
+• **reduce**: *AsyncReduceFunction*<T\>
 
 ___
 
 ### reduceAndMap
 
-• **reduceAndMap**: *FluentAsyncReduceAndMapFunction*<T\>
+• **reduceAndMap**: *AsyncReduceAndMapFunction*<T\>
 
 ___
 
 ### repeat
 
-• **repeat**: *FluentAsyncRepeatFunction*<T\>
+• **repeat**: *AsyncRepeatFunction*<T\>
 
 ___
 
 ### skip
 
-• **skip**: *FluentAsyncSkipFunction*<T\>
+• **skip**: *AsyncSkipFunction*<T\>
 
 ___
 
 ### skipWhile
 
-• **skipWhile**: *FluentAsyncSkipWhileFunction*<T\>
+• **skipWhile**: *AsyncSkipWhileFunction*<T\>
+
+___
+
+### some
+
+• **some**: *AsyncAnyFunction*<T\>
 
 ___
 
 ### sort
 
-• **sort**: *FluentAsyncSortFunction*<T\>
+• **sort**: *AsyncSortFunction*<T\>
 
 ___
 
@@ -328,7 +349,7 @@ ___
 
 ### sum
 
-• **sum**: *FluentAsyncSumFunction*<T\>
+• **sum**: *AsyncSumFunction*<T\>
 
 ___
 
@@ -340,37 +361,37 @@ ___
 
 ### takeWhile
 
-• **takeWhile**: *FluentAsyncTakeWhileFunction*<T\>
+• **takeWhile**: *AsyncTakeWhileFunction*<T\>
 
 ___
 
 ### toArray
 
-• **toArray**: *FluentAsyncToArrayFunction*<T\>
+• **toArray**: *AsyncToArrayFunction*<T\>
 
 ___
 
 ### toObject
 
-• **toObject**: *FluentAsyncToObjectFunction*<T\>
+• **toObject**: *AsyncToObjectFunction*<T\>
 
 ___
 
 ### top
 
-• **top**: *FluentAsyncTopFunction*<T\>
+• **top**: *AsyncTopFunction*<T\>
 
 ___
 
 ### waitAll
 
-• **waitAll**: *FluentAsyncWaitAllFunction*<T\>
+• **waitAll**: *AsyncWaitAllFunction*<T\>
 
 ___
 
 ### withIndex
 
-• **withIndex**: *FluentAsyncWithIndexFunction*<T\>
+• **withIndex**: *AsyncWithIndexFunction*<T\>
 
 ## Methods
 
