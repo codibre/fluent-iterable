@@ -1,6 +1,5 @@
-import { AsyncMapper } from '../types';
 import { identity } from '../utils';
-import { AnyIterable } from 'augmentative-iterable';
+import { AnyIterable, AsyncMapper } from 'augmentative-iterable';
 import { BasicReduceIngredients } from './ingredients';
 import { AnyMapper } from '../types-internal';
 import { prepare } from '../types-internal/prepare';

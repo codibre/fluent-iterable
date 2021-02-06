@@ -1,6 +1,6 @@
 import { NextResult } from './merge-types';
 import { getNextAsyncIteratorFactory } from './get-next-async-iterator-factory';
-import { ErrorCallback } from '../../types-base';
+import { ErrorCallback } from '../../types/base';
 
 async function getNextValue(
   asyncIteratorsValues: Map<any, any>,
@@ -31,4 +31,34 @@ export async function* mergeIterators<T>(
       );
     }
   }
+}
+
+/**
+ * Merge the informed async iterables into one. The item orders will be defined from what is returned first
+ * @param iterables the iterables to merge
+ */
+export function mergeIterables<T>(
+  ...iterables: AsyncIterable<T>[]
+): AsyncIterable<T>;
+/**
+ * Merge the informed async iterables into one. The item orders will be defined from what is returned first
+ * @param callback A callback to case in case that any iterable throws an error. If informed, an failed iterable will not cause an error in the merging
+ * @param iterables the iterables to merge
+ */
+export function mergeIterables<T>(
+  callback: ErrorCallback,
+  ...iterables: AsyncIterable<T>[]
+): AsyncIterable<T>;
+export function mergeIterables<T>(
+  callback: ErrorCallback | undefined | AsyncIterable<T>,
+  ...iterables: AsyncIterable<T>[]
+): AsyncIterable<T> {
+  if (callback && typeof callback !== 'function') {
+    iterables = [callback, ...iterables];
+    callback = undefined;
+  }
+  return mergeIterators(
+    callback,
+    ...iterables.map((x) => x[Symbol.asyncIterator]()),
+  );
 }

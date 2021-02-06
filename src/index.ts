@@ -1,15 +1,12 @@
 import {
   AsyncPredicate,
-  Mapper,
-  AsyncMapper,
   Page,
   Pager,
   FluentIterable,
   FluentAsyncIterable,
   FluentGroup,
+  OrderAssurable,
 } from './types';
-import './types-key';
-import { OrderAssurable } from './assure-order-types';
 import {
   Predicate,
   Reducer,
@@ -19,14 +16,15 @@ import {
   AsyncAction,
   Group,
   FluentEmitter,
-} from './types-base';
+} from './types/base';
 
 import fluent from './fluent';
 import { fluentAsync, fluentEmit } from './fluent-async';
 import depaginate from './depaginator';
 import { interval } from './interval';
-import { mergeIterators } from './async-base/merging';
+import { mergeIterators, mergeIterables } from './async-base/merging';
 import { assureOrder as o, assureOrderDescending as od } from './utils';
+import { AsyncMapper, Mapper } from 'augmentative-iterable';
 
 export * from './extend-async';
 export * from './extend';
@@ -56,6 +54,7 @@ export {
   FluentEmitter,
   depaginate,
   interval,
+  mergeIterables,
   mergeIterators,
 };
 export * from './utils';

@@ -161,6 +161,36 @@ interface FluentEvents<T> {
   end(): void;
 }
 
+/**
+ * Represents a page of a paginated resource.
+ * @typeparam T The type of the elements of the page.
+ * @typeparam TToken The type of the next page token associated to the page.
+ */
+export interface Page<T, TToken> {
+  /**
+   * The elements of the page.
+   */
+  results: T[];
+  /**
+   * The next page token associated to the page.
+   */
+  nextPageToken?: TToken;
+}
+
+/**
+ * Represents a pager - responsible to retrieve pages from a paginated resource.
+ * @typeparam T The type of the elements of the page.
+ * @typeparam TToken The type of the next page token associated to the page.
+ */
+export interface Pager<T, TToken> {
+  /**
+   * Retrieves a page from a paginated resource.
+   * @param nextPageToken The token represents the page to retrieve or the first page if undefined.
+   * @returns A promise of the page requested.
+   */
+  (nextPageToken?: TToken): Promise<Page<T, TToken> | undefined>;
+}
+
 export interface FluentEmitter<T> extends TypedEmitter<FluentEvents<T>> {}
 
 export interface KVGroupTransform<K, V, NewV = V> {

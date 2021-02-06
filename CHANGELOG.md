@@ -1,5 +1,17 @@
 
-## 1.8.4
+## 1.8.6
+* 9502fba fixing cagada
+* 05afc55 covering mergeIterables
+* 48d22ae merging
+* bb5b13c Augmentative iterable update (#33)
+## v1.8.5
+* a6de8f9 1.8.5
+* 536b9dc removing more yields
+* 22430bf reorganizing types
+* e33e82f refactoring functions using yield
+* e1cb086 updating augmentative iterable
+## v1.8.4
+* 82cf6a2 1.8.4
 * 9e6e601 updating augmentative iterable and treating order assurance for map
 * 61822ee Return self when fluent (#32)
 ## v1.8.3

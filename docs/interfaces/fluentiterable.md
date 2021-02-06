@@ -1,4 +1,4 @@
-[fluent-iterable - v1.8.4](../README.md) / FluentIterable
+[fluent-iterable - v1.8.6](../README.md) / FluentIterable
 
 # Interface: FluentIterable<T\>
 
@@ -15,7 +15,7 @@ Name | Description |
 
 * *Iterable*<T\>
 
-* [*OrderAssurable*](orderassurable.md)<[*FluentAsyncIterable*](fluentasynciterable.md)<T\>\>
+* [*OrderAssurable*](orderassurable.md)<[*FluentIterable*](fluentiterable.md)<T\>\>
 
 * *FluentIterableEmitter*<T\>
 
@@ -158,7 +158,7 @@ ___
 
 ### allAsync
 
-▸ **allAsync**(`predicate`: [*AsyncPredicate*](asyncpredicate.md)<T\>): *Promise*<*boolean*\>
+▸ **allAsync**(`predicate`: *AsyncPredicate*<T\>): *Promise*<*boolean*\>
 
 Determines whether all elements of the iterable satisfy an asynchronous condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
   Note: This operation stops reading elements from the iterable as soon as the result can be determined.
@@ -167,7 +167,7 @@ Determines whether all elements of the iterable satisfy an asynchronous conditio
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate` | [*AsyncPredicate*](asyncpredicate.md)<T\> | The asynchronous condition checked for all elements in the iterable.   |
+`predicate` | *AsyncPredicate*<T\> | The asynchronous condition checked for all elements in the iterable.   |
 
 **Returns:** *Promise*<*boolean*\>
 
@@ -238,7 +238,7 @@ ___
 
 ### anyAsync
 
-▸ **anyAsync**(`predicate?`: [*AsyncPredicate*](asyncpredicate.md)<T\>): *Promise*<*boolean*\>
+▸ **anyAsync**(`predicate?`: *AsyncPredicate*<T\>): *Promise*<*boolean*\>
 
 Determines whether any element of the iterable exists or satisfies an asynchronous condition. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.<br>
   Note: This operation stops reading elements from the iterable as soon as the result can be determined.
@@ -247,7 +247,7 @@ Determines whether any element of the iterable exists or satisfies an asynchrono
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | [*AsyncPredicate*](asyncpredicate.md)<T\> | The asynchronous condition checked for the elements in the iterable.   |
+`predicate?` | *AsyncPredicate*<T\> | The asynchronous condition checked for the elements in the iterable.   |
 
 **Returns:** *Promise*<*boolean*\>
 
@@ -291,7 +291,7 @@ ___
 
 ### assureOrder
 
-▸ **assureOrder**(): [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
+▸ **assureOrder**(): [*FluentIterable*](fluentiterable.md)<T\>
 
 Assures the order of the object. For the next operations to be used,
 it will be assumed that the order, no matter the predicate used, will
@@ -299,7 +299,7 @@ be ascending, and this will affect the way some operations works.
 
 Be sure to use this method only if you know the order will be right
 
-**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
+**Returns:** [*FluentIterable*](fluentiterable.md)<T\>
 
 Inherited from: [OrderAssurable](orderassurable.md)
 
@@ -307,7 +307,7 @@ ___
 
 ### assureOrderDescending
 
-▸ **assureOrderDescending**(): [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
+▸ **assureOrderDescending**(): [*FluentIterable*](fluentiterable.md)<T\>
 
 Assures the descending order of the object. For the next operations to be used,
 it will be assumed that the order, no matter the predicate used, will
@@ -315,7 +315,7 @@ be descending, and this will affect the way some operations works.
 
 Be sure to use this method only if you know the order will be right
 
-**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
+**Returns:** [*FluentIterable*](fluentiterable.md)<T\>
 
 Inherited from: [OrderAssurable](orderassurable.md)
 
@@ -820,7 +820,7 @@ ___
 
 ### countAsync
 
-▸ **countAsync**(`predicate?`: [*AsyncPredicate*](asyncpredicate.md)<T\>): *Promise*<*number*\>
+▸ **countAsync**(`predicate?`: *AsyncPredicate*<T\>): *Promise*<*number*\>
 
 Returns the number of elements that matches an asynchronous predicate in the iterable. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -828,7 +828,7 @@ Returns the number of elements that matches an asynchronous predicate in the ite
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | [*AsyncPredicate*](asyncpredicate.md)<T\> | The count will consider elements which match this asynchronous predicate.   |
+`predicate?` | *AsyncPredicate*<T\> | The count will consider elements which match this asynchronous predicate.   |
 
 **Returns:** *Promise*<*number*\>
 
@@ -1058,7 +1058,7 @@ ___
 
 ### filterAsync
 
-▸ **filterAsync**(`predicate`: [*AsyncPredicate*](asyncpredicate.md)<T\>): [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
+▸ **filterAsync**(`predicate`: *AsyncPredicate*<T\>): [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
 Filters the iterable of `T` based on an asynchronous predicate.
 
@@ -1066,7 +1066,7 @@ Filters the iterable of `T` based on an asynchronous predicate.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate` | [*AsyncPredicate*](asyncpredicate.md)<T\> | An asynchronous predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`.   |
+`predicate` | *AsyncPredicate*<T\> | An asynchronous predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`.   |
 
 **Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
@@ -1132,7 +1132,7 @@ ___
 
 ### firstAsync
 
-▸ **firstAsync**(`predicate?`: [*AsyncPredicate*](asyncpredicate.md)<T\>): *Promise*<*undefined* \| T\>
+▸ **firstAsync**(`predicate?`: *AsyncPredicate*<T\>): *Promise*<*undefined* \| T\>
 
 Returns the first element of the iterable matching an asynchronous predicate, or `undefined` value if no such element is found. This is a partial resolving operation, will cause a partial or - if needed - a full loop through the elements of the iterable.
 
@@ -1140,7 +1140,7 @@ Returns the first element of the iterable matching an asynchronous predicate, or
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | [*AsyncPredicate*](asyncpredicate.md)<T\> | The first element is to be returned which matches this asynchronous predicate.   |
+`predicate?` | *AsyncPredicate*<T\> | The first element is to be returned which matches this asynchronous predicate.   |
 
 **Returns:** *Promise*<*undefined* \| T\>
 
@@ -1768,7 +1768,7 @@ ___
 
 ### lastAsync
 
-▸ **lastAsync**(`predicate?`: [*AsyncPredicate*](asyncpredicate.md)<T\>): *Promise*<*undefined* \| T\>
+▸ **lastAsync**(`predicate?`: *AsyncPredicate*<T\>): *Promise*<*undefined* \| T\>
 
 Returns the last element of the iterable matching an asynchronous predicate, or `undefined` value if no such element is found. This is a resolving operation, will cause a full loop through all the elements of the iterable.
 
@@ -1776,7 +1776,7 @@ Returns the last element of the iterable matching an asynchronous predicate, or 
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate?` | [*AsyncPredicate*](asyncpredicate.md)<T\> | The last element is to be returned which matches this asynchronous predicate.   |
+`predicate?` | *AsyncPredicate*<T\> | The last element is to be returned which matches this asynchronous predicate.   |
 
 **Returns:** *Promise*<*undefined* \| T\>
 
@@ -2070,7 +2070,7 @@ ___
 
 ### o
 
-▸ **o**(): [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
+▸ **o**(): [*FluentIterable*](fluentiterable.md)<T\>
 
 Alias for assureOrder
 
@@ -2080,7 +2080,7 @@ be ascending, and this will affect the way some operations works.
 
 Be sure to use this method only if you know the order will be right
 
-**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
+**Returns:** [*FluentIterable*](fluentiterable.md)<T\>
 
 Inherited from: [OrderAssurable](orderassurable.md)
 
@@ -2088,7 +2088,7 @@ ___
 
 ### od
 
-▸ **od**(): [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
+▸ **od**(): [*FluentIterable*](fluentiterable.md)<T\>
 
 alias for assureOrderDescending
 
@@ -2098,7 +2098,7 @@ be descending, and this will affect the way some operations works.
 
 Be sure to use this method only if you know the order will be right
 
-**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
+**Returns:** [*FluentIterable*](fluentiterable.md)<T\>
 
 Inherited from: [OrderAssurable](orderassurable.md)
 
@@ -2390,7 +2390,7 @@ ___
 
 ### skipWhileAsync
 
-▸ **skipWhileAsync**(`condition`: [*AsyncPredicate*](asyncpredicate.md)<T\>): [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
+▸ **skipWhileAsync**(`condition`: *AsyncPredicate*<T\>): [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
 Bypasses elements in the iterable as long as a specified asynchronous condition is true and then returns the remaining elements.
 
@@ -2398,7 +2398,7 @@ Bypasses elements in the iterable as long as a specified asynchronous condition 
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`condition` | [*AsyncPredicate*](asyncpredicate.md)<T\> | An asynchronous predicate of `T`. All elements are skipped from the iterable until this evaluates to `false` for the first time.   |
+`condition` | *AsyncPredicate*<T\> | An asynchronous predicate of `T`. All elements are skipped from the iterable until this evaluates to `false` for the first time.   |
 
 **Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
@@ -2589,7 +2589,7 @@ ___
 
 ### takeWhileAsync
 
-▸ **takeWhileAsync**(`condition`: [*AsyncPredicate*](asyncpredicate.md)<T\>): [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
+▸ **takeWhileAsync**(`condition`: *AsyncPredicate*<T\>): [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
 Returns elements from the iterable as long as a specified asynchronous condition is met.
 
@@ -2597,7 +2597,7 @@ Returns elements from the iterable as long as a specified asynchronous condition
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`condition` | [*AsyncPredicate*](asyncpredicate.md)<T\> | An asynchronous predicate of `T`. All elements are yielded from the iterable until this evaluates to `false` for the first time.   |
+`condition` | *AsyncPredicate*<T\> | An asynchronous predicate of `T`. All elements are yielded from the iterable until this evaluates to `false` for the first time.   |
 
 **Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 

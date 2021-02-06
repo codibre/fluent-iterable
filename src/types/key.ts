@@ -1,30 +1,26 @@
 import { AsyncMapper, Mapper, AnyIterable } from 'augmentative-iterable';
-import { FluentGroup } from './types';
-import {
-  Comparer,
-  Reducer,
-  AsyncReducer,
-  KVGroupTransform,
-} from './types-base';
+import { FluentGroup } from './fluent-iterable';
+import { Comparer, Reducer, AsyncReducer, KVGroupTransform } from './base';
+import { FluentAsyncIterable } from './fluent-async-iterable';
 
-declare module './types' {
-  /**
-   * Represents the type of the item of an iterable
-   */
-  type ItemType<T> = T extends Iterable<infer R> ? R : never;
+/**
+ * Represents the type of the item of an iterable
+ */
+export type ItemType<T> = T extends Iterable<infer R> ? R : never;
 
-  /**
-   * Represents the type of the item of an iterable or an async iterable
-   */
-  type AsyncItemType<T> = T extends AnyIterable<infer R> ? R : never;
+/**
+ * Represents the type of the item of an iterable or an async iterable
+ */
+export type AsyncItemType<T> = T extends AnyIterable<infer R> ? R : never;
 
-  type ToObjectKeyType<T, R1 extends keyof T> = T[R1] extends
-    | string
-    | number
-    | symbol
-    ? T[R1]
-    : any;
+export type ToObjectKeyType<T, R1 extends keyof T> = T[R1] extends
+  | string
+  | number
+  | symbol
+  ? T[R1]
+  : any;
 
+declare module './fluent-iterable' {
   /**
    * Represents an iterable extended with common processing and mutating capabilities.<br>
    *   The capabilities introduced are defined as a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) and thus they support *method chaining*.
@@ -625,7 +621,9 @@ declare module './types' {
       keyB: keyof U,
     ): FluentAsyncIterable<[T, U]>;
   }
+}
 
+declare module './fluent-async-iterable' {
   /**
    * Represents an asynchronous iterable extended with common processing and mutating capabilities.<br>
    *   The capabilities introduced are defined as a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) and thus they support *method chaining*.

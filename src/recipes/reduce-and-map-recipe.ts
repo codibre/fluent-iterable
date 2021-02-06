@@ -1,4 +1,4 @@
-import { Reducer } from '../types-base';
+import { Reducer } from '../types/base';
 import { AnyMapper } from '../types-internal';
 import { prepare } from '../types-internal/prepare';
 import { BasicIngredients } from './ingredients';

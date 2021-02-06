@@ -1,6 +1,5 @@
-import { AnyIterable } from 'augmentative-iterable';
-import { AsyncMapper } from '../types';
-import { AsyncReducer, Comparer, Equality } from '../types-base';
+import { AnyIterable, AsyncMapper } from 'augmentative-iterable';
+import { AsyncReducer, Comparer, Equality } from '../types/base';
 import { AnyMapper, CompareProvider, ResolverType } from '../types-internal';
 
 export type IngredientOpt = (predicate?: AnyMapper<any>) => AnyIterable<any>;
@@ -17,10 +16,6 @@ export type ReduceAndMapIngredient = (
   result: AsyncMapper<any, any>,
 ) => any;
 export type PartitionIngredient = (
-  size: number | Equality<any>,
-) => AnyIterable<AnyIterable<any>>;
-export type PartitionBaseIngredient = (
-  it: any,
   size: number | Equality<any>,
 ) => AnyIterable<AnyIterable<any>>;
 export type ThresholdIngredient = (

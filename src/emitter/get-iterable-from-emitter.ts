@@ -1,4 +1,4 @@
-import { FluentEmitOptions } from '../types-base';
+import { FluentEmitOptions } from '../types/base';
 import { EventEmitter } from 'events';
 import forEmitOf = require('for-emit-of');
 

@@ -1,6 +1,6 @@
-fluent-iterable - v1.8.4
+fluent-iterable - v1.8.6
 
-# fluent-iterable - v1.8.4
+# fluent-iterable - v1.8.6
 
 ## Table of contents
 
@@ -14,7 +14,6 @@ fluent-iterable - v1.8.4
 - [Action](interfaces/action.md)
 - [AsyncAction](interfaces/asyncaction.md)
 - [AsyncMapper](interfaces/asyncmapper.md)
-- [AsyncPredicate](interfaces/asyncpredicate.md)
 - [AsyncReducer](interfaces/asyncreducer.md)
 - [Comparer](interfaces/comparer.md)
 - [FluentAsyncIterable](interfaces/fluentasynciterable.md)
@@ -32,6 +31,7 @@ fluent-iterable - v1.8.4
 
 - [AsyncIterableOperation](README.md#asynciterableoperation)
 - [AsyncIterableResolvingOperation](README.md#asynciterableresolvingoperation)
+- [AsyncPredicate](README.md#asyncpredicate)
 - [IterableOperation](README.md#iterableoperation)
 - [IterableOperationAsync](README.md#iterableoperationasync)
 - [IterableResolvingOperation](README.md#iterableresolvingoperation)
@@ -71,6 +71,7 @@ fluent-iterable - v1.8.4
 - [iterateObjProps](README.md#iterateobjprops)
 - [le](README.md#le)
 - [lt](README.md#lt)
+- [mergeIterables](README.md#mergeiterables)
 - [mergeIterators](README.md#mergeiterators)
 - [negation](README.md#negation)
 - [o](README.md#o)
@@ -105,6 +106,18 @@ ___
 Ƭ **AsyncIterableResolvingOperation**: <T\>(`iterable`: *AsyncIterable*<T\>, ...`args`: *any*[]) => *PromiseLike*<*any*\>
 
 A resolving operation
+
+___
+
+### AsyncPredicate
+
+Ƭ **AsyncPredicate**<T\>: *AsyncFunctionPredicate*<T\> \| keyof T
+
+#### Type parameters:
+
+Name |
+------ |
+`T` |
 
 ___
 
@@ -213,7 +226,7 @@ ___
 
 ### asyncNegation
 
-▸ **asyncNegation**<T\>(`predicate`: [*AsyncPredicate*](interfaces/asyncpredicate.md)<T\>): [*AsyncPredicate*](interfaces/asyncpredicate.md)<T\>
+▸ **asyncNegation**<T\>(`predicate`: *AsyncPredicate*<T\>): *AsyncPredicate*<T\>
 
 Provides a function that negates the informed async predicate
 
@@ -221,15 +234,15 @@ Provides a function that negates the informed async predicate
 
 Name | Description |
 ------ | ------ |
-`T` | the item type of the [AsyncPredicate](interfaces/asyncpredicate.md)   |
+`T` | the item type of the [AsyncPredicate](README.md#asyncpredicate)   |
 
 #### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`predicate` | [*AsyncPredicate*](interfaces/asyncpredicate.md)<T\> | The async predicate to be negated    |
+`predicate` | *AsyncPredicate*<T\> | The async predicate to be negated    |
 
-**Returns:** [*AsyncPredicate*](interfaces/asyncpredicate.md)<T\>
+**Returns:** *AsyncPredicate*<T\>
 
 ___
 
@@ -652,7 +665,7 @@ ___
 
 ### iterate
 
-▸ `Const`**iterate**<T\>(`param`: T): T
+▸ `Const`**iterate**<T\>(`a`: *Iterable*<T\>): *Iterable*<T\>
 
 Iterates all element of an iterable
 
@@ -664,11 +677,11 @@ Name | Description |
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`param` | T |
+Name | Type | Description |
+------ | ------ | ------ |
+`a` | *Iterable*<T\> | The iterable    |
 
-**Returns:** T
+**Returns:** *Iterable*<T\>
 
 ___
 
@@ -740,7 +753,7 @@ ___
 
 ### iterateObjEntries
 
-▸ **iterateObjEntries**<T\>(`obj`: T): *Generator*<(keyof T \| T[keyof T])[], *void*, *unknown*\>
+▸ **iterateObjEntries**<T\>(`obj`: T): *Iterable*<[keyof T, *unknown*]\>
 
 Iterates over all owned entries of given object
 
@@ -756,7 +769,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `obj` | T | The object to iterate with    |
 
-**Returns:** *Generator*<(keyof T \| T[keyof T])[], *void*, *unknown*\>
+**Returns:** *Iterable*<[keyof T, *unknown*]\>
 
 ___
 
@@ -823,6 +836,47 @@ Name | Type | Description |
 `b` | *any* | the value for comparison    |
 
 **Returns:** *function*
+
+___
+
+### mergeIterables
+
+▸ **mergeIterables**<T\>(...`iterables`: *AsyncIterable*<T\>[]): *AsyncIterable*<T\>
+
+Merge the informed async iterables into one. The item orders will be defined from what is returned first
+
+#### Type parameters:
+
+Name |
+------ |
+`T` |
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`...iterables` | *AsyncIterable*<T\>[] | the iterables to merge    |
+
+**Returns:** *AsyncIterable*<T\>
+
+▸ **mergeIterables**<T\>(`callback`: ErrorCallback, ...`iterables`: *AsyncIterable*<T\>[]): *AsyncIterable*<T\>
+
+Merge the informed async iterables into one. The item orders will be defined from what is returned first
+
+#### Type parameters:
+
+Name |
+------ |
+`T` |
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`callback` | ErrorCallback | A callback to case in case that any iterable throws an error. If informed, an failed iterable will not cause an error in the merging   |
+`...iterables` | *AsyncIterable*<T\>[] | the iterables to merge    |
+
+**Returns:** *AsyncIterable*<T\>
 
 ___
 
