@@ -25,7 +25,7 @@ export interface GroupFunction<T> {
    */
   <R extends keyof T, V = T>(
     mapper: R,
-    transformValue?: KVGroupTransform<R, T, V>,
+    transformValue?: KVGroupTransform<T[R], T, V>,
   ): FluentIterable<FluentGroup<V, T[R]>>;
 }
 export interface AsyncGroupFunction<T> {
@@ -50,6 +50,6 @@ export interface AsyncGroupFunction<T> {
    */
   <R extends keyof T, V = T>(
     mapper: R,
-    transformValue?: KVGroupTransform<R, T, V>,
+    transformValue?: KVGroupTransform<T[R], T, V>,
   ): FluentAsyncIterable<FluentGroup<V, T[R]>>;
 }

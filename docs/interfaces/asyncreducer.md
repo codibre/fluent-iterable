@@ -1,4 +1,4 @@
-[fluent-iterable - v1.9.0](../README.md) / AsyncReducer
+[fluent-iterable - v1.9.1](../README.md) / AsyncReducer
 
 # Interface: AsyncReducer<T, A\>
 
