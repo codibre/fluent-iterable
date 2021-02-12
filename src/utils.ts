@@ -105,15 +105,16 @@ function* iterateObjProps<T extends object>(obj: T): Iterable<keyof T> {
  * Iterates over all owned entries of given object
  * @param obj The object to iterate with
  */
-function iterateObjEntries<T extends object>(
-  obj: T,
-): Iterable<[keyof T, unknown]> {
+function iterateObjEntries<
+  T extends object,
+  K extends keyof T = keyof T,
+  V extends T[K] = T[K]
+>(obj: T): Iterable<[K, V]> {
   return map.call(iterateObjProps(obj), (property) => [
     property,
-    obj[property as keyof T],
-  ]) as Iterable<[keyof T, unknown]>;
+    obj[property as K],
+  ]) as Iterable<[K, V]>;
 }
-
 /**
  * Provides a "equals" comparer
  * @typeparam T the type of b
