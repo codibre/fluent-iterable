@@ -1,6 +1,6 @@
-fluent-iterable - v1.9.1
+fluent-iterable - v1.9.2
 
-# fluent-iterable - v1.9.1
+# fluent-iterable - v1.9.2
 
 ## Table of contents
 
@@ -753,15 +753,17 @@ ___
 
 ### iterateObjEntries
 
-▸ **iterateObjEntries**<T\>(`obj`: T): *Iterable*<[keyof T, *unknown*]\>
+▸ **iterateObjEntries**<T, K, V\>(`obj`: T): *Iterable*<[K, V]\>
 
 Iterates over all owned entries of given object
 
 #### Type parameters:
 
-Name | Type |
------- | ------ |
-`T` | *object* |
+Name | Type | Default |
+------ | ------ | ------ |
+`T` | *object* | - |
+`K` | *string* \| *number* \| *symbol* | keyof T |
+`V` | - | T[K] |
 
 #### Parameters:
 
@@ -769,7 +771,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `obj` | T | The object to iterate with    |
 
-**Returns:** *Iterable*<[keyof T, *unknown*]\>
+**Returns:** *Iterable*<[K, V]\>
 
 ___
 

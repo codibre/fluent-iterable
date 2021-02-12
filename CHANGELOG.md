@@ -1,5 +1,9 @@
 
-## 1.9.1
+## 1.9.2
+## v1.9.2
+* 756f909 1.9.2
+* 67b3749 fixing iterateObjEntries return type
+* 8722ee3 Fixing group type (#36)
 ## v1.9.1
 * aaa047f 1.9.1
 * e16d2e9 fixing group type when using key property
