@@ -1,6 +1,21 @@
 import { AsyncMapper, Mapper } from 'augmentative-iterable';
 import { ToObjectKeyType } from '../base';
 
+type ObjectResult<
+  R extends string | symbol | number,
+  O extends {
+    [k in R]: unknown;
+  }
+> = {
+  [k in R]: O[R];
+};
+
+type ObjectType<R extends string | symbol | number> = {
+  [k in R]: unknown;
+};
+
+type KeyType = string | symbol | number;
+
 export interface ToObjectFunction<T> {
   /**
    * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by a key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -12,10 +27,10 @@ export interface ToObjectFunction<T> {
    * @param valueSelector Projects an element of the iterable into the value of the corresponding field. The identity function is being used if omitted.
    * @returns The object composed of the elements of the iterable as fields.
    */
-  <R = any>(
-    keySelector: Mapper<T, keyof R>,
-    valueSelector?: Mapper<T, R[keyof R]>,
-  ): R;
+  <R extends KeyType, O extends ObjectType<R>>(
+    keySelector: Mapper<T, R>,
+    valueSelector?: Mapper<T, O[R]>,
+  ): ObjectResult<R, O>;
 
   /**
    * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by a key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -62,6 +77,7 @@ export interface ToObjectFunction<T> {
     valueSelector: R2,
   ): { [key in ToObjectKeyType<T, R1>]: T[R2] };
 }
+
 export interface AsyncToObjectFunction<T> {
   /**
    * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by an asynchronous key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -70,10 +86,10 @@ export interface AsyncToObjectFunction<T> {
    * @param valueSelector Asynchronously projects an element of the iterable into the value of the corresponding field.
    * @returns A promise of the object composed of the elements of the iterable as fields.
    */
-  <R = any>(
-    keySelector: AsyncMapper<T, keyof R>,
-    valueSelector?: AsyncMapper<T, R[keyof R]>,
-  ): Promise<R>;
+  <R extends KeyType, O extends ObjectType<R>>(
+    keySelector: AsyncMapper<T, R>,
+    valueSelector?: AsyncMapper<T, O[R]>,
+  ): Promise<ObjectResult<R, O>>;
 
   /**
    * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by an asynchronous key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
