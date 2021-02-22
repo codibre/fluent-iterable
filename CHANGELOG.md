@@ -1,5 +1,9 @@
 
-## 1.10.0
+## 1.10.1
+* cd988db 1.10.1
+* fc6b440 bettering toObject typing
+* feb20c5 fixing code smell
+* 6c71866 creating implicity identity filter
 * 264233a 1.10.0
 * bdf61e5 creating implicity identity filter
 * 52d9512 bettering filter signature
@@ -161,6 +165,11 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.10.1
+* cd988db 1.10.1
+* fc6b440 bettering toObject typing
+* feb20c5 fixing code smell
+* 6c71866 creating implicity identity filter
 ## v1.10.0
 * 264233a 1.10.0
 * bdf61e5 creating implicity identity filter
