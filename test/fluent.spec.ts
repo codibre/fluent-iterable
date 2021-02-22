@@ -469,6 +469,21 @@ describe('fluent iterable', () => {
               .first(),
           ).to.be.eq('2.00 and 1');
         });
+        it('should return just the truthy values with correct typing', () => {
+          interface Test {
+            a: number;
+            b: string;
+          }
+          expect(
+            fluent([{ b: 'abc', a: 1 }, undefined, { a: 2, b: 'b' }] as (
+              | Test
+              | undefined
+            )[])
+              .filter()
+              .map((x) => `${x.a.toFixed(2)} and ${x.b.length}`)
+              .toArray(),
+          ).to.be.eql(['1.00 and 3', '2.00 and 1']);
+        });
       });
       describe('filterAsync', () => {
         it('with always false predicate', async () =>
@@ -534,6 +549,21 @@ describe('fluent iterable', () => {
               .map((x) => `${x.a.toFixed(2)} and ${x.b.length}`)
               .first(),
           ).to.be.eq('2.00 and 1');
+        });
+        it('should return just the truthy values with correct typing', async () => {
+          interface Test {
+            a: number;
+            b: string;
+          }
+          expect(
+            await fluent([{ b: 'abc', a: 1 }, undefined, { a: 2, b: 'b' }] as (
+              | Test
+              | undefined
+            )[])
+              .filterAsync()
+              .map((x) => `${x.a.toFixed(2)} and ${x.b.length}`)
+              .toArray(),
+          ).to.be.eql(['1.00 and 3', '2.00 and 1']);
         });
       });
       describe('partition', () => {

@@ -6,6 +6,7 @@ import {
   ResolverType,
 } from '../types-internal';
 import { prepare } from '../types-internal/prepare';
+import { identity } from '../utils';
 import { augmentIterableRecipe } from './augment-iterable-recipe';
 
 export function filterRecipe(
@@ -16,7 +17,10 @@ export function filterRecipe(
   const baseFilter = augmentIterableRecipe(filterIterable);
   const takeWhile = augmentIterableRecipe(takeWhileIterable);
 
-  return function <T>(this: AnyIterable<T>, basePredicate: AnyMapper<any>) {
+  return function <T>(
+    this: AnyIterable<T>,
+    basePredicate: AnyMapper<any> = identity,
+  ) {
     const predicate = prepare(basePredicate);
     if (isAnyOrderAssured(predicate, this)) {
       let alreadyTrue = false;

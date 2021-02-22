@@ -12,6 +12,12 @@ type RequiresTruthy<T, Guarantees extends keyof T> = {
 
 export interface FilterFunction<T> {
   /**
+   * Filters the falsy values of a iterable of `T`<br>
+   *   Example: `fluent(['anchor', undefined, 'bound', undefined]).filter()` yields *anchor* and *bound*.
+   * @returns A [[FluentIterable]] of the elements against which the predicate evaluates to `true`.
+   */
+  (): FluentIterable<Truthy<T>>;
+  /**
    * Filters the iterable of `T` based on a predicate.<br>
    *   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).filter(word => word[0] === 'a')` yields *anchor*, *almond*, and *alpine*.
    * @param predicate A predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`.
@@ -29,6 +35,12 @@ export interface FilterFunction<T> {
   <K extends keyof T>(predicate: K): FluentIterable<T & RequiresTruthy<T, K>>;
 }
 export interface AsyncFilterFunction<T> {
+  /**
+   * Filters the falsy values of a iterable of `T`<br>
+   *   Example: `fluentAsync(['anchor', undefined, 'bound', undefined]).filter()` yields *anchor* and *bound*.
+   * @returns A [[FluentAsyncIterable]] of the elements against which the predicate evaluates to `true`.
+   */
+  (): FluentAsyncIterable<Truthy<T>>;
   /**
    * Filters the iterable of `T` based on an asynchronous predicate.
    * @param predicate An asynchronous predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`.
