@@ -444,6 +444,31 @@ describe('fluent iterable', () => {
               .toArray(),
           ).to.eql([2, 4]);
         });
+        it('should guarantees that a possible falsy unique key is defined', () => {
+          interface Test {
+            a?: number;
+            b: string | null;
+          }
+          expect(
+            fluent([{ b: null, a: 1 }, { b: 'a' }, { a: 2, b: 'b' }] as Test[])
+              .filter('b')
+              .filter('a')
+              .map((x) => `${x.a.toFixed(2)} and ${x.b.length}`)
+              .first(),
+          ).to.be.eq('2.00 and 1');
+        });
+        it('should guarantees that a possible falsy unique key is defined explicitly', () => {
+          interface Test {
+            a?: number;
+            b: string | null;
+          }
+          expect(
+            fluent([{ b: null, a: 1 }, { b: 'a' }, { a: 2, b: 'b' }] as Test[])
+              .filter<'b' | 'a'>((x) => x.b && x.a)
+              .map((x) => `${x.a.toFixed(2)} and ${x.b.length}`)
+              .first(),
+          ).to.be.eq('2.00 and 1');
+        });
       });
       describe('filterAsync', () => {
         it('with always false predicate', async () =>
@@ -476,6 +501,39 @@ describe('fluent iterable', () => {
               .map('b')
               .toArray(),
           ).to.eql([2, 4]);
+        });
+        it('should guarantees that a possible falsy unique key is defined', async () => {
+          interface Test {
+            a?: number;
+            b: string | null;
+          }
+          expect(
+            await fluent([
+              { b: null, a: 1 },
+              { b: 'a' },
+              { a: 2, b: 'b' },
+            ] as Test[])
+              .filterAsync('b')
+              .filter('a')
+              .map((x) => `${x.a.toFixed(2)} and ${x.b.length}`)
+              .first(),
+          ).to.be.eq('2.00 and 1');
+        });
+        it('should guarantees that a possible falsy unique key is defined explicitly', async () => {
+          interface Test {
+            a?: number;
+            b: string | null;
+          }
+          expect(
+            await fluent([
+              { b: null, a: 1 },
+              { b: 'a' },
+              { a: 2, b: 'b' },
+            ] as Test[])
+              .filterAsync<'b' | 'a'>((x) => x.b && x.a)
+              .map((x) => `${x.a.toFixed(2)} and ${x.b.length}`)
+              .first(),
+          ).to.be.eq('2.00 and 1');
         });
       });
       describe('partition', () => {
