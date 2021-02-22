@@ -1,5 +1,7 @@
 
-## 1.10.2
+## 1.10.3
+* 5716e99 1.10.3
+* 16142f0 mergin changes
 * 61cd7f7 1.10.2
 * fe08f33 fixing take return type
 * fc7789e Merge branch 'master' of github.com:Codibre/fluent-iterable into bettering-filter-signature
@@ -170,6 +172,9 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.10.3
+* 5716e99 1.10.3
+* 16142f0 mergin changes
 ## v1.10.2
 * 61cd7f7 1.10.2
 * fe08f33 fixing take return type
