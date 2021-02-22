@@ -1,5 +1,9 @@
 
-## 1.9.2
+## 1.10.0
+* 264233a 1.10.0
+* bdf61e5 creating implicity identity filter
+* 52d9512 bettering filter signature
+* cb0d4a5 Iterable obj entries type (#37)
 ## v1.9.2
 * 756f909 1.9.2
 * 67b3749 fixing iterateObjEntries return type
@@ -157,6 +161,88 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.10.0
+* 264233a 1.10.0
+* bdf61e5 creating implicity identity filter
+* 52d9512 bettering filter signature
+* cb0d4a5 Iterable obj entries type (#37)
+* 8722ee3 Fixing group type (#36)
+* 8173e93 Es compliance (#35)
+* 140573b Refactoring partition, yields and types (#34)
+* bb5b13c Augmentative iterable update (#33)
+* 61822ee Return self when fluent (#32)
+* 79f70b2 Fixing to object return type with key (#30)
+* ec2c2ea bug with typing when flatten with no parameter (#29)
+* e7a095a Issue 26 bug with typing when flatten uses string field property (#28)
+* 2dde58d Release (#24)
+* 82f25ea Release (#23)
+* 2a64d19 fixing sum (#21)
+* 2f8fbb4 creating sortBy method (#22)
+* 00ced81 fixing import name lib in readme file (#19)
+* 95af91f creating publish action (#17)
+* 63ed241 1.6.0 (#16)
+* 760da33 Issue 14 make fluent accept strings in place of functions (#15)
+* 712fa57 Issue 11 order assuring option for faster opertations (#12)
+* 4060526 Issue 9 implement method is dinstinct (#10)
+* c75cd5d adding emit methods (#8)
+* 0fe6265 expanding min and max contracts to accepts non numeric values (#6)
+* e1ff83d 1.5.0
+* 0518e30 Merge branch 'master' of github.com:Codibre/fluent-iterable
+* a695499 separating average from iterative means calculation for a more utils exporting
+* fc04398 Update README.md
+* 1102727 1.4.0
+* 7db5dc2 Merge pull request #4 from Codibre/issue-1-Implementing_fluentEvent
+* 6511552 updating for-emit-of
+* 37da974 ending events cache
+* d26e007 adding custom treatment for break using in the for await
+* 1200ab0 sync with master
+* 93b85b2 Merge branch 'master' of github.com:Codibre/fluent-iterable into issue-1-Implementing_fluentEvent
+* ea61ebe 1.3.4
+* e387454 adding return call for cases where next is used
+* 3ba3c6d 1.3.3
+* 63199c8 updating augmentative iterable for Iterator.return properly call support
+* 1d672b3 updating forEmitOf library
+* 8b0b9f2 Merge branch 'master' of github.com:Codibre/fluent-iterable into issue-1-Implementing_fluentEvent
+* 8e08d88 Merge branch 'master' of github.com:Codibre/fluent-iterable
+* d63301b 1.3.2
+* 06588d6 Update README.md
+* 2d9f968 updating codeclimate after repo remaking
+* 6bf1722 just a change to make codeclimate update numbers
+* 8fef128 Adding workflow
+* 00bba4c Removing workflow
+* 6915268 updating libraries and centralizing forEmitOf using
+* b473d47 adding tsdoc information about EventEmitter Iterables
+* 265bf66 fixing forEmitOf importing
+* 81b567e changing test setup as promise handling works slightly different since node 12.x in the matter of setImmediate functionality (it's too imediately for our test)
+* e40922d fixing duplicated code
+* dbd5e17 fixing types size
+* e51cc6e implementing fluentEmit and EventEmitter operators
+* f55529f Merge branch 'master' of github.com:Codibre/fluent-iterable
+* 931880b 1.3.1
+* bca0c2b Using iterative mean algorithm http://www.heikohoffmann.de/htmlthesis/node134.html to calculate avg
+* 580969e Update README.md
+* a961e58 updating readme"
+* b8b8fe1 updating readme
+* c00ff3d adding faulting case tests
+* 2b8a126 refactoring combine
+* e1622b3 refactoring combine
+* 1a67cd0 adding one more test case
+* 2596ded 1.3.0
+* f889db1 creating key combiner
+* a6e5243 1.2.5
+* 680df96 updating to stable version of dependencies
+* 526cd40 1.2.4
+* c032cc6 updating version of augmentative for the one with strict mode
+* f78c49a Adding memory test or native approach
+* fe96d52 1.2.3
+* d149a28 fixing lint
+* f6e6bba updating changelog and docs
+* 8505952 updating version
+* 72cde26 updating version
+* 29c5b69 adding memory test and fluent interface for interval
+* a3821ba 1.2.1
+* 4c95d7a updating package lock"
+* d7f049a updating packages
 * 0db8262 1.2.0
 * 05c5953 completing coverage and adding more methods
 * 2d52b34 calibrating performing test
