@@ -1,4 +1,4 @@
-[fluent-iterable - v1.10.1](../README.md) / FluentAsyncIterable
+[fluent-iterable - v1.10.3](../README.md) / FluentAsyncIterable
 
 # Interface: FluentAsyncIterable<T\>
 
@@ -355,7 +355,7 @@ ___
 
 ### take
 
-• **take**: *TakeFunction*<T\>
+• **take**: *AsyncTakeFunction*<T\>
 
 ___
 

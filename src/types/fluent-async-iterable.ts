@@ -4,7 +4,7 @@ declare module './base' {
   interface FluentAsyncIterable<T> {
     withIndex: f.AsyncWithIndexFunction<T>;
     takeWhile: f.AsyncTakeWhileFunction<T>;
-    take: f.TakeFunction<T>;
+    take: f.AsyncTakeFunction<T>;
     skipWhile: f.AsyncSkipWhileFunction<T>;
     skip: f.AsyncSkipFunction<T>;
     map: f.AsyncMapFunction<T>;
