@@ -6,9 +6,10 @@ type Truthy<T> = Exclude<
   undefined
 >;
 
-type RequiresTruthy<T, Guarantees extends keyof T> = {
-  [P in Guarantees]-?: Truthy<T[P]>;
-};
+type RequiresTruthy<T, Guarantees extends keyof T> = T &
+  {
+    [P in Guarantees]-?: Truthy<T[P]>;
+  };
 
 export interface FilterFunction<T> {
   /**
@@ -24,7 +25,7 @@ export interface FilterFunction<T> {
    * @returns A [[FluentIterable]] of the elements against which the predicate evaluates to `true`.
    */
   <Guarantees extends keyof T = any>(predicate: Predicate<T>): FluentIterable<
-    T & RequiresTruthy<T, Guarantees>
+    RequiresTruthy<T, Guarantees>
   >;
   /**
    * Filters the iterable of `T` based on a predicate.<br>
@@ -32,7 +33,7 @@ export interface FilterFunction<T> {
    * @param predicate A predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`.
    * @returns A [[FluentIterable]] of the elements against which the predicate evaluates to `true`.
    */
-  <K extends keyof T>(predicate: K): FluentIterable<T & RequiresTruthy<T, K>>;
+  <K extends keyof T>(predicate: K): FluentIterable<RequiresTruthy<T, K>>;
 }
 export interface AsyncFilterFunction<T> {
   /**
@@ -48,13 +49,13 @@ export interface AsyncFilterFunction<T> {
    */
   <Guarantees extends keyof T = any>(
     predicate: AsyncPredicate<T>,
-  ): FluentAsyncIterable<T & RequiresTruthy<T, Guarantees>>;
+  ): FluentAsyncIterable<RequiresTruthy<T, Guarantees>>;
   /**
    * Filters the iterable of `T` based on an asynchronous predicate.
    * @param predicate An asynchronous predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`.
    * @returns A [[FluentAsyncIterable]] of the elements against which the predicate evaluates to `true`.
    */
   <R extends keyof T, K extends keyof T>(predicate: R): FluentAsyncIterable<
-    T & RequiresTruthy<T, K>
+    RequiresTruthy<T, K>
   >;
 }
