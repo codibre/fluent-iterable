@@ -10,9 +10,3 @@ export function prepare<T>(predicate: AnyMapper<T>): FunctionAnyMapper<T> {
     ? (t: T) => t[predicate]
     : (predicate as FunctionAnyMapper<T>);
 }
-
-export function optPrepare<T>(
-  predicate?: AnyMapper<T>,
-): FunctionAnyMapper<T> | undefined {
-  return predicate ? prepare(predicate) : undefined;
-}

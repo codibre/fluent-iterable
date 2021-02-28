@@ -58,3 +58,11 @@ export {
   mergeIterators,
 };
 export * from './utils';
+export * from './is-async-iterable';
+export * from './is-iterable';
+export * from './f';
+export * from './fluent-object';
+export * from './is-fluent-async-iterable';
+export * from './is-fluent-iterable';
+export * from './is-any-iterable';
+export * from './is-any-fluent-iterable';

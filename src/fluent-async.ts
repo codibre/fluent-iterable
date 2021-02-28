@@ -8,14 +8,12 @@ import {
 import { mountIterableFunctions, mountSpecial } from './mounters';
 import { AnyIterable } from 'augmentative-iterable';
 import { iterateAsync } from './utils';
-import { getExtender, extend, defaultCookFunction } from 'extension-methods';
+import { extend } from 'extension-methods';
 import { EventEmitter } from 'events';
 import { getIterableFromEmitter } from './emitter';
 import { fluentSymbolAsync, getFluent } from './types-internal';
-
-export const proxyReference: { [key: string]: Function } = {};
-const handler = getExtender(proxyReference, defaultCookFunction, 'extender');
-
+import { asyncHandler, asyncProxyReference } from './async-handler';
+import { internalAsyncWrapper, internalWrapper } from './internal-wrapper';
 /**
  * Tranforms an asynchronous iterable into a [[FluentAsyncIterable]].
  * @typeparam T The type of the items in the async iterable.
@@ -25,7 +23,7 @@ const handler = getExtender(proxyReference, defaultCookFunction, 'extender');
 function fluentAsync<T>(
   iterable: AnyIterable<T> | PromiseLike<AnyIterable<T>>,
 ): FluentAsyncIterable<T> {
-  return getFluent(iterateAsync(iterable), handler, fluentSymbolAsync);
+  return getFluent(iterateAsync(iterable), asyncHandler, fluentSymbolAsync);
 }
 
 /**
@@ -49,10 +47,13 @@ function fluentEmit<T = any>(
   emitter: EventEmitter,
   options?: FluentEmitOptions,
 ): FluentAsyncIterable<T> {
-  return extend(getIterableFromEmitter<T>(emitter, options), handler) as any;
+  return extend(
+    getIterableFromEmitter<T>(emitter, options),
+    asyncHandler,
+  ) as any;
 }
 
-Object.assign(proxyReference, {
+Object.assign(asyncProxyReference, {
   ...mountIterableFunctions(asyncIterableFuncs, fluentAsync),
   ...mountSpecial(asyncSpecial, fluentAsync, fluentAsync),
   ...asyncResolvingFuncs,

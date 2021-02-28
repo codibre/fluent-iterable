@@ -111,6 +111,11 @@ describe('fluent iterable', () => {
         it('can convert to array', () => {
           expect(fluent(subject).toArray()).to.eql(data);
         });
+        it('should iterate with forEach', () => {
+          let sum = 0;
+          fluent([1, 2, 3]).forEach((x) => (sum += x));
+          expect(sum).to.be.eq(6);
+        });
       });
       context('withIndex', () => {
         it('should return Indexed instances from informed array', () => {

@@ -51,6 +51,13 @@ describe('fluent async iterable', () => {
           ).toArray(),
         ).to.eql(data);
       });
+      it('should iterate with forEach', async () => {
+        let sum = 0;
+        await fluentAsync(new ObjectReadableMock([1, 2, 3])).forEach(
+          (x) => (sum += x),
+        );
+        expect(sum).to.be.eq(6);
+      });
     });
     context('withIndex', () => {
       it('should return Indexed instances from informed array', async () => {

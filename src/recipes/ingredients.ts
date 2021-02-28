@@ -6,6 +6,7 @@ export type IngredientOpt = (predicate?: AnyMapper<any>) => AnyIterable<any>;
 export type Ingredient = (predicate: AnyMapper<any>) => AnyIterable<any>;
 export type ComparerIngredient = (comparer: Comparer<any>) => AnyIterable<any>;
 export type ResolverIngredient = (predicate?: AnyMapper<any>) => any;
+export type RequiredResolverIngredient = (predicate: AnyMapper<any>) => any;
 export type ReduceIngredient = (
   reducer: AsyncReducer<any, any>,
   initial: any,
@@ -33,7 +34,7 @@ export interface BasicIngredients {
   map: Ingredient;
   filter: Ingredient;
   takeWhile: Ingredient;
-  forEach: ResolverIngredient;
+  forEach: RequiredResolverIngredient;
   iterate: IterateIngredient;
   iterateAll: IterateIngredient;
   toArray: ResolverIngredient;

@@ -8,12 +8,9 @@ import {
   special,
 } from './mounters';
 import { mountIterableFunctions, mountSpecial } from './mounters';
-import { getExtender, defaultCookFunction } from 'extension-methods';
 import { getFluent } from './types-internal';
-
-export const proxyReference: { [key: string]: Function } = {};
-const handler = getExtender(proxyReference, defaultCookFunction, 'extender');
-
+import { internalAsyncWrapper, internalWrapper } from './internal-wrapper';
+import { proxyReference, syncHandler } from './sync-handler';
 /**
  * Tranforms an iterable into a [[FluentIterable]].
  * @typeparam T The type of the items in the iterable.
@@ -21,7 +18,7 @@ const handler = getExtender(proxyReference, defaultCookFunction, 'extender');
  * @returns The [[FluentIterable]] instance.
  */
 function fluent<T>(iterable: Iterable<T>): FluentIterable<T> {
-  return getFluent(iterable, handler, fluentSymbol);
+  return getFluent(iterable, syncHandler, fluentSymbol);
 }
 
 Object.assign(proxyReference, {

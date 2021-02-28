@@ -1,10 +1,6 @@
 import { AsyncPredicate, Predicate } from 'augmentative-iterable';
 import { FluentAsyncIterable, FluentIterable } from '../base';
-
-type Truthy<T> = Exclude<
-  Exclude<Exclude<Exclude<Exclude<T, false>, 0>, ''>, null>,
-  undefined
->;
+import { Truthy } from '../truthy';
 
 type RequiresTruthy<T, Guarantees extends keyof T> = T &
   {

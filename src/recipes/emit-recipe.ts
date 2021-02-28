@@ -1,9 +1,9 @@
 import { AnyIterable } from 'augmentative-iterable';
 import { EventEmitter } from 'events';
 import { FluentEmitter } from '../types/base';
-import { ResolverIngredient } from './ingredients';
+import { RequiredResolverIngredient } from './ingredients';
 
-export function emitRecipe(forEach: ResolverIngredient) {
+export function emitRecipe(forEach: RequiredResolverIngredient) {
   return function <T>(this: AnyIterable<T>): FluentEmitter<T> {
     const emitter = new EventEmitter();
     process.nextTick(async () => {

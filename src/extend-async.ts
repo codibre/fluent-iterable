@@ -1,7 +1,8 @@
 import { mountIterableFunctions } from './mounters';
 import { addCustomMethod } from './add-custom-method';
 import { AnyIterable } from 'augmentative-iterable';
-import { fluentAsync, proxyReference } from './fluent-async';
+import { fluentAsync } from './fluent-async';
+import { asyncProxyReference } from './async-handler';
 
 /**
  * An operation that returns an AsyncIterable
@@ -36,7 +37,7 @@ export const extendAsync = {
    */
   use(name: string, operation: AsyncIterableOperation) {
     addCustomMethod(
-      proxyReference,
+      asyncProxyReference,
       mountIterableFunctions({ [name]: operation }, fluentAsync),
     );
   },
@@ -49,6 +50,6 @@ export const extendAsync = {
     name: string,
     operation: <T>(iterable: AsyncIterableResolvingOperation) => any,
   ) {
-    addCustomMethod(proxyReference, { [name]: operation });
+    addCustomMethod(asyncProxyReference, { [name]: operation });
   },
 };

@@ -1,9 +1,9 @@
 import { mountIterableFunctions } from './mounters';
 import { addCustomMethod } from './add-custom-method';
 import { AnyIterable } from 'augmentative-iterable';
-import { proxyReference } from './fluent';
 import { fluent } from '.';
 import { fluentAsync } from './fluent-async';
+import { proxyReference } from './sync-handler';
 
 /**
  * An operation that returns an Iterable
