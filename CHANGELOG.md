@@ -1,5 +1,7 @@
 
-## 1.11.0
+## 1.11.1
+* 58b1998 1.11.1
+* 81b4ffe releasing
 * 7db0d81 1.11.0
 * 07f1720 performance improvements and utility functions
 * 61934d2 Bettering async take signature (#40)
@@ -163,6 +165,9 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.11.1
+* 58b1998 1.11.1
+* 81b4ffe releasing
 ## v1.11.0
 * 7db0d81 1.11.0
 * 07f1720 performance improvements and utility functions
