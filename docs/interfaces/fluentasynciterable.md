@@ -1,4 +1,4 @@
-[fluent-iterable - v1.13.0](../README.md) / FluentAsyncIterable
+[fluent-iterable - v1.13.1](../README.md) / FluentAsyncIterable
 
 # Interface: FluentAsyncIterable<T\>
 

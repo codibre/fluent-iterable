@@ -1,7 +1,13 @@
 
-## 1.13.0
+## 1.13.1
+* 4c4ac5d 1.13.1
+* 3370f79 bettering toObject signature
+* 4ccf21d Merge branch 'master' of github.com:Codibre/fluent-iterable
+* 7092f8a version minor
 * 5f19f26 1.13.0
 * 9034dbd creating catch operators and making append and prepend accepting rest parameters
+* 00e9702 Update README.md
+* 2f434f6 Set theme jekyll-theme-slate
 * 1610b8d Merge branch 'master' of github.com:Codibre/fluent-iterable
 * b56f0da creating advanced examples folder
 * 79979b1 1.12.0
@@ -175,6 +181,13 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.13.1
+* 4c4ac5d 1.13.1
+* 3370f79 bettering toObject signature
+* 4ccf21d Merge branch 'master' of github.com:Codibre/fluent-iterable
+* 7092f8a version minor
+* 00e9702 Update README.md
+* 2f434f6 Set theme jekyll-theme-slate
 ## v1.13.0
 * 5f19f26 1.13.0
 * 9034dbd creating catch operators and making append and prepend accepting rest parameters
