@@ -43,6 +43,7 @@ import {
   filterAsync,
   mapAsync,
   isDistinctAsync,
+  flatMergeAsync,
 } from '../async';
 import {
   combineEmitter,
@@ -50,7 +51,7 @@ import {
   mergeEmitter,
   mergeEmitterCatching,
 } from '../emitter';
-import { merge, mergeCatching } from '../async-base';
+import { merge, mergeCatching, whenEmptyAsync } from '../async-base';
 import * as common from '../common';
 
 export const asyncIterableFuncs = {
@@ -72,6 +73,7 @@ export const asyncIterableFuncs = {
   repeat: repeatAsync,
   flatten: flattenAsync,
   flatMap: flattenAsync,
+  flatMerge: flatMergeAsync,
   sort: sortAsync,
   sortBy: sortByAsync,
   distinct: distinctAsync,
@@ -84,6 +86,7 @@ export const asyncIterableFuncs = {
   concatEmitter,
   mergeEmitter,
   mergeEmitterCatching,
+  whenEmpty: whenEmptyAsync,
 };
 
 export const asyncSpecial = {

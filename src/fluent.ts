@@ -1,5 +1,4 @@
 import { fluentSymbol } from './types-internal/fluent-symbol';
-import { fluentAsync } from './fluent-async';
 import { FluentIterable } from './types';
 import {
   iterableFuncs,
@@ -22,10 +21,10 @@ function fluent<T>(iterable: Iterable<T>): FluentIterable<T> {
 }
 
 Object.assign(proxyReference, {
-  ...mountIterableFunctions(iterableFuncs, fluent),
-  ...mountIterableFunctions(iterableAsyncFuncs, fluentAsync),
+  ...mountIterableFunctions(iterableFuncs, internalWrapper),
+  ...mountIterableFunctions(iterableAsyncFuncs, internalAsyncWrapper),
   ...resolvingFuncs,
-  ...mountSpecial(special, fluent, fluentAsync),
+  ...mountSpecial(special, internalWrapper, internalAsyncWrapper),
   fluent: fluentSymbol,
 });
 

@@ -79,5 +79,7 @@ declare module './base' {
     combine: f.CombineFunction<T>;
     combineAsync: f.AsyncCombineFunction<T>;
     emit: f.EmitFunction<T>;
+    flatMerge: f.FlatMergeFunction<T>;
+    whenEmpty: f.WhenEmptyFunction;
   }
 }

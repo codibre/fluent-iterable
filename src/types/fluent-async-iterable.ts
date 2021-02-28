@@ -53,5 +53,7 @@ declare module './base' {
     waitAll: f.AsyncWaitAllFunction<T>;
     combine: f.AsyncCombineFunction<T>;
     emit: f.AsyncEmitFunction<T>;
+    flatMerge: f.FlatMergeFunction<T>;
+    whenEmpty: f.AsyncWhenEmptyFunction;
   }
 }

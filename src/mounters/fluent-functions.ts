@@ -25,6 +25,7 @@ import {
   append,
   prepend,
   concat,
+  flatMerge,
   flatten,
   sort,
   sortBy,
@@ -44,6 +45,7 @@ import {
   filter,
   takeWhile,
   isDistinct,
+  whenEmpty,
 } from '../sync';
 import {
   allAsync,
@@ -96,6 +98,7 @@ export const iterableFuncs = {
   distinct,
   execute,
   combine,
+  whenEmpty,
 };
 
 export const iterableAsyncFuncs = {
@@ -105,6 +108,7 @@ export const iterableAsyncFuncs = {
   mapAsync,
   filterAsync,
   flattenAsync,
+  flatMerge,
   flatMapAsync: flattenAsync,
   distinctAsync,
   executeAsync,

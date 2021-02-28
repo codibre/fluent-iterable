@@ -54,8 +54,8 @@ function fluentEmit<T = any>(
 }
 
 Object.assign(asyncProxyReference, {
-  ...mountIterableFunctions(asyncIterableFuncs, fluentAsync),
-  ...mountSpecial(asyncSpecial, fluentAsync, fluentAsync),
+  ...mountIterableFunctions(asyncIterableFuncs, internalAsyncWrapper),
+  ...mountSpecial(asyncSpecial, internalAsyncWrapper, internalAsyncWrapper),
   ...asyncResolvingFuncs,
   fluent: fluentSymbolAsync,
 });
