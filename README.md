@@ -6,11 +6,11 @@
 [![npm version](https://badge.fury.io/js/%40codibre%2Ffluent-iterable.svg)](https://badge.fury.io/js/%40codibre%2Ffluent-iterable)
 ![downlods per month](https://img.shields.io/npm/dm/@codibre/fluent-iterable)
 
-<p align="center">
-<img src="https://github.com/Codibre/fluent-iterable/resources/preview.png">
-</p>
-
 A fast way to iterate, sync or async, over array likes, stream and async iterables. It provides [fluent api](https://en.wikipedia.org/wiki/Fluent_interface) operations so you can easily chain many operations.
+
+<p align="center">
+<img src="resources/preview.png">
+</p>
 
 ## But Why?
 
