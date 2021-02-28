@@ -1,6 +1,6 @@
 # Combining iterables
 
-Sometimes you have two distinct lists and need to combined them to generate a new one. With the combine operations you can achieve this.
+Sometimes you have two distinct lists and need to combine them to generate a new one. With the combine operation you can achieve this.
 
 ```ts
 const categories = [
@@ -43,8 +43,8 @@ const categoriesDictionary = fluent(categories)
   });
 ```
 
-Fluent will try to run this combination the fastest he can. If you provide two combining keys like in this example, this is achievable.
-However, if you have a more complex combining rule and can't afford to provide the combinign keys, then fluent will do an operation O(N x M), where N is the number of elements of the first iterable, and M is from the second:
+Fluent will try to run this combination the fastest way he can. If you provide two combining keys like in this example, this is achievable.
+However, if you have a more complex combining rule and can't afford to provide the combining keys, then fluent will do an operation O(N x M), where N is the number of elements of the first iterable, and M is from the second:
 
 ```ts
 const categories = [
@@ -112,4 +112,4 @@ const categoriesDictionary = fluent(categories)
   });
 ```
 
-With this approach, you had combined the elements by parentId directly in the combine operation, which will make the algorithm take advantage of the faster combination strategy and, then, filtered the combinations by the id relation, which will do exclude all the undesirable combinations, but in a subset, not analyzing all combinations possible!
+With this approach, you had combined the elements by parentId directly in the combine operation, which will make the algorithm take advantage of the faster combination strategy and, then, filtered the combinations by the id relation, which will exclude all the undesirable combinations, but in a subset instead of analyze all combinations possible!
