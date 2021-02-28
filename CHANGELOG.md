@@ -1,5 +1,8 @@
 
-## 1.11.1
+## 1.12.0
+* 79979b1 1.12.0
+* d909cb3 adding flatMerge and whenEmpty operators
+* d41b195 forcing readme update for github pages
 * 58b1998 1.11.1
 * 81b4ffe releasing
 * 7db0d81 1.11.0
@@ -165,6 +168,10 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.12.0
+* 79979b1 1.12.0
+* d909cb3 adding flatMerge and whenEmpty operators
+* d41b195 forcing readme update for github pages
 ## v1.11.1
 * 58b1998 1.11.1
 * 81b4ffe releasing

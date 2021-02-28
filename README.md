@@ -209,6 +209,8 @@ const firstItems: FluentAsyncIterable<Data> = fluentAsync(depaginate(pager)).tak
 
 ### Examples
 
+You can see a list of many advanced examples for **fluent** clicking [here!](advanced-examples/README.md)!
+
 #### Playing with Fibonacci generator
 
 ```typescript

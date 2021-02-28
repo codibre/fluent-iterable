@@ -1,4 +1,4 @@
-[fluent-iterable - v1.11.1](../README.md) / FluentIterable
+[fluent-iterable - v1.12.0](../README.md) / FluentIterable
 
 # Interface: FluentIterable<T\>
 
@@ -52,6 +52,7 @@ Name | Description |
 - [firstAsync](fluentiterable.md#firstasync)
 - [flatMap](fluentiterable.md#flatmap)
 - [flatMapAsync](fluentiterable.md#flatmapasync)
+- [flatMerge](fluentiterable.md#flatmerge)
 - [flatten](fluentiterable.md#flatten)
 - [flattenAsync](fluentiterable.md#flattenasync)
 - [forEach](fluentiterable.md#foreach)
@@ -101,6 +102,7 @@ Name | Description |
 - [top](fluentiterable.md#top)
 - [topAsync](fluentiterable.md#topasync)
 - [waitAll](fluentiterable.md#waitall)
+- [whenEmpty](fluentiterable.md#whenempty)
 - [withIndex](fluentiterable.md#withindex)
 
 ### Methods
@@ -274,6 +276,12 @@ ___
 ### flatMapAsync
 
 • **flatMapAsync**: *AsyncFlattenFunction*<T\>
+
+___
+
+### flatMerge
+
+• **flatMerge**: *FlatMergeFunction*<T\>
 
 ___
 
@@ -568,6 +576,12 @@ ___
 ### waitAll
 
 • **waitAll**: *WaitAllFunction*<T\>
+
+___
+
+### whenEmpty
+
+• **whenEmpty**: WhenEmptyFunction
 
 ___
 
