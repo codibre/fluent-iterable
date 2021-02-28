@@ -1,4 +1,4 @@
-[fluent-iterable - v1.10.3](../README.md) / Group
+[fluent-iterable - v1.11.0](../README.md) / Group
 
 # Interface: Group<T, R\>
 
@@ -7,7 +7,7 @@ Represents a group of items of type `T` with a key of type `R`.
 ## Type parameters
 
 Name | Description |
------- | ------ |
+:------ | :------ |
 `T` | The type of the items in the [Group](group.md).   |
 `R` | The type of the key of the [Group](group.md).    |
 

@@ -1,16 +1,16 @@
-[fluent-iterable - v1.10.3](../README.md) / FluentEmitter
+[fluent-iterable - v1.11.0](../README.md) / FluentEmitter
 
 # Interface: FluentEmitter<T\>
 
 ## Type parameters
 
 Name |
------- |
+:------ |
 `T` |
 
 ## Hierarchy
 
-* *TypedEmitter*<*FluentEvents*<T\>\>
+* *TypedEmitter*<FluentEvents<T\>\>
 
   ↳ **FluentEmitter**
 
@@ -43,13 +43,13 @@ Name |
 #### Type parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `E` | *data* \| *error* \| *end* |
 
 #### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `event` | E |
 `listener` | *FluentEvents*<T\>[E] |
 
@@ -64,13 +64,13 @@ ___
 #### Type parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `E` | *data* \| *error* \| *end* |
 
 #### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `event` | E |
 `...args` | *Arguments*<*FluentEvents*<T\>[E]\> |
 
@@ -101,13 +101,13 @@ ___
 #### Type parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `E` | *data* \| *error* \| *end* |
 
 #### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `event` | E |
 
 **Returns:** *number*
@@ -121,13 +121,13 @@ ___
 #### Type parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `E` | *data* \| *error* \| *end* |
 
 #### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `event` | E |
 
 **Returns:** Function[]
@@ -141,13 +141,13 @@ ___
 #### Type parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `E` | *data* \| *error* \| *end* |
 
 #### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `event` | E |
 `listener` | *FluentEvents*<T\>[E] |
 
@@ -162,13 +162,13 @@ ___
 #### Type parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `E` | *data* \| *error* \| *end* |
 
 #### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `event` | E |
 `listener` | *FluentEvents*<T\>[E] |
 
@@ -183,13 +183,13 @@ ___
 #### Type parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `E` | *data* \| *error* \| *end* |
 
 #### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `event` | E |
 `listener` | *FluentEvents*<T\>[E] |
 
@@ -204,13 +204,13 @@ ___
 #### Type parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `E` | *data* \| *error* \| *end* |
 
 #### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `event` | E |
 `listener` | *FluentEvents*<T\>[E] |
 
@@ -225,13 +225,13 @@ ___
 #### Type parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `E` | *data* \| *error* \| *end* |
 
 #### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `event` | E |
 `listener` | *FluentEvents*<T\>[E] |
 
@@ -246,13 +246,13 @@ ___
 #### Type parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `E` | *data* \| *error* \| *end* |
 
 #### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `event` | E |
 
 **Returns:** Function[]
@@ -266,13 +266,13 @@ ___
 #### Type parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `E` | *data* \| *error* \| *end* |
 
 #### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `event?` | E |
 
 **Returns:** [*FluentEmitter*](fluentemitter.md)<T\>
@@ -286,13 +286,13 @@ ___
 #### Type parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `E` | *data* \| *error* \| *end* |
 
 #### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `event` | E |
 `listener` | *FluentEvents*<T\>[E] |
 
@@ -307,7 +307,7 @@ ___
 #### Parameters:
 
 Name | Type |
------- | ------ |
+:------ | :------ |
 `maxListeners` | *number* |
 
 **Returns:** [*FluentEmitter*](fluentemitter.md)<T\>

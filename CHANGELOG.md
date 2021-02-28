@@ -1,19 +1,10 @@
 
-## 1.10.3
-* 5716e99 1.10.3
-* 16142f0 mergin changes
-* 61cd7f7 1.10.2
-* fe08f33 fixing take return type
-* fc7789e Merge branch 'master' of github.com:Codibre/fluent-iterable into bettering-filter-signature
-* bf46ca1 refactoring typing
-* cd988db 1.10.1
-* fc6b440 bettering toObject typing
+## 1.11.0
+* 7db0d81 1.11.0
+* 07f1720 performance improvements and utility functions
+* 61934d2 Bettering async take signature (#40)
+* 7c47519 Bettering toObject signature (#39)
 * 4671b9c Bettering filter signature (#38)
-* feb20c5 fixing code smell
-* 6c71866 creating implicity identity filter
-* 264233a 1.10.0
-* bdf61e5 creating implicity identity filter
-* 52d9512 bettering filter signature
 * cb0d4a5 Iterable obj entries type (#37)
 ## v1.9.2
 * 756f909 1.9.2
@@ -172,6 +163,11 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.11.0
+* 7db0d81 1.11.0
+* 07f1720 performance improvements and utility functions
+* 61934d2 Bettering async take signature (#40)
+* 7c47519 Bettering toObject signature (#39)
 ## v1.10.3
 * 5716e99 1.10.3
 * 16142f0 mergin changes

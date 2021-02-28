@@ -1,4 +1,4 @@
-[fluent-iterable - v1.10.3](../README.md) / Reducer
+[fluent-iterable - v1.11.0](../README.md) / Reducer
 
 # Interface: Reducer<T, A\>
 
@@ -8,13 +8,9 @@ Represents a reducer of type `T` into the accumulator type `A`.<br>
 ## Type parameters
 
 Name | Description |
------- | ------ |
+:------ | :------ |
 `T` | The source type.   |
 `A` | The accumulator type.    |
-
-## Hierarchy
-
-* **Reducer**
 
 ## Callable
 
@@ -25,7 +21,7 @@ Generates the next accumulator item based on the previous one and the next item 
 #### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
+:------ | :------ | :------ |
 `current` | A | The previous accumulator value.   |
 `next` | T | The next item.   |
 

@@ -1,4 +1,4 @@
-[fluent-iterable - v1.10.3](../README.md) / FluentGroup
+[fluent-iterable - v1.11.0](../README.md) / FluentGroup
 
 # Interface: FluentGroup<T, R\>
 
@@ -7,7 +7,7 @@ Represents a group of [fluent](../README.md#fluent) items of type `T` with a key
 ## Type parameters
 
 Name | Description |
------- | ------ |
+:------ | :------ |
 `T` | The type of the items in the [FluentGroup](fluentgroup.md).   |
 `R` | The type of the key of the [FluentGroup](fluentgroup.md).    |
 

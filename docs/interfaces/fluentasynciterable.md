@@ -1,23 +1,23 @@
-P[fluent-iterable - v1.10.3](../README.md) / FluentAsyncIterable
+[fluent-iterable - v1.11.0](../README.md) / FluentAsyncIterable
 
 # Interface: FluentAsyncIterable<T\>
 
 Represents an asynchronous iterable extended with common processing and mutating capabilities.<br>
-The capabilities introduced are defined as a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) and thus they support _method chaining_.
+  The capabilities introduced are defined as a [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) and thus they support *method chaining*.
 
 ## Type parameters
 
-| Name | Description                                         |
-| ---- | --------------------------------------------------- |
-| `T`  | The type of the items in the asynchronous iterable. |
+Name | Description |
+:------ | :------ |
+`T` | The type of the items in the asynchronous iterable.    |
 
 ## Hierarchy
 
-- _AsyncIterable_<T\>
+* *AsyncIterable*<T\>
 
-- [_OrderAssurable_](orderassurable.md)<[_FluentAsyncIterable_](fluentasynciterable.md)<T\>\>
+* [*OrderAssurable*](orderassurable.md)<[*FluentAsyncIterable*](fluentasynciterable.md)<T\>\>
 
-- _FluentIterableEmitter_<T\>
+* *FluentIterableEmitter*<T\>
 
   ↳ **FluentAsyncIterable**
 
@@ -91,321 +91,321 @@ The capabilities introduced are defined as a [fluent interface](https://en.wikip
 
 ### all
 
-• **all**: _AsyncAllFunction_<T\>
+• **all**: *AsyncAllFunction*<T\>
 
----
+___
 
 ### any
 
-• **any**: _AsyncAnyFunction_<T\>
+• **any**: *AsyncAnyFunction*<T\>
 
----
+___
 
 ### append
 
-• **append**: _AsyncAppendFunction_<T\>
+• **append**: *AsyncAppendFunction*<T\>
 
----
+___
 
 ### avg
 
-• **avg**: _AsyncAvgFunction_<T\>
+• **avg**: *AsyncAvgFunction*<T\>
 
----
+___
 
 ### combine
 
-• **combine**: _AsyncCombineFunction_<T\>
+• **combine**: *AsyncCombineFunction*<T\>
 
----
+___
 
 ### concat
 
-• **concat**: _AsyncConcatFunction_<T\>
+• **concat**: *AsyncConcatFunction*<T\>
 
----
+___
 
 ### contains
 
-• **contains**: _AsyncContainsFunction_<T\>
+• **contains**: *AsyncContainsFunction*<T\>
 
----
+___
 
 ### count
 
-• **count**: _AsyncCountFunction_<T\>
+• **count**: *AsyncCountFunction*<T\>
 
----
+___
 
 ### distinct
 
-• **distinct**: _AsyncDistinctFunction_<T\>
+• **distinct**: *AsyncDistinctFunction*<T\>
 
----
+___
 
 ### emit
 
-• **emit**: _AsyncEmitFunction_<T\>
+• **emit**: *AsyncEmitFunction*<T\>
 
----
+___
 
 ### every
 
-• **every**: _AsyncAllFunction_<T\>
+• **every**: *AsyncAllFunction*<T\>
 
----
+___
 
 ### execute
 
-• **execute**: _AsyncExecuteFunction_<T\>
+• **execute**: *AsyncExecuteFunction*<T\>
 
----
+___
 
 ### filter
 
-• **filter**: _AsyncFilterFunction_<T\>
+• **filter**: *AsyncFilterFunction*<T\>
 
----
+___
 
 ### first
 
-• **first**: _AsyncFirstFunction_<T\>
+• **first**: *AsyncFirstFunction*<T\>
 
----
+___
 
 ### flatMap
 
-• **flatMap**: _AsyncFlattenFunction_<T\>
+• **flatMap**: *AsyncFlattenFunction*<T\>
 
----
+___
 
 ### flatten
 
-• **flatten**: _AsyncFlattenFunction_<T\>
+• **flatten**: *AsyncFlattenFunction*<T\>
 
----
+___
 
 ### forEach
 
-• **forEach**: _AsyncForEachFunction_<T\>
+• **forEach**: *AsyncForEachFunction*<T\>
 
----
+___
 
 ### group
 
-• **group**: _AsyncGroupFunction_<T\>
+• **group**: *AsyncGroupFunction*<T\>
 
----
+___
 
 ### hasExactly
 
 • **hasExactly**: AsyncHasExactlyFunction
 
----
+___
 
 ### hasLessOrExactly
 
 • **hasLessOrExactly**: AsyncHasLessOrExactly
 
----
+___
 
 ### hasLessThan
 
 • **hasLessThan**: AsyncHasLessThanFunction
 
----
+___
 
 ### hasMoreOrExactly
 
 • **hasMoreOrExactly**: AsyncHasMoreOrExactlyFunction
 
----
+___
 
 ### hasMoreThan
 
 • **hasMoreThan**: AsyncHasMoreThanFunction
 
----
+___
 
 ### isDistinct
 
-• **isDistinct**: _AsyncIsDistinctFunction_<T\>
+• **isDistinct**: *AsyncIsDistinctFunction*<T\>
 
----
+___
 
 ### join
 
-• **join**: _AsyncJoinFunction_<T\>
+• **join**: *AsyncJoinFunction*<T\>
 
----
+___
 
 ### last
 
-• **last**: _AsyncLastFunction_<T\>
+• **last**: *AsyncLastFunction*<T\>
 
----
+___
 
 ### map
 
-• **map**: _AsyncMapFunction_<T\>
+• **map**: *AsyncMapFunction*<T\>
 
----
+___
 
 ### max
 
-• **max**: _AsyncMaxFunction_<T\>
+• **max**: *AsyncMaxFunction*<T\>
 
----
+___
 
 ### merge
 
-• **merge**: _AsyncMergeFunction_<T\>
+• **merge**: *AsyncMergeFunction*<T\>
 
----
+___
 
 ### mergeCatching
 
-• **mergeCatching**: _AsyncMergeCatchingFunction_<T\>
+• **mergeCatching**: *AsyncMergeCatchingFunction*<T\>
 
----
+___
 
 ### mergeEmitter
 
-• **mergeEmitter**: _AsyncMergeEmitterFunction_<T\>
+• **mergeEmitter**: *AsyncMergeEmitterFunction*<T\>
 
----
+___
 
 ### mergeEmitterCatching
 
-• **mergeEmitterCatching**: _AsyncMergeEmitterCatchingFunction_<T\>
+• **mergeEmitterCatching**: *AsyncMergeEmitterCatchingFunction*<T\>
 
----
+___
 
 ### min
 
-• **min**: _AsyncMinFunction_<T\>
+• **min**: *AsyncMinFunction*<T\>
 
----
+___
 
 ### partition
 
-• **partition**: _AsyncPartitionFunction_<T\>
+• **partition**: *AsyncPartitionFunction*<T\>
 
----
+___
 
 ### prepend
 
-• **prepend**: _AsyncPrependFunction_<T\>
+• **prepend**: *AsyncPrependFunction*<T\>
 
----
+___
 
 ### reduce
 
-• **reduce**: _AsyncReduceFunction_<T\>
+• **reduce**: *AsyncReduceFunction*<T\>
 
----
+___
 
 ### reduceAndMap
 
-• **reduceAndMap**: _AsyncReduceAndMapFunction_<T\>
+• **reduceAndMap**: *AsyncReduceAndMapFunction*<T\>
 
----
+___
 
 ### repeat
 
-• **repeat**: _AsyncRepeatFunction_<T\>
+• **repeat**: *AsyncRepeatFunction*<T\>
 
----
+___
 
 ### skip
 
-• **skip**: _AsyncSkipFunction_<T\>
+• **skip**: *AsyncSkipFunction*<T\>
 
----
+___
 
 ### skipWhile
 
-• **skipWhile**: _AsyncSkipWhileFunction_<T\>
+• **skipWhile**: *AsyncSkipWhileFunction*<T\>
 
----
+___
 
 ### some
 
-• **some**: _AsyncAnyFunction_<T\>
+• **some**: *AsyncAnyFunction*<T\>
 
----
+___
 
 ### sort
 
-• **sort**: _AsyncSortFunction_<T\>
+• **sort**: *AsyncSortFunction*<T\>
 
----
+___
 
 ### sortBy
 
-• **sortBy**: _AsyncSortByFunction_<T\>
+• **sortBy**: *AsyncSortByFunction*<T\>
 
----
+___
 
 ### sum
 
-• **sum**: _AsyncSumFunction_<T\>
+• **sum**: *AsyncSumFunction*<T\>
 
----
+___
 
 ### take
 
-• **take**: _AsyncTakeFunction_<T\>
+• **take**: *AsyncTakeFunction*<T\>
 
----
+___
 
 ### takeWhile
 
-• **takeWhile**: _AsyncTakeWhileFunction_<T\>
+• **takeWhile**: *AsyncTakeWhileFunction*<T\>
 
----
+___
 
 ### toArray
 
-• **toArray**: _AsyncToArrayFunction_<T\>
+• **toArray**: *AsyncToArrayFunction*<T\>
 
----
+___
 
 ### toObject
 
-• **toObject**: _AsyncToObjectFunction_<T\>
+• **toObject**: *AsyncToObjectFunction*<T\>
 
----
+___
 
 ### top
 
-• **top**: _AsyncTopFunction_<T\>
+• **top**: *AsyncTopFunction*<T\>
 
----
+___
 
 ### waitAll
 
-• **waitAll**: _AsyncWaitAllFunction_<T\>
+• **waitAll**: *AsyncWaitAllFunction*<T\>
 
----
+___
 
 ### withIndex
 
-• **withIndex**: _AsyncWithIndexFunction_<T\>
+• **withIndex**: *AsyncWithIndexFunction*<T\>
 
 ## Methods
 
 ### [Symbol.asyncIterator]
 
-▸ **[Symbol.asyncIterator]**(): _AsyncIterator_<T, _any_, _undefined_\>
+▸ **[Symbol.asyncIterator]**(): *AsyncIterator*<T, any, undefined\>
 
-**Returns:** _AsyncIterator_<T, _any_, _undefined_\>
+**Returns:** *AsyncIterator*<T, any, undefined\>
 
----
+___
 
 ### assureOrder
 
-▸ **assureOrder**(): [_FluentAsyncIterable_](fluentasynciterable.md)<T\>
+▸ **assureOrder**(): [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
 Assures the order of the object. For the next operations to be used,
 it will be assumed that the order, no matter the predicate used, will
@@ -413,15 +413,15 @@ be ascending, and this will affect the way some operations works.
 
 Be sure to use this method only if you know the order will be right
 
-**Returns:** [_FluentAsyncIterable_](fluentasynciterable.md)<T\>
+**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
 Inherited from: [OrderAssurable](orderassurable.md)
 
----
+___
 
 ### assureOrderDescending
 
-▸ **assureOrderDescending**(): [_FluentAsyncIterable_](fluentasynciterable.md)<T\>
+▸ **assureOrderDescending**(): [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
 Assures the descending order of the object. For the next operations to be used,
 it will be assumed that the order, no matter the predicate used, will
@@ -429,15 +429,15 @@ be descending, and this will affect the way some operations works.
 
 Be sure to use this method only if you know the order will be right
 
-**Returns:** [_FluentAsyncIterable_](fluentasynciterable.md)<T\>
+**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
 Inherited from: [OrderAssurable](orderassurable.md)
 
----
+___
 
 ### combineEmitter
 
-▸ **combineEmitter**<U\>(`emitter`: _EventEmitter_, `options?`: FluentEmitOptions): [_FluentAsyncIterable_](fluentasynciterable.md)<[T, U]\>
+▸ **combineEmitter**<U\>(`emitter`: *EventEmitter*, `options?`: FluentEmitOptions): [*FluentAsyncIterable*](fluentasynciterable.md)<[T, U]\>
 
 Join the iterable with an EventEmitter, returning a new async iterable with a NxN combination
 
@@ -452,20 +452,20 @@ If you need to change the key event or other characteristics, you can do it thro
 
 #### Type parameters:
 
-| Name | Default |
-| ---- | ------- |
-| `U`  | _any_   |
+Name | Default |
+:------ | :------ |
+`U` | *any* |
 
 #### Parameters:
 
-| Name       | Type              | Description                        |
-| ---------- | ----------------- | ---------------------------------- |
-| `emitter`  | _EventEmitter_    | The EventEmitter                   |
-| `options?` | FluentEmitOptions | The EventEmitter options. Optional |
+Name | Type | Description |
+:------ | :------ | :------ |
+`emitter` | *EventEmitter* | The EventEmitter   |
+`options?` | FluentEmitOptions | The EventEmitter options. Optional    |
 
-**Returns:** [_FluentAsyncIterable_](fluentasynciterable.md)<[T, U]\>
+**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<[T, U]\>
 
-▸ **combineEmitter**<U, K\>(`emitter`: _EventEmitter_, `keyA`: [_Mapper_](mapper.md)<T, K\>, `keyB`: [_Mapper_](mapper.md)<U, K\>, `options?`: FluentEmitOptions): [_FluentAsyncIterable_](fluentasynciterable.md)<[T, U]\>
+▸ **combineEmitter**<U, K\>(`emitter`: *EventEmitter*, `keyA`: [*Mapper*](mapper.md)<T, K\>, `keyB`: [*Mapper*](mapper.md)<U, K\>, `options?`: FluentEmitOptions): [*FluentAsyncIterable*](fluentasynciterable.md)<[T, U]\>
 
 Join the iterable with another the EventEmitter, returning a new async iterable with the inner matching combinations
 
@@ -480,23 +480,23 @@ If you need to change the key event or other characteristics, you can do it thro
 
 #### Type parameters:
 
-| Name |
-| ---- |
-| `U`  |
-| `K`  |
+Name |
+:------ |
+`U` |
+`K` |
 
 #### Parameters:
 
-| Name       | Type                         | Description                                                     |
-| ---------- | ---------------------------- | --------------------------------------------------------------- |
-| `emitter`  | _EventEmitter_               | The EventEmitter                                                |
-| `keyA`     | [_Mapper_](mapper.md)<T, K\> | A mapper that returns the key map value from the left iterable  |
-| `keyB`     | [_Mapper_](mapper.md)<U, K\> | A mapper that returns the key map value from the right iterable |
-| `options?` | FluentEmitOptions            | The EventEmitter options. Optional                              |
+Name | Type | Description |
+:------ | :------ | :------ |
+`emitter` | *EventEmitter* | The EventEmitter   |
+`keyA` | [*Mapper*](mapper.md)<T, K\> | A mapper that returns the key map value from the left iterable   |
+`keyB` | [*Mapper*](mapper.md)<U, K\> | A mapper that returns the key map value from the right iterable    |
+`options?` | FluentEmitOptions | The EventEmitter options. Optional   |
 
-**Returns:** [_FluentAsyncIterable_](fluentasynciterable.md)<[T, U]\>
+**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<[T, U]\>
 
-▸ **combineEmitter**<U, K\>(`emitter`: _EventEmitter_, `keyA`: keyof T, `keyB`: [_Mapper_](mapper.md)<U, K\>, `options?`: FluentEmitOptions): [_FluentAsyncIterable_](fluentasynciterable.md)<[T, U]\>
+▸ **combineEmitter**<U, K\>(`emitter`: *EventEmitter*, `keyA`: keyof T, `keyB`: [*Mapper*](mapper.md)<U, K\>, `options?`: FluentEmitOptions): [*FluentAsyncIterable*](fluentasynciterable.md)<[T, U]\>
 
 Join the iterable with another the EventEmitter, returning a new async iterable with the inner matching combinations
 
@@ -511,27 +511,27 @@ If you need to change the key event or other characteristics, you can do it thro
 
 #### Type parameters:
 
-| Name |
-| ---- |
-| `U`  |
-| `K`  |
+Name |
+:------ |
+`U` |
+`K` |
 
 #### Parameters:
 
-| Name       | Type                         | Description                                                     |
-| ---------- | ---------------------------- | --------------------------------------------------------------- |
-| `emitter`  | _EventEmitter_               | The EventEmitter                                                |
-| `keyA`     | keyof T                      | A mapper that returns the key map value from the left iterable  |
-| `keyB`     | [_Mapper_](mapper.md)<U, K\> | A mapper that returns the key map value from the right iterable |
-| `options?` | FluentEmitOptions            | The EventEmitter options. Optional                              |
+Name | Type | Description |
+:------ | :------ | :------ |
+`emitter` | *EventEmitter* | The EventEmitter   |
+`keyA` | keyof T | A mapper that returns the key map value from the left iterable   |
+`keyB` | [*Mapper*](mapper.md)<U, K\> | A mapper that returns the key map value from the right iterable    |
+`options?` | FluentEmitOptions | The EventEmitter options. Optional   |
 
-**Returns:** [_FluentAsyncIterable_](fluentasynciterable.md)<[T, U]\>
+**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<[T, U]\>
 
----
+___
 
 ### concatEmitter
 
-▸ **concatEmitter**(`emitter`: _EventEmitter_, `options?`: FluentEmitOptions): [_FluentAsyncIterable_](fluentasynciterable.md)<T\>
+▸ **concatEmitter**(`emitter`: *EventEmitter*, `options?`: FluentEmitOptions): [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
 Concatenates the specified Emitter to the async iterable.
 
@@ -546,20 +546,20 @@ If you need to change the key event or other characteristics, you can do it thro
 
 #### Parameters:
 
-| Name       | Type              | Description                        |
-| ---------- | ----------------- | ---------------------------------- |
-| `emitter`  | _EventEmitter_    | The EventEmitter                   |
-| `options?` | FluentEmitOptions | The EventEmitter options. Optional |
+Name | Type | Description |
+:------ | :------ | :------ |
+`emitter` | *EventEmitter* | The EventEmitter   |
+`options?` | FluentEmitOptions | The EventEmitter options. Optional   |
 
-**Returns:** [_FluentAsyncIterable_](fluentasynciterable.md)<T\>
+**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
 The [FluentAsyncIterable](fluentasynciterable.md) of the concatenated async iterables.
 
----
+___
 
 ### o
 
-▸ **o**(): [_FluentAsyncIterable_](fluentasynciterable.md)<T\>
+▸ **o**(): [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
 Alias for assureOrder
 
@@ -569,15 +569,15 @@ be ascending, and this will affect the way some operations works.
 
 Be sure to use this method only if you know the order will be right
 
-**Returns:** [_FluentAsyncIterable_](fluentasynciterable.md)<T\>
+**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
 Inherited from: [OrderAssurable](orderassurable.md)
 
----
+___
 
 ### od
 
-▸ **od**(): [_FluentAsyncIterable_](fluentasynciterable.md)<T\>
+▸ **od**(): [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
 alias for assureOrderDescending
 
@@ -587,6 +587,6 @@ be descending, and this will affect the way some operations works.
 
 Be sure to use this method only if you know the order will be right
 
-**Returns:** [_FluentAsyncIterable_](fluentasynciterable.md)<T\>
+**Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
 Inherited from: [OrderAssurable](orderassurable.md)

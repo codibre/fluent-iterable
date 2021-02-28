@@ -1,4 +1,4 @@
-[fluent-iterable - v1.10.3](../README.md) / FluentIterable
+[fluent-iterable - v1.11.0](../README.md) / FluentIterable
 
 # Interface: FluentIterable<T\>
 
@@ -8,7 +8,7 @@ Represents an iterable extended with common processing and mutating capabilities
 ## Type parameters
 
 Name | Description |
------- | ------ |
+:------ | :------ |
 `T` | The type of the items in the iterable.    |
 
 ## Hierarchy
@@ -579,9 +579,9 @@ ___
 
 ### [Symbol.iterator]
 
-▸ **[Symbol.iterator]**(): *Iterator*<T, *any*, *undefined*\>
+▸ **[Symbol.iterator]**(): *Iterator*<T, any, undefined\>
 
-**Returns:** *Iterator*<T, *any*, *undefined*\>
+**Returns:** *Iterator*<T, any, undefined\>
 
 ___
 
@@ -635,13 +635,13 @@ If you need to change the key event or other characteristics, you can do it thro
 #### Type parameters:
 
 Name | Default |
------- | ------ |
+:------ | :------ |
 `U` | *any* |
 
 #### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
+:------ | :------ | :------ |
 `emitter` | *EventEmitter* | The EventEmitter   |
 `options?` | FluentEmitOptions | The EventEmitter options. Optional    |
 
@@ -663,14 +663,14 @@ If you need to change the key event or other characteristics, you can do it thro
 #### Type parameters:
 
 Name |
------- |
+:------ |
 `U` |
 `K` |
 
 #### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
+:------ | :------ | :------ |
 `emitter` | *EventEmitter* | The EventEmitter   |
 `keyA` | [*Mapper*](mapper.md)<T, K\> | A mapper that returns the key map value from the left iterable   |
 `keyB` | [*Mapper*](mapper.md)<U, K\> | A mapper that returns the key map value from the right iterable    |
@@ -694,14 +694,14 @@ If you need to change the key event or other characteristics, you can do it thro
 #### Type parameters:
 
 Name |
------- |
+:------ |
 `U` |
 `K` |
 
 #### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
+:------ | :------ | :------ |
 `emitter` | *EventEmitter* | The EventEmitter   |
 `keyA` | keyof T | A mapper that returns the key map value from the left iterable   |
 `keyB` | [*Mapper*](mapper.md)<U, K\> | A mapper that returns the key map value from the right iterable    |
@@ -729,7 +729,7 @@ If you need to change the key event or other characteristics, you can do it thro
 #### Parameters:
 
 Name | Type | Description |
------- | ------ | ------ |
+:------ | :------ | :------ |
 `emitter` | *EventEmitter* | The EventEmitter   |
 `options?` | FluentEmitOptions | The EventEmitter options. Optional   |
 
