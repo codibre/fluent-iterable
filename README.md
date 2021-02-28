@@ -6,61 +6,92 @@
 [![npm version](https://badge.fury.io/js/%40codibre%2Ffluent-iterable.svg)](https://badge.fury.io/js/%40codibre%2Ffluent-iterable)
 ![downlods per month](https://img.shields.io/npm/dm/@codibre/fluent-iterable)
 
+A fast way to iterate, sync or async, over array likes, stream and async iterables. It provides [fluent api](https://en.wikipedia.org/wiki/Fluent_interface) operations so you can easily chain many operations.
+
 <p align="center">
 <img src="resources/preview.png">
 </p>
 
-Provides [fluent api](https://en.wikipedia.org/wiki/Fluent_interface) operations on iterables and async iterables - similar to what's defined on arrays. Especially useful until [relevant ESNext features](https://tc39.es/proposal-iterator-helpers/#sec-iteration) are being delivered.
-This library is a fork from [kataik fluent-iterable repository](https://github.com/kataik/fluent-iterable) where more functionalities was added.
+## But Why?
 
-## Description
+When you're dealing with complex operations envolving lists with multiple items, you can fall in the need of transform, filter, perform a flat map or even take just some items from that list. In cases like that, if you're dealing with a pure array, one solution is to simply do something like this:
 
-The library provides the common transformation, filtering and aggregation operations on iterables and async iterables. Supported operations include:
-
-- Item-by-item transformations like [map](docs/interfaces/_types_.fluentiterable.md#map), [withIndex](docs/interfaces/_types_.fluentiterable.md#withIndex)
-- Group transformations like [flatten](docs/interfaces/_types_.fluentiterable.md#flatten), [group](docs/interfaces/_types_.fluentiterable.md#group), [partition](docs/interfaces/_types_.fluentiterable.md#partition), [repeat](docs/interfaces/_types_.fluentiterable.md#repeat), [sort](docs/interfaces/_types_.fluentiterable.md#sort)
-- Extending operations like [append](docs/interfaces/_types_.fluentiterable.md#append), [prepend](docs/interfaces/_types_.fluentiterable.md#prepend), [concat](docs/interfaces/_types_.fluentiterable.md#concat)
-- Narrowing operations like [filter](docs/interfaces/_types_.fluentiterable.md#filter), [take](docs/interfaces/_types_.fluentiterable.md#take), [skip](docs/interfaces/_types_.fluentiterable.md#skip), [distinct](docs/interfaces/_types_.fluentiterable.md#distinct), [first](docs/interfaces/_types_.fluentiterable.md#first), [last](docs/interfaces/_types_.fluentiterable.md#last)
-- Aggregating operations like [reduce](docs/interfaces/_types_.fluentiterable.md#reduce), [toArray](docs/interfaces/_types_.fluentiterable.md#toArray), [toObject](docs/interfaces/_types_.fluentiterable.md#toObject), [join](docs/interfaces/_types_.fluentiterable.md#join)
-- Numeric aggregating operations like [count](docs/interfaces/_types_.fluentiterable.md#count), [max](docs/interfaces/_types_.fluentiterable.md#max), [min](docs/interfaces/_types_.fluentiterable.md#min), [sum](docs/interfaces/_types_.fluentiterable.md#sum), [avg](docs/interfaces/_types_.fluentiterable.md#avg)
-- Logical aggregating operations like [all](docs/interfaces/_types_.fluentiterable.md#all), [any](docs/interfaces/_types_.fluentiterable.md#any), [contains](docs/interfaces/_types_.fluentiterable.md#contains)
-- Execution operations like [execute](docs/interfaces/_types_.fluentiterable.md#execute), [forEach](docs/interfaces/_types_.fluentiterable.md#forEach)
-
-## Quick start guide
-
-Install from [Node Package Manager](https://www.npmjs.com/): `npm i @codibre/fluent-iterable`
-
-Add the following code to your index file (ts example):
 
 ```typescript
-import { fluent, FluentIterable } from '@codibre/fluent-iterable';
-
-const numbers: number[] = [3, 1, 8, 6, 9, 2];
-const iterable: FluentIterable<number> = fluent(numbers);
-
-console.log(
-  `The largest even number is: ${iterable.filter((n) => n % 2 === 0).max()}`,
-);
+const flattedList = [];
+const list2 = list
+    .filter((x) => filter1(x))
+    .map((X) => transform1(x))
+    .filter((x) => filter2(x))
+    .forEach((x) => flattedList.push(...x));
+const result = flattedList
+    .filter((x) => filter3(x))
+    .slice(0, 10)
+    .map((x) => transform2(x));
 ```
+
+This code looks fluent and easy to read, but it is severe to performance.
+That's because each operation do a complete iteration over the array, generating a new one! It can cause serious memory and cpu consumption, so, such practice is not encouraged.
+So, to solve this, you can write an equivalent code which will solve everything in with two chained loops. This will give you the best performance possible, but can result in a code harder to maintain.
+And that's where fast-iterable comes in!
+
+With fast-iterable, you can do the same operation with the following code:
+
+```typescript
+const result = fluent(list)
+    .filter((x) => filter1(x))
+    .map((X) => transform1(x))
+    .filter((x) => filter2(x))
+    .flatMap()
+    .filter((x) => filter3(x))
+    .take(10)
+    .map((x) => transform2(x))
+    .toArray();
+```
+
+Pretty simple, right? With this code, you'll do exactly two chained loops, exactly as the vanilla solution described above!
+fast-iterable takes advantage of the Iterable and AsyncIterable contracts to achieve this, but it goes beyond. It uses a special library called **augmentative-iterables** that we developed as the core engine of the iterations. This library is focused exclusively in performance, so, with it, we achieved a processing time very close to the vanilla solution above!
+Comparing to iterations using **for of**, the native way to iterate over iterables of JavaScript, we achieved a result 50% faster!
+
+## Doesn't it what rxjs do?
+
+No.
+
+Although you can manipulate Iterables in a similar way, rxjs have some key different behaviors and a different purpose overall.
+In summary, we can use rxjs as what themselves define it in their website:
+
+```
+Think of RxJS as Lodash for events.
+```
+
+That's it. Rxjs is focused primarily in event handling.
+Over that, some key differences can be pointed out:
+
+* *A previous operation of rxjs doesn't stop when some next operation stops, while with fast-iterable it does.*<br>
+That's because, with rxjs you can chain multiple operations parallel after one, which makes sense for event handling. With fast-iterable, on the other hand, you can only have, normally, a straight line of operations and,f no matter what operation break the iteration, everything stops.
+* *With rxjs, a previous operation doesn't wait for a async next operation to end before go to the next step, while with fast-iterable it does.*<br>
+Again, rxjs is focused on events. When dealing with event, you just want to emit them as fast as possible. With a simple iteration, though, you want to make sure that the whole chain of steps is concluded before advancing to the next one.
+
+So, as you see, regardless some similarities, there're some pretty important differences between them and those are libraries focused on quite different problems.
 
 ## Usage
 
-Click here for the [Full API Reference](./docs/README.md).
+Fast-iterable have some neat operations already implemente. If you want to Click here for the [Full API Reference](https://github.com/Codibre/fluent-iterable/blob/master/docs/README.md).
 
 ### Basics
 
-ECMAScript introduced support for [iterables and generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators) with version ES6 and their [asynchronous counterparts](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator) with version ES2018. It has introduced an abstraction over sequential iterators (arrays, maps, generators, etc), enabling us to implement solutions regardless of the actual type of the iterable collection. It is especially powerful when using in tandem with generator functions to avoid storing all items in memory when its avoidable. The API provided by _fluent-iterable_ reads the elements of the underlying iterable only when needed and stops reading elements as soon as the result is determined.
+ECMAScript introduced support for [iterables and generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators) with version ES6 and their [asynchronous counterparts](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator) with version ES2018. It has introduced an abstraction over sequential iterators (arrays, maps, generators, etc), enabling us to implement solutions regardless of the actual type of the iterable collection. It is especially powerful when using in tandem with generator functions to avoid storing all items in memory when its avoidable. The API provided by *fast-iterable* reads the elements of the underlying iterable only when needed and stops reading elements as soon as the result is determined.
 
-To get started with the fluent API, you need to translate the iterable (can be any object with [Symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) [iterator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator) or [asyncIterator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator) defined) into either a [FluentIterable](docs/interfaces/_types_.fluentiterable.md) using [fluent()](docs/modules/_fluent_.md#fluent) or a [FluentAsyncIterable](docs/interfaces/_types_.fluentasynciterable.md) using [fluentAsync()](docs/modules/_fluentasync_.md#fluentAsync).
+To get started with the fluent API, you need to translate the iterable (can be any object with [Symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) [iterator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator) or [asyncIterator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator) defined) into either a **FluentIterable** using **fluent()** or a **FluentAsyncIterable** using **fluentAsync()**.
 
-```typescript
+``` typescript
 import fetch from 'node-fetch';
 import {
   fluent,
   fluentAsync,
   FluentIterable,
   FluentAsyncIterable,
-} from '@codibre/fluent-iterable';
+} from 'fast-iterable';
 
 const iterableOfArray: FluentIterable<number> = fluent([3, 1, 8, 6, 9, 2]);
 
@@ -78,7 +109,7 @@ function* naiveFibonacci(): Iterable<number> {
   }
 }
 
-const iterableOfGenerator: FluentIterable<number> = fluent(naiveFibonacci());
+const iterableOfGenerator = fluent(naiveFibonacci());
 
 async function* emails(): AsyncIterable<string> {
   let page = 1;
@@ -91,14 +122,14 @@ async function* emails(): AsyncIterable<string> {
   }
 }
 
-const asyncIterableOfEmails: FluentAsyncIterable<string> = fluentAsync(
+const asyncIterableOfEmails = fluentAsync(
   emails(),
 );
 ```
 
 Once you have an instance of a fluent iterable, you can start chaining any of the supported operations to express what you need, like:
 
-```typescript
+``` typescript
 ...
 
 interface ChatMessage {
@@ -116,7 +147,7 @@ function getAllMessages(iterable: FluentAsyncIterable<ChatMessage>): FluentAsync
 
 function getAllUsers(iterable: FluentAsyncIterable<ChatMessage>): FluentAsyncIterable<string> {
   return iterable
-    .flatten(chatMessage => [ chatMessage.from, chatMessage.to ]) // convert the message entries into arrays of sender and recipient and flatten them
+    .flatMap(chatMessage => [ chatMessage.from, chatMessage.to ]) // convert the message entries into arrays of sender and recipient and flatten them
     .distinct(); // yield the users only once
 }
 
@@ -158,63 +189,14 @@ async function createBackupParallel(iterable: FluentAsyncIterable<ChatMessage>):
 }
 ```
 
-### Utils
-
-The API provides some utility functions to help working with iterables.
-
-#### Interval
-
-The [interval()](docs/modules/_utils_.md#interval) function generates a continuous and unique sequence of numbers. If no arguments provided, the sequence starts at zero and generates infinite numbers.
-
-Note: remember, generator functions are state machines, calling the function will not actually generate the numbers. They are generated on the fly until new number are being read from it:
-
-```typescript
-import { fluent, interval } from '@codibre/fluent-iterable';
-
-const numbers: Iterable<number> = interval();
-const iterable: FluentIterable<number> = fluent(numbers);
-
-for (const number of iterable.take(10)) {
-  // generate the first 10 numbers one-by-one
-  console.log(number);
-} // close the generator
-
-// this function would cause an infinite loop:
-// for (const number of iterable.take(10)) { // generate infinite number of numbers one-by-one
-//   console.log(number);
-// }
-```
-
-#### Depaginator
-
-The [depaginate()](docs/modules/_depaginator_.md#depaginate) is a handy little generator function when it comes down to dealing paginated resources. It is designed to translate the paginated resource into a non-paginated iterable of elements. The function takes one parameter of type [Pager](docs/modules/_types_.md), which defines how to retrieve a single [page](docs/interfaces/_types_.page.md) from the resource.
-
-```typescript
-import { fluentAsync, depaginate, Page, Pager } from '@codibre/fluent-iterable';
-
-interface Data { .. } // The type of the data stored in the paginated resource
-type NextPageToken = ..; // The type of the next page token (e.g. page number, DDB token string, etc)
-
-// These functions return a page of items from the resource in the form of { nextPageToken: NextPageToken, results: Data[] }
-async function getFirstPage(): Promise<Page<Data, NextPageToken>> { .. }
-async function getPage(nextPageToken: NextPageToken): Promise<Page<Data, NextPageToken>> { .. }
-
-const pager: Pager<Data, NextPageToken> = (nextPageToken) => nextPageToken ? getPage(nextPageToken) : getFirstPage();
-
-const allItems: AsyncIterable<Data> = depaginate(pager); // as long as you keep read items from this it will keep requesting pages to fulfil the reads
-const firstItems: FluentAsyncIterable<Data> = fluentAsync(depaginate(pager)).take(10); // you can read up to 10 items from this and it will request exactly as many pages as necessary to fulfill the reads
-
-// ... you get the picture
-```
-
 ### Examples
 
 You can see a list of many advanced examples for **fluent** clicking [here!](advanced-examples/README.md)!
 
 #### Playing with Fibonacci generator
 
-```typescript
-import { fluent } from '@codibre/fluent-iterable';
+``` typescript
+import { fluent } from 'fast-iterable';
 
 function* naiveFibonacci(): Iterable<number> {
   yield 0;
@@ -260,8 +242,8 @@ console.log(
 
 #### Playing with object arrays
 
-```typescript
-import { fluent } from '@codibre/fluent-iterable';
+``` typescript
+import { fluent } from 'fast-iterable';
 
 enum Gender {
   Male = 'Male',
@@ -342,9 +324,9 @@ console.log(
 
 #### Playing with remote
 
-```typescript
+``` typescript
 import fetch from 'node-fetch';
-import { fluentAsync, Pager } from '@codibre/fluent-iterable';
+import { fluentAsync, Pager } from 'fast-iterable';
 
 interface Data {
   id: number;
@@ -372,8 +354,8 @@ fluentAsync(depaginate(pager))
 
 ### Doing an inner join between two iterables:
 
-```typescript
-import { fluent, identity } from '@codibre/fluent-iterable';
+``` typescript
+import { fluent, identity } from 'fast-iterable';
 
 const genders = [
   { code: 'm', description: 'male' },
@@ -421,10 +403,10 @@ fluent(genders)
 
 #### Bonus: How to Scan DynamoDB like a pro
 
-```typescript
+``` typescript
 import { DynamoDB } from 'aws-sdk';
 import { Key } from 'aws-sdk/clients/dynamodb';
-import { depaginate, fluentAsync, Pager } from '@codibre/fluent-iterable';
+import { depaginate, fluentAsync, Pager } from 'fast-iterable';
 
 async function *scan<TData>(
   input: DynamoDB.DocumentClient.ScanInput
@@ -462,16 +444,16 @@ async function printProducts(count: number) {
 
 ## Merging stream, async iterables and async iterators
 
-Due to Readables also being async iterables, it can be very useful, if you have a scenario where you have many streams being dealt with and you need to combine all results, you can use _asyncHelper.merge_ or _asyncHelper.mergeCatching_ for it! The difference between them is that, with _mergeCatching_, you can continue to receive chunks from non concluded async iterables/readables, even if one of them throws an error, while _merge_, in the other hand, will throw an error at the first error received.
+Due to Readables also being async iterables, it can be very useful, if you have a scenario where you have many streams being dealt with and you need to combine all results, you can use *asyncHelper.merge* or *asyncHelper.mergeCatching* for it! The difference between them is that, with *mergeCatching*, you can continue to receive chunks from non concluded async iterables/readables, even if one of them throws an error, while *merge*, in the other hand, will throw an error at the first error received.
 
 The solution used for this problems was 90% inspired in the [fraxken combine-async-iterators repository](https://github.com/fraxken/combine-async-iterators), which uses Promise.race to generate a new merged iterable that yields the items from all iterators in the resolving order.
 
 ## Adding custom operations
 
-You can add custom methods to the FluentIterable and FluentAsyncIterable using the _extend_ and _extendAsync_ utilities. Here is a practical example of how to:
+You can add custom methods to the FluentIterable and FluentAsyncIterable using the *extend* and *extendAsync* utilities. Here is a practical example of how to:
 
-```TypeScript
-declare module '@codibre/fluent-iterable' {
+``` TypeScript
+declare module 'fast-iterable' {
   import { extendAsync } from '../src';
 
   interface FluentAsyncIterable<T> {
@@ -491,7 +473,7 @@ Notice that, when you import a code like the above, all the next created FluentA
 One thing you can do to get the best performance from this package is to signalize when determined predicate
 will generate or analyze results in order. Take this example:
 
-```ts
+``` ts
 const result = fluent([1, 2, 3, 4, 5])
   .filter((x) => x < 3)
   .toArray();
@@ -503,7 +485,7 @@ The way it is declared, this operation will print 2 items, but will validate 5. 
 though, so, why we need validate all items?
 We can avoid this if you assure for fluent-iterable that the filter predicate will treat elements in order:
 
-```ts
+``` ts
 const result = fluent([1, 2, 3, 4, 5])
   .filter(assureOrder((x) => x < 3))
   .toArray();
@@ -514,7 +496,7 @@ console.log(result); // prints [1, 2]
 This result will be the same, but this operation will only validate 3 items! The third item will be 3 and will make the iteration to stop!
 You can also do the same operation with an alias for **assureOrder**:
 
-```ts
+``` ts
 const result = fluent([1, 2, 3, 4, 5])
   .filter(o((x) => x < 3))
   .toArray();
@@ -524,7 +506,7 @@ console.log(result); // prints [1, 2]
 
 You can also assure the order for a whole iterable
 
-```ts
+``` ts
 const result = fluent(o([1, 2, 3, 4, 5])) // or o(fluent([1, 2, 3, 4, 5]))
   .assureOrder() // you can also use alias .o()
   .filter((x) => x < 3)
@@ -535,7 +517,7 @@ console.log(result); // prints [1, 2]
 
 Or you can use the fluent syntax:
 
-```ts
+``` ts
 const result = fluent([1, 2, 3, 4, 5])
   .assureOrder() // you can also use alias .o()
   .filter((x) => x < 3)
@@ -548,7 +530,7 @@ But these later ones have a behavior slight different from assuring a predicate 
 
 So, something like this:
 
-```ts
+``` ts
 const result = fluent([1, 2, 3, 4, 5])
   .o()
   .filter((x) => x < 3)
@@ -562,7 +544,7 @@ But **max** is a particular operation that could take a benefit much greater fro
 simply become equivalent to **first**. If you fall into such situation, you can also indicate it to fluent,
 like this:
 
-```ts
+``` ts
 const result = fluent([5, 4, 3, 2, 1])
   .od() // you can also use alias .assureOrderDescending()
   .filter((x) => x < 3)
@@ -570,19 +552,6 @@ const result = fluent([5, 4, 3, 2, 1])
 
 console.log(result); // prints 2
 ```
-
-On the other hand, **min** works better with an ascending iterable so it takes more benefits more from an ascending assuring.
-
-Finally, some fluent operations benefits equally from an ascending or descending assuring, and they are:
-
-- count;
-- distinct;
-- filter;
-- group;
-- isDistinct;
-- last;
-
-So, if you find yourself in some situation where you can assure the order, asc or desc, do it and get the best performance you could with your fluent operations!
 
 ## License
 
