@@ -1,4 +1,4 @@
-[fluent-iterable - v1.12.0](../README.md) / FluentEmitter
+[fluent-iterable - v1.13.0](../README.md) / FluentEmitter
 
 # Interface: FluentEmitter<T\>
 

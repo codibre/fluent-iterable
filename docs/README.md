@@ -1,6 +1,6 @@
-fluent-iterable - v1.12.0
+fluent-iterable - v1.13.0
 
-# fluent-iterable - v1.12.0
+# fluent-iterable - v1.13.0
 
 ## Table of contents
 
@@ -71,6 +71,7 @@ fluent-iterable - v1.12.0
 - [isFluentAsyncIterable](README.md#isfluentasynciterable)
 - [isFluentIterable](README.md#isfluentiterable)
 - [isIterable](README.md#isiterable)
+- [isPromise](README.md#ispromise)
 - [iterate](README.md#iterate)
 - [iterateAll](README.md#iterateall)
 - [iterateAllAsync](README.md#iterateallasync)
@@ -998,6 +999,20 @@ Name | Type | Description |
 **Returns:** value is Iterable<T\>
 
 The return is also a type guard, ie, inside an if with that function, the value will be considered an iterable
+
+___
+
+### isPromise
+
+▸ **isPromise**(`t`: *unknown*): t is PromiseLike<any\>
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`t` | *unknown* |
+
+**Returns:** t is PromiseLike<any\>
 
 ___
 

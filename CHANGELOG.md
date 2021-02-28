@@ -1,7 +1,14 @@
 
-## 1.12.0
+## 1.13.0
+* 5f19f26 1.13.0
+* 9034dbd creating catch operators and making append and prepend accepting rest parameters
+* 1610b8d Merge branch 'master' of github.com:Codibre/fluent-iterable
+* b56f0da creating advanced examples folder
 * 79979b1 1.12.0
 * d909cb3 adding flatMerge and whenEmpty operators
+* da25f02 Update README.md
+* 8dfd8ee Update README.md
+* 6f62ba5 Update README.md
 * d41b195 forcing readme update for github pages
 * 58b1998 1.11.1
 * 81b4ffe releasing
@@ -168,6 +175,14 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.13.0
+* 5f19f26 1.13.0
+* 9034dbd creating catch operators and making append and prepend accepting rest parameters
+* 1610b8d Merge branch 'master' of github.com:Codibre/fluent-iterable
+* b56f0da creating advanced examples folder
+* da25f02 Update README.md
+* 8dfd8ee Update README.md
+* 6f62ba5 Update README.md
 ## v1.12.0
 * 79979b1 1.12.0
 * d909cb3 adding flatMerge and whenEmpty operators

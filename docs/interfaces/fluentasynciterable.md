@@ -1,4 +1,4 @@
-[fluent-iterable - v1.12.0](../README.md) / FluentAsyncIterable
+[fluent-iterable - v1.13.0](../README.md) / FluentAsyncIterable
 
 # Interface: FluentAsyncIterable<T\>
 
@@ -29,6 +29,7 @@ Name | Description |
 - [any](fluentasynciterable.md#any)
 - [append](fluentasynciterable.md#append)
 - [avg](fluentasynciterable.md#avg)
+- [catch](fluentasynciterable.md#catch)
 - [combine](fluentasynciterable.md#combine)
 - [concat](fluentasynciterable.md#concat)
 - [contains](fluentasynciterable.md#contains)
@@ -112,6 +113,12 @@ ___
 ### avg
 
 • **avg**: *AsyncAvgFunction*<T\>
+
+___
+
+### catch
+
+• **catch**: *AsyncCatchFunction*<T\>
 
 ___
 
