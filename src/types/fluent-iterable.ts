@@ -81,5 +81,7 @@ declare module './base' {
     emit: f.EmitFunction<T>;
     flatMerge: f.FlatMergeFunction<T>;
     whenEmpty: f.WhenEmptyFunction;
+    catch: f.CatchFunction<T>;
+    catchAsync: f.AsyncCatchFunction<T>;
   }
 }

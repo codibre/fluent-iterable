@@ -55,5 +55,6 @@ declare module './base' {
     emit: f.AsyncEmitFunction<T>;
     flatMerge: f.FlatMergeFunction<T>;
     whenEmpty: f.AsyncWhenEmptyFunction;
+    catch: f.AsyncCatchFunction<T>;
   }
 }

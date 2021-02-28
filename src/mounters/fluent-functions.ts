@@ -46,6 +46,7 @@ import {
   takeWhile,
   isDistinct,
   whenEmpty,
+  catchSync,
 } from '../sync';
 import {
   allAsync,
@@ -77,6 +78,7 @@ import {
 } from '../async';
 import { combineEmitter, concatEmitter } from '../emitter';
 import * as common from '../common';
+import { catchAsync } from '../async-base';
 
 export const iterableFuncs = {
   ...common,
@@ -99,6 +101,7 @@ export const iterableFuncs = {
   execute,
   combine,
   whenEmpty,
+  catch: catchSync,
 };
 
 export const iterableAsyncFuncs = {
@@ -116,6 +119,7 @@ export const iterableAsyncFuncs = {
   combineAsync,
   combineEmitter,
   concatEmitter,
+  catchAsync,
 };
 
 export const special = {

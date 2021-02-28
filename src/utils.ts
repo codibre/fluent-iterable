@@ -371,6 +371,10 @@ export function getGroupingDistinct<K, T, NewT = T[]>(
   };
 }
 
+export function isPromise(t: unknown): t is PromiseLike<any> {
+  return !!(t && typeof (t as any).then === 'function');
+}
+
 export {
   assureOrder,
   assureOrderDescending,

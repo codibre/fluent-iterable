@@ -51,7 +51,12 @@ import {
   mergeEmitter,
   mergeEmitterCatching,
 } from '../emitter';
-import { merge, mergeCatching, whenEmptyAsync } from '../async-base';
+import {
+  catchAsync,
+  merge,
+  mergeCatching,
+  whenEmptyAsync,
+} from '../async-base';
 import * as common from '../common';
 
 export const asyncIterableFuncs = {
@@ -87,6 +92,7 @@ export const asyncIterableFuncs = {
   mergeEmitter,
   mergeEmitterCatching,
   whenEmpty: whenEmptyAsync,
+  catch: catchAsync,
 };
 
 export const asyncSpecial = {

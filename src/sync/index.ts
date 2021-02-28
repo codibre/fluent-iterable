@@ -2,6 +2,7 @@ export * from './all';
 export * from './any';
 export * from './append';
 export * from './avg';
+export * from './catch';
 export * from './combine';
 export * from './concat';
 export * from './contains';
