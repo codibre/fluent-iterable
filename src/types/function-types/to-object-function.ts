@@ -3,7 +3,7 @@ import { ToObjectKeyType } from '../base';
 
 type ObjectResult<
   R extends string | symbol | number,
-  O  extends {
+  O extends {
     [k in R]: unknown;
   }
 > = {
@@ -26,9 +26,7 @@ export interface ToObjectFunction<T> {
    * @param keySelector Projects an element of the iterable into the key of the corresponding field.
    * @returns The object composed of the elements of the iterable as fields.
    */
-  <R extends KeyType>(
-    keySelector: Mapper<T, R>,
-  ): Record<R, T>;
+  <R extends KeyType>(keySelector: Mapper<T, R>): Record<R, T>;
 
   /**
    * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by a key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -52,9 +50,7 @@ export interface ToObjectFunction<T> {
    * @param keySelector Projects an element of the iterable into the key of the corresponding field.
    * @returns The object composed of the elements of the iterable as fields.
    */
-  <R1 extends keyof T>(
-    keySelector: R1,
-  ): Record<ToObjectKeyType<T, R1>, T>;
+  <R1 extends keyof T>(keySelector: R1): Record<ToObjectKeyType<T, R1>, T>;
 
   /**
    * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by a key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -66,10 +62,10 @@ export interface ToObjectFunction<T> {
    * @param valueSelector Projects an element of the iterable into the value of the corresponding field. The identity function is being used if omitted.
    * @returns The object composed of the elements of the iterable as fields.
    */
-  <R1 extends keyof T, R>(
-    keySelector: R1,
-    valueSelector: Mapper<T, R>,
-  ): Record<ToObjectKeyType<T, R1>, R>;
+  <R1 extends keyof T, R>(keySelector: R1, valueSelector: Mapper<T, R>): Record<
+    ToObjectKeyType<T, R1>,
+    R
+  >;
 
   /**
    * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by a key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -109,9 +105,7 @@ export interface AsyncToObjectFunction<T> {
    * @param keySelector Asynchronously projects an element of the iterable into the key of the corresponding field.
    * @returns A promise of the object composed of the elements of the iterable as fields.
    */
-  <R extends KeyType>(
-    keySelector: AsyncMapper<T, R>,
-  ): Promise<Record<R, T>>;
+  <R extends KeyType>(keySelector: AsyncMapper<T, R>): Promise<Record<R, T>>;
 
   /**
    * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by an asynchronous key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -131,9 +125,9 @@ export interface AsyncToObjectFunction<T> {
    * @param keySelector Asynchronously projects an element of the iterable into the key of the corresponding field.
    * @returns A promise of the object composed of the elements of the iterable as fields.
    */
-  <R1 extends keyof T>(
-    keySelector: R1,
-  ): Promise<Record<ToObjectKeyType<T, R1>, T>>;
+  <R1 extends keyof T>(keySelector: R1): Promise<
+    Record<ToObjectKeyType<T, R1>, T>
+  >;
 
   /**
    * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by an asynchronous key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.

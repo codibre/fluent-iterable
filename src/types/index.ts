@@ -11,7 +11,6 @@ export * from './fluent-iterable';
 export * from './iterator-catch-result';
 export * from './truthy';
 
-
 const categories = [
   {
     id: 1,
