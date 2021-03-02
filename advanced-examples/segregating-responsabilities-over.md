@@ -1,11 +1,12 @@
 # Segregating responsibilities over
 
-It's common practice to organize a project following an DDD, onion, or hexagonal architecture. All of them have their own differences, but one thing in common: there is an application and a domain layer.
+It's a common practice to organize a project following an DDD, onion, or hexagonal architecture. All of them have their own differences, but one thing in common: there is an application and a domain layer.
 
-The handlers, or application service, in the application layer must have the responsibility of orchestrating the domain services
-The domain services must have a single and decoupled responsibility, with no relation at all with nothing of infrastructure implementation and no dependencies with others domain services.
+The **handlers**, or application services, in the application layer must have the responsibility to orchestrate the domain services.
 
-With fluent iterable, de capability os segregate those responsibilities is fortified, and you can fluently orchestrate your application flow in your handler/application service. Let's see how we can do this
+The domain services must have a single and decoupled responsibility, with no relation at all with infrastructure implementation and no dependencies with others domain services.
+
+With fluent iterable, the capability of segregate those responsibilities is fortified, and you can fluently orchestrate your application flow in your handler/application service. Let's see how we can do this:
 
 ```ts
 class MyHandler {
@@ -19,7 +20,7 @@ class MyHandler {
     return fluentAsync(
       this.service1.doSomeBusinessRule(command), // Here, doSomeBusinessRule returns an Iterable, AsyncIterable, Readable, FluentIterable or FluentAsyncIterable
     )
-      .next((x) => this.service2.doYourPart(x)) // x, in this case, is FluentAsyncIterable with the item type defined by doSomeBusinessRule
+      .next((x) => this.service2.doYourPart(x)) // x, in this case, is a FluentAsyncIterable with the item type defined by doSomeBusinessRule
       .next((x) => this.service3.finishTheJob(x)); // now, x has it's item type defined by doYourPart
   }
 }
