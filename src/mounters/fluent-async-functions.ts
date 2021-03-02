@@ -44,6 +44,7 @@ import {
   mapAsync,
   isDistinctAsync,
   flatMergeAsync,
+  nextAsync,
 } from '../async';
 import {
   combineEmitter,
@@ -98,6 +99,7 @@ export const asyncIterableFuncs = {
 export const asyncSpecial = {
   partition: partitionAsync,
   group: groupAsync,
+  next: nextAsync,
 };
 
 export const asyncResolvingFuncs = {

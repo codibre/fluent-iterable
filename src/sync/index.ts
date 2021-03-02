@@ -26,6 +26,7 @@ export * from './last';
 export * from './map';
 export * from './max';
 export * from './min';
+export * from './next';
 export * from './partition';
 export * from './prepend';
 export * from './reduce';

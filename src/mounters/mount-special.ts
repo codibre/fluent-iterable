@@ -2,11 +2,11 @@ import { fluentGroup } from '../utils';
 import { AnyIterable } from 'augmentative-iterable';
 
 export type SpecialType = {
-  [key in 'group' | 'groupAsync' | 'partition']: Function;
+  [key in 'group' | 'groupAsync' | 'partition' | 'next']: Function;
 };
 
 export function mountSpecial<T>(
-  { group, groupAsync, partition }: Partial<SpecialType>,
+  { group, groupAsync, partition, next }: Partial<SpecialType>,
   wrapper: (...args: any[]) => any,
   asyncWrapper: (...args: any[]) => any,
 ) {
@@ -28,5 +28,11 @@ export function mountSpecial<T>(
       return wrapper(part);
     });
   };
+
+  if (next) {
+    result.next = function <T>(this: AnyIterable<T>, ...args: any[]) {
+      return next.call(wrapper(this), ...args);
+    };
+  }
   return result;
 }

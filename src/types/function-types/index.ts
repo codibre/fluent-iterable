@@ -31,6 +31,7 @@ export * from './merge-emitter-catching-function';
 export * from './merge-emitter-function';
 export * from './merge-function';
 export * from './min-function';
+export * from './next-function';
 export * from './partition-function';
 export * from './prepend-function';
 export * from './reduce-and-map-function';

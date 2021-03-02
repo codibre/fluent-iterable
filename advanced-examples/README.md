@@ -8,3 +8,4 @@ Here you'll find a collection of advanced examples of fluent usability!
 - [Iterate over chunked streams seamlessly](iterate-chunks.md): Iterate over chunked streams like if you're dealing with simples lists!
 - [Chain async and sync operations](combining-sync-and-async-operations.md): Chain sync and async operations over the fluent flow
 - [Creating and validating unique lists](creating-and-validation-unique-list.md): How to generate unique lists or validate if an iterable is unique on the flow
+- [Segregating responsibilities over](segregating-responsabilities-over.md): A elegant way to segregate responsibilities and orchestrate a iterable flow fluently, fit for a DDD, Onion o Hexagonal architecture!
