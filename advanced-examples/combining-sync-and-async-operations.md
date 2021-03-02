@@ -17,7 +17,7 @@ take(10); //Take just 10 items
 
 The good thing here is that fluent works over the iterable and async iterable mechanism, and in that way, it is possible to chain operations that results in promises, and all the iterable sequence will be respected, instead of generating a lot of promises which will flood node queue.
 
-The only thing is that, when you're dealing with **FluentAsyncIterable**, you don't need to do nothing for this to work, but, if your working with sync iterables, then you must specify that you want a async operation n soe point, like this:
+The only thing is that, when you're dealing with **FluentAsyncIterable**, you don't need to do nothing for this to work, but, if you're working with sync iterables, then you must specify that you want a async operation n soe point, like this:
 
 ```ts
 fluent(data)
