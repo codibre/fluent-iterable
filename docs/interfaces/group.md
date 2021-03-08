@@ -1,4 +1,4 @@
-[fluent-iterable - v1.14.0](../README.md) / Group
+[fluent-iterable - v1.14.1](../README.md) / Group
 
 # Interface: Group<T, R\>
 

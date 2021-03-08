@@ -1,4 +1,4 @@
-[fluent-iterable - v1.14.0](../README.md) / Page
+[fluent-iterable - v1.14.1](../README.md) / Page
 
 # Interface: Page<T, TToken\>
 
@@ -22,7 +22,7 @@ Name | Description |
 
 ### nextPageToken
 
-• `Optional` **nextPageToken**: *undefined* \| TToken
+• `Optional` **nextPageToken**: TToken
 
 The next page token associated to the page.
 

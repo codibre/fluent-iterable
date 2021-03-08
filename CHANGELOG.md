@@ -1,5 +1,10 @@
 
-## 1.14.0
+## 1.14.1
+* 5ededaf 1.14.1
+* 0b1d88e Merge branch 'master' of github.com:Codibre/fluent-iterable
+* e33638a improving performance avoiding proxy use when possible
+* 203c860 Update segregating-responsabilities-over.md
+* 359c52f updating docs and changelog
 * 2ebbcba 1.14.0
 * 7c4233b creating the next operation
 * e32084b Merge branch 'master' of github.com:Codibre/fluent-iterable
@@ -121,6 +126,8 @@
 * 00ced81 fixing import name lib in readme file (#19)
 * 95af91f creating publish action (#17)
 * 63ed241 1.6.0 (#16)
+## v1.6.0
+* a4f849d 1.6.0
 * 760da33 Issue 14 make fluent accept strings in place of functions (#15)
 * 712fa57 Issue 11 order assuring option for faster opertations (#12)
 * 4060526 Issue 9 implement method is dinstinct (#10)
@@ -195,6 +202,12 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.14.1
+* 5ededaf 1.14.1
+* 0b1d88e Merge branch 'master' of github.com:Codibre/fluent-iterable
+* e33638a improving performance avoiding proxy use when possible
+* 203c860 Update segregating-responsabilities-over.md
+* 359c52f updating docs and changelog
 ## v1.14.0
 * 2ebbcba 1.14.0
 * 7c4233b creating the next operation
