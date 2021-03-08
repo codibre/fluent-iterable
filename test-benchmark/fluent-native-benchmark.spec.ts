@@ -14,7 +14,7 @@ import { expect } from 'chai';
  * fluent-iterable will also win.
  */
 
-const TAKE_WHILE_THRESHOLD = 3000;
+const TAKE_WHILE_THRESHOLD = 1000;
 const USE_TAKE_WHILE = true;
 
 function* mapTimes7(iterable: Iterable<number>) {
@@ -144,8 +144,7 @@ describe('fluent x native', () => {
     };
   }
 
-  describe('Execution for 1 iteration', executionSuite(100, 1, 10000));
-  describe('Execution for 10 iteration', executionSuite(100, 10, 10000));
+  describe('Execution for 10 iteration', executionSuite(1000, 10, 10000));
   describe('Execution for 100 iteration', executionSuite(100, 100, 10000));
   describe('Execution for 1000 iteration', executionSuite(100, 1000, 10000));
 });

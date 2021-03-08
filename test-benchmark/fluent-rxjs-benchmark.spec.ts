@@ -20,7 +20,7 @@ import { expect } from 'chai';
  * to false.
  */
 
-const TAKE_WHILE_THRESHOLD = 3000;
+const TAKE_WHILE_THRESHOLD = 200;
 const USE_TAKE_WHILE = true;
 
 describe('fluent x rxjs', () => {
