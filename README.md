@@ -15,6 +15,10 @@ A fast way to iterate, sync or async, over array likes, stream and async iterabl
 <img src="resources/preview.png">
 </p>
 
+## Benchmarks
+
+Fluent-iterable are strongly focused on performance. Check it out in our [benchmark](https://runkit.com/farenheith/fluent-iterable-benchmark)!;
+
 ## But Why?
 
 When you're dealing with complex operations envolving lists with multiple items, you can fall in the need of transform, filter, perform a flat map or even take just some items from that list. In cases like that, if you're dealing with a pure array, one solution is to simply do something like this:
@@ -75,10 +79,6 @@ Over that, some key differences can be pointed out:
   Again, rxjs is focused on events. When dealing with event, you just want to emit them as fast as possible. With a simple iteration, though, you want to make sure that the whole chain of steps is concluded before advancing to the next one.
 
 So, as you see, regardless some similarities, there're some pretty important differences between them and those are libraries focused on quite different problems.
-
-## Benchmarks
-
-Fluent-iterable are strongly focused on performance. Check it out in our [benchmark](https://runkit.com/farenheith/fluent-iterable-benchmark)!;
 
 ## Usage
 
