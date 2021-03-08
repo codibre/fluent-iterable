@@ -1,9 +1,13 @@
-import { extend, Extender } from 'extension-methods';
+import { Extender } from 'extension-methods';
+import { extendFluent } from './extend-fluent';
 
 export function getFluent(
   iterable: any,
   handler: Extender<any>,
   symbol: symbol,
 ) {
-  return iterable.fluent === symbol ? iterable : extend(iterable, handler);
+  if (iterable.fluent === symbol) {
+    return iterable;
+  }
+  return extendFluent(iterable, handler);
 }

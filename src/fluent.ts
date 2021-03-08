@@ -22,7 +22,7 @@ function fluent<T>(iterable: Iterable<T>): FluentIterable<T> {
 
 Object.assign(proxyReference, {
   ...mountIterableFunctions(iterableFuncs, internalWrapper),
-  ...mountIterableFunctions(iterableAsyncFuncs, internalAsyncWrapper),
+  ...mountIterableFunctions(iterableAsyncFuncs, internalAsyncWrapper, true),
   ...resolvingFuncs,
   ...mountSpecial(special, internalWrapper, internalAsyncWrapper),
   fluent: fluentSymbol,

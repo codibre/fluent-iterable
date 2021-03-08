@@ -1,5 +1,6 @@
 export * from './any-mapper';
 export * from './compare-provider';
+export * from './extend-fluent';
 export * from './find-strut';
 export * from './fluent-symbol';
 export * from './get-fluent';
