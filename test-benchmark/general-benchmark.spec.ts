@@ -9,6 +9,7 @@ const FLAT_FACTOR = 10;
 const MULTIPLIER1 = 3;
 const MULTIPLIER2 = 2;
 const QUOTIENT = 5;
+const TAKE = 2000;
 const benchmarkSuite = new Benchmark.Suite();
 function interval2(init, final) {
   const items: any[] = [];
@@ -34,6 +35,16 @@ function *filter1(it) {
      }
    }
 }
+function *take1(it) {
+   let count = 0;
+   for (const x of it) {
+     count++;
+     if (count >= TAKE) {
+       break;
+     }
+     yield interval2(x, x + FLAT_FACTOR);
+   }
+}
 function *map3(it) {
    for (const x of it) {
      yield interval2(x, x + FLAT_FACTOR);
@@ -49,16 +60,18 @@ describe('General benchmark', () => {
           .map((x) => x * MULTIPLIER2)
           .filter((x) => x % QUOTIENT === 0)
           .map((x) => interval2(x, x + FLAT_FACTOR))
+          .take(TAKE)
           .forEach((x) => x.join(','));
   }).add('array operation chain', () => {
       interval2(1, ITEMS).map((x) => x * MULTIPLIER1)
           .map((x) => x * MULTIPLIER2)
           .filter((x) => x % QUOTIENT === 0)
           .map((x) => interval2(x, x + FLAT_FACTOR))
+          .filter((_x, i) => i < TAKE)
           .map((x) => x.join(','));
   }).add('native iterable', () => {
       const it0 = interval2(1, ITEMS);
-      const it = map3(filter1(map2(map1(it0))));
+      const it = map3(take1(filter1(map2(map1(it0)))));
       for (const x of it) {
         x.join(',');
       }
@@ -69,6 +82,7 @@ describe('General benchmark', () => {
           rxjsOp.map((x) => x * MULTIPLIER2),
           rxjsOp.filter((x) => x % QUOTIENT === 0),
           rxjsOp.map((x) => interval2(x, x + FLAT_FACTOR)),
+          rxjsOp.take(TAKE),
           rxjsOp.map((x) => x.join(',')),
         ).toPromise();
   }).on('cycle', function(event) {
