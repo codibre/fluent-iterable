@@ -47,6 +47,7 @@ import {
   isDistinct,
   whenEmpty,
   catchSync,
+  next,
 } from '../sync';
 import {
   allAsync,
@@ -126,6 +127,7 @@ export const special = {
   partition,
   group,
   groupAsync,
+  next,
 };
 
 export const resolvingFuncs = {
@@ -174,4 +176,5 @@ export const resolvingFuncs = {
   waitAll,
   isDistinct,
   isDistinctAsync,
+  next,
 };

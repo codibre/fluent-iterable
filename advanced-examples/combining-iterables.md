@@ -113,3 +113,5 @@ const categoriesDictionary = fluent(categories)
 ```
 
 With this approach, you had combined the elements by parentId directly in the combine operation, which will make the algorithm take advantage of the faster combination strategy and, then, filtered the combinations by the id relation, which will exclude all the undesirable combinations, but in a subset instead of analyze all combinations possible!
+
+[Go back](README.md)

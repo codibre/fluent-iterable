@@ -49,3 +49,5 @@ const categoriesDictionary = fluent(categories).toObject(
   (x) => x.description,
 );
 ```
+
+[Go back](README.md)

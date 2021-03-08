@@ -1,7 +1,7 @@
 {
   "name": "@codibre/fluent-iterable",
   "description": "Provides LINQ-like fluent api operations for iterables and async iterables (ES2018+).",
-  "version": "1.13.1",
+  "version": "1.14.0",
   "private": false,
   "author": {
     "name": "Thiago O Santos <tos.oliveira@gmail.com>"
@@ -87,6 +87,7 @@
     "benchmark": "^2.1.4",
     "chai": "^4.3.0",
     "chai-callslike": "^1.2.5",
+    "del-cli": "^3.0.1",
     "delay": "^5.0.0",
     "eslint": "^7.21.0",
     "eslint-config-prettier": "^8.1.0",
@@ -95,6 +96,7 @@
     "mocha": "^8.3.0",
     "nyc": "^15.1.0",
     "prettier": "^2.2.1",
+    "reflect-metadata": "^0.1.13",
     "rxjs": "^6.6.6",
     "sinon": "^9.2.4",
     "sinon-chai": "^3.5.0",

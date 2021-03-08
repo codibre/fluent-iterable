@@ -1,4 +1,4 @@
-[fluent-iterable - v1.13.1](../README.md) / FluentAsyncIterable
+[fluent-iterable - v1.14.0](../README.md) / FluentAsyncIterable
 
 # Interface: FluentAsyncIterable<T\>
 
@@ -60,6 +60,7 @@ Name | Description |
 - [mergeEmitter](fluentasynciterable.md#mergeemitter)
 - [mergeEmitterCatching](fluentasynciterable.md#mergeemittercatching)
 - [min](fluentasynciterable.md#min)
+- [next](fluentasynciterable.md#next)
 - [partition](fluentasynciterable.md#partition)
 - [prepend](fluentasynciterable.md#prepend)
 - [reduce](fluentasynciterable.md#reduce)
@@ -299,6 +300,12 @@ ___
 ### min
 
 • **min**: *AsyncMinFunction*<T\>
+
+___
+
+### next
+
+• **next**: *AsyncNextFunction*<T\>
 
 ___
 

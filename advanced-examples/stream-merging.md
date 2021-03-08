@@ -26,7 +26,7 @@ function parseResponse(request: MyResponse): MyParsedResponse {
 function getMergedStream(requestList: MyOriginalRequest[]) {
   return fluent(requestList)
     .map((x) => parseRequest(x))
-    .map((x) => runRequest(x))
+    .mapAsync((x) => runRequest(x))
     .flatMerge()
     .map((x) => parseResponse(x));
 }
@@ -39,7 +39,7 @@ you can pass a callback to flatMerge, like this:
 function getMergedStream(requestList: MyOriginalRequest[]) {
   return fluent(requestList)
     .map((x) => parseRequest(x))
-    .map((x) => runRequest(x))
+    .mapAsync((x) => runRequest(x))
     .flatMerge((err, idx) =>> errorCallback(err, idx))
     .map((x) => parseResponse(x));
 }
@@ -54,7 +54,7 @@ In this case, you can add a fallback response, like this:
 function getMergedStream(requestList: MyOriginalRequest[]) {
   return fluent(requestList)
     .map((x) => parseRequest(x))
-    .map((x) => runRequest(x))
+    .mapAsync((x) => runRequest(x))
     .flatMerge((err, idx) =>> errorCallback(err, idx))
     .map((x) => parseResponse(x))
     .whenEmpty(myFallbackIterable);
@@ -62,3 +62,5 @@ function getMergedStream(requestList: MyOriginalRequest[]) {
 ```
 
 **myFallbackIterable** must be an iterable or async iterable object, in this case.
+
+[Go back](README.md)

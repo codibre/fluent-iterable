@@ -1,11 +1,5 @@
-import { AnyIterable, AsyncPredicate, Predicate } from 'augmentative-iterable';
+import { AnyIterable } from 'augmentative-iterable';
 import { FluentAsyncIterable, FluentIterable } from '../base';
-import { Truthy } from '../truthy';
-
-type RequiresTruthy<T, Guarantees extends keyof T> = T &
-  {
-    [P in Guarantees]-?: Truthy<T[P]>;
-  };
 
 export interface WhenEmptyFunction {
   /**

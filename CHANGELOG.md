@@ -1,5 +1,20 @@
 
-## 1.13.1
+## 1.14.0
+* 2ebbcba 1.14.0
+* 7c4233b creating the next operation
+* e32084b Merge branch 'master' of github.com:Codibre/fluent-iterable
+* abfd5cf adding more examples
+* 6f6de68 Create combining-sync-and-async-operations.md
+* 4eea7ec Update combining-sync-and-async-operations.md
+* 04c67ba Update combining-sync-and-async-operations.md
+* 23d47e7 fixing packages
+* ea79142 removing yaml
+* c2be0cd adding more examples
+* 04ec58a fixing lint
+* 114c6e2 fixing combining example
+* b7103b7 fixing combining link
+* 3bc85c6 fixing combining link
+* 9437683 version patch
 * 4c4ac5d 1.13.1
 * 3370f79 bettering toObject signature
 * 4ccf21d Merge branch 'master' of github.com:Codibre/fluent-iterable
@@ -106,8 +121,6 @@
 * 00ced81 fixing import name lib in readme file (#19)
 * 95af91f creating publish action (#17)
 * 63ed241 1.6.0 (#16)
-## v1.6.0
-* a4f849d 1.6.0
 * 760da33 Issue 14 make fluent accept strings in place of functions (#15)
 * 712fa57 Issue 11 order assuring option for faster opertations (#12)
 * 4060526 Issue 9 implement method is dinstinct (#10)
@@ -170,6 +183,7 @@
 * 526cd40 1.2.4
 * c032cc6 updating version of augmentative for the one with strict mode
 * f78c49a Adding memory test or native approach
+## v1.2.3
 * fe96d52 1.2.3
 * d149a28 fixing lint
 * f6e6bba updating changelog and docs
@@ -181,6 +195,22 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.14.0
+* 2ebbcba 1.14.0
+* 7c4233b creating the next operation
+* e32084b Merge branch 'master' of github.com:Codibre/fluent-iterable
+* abfd5cf adding more examples
+* 6f6de68 Create combining-sync-and-async-operations.md
+* 4eea7ec Update combining-sync-and-async-operations.md
+* 04c67ba Update combining-sync-and-async-operations.md
+* 23d47e7 fixing packages
+* ea79142 removing yaml
+* c2be0cd adding more examples
+* 04ec58a fixing lint
+* 114c6e2 fixing combining example
+* b7103b7 fixing combining link
+* 3bc85c6 fixing combining link
+* 9437683 version patch
 ## v1.13.1
 * 4c4ac5d 1.13.1
 * 3370f79 bettering toObject signature

@@ -1,4 +1,4 @@
-[fluent-iterable - v1.13.1](../README.md) / FluentIterable
+[fluent-iterable - v1.14.0](../README.md) / FluentIterable
 
 # Interface: FluentIterable<T\>
 
@@ -78,6 +78,7 @@ Name | Description |
 - [maxAsync](fluentiterable.md#maxasync)
 - [min](fluentiterable.md#min)
 - [minAsync](fluentiterable.md#minasync)
+- [next](fluentiterable.md#next)
 - [partition](fluentiterable.md#partition)
 - [prepend](fluentiterable.md#prepend)
 - [reduce](fluentiterable.md#reduce)
@@ -434,6 +435,12 @@ ___
 ### minAsync
 
 • **minAsync**: *AsyncMinFunction*<T\>
+
+___
+
+### next
+
+• **next**: *NextFunction*<T\>
 
 ___
 
