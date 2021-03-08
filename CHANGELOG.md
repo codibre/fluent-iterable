@@ -1,5 +1,13 @@
 
-## 1.14.1
+## 1.14.2
+* ff6d7c9 1.14.2
+* 611469a updating readme
+* ffa36f7 adding take to benchmark malandramente
+* c2b3254 fixing benchmark names
+* 947c7a3 dividing benchmark by version
+* e39365f removing unuseful benchmarks
+* 0c1bac9 adding benchmark badge
+* dfedeb5 fixing docs
 * 5ededaf 1.14.1
 * 0b1d88e Merge branch 'master' of github.com:Codibre/fluent-iterable
 * e33638a improving performance avoiding proxy use when possible
@@ -202,6 +210,15 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.14.2
+* ff6d7c9 1.14.2
+* 611469a updating readme
+* ffa36f7 adding take to benchmark malandramente
+* c2b3254 fixing benchmark names
+* 947c7a3 dividing benchmark by version
+* e39365f removing unuseful benchmarks
+* 0c1bac9 adding benchmark badge
+* dfedeb5 fixing docs
 ## v1.14.1
 * 5ededaf 1.14.1
 * 0b1d88e Merge branch 'master' of github.com:Codibre/fluent-iterable
