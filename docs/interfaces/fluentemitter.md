@@ -1,4 +1,4 @@
-[fluent-iterable - v1.14.2](../README.md) / FluentEmitter
+[fluent-iterable - v1.14.3](../README.md) / FluentEmitter
 
 # Interface: FluentEmitter<T\>
 
@@ -44,7 +44,7 @@ Name |
 
 Name | Type |
 :------ | :------ |
-`E` | keyof *any* |
+`E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
@@ -65,7 +65,7 @@ ___
 
 Name | Type |
 :------ | :------ |
-`E` | keyof *any* |
+`E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
@@ -102,7 +102,7 @@ ___
 
 Name | Type |
 :------ | :------ |
-`E` | keyof *any* |
+`E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
@@ -122,7 +122,7 @@ ___
 
 Name | Type |
 :------ | :------ |
-`E` | keyof *any* |
+`E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
@@ -142,7 +142,7 @@ ___
 
 Name | Type |
 :------ | :------ |
-`E` | keyof *any* |
+`E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
@@ -163,7 +163,7 @@ ___
 
 Name | Type |
 :------ | :------ |
-`E` | keyof *any* |
+`E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
@@ -184,7 +184,7 @@ ___
 
 Name | Type |
 :------ | :------ |
-`E` | keyof *any* |
+`E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
@@ -205,7 +205,7 @@ ___
 
 Name | Type |
 :------ | :------ |
-`E` | keyof *any* |
+`E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
@@ -226,7 +226,7 @@ ___
 
 Name | Type |
 :------ | :------ |
-`E` | keyof *any* |
+`E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
@@ -247,7 +247,7 @@ ___
 
 Name | Type |
 :------ | :------ |
-`E` | keyof *any* |
+`E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
@@ -267,7 +267,7 @@ ___
 
 Name | Type |
 :------ | :------ |
-`E` | keyof *any* |
+`E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
@@ -287,7 +287,7 @@ ___
 
 Name | Type |
 :------ | :------ |
-`E` | keyof *any* |
+`E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
