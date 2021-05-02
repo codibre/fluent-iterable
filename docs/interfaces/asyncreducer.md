@@ -1,4 +1,4 @@
-[fluent-iterable - v1.14.3](../README.md) / AsyncReducer
+[fluent-iterable - v1.14.4](../README.md) / AsyncReducer
 
 # Interface: AsyncReducer<T, A\>
 
@@ -7,10 +7,10 @@ Represents an asynchronous reducer of type `T` into the accumulator type `A`.<br
 
 ## Type parameters
 
-Name | Description |
-:------ | :------ |
-`T` | The source type.   |
-`A` | The accumulator type.    |
+| Name | Description |
+| :------ | :------ |
+| `T` | The source type. |
+| `A` | The accumulator type. |
 
 ## Callable
 
@@ -20,10 +20,10 @@ Asynchronously generates the next accumulator item based on the previous one and
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`current` | A | The previous accumulator value.   |
-`next` | T | The next item.   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `current` | A | The previous accumulator value. |
+| `next` | T | The next item. |
 
 **Returns:** A \| *Promise*<A\>
 

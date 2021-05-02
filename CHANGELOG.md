@@ -1,7 +1,9 @@
 
-## 1.14.3
-* 3af205a 1.14.3
-* 293ff86 removes proxy ref on get fluent
+## 1.14.4
+* 5b2c8bd 1.14.4
+* 1083980 Merge branch 'master' of github.com:Codibre/fluent-iterable
+* aeaaf8a fixing filter typing error
+* c722efa removes proxy ref on get fluent (#41)
 * 9cc7474 adding more documentation
 * a7980df updating docs
 * ff6d7c9 1.14.2
@@ -214,9 +216,11 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
-## v1.14.3
-* 3af205a 1.14.3
-* 293ff86 removes proxy ref on get fluent
+## v1.14.4
+* 5b2c8bd 1.14.4
+* 1083980 Merge branch 'master' of github.com:Codibre/fluent-iterable
+* aeaaf8a fixing filter typing error
+* c722efa removes proxy ref on get fluent (#41)
 * 9cc7474 adding more documentation
 * a7980df updating docs
 ## v1.14.2

@@ -1,4 +1,4 @@
-[fluent-iterable - v1.14.3](../README.md) / FluentAsyncIterable
+[fluent-iterable - v1.14.4](../README.md) / FluentAsyncIterable
 
 # Interface: FluentAsyncIterable<T\>
 
@@ -7,9 +7,9 @@ Represents an asynchronous iterable extended with common processing and mutating
 
 ## Type parameters
 
-Name | Description |
-:------ | :------ |
-`T` | The type of the items in the asynchronous iterable.    |
+| Name | Description |
+| :------ | :------ |
+| `T` | The type of the items in the asynchronous iterable. |
 
 ## Hierarchy
 
@@ -429,6 +429,8 @@ ___
 
 **Returns:** *AsyncIterator*<T, any, undefined\>
 
+Inherited from: AsyncIterable.\_\_@asyncIterator
+
 ___
 
 ### assureOrder
@@ -480,18 +482,20 @@ If you need to change the key event or other characteristics, you can do it thro
 
 #### Type parameters:
 
-Name | Default |
-:------ | :------ |
-`U` | *any* |
+| Name | Default |
+| :------ | :------ |
+| `U` | *any* |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`emitter` | *EventEmitter* | The EventEmitter   |
-`options?` | FluentEmitOptions | The EventEmitter options. Optional    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `emitter` | *EventEmitter* | The EventEmitter |
+| `options?` | FluentEmitOptions | The EventEmitter options. Optional |
 
 **Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<[T, U]\>
+
+Inherited from: FluentIterableEmitter.combineEmitter
 
 ▸ **combineEmitter**<U, K\>(`emitter`: *EventEmitter*, `keyA`: [*Mapper*](mapper.md)<T, K\>, `keyB`: [*Mapper*](mapper.md)<U, K\>, `options?`: FluentEmitOptions): [*FluentAsyncIterable*](fluentasynciterable.md)<[T, U]\>
 
@@ -508,21 +512,23 @@ If you need to change the key event or other characteristics, you can do it thro
 
 #### Type parameters:
 
-Name |
-:------ |
-`U` |
-`K` |
+| Name |
+| :------ |
+| `U` |
+| `K` |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`emitter` | *EventEmitter* | The EventEmitter   |
-`keyA` | [*Mapper*](mapper.md)<T, K\> | A mapper that returns the key map value from the left iterable   |
-`keyB` | [*Mapper*](mapper.md)<U, K\> | A mapper that returns the key map value from the right iterable    |
-`options?` | FluentEmitOptions | The EventEmitter options. Optional   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `emitter` | *EventEmitter* | The EventEmitter |
+| `keyA` | [*Mapper*](mapper.md)<T, K\> | A mapper that returns the key map value from the left iterable |
+| `keyB` | [*Mapper*](mapper.md)<U, K\> | A mapper that returns the key map value from the right iterable |
+| `options?` | FluentEmitOptions | The EventEmitter options. Optional |
 
 **Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<[T, U]\>
+
+Inherited from: FluentIterableEmitter.combineEmitter
 
 ▸ **combineEmitter**<U, K\>(`emitter`: *EventEmitter*, `keyA`: keyof T, `keyB`: [*Mapper*](mapper.md)<U, K\>, `options?`: FluentEmitOptions): [*FluentAsyncIterable*](fluentasynciterable.md)<[T, U]\>
 
@@ -539,21 +545,23 @@ If you need to change the key event or other characteristics, you can do it thro
 
 #### Type parameters:
 
-Name |
-:------ |
-`U` |
-`K` |
+| Name |
+| :------ |
+| `U` |
+| `K` |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`emitter` | *EventEmitter* | The EventEmitter   |
-`keyA` | keyof T | A mapper that returns the key map value from the left iterable   |
-`keyB` | [*Mapper*](mapper.md)<U, K\> | A mapper that returns the key map value from the right iterable    |
-`options?` | FluentEmitOptions | The EventEmitter options. Optional   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `emitter` | *EventEmitter* | The EventEmitter |
+| `keyA` | keyof T | A mapper that returns the key map value from the left iterable |
+| `keyB` | [*Mapper*](mapper.md)<U, K\> | A mapper that returns the key map value from the right iterable |
+| `options?` | FluentEmitOptions | The EventEmitter options. Optional |
 
 **Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<[T, U]\>
+
+Inherited from: FluentIterableEmitter.combineEmitter
 
 ___
 
@@ -574,14 +582,16 @@ If you need to change the key event or other characteristics, you can do it thro
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`emitter` | *EventEmitter* | The EventEmitter   |
-`options?` | FluentEmitOptions | The EventEmitter options. Optional   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `emitter` | *EventEmitter* | The EventEmitter |
+| `options?` | FluentEmitOptions | The EventEmitter options. Optional |
 
 **Returns:** [*FluentAsyncIterable*](fluentasynciterable.md)<T\>
 
 The [FluentAsyncIterable](fluentasynciterable.md) of the concatenated async iterables.
+
+Inherited from: FluentIterableEmitter.concatEmitter
 
 ___
 

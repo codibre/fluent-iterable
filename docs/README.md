@@ -1,6 +1,6 @@
-fluent-iterable - v1.14.3
+fluent-iterable - v1.14.4
 
-# fluent-iterable - v1.14.3
+# fluent-iterable - v1.14.4
 
 ## Table of contents
 
@@ -114,16 +114,16 @@ An operation that returns an AsyncIterable
 
 #### Type parameters:
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`iterable` | *AsyncIterable*<T\> |
-`...args` | *any*[] |
+| Name | Type |
+| :------ | :------ |
+| `iterable` | *AsyncIterable*<T\> |
+| `...args` | *any*[] |
 
 **Returns:** *AsyncIterable*<any\> \| *PromiseLike*<AnyIterable<any\>\>
 
@@ -141,16 +141,16 @@ A resolving operation
 
 #### Type parameters:
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`iterable` | *AsyncIterable*<T\> |
-`...args` | *any*[] |
+| Name | Type |
+| :------ | :------ |
+| `iterable` | *AsyncIterable*<T\> |
+| `...args` | *any*[] |
 
 **Returns:** *PromiseLike*<any\>
 
@@ -162,9 +162,9 @@ ___
 
 #### Type parameters:
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 ___
 
@@ -180,16 +180,16 @@ An operation that returns an Iterable
 
 #### Type parameters:
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`this` | *Iterable*<T\> |
-`...args` | *any*[] |
+| Name | Type |
+| :------ | :------ |
+| `this` | *Iterable*<T\> |
+| `...args` | *any*[] |
 
 **Returns:** *Iterable*<any\>
 
@@ -207,16 +207,16 @@ An operation that returns an AsyncIterable
 
 #### Type parameters:
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`this` | *Iterable*<T\> |
-`...args` | *any*[] |
+| Name | Type |
+| :------ | :------ |
+| `this` | *Iterable*<T\> |
+| `...args` | *any*[] |
 
 **Returns:** *AsyncIterable*<any\> \| *PromiseLike*<AnyIterable<any\>\>
 
@@ -234,16 +234,16 @@ A resolving operation
 
 #### Type parameters:
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`this` | *Iterable*<T\> |
-`...args` | *any*[] |
+| Name | Type |
+| :------ | :------ |
+| `this` | *Iterable*<T\> |
+| `...args` | *any*[] |
 
 **Returns:** *any*
 
@@ -255,9 +255,9 @@ ___
 
 #### Type parameters:
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 ## Variables
 
@@ -277,11 +277,11 @@ declare module '@codibre/fluent-iterable'{
 
 #### Type declaration:
 
-Name | Type |
-:------ | :------ |
-`use` | (`name`: *string*, `operation`: [*IterableOperation*](README.md#iterableoperation)) => *void* |
-`useAsync` | (`name`: *string*, `operation`: [*IterableOperationAsync*](README.md#iterableoperationasync)) => *void* |
-`useResolving` | (`name`: *string*, `operation`: [*IterableResolvingOperation*](README.md#iterableresolvingoperation)) => *void* |
+| Name | Type |
+| :------ | :------ |
+| `use` | (`name`: *string*, `operation`: [*IterableOperation*](README.md#iterableoperation)) => *void* |
+| `useAsync` | (`name`: *string*, `operation`: [*IterableOperationAsync*](README.md#iterableoperationasync)) => *void* |
+| `useResolving` | (`name`: *string*, `operation`: [*IterableResolvingOperation*](README.md#iterableresolvingoperation)) => *void* |
 
 ___
 
@@ -299,10 +299,10 @@ declare namespace FluentAsyncIterable {
 
 #### Type declaration:
 
-Name | Type |
-:------ | :------ |
-`use` | (`name`: *string*, `operation`: [*AsyncIterableOperation*](README.md#asynciterableoperation)) => *void* |
-`useResolving` | (`name`: *string*, `operation`: <T\>(`iterable`: [*AsyncIterableResolvingOperation*](README.md#asynciterableresolvingoperation)) => *any*) => *void* |
+| Name | Type |
+| :------ | :------ |
+| `use` | (`name`: *string*, `operation`: [*AsyncIterableOperation*](README.md#asynciterableoperation)) => *void* |
+| `useResolving` | (`name`: *string*, `operation`: <T\>(`iterable`: [*AsyncIterableResolvingOperation*](README.md#asynciterableresolvingoperation)) => *any*) => *void* |
 
 ## Functions
 
@@ -314,15 +314,15 @@ Mark a field name or a mapper as ascending, for use with sortBy
 
 #### Type parameters:
 
-Name |
-:------ |
-`F` |
+| Name |
+| :------ |
+| `F` |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`f` | F | the mapper or the field name    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `f` | F | the mapper or the field name |
 
 **Returns:** F
 
@@ -336,15 +336,15 @@ Provides a function that negates the informed async predicate
 
 #### Type parameters:
 
-Name | Description |
-:------ | :------ |
-`T` | the item type of the [AsyncPredicate](README.md#asyncpredicate)   |
+| Name | Description |
+| :------ | :------ |
+| `T` | the item type of the [AsyncPredicate](README.md#asyncpredicate) |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`predicate` | *AsyncPredicate*<T\> | The async predicate to be negated    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `predicate` | *AsyncPredicate*<T\> | The async predicate to be negated |
 
 **Returns:** *AsyncPredicate*<T\>
 
@@ -358,15 +358,15 @@ Returns a function that always returns the informed value
 
 #### Type parameters:
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`value` | T | the constant value    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | T | the constant value |
 
 **Returns:** () => T
 
@@ -380,16 +380,16 @@ Translate a paginated resource into a non-paginated iterable of elements.
 
 #### Type parameters:
 
-Name | Description |
-:------ | :------ |
-`T` | The type of the elements of the page.   |
-`TToken` | The type of the next page token associated to the page.   |
+| Name | Description |
+| :------ | :------ |
+| `T` | The type of the elements of the page. |
+| `TToken` | The type of the next page token associated to the page. |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`pager` | [*Pager*](interfaces/pager.md)<T, TToken\> | Represents the way of retrieving pages from the paginated resource.   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `pager` | [*Pager*](interfaces/pager.md)<T, TToken\> | Represents the way of retrieving pages from the paginated resource. |
 
 **Returns:** *AsyncIterable*<T\>
 
@@ -405,15 +405,15 @@ Mark a field name or a mapper as descending, for use with sortBy
 
 #### Type parameters:
 
-Name |
-:------ |
-`F` |
+| Name |
+| :------ |
+| `F` |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`f` | F | the mapper or the field name    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `f` | F | the mapper or the field name |
 
 **Returns:** F
 
@@ -447,15 +447,15 @@ Provides a "equals" comparer
 
 #### Type parameters:
 
-Name | Description |
-:------ | :------ |
-`T` | the type of b   |
+| Name | Description |
+| :------ | :------ |
+| `T` | the type of b |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`b` | *any* | the value for comparison    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `b` | *any* | the value for comparison |
 
 **Returns:** (`a`: T) => *boolean*
 
@@ -467,15 +467,15 @@ ___
 
 #### Type parameters:
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`iterable` | *Iterable*<T\> |
+| Name | Type |
+| :------ | :------ |
+| `iterable` | *Iterable*<T\> |
 
 **Returns:** [*FluentIterable*](interfaces/fluentiterable.md)<T\>
 
@@ -483,15 +483,15 @@ Name | Type |
 
 #### Type parameters:
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`iterable` | *AsyncIterable*<T\> |
+| Name | Type |
+| :------ | :------ |
+| `iterable` | *AsyncIterable*<T\> |
 
 **Returns:** [*FluentAsyncIterable*](interfaces/fluentasynciterable.md)<T\>
 
@@ -499,16 +499,16 @@ Name | Type |
 
 #### Type parameters:
 
-Name | Type |
-:------ | :------ |
-`T` | *object* |
-`K` | *string* \| *number* \| *symbol* |
+| Name | Type |
+| :------ | :------ |
+| `T` | *object* |
+| `K` | *string* \| *number* \| *symbol* |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`iterable` | T |
+| Name | Type |
+| :------ | :------ |
+| `iterable` | T |
 
 **Returns:** [*FluentAsyncIterable*](interfaces/fluentasynciterable.md)<[K, T[K]]\>
 
@@ -516,16 +516,16 @@ Name | Type |
 
 #### Type parameters:
 
-Name | Default |
-:------ | :------ |
-`T` | *any* |
+| Name | Default |
+| :------ | :------ |
+| `T` | *any* |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`emitter` | EventEmitter |
-`options?` | FluentEmitOptions |
+| Name | Type |
+| :------ | :------ |
+| `emitter` | EventEmitter |
+| `options?` | FluentEmitOptions |
 
 **Returns:** [*FluentAsyncIterable*](interfaces/fluentasynciterable.md)<T\>
 
@@ -549,15 +549,15 @@ Tranforms an iterable into a [FluentIterable](interfaces/fluentiterable.md).
 
 #### Type parameters:
 
-Name | Description |
-:------ | :------ |
-`T` | The type of the items in the iterable.   |
+| Name | Description |
+| :------ | :------ |
+| `T` | The type of the items in the iterable. |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`iterable` | *Iterable*<T\> | The iterable instance.   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `iterable` | *Iterable*<T\> | The iterable instance. |
 
 **Returns:** [*FluentIterable*](interfaces/fluentiterable.md)<T\>
 
@@ -573,15 +573,15 @@ Tranforms an asynchronous iterable into a [FluentAsyncIterable](interfaces/fluen
 
 #### Type parameters:
 
-Name | Description |
-:------ | :------ |
-`T` | The type of the items in the async iterable.   |
+| Name | Description |
+| :------ | :------ |
+| `T` | The type of the items in the async iterable. |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`iterable` | *AnyIterable*<T\> \| *PromiseLike*<AnyIterable<T\>\> | The asynchronous iterable instance.   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `iterable` | *AnyIterable*<T\> \| *PromiseLike*<AnyIterable<T\>\> | The asynchronous iterable instance. |
 
 **Returns:** [*FluentAsyncIterable*](interfaces/fluentasynciterable.md)<T\>
 
@@ -606,16 +606,16 @@ If you need to change the key event or other characteristics, you can do it thro
 
 #### Type parameters:
 
-Name | Default | Description |
-:------ | :------ | :------ |
-`T` | *any* | The type of the items in the created FluentAsyncIterable.   |
+| Name | Default | Description |
+| :------ | :------ | :------ |
+| `T` | *any* | The type of the items in the created FluentAsyncIterable. |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`emitter` | EventEmitter | The EventEmitter   |
-`options?` | FluentEmitOptions | The EventEmitter options. Optional   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `emitter` | EventEmitter | The EventEmitter |
+| `options?` | FluentEmitOptions | The EventEmitter options. Optional |
 
 **Returns:** [*FluentAsyncIterable*](interfaces/fluentasynciterable.md)<T\>
 
@@ -631,16 +631,16 @@ Convert a simple [Group](interfaces/group.md) to a [FluentGroup](interfaces/flue
 
 #### Type parameters:
 
-Name | Description |
-:------ | :------ |
-`Key` | The type of the key   |
-`Value` | the type of the items of the value property   |
+| Name | Description |
+| :------ | :------ |
+| `Key` | The type of the key |
+| `Value` | the type of the items of the value property |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`grp` | [*Group*](interfaces/group.md)<Value, Key\> | the [Group](interfaces/group.md) to be converted    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `grp` | [*Group*](interfaces/group.md)<Value, Key\> | the [Group](interfaces/group.md) to be converted |
 
 **Returns:** [*FluentGroup*](interfaces/fluentgroup.md)<Value, Key\>
 
@@ -652,16 +652,16 @@ ___
 
 #### Type parameters:
 
-Name | Type |
-:------ | :------ |
-`T` | *object* |
-`K` | *string* \| *number* \| *symbol* |
+| Name | Type |
+| :------ | :------ |
+| `T` | *object* |
+| `K` | *string* \| *number* \| *symbol* |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`iterable` | T |
+| Name | Type |
+| :------ | :------ |
+| `iterable` | T |
 
 **Returns:** [*FluentIterable*](interfaces/fluentiterable.md)<[K, T[K]]\>
 
@@ -675,15 +675,15 @@ Provides a "greater or equal" comparer
 
 #### Type parameters:
 
-Name | Description |
-:------ | :------ |
-`T` | the type of b   |
+| Name | Description |
+| :------ | :------ |
+| `T` | the type of b |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`b` | *any* | the value for comparison    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `b` | *any* | the value for comparison |
 
 **Returns:** (`a`: T) => *boolean*
 
@@ -707,16 +707,16 @@ Return a transformation function for use in group operation to guarantee distinc
 
 #### Type parameters:
 
-Name |
-:------ |
-`K` |
-`T` |
+| Name |
+| :------ |
+| `K` |
+| `T` |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`valueDistinctMapper` | keyof T | must return the unicity key. The unicity is respected by group    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `valueDistinctMapper` | keyof T | must return the unicity key. The unicity is respected by group |
 
 **Returns:** *KVGroupTransform*<K, T\>
 
@@ -726,19 +726,19 @@ Return a transformation function for use in group operation to guarantee distinc
 
 #### Type parameters:
 
-Name | Type | Default |
-:------ | :------ | :------ |
-`K` | - | - |
-`T` | - | - |
-`KT` | *string* \| *number* \| *symbol* | - |
-`NewT` | *unknown* | *ItemType*<T[KT]\> |
+| Name | Type | Default |
+| :------ | :------ | :------ |
+| `K` | - | - |
+| `T` | - | - |
+| `KT` | *string* \| *number* \| *symbol* | - |
+| `NewT` | *unknown* | *ItemType*<T[KT]\> |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`valueMapper` | KT | maps the value for a Iterable of values. Useful if you need to flat map your values per group somehow   |
-`valueDistinctMapper` | keyof *ItemType*<T[KT]\> | must return the unicity key. The unicity is respected by group    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `valueMapper` | KT | maps the value for a Iterable of values. Useful if you need to flat map your values per group somehow |
+| `valueDistinctMapper` | keyof *ItemType*<T[KT]\> | must return the unicity key. The unicity is respected by group |
 
 **Returns:** *KVGroupTransform*<K, T, NewT\>
 
@@ -748,17 +748,17 @@ Return a transformation function for use in group operation to guarantee distinc
 
 #### Type parameters:
 
-Name |
-:------ |
-`K` |
-`T` |
-`NewT` |
+| Name |
+| :------ |
+| `K` |
+| `T` |
+| `NewT` |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`valueDistinctMapper` | [*Mapper*](interfaces/mapper.md)<T, NewT\> | must return the unicity key. The unicity is respected by group    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `valueDistinctMapper` | [*Mapper*](interfaces/mapper.md)<T, NewT\> | must return the unicity key. The unicity is respected by group |
 
 **Returns:** *KVGroupTransform*<K, T, NewT\>
 
@@ -768,18 +768,18 @@ Return a transformation function for use in group operation to guarantee distinc
 
 #### Type parameters:
 
-Name | Default |
-:------ | :------ |
-`K` | - |
-`T` | - |
-`NewT` | T[] |
+| Name | Default |
+| :------ | :------ |
+| `K` | - |
+| `T` | - |
+| `NewT` | T[] |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`valueMapper` | [*Mapper*](interfaces/mapper.md)<T, Iterable<NewT\>\> | maps the value for a Iterable of values. Useful if you need to flat map your values per group somehow   |
-`valueDistinctMapper?` | [*Mapper*](interfaces/mapper.md)<NewT, unknown\> \| keyof NewT | must return the unicity key. The unicity is respected by group    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `valueMapper` | [*Mapper*](interfaces/mapper.md)<T, Iterable<NewT\>\> | maps the value for a Iterable of values. Useful if you need to flat map your values per group somehow |
+| `valueDistinctMapper?` | [*Mapper*](interfaces/mapper.md)<NewT, unknown\> \| keyof NewT | must return the unicity key. The unicity is respected by group |
 
 **Returns:** *KVGroupTransform*<K, T, NewT\>
 
@@ -793,15 +793,15 @@ Provides a "greater than" comparer
 
 #### Type parameters:
 
-Name | Description |
-:------ | :------ |
-`T` | the type of b   |
+| Name | Description |
+| :------ | :------ |
+| `T` | the type of b |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`b` | *any* | the value for comparison    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `b` | *any* | the value for comparison |
 
 **Returns:** (`a`: T) => *boolean*
 
@@ -815,15 +815,15 @@ Returns exactly the informed parameter
 
 #### Type parameters:
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`param` | T | The informed parameter to be returned    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `param` | T | The informed parameter to be returned |
 
 **Returns:** T
 
@@ -847,10 +847,10 @@ Examples:
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`fromInclusive?` | *number* | Specifies the start of the interval. Defaults to zero.   |
-`count?` | *number* | Specifies the length of the interval. The interval provides numbers indefinitely if omitted.   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `fromInclusive?` | *number* | Specifies the start of the interval. Defaults to zero. |
+| `count?` | *number* | Specifies the length of the interval. The interval provides numbers indefinitely if omitted. |
 
 **Returns:** [*FluentIterable*](interfaces/fluentiterable.md)<number\>
 
@@ -866,15 +866,15 @@ Return true when the informed value is an fluent iterable, and false otherwise
 
 #### Type parameters:
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`value` | *unknown* | the value to be analyzed   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | *unknown* | the value to be analyzed |
 
 **Returns:** value is FluentIterable<T\> \| FluentAsyncIterable<T\>
 
@@ -890,15 +890,15 @@ Return true when the informed value is any kind of iterable, and false otherwise
 
 #### Type parameters:
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`value` | *unknown* | the value to be analyzed   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | *unknown* | the value to be analyzed |
 
 **Returns:** value is AnyIterable<T\>
 
@@ -914,15 +914,15 @@ Return true when the informed value is an async iterable, and false otherwise
 
 #### Type parameters:
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`value` | *unknown* | the value to be analyzed   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | *unknown* | the value to be analyzed |
 
 **Returns:** value is AsyncIterable<T\>
 
@@ -938,15 +938,15 @@ Return true when the informed value is an fluent async iterable, and false other
 
 #### Type parameters:
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`value` | *unknown* | the value to be analyzed   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | *unknown* | the value to be analyzed |
 
 **Returns:** value is FluentAsyncIterable<T\>
 
@@ -962,15 +962,15 @@ Return true when the informed value is an fluent iterable, and false otherwise
 
 #### Type parameters:
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`value` | *unknown* | the value to be analyzed   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | *unknown* | the value to be analyzed |
 
 **Returns:** value is FluentIterable<T\>
 
@@ -986,15 +986,15 @@ Return true when the informed value is an iterable, and false otherwise
 
 #### Type parameters:
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`value` | *unknown* | the value to be analyzed   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | *unknown* | the value to be analyzed |
 
 **Returns:** value is Iterable<T\>
 
@@ -1008,9 +1008,9 @@ ___
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`t` | *unknown* |
+| Name | Type |
+| :------ | :------ |
+| `t` | *unknown* |
 
 **Returns:** t is PromiseLike<any\>
 
@@ -1024,15 +1024,15 @@ Iterates all element of an iterable
 
 #### Type parameters:
 
-Name | Description |
-:------ | :------ |
-`T` | the item type of the [[Iterable]]   |
+| Name | Description |
+| :------ | :------ |
+| `T` | the item type of the [[Iterable]] |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`a` | *Iterable*<T\> | The iterable    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | *Iterable*<T\> | The iterable |
 
 **Returns:** *Iterable*<T\>
 
@@ -1046,15 +1046,15 @@ Iterates in all elements of an iterable of iterables
 
 #### Type parameters:
 
-Name | Description |
-:------ | :------ |
-`T` | the item type of the internal [[Iterable]]   |
+| Name | Description |
+| :------ | :------ |
+| `T` | the item type of the internal [[Iterable]] |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`a` | *Iterable*<Iterable<T\>\> | The iterable    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | *Iterable*<Iterable<T\>\> | The iterable |
 
 **Returns:** *Generator*<T, void, undefined\>
 
@@ -1068,15 +1068,15 @@ Iterates in all elements of an async iterable of iterables or async iterables
 
 #### Type parameters:
 
-Name | Description |
-:------ | :------ |
-`T` | the item type of the internal [[Iterable/AsyncIterable]]   |
+| Name | Description |
+| :------ | :------ |
+| `T` | the item type of the internal [[Iterable/AsyncIterable]] |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`a` | *AsyncIterable*<AnyIterable<T\>\> | The async iterable    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | *AsyncIterable*<AnyIterable<T\>\> | The async iterable |
 
 **Returns:** *AsyncGenerator*<T, void, undefined\>
 
@@ -1090,15 +1090,15 @@ Iterates all element of an async iterable
 
 #### Type parameters:
 
-Name | Description |
-:------ | :------ |
-`T` | the item type of the [[Iterable]]   |
+| Name | Description |
+| :------ | :------ |
+| `T` | the item type of the [[Iterable]] |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`a` | *AnyIterable*<T\> \| *PromiseLike*<AnyIterable<T\>\> | The async iterable    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `a` | *AnyIterable*<T\> \| *PromiseLike*<AnyIterable<T\>\> | The async iterable |
 
 **Returns:** *AsyncIterable*<T\>
 
@@ -1112,17 +1112,17 @@ Iterates over all owned entries of given object
 
 #### Type parameters:
 
-Name | Type | Default |
-:------ | :------ | :------ |
-`T` | *object* | - |
-`K` | *string* \| *number* \| *symbol* | keyof T |
-`V` | - | T[K] |
+| Name | Type | Default |
+| :------ | :------ | :------ |
+| `T` | *object* | - |
+| `K` | *string* \| *number* \| *symbol* | keyof T |
+| `V` | - | T[K] |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`obj` | T | The object to iterate with    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | T | The object to iterate with |
 
 **Returns:** *Iterable*<[K, V]\>
 
@@ -1136,15 +1136,15 @@ Iterates over all owned properties of the given object
 
 #### Type parameters:
 
-Name | Type |
-:------ | :------ |
-`T` | *object* |
+| Name | Type |
+| :------ | :------ |
+| `T` | *object* |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`obj` | T | The object to iterate with    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | T | The object to iterate with |
 
 **Returns:** *Iterable*<keyof T\>
 
@@ -1158,15 +1158,15 @@ Provides a "lesser or equal" comparer
 
 #### Type parameters:
 
-Name | Description |
-:------ | :------ |
-`T` | the type of b   |
+| Name | Description |
+| :------ | :------ |
+| `T` | the type of b |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`b` | *any* | the value for comparison    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `b` | *any* | the value for comparison |
 
 **Returns:** (`a`: T) => *boolean*
 
@@ -1180,15 +1180,15 @@ Provides a "lesser than" comparer
 
 #### Type parameters:
 
-Name | Description |
-:------ | :------ |
-`T` | the type of b   |
+| Name | Description |
+| :------ | :------ |
+| `T` | the type of b |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`b` | *any* | the value for comparison    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `b` | *any* | the value for comparison |
 
 **Returns:** (`a`: T) => *boolean*
 
@@ -1202,15 +1202,15 @@ Merge the informed async iterables into one. The item orders will be defined fro
 
 #### Type parameters:
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`...iterables` | *AsyncIterable*<T\>[] | the iterables to merge    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `...iterables` | *AsyncIterable*<T\>[] | the iterables to merge |
 
 **Returns:** *AsyncIterable*<T\>
 
@@ -1220,16 +1220,16 @@ Merge the informed async iterables into one. The item orders will be defined fro
 
 #### Type parameters:
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`callback` | ErrorCallback | A callback to case in case that any iterable throws an error. If informed, an failed iterable will not cause an error in the merging   |
-`...iterables` | *AsyncIterable*<T\>[] | the iterables to merge    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `callback` | ErrorCallback | A callback to case in case that any iterable throws an error. If informed, an failed iterable will not cause an error in the merging |
+| `...iterables` | *AsyncIterable*<T\>[] | the iterables to merge |
 
 **Returns:** *AsyncIterable*<T\>
 
@@ -1241,16 +1241,16 @@ ___
 
 #### Type parameters:
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`callback` | ErrorCallback \| *undefined* |
-`...iterators` | *AsyncIterator*<T\>[] |
+| Name | Type |
+| :------ | :------ |
+| `callback` | ErrorCallback \| *undefined* |
+| `...iterators` | *AsyncIterator*<T\>[] |
 
 **Returns:** *AsyncIterable*<T\>
 
@@ -1264,15 +1264,15 @@ Provides a function that negates the informed predicate
 
 #### Type parameters:
 
-Name | Description |
-:------ | :------ |
-`T` | the item type of the [Predicate](README.md#predicate)   |
+| Name | Description |
+| :------ | :------ |
+| `T` | the item type of the [Predicate](README.md#predicate) |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`predicate` | *Predicate*<T\> | The predicate to be negated    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `predicate` | *Predicate*<T\> | The predicate to be negated |
 
 **Returns:** *Predicate*<T\>
 
@@ -1293,15 +1293,15 @@ the output may not match expectation if the resulting order is not actually righ
 
 #### Type parameters:
 
-Name | Type |
-:------ | :------ |
-`F` | Function \| [*FluentIterable*](interfaces/fluentiterable.md)<any\> \| [*FluentAsyncIterable*](interfaces/fluentasynciterable.md)<any\> |
+| Name | Type |
+| :------ | :------ |
+| `F` | Function \| [*FluentIterable*](interfaces/fluentiterable.md)<any\> \| [*FluentAsyncIterable*](interfaces/fluentasynciterable.md)<any\> |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`f` | F | the function to assure order    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `f` | F | the function to assure order |
 
 **Returns:** F
 
@@ -1322,15 +1322,15 @@ the output may not match expectation if the resulting order is not actually righ
 
 #### Type parameters:
 
-Name | Type |
-:------ | :------ |
-`F` | Function \| [*FluentIterable*](interfaces/fluentiterable.md)<any\> \| [*FluentAsyncIterable*](interfaces/fluentasynciterable.md)<any\> |
+| Name | Type |
+| :------ | :------ |
+| `F` | Function \| [*FluentIterable*](interfaces/fluentiterable.md)<any\> \| [*FluentAsyncIterable*](interfaces/fluentasynciterable.md)<any\> |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`f` | F | the function to assure order    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `f` | F | the function to assure order |
 
 **Returns:** F
 
@@ -1344,16 +1344,16 @@ Applies a transformation to the value of all pro
 
 #### Type parameters:
 
-Name | Type |
-:------ | :------ |
-`T` | *object* |
+| Name | Type |
+| :------ | :------ |
+| `T` | *object* |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`obj` | T | The object to be iterated with   |
-`mapper` | [*Mapper*](interfaces/mapper.md)<[keyof T, T[keyof T]], unknown\> | the mapper to be applied to each value    |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `obj` | T | The object to be iterated with |
+| `mapper` | [*Mapper*](interfaces/mapper.md)<[keyof T, T[keyof T]], unknown\> | the mapper to be applied to each value |
 
 **Returns:** *object*
 

@@ -1,4 +1,4 @@
-[fluent-iterable - v1.14.3](../README.md) / AsyncAction
+[fluent-iterable - v1.14.4](../README.md) / AsyncAction
 
 # Interface: AsyncAction<T\>
 
@@ -7,9 +7,9 @@ Represents an asynchronous action on an item of type `T`.<br>
 
 ## Type parameters
 
-Name | Description |
-:------ | :------ |
-`T` | The type of the item the action is defined on.    |
+| Name | Description |
+| :------ | :------ |
+| `T` | The type of the item the action is defined on. |
 
 ## Callable
 
@@ -19,9 +19,9 @@ Specifies the asynchronous action to perform on `item`.
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`item` | T | The item the action is performed against.   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `item` | T | The item the action is performed against. |
 
 **Returns:** *unknown*
 

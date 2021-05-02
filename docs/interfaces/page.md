@@ -1,4 +1,4 @@
-[fluent-iterable - v1.14.3](../README.md) / Page
+[fluent-iterable - v1.14.4](../README.md) / Page
 
 # Interface: Page<T, TToken\>
 
@@ -6,10 +6,10 @@ Represents a page of a paginated resource.
 
 ## Type parameters
 
-Name | Description |
-:------ | :------ |
-`T` | The type of the elements of the page.   |
-`TToken` | The type of the next page token associated to the page.    |
+| Name | Description |
+| :------ | :------ |
+| `T` | The type of the elements of the page. |
+| `TToken` | The type of the next page token associated to the page. |
 
 ## Table of contents
 

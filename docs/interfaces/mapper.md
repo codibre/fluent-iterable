@@ -1,4 +1,4 @@
-[fluent-iterable - v1.14.3](../README.md) / Mapper
+[fluent-iterable - v1.14.4](../README.md) / Mapper
 
 # Interface: Mapper<T, R\>
 
@@ -7,10 +7,10 @@ Represents a mapping operation from type `T` to type `R`.<br>
 
 ## Type parameters
 
-Name | Description |
-:------ | :------ |
-`T` | The source type.   |
-`R` | The destination type.    |
+| Name | Description |
+| :------ | :------ |
+| `T` | The source type. |
+| `R` | The destination type. |
 
 ## Callable
 
@@ -20,9 +20,9 @@ Maps an item of type `T` into an instance of type `R`.
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`item` | T | The item to map.   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `item` | T | The item to map. |
 
 **Returns:** R
 

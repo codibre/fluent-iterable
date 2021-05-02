@@ -1,12 +1,12 @@
-[fluent-iterable - v1.14.3](../README.md) / FluentEmitter
+[fluent-iterable - v1.14.4](../README.md) / FluentEmitter
 
 # Interface: FluentEmitter<T\>
 
 ## Type parameters
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 ## Hierarchy
 
@@ -42,18 +42,20 @@ Name |
 
 #### Type parameters:
 
-Name | Type |
-:------ | :------ |
-`E` | keyof *FluentEvents*<T\> |
+| Name | Type |
+| :------ | :------ |
+| `E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`event` | E |
-`listener` | *FluentEvents*<T\>[E] |
+| Name | Type |
+| :------ | :------ |
+| `event` | E |
+| `listener` | *FluentEvents*<T\>[E] |
 
 **Returns:** [*FluentEmitter*](fluentemitter.md)<T\>
+
+Inherited from: TypedEmitter.addListener
 
 ___
 
@@ -63,18 +65,20 @@ ___
 
 #### Type parameters:
 
-Name | Type |
-:------ | :------ |
-`E` | keyof *FluentEvents*<T\> |
+| Name | Type |
+| :------ | :------ |
+| `E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`event` | E |
-`...args` | *Arguments*<*FluentEvents*<T\>[E]\> |
+| Name | Type |
+| :------ | :------ |
+| `event` | E |
+| `...args` | *Arguments*<*FluentEvents*<T\>[E]\> |
 
 **Returns:** *boolean*
+
+Inherited from: TypedEmitter.emit
 
 ___
 
@@ -84,6 +88,8 @@ ___
 
 **Returns:** (*string* \| *symbol*)[]
 
+Inherited from: TypedEmitter.eventNames
+
 ___
 
 ### getMaxListeners
@@ -91,6 +97,8 @@ ___
 ▸ **getMaxListeners**(): *number*
 
 **Returns:** *number*
+
+Inherited from: TypedEmitter.getMaxListeners
 
 ___
 
@@ -100,17 +108,19 @@ ___
 
 #### Type parameters:
 
-Name | Type |
-:------ | :------ |
-`E` | keyof *FluentEvents*<T\> |
+| Name | Type |
+| :------ | :------ |
+| `E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`event` | E |
+| Name | Type |
+| :------ | :------ |
+| `event` | E |
 
 **Returns:** *number*
+
+Inherited from: TypedEmitter.listenerCount
 
 ___
 
@@ -120,17 +130,19 @@ ___
 
 #### Type parameters:
 
-Name | Type |
-:------ | :------ |
-`E` | keyof *FluentEvents*<T\> |
+| Name | Type |
+| :------ | :------ |
+| `E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`event` | E |
+| Name | Type |
+| :------ | :------ |
+| `event` | E |
 
 **Returns:** Function[]
+
+Inherited from: TypedEmitter.listeners
 
 ___
 
@@ -140,18 +152,20 @@ ___
 
 #### Type parameters:
 
-Name | Type |
-:------ | :------ |
-`E` | keyof *FluentEvents*<T\> |
+| Name | Type |
+| :------ | :------ |
+| `E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`event` | E |
-`listener` | *FluentEvents*<T\>[E] |
+| Name | Type |
+| :------ | :------ |
+| `event` | E |
+| `listener` | *FluentEvents*<T\>[E] |
 
 **Returns:** [*FluentEmitter*](fluentemitter.md)<T\>
+
+Inherited from: TypedEmitter.off
 
 ___
 
@@ -161,18 +175,20 @@ ___
 
 #### Type parameters:
 
-Name | Type |
-:------ | :------ |
-`E` | keyof *FluentEvents*<T\> |
+| Name | Type |
+| :------ | :------ |
+| `E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`event` | E |
-`listener` | *FluentEvents*<T\>[E] |
+| Name | Type |
+| :------ | :------ |
+| `event` | E |
+| `listener` | *FluentEvents*<T\>[E] |
 
 **Returns:** [*FluentEmitter*](fluentemitter.md)<T\>
+
+Inherited from: TypedEmitter.on
 
 ___
 
@@ -182,18 +198,20 @@ ___
 
 #### Type parameters:
 
-Name | Type |
-:------ | :------ |
-`E` | keyof *FluentEvents*<T\> |
+| Name | Type |
+| :------ | :------ |
+| `E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`event` | E |
-`listener` | *FluentEvents*<T\>[E] |
+| Name | Type |
+| :------ | :------ |
+| `event` | E |
+| `listener` | *FluentEvents*<T\>[E] |
 
 **Returns:** [*FluentEmitter*](fluentemitter.md)<T\>
+
+Inherited from: TypedEmitter.once
 
 ___
 
@@ -203,18 +221,20 @@ ___
 
 #### Type parameters:
 
-Name | Type |
-:------ | :------ |
-`E` | keyof *FluentEvents*<T\> |
+| Name | Type |
+| :------ | :------ |
+| `E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`event` | E |
-`listener` | *FluentEvents*<T\>[E] |
+| Name | Type |
+| :------ | :------ |
+| `event` | E |
+| `listener` | *FluentEvents*<T\>[E] |
 
 **Returns:** [*FluentEmitter*](fluentemitter.md)<T\>
+
+Inherited from: TypedEmitter.prependListener
 
 ___
 
@@ -224,18 +244,20 @@ ___
 
 #### Type parameters:
 
-Name | Type |
-:------ | :------ |
-`E` | keyof *FluentEvents*<T\> |
+| Name | Type |
+| :------ | :------ |
+| `E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`event` | E |
-`listener` | *FluentEvents*<T\>[E] |
+| Name | Type |
+| :------ | :------ |
+| `event` | E |
+| `listener` | *FluentEvents*<T\>[E] |
 
 **Returns:** [*FluentEmitter*](fluentemitter.md)<T\>
+
+Inherited from: TypedEmitter.prependOnceListener
 
 ___
 
@@ -245,17 +267,19 @@ ___
 
 #### Type parameters:
 
-Name | Type |
-:------ | :------ |
-`E` | keyof *FluentEvents*<T\> |
+| Name | Type |
+| :------ | :------ |
+| `E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`event` | E |
+| Name | Type |
+| :------ | :------ |
+| `event` | E |
 
 **Returns:** Function[]
+
+Inherited from: TypedEmitter.rawListeners
 
 ___
 
@@ -265,17 +289,19 @@ ___
 
 #### Type parameters:
 
-Name | Type |
-:------ | :------ |
-`E` | keyof *FluentEvents*<T\> |
+| Name | Type |
+| :------ | :------ |
+| `E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`event?` | E |
+| Name | Type |
+| :------ | :------ |
+| `event?` | E |
 
 **Returns:** [*FluentEmitter*](fluentemitter.md)<T\>
+
+Inherited from: TypedEmitter.removeAllListeners
 
 ___
 
@@ -285,18 +311,20 @@ ___
 
 #### Type parameters:
 
-Name | Type |
-:------ | :------ |
-`E` | keyof *FluentEvents*<T\> |
+| Name | Type |
+| :------ | :------ |
+| `E` | keyof *FluentEvents*<T\> |
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`event` | E |
-`listener` | *FluentEvents*<T\>[E] |
+| Name | Type |
+| :------ | :------ |
+| `event` | E |
+| `listener` | *FluentEvents*<T\>[E] |
 
 **Returns:** [*FluentEmitter*](fluentemitter.md)<T\>
+
+Inherited from: TypedEmitter.removeListener
 
 ___
 
@@ -306,8 +334,10 @@ ___
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`maxListeners` | *number* |
+| Name | Type |
+| :------ | :------ |
+| `maxListeners` | *number* |
 
 **Returns:** [*FluentEmitter*](fluentemitter.md)<T\>
+
+Inherited from: TypedEmitter.setMaxListeners
