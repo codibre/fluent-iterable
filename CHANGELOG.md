@@ -1,5 +1,8 @@
 
-## 1.14.4
+## 1.14.5
+* 4c48c3d 1.14.5
+* cfe0f89 fixing extension methods mistake
+* 2a518d7 version bump
 * 5b2c8bd 1.14.4
 * 1083980 Merge branch 'master' of github.com:Codibre/fluent-iterable
 * aeaaf8a fixing filter typing error
@@ -216,6 +219,10 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.14.5
+* 4c48c3d 1.14.5
+* cfe0f89 fixing extension methods mistake
+* 2a518d7 version bump
 ## v1.14.4
 * 5b2c8bd 1.14.4
 * 1083980 Merge branch 'master' of github.com:Codibre/fluent-iterable
