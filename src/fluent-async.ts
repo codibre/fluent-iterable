@@ -47,10 +47,7 @@ function fluentEmit<T = any>(
   emitter: EventEmitter,
   options?: FluentEmitOptions,
 ): FluentAsyncIterable<T> {
-  return extend(
-    getIterableFromEmitter<T>(emitter, options),
-    asyncHandler,
-  ) as any;
+  return extend(getIterableFromEmitter<T>(emitter, options), asyncHandler);
 }
 
 Object.assign(asyncProxyReference, {
