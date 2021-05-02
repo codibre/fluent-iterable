@@ -2,7 +2,6 @@
 
 import { AnyIterable } from 'augmentative-iterable';
 import { transformObjValues } from '../transform-obj-values';
-import { proxyRef } from '../types-internal';
 
 const getDefinition = <Func extends Function>(
   iterableFunc: Func,
@@ -15,7 +14,7 @@ const getDefinition = <Func extends Function>(
       }
     : function <T>(this: AnyIterable<T>, ...args: any[]) {
         const result = iterableFunc.call(this, ...args);
-        return result === this ? (this as any)[proxyRef] : wrapper(result);
+        return wrapper(result);
       };
 };
 

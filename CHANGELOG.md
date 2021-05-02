@@ -1,5 +1,9 @@
 
-## 1.14.2
+## 1.14.3
+* 3af205a 1.14.3
+* 293ff86 removes proxy ref on get fluent
+* 9cc7474 adding more documentation
+* a7980df updating docs
 * ff6d7c9 1.14.2
 * 611469a updating readme
 * ffa36f7 adding take to benchmark malandramente
@@ -210,6 +214,11 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.14.3
+* 3af205a 1.14.3
+* 293ff86 removes proxy ref on get fluent
+* 9cc7474 adding more documentation
+* a7980df updating docs
 ## v1.14.2
 * ff6d7c9 1.14.2
 * 611469a updating readme
