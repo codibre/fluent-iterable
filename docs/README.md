@@ -1,6 +1,6 @@
-fluent-iterable - v1.14.6
+fluent-iterable - v1.15.0
 
-# fluent-iterable - v1.14.6
+# fluent-iterable - v1.15.0
 
 ## Table of contents
 
@@ -62,6 +62,7 @@ fluent-iterable - v1.14.6
 - [ge](README.md#ge)
 - [getAverageStepper](README.md#getaveragestepper)
 - [getGroupingDistinct](README.md#getgroupingdistinct)
+- [getGroupingTopHit](README.md#getgroupingtophit)
 - [gt](README.md#gt)
 - [identity](README.md#identity)
 - [interval](README.md#interval)
@@ -782,6 +783,56 @@ Return a transformation function for use in group operation to guarantee distinc
 | `valueDistinctMapper?` | [*Mapper*](interfaces/mapper.md)<NewT, unknown\> \| keyof NewT | must return the unicity key. The unicity is respected by group |
 
 **Returns:** *KVGroupTransform*<K, T, NewT\>
+
+___
+
+### getGroupingTopHit
+
+▸ **getGroupingTopHit**<K, T, KT\>(`distinct`: *AnyMapper*<T\>, `choose`: (`a`: T[KT], `b`: T[KT]) => T[KT], `mapper`: KT): *KVGroupTransform*<K, T, T[KT][]\>
+
+Returns a functions that make the group operations get distinct items, according to a giving criteria,
+keeping the preferred one, according to a given choosing criteria,
+
+#### Type parameters:
+
+| Name | Type |
+| :------ | :------ |
+| `K` | - |
+| `T` | - |
+| `KT` | *string* \| *number* \| *symbol* |
+
+#### Parameters:
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `distinct` | *AnyMapper*<T\> | must return the distinction key. The distinction is respected by group |
+| `choose` | (`a`: T[KT], `b`: T[KT]) => T[KT] | must return the preferred value over two provided |
+| `mapper` | KT | The property name you want to map for the value |
+
+**Returns:** *KVGroupTransform*<K, T, T[KT][]\>
+
+▸ **getGroupingTopHit**<K, T, NewT\>(`distinct`: *AnyMapper*<T\>, `choose`: (`a`: NewT, `b`: NewT) => NewT, `mapper?`: [*Mapper*](interfaces/mapper.md)<T, NewT\>): *KVGroupTransform*<K, T, NewT[]\>
+
+Returns a functions that make the group operations get distinct items, according to a giving criteria,
+keeping the preferred one, according to a given choosing criteria,
+
+#### Type parameters:
+
+| Name | Default |
+| :------ | :------ |
+| `K` | - |
+| `T` | - |
+| `NewT` | T |
+
+#### Parameters:
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `distinct` | *AnyMapper*<T\> | must return the distinction key. The distinction is respected by group |
+| `choose` | (`a`: NewT, `b`: NewT) => NewT | must return the preferred value over two provided |
+| `mapper?` | [*Mapper*](interfaces/mapper.md)<T, NewT\> | If informed, the mapping operation to define the grouping value. If not, the original value is assumed |
+
+**Returns:** *KVGroupTransform*<K, T, NewT[]\>
 
 ___
 

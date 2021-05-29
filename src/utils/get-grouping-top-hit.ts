@@ -27,7 +27,7 @@ export function getGroupingTopHit<K, T, NewT = T>(
   distinct: AnyMapper<T>,
   choose: (a: NewT, b: NewT) => NewT,
   mapper?: Mapper<T, NewT>,
-): KVGroupTransform<K, T, NewT[]>;
+): KVGroupTransform<K, T, NewT>;
 export function getGroupingTopHit<K, T, NewT = T>(
   distinct: AnyMapper<T>,
   choose: (a: NewT, b: NewT) => NewT,
