@@ -1,5 +1,7 @@
 
-## 1.15.0
+## 1.15.1
+* 7534c4b 1.15.1
+* 1c234c5 fixing getGroupingTopHit return type
 * 9f89e40 1.15.0
 * 453d94c releaseing getGroupingTopHit
 * 14801a5 pushing docs
@@ -225,6 +227,9 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.15.1
+* 7534c4b 1.15.1
+* 1c234c5 fixing getGroupingTopHit return type
 ## v1.15.0
 * 9f89e40 1.15.0
 * 453d94c releaseing getGroupingTopHit

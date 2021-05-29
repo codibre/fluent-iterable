@@ -1,9 +1,20 @@
 import { KVGroupTransform } from '../types/base';
 import { Mapper } from 'augmentative-iterable';
 import { prepare } from '../types-internal/prepare';
-import { AnyMapper } from '../types-internal';
-import { identity } from './utils';
+import { AnyMapper, FunctionAnyMapper } from '../types-internal';
+import { constant, identity } from './utils';
 
+type Choose<T> = (a: T, b: T) => T;
+const noDistinct = constant(1);
+
+/**
+ * Returns a functions that make the group operations to get only one item, per group key,
+ * The item kept is the preferred one, according to a given choosing criteria,
+ * @param choose must return the preferred value over two provided
+ */
+export function getGroupingTopHit<K, T>(
+  choose: Choose<T>,
+): KVGroupTransform<K, T>;
 /**
  * Returns a functions that make the group operations get distinct items, according to a giving criteria,
  * keeping the preferred one, according to a given choosing criteria,
@@ -13,7 +24,7 @@ import { identity } from './utils';
  */
 export function getGroupingTopHit<K, T, KT extends keyof T>(
   distinct: AnyMapper<T>,
-  choose: (a: T[KT], b: T[KT]) => T[KT],
+  choose: Choose<T[KT]>,
   mapper: KT,
 ): KVGroupTransform<K, T, T[KT][]>;
 /**
@@ -25,17 +36,23 @@ export function getGroupingTopHit<K, T, KT extends keyof T>(
  */
 export function getGroupingTopHit<K, T, NewT = T>(
   distinct: AnyMapper<T>,
-  choose: (a: NewT, b: NewT) => NewT,
+  choose: Choose<NewT>,
   mapper?: Mapper<T, NewT>,
 ): KVGroupTransform<K, T, NewT>;
 export function getGroupingTopHit<K, T, NewT = T>(
-  distinct: AnyMapper<T>,
-  choose: (a: NewT, b: NewT) => NewT,
+  distinct: AnyMapper<T> | Choose<NewT>,
+  choose?: Choose<NewT>,
   mapper: Mapper<T, NewT> | keyof T = identity as any,
 ): KVGroupTransform<K, T, NewT> {
   const groupMap = new Map<K, Map<unknown, [NewT, number]>>();
-  const preparedDistinct = prepare(distinct);
-  const preparedMapper = prepare(mapper);
+  const preparedMapper: FunctionAnyMapper<T> = prepare(mapper);
+  let preparedDistinct: FunctionAnyMapper<T>;
+  if (choose) {
+    preparedDistinct = prepare(distinct as AnyMapper<T>);
+  } else {
+    preparedDistinct = noDistinct;
+    choose = distinct as Choose<NewT>;
+  }
 
   return function (k: K, v: T, previous: NewT[]) {
     let chosenMap = groupMap.get(k);
@@ -47,7 +64,7 @@ export function getGroupingTopHit<K, T, NewT = T>(
     const chosenKey = preparedDistinct(v);
     const prev = chosenMap.get(chosenKey);
     if (prev) {
-      const chosen = choose(prev[0], mapped);
+      const chosen = choose!(prev[0], mapped);
       if (chosen !== prev[0]) {
         previous[prev[1]] = chosen;
       }
