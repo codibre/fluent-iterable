@@ -31,7 +31,10 @@ function orderedGroupRecipe({
       return resolver(
         forEach.call(part, ([k, v]: any) => {
           key = k;
-          return forEach.call(transformValue(k, v, values), boundValues);
+          const iterable = transformValue(k, v, values);
+          if (iterable) {
+            return forEach.call(iterable, boundValues);
+          }
         }),
         () => ({ key, values }),
       );
@@ -58,21 +61,20 @@ function reduceGroup<T, R>({
 }: ReduceGroupParameters<T>) {
   return reduceAndMap.call(
     iterable,
-    (g: any, t: any) =>
-      resolver(mapper(t), (key) => {
+    (g: any, t: any) => {
+      const getG = constant(g);
+      return resolver(mapper(t), (key) => {
         let values = g.get(key);
         if (!values) {
           values = [];
           g.set(key, values);
         }
-        return resolver(
-          forEach.call(
-            transformValue(key, t, values),
-            values.push.bind(values),
-          ),
-          constant(g),
-        );
-      }),
+        const transformed = transformValue(key, t, values);
+        return transformed
+          ? resolver(forEach.call(transformed, values.push.bind(values)), getG)
+          : g;
+      });
+    },
     new Map<R, T[]>(),
     (x: any) => x.entries(),
   );

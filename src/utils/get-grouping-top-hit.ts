@@ -44,15 +44,28 @@ export function getGroupingTopHit<K, T, NewT = T>(
   choose?: Choose<NewT>,
   mapper: Mapper<T, NewT> | keyof T = identity as any,
 ): KVGroupTransform<K, T, NewT> {
-  const groupMap = new Map<K, Map<unknown, [NewT, number]>>();
   const preparedMapper: FunctionAnyMapper<T> = prepare(mapper);
   let preparedDistinct: FunctionAnyMapper<T>;
-  if (choose) {
-    preparedDistinct = prepare(distinct as AnyMapper<T>);
-  } else {
+  if (!choose) {
     preparedDistinct = noDistinct;
     choose = distinct as Choose<NewT>;
+    const chosenMap = new Map<K, [NewT, number]>();
+    return function (k: K, v: T, previous: NewT[]) {
+      const mapped = preparedMapper(v);
+      const prev = chosenMap.get(k);
+      if (!prev) {
+        chosenMap.set(k, [mapped, previous.length]);
+        return [mapped];
+      }
+      const chosen = choose!(prev[0], mapped);
+      if (chosen !== prev[0]) {
+        chosenMap.set(k, [chosen, prev[1]]);
+        previous[prev[1]] = chosen;
+      }
+    };
   }
+  preparedDistinct = prepare(distinct as AnyMapper<T>);
+  const groupMap = new Map<K, Map<unknown, [NewT, number]>>();
 
   return function (k: K, v: T, previous: NewT[]) {
     let chosenMap = groupMap.get(k);
@@ -63,15 +76,14 @@ export function getGroupingTopHit<K, T, NewT = T>(
     const mapped = preparedMapper(v);
     const chosenKey = preparedDistinct(v);
     const prev = chosenMap.get(chosenKey);
-    if (prev) {
-      const chosen = choose!(prev[0], mapped);
-      if (chosen !== prev[0]) {
-        previous[prev[1]] = chosen;
-      }
-      return [];
+    if (!prev) {
+      chosenMap.set(chosenKey, [mapped, previous.length]);
+      return [mapped];
     }
-    chosenMap.set(chosenKey, [mapped, previous.length]);
-
-    return [mapped];
+    const chosen = choose!(prev[0], mapped);
+    if (chosen !== prev[0]) {
+      chosenMap.set(chosenKey, [chosen, prev[1]]);
+      previous[prev[1]] = chosen;
+    }
   };
 }

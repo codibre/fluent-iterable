@@ -1,3 +1,4 @@
 {
-  "extends": "node_modules/@codibre/confs/mocharc.json"
+  "extends": "node_modules/@codibre/confs/mocharc.json",
+  "timeout": 999999
 }

@@ -1,4 +1,4 @@
-[fluent-iterable - v1.15.1](../README.md) / Action
+[fluent-iterable - v1.15.2](../README.md) / Action
 
 # Interface: Action<T\>
 

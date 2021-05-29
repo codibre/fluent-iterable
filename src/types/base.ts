@@ -207,11 +207,11 @@ export interface Pager<T, TToken> {
 export interface FluentEmitter<T> extends TypedEmitter<FluentEvents<T>> {}
 
 export interface KVGroupTransform<K, V, NewV = V> {
-  (key: K, value: V, previous: NewV[]): Iterable<NewV>;
+  (key: K, value: V, previous: NewV[]): Iterable<NewV> | undefined;
 }
 
 export interface AsyncKVGroupTransform<K, V, NewV = V> {
-  (key: K, value: V, previous: NewV[]): AnyIterable<NewV>;
+  (key: K, value: V, previous: NewV[]): AnyIterable<NewV> | undefined;
 }
 
 /**

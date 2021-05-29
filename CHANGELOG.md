@@ -1,5 +1,7 @@
 
-## 1.15.1
+## 1.15.2
+* 48d720c 1.15.2
+* aa56767 adding signature with just choose to getGroupingTopHit
 * 7534c4b 1.15.1
 * 1c234c5 fixing getGroupingTopHit return type
 * 9f89e40 1.15.0
@@ -227,6 +229,9 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.15.2
+* 48d720c 1.15.2
+* aa56767 adding signature with just choose to getGroupingTopHit
 ## v1.15.1
 * 7534c4b 1.15.1
 * 1c234c5 fixing getGroupingTopHit return type

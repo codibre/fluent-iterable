@@ -1,6 +1,6 @@
-fluent-iterable - v1.15.1
+fluent-iterable - v1.15.2
 
-# fluent-iterable - v1.15.1
+# fluent-iterable - v1.15.2
 
 ## Table of contents
 
@@ -788,7 +788,27 @@ ___
 
 ### getGroupingTopHit
 
-▸ **getGroupingTopHit**<K, T, KT\>(`distinct`: *AnyMapper*<T\>, `choose`: (`a`: T[KT], `b`: T[KT]) => T[KT], `mapper`: KT): *KVGroupTransform*<K, T, T[KT][]\>
+▸ **getGroupingTopHit**<K, T\>(`choose`: *Choose*<T\>): *KVGroupTransform*<K, T\>
+
+Returns a functions that make the group operations to get only one item, per group key,
+The item kept is the preferred one, according to a given choosing criteria,
+
+#### Type parameters:
+
+| Name |
+| :------ |
+| `K` |
+| `T` |
+
+#### Parameters:
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `choose` | *Choose*<T\> | must return the preferred value over two provided |
+
+**Returns:** *KVGroupTransform*<K, T\>
+
+▸ **getGroupingTopHit**<K, T, KT\>(`distinct`: *AnyMapper*<T\>, `choose`: *Choose*<T[KT]\>, `mapper`: KT): *KVGroupTransform*<K, T, T[KT][]\>
 
 Returns a functions that make the group operations get distinct items, according to a giving criteria,
 keeping the preferred one, according to a given choosing criteria,
@@ -806,12 +826,12 @@ keeping the preferred one, according to a given choosing criteria,
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `distinct` | *AnyMapper*<T\> | must return the distinction key. The distinction is respected by group |
-| `choose` | (`a`: T[KT], `b`: T[KT]) => T[KT] | must return the preferred value over two provided |
+| `choose` | *Choose*<T[KT]\> | must return the preferred value over two provided |
 | `mapper` | KT | The property name you want to map for the value |
 
 **Returns:** *KVGroupTransform*<K, T, T[KT][]\>
 
-▸ **getGroupingTopHit**<K, T, NewT\>(`distinct`: *AnyMapper*<T\>, `choose`: (`a`: NewT, `b`: NewT) => NewT, `mapper?`: [*Mapper*](interfaces/mapper.md)<T, NewT\>): *KVGroupTransform*<K, T, NewT\>
+▸ **getGroupingTopHit**<K, T, NewT\>(`distinct`: *AnyMapper*<T\>, `choose`: *Choose*<NewT\>, `mapper?`: [*Mapper*](interfaces/mapper.md)<T, NewT\>): *KVGroupTransform*<K, T, NewT\>
 
 Returns a functions that make the group operations get distinct items, according to a giving criteria,
 keeping the preferred one, according to a given choosing criteria,
@@ -829,7 +849,7 @@ keeping the preferred one, according to a given choosing criteria,
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `distinct` | *AnyMapper*<T\> | must return the distinction key. The distinction is respected by group |
-| `choose` | (`a`: NewT, `b`: NewT) => NewT | must return the preferred value over two provided |
+| `choose` | *Choose*<NewT\> | must return the preferred value over two provided |
 | `mapper?` | [*Mapper*](interfaces/mapper.md)<T, NewT\> | If informed, the mapping operation to define the grouping value. If not, the original value is assumed |
 
 **Returns:** *KVGroupTransform*<K, T, NewT\>

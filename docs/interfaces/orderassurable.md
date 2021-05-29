@@ -1,4 +1,4 @@
-[fluent-iterable - v1.15.1](../README.md) / OrderAssurable
+[fluent-iterable - v1.15.2](../README.md) / OrderAssurable
 
 # Interface: OrderAssurable<T\>
 
