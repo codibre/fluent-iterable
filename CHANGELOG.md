@@ -1,5 +1,8 @@
 
-## 1.14.5
+## 1.14.6
+* e704eca 1.14.6
+* 63503e9 creating getGroupingTopHit
+* ad78be5 fixing extension methods mistake
 * 4c48c3d 1.14.5
 * cfe0f89 fixing extension methods mistake
 * 2a518d7 version bump
@@ -219,6 +222,10 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.14.6
+* e704eca 1.14.6
+* 63503e9 creating getGroupingTopHit
+* ad78be5 fixing extension methods mistake
 ## v1.14.5
 * 4c48c3d 1.14.5
 * cfe0f89 fixing extension methods mistake

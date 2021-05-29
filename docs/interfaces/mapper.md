@@ -1,4 +1,4 @@
-[fluent-iterable - v1.14.5](../README.md) / Mapper
+[fluent-iterable - v1.14.6](../README.md) / Mapper
 
 # Interface: Mapper<T, R\>
 
