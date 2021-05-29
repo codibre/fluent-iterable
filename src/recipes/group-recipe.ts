@@ -9,6 +9,7 @@ import { map as mapSync } from '../sync/map';
 import { GroupIngredients, IterateIngredient } from './ingredients';
 import { orderedOperationRecipe } from './ordered-operation-recipe';
 import { prepare } from '../types-internal/prepare';
+import { constant } from '../utils';
 
 function orderedGroupRecipe({
   map,
@@ -26,23 +27,16 @@ function orderedGroupRecipe({
     return map.call(partitioned, (part: Iterable<any[]>) => {
       let key!: any;
       const values: any[] = [];
+      const boundValues = values.push.bind(values);
       return resolver(
         forEach.call(part, ([k, v]: any) => {
           key = k;
-          for (const item of transformValue(key, v)) {
-            values.push(item);
-          }
+          return forEach.call(transformValue(k, v, values), boundValues);
         }),
         () => ({ key, values }),
       );
     });
   };
-}
-
-function groupItem(g: any, key: any, t: any) {
-  const values = g.get(key) || [];
-  values.push(t);
-  g.set(key, values);
 }
 
 interface ReduceGroupParameters<T> {
@@ -51,6 +45,7 @@ interface ReduceGroupParameters<T> {
   resolver: ResolverType;
   mapper: FunctionAnyMapper<T>;
   transformValue: Function;
+  forEach: Function;
 }
 
 function reduceGroup<T, R>({
@@ -59,15 +54,24 @@ function reduceGroup<T, R>({
   resolver,
   mapper,
   transformValue,
+  forEach,
 }: ReduceGroupParameters<T>) {
   return reduceAndMap.call(
     iterable,
     (g: any, t: any) =>
       resolver(mapper(t), (key) => {
-        for (const item of transformValue(key, t)) {
-          groupItem(g, key, item);
+        let values = g.get(key);
+        if (!values) {
+          values = [];
+          g.set(key, values);
         }
-        return g;
+        return resolver(
+          forEach.call(
+            transformValue(key, t, values),
+            values.push.bind(values),
+          ),
+          constant(g),
+        );
       }),
     new Map<R, T[]>(),
     (x: any) => x.entries(),
@@ -81,6 +85,7 @@ function nonOrderedGroup<T>(
     resolver,
     mapper,
     transformValue,
+    forEach,
   }: ReduceGroupParameters<T>,
   iterate: IterateIngredient,
 ) {
@@ -90,6 +95,7 @@ function nonOrderedGroup<T>(
     resolver,
     mapper,
     transformValue,
+    forEach,
   });
 
   const resolved = resolver(reduced, (r) =>
@@ -107,7 +113,7 @@ export function singleItem<T>(_k: any, t: T) {
 
 export function groupRecipe(ingredients: GroupIngredients) {
   const orderedGroup = orderedGroupRecipe(ingredients);
-  const { reduceAndMap, resolver, iterate } = ingredients;
+  const { reduceAndMap, resolver, iterate, forEach } = ingredients;
   return function <T>(
     this: AnyIterable<T>,
     baseMapper: AnyMapper<T>,
@@ -121,7 +127,14 @@ export function groupRecipe(ingredients: GroupIngredients) {
       return orderedGroup.call(this, mapper, transformValue);
     } else {
       return nonOrderedGroup<T>(
-        { iterable: this, reduceAndMap, resolver, mapper, transformValue },
+        {
+          iterable: this,
+          reduceAndMap,
+          resolver,
+          mapper,
+          transformValue,
+          forEach,
+        },
         iterate,
       );
     }
