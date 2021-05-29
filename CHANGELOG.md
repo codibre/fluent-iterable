@@ -1,5 +1,7 @@
 
-## 1.15.2
+## 1.15.3
+* b43fb12 1.15.3
+* 464c564 bettering getGroupingTopHit performance
 * 48d720c 1.15.2
 * aa56767 adding signature with just choose to getGroupingTopHit
 * 7534c4b 1.15.1
@@ -229,6 +231,9 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.15.3
+* b43fb12 1.15.3
+* 464c564 bettering getGroupingTopHit performance
 ## v1.15.2
 * 48d720c 1.15.2
 * aa56767 adding signature with just choose to getGroupingTopHit
