@@ -1,5 +1,7 @@
 
-## 1.16.0
+## 1.17.0
+* daefd17 1.17.0
+* eac660c creating toMap operation
 * dbfa907 1.16.0
 * bedcd6e creating option to choose elect value of distinct
 * 3b635db verison bump
@@ -234,6 +236,9 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.17.0
+* daefd17 1.17.0
+* eac660c creating toMap operation
 ## v1.16.0
 * dbfa907 1.16.0
 * bedcd6e creating option to choose elect value of distinct
