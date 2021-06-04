@@ -81,7 +81,7 @@ export const data: Person[] = [
 export const picker = (...indexes: number[]): Person[] =>
   pick(data, ...indexes);
 
-function* generator(): Iterable<Person> {
+export function* generator(): Iterable<Person> {
   yield* data;
 }
 
@@ -753,51 +753,6 @@ describe('fluent iterable', () => {
               .sort((a, b) => b - a)
               .toArray(),
           ).to.eql([6, 5, 4, 3, 2, 1]));
-      });
-      describe('distinct', () => {
-        it('empty', () => expect(fluent([]).distinct().toArray()).to.be.empty);
-        it('not distinct numbers', () =>
-          expect(fluent([1, 1, 1, 2, 2, 3]).distinct().toArray()).to.eql([
-            1,
-            2,
-            3,
-          ]));
-        it('already distinct collection', () =>
-          expect(fluent(subject).distinct().toArray()).to.eql(data));
-        it('with mapper', () =>
-          expect(
-            fluent(subject)
-              .distinct((p) => p.gender)
-              .toArray(),
-          ).to.eql(picker(0, 3, 4, 5)));
-        it('should work with key string', () =>
-          expect(fluent(subject).distinct('gender').toArray()).to.eql(
-            picker(0, 3, 4, 5),
-          ));
-      });
-      describe('distinctAsync', () => {
-        it('empty', async () =>
-          expect(
-            await fluent([])
-              .distinctAsync(async (x) => x)
-              .toArray(),
-          ).to.be.empty);
-        it('not distinct numbers', async () =>
-          expect(
-            await fluent([1, 1, 1, 2, 2, 3])
-              .distinctAsync(async (x) => x)
-              .toArray(),
-          ).to.eql([1, 2, 3]));
-        it('already distinct collection', async () =>
-          expect(
-            await fluent(subject)
-              .distinctAsync(async (x) => x)
-              .toArray(),
-          ).to.eql(data));
-        it('should work with key string', () =>
-          expect(fluent(subject).distinct('gender').toArray()).to.eql(
-            picker(0, 3, 4, 5),
-          ));
       });
       describe('group', () => {
         it('empty', () =>

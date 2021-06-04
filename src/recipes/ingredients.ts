@@ -57,6 +57,7 @@ export interface DistinctIngredients extends BasicIngredients {
   partition: PartitionIngredient;
   filterOrAll: Ingredient | ResolverIngredient;
   hasLessOrExactly: ThresholdIngredient;
+  reduce: ReduceIngredient;
 }
 
 export interface MinMaxIngredients extends BasicIngredients {

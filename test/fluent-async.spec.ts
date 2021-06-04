@@ -16,7 +16,7 @@ import { AnyIterable } from 'augmentative-iterable';
 import { emitGenerator } from './fluent-emit.spec';
 import { fluentSymbolAsync } from '../src/types-internal';
 
-async function* generator(): AsyncIterable<Person> {
+export async function* asyncGenerator(): AsyncIterable<Person> {
   yield* data;
 }
 
@@ -393,26 +393,6 @@ describe('fluent async iterable', () => {
             .sort((a, b) => b - a)
             .toArray(),
         ).to.eql([6, 5, 4, 3, 2, 1]));
-    });
-    describe('distinct', () => {
-      it('empty', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([])).distinct().toArray(),
-        ).to.be.empty);
-      it('not distinct numbers', async () =>
-        expect(
-          await fluentAsync(new ObjectReadableMock([1, 1, 1, 2, 2, 3]))
-            .distinct()
-            .toArray(),
-        ).to.eql([1, 2, 3]));
-      it('already distinct collection', async () =>
-        expect(await fluentAsync(subject).distinct().toArray()).to.eql(data));
-      it('with mapper', async () =>
-        expect(
-          await fluentAsync(subject)
-            .distinct((p) => p.gender)
-            .toArray(),
-        ).to.eql(picker(0, 3, 4, 5)));
     });
     describe('group', () => {
       it('empty', async () =>
@@ -1049,7 +1029,7 @@ describe('fluent async iterable', () => {
     'on array',
     suite(() => data),
   );
-  describe('on generator', suite(generator));
+  describe('on generator', suite(asyncGenerator));
 
   describe('waitAll', () => {
     it('should return a promises with resolves when all promises are resolved', async () => {

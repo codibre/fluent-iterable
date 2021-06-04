@@ -5,6 +5,7 @@ import { hasLessOrExactlyAsync } from './has-less-or-exactly-async';
 import { basicAsync } from './basic-ingredients-async';
 import { partitionAsync } from './partition-async';
 import { Ingredient, ResolverIngredient } from '../recipes/ingredients';
+import { reduceAsync } from './reduce-async';
 
 function distinctAsyncRecipe(filterOrAll: Ingredient | ResolverIngredient) {
   return distinctRecipe({
@@ -12,6 +13,7 @@ function distinctAsyncRecipe(filterOrAll: Ingredient | ResolverIngredient) {
     partition: partitionAsync,
     filterOrAll,
     hasLessOrExactly: hasLessOrExactlyAsync,
+    reduce: reduceAsync,
   });
 }
 

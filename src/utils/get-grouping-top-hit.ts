@@ -3,8 +3,8 @@ import { Mapper } from 'augmentative-iterable';
 import { prepare } from '../types-internal/prepare';
 import { AnyMapper, FunctionAnyMapper } from '../types-internal';
 import { constant, identity } from './utils';
+import { Choose } from '../types';
 
-type Choose<T> = (a: T, b: T) => T;
 const noDistinct = constant(1);
 
 /**
