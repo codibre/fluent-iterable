@@ -1,5 +1,8 @@
 
-## 1.15.3
+## 1.16.0
+* dbfa907 1.16.0
+* bedcd6e creating option to choose elect value of distinct
+* 3b635db verison bump
 * b43fb12 1.15.3
 * 464c564 bettering getGroupingTopHit performance
 * 48d720c 1.15.2
@@ -231,6 +234,10 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.16.0
+* dbfa907 1.16.0
+* bedcd6e creating option to choose elect value of distinct
+* 3b635db verison bump
 ## v1.15.3
 * b43fb12 1.15.3
 * 464c564 bettering getGroupingTopHit performance

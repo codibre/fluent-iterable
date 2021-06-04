@@ -51,6 +51,8 @@ declare module './base' {
     someAsync: f.AsyncAnyFunction<T>;
     contains: f.ContainsFunction<T>;
     toArray: f.ToArrayFunction<T>;
+    toMap: f.ToMapFunction<T>;
+    toMapAsync: f.AsyncToMapFunction<T>;
     toObject: f.ToObjectFunction<T>;
     toObjectAsync: f.AsyncToObjectFunction<T>;
     toAsync: f.ToAsyncFunction<T>;

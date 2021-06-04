@@ -34,6 +34,7 @@ import {
   last,
   all,
   toArray,
+  toMap,
   execute,
   avg,
   reduceAndMap,
@@ -76,6 +77,7 @@ import {
   filterAsync,
   takeWhileAsync,
   isDistinctAsync,
+  toMapAsync,
 } from '../async';
 import { combineEmitter, concatEmitter } from '../emitter';
 import * as common from '../common';
@@ -177,4 +179,6 @@ export const resolvingFuncs = {
   isDistinct,
   isDistinctAsync,
   next,
+  toMap,
+  toMapAsync,
 };

@@ -41,6 +41,7 @@ export * from './take';
 export * from './take-while';
 export * from './to-array';
 export * from './to-async';
+export * from './to-map';
 export * from './to-object';
 export * from './top';
 export * from './wait-all';
