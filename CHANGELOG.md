@@ -1,5 +1,8 @@
 
-## 1.17.0
+## 1.18.0
+* 8983dba 1.18.0
+* 5e7461f creating toSet
+* c62253d updating changelog
 * daefd17 1.17.0
 * eac660c creating toMap operation
 * dbfa907 1.16.0
@@ -236,6 +239,10 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.18.0
+* 8983dba 1.18.0
+* 5e7461f creating toSet
+* c62253d updating changelog
 ## v1.17.0
 * daefd17 1.17.0
 * eac660c creating toMap operation
