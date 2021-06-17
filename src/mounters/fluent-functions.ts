@@ -49,6 +49,7 @@ import {
   whenEmpty,
   catchSync,
   next,
+  toSet,
 } from '../sync';
 import {
   allAsync,
@@ -78,6 +79,7 @@ import {
   takeWhileAsync,
   isDistinctAsync,
   toMapAsync,
+  toSetAsync,
 } from '../async';
 import { combineEmitter, concatEmitter } from '../emitter';
 import * as common from '../common';
@@ -181,4 +183,6 @@ export const resolvingFuncs = {
   next,
   toMap,
   toMapAsync,
+  toSet,
+  toSetAsync,
 };

@@ -34,6 +34,7 @@ declare module './base' {
     toArray: f.AsyncToArrayFunction<T>;
     toMap: f.AsyncToMapFunction<T>;
     toObject: f.AsyncToObjectFunction<T>;
+    toSet: f.AsyncToSetFunction<T>;
     forEach: f.AsyncForEachFunction<T>;
     execute: f.AsyncExecuteFunction<T>;
     join: f.AsyncJoinFunction<T>;

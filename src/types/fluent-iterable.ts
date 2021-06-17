@@ -55,6 +55,8 @@ declare module './base' {
     toMapAsync: f.AsyncToMapFunction<T>;
     toObject: f.ToObjectFunction<T>;
     toObjectAsync: f.AsyncToObjectFunction<T>;
+    toSet: f.ToSetFunction<T>;
+    toSetAsync: f.AsyncToSetFunction<T>;
     toAsync: f.ToAsyncFunction<T>;
     forEach: f.ForEachFunction<T>;
     forEachAsync: f.AsyncForEachFunction<T>;

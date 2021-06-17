@@ -43,6 +43,7 @@ export * from './to-array';
 export * from './to-async';
 export * from './to-map';
 export * from './to-object';
+export * from './to-set';
 export * from './top';
 export * from './wait-all';
 export * from './when-empty';

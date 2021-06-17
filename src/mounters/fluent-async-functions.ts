@@ -46,6 +46,7 @@ import {
   flatMergeAsync,
   nextAsync,
   toMapAsync,
+  toSetAsync,
 } from '../async';
 import {
   combineEmitter,
@@ -132,4 +133,5 @@ export const asyncResolvingFuncs = {
   waitAll: waitAllAsync,
   isDistinct: isDistinctAsync,
   toMap: toMapAsync,
+  toSet: toSetAsync,
 };

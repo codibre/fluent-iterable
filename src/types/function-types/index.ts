@@ -48,6 +48,7 @@ export * from './to-array-function';
 export * from './to-async-function';
 export * from './to-map-function';
 export * from './to-object-function';
+export * from './to-set-function';
 export * from './top-function';
 export * from './wait-all-function';
 export * from './when-empty-function';
