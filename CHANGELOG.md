@@ -1,5 +1,9 @@
 
-## 1.18.0
+## 1.18.1
+* 5035b2e 1.18.1
+* 2e801f7 adding benchmark results to README
+* 8483221 adding iterare to benchmark
+* f995161 updating changelog
 * 8983dba 1.18.0
 * 5e7461f creating toSet
 * c62253d updating changelog
@@ -239,6 +243,11 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.18.1
+* 5035b2e 1.18.1
+* 2e801f7 adding benchmark results to README
+* 8483221 adding iterare to benchmark
+* f995161 updating changelog
 ## v1.18.0
 * 8983dba 1.18.0
 * 5e7461f creating toSet

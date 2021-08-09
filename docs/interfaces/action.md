@@ -1,4 +1,4 @@
-[fluent-iterable - v1.15.2](../README.md) / Action
+[fluent-iterable - v1.18.1](../README.md) / Action
 
 # Interface: Action<T\>
 
@@ -7,9 +7,9 @@ Represents an action on an item of type `T`.<br>
 
 ## Type parameters
 
-| Name | Description |
-| :------ | :------ |
-| `T` | The type of the item the action is defined on. |
+Name | Description |
+:------ | :------ |
+`T` | The type of the item the action is defined on.    |
 
 ## Callable
 
@@ -19,8 +19,8 @@ Specifies the action to perform on `item`.
 
 #### Parameters:
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `item` | T | The item the action is performed against. |
+Name | Type | Description |
+:------ | :------ | :------ |
+`item` | T | The item the action is performed against.    |
 
 **Returns:** *void*

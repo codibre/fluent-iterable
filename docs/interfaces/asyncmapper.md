@@ -1,4 +1,4 @@
-[fluent-iterable - v1.15.2](../README.md) / AsyncMapper
+[fluent-iterable - v1.18.1](../README.md) / AsyncMapper
 
 # Interface: AsyncMapper<T, R\>
 
@@ -8,10 +8,10 @@ Represents a asynchronous mapping operation from type `T` to type `R`.<br>
 
 ## Type parameters
 
-| Name | Description |
-| :------ | :------ |
-| `T` | The source type. |
-| `R` | The destination type. |
+Name | Description |
+:------ | :------ |
+`T` | The source type.   |
+`R` | The destination type.    |
 
 ## Callable
 
@@ -21,9 +21,9 @@ Asynchronously maps an item of type `T` into an instance of type `R`.
 
 #### Parameters:
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `item` | T | The item to map. |
+Name | Type | Description |
+:------ | :------ | :------ |
+`item` | T | The item to map.   |
 
 **Returns:** R \| *Promise*<R\>
 

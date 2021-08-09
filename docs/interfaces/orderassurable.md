@@ -1,12 +1,12 @@
-[fluent-iterable - v1.15.2](../README.md) / OrderAssurable
+[fluent-iterable - v1.18.1](../README.md) / OrderAssurable
 
 # Interface: OrderAssurable<T\>
 
 ## Type parameters
 
-| Name |
-| :------ |
-| `T` |
+Name |
+:------ |
+`T` |
 
 ## Hierarchy
 

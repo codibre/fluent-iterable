@@ -1,4 +1,4 @@
-[fluent-iterable - v1.15.2](../README.md) / Comparer
+[fluent-iterable - v1.18.1](../README.md) / Comparer
 
 # Interface: Comparer<T\>
 
@@ -7,9 +7,9 @@ Compares two instances of type `T`.<br>
 
 ## Type parameters
 
-| Name | Description |
-| :------ | :------ |
-| `T` | The type of the compared instances. |
+Name | Description |
+:------ | :------ |
+`T` | The type of the compared instances.    |
 
 ## Callable
 
@@ -19,10 +19,10 @@ Compares `a` and `b`.
 
 #### Parameters:
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `a` | T | The first instance (the left hand side of the comparison). |
-| `b` | T | The second instance (the right hand side of the comparison). |
+Name | Type | Description |
+:------ | :------ | :------ |
+`a` | T | The first instance (the left hand side of the comparison).   |
+`b` | T | The second instance (the right hand side of the comparison).   |
 
 **Returns:** *number*
 
