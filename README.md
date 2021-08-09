@@ -11,13 +11,23 @@
 
 A fast way to iterate, sync or async, over array likes, stream and async iterables. It provides [fluent api](https://en.wikipedia.org/wiki/Fluent_interface) operations so you can easily chain many operations.
 
-<p align="center">
 <img src="resources/preview.png">
-</p>
 
 ## Benchmarks
 
 Fluent-iterable are strongly focused on performance. Check it out in our [benchmark](https://runkit.com/farenheith/fluent-iterable-benchmark)!;
+Here a some results we got comparing to another similar options:
+
+| Library | Ops/sec | Margin | Ran samples |
+| ------- | ------- | ----------- | ----------- |
+| **fluent** | 276 | ±4.91% | 82 |
+| [iterare](https://www.npmjs.com/package/iterare ) | 155 | ±4.94%  | 80 |
+| [rxjs](https://www.npmjs.com/package/rxjs) | 151 | ±3.42% | 77 |
+| native generators | 86.89 | ±4.09% | 74 |
+| native array operations chain | 73.23 | ±4.51% | 63 |
+
+You can check the bechmark code [here](./test-benchmark/general-benchmark.spec.ts)
+
 
 ## But Why?
 
@@ -43,7 +53,7 @@ And that's where fast-iterable comes in!
 
 With fast-iterable, you can do the same operation with the following code:
 
-```typescript
+``` typescript
 const result = fluent(list)
   .filter((x) => filter1(x))
   .map((X) => transform1(x))
@@ -73,10 +83,10 @@ Think of RxJS as Lodash for events.
 That's it. Rxjs is focused primarily in event handling.
 Over that, some key differences can be pointed out:
 
-- _A previous operation of rxjs doesn't stop when some next operation stops, while with fast-iterable it does._<br>
-  That's because, with rxjs you can chain multiple operations parallel after one, which makes sense for event handling. With fast-iterable, on the other hand, you can only have, normally, a straight line of operations and,f no matter what operation break the iteration, everything stops.
-- _With rxjs, a previous operation doesn't wait for a async next operation to end before go to the next step, while with fast-iterable it does._<br>
-  Again, rxjs is focused on events. When dealing with event, you just want to emit them as fast as possible. With a simple iteration, though, you want to make sure that the whole chain of steps is concluded before advancing to the next one.
+* *A previous operation of rxjs doesn't stop when some next operation stops, while with fast-iterable it does.*
+That's because, with rxjs you can chain multiple operations parallel after one, which makes sense for event handling. With fast-iterable, on the other hand, you can only have, normally, a straight line of operations and,f no matter what operation break the iteration, everything stops.
+* *With rxjs, a previous operation doesn't wait for a async next operation to end before go to the next step, while with fast-iterable it does.*
+Again, rxjs is focused on events. When dealing with event, you just want to emit them as fast as possible. With a simple iteration, though, you want to make sure that the whole chain of steps is concluded before advancing to the next one.
 
 So, as you see, regardless some similarities, there're some pretty important differences between them and those are libraries focused on quite different problems.
 
@@ -86,11 +96,11 @@ Fast-iterable have some neat operations already implemente. If you want to Click
 
 ### Basics
 
-ECMAScript introduced support for [iterables and generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators) with version ES6 and their [asynchronous counterparts](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator) with version ES2018. It has introduced an abstraction over sequential iterators (arrays, maps, generators, etc), enabling us to implement solutions regardless of the actual type of the iterable collection. It is especially powerful when using in tandem with generator functions to avoid storing all items in memory when its avoidable. The API provided by _fast-iterable_ reads the elements of the underlying iterable only when needed and stops reading elements as soon as the result is determined.
+ECMAScript introduced support for [iterables and generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators) with version ES6 and their [asynchronous counterparts](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator) with version ES2018. It has introduced an abstraction over sequential iterators (arrays, maps, generators, etc), enabling us to implement solutions regardless of the actual type of the iterable collection. It is especially powerful when using in tandem with generator functions to avoid storing all items in memory when its avoidable. The API provided by *fast-iterable* reads the elements of the underlying iterable only when needed and stops reading elements as soon as the result is determined.
 
 To get started with the fluent API, you need to translate the iterable (can be any object with [Symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) [iterator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator) or [asyncIterator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator) defined) into either a **FluentIterable** using **fluent()** or a **FluentAsyncIterable** using **fluentAsync()**.
 
-```typescript
+``` typescript
 import fetch from 'node-fetch';
 import {
   fluent,
@@ -133,7 +143,7 @@ const asyncIterableOfEmails = fluentAsync(emails());
 
 Once you have an instance of a fluent iterable, you can start chaining any of the supported operations to express what you need, like:
 
-```typescript
+``` typescript
 ...
 
 interface ChatMessage {
@@ -199,7 +209,7 @@ You can see a list of many advanced examples for **fluent** clicking [here!](adv
 
 #### Playing with Fibonacci generator
 
-```typescript
+``` typescript
 import { fluent } from 'fast-iterable';
 
 function* naiveFibonacci(): Iterable<number> {
@@ -246,7 +256,7 @@ console.log(
 
 #### Playing with object arrays
 
-```typescript
+``` typescript
 import { fluent } from 'fast-iterable';
 
 enum Gender {
@@ -328,7 +338,7 @@ console.log(
 
 #### Playing with remote
 
-```typescript
+``` typescript
 import fetch from 'node-fetch';
 import { fluentAsync, Pager } from 'fast-iterable';
 
@@ -358,7 +368,7 @@ fluentAsync(depaginate(pager))
 
 ### Doing an inner join between two iterables:
 
-```typescript
+``` typescript
 import { fluent, identity } from 'fast-iterable';
 
 const genders = [
@@ -407,7 +417,7 @@ fluent(genders)
 
 #### Bonus: How to Scan DynamoDB like a pro
 
-```typescript
+``` typescript
 import { DynamoDB } from 'aws-sdk';
 import { Key } from 'aws-sdk/clients/dynamodb';
 import { depaginate, fluentAsync, Pager } from 'fast-iterable';
@@ -448,15 +458,15 @@ async function printProducts(count: number) {
 
 ## Merging stream, async iterables and async iterators
 
-Due to Readables also being async iterables, it can be very useful, if you have a scenario where you have many streams being dealt with and you need to combine all results, you can use _asyncHelper.merge_ or _asyncHelper.mergeCatching_ for it! The difference between them is that, with _mergeCatching_, you can continue to receive chunks from non concluded async iterables/readables, even if one of them throws an error, while _merge_, in the other hand, will throw an error at the first error received.
+Due to Readables also being async iterables, it can be very useful, if you have a scenario where you have many streams being dealt with and you need to combine all results, you can use *asyncHelper.merge* or *asyncHelper.mergeCatching* for it! The difference between them is that, with *mergeCatching*, you can continue to receive chunks from non concluded async iterables/readables, even if one of them throws an error, while *merge*, in the other hand, will throw an error at the first error received.
 
 The solution used for this problems was 90% inspired in the [fraxken combine-async-iterators repository](https://github.com/fraxken/combine-async-iterators), which uses Promise.race to generate a new merged iterable that yields the items from all iterators in the resolving order.
 
 ## Adding custom operations
 
-You can add custom methods to the FluentIterable and FluentAsyncIterable using the _extend_ and _extendAsync_ utilities. Here is a practical example of how to:
+You can add custom methods to the FluentIterable and FluentAsyncIterable using the *extend* and *extendAsync* utilities. Here is a practical example of how to:
 
-```TypeScript
+``` TypeScript
 declare module 'fast-iterable' {
   import { extendAsync } from '../src';
 
@@ -477,7 +487,7 @@ Notice that, when you import a code like the above, all the next created FluentA
 One thing you can do to get the best performance from this package is to signalize when determined predicate
 will generate or analyze results in order. Take this example:
 
-```ts
+``` ts
 const result = fluent([1, 2, 3, 4, 5])
   .filter((x) => x < 3)
   .toArray();
@@ -489,7 +499,7 @@ The way it is declared, this operation will print 2 items, but will validate 5. 
 though, so, why we need validate all items?
 We can avoid this if you assure for fluent-iterable that the filter predicate will treat elements in order:
 
-```ts
+``` ts
 const result = fluent([1, 2, 3, 4, 5])
   .filter(assureOrder((x) => x < 3))
   .toArray();
@@ -500,7 +510,7 @@ console.log(result); // prints [1, 2]
 This result will be the same, but this operation will only validate 3 items! The third item will be 3 and will make the iteration to stop!
 You can also do the same operation with an alias for **assureOrder**:
 
-```ts
+``` ts
 const result = fluent([1, 2, 3, 4, 5])
   .filter(o((x) => x < 3))
   .toArray();
@@ -510,7 +520,7 @@ console.log(result); // prints [1, 2]
 
 You can also assure the order for a whole iterable
 
-```ts
+``` ts
 const result = fluent(o([1, 2, 3, 4, 5])) // or o(fluent([1, 2, 3, 4, 5]))
   .assureOrder() // you can also use alias .o()
   .filter((x) => x < 3)
@@ -521,7 +531,7 @@ console.log(result); // prints [1, 2]
 
 Or you can use the fluent syntax:
 
-```ts
+``` ts
 const result = fluent([1, 2, 3, 4, 5])
   .assureOrder() // you can also use alias .o()
   .filter((x) => x < 3)
@@ -534,7 +544,7 @@ But these later ones have a behavior slight different from assuring a predicate 
 
 So, something like this:
 
-```ts
+``` ts
 const result = fluent([1, 2, 3, 4, 5])
   .o()
   .filter((x) => x < 3)
@@ -548,7 +558,7 @@ But **max** is a particular operation that could take a benefit much greater fro
 simply become equivalent to **first**. If you fall into such situation, you can also indicate it to fluent,
 like this:
 
-```ts
+``` ts
 const result = fluent([5, 4, 3, 2, 1])
   .od() // you can also use alias .assureOrderDescending()
   .filter((x) => x < 3)
