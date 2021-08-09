@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import { fluent, interval }  from '../src';
 import rxjs = require('rxjs');
 import rxjsOp = require('rxjs/operators');
+import { iterate } from 'iterare';
 import Benchmark = require('benchmark');
 
 const ITEMS = 100000;
@@ -85,7 +86,15 @@ describe('General benchmark', () => {
           rxjsOp.take(TAKE),
           rxjsOp.map((x) => x.join(',')),
         ).toPromise();
-  }).on('cycle', function(event) {
+  }).add('iterare', () => {
+    iterate(interval2(1, ITEMS))
+      .map((x) => x * MULTIPLIER1)
+      .map((x) => x * MULTIPLIER2)
+      .filter((x) => x % QUOTIENT === 0)
+      .map((x) => interval2(x, x + FLAT_FACTOR))
+      .take(TAKE)
+      .forEach((x) => x.join(','));
+}).on('cycle', function(event) {
     log += `${event.target}\n`;
   }).on('complete', function(this: any) {
     console.log(log);

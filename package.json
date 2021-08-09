@@ -94,6 +94,7 @@
     "eslint-plugin-prettier": "^3.3.1",
     "expect": "^26.6.2",
     "husky": "^6.0.0",
+    "iterare": "^1.2.1",
     "mocha": "^8.3.2",
     "nyc": "^15.1.0",
     "prettier": "^2.2.1",
