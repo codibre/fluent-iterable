@@ -7,6 +7,8 @@ type RequiresTruthy<T, Guarantees extends keyof T> = T &
     [P in Guarantees]-?: Truthy<T[P]>;
   };
 
+export type PredicateTypeGuard<T, E extends T> = (item: T) => item is E;
+
 export interface FilterFunction<T> {
   /**
    * Filters the falsy values of a iterable of `T`<br>
@@ -14,6 +16,13 @@ export interface FilterFunction<T> {
    * @returns A [[FluentIterable]] of the elements against which the predicate evaluates to `true`.
    */
   (): FluentIterable<Truthy<T>>;
+  /**
+   * Filters the iterable of `T` based on a predicate.<br>
+   *   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).filter(word => word[0] === 'a')` yields *anchor*, *almond*, and *alpine*.
+   * @param predicate A predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`.
+   * @returns A [[FluentIterable]] of the elements against which the predicate evaluates to `true`.
+   */
+  <E extends T>(predicate: PredicateTypeGuard<T, E>): FluentIterable<E>;
   /**
    * Filters the iterable of `T` based on a predicate.<br>
    *   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).filter(word => word[0] === 'a')` yields *anchor*, *almond*, and *alpine*.
@@ -45,6 +54,12 @@ export interface AsyncFilterFunction<T> {
    * @returns A [[FluentAsyncIterable]] of the elements against which the predicate evaluates to `true`.
    */
   (): FluentAsyncIterable<Truthy<T>>;
+  /**
+   * Filters the iterable of `T` based on an type guard predicate.
+   * @param predicate An asynchronous predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`.
+   * @returns A [[FluentAsyncIterable]] of the elements against which the predicate evaluates to `true`.
+   */
+  <E extends T>(predicate: PredicateTypeGuard<T, E>): FluentAsyncIterable<E>;
   /**
    * Filters the iterable of `T` based on an asynchronous predicate.
    * @param predicate An asynchronous predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`.

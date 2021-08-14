@@ -219,6 +219,14 @@ describe('fluent async iterable', () => {
         ).to.eql([2, 3]);
         expect(call).to.have.callCount(4);
       });
+      it('should apply type guard properly', async () => {
+        const test: (number | string)[] = [1, 'b', 2, 'c', 3];
+        const result = await fluentAsync(test)
+          .filter((a): a is number => typeof a === 'number')
+          .toArray();
+
+        expect(result[0] + 1).to.be.eq(2);
+      });
     });
     describe('partition', () => {
       it('should divide result in blocks of the specified size', async () => {

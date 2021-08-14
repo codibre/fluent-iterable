@@ -489,6 +489,14 @@ describe('fluent iterable', () => {
               .toArray(),
           ).to.be.eql(['1.00 and 3', '2.00 and 1']);
         });
+        it('should apply type guard properly', () => {
+          const test: (number | string)[] = [1, 'b', 2, 'c', 3];
+          const result = fluent(test)
+            .filter((a): a is number => typeof a === 'number')
+            .toArray();
+
+          expect(result[0] + 1).to.be.eq(2);
+        });
       });
       describe('filterAsync', () => {
         it('with always false predicate', async () =>
