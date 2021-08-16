@@ -1,4 +1,4 @@
-[fluent-iterable - v1.18.1](../README.md) / Comparer
+[fluent-iterable - v1.18.2](../README.md) / Comparer
 
 # Interface: Comparer<T\>
 

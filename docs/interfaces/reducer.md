@@ -1,4 +1,4 @@
-[fluent-iterable - v1.18.1](../README.md) / Reducer
+[fluent-iterable - v1.18.2](../README.md) / Reducer
 
 # Interface: Reducer<T, A\>
 

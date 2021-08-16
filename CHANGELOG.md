@@ -1,5 +1,8 @@
 
-## 1.18.1
+## 1.18.2
+* a1592ba 1.18.2
+* edcabff using typeguard on filter
+* 15c5833 updating docs
 * 5035b2e 1.18.1
 * 2e801f7 adding benchmark results to README
 * 8483221 adding iterare to benchmark
@@ -243,6 +246,10 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.18.2
+* a1592ba 1.18.2
+* edcabff using typeguard on filter
+* 15c5833 updating docs
 ## v1.18.1
 * 5035b2e 1.18.1
 * 2e801f7 adding benchmark results to README
