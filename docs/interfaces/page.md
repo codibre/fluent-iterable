@@ -1,4 +1,4 @@
-[fluent-iterable - v1.18.2](../README.md) / Page
+[fluent-iterable - v1.18.3](../README.md) / Page
 
 # Interface: Page<T, TToken\>
 

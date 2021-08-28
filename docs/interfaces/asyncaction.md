@@ -1,4 +1,4 @@
-[fluent-iterable - v1.18.2](../README.md) / AsyncAction
+[fluent-iterable - v1.18.3](../README.md) / AsyncAction
 
 # Interface: AsyncAction<T\>
 

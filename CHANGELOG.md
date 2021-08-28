@@ -1,5 +1,8 @@
 
-## 1.18.2
+## 1.18.3
+* 18a1371 1.18.3
+* 44ca34e fixing flatMap/flatten contract
+* 47cd81d docs: update docs
 * a1592ba 1.18.2
 * edcabff using typeguard on filter
 * 15c5833 updating docs
@@ -246,6 +249,10 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.18.3
+* 18a1371 1.18.3
+* 44ca34e fixing flatMap/flatten contract
+* 47cd81d docs: update docs
 ## v1.18.2
 * a1592ba 1.18.2
 * edcabff using typeguard on filter
