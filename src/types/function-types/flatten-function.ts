@@ -1,4 +1,4 @@
-import { AsyncMapper, Mapper } from 'augmentative-iterable';
+import { AsyncMapper, Mapper, AnyIterable } from 'augmentative-iterable';
 import { AsyncItemType, ItemType } from '../base';
 import { FluentAsyncIterable, FluentIterable } from '../base';
 
@@ -41,14 +41,14 @@ export interface AsyncFlattenFunction<T> {
    * @typeparam R The type of the elements in the inner iterable.
    * @returns The [[FluentIterable]] of the flattened iterable.
    */
-  <R extends ItemType<T>>(): FluentAsyncIterable<R>;
+  <R extends AsyncItemType<T>>(): FluentAsyncIterable<R>;
   /**
    * Asynchronously projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.
    * @typeparam R The type of the elements in the inner iterable.
    * @param mapper Specifies the asynchronous projection from the elements of `T` to iterables of `R`.
    * @returns The flattened [[FluentAsyncIterable]].
    */
-  <R>(mapper: AsyncMapper<T, Iterable<R>>): FluentAsyncIterable<R>;
+  <R>(mapper: AsyncMapper<T, AnyIterable<R>>): FluentAsyncIterable<R>;
   /**
    * Asynchronously projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.
    * @typeparam R The type of the elements in the inner iterable.

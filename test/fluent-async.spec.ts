@@ -383,6 +383,24 @@ describe('fluent async iterable', () => {
           expect(await fluentAsync(subject)[func]('emails').toArray()).to.eql(
             flatMap(picker(1, 2, 6, 7, 8, 9, 10, 11), (p) => p.emails),
           ));
+        it('with no mapper and async items', async () =>
+          expect(
+            await fluentAsync(subject)
+              .map(async (x) => x.emails)
+              [func]()
+              .toArray(),
+          ).to.eql(flatMap(picker(1, 2, 6, 7, 8, 9, 10, 11), (p) => p.emails)));
+        it('with mapper and async items', async () =>
+          expect(
+            await fluentAsync(subject)
+              .map(async (x) => x)
+              [func]((p) => p.emails)
+              .toArray(),
+          ).to.eql(flatMap(picker(1, 2, 6, 7, 8, 9, 10, 11), (p) => p.emails)));
+        it('with property key', async () =>
+          expect(await fluentAsync(subject)[func]('emails').toArray()).to.eql(
+            flatMap(picker(1, 2, 6, 7, 8, 9, 10, 11), (p) => p.emails),
+          ));
       });
     });
     describe('sort', () => {
