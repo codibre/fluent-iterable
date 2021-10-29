@@ -1,6 +1,6 @@
-fluent-iterable - v1.18.3
+fluent-iterable - v1.18.4
 
-# fluent-iterable - v1.18.3
+# fluent-iterable - v1.18.4
 
 ## Table of contents
 
@@ -303,7 +303,7 @@ declare namespace FluentAsyncIterable {
 Name | Type |
 :------ | :------ |
 `use` | (`name`: *string*, `operation`: [*AsyncIterableOperation*](README.md#asynciterableoperation)) => *void* |
-`useResolving` | (`name`: *string*, `operation`: <T\>(`iterable`: [*AsyncIterableResolvingOperation*](README.md#asynciterableresolvingoperation)) => *any*) => *void* |
+`useResolving` | (`name`: *string*, `operation`: (`iterable`: [*AsyncIterableResolvingOperation*](README.md#asynciterableresolvingoperation)) => *any*) => *void* |
 
 ## Functions
 

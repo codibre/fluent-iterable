@@ -13,7 +13,7 @@ import { EventEmitter } from 'events';
 import { getIterableFromEmitter } from './emitter';
 import { fluentSymbolAsync, getFluent } from './types-internal';
 import { asyncHandler, asyncProxyReference } from './async-handler';
-import { internalAsyncWrapper, internalWrapper } from './internal-wrapper';
+import { internalAsyncWrapper } from './internal-wrapper';
 /**
  * Tranforms an asynchronous iterable into a [[FluentAsyncIterable]].
  * @typeparam T The type of the items in the async iterable.

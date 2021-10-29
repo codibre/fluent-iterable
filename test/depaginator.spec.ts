@@ -1,4 +1,4 @@
-import { fluent, fluentAsync, depaginate, Pager, Page } from '../src';
+import { fluentAsync, depaginate, Pager, Page } from '../src';
 import { expect } from 'chai';
 
 describe('depaginate()', () => {

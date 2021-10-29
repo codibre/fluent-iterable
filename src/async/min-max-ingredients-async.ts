@@ -1,7 +1,4 @@
-import {
-  BasicReduceIngredients,
-  MinMaxIngredients,
-} from '../recipes/ingredients';
+import { MinMaxIngredients } from '../recipes/ingredients';
 import { basicAsync } from './basic-ingredients-async';
 import { firstAsync } from './first-async';
 import { lastAsync } from './last-async';

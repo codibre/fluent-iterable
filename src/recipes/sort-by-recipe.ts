@@ -1,4 +1,3 @@
-import { valueTypeWrapper } from './../types-internal/string-wrapper';
 import { isDescendingOrderAssured } from './../types-internal/order-assured';
 import { FunctionAnyMapper } from './../types-internal/any-mapper';
 import { ComparerIngredient } from './ingredients';

@@ -89,7 +89,7 @@ export function distinctRecipe(ingredients: DistinctIngredients) {
   const choose = chooseDistinctRecipe(ingredients);
   const { filterOrAll, resolver } = ingredients;
 
-  return function distinct<T, R>(
+  return function distinct<T>(
     this: AnyIterable<T>,
     baseMapper: AnyMapper<T> | number = identity,
     maxOcurrencesOrChoose?: number | Choose<T>,

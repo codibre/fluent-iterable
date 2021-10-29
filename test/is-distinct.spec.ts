@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { o, fluent, fluentAsync, identity } from '../src';
+import { o, fluent, fluentAsync } from '../src';
 
 describe('isDistinct()', () => {
   context('iterable', () => {

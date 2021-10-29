@@ -1,5 +1,7 @@
 
-## 1.18.3
+## 1.18.4
+* dce4486 1.18.4
+* 9e441c6 Updating docs
 * 18a1371 1.18.3
 * 44ca34e fixing flatMap/flatten contract
 * 47cd81d docs: update docs
@@ -249,6 +251,9 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.18.4
+* dce4486 1.18.4
+* 9e441c6 Updating docs
 ## v1.18.3
 * 18a1371 1.18.3
 * 44ca34e fixing flatMap/flatten contract

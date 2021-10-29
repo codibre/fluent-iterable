@@ -5,7 +5,7 @@ import { prepare } from '../types-internal/prepare';
 import { constant, identity } from '../utils';
 
 export function toSetRecipe({ forEach, resolver }: BasicIngredients) {
-  return function toSet<T, R>(
+  return function toSet<T>(
     this: AnyIterable<T>,
     mapper: AnyMapper<T> = identity,
   ) {

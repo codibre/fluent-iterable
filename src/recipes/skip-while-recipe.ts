@@ -1,4 +1,3 @@
-import { AsyncPredicate } from '../types';
 import { AnyIterable } from 'augmentative-iterable';
 import { BasicIngredients } from './ingredients';
 import { AnyMapper } from '../types-internal';

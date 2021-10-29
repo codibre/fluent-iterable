@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import delay from 'delay';
 import { stub } from 'sinon';
 import { ObjectReadableMock } from 'stream-mock';
-import { fluent, fluentAsync, mergeIterables } from '../src';
+import { fluent, fluentAsync } from '../src';
 
 describe('flatMerge', () => {
   it('should merge the iterables', async () => {

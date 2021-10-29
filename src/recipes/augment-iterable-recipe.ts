@@ -1,7 +1,6 @@
 import { AnyIterable, itClone } from 'augmentative-iterable';
 import { AnyMapper, orderAssured } from '../types-internal';
 import { prepare } from '../types-internal/prepare';
-import { assureOrder } from '../utils';
 
 export function augmentIterableRecipe(
   augmentIterable: Function,

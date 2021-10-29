@@ -994,7 +994,6 @@ describe('fluent iterable', () => {
           });
         });
         it('should work with distinct expression', async () => {
-          const set = new Set<number>();
           const groups = await fluent([1, 2, 2, 3, 4, 4, 5, 5, 5])
             .groupAsync((x) => x % 2, getGroupingDistinct(identity))
             .toArray();

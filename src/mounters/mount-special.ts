@@ -5,7 +5,7 @@ export type SpecialType = {
   [key in 'group' | 'groupAsync' | 'partition' | 'next']: Function;
 };
 
-export function mountSpecial<T>(
+export function mountSpecial(
   { group, groupAsync, partition, next }: Partial<SpecialType>,
   wrapper: (...args: any[]) => any,
   asyncWrapper: (...args: any[]) => any,

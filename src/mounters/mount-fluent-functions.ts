@@ -23,7 +23,6 @@ function getValue(wrapper: (...args: any[]) => any, force: boolean) {
 }
 
 export function mountIterableFunctions<
-  T,
   Func extends Function,
   Funcs extends { [key: string]: Func }
 >(iterableFuncs: Funcs, wrapper: (...args: any[]) => any, force = false): any {

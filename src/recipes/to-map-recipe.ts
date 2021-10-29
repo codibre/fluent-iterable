@@ -78,7 +78,7 @@ export function toMapRecipe(ingredients: DistinctIngredients) {
   const ordered = orderedToMapRecipe(ingredients);
   const choose = chooseToMapRecipe(ingredients);
 
-  return function distinct<T, R>(
+  return function distinct<T>(
     this: AnyIterable<T>,
     getKey: AnyMapper<T>,
     mapper: AnyMapper<T>,

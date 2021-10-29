@@ -1,5 +1,4 @@
 import { ObjectReadableMock } from 'stream-mock';
-import { sortBy } from './../src/sync/sort-by';
 import { expect } from 'chai';
 import { asc, desc, fluent, fluentAsync } from '../src';
 

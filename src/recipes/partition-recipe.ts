@@ -25,7 +25,7 @@ export function othersFactory(resolver: ResolverType) {
   };
 }
 
-export function partIterateFactory<T>(
+export function partIterateFactory(
   symbol: symbol,
   getOthers: <T>(wrapper: PartitionWrapper<T>) => () => any,
 ) {

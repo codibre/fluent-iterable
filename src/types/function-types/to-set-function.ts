@@ -1,5 +1,4 @@
 import { AsyncMapper, Mapper } from 'augmentative-iterable';
-import { Reducer } from '../base';
 
 export interface ToSetFunction<T> {
   /**
