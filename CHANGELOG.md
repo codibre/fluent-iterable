@@ -1,5 +1,9 @@
 
-## 1.18.4
+## 1.19.0
+* 0ae6b1d 1.19.0
+* fb26e53 feat: updating dependencies
+* dcfdfcf feat: updating augmentative iterable for performance improvements
+* be6cd02 updating augmentative-iterable for performance improvement
 * dce4486 1.18.4
 * 9e441c6 Updating docs
 * 18a1371 1.18.3
@@ -251,6 +255,11 @@
 * 4c95d7a updating package lock"
 * d7f049a updating packages
 ## v1.2.0
+## v1.19.0
+* 0ae6b1d 1.19.0
+* fb26e53 feat: updating dependencies
+* dcfdfcf feat: updating augmentative iterable for performance improvements
+* be6cd02 updating augmentative-iterable for performance improvement
 ## v1.18.4
 * dce4486 1.18.4
 * 9e441c6 Updating docs

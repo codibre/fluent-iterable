@@ -1,35 +1,35 @@
-[fluent-iterable - v1.18.4](../README.md) / OrderAssurable
+[fluent-iterable - v1.19.0](../README.md) / OrderAssurable
 
 # Interface: OrderAssurable<T\>
 
 ## Type parameters
 
-Name |
-:------ |
-`T` |
+| Name |
+| :------ |
+| `T` |
 
 ## Hierarchy
 
-* **OrderAssurable**
+- **`OrderAssurable`**
 
-  ↳ [*FluentIterable*](fluentiterable.md)
+  ↳ [`FluentIterable`](FluentIterable.md)
 
-  ↳ [*FluentAsyncIterable*](fluentasynciterable.md)
+  ↳ [`FluentAsyncIterable`](FluentAsyncIterable.md)
 
 ## Table of contents
 
 ### Methods
 
-- [assureOrder](orderassurable.md#assureorder)
-- [assureOrderDescending](orderassurable.md#assureorderdescending)
-- [o](orderassurable.md#o)
-- [od](orderassurable.md#od)
+- [assureOrder](OrderAssurable.md#assureorder)
+- [assureOrderDescending](OrderAssurable.md#assureorderdescending)
+- [o](OrderAssurable.md#o)
+- [od](OrderAssurable.md#od)
 
 ## Methods
 
 ### assureOrder
 
-▸ **assureOrder**(): T
+▸ **assureOrder**(): `T`
 
 Assures the order of the object. For the next operations to be used,
 it will be assumed that the order, no matter the predicate used, will
@@ -37,13 +37,15 @@ be ascending, and this will affect the way some operations works.
 
 Be sure to use this method only if you know the order will be right
 
-**Returns:** T
+#### Returns
+
+`T`
 
 ___
 
 ### assureOrderDescending
 
-▸ **assureOrderDescending**(): T
+▸ **assureOrderDescending**(): `T`
 
 Assures the descending order of the object. For the next operations to be used,
 it will be assumed that the order, no matter the predicate used, will
@@ -51,13 +53,15 @@ be descending, and this will affect the way some operations works.
 
 Be sure to use this method only if you know the order will be right
 
-**Returns:** T
+#### Returns
+
+`T`
 
 ___
 
 ### o
 
-▸ **o**(): T
+▸ **o**(): `T`
 
 Alias for assureOrder
 
@@ -67,13 +71,15 @@ be ascending, and this will affect the way some operations works.
 
 Be sure to use this method only if you know the order will be right
 
-**Returns:** T
+#### Returns
+
+`T`
 
 ___
 
 ### od
 
-▸ **od**(): T
+▸ **od**(): `T`
 
 alias for assureOrderDescending
 
@@ -83,4 +89,6 @@ be descending, and this will affect the way some operations works.
 
 Be sure to use this method only if you know the order will be right
 
-**Returns:** T
+#### Returns
+
+`T`
