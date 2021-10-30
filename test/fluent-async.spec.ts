@@ -512,12 +512,12 @@ describe('fluent async iterable', () => {
           .toArray();
         expect(groups.length).to.eql(2);
         expect(groups.map((grp) => grp.key)).to.have.members([0, 1]);
-        expect(
-          groups.find(({ key }) => key === 0)!.values.toArray(),
-        ).to.be.eql([2, 4]);
-        expect(
-          groups.find(({ key }) => key === 1)!.values.toArray(),
-        ).to.be.eql([1, 3, 5]);
+        expect(groups.find(({ key }) => key === 0)!.values.toArray()).to.be.eql(
+          [2, 4],
+        );
+        expect(groups.find(({ key }) => key === 1)!.values.toArray()).to.be.eql(
+          [1, 3, 5],
+        );
       });
     });
     describe('avg', () => {

@@ -13,7 +13,7 @@ export function getNextAsyncIteratorFactory<T>(
       ): Promise<NextResult<T>> => {
         try {
           return await getNextAsyncIterator(asyncIterator, index);
-        } catch (err) {
+        } catch (err: any) {
           callback(err, index);
           return {
             index,

@@ -24,7 +24,7 @@ function getValue(wrapper: (...args: any[]) => any, force: boolean) {
 
 export function mountIterableFunctions<
   Func extends Function,
-  Funcs extends { [key: string]: Func }
+  Funcs extends { [key: string]: Func },
 >(iterableFuncs: Funcs, wrapper: (...args: any[]) => any, force = false): any {
   return transformObjValues(iterableFuncs, getValue(wrapper, force));
 }

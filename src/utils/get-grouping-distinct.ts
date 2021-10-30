@@ -21,7 +21,7 @@ export function getGroupingDistinct<
   K,
   T,
   KT extends keyof T,
-  NewT extends ItemType<T[KT]> = ItemType<T[KT]>
+  NewT extends ItemType<T[KT]> = ItemType<T[KT]>,
 >(
   valueMapper: KT,
   valueDistinctMapper: keyof ItemType<T[KT]>,

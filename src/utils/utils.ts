@@ -34,9 +34,11 @@ async function* promiseIterateAsync<T>(
 function iterateAsync<T>(
   a: AnyIterable<T> | PromiseLike<AnyIterable<T>>,
 ): AsyncIterable<T> {
-  return ((a as any).then || (a as any)[Symbol.iterator]
-    ? promiseIterateAsync(a as any)
-    : a) as any;
+  return (
+    (a as any).then || (a as any)[Symbol.iterator]
+      ? promiseIterateAsync(a as any)
+      : a
+  ) as any;
 }
 
 /**
@@ -95,7 +97,7 @@ function* iterateObjProps<T extends object>(obj: T): Iterable<keyof T> {
 function iterateObjEntries<
   T extends object,
   K extends keyof T = keyof T,
-  V extends T[K] = T[K]
+  V extends T[K] = T[K],
 >(obj: T): Iterable<[K, V]> {
   return map.call(iterateObjProps(obj), (property) => [
     property,
@@ -220,10 +222,10 @@ function getAverageStepper() {
   return wrapper;
 }
 function getItemToAssure<
-  F extends Function | FluentIterable<any> | FluentAsyncIterable<any>
+  F extends Function | FluentIterable<any> | FluentAsyncIterable<any>,
 >(f: F): any {
   return typeof f === 'function'
-    ? (...args: any[]) => (f as Function)(...args)
+    ? (...args: any[]) => (f as CallableFunction)(...args)
     : f;
 }
 
@@ -240,7 +242,7 @@ function getItemToAssure<
  * @param f the function to assure order
  */
 function assureOrder<
-  F extends Function | FluentIterable<any> | FluentAsyncIterable<any>
+  F extends Function | FluentIterable<any> | FluentAsyncIterable<any>,
 >(f: F): F {
   const result = getItemToAssure(f);
   result[orderAssured] = 1;
@@ -260,7 +262,7 @@ function assureOrder<
  * @param f the function to assure order
  */
 function assureOrderDescending<
-  F extends Function | FluentIterable<any> | FluentAsyncIterable<any>
+  F extends Function | FluentIterable<any> | FluentAsyncIterable<any>,
 >(f: F): F {
   const result = getItemToAssure(f);
   result[orderAssured] = -1;

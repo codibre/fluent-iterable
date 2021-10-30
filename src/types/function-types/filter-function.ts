@@ -2,10 +2,9 @@ import { AsyncPredicate, Predicate } from 'augmentative-iterable';
 import { FluentAsyncIterable, FluentIterable } from '../base';
 import { Truthy } from '../truthy';
 
-type RequiresTruthy<T, Guarantees extends keyof T> = T &
-  {
-    [P in Guarantees]-?: Truthy<T[P]>;
-  };
+type RequiresTruthy<T, Guarantees extends keyof T> = T & {
+  [P in Guarantees]-?: Truthy<T[P]>;
+};
 
 export type PredicateTypeGuard<T, E extends T> = (item: T) => item is E;
 

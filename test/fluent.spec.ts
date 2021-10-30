@@ -748,12 +748,7 @@ describe('fluent iterable', () => {
         it('empty', () => expect(fluent([]).sort().toArray()).to.be.empty);
         it('flat numbers', () =>
           expect(fluent([6, 4, 5, 3, 2, 1]).sort().toArray()).to.eql([
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
+            1, 2, 3, 4, 5, 6,
           ]));
         it('flat numbers with reversed comparison', () =>
           expect(

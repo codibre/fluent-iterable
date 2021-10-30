@@ -5,7 +5,7 @@ type ObjectResult<
   R extends string | symbol | number,
   O extends {
     [k in R]: unknown;
-  }
+  },
 > = {
   [k in R]: O[R];
 };

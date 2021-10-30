@@ -6,9 +6,7 @@ describe('whenEmpty', () => {
   describe('sync', () => {
     it('should not return the fallback result when the original is not empty', () => {
       expect(fluent([1, 2, 3]).whenEmpty([4, 5, 6]).toArray()).to.be.eql([
-        1,
-        2,
-        3,
+        1, 2, 3,
       ]);
     });
 

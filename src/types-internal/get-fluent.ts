@@ -6,6 +6,10 @@ export function getFluent(
   handler: Extender<any>,
   symbol: symbol,
 ) {
+  if (!iterable) {
+    throw new TypeError('Not a valid iterable!');
+  }
+
   if (iterable.fluent === symbol) {
     return iterable;
   }

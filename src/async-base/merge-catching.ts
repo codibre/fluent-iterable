@@ -6,8 +6,5 @@ export function mergeCatching<T, R>(
   callback: ErrorCallback,
   ...items: Array<AsyncIterable<R>>
 ): AsyncIterable<T | R> {
-  return mergeIterators(
-    callback,
-    ...getIterators<T | R>([this, ...items]),
-  );
+  return mergeIterators(callback, ...getIterators<T | R>([this, ...items]));
 }

@@ -15,9 +15,7 @@ describe('distinct', () => {
         it('empty', () => expect(fluent([]).distinct().toArray()).to.be.empty);
         it('not distinct numbers', () =>
           expect(fluent([1, 1, 1, 2, 2, 3]).distinct().toArray()).to.eql([
-            1,
-            2,
-            3,
+            1, 2, 3,
           ]));
         it('already distinct collection', () =>
           expect(fluent(subject).distinct().toArray()).to.eql(data));

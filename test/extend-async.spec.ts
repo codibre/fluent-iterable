@@ -18,9 +18,7 @@ describe('extendAsync', () => {
     it('should add new specified method to FluentAsyncIterable', async () => {
       extendAsync.use('testIterable', asyncIdentityFunction);
 
-      const iterable = fluentAsync(
-        new Promise<number[]>((r) => r([1, 2, 3])),
-      );
+      const iterable = fluentAsync(new Promise<number[]>((r) => r([1, 2, 3])));
 
       expect(await iterable.testIterable().toArray()).to.be.eql([1, 2, 3]);
     });
@@ -42,9 +40,7 @@ describe('extendAsync', () => {
     it('should add new specified method to FluentIterable', async () => {
       extendAsync.useResolving('testResolving', async () => 2);
 
-      const iterable = fluentAsync(
-        new Promise<number[]>((r) => r([1, 2, 3])),
-      );
+      const iterable = fluentAsync(new Promise<number[]>((r) => r([1, 2, 3])));
 
       expect(await iterable.testResolving()).to.be.eq(2);
     });
