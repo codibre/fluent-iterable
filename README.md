@@ -20,11 +20,12 @@ Here a some results we got comparing to another similar options:
 
 | Library | Ops/sec | Margin | Ran samples |
 | ------- | ------- | ----------- | ----------- |
-| **fluent** | 276 | ±4.91% | 82 |
-| [iterare](https://www.npmjs.com/package/iterare ) | 155 | ±4.94%  | 80 |
-| [rxjs](https://www.npmjs.com/package/rxjs) | 151 | ±3.42% | 77 |
-| native generators | 86.89 | ±4.09% | 74 |
-| native array operations chain | 73.23 | ±4.51% | 63 |
+| **fluent** | 283 | ±2.67% | 83 |
+| [iterare](https://www.npmjs.com/package/iterare ) | 284 | ±2.53%  | 83 |
+| [iter-tools](https://www.npmjs.com/package/iter-tools-es ) | 217 | ±2.43%  | 83 |
+| [rxjs](https://www.npmjs.com/package/rxjs) | 147 | ±3.63% | 82 |
+| native generators | 96.88 | ±0.69% | 70 |
+| native array operations chain | 83.49 | ±4.82% | 62 |
 
 You can check the bechmark code [here](./test-benchmark/general-benchmark.spec.ts)
 
