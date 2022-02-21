@@ -1,3 +1,11 @@
+## [1.19.1](https://github.com/codibre/fluent-iterable/compare/v1.19.0...v1.19.1) (2022-02-21)
+
+
+### Bug Fixes
+
+* fixing build ([bfc0240](https://github.com/codibre/fluent-iterable/commit/bfc0240ee08057ed0447b521e3b2dbaaede2394c))
+* fixing lint run ([46dd027](https://github.com/codibre/fluent-iterable/commit/46dd027379d7c25f2ffc6fc3f67b9ab4d86256ef))
+* preparing semantic release ([#43](https://github.com/codibre/fluent-iterable/issues/43)) ([1e49f9f](https://github.com/codibre/fluent-iterable/commit/1e49f9fbf848858f8c465677217f7284cf3e875e))
 
 ## 1.19.0
 * 0ae6b1d 1.19.0
