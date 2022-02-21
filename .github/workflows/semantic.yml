@@ -1,0 +1,38 @@
+name: semantic-release
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  semantic:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+      HUSKY: 0
+      CI: true
+    steps:
+      - uses: actions/checkout@master
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "10.x"
+      - run: printf "//`node -p \"require('url').parse('https://registry.npmjs.org').host\"`/:_authToken=${NPM_TOKEN}\n" >> ~/.npmrc
+      - run: npm ci
+      - run: npm run build --if-present
+      - name: Redis Server in GitHub Actions
+        uses: supercharge/redis-github-action@1.1.0
+      - run: npm test
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "16.x"
+      - run: npm i -g @semantic-release/changelog @semantic-release/commit-analyzer @semantic-release/git @semantic-release/github @semantic-release/exec @semantic-release/npm @semantic-release/release-notes-generator semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+          HUSKY: 0
+          CI: true
+      - run: npx semantic-release --ci
+      - run: git push
