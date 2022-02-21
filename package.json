@@ -94,6 +94,7 @@
     "expect": "^27.3.1",
     "for-emit-of": "^1.3.3",
     "husky": "^7.0.4",
+    "iter-tools-es": "^7.1.4",
     "iterare": "^1.2.1",
     "mocha": "^9.1.3",
     "nyc": "^15.1.0",

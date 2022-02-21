@@ -1,8 +1,9 @@
 import { expect } from 'chai';
-import { fluent, interval }  from '../src';
+import { fluent }  from '../src';
 import rxjs = require('rxjs');
 import rxjsOp = require('rxjs/operators');
 import { iterate } from 'iterare';
+import * as iterTools from 'iter-tools-es';
 import Benchmark = require('benchmark');
 
 const ITEMS = 100000;
@@ -12,6 +13,11 @@ const MULTIPLIER2 = 2;
 const QUOTIENT = 5;
 const TAKE = 2000;
 const benchmarkSuite = new Benchmark.Suite();
+function *interval(init, final) {
+  for(let i = init; i <= final; i++) {
+    yield i;
+  }
+}
 function interval2(init, final) {
   const items: any[] = [];
   for(let i = init; i <= final; i++) {
@@ -86,8 +92,18 @@ describe('General benchmark', () => {
           rxjsOp.take(TAKE),
           rxjsOp.map((x) => x.join(',')),
         ).toPromise();
+  }).add('iter-tools', () => {
+    return iterTools.execPipe(
+      interval(1, ITEMS),
+      iterTools.map((x) => x * MULTIPLIER1),
+      iterTools.map((x) => x * MULTIPLIER2),
+      iterTools.filter((x) => x % QUOTIENT === 0),
+      iterTools.map((x) => interval2(x, x + FLAT_FACTOR)),
+      iterTools.take(TAKE),
+      iterTools.forEach((x) => x.join(',')),
+    );
   }).add('iterare', () => {
-    iterate(interval2(1, ITEMS))
+    iterate(interval(1, ITEMS))
       .map((x) => x * MULTIPLIER1)
       .map((x) => x * MULTIPLIER2)
       .filter((x) => x % QUOTIENT === 0)
