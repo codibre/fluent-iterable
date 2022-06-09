@@ -16,6 +16,8 @@ import {
   AsyncAction,
   Group,
   FluentEmitter,
+  head,
+  tail,
 } from './types/base';
 
 import fluent from './fluent';
@@ -56,6 +58,8 @@ export {
   interval,
   mergeIterables,
   mergeIterators,
+  head,
+  tail,
 };
 export * from './utils';
 export * from './is-async-iterable';
