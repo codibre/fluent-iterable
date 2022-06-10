@@ -4,11 +4,11 @@ import { ItemOrSelfType, FluentIterable } from '../base';
 type FlatJoinResult<TResult, T, R1, K0 extends string | number | symbol> = {
   [head]: TResult;
   [tail]: T;
-} & Record<K0, ItemOrSelfType<R1>>;
+} & Record<K0, R1>;
 
 type Exclusive1<R1, K1 extends keyof R1, KN> = K1 extends KN
   ? {}
-  : Pick<R1, K1>;
+  : Record<K1, ItemOrSelfType<R1[K1]>>;
 
 type Exclusive2<
   R2,
