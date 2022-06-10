@@ -10,32 +10,32 @@ function flattable(value: unknown) {
 function getNextIterable(
   current: any,
   path: string[],
-  nextI: number,
+  nextIndex: number,
 ): [any, number] {
   let item = current;
   if (flattable(item)) {
-    return [item, nextI];
+    return [item, nextIndex];
   }
 
-  while (nextI < path.length) {
-    item = item[path[nextI]];
-    nextI++;
+  while (nextIndex < path.length) {
+    item = item[path[nextIndex]];
+    nextIndex++;
     if (flattable(item)) {
       break;
     }
   }
-  return [item, nextI];
+  return [item, nextIndex];
 }
 
 function fillMiddleFieldsFactory(
   oldItem: any,
   start: number,
-  nextI: number,
+  nextIndex: number,
   path: string[],
 ) {
   return (x: any) => {
     let current = oldItem;
-    for (let i = start; i < nextI; i++) {
+    for (let i = start; i < nextIndex; i++) {
       current = current[path[i]];
       if (!flattable(current)) {
         x[path[i]] = current;
@@ -49,10 +49,15 @@ function fillMiddleFieldsFactory(
 function fillMiddleToHeadFieldsFactory(
   oldItem: any,
   start: number,
-  nextI: number,
+  nextIndex: number,
   path: string[],
 ) {
-  const fillMiddleFields = fillMiddleFieldsFactory(oldItem, start, nextI, path);
+  const fillMiddleFields = fillMiddleFieldsFactory(
+    oldItem,
+    start,
+    nextIndex,
+    path,
+  );
   return (sub: any) => {
     const newItem = fillMiddleFields({});
     newItem[head] = sub;
@@ -76,29 +81,34 @@ function flatMap(
   item: any,
   ingredients: CombineIngredients,
   path: string[],
-  nextI: number,
+  nextIndex: number,
 ): any {
   const oldItem = item;
   const { flatten, map } = ingredients;
-  const start = nextI;
-  const result = getNextIterable(item, path, nextI);
+  const start = nextIndex;
+  const result = getNextIterable(item, path, nextIndex);
   item = result[0];
-  nextI = result[1];
+  nextIndex = result[1];
 
-  if (nextI < path.length) {
+  if (nextIndex < path.length) {
     return flatten.call(item, (sub: any) => {
       const mapped = map.call(
-        flatMap(sub, ingredients, path, nextI),
-        fillMiddleFieldsFactory(oldItem, start, nextI, path),
+        flatMap(sub, ingredients, path, nextIndex),
+        fillMiddleFieldsFactory(oldItem, start, nextIndex, path),
       );
-      return mapRoot(mapped, map, nextI > 0 ? path[nextI - 1] : tail, sub);
+      return mapRoot(
+        mapped,
+        map,
+        nextIndex > 0 ? path[nextIndex - 1] : tail,
+        sub,
+      );
     });
   }
 
   const fillMiddleToHeadItems = fillMiddleToHeadFieldsFactory(
     oldItem,
     start,
-    nextI,
+    nextIndex,
     path,
   );
 
