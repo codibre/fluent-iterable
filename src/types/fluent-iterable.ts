@@ -21,6 +21,7 @@ declare module './base' {
     repeat: f.RepeatFunction<T>;
     flatten: f.FlattenFunction<T>;
     flatMap: f.FlattenFunction<T>;
+    flatJoin: f.FlatJoinFunction<T>;
     flattenAsync: f.AsyncFlattenFunction<T>;
     flatMapAsync: f.AsyncFlattenFunction<T>;
     sort: f.SortFunction<T>;

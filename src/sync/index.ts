@@ -12,6 +12,7 @@ export * from './emit';
 export * from './execute';
 export * from './filter';
 export * from './first';
+export * from './flat-join';
 export * from './flat-merge';
 export * from './flatten';
 export * from './for-each';

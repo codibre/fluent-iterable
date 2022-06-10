@@ -8,6 +8,7 @@ export * from './count-recipe';
 export * from './distinct-recipe';
 export * from './emit-recipe';
 export * from './execute-recipe';
+export * from './flat-join-recipe';
 export * from './flat-merge-recipe';
 export * from './flatten-recipe';
 export * from './for-each-recipe';

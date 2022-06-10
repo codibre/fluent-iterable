@@ -12,6 +12,7 @@ export * from './emit-function';
 export * from './execute-function';
 export * from './filter-function';
 export * from './first-function';
+export * from './flat-join-function';
 export * from './flat-merge-function';
 export * from './flatten-function';
 export * from './for-each-function';

@@ -8,6 +8,18 @@ import {
   AnyIterable,
 } from 'augmentative-iterable';
 
+export const head = Symbol.for('@head');
+export const tail = Symbol.for('@tail');
+
+/**
+ * Represents the first string or non iterable item from chained iterables
+ */
+export type ItemOrSelfType<T> = T extends string
+  ? T
+  : T extends Iterable<infer R>
+  ? ItemOrSelfType<R>
+  : T;
+
 /**
  * Represents the type of the item of an iterable
  */
