@@ -1,3 +1,10 @@
+## [1.20.2](https://github.com/codibre/fluent-iterable/compare/v1.20.1...v1.20.2) (2022-06-10)
+
+
+### Bug Fixes
+
+* fixing flatjoin key typing ([#48](https://github.com/codibre/fluent-iterable/issues/48)) ([39a0b48](https://github.com/codibre/fluent-iterable/commit/39a0b48791d3ce2702702fd8525959be30d003f6))
+
 ## [1.20.1](https://github.com/codibre/fluent-iterable/compare/v1.20.0...v1.20.1) (2022-06-10)
 
 
