@@ -4,7 +4,7 @@ import { ItemOrSelfType, FluentIterable } from '../base';
 type FlatJoinResult<TResult, T, R1, K0 extends string | number | symbol> = {
   [head]: TResult;
   [tail]: T;
-} & Record<K0, R1>;
+} & Record<K0, ItemOrSelfType<R1>>;
 
 type Exclusive1<R1, K1 extends keyof R1, KN> = K1 extends KN
   ? {}
@@ -41,6 +41,21 @@ type Exclusive4<
 > = Exclusive3<R3, K3, R2, K2, R1, K1, K0> &
   Exclusive1<R4, K4, K0 | K1 | K2 | K3>;
 
+type Exclusive5<
+  R5,
+  K5 extends keyof R5,
+  R4,
+  K4 extends keyof R4,
+  R3,
+  K3 extends keyof R3,
+  R2,
+  K2 extends keyof R2,
+  R1,
+  K1 extends keyof R1,
+  K0,
+> = Exclusive4<R4, K4, R3, K3, R2, K2, R1, K1, K0> &
+  Exclusive1<R5, K5, K0 | K1 | K2 | K3 | K4>;
+
 export interface FlatJoinFunction<T> {
   /**
    * This operation flattens the whole informed path into a flat object.
@@ -56,13 +71,6 @@ export interface FlatJoinFunction<T> {
     R1 extends ItemOrSelfType<R0[K0]>,
   >(
     field: K0,
-  ): FluentIterable<R1>;
-  <
-    R0 extends ItemOrSelfType<T>,
-    K0 extends keyof T,
-    R1 extends ItemOrSelfType<R0>,
-  >(
-    field0: K0,
   ): FluentIterable<FlatJoinResult<R1, T, R1, K0>>;
   <
     R0 extends ItemOrSelfType<T>,
@@ -140,6 +148,8 @@ export interface FlatJoinFunction<T> {
     K3 extends keyof R3,
     R4 extends ItemOrSelfType<R3[K3]>,
     K4 extends keyof R4,
+    R5 extends ItemOrSelfType<R4[K4]>,
+    K5 extends keyof R5,
     KN extends string | number | symbol,
   >(
     field0: K0,
@@ -147,10 +157,11 @@ export interface FlatJoinFunction<T> {
     field2: K2,
     field3: K3,
     field4: K4,
+    field5: K5,
     ...fields: KN[]
   ): FluentIterable<
     FlatJoinResult<any, T, R1, K0> &
-      Exclusive4<R4, K4, R3, K3, R2, K2, R1, K1, K0> &
+      Exclusive5<R5, K5, R4, K4, R3, K3, R2, K2, R1, K1, K0> &
       Record<KN, any>
   >;
 }
