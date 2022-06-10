@@ -1,3 +1,10 @@
+# [1.20.0](https://github.com/codibre/fluent-iterable/compare/v1.19.1...v1.20.0) (2022-06-10)
+
+
+### Features
+
+* creating flatJoin operation ([#46](https://github.com/codibre/fluent-iterable/issues/46)) ([98fd306](https://github.com/codibre/fluent-iterable/commit/98fd30659d445ad5576f5980af7c246c43c53cb9))
+
 ## [1.19.1](https://github.com/codibre/fluent-iterable/compare/v1.19.0...v1.19.1) (2022-02-21)
 
 
