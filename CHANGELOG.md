@@ -1,3 +1,10 @@
+## [1.20.1](https://github.com/codibre/fluent-iterable/compare/v1.20.0...v1.20.1) (2022-06-10)
+
+
+### Bug Fixes
+
+* fixing flatjoin contract ([#47](https://github.com/codibre/fluent-iterable/issues/47)) ([73f83f7](https://github.com/codibre/fluent-iterable/commit/73f83f752e08547d745c3c5891641c3b1e9f5b2a))
+
 # [1.20.0](https://github.com/codibre/fluent-iterable/compare/v1.19.1...v1.20.0) (2022-06-10)
 
 
