@@ -16,16 +16,16 @@ A fast way to iterate, sync or async, over array likes, stream and async iterabl
 ## Benchmarks
 
 Fluent-iterable are strongly focused on performance. Check it out in our [benchmark](https://runkit.com/farenheith/fluent-iterable-benchmark)!;
-Here a some results we got comparing to another similar options:
+Here a some results we got comparing to another similar options on node 16:
 
 | Library | Ops/sec | Margin | Ran samples |
 | ------- | ------- | ----------- | ----------- |
-| **fluent** | 283 | ±2.67% | 83 |
-| [iterare](https://www.npmjs.com/package/iterare ) | 284 | ±2.53%  | 83 |
-| [iter-tools](https://www.npmjs.com/package/iter-tools-es ) | 217 | ±2.43%  | 83 |
-| [rxjs](https://www.npmjs.com/package/rxjs) | 147 | ±3.63% | 82 |
-| native generators | 96.88 | ±0.69% | 70 |
-| native array operations chain | 83.49 | ±4.82% | 62 |
+| **fluent** | 285 | ±0.57% | 90 |
+| [iterare](https://www.npmjs.com/package/iterare ) | 289 | ±0.36%  | 91 |
+| [iter-tools](https://www.npmjs.com/package/iter-tools-es ) | 164 | ±0.24%  | 83 |
+| [rxjs](https://www.npmjs.com/package/rxjs) | 127 | ±3.04% | 81 |
+| native generators | 127 | ±2.87% | 78 |
+| native array operations chain | 48.43 | ±4.36% | 64 |
 
 You can check the bechmark code [here](./test-benchmark/general-benchmark.spec.ts)
 
