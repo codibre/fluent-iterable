@@ -11,7 +11,7 @@ const FLAT_FACTOR = 10;
 const MULTIPLIER1 = 3;
 const MULTIPLIER2 = 2;
 const QUOTIENT = 5;
-const TAKE = 1000;
+const TAKE = 2000;
 const benchmarkSuite = new Benchmark.Suite();
 function* interval(init, final) {
   for (let i = init; i <= final; i++) {
