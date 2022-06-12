@@ -65,11 +65,11 @@ describe('General benchmark', () => {
       fluent(interval(1, ITEMS))
         .map((x) => x * MULTIPLIER1)
         .map((x) => x * MULTIPLIER2)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
         .filter((x) => x % QUOTIENT === 0)
-        .map((x) => x / MULTIPLIER2)
-        .map((x) => x * MULTIPLIER2)
-        .map((x) => x / MULTIPLIER2)
-        .map((x) => x * MULTIPLIER2)
         .map((x) => x / MULTIPLIER2)
         .map((x) => x * MULTIPLIER2)
         .map((x) => x / MULTIPLIER2)
@@ -80,11 +80,11 @@ describe('General benchmark', () => {
     }).add('array operation chain', () => {
       interval2(1, ITEMS).map((x) => x * MULTIPLIER1)
         .map((x) => x * MULTIPLIER2)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
         .filter((x) => x % QUOTIENT === 0)
-        .map((x) => x / MULTIPLIER2)
-        .map((x) => x * MULTIPLIER2)
-        .map((x) => x / MULTIPLIER2)
-        .map((x) => x * MULTIPLIER2)
         .map((x) => x / MULTIPLIER2)
         .map((x) => x * MULTIPLIER2)
         .map((x) => x / MULTIPLIER2)
@@ -103,11 +103,11 @@ describe('General benchmark', () => {
         .pipe(
           rxjsOp.map((x) => x * MULTIPLIER1),
           rxjsOp.map((x) => x * MULTIPLIER2),
+          rxjsOp.map((x) => x / MULTIPLIER2),
+          rxjsOp.map((x) => x * MULTIPLIER2),
+          rxjsOp.map((x) => x / MULTIPLIER2),
+          rxjsOp.map((x) => x * MULTIPLIER2),
           rxjsOp.filter((x) => x % QUOTIENT === 0),
-          rxjsOp.map((x) => x / MULTIPLIER2),
-          rxjsOp.map((x) => x * MULTIPLIER2),
-          rxjsOp.map((x) => x / MULTIPLIER2),
-          rxjsOp.map((x) => x * MULTIPLIER2),
           rxjsOp.map((x) => x / MULTIPLIER2),
           rxjsOp.map((x) => x * MULTIPLIER2),
           rxjsOp.map((x) => x / MULTIPLIER2),
@@ -121,11 +121,11 @@ describe('General benchmark', () => {
         interval(1, ITEMS),
         iterTools.map((x) => x * MULTIPLIER1),
         iterTools.map((x) => x * MULTIPLIER2),
+        iterTools.map((x) => x / MULTIPLIER2),
+        iterTools.map((x) => x * MULTIPLIER2),
+        iterTools.map((x) => x / MULTIPLIER2),
+        iterTools.map((x) => x * MULTIPLIER2),
         iterTools.filter((x) => x % QUOTIENT === 0),
-        iterTools.map((x) => x / MULTIPLIER2),
-        iterTools.map((x) => x * MULTIPLIER2),
-        iterTools.map((x) => x / MULTIPLIER2),
-        iterTools.map((x) => x * MULTIPLIER2),
         iterTools.map((x) => x / MULTIPLIER2),
         iterTools.map((x) => x * MULTIPLIER2),
         iterTools.map((x) => x / MULTIPLIER2),
@@ -138,11 +138,11 @@ describe('General benchmark', () => {
       iterate(interval(1, ITEMS))
         .map((x) => x * MULTIPLIER1)
         .map((x) => x * MULTIPLIER2)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
         .filter((x) => x % QUOTIENT === 0)
-        .map((x) => x / MULTIPLIER2)
-        .map((x) => x * MULTIPLIER2)
-        .map((x) => x / MULTIPLIER2)
-        .map((x) => x * MULTIPLIER2)
         .map((x) => x / MULTIPLIER2)
         .map((x) => x * MULTIPLIER2)
         .map((x) => x / MULTIPLIER2)
