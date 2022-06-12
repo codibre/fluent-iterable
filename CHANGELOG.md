@@ -1,3 +1,10 @@
+# [1.21.0](https://github.com/codibre/fluent-iterable/compare/v1.20.3...v1.21.0) (2022-06-12)
+
+
+### Features
+
+* fixing toMap contract, making reducer optional and adding optional reducer to toObject ([921f73b](https://github.com/codibre/fluent-iterable/commit/921f73b0d0f591bded2849a9fc0ab53063b63b4b))
+
 ## [1.20.3](https://github.com/codibre/fluent-iterable/compare/v1.20.2...v1.20.3) (2022-06-12)
 
 
