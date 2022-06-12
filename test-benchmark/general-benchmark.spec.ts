@@ -74,6 +74,10 @@ describe('General benchmark', () => {
         .map((x) => x * MULTIPLIER2)
         .map((x) => x / MULTIPLIER2)
         .map((x) => x * MULTIPLIER2)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
         .map((x) => interval2(x, x + FLAT_FACTOR))
         .take(TAKE)
         .forEach((x) => x.join(','));
@@ -85,6 +89,10 @@ describe('General benchmark', () => {
         .map((x) => x / MULTIPLIER2)
         .map((x) => x * MULTIPLIER2)
         .filter((x) => x % QUOTIENT === 0)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
         .map((x) => x / MULTIPLIER2)
         .map((x) => x * MULTIPLIER2)
         .map((x) => x / MULTIPLIER2)
@@ -112,6 +120,10 @@ describe('General benchmark', () => {
           rxjsOp.map((x) => x * MULTIPLIER2),
           rxjsOp.map((x) => x / MULTIPLIER2),
           rxjsOp.map((x) => x * MULTIPLIER2),
+          rxjsOp.map((x) => x / MULTIPLIER2),
+          rxjsOp.map((x) => x * MULTIPLIER2),
+          rxjsOp.map((x) => x / MULTIPLIER2),
+          rxjsOp.map((x) => x * MULTIPLIER2),
           rxjsOp.map((x) => interval2(x, x + FLAT_FACTOR)),
           rxjsOp.take(TAKE),
           rxjsOp.map((x) => x.join(',')),
@@ -130,6 +142,10 @@ describe('General benchmark', () => {
         iterTools.map((x) => x * MULTIPLIER2),
         iterTools.map((x) => x / MULTIPLIER2),
         iterTools.map((x) => x * MULTIPLIER2),
+        iterTools.map((x) => x / MULTIPLIER2),
+        iterTools.map((x) => x * MULTIPLIER2),
+        iterTools.map((x) => x / MULTIPLIER2),
+        iterTools.map((x) => x * MULTIPLIER2),
         iterTools.map((x) => interval2(x, x + FLAT_FACTOR)),
         iterTools.take(TAKE),
         iterTools.forEach((x: any) => x.join(',')) as any,
@@ -143,6 +159,10 @@ describe('General benchmark', () => {
         .map((x) => x / MULTIPLIER2)
         .map((x) => x * MULTIPLIER2)
         .filter((x) => x % QUOTIENT === 0)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
         .map((x) => x / MULTIPLIER2)
         .map((x) => x * MULTIPLIER2)
         .map((x) => x / MULTIPLIER2)
