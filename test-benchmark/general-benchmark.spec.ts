@@ -11,7 +11,7 @@ const FLAT_FACTOR = 10;
 const MULTIPLIER1 = 3;
 const MULTIPLIER2 = 2;
 const QUOTIENT = 5;
-const TAKE = 500;
+const TAKE = 1000;
 const benchmarkSuite = new Benchmark.Suite();
 function* interval(init, final) {
   for (let i = init; i <= final; i++) {
@@ -66,6 +66,14 @@ describe('General benchmark', () => {
         .map((x) => x * MULTIPLIER1)
         .map((x) => x * MULTIPLIER2)
         .filter((x) => x % QUOTIENT === 0)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
         .map((x) => interval2(x, x + FLAT_FACTOR))
         .take(TAKE)
         .forEach((x) => x.join(','));
@@ -73,6 +81,14 @@ describe('General benchmark', () => {
       interval2(1, ITEMS).map((x) => x * MULTIPLIER1)
         .map((x) => x * MULTIPLIER2)
         .filter((x) => x % QUOTIENT === 0)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
         .map((x) => interval2(x, x + FLAT_FACTOR))
         .filter((_x, i) => i < TAKE)
         .map((x) => x.join(','));
@@ -88,6 +104,14 @@ describe('General benchmark', () => {
           rxjsOp.map((x) => x * MULTIPLIER1),
           rxjsOp.map((x) => x * MULTIPLIER2),
           rxjsOp.filter((x) => x % QUOTIENT === 0),
+          rxjsOp.map((x) => x / MULTIPLIER2),
+          rxjsOp.map((x) => x * MULTIPLIER2),
+          rxjsOp.map((x) => x / MULTIPLIER2),
+          rxjsOp.map((x) => x * MULTIPLIER2),
+          rxjsOp.map((x) => x / MULTIPLIER2),
+          rxjsOp.map((x) => x * MULTIPLIER2),
+          rxjsOp.map((x) => x / MULTIPLIER2),
+          rxjsOp.map((x) => x * MULTIPLIER2),
           rxjsOp.map((x) => interval2(x, x + FLAT_FACTOR)),
           rxjsOp.take(TAKE),
           rxjsOp.map((x) => x.join(',')),
@@ -98,15 +122,31 @@ describe('General benchmark', () => {
         iterTools.map((x) => x * MULTIPLIER1),
         iterTools.map((x) => x * MULTIPLIER2),
         iterTools.filter((x) => x % QUOTIENT === 0),
+        iterTools.map((x) => x / MULTIPLIER2),
+        iterTools.map((x) => x * MULTIPLIER2),
+        iterTools.map((x) => x / MULTIPLIER2),
+        iterTools.map((x) => x * MULTIPLIER2),
+        iterTools.map((x) => x / MULTIPLIER2),
+        iterTools.map((x) => x * MULTIPLIER2),
+        iterTools.map((x) => x / MULTIPLIER2),
+        iterTools.map((x) => x * MULTIPLIER2),
         iterTools.map((x) => interval2(x, x + FLAT_FACTOR)),
         iterTools.take(TAKE),
-        iterTools.forEach((x) => x.join(',')),
+        iterTools.forEach((x: any) => x.join(',')) as any,
       );
     }).add('iterare', () => {
       iterate(interval(1, ITEMS))
         .map((x) => x * MULTIPLIER1)
         .map((x) => x * MULTIPLIER2)
         .filter((x) => x % QUOTIENT === 0)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
+        .map((x) => x / MULTIPLIER2)
+        .map((x) => x * MULTIPLIER2)
         .map((x) => interval2(x, x + FLAT_FACTOR))
         .take(TAKE)
         .forEach((x) => x.join(','));
