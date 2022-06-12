@@ -1462,6 +1462,53 @@ describe('fluent iterable', () => {
             [Gender.NonBinary]: 'name B',
             [Gender.Male]: 'name C',
           }));
+        it('should keep last value when having repeated keys and no reducing criteria', () =>
+          expect(
+            fluent([
+              {
+                gender: Gender.Female,
+                name: 'name A',
+              },
+              {
+                gender: Gender.Female,
+                name: 'name B',
+              },
+              {
+                gender: Gender.Male,
+                name: 'name C',
+              },
+            ]).toObject(
+              (x) => x.gender as string,
+              (x) => x.name,
+            ),
+          ).to.be.deep.equal({
+            [Gender.Female]: 'name B',
+            [Gender.Male]: 'name C',
+          }));
+        it('should keep chosen value when having repeated keys and a reducing criteria', () =>
+          expect(
+            fluent([
+              {
+                gender: Gender.Female,
+                name: 'name A',
+              },
+              {
+                gender: Gender.Female,
+                name: 'name B',
+              },
+              {
+                gender: Gender.Male,
+                name: 'name C',
+              },
+            ]).toObject(
+              (x) => x.gender as string,
+              (x) => x.name,
+              (a, b) => (a < b ? a : b),
+            ),
+          ).to.be.deep.equal({
+            [Gender.Female]: 'name A',
+            [Gender.Male]: 'name C',
+          }));
       });
       describe('toObjectAsync', () => {
         it('empty', async () =>

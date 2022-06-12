@@ -36,6 +36,23 @@ describe('toMap', () => {
           ]),
         );
       });
+      it('should work with field names', () => {
+        const source = [
+          { key: 'key1', value: 1 },
+          { key: 'key2', value: 2 },
+          { key: 'key3', value: 3 },
+        ];
+
+        const result = fluent(source).toMap('key', 'value');
+
+        expect(result).to.be.eql(
+          new Map([
+            ['key1', 1],
+            ['key2', 2],
+            ['key3', 3],
+          ]),
+        );
+      });
     });
     describe('async', () => {
       it('should keep only the chosen values', async () => {
@@ -67,6 +84,23 @@ describe('toMap', () => {
             [1, 10],
             [2, 11],
             [1, 19],
+          ]),
+        );
+      });
+      it('should work with field names', async () => {
+        const source = [
+          { key: 'key1', value: 1 },
+          { key: 'key2', value: 2 },
+          { key: 'key3', value: 3 },
+        ];
+
+        const result = await fluent(source).toMapAsync('key', 'value');
+
+        expect(result).to.be.eql(
+          new Map([
+            ['key1', 1],
+            ['key2', 2],
+            ['key3', 3],
           ]),
         );
       });
@@ -103,6 +137,23 @@ describe('toMap', () => {
           [1, 10],
           [2, 11],
           [1, 19],
+        ]),
+      );
+    });
+    it('should work with field names', async () => {
+      const source = [
+        { key: 'key1', value: 1 },
+        { key: 'key2', value: 2 },
+        { key: 'key3', value: 3 },
+      ];
+
+      const result = await fluentAsync(source).toMap('key', 'value');
+
+      expect(result).to.be.eql(
+        new Map([
+          ['key1', 1],
+          ['key2', 2],
+          ['key3', 3],
         ]),
       );
     });
