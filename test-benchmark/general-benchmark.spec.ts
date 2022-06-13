@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { fluent } from '../src';
+import { fluent } from '../dist';
 import rxjs = require('rxjs');
 import rxjsOp = require('rxjs/operators');
 import { iterate } from 'iterare';
