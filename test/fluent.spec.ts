@@ -697,9 +697,17 @@ describe('fluent iterable', () => {
       flattens.forEach((func) => {
         describe(func, () => {
           it('empty array', () =>
-            expect(fluent([])[func]().toArray()).to.be.empty);
+            expect(
+              fluent([] as [][])
+                [func]()
+                .toArray(),
+            ).to.be.empty);
           it('already flat fails', () =>
-            expect(() => fluent(subject)[func]().toArray()).to.throw());
+            expect(() =>
+              fluent(subject as [][])
+                [func]()
+                .toArray(),
+            ).to.throw());
           it('not flat', () =>
             expect(
               fluent([[1, 2], [3, 4, 5], [], [6]])
@@ -728,7 +736,7 @@ describe('fluent iterable', () => {
         describe(func, () => {
           it('empty array', async () =>
             expect(
-              await fluent([])
+              await fluent([] as any[])
                 [func]((x) => x)
                 .toArray(),
             ).to.be.empty);
