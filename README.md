@@ -18,12 +18,19 @@ Here a some results we got comparing to another similar options on node 16:
 
 | Library | Ops/sec | Margin | Ran samples |
 | ------- | ------- | ----------- | ----------- |
-| **fluent** | 292 | ±1.30% | 86 |
-| [iterare](https://www.npmjs.com/package/iterare ) | 291 | ±0.22%  | 92 |
-| [iter-tools](https://www.npmjs.com/package/iter-tools-es ) | 169 | ±0.32%  | 86 |
-| [rxjs](https://www.npmjs.com/package/rxjs) | 127 | ±4.89% | 75 |
-| native generators | 92.85 | ±5.35% | 75 |
-| native array operations chain | 43.68 | ±3.55% | 75 |
+| **fluent** | 300 | ±0.16% | 89 |
+| [iterare](https://www.npmjs.com/package/iterare ) | 265 | ±0.11%  | 89 |
+| [iter-tools](https://www.npmjs.com/package/iter-tools-es ) | 152 | ±0.16%  | 86 |
+| [rxjs](https://www.npmjs.com/package/rxjs) | 125 | ±2.61% | 80 |
+| native generators | 93.55 | ±5.62% | 69 |
+| native array operations chain | 44.36 | ±4.23% | 58 |
+
+fluent x 300 ops/sec ±0.16% (89 runs sampled)
+array operation chain x 44.36 ops/sec ±4.23% (58 runs sampled)
+native iterable x 93.55 ops/sec ±5.62% (69 runs sampled)
+rxjs x 125 ops/sec ±2.61% (80 runs sampled)
+iter-tools x 152 ops/sec ±0.16% (86 runs sampled)
+iterare x 265 ops/sec ±0.11% (89 runs sampled)
 
 You can check the bechmark code [here](./test-benchmark/general-benchmark.spec.ts)
 
