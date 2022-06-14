@@ -26,13 +26,6 @@ Here a some results we got comparing to another similar options on node 16:
 | native generators | 93.55 | ±5.62% | 69 |
 | native array operations chain | 44.36 | ±4.23% | 58 |
 
-fluent x 300 ops/sec ±0.16% (89 runs sampled)
-array operation chain x 44.36 ops/sec ±4.23% (58 runs sampled)
-native iterable x 93.55 ops/sec ±5.62% (69 runs sampled)
-rxjs x 125 ops/sec ±2.61% (80 runs sampled)
-iter-tools x 152 ops/sec ±0.16% (86 runs sampled)
-iterare x 265 ops/sec ±0.11% (89 runs sampled)
-
 You can check the bechmark code [here](./test-benchmark/general-benchmark.spec.ts)
 
 
