@@ -1,9 +1,7 @@
 [![Actions Status](https://github.com/Codibre/fluent-iterable/workflows/build/badge.svg)](https://github.com/Codibre/fluent-iterable/actions)
 [![Actions Status](https://github.com/Codibre/fluent-iterable/workflows/test/badge.svg)](https://github.com/Codibre/fluent-iterable/actions)
 [![Actions Status](https://github.com/Codibre/fluent-iterable/workflows/lint/badge.svg)](https://github.com/Codibre/fluent-iterable/actions)
-[![Actions Status](https://github.com/Codibre/fluent-iterable/workflows/benchmark-10/badge.svg)](https://github.com/Codibre/fluent-iterable/actions)
-[![Actions Status](https://github.com/Codibre/fluent-iterable/workflows/benchmark-12/badge.svg)](https://github.com/Codibre/fluent-iterable/actions)
-[![Actions Status](https://github.com/Codibre/fluent-iterable/workflows/benchmark-14/badge.svg)](https://github.com/Codibre/fluent-iterable/actions)
+[![benchmark](https://github.com/Codibre/fluent-iterable/actions/workflows/benchmark.yml/badge.svg)](https://github.com/Codibre/fluent-iterable/actions/workflows/benchmark.yml)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/069043968e0e72b2b5aa/test_coverage)](https://codeclimate.com/github/Codibre/fluent-iterable/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/069043968e0e72b2b5aa/maintainability)](https://codeclimate.com/github/Codibre/fluent-iterable/maintainability)
 [![npm version](https://badge.fury.io/js/%40codibre%2Ffluent-iterable.svg)](https://badge.fury.io/js/%40codibre%2Ffluent-iterable)
@@ -20,12 +18,12 @@ Here a some results we got comparing to another similar options on node 16:
 
 | Library | Ops/sec | Margin | Ran samples |
 | ------- | ------- | ----------- | ----------- |
-| **fluent** | 285 | ±0.57% | 90 |
-| [iterare](https://www.npmjs.com/package/iterare ) | 289 | ±0.36%  | 91 |
-| [iter-tools](https://www.npmjs.com/package/iter-tools-es ) | 164 | ±0.24%  | 83 |
-| [rxjs](https://www.npmjs.com/package/rxjs) | 127 | ±3.04% | 81 |
-| native generators | 127 | ±2.87% | 78 |
-| native array operations chain | 48.43 | ±4.36% | 64 |
+| **fluent** | 292 | ±1.30% | 86 |
+| [iterare](https://www.npmjs.com/package/iterare ) | 291 | ±0.22%  | 92 |
+| [iter-tools](https://www.npmjs.com/package/iter-tools-es ) | 169 | ±0.32%  | 86 |
+| [rxjs](https://www.npmjs.com/package/rxjs) | 127 | ±4.89% | 75 |
+| native generators | 92.85 | ±5.35% | 75 |
+| native array operations chain | 43.68 | ±3.55% | 75 |
 
 You can check the bechmark code [here](./test-benchmark/general-benchmark.spec.ts)
 
