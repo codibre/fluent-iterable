@@ -1,6 +1,5 @@
+export * from './any-mapper';
 export * from './assure-order-types';
-export * from './base';
-export * from './base';
 export * from './base';
 export * from './catch-callback';
 export * from './choose';

@@ -2,7 +2,7 @@ import { AsyncMapper, Mapper, AnyIterable } from 'augmentative-iterable';
 import { AsyncItemType, IsAnyOrUnknown, ItemType } from '../base';
 import { FluentAsyncIterable, FluentIterable } from '../base';
 
-type FlattenNoParams<T> = {
+export type FlattenNoParams<T> = {
   /**
    * Projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.<br>
    * Examples:<br>
@@ -39,7 +39,7 @@ export type FlattenFunction<T> = {
   ? FlattenNoParams<T>
   : {});
 
-type AsyncFlattenNoParams<T> = {
+export type AsyncFlattenNoParams<T> = {
   /**
    * Projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.<br>
    * Examples:<br>

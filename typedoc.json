@@ -7,7 +7,10 @@
   "includeVersion": true,
   "disableSources": true,
   "entryPoints": [
-    "./src/index.ts"
+    "./src/types/function-types/index.ts",
+    "./src/index.ts",
+    "./src/types/index.ts",
+    "./src/types-internal/index.ts"
   ],
   "exclude": [
     "src/fluentFunctions.ts",

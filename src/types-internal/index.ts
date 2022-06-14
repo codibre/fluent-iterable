@@ -1,4 +1,4 @@
-export * from './any-mapper';
+export * from '../types/any-mapper';
 export * from './compare-provider';
 export * from './extend-fluent';
 export * from './find-strut';

@@ -1,16 +1,21 @@
 import { tail, head } from './../base';
 import { ItemOrSelfType, FluentIterable } from '../base';
 
-type FlatJoinResult<TResult, T, R1, K0 extends string | number | symbol> = {
+export type FlatJoinResult<
+  TResult,
+  T,
+  R1,
+  K0 extends string | number | symbol,
+> = {
   [head]: TResult;
   [tail]: T;
 } & Record<K0, R1>;
 
-type Exclusive1<R1, K1 extends keyof R1, KN> = K1 extends KN
+export type Exclusive1<R1, K1 extends keyof R1, KN> = K1 extends KN
   ? {}
   : Record<K1, ItemOrSelfType<R1[K1]>>;
 
-type Exclusive2<
+export type Exclusive2<
   R2,
   K2 extends keyof R2,
   R1,
@@ -18,7 +23,7 @@ type Exclusive2<
   K0,
 > = Exclusive1<R1, K1, K0> & Exclusive1<R2, K2, K0 | K1>;
 
-type Exclusive3<
+export type Exclusive3<
   R3,
   K3 extends keyof R3,
   R2,
@@ -28,7 +33,7 @@ type Exclusive3<
   K0,
 > = Exclusive2<R2, K2, R1, K1, K0> & Exclusive1<R3, K3, K0 | K1 | K2>;
 
-type Exclusive4<
+export type Exclusive4<
   R4,
   K4 extends keyof R4,
   R3,
@@ -41,7 +46,7 @@ type Exclusive4<
 > = Exclusive3<R3, K3, R2, K2, R1, K1, K0> &
   Exclusive1<R4, K4, K0 | K1 | K2 | K3>;
 
-type Exclusive5<
+export type Exclusive5<
   R5,
   K5 extends keyof R5,
   R4,

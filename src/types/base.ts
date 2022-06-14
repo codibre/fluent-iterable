@@ -11,7 +11,7 @@ import {
 export const head = Symbol.for('@head');
 export const tail = Symbol.for('@tail');
 
-type AnyHack<T> = T extends never ? 'A' : 'B';
+export type AnyHack<T> = T extends never ? 'A' : 'B';
 
 /**
  * Returns true wether T is any or unknown
@@ -193,7 +193,7 @@ export interface Equality<T> {
   (a: T, b: T): boolean;
 }
 
-interface FluentEvents<T> {
+export interface FluentEvents<T> {
   data(t: T): void;
   error(error: any): void;
   end(): void;

@@ -1,5 +1,5 @@
 import { valueTypeWrapper } from './string-wrapper';
-import { AnyMapper, FunctionAnyMapper } from './any-mapper';
+import { AnyMapper, FunctionAnyMapper } from '../types/any-mapper';
 
 export function prepare<T>(predicate: AnyMapper<T>): FunctionAnyMapper<T> {
   if (predicate.hasOwnProperty(valueTypeWrapper)) {

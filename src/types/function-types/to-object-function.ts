@@ -2,7 +2,7 @@ import { AsyncMapper, Mapper } from 'augmentative-iterable';
 import { ToObjectKeyType } from '../base';
 import { Choose } from '../choose';
 
-type ObjectResult<
+export type ObjectResult<
   R extends string | symbol | number,
   O extends {
     [k in R]: unknown;
@@ -11,11 +11,11 @@ type ObjectResult<
   [k in R]: O[R];
 };
 
-type ObjectType<R extends string | symbol | number> = {
+export type ObjectType<R extends string | symbol | number> = {
   [k in R]: unknown;
 };
 
-type KeyType = string | symbol | number;
+export type KeyType = string | symbol | number;
 
 export interface ToObjectFunction<T> {
   /**

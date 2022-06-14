@@ -1,5 +1,5 @@
 import { isDescendingOrderAssured } from './../types-internal/order-assured';
-import { FunctionAnyMapper } from './../types-internal/any-mapper';
+import { FunctionAnyMapper } from '../types/any-mapper';
 import { ComparerIngredient } from './ingredients';
 import { AnyMapper, keepOrderAssuring } from '../types-internal';
 import { prepare } from '../types-internal/prepare';
