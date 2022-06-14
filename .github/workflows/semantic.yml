@@ -40,6 +40,7 @@ jobs:
       - run: if [ "$previousVersion" = "$finalVersion" ]; then exit 0; fi
       - run: git push
       - run: sed -i "s/\*\*@codibre\/fluent-iterable\*\*/**fast-iterable**/g" README.md
+      - run: sed -i "s/@codibre\/fluent-iterable/fast-iterable/g" package*.json
       - run: npm publish
         env:
             NPM_TOKEN: ${{secrets.NPM_TOKEN}}
