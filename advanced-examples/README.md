@@ -10,3 +10,4 @@ Here you'll find a collection of advanced examples of fluent usability!
 - [Creating and validating unique lists](creating-and-validation-unique-list.md): How to generate unique lists or validate if an iterable is unique on the flow
 - [Segregating responsibilities over](segregating-responsabilities-over.md): A elegant way to segregate responsibilities and orchestrate a iterable flow fluently, fit for a DDD, Onion o Hexagonal architecture!
 - [Operators, resolvers and preparation](operators-and-resolvers.md): Understand how fluent iterable works under the hood, when the chained operations really happen and when is the best moment to resolve an iterable.
+- [Nested flattening with back reference](nested-flattening-with-back-reference.md): Flat nested iterables keeping track of each level of items easily!
