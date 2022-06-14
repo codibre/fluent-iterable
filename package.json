@@ -19,7 +19,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "doc": "rm -rf docs && npx typedoc && git add . && git commit -m 'chore: generating docs' && git push",
+    "doc": "rm -rf docs && npx typedoc && git add . && git commit -m 'chore: generating docs'",
     "format": "prettier --write src/**/*.ts tst/**/*.ts",
     "lint": "npm run lint:format && npm run lint:style",
     "lint:fix": "npm run lint:format:fix && npm run lint:style:fix",
@@ -126,7 +126,7 @@
     "ts-node": "^10.4.0",
     "tsconfig-paths": "^3.11.0",
     "typedoc": "^0.22.17",
-    "typedoc-plugin-markdown": "^3.12.1",
+    "typedoc-plugin-markdown": "^3.11.3",
     "typescript": "^4.4.4"
   }
 }
