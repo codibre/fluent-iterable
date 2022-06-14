@@ -68,7 +68,7 @@
     "for-emit-of": "^1.3.3"
   },
   "dependencies": {
-    "augmentative-iterable": "^1.5.7",
+    "augmentative-iterable": "^1.5.8",
     "extension-methods": "^1.0.1",
     "typed-emitter": "^1.4.0"
   },
