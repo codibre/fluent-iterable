@@ -1,5 +1,5 @@
 import { Mapper } from 'augmentative-iterable';
-import { Choose } from '../choose';
+import { Reducer } from '../base';
 
 export interface ToMapFunction<T> {
   /**
@@ -13,7 +13,7 @@ export interface ToMapFunction<T> {
   <K, V>(
     getKey: Mapper<T, K>,
     mapper: Mapper<T, V>,
-    reduceValue?: Choose<V>,
+    reduceValue?: Reducer<V, T>,
   ): Map<K, V>;
   /**
    * Create a Map from the iterable. This is a resolving operation
@@ -26,7 +26,7 @@ export interface ToMapFunction<T> {
   <K extends keyof T, V>(
     getKey: K,
     mapper: Mapper<T, V>,
-    reduceValue?: Choose<V>,
+    reduceValue?: Reducer<V, T>,
   ): Map<T[K], V>;
   /**
    * Create a Map from the iterable. This is a resolving operation
@@ -39,7 +39,7 @@ export interface ToMapFunction<T> {
   <K extends keyof T, V extends keyof T>(
     getKey: K,
     mapper: V,
-    reduceValue?: Choose<T[V]>,
+    reduceValue?: Reducer<T[V], T>,
   ): Map<T[K], T[V]>;
 }
 export interface AsyncToMapFunction<T> {
@@ -54,7 +54,7 @@ export interface AsyncToMapFunction<T> {
   <K, V>(
     getKey: Mapper<T, K>,
     mapper: Mapper<T, V>,
-    reduceValue: Choose<V>,
+    reduceValue: Reducer<V, T>,
   ): Promise<Map<K, V>>;
   /**
    * Create a Map from the iterable. This is a resolving operation
@@ -67,7 +67,7 @@ export interface AsyncToMapFunction<T> {
   <K extends keyof T, V>(
     getKey: K,
     mapper: Mapper<T, V>,
-    reduceValue: Choose<V>,
+    reduceValue: Reducer<V, T>,
   ): Promise<Map<T[K], V>>;
   /**
    * Create a Map from the iterable. This is a resolving operation
@@ -80,6 +80,6 @@ export interface AsyncToMapFunction<T> {
   <K extends keyof T, V extends keyof T>(
     getKey: K,
     mapper: V,
-    reduceValue?: Choose<T[V]>,
+    reduceValue?: Reducer<T[V], T>,
   ): Promise<Map<T[K], T[V]>>;
 }
