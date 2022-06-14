@@ -50,7 +50,7 @@ fluent(invoices)
   )
 ```
 
-Those nested fluent operation can become very messy when you business rule starts to become more complicated. Luckily, fluent offers you a powerful operation called **flatJoin**. With flatJoin, you can automatically obtain the items of each nested level with just one operation, like that:
+Those nested fluent operation can become very messy when your business rule starts to become more complicated. Luckily, fluent offers you a powerful operation called **flatJoin**. With flatJoin, you can automatically obtain the items of each nested level with just one operation, like that:
 
 ```ts
 fluent(invoices)
@@ -63,7 +63,7 @@ fluent(invoices)
 ```
 
 Look that the root item of each operation is added to the result in the property named with the symbol **tail**, that you can import from fluent. You can also get the last items from symbol **head**, but in this case it'll be the same value as the property **taxes**.
-With **flatJoin** that operation, the value of each item of each flat joined level is assigned to a property with the same name of the property where it was contained. The resulting iterable is strongly typed and will allow you to map what you want in the aftermatch with all the help Typescript can offer you! At the current fluent version so far (**1.21.5**), we added to flatJoin contract up to five level of nested properties that you'll get fully typed results. From the level 6 and beyond you'll get the correspondent keys for each property you specify, but both the strings specified as paramters to the operation and the values of those properties will not be fully typed, as Typescript didn't offer a way to do it generally or at least we haven't figured it out yet.
+With **flatJoin**, the value of each item of each flat-joined level is assigned to a property with the same name of the property where it was contained. The resulting iterable is strongly typed and will allow you to map what you want in the aftermatch with all the help Typescript can offer you! At the current fluent version so far (**1.21.5**), we added to flatJoin contract up to five levels of nested properties that you'll get fully typed results. From the level 6 and beyond you'll get the correspondent keys for each property you specify, but both the strings specified as paramters to the operation and the values of those properties will not be fully typed, as Typescript didn't offer a way to do it generally or at least we haven't figured it out yet.
 Even so, all the complexity of each flattening operation you may need to do with nested operations will be solved almost seamslessly with this feature!
 
 [Go back](README.md)
