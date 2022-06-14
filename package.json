@@ -19,7 +19,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "doc": "rm -rf docs && npx typedoc && git add . && git commit -m 'chore: generating docs'",
+    "doc": "rm -rf docs && npx typedoc && git add . && git commit -m 'chore: generating docs [skip ci]'",
     "format": "prettier --write src/**/*.ts tst/**/*.ts",
     "lint": "npm run lint:format && npm run lint:style",
     "lint:fix": "npm run lint:format:fix && npm run lint:style:fix",
