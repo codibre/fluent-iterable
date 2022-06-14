@@ -41,7 +41,8 @@
     "lint:format": "prettier --check '{src,test}/**/*.ts'",
     "lint:format:fix": "prettier --write '{src,test}/**/*.ts'",
     "lint:style": "eslint '**/*.ts'",
-    "lint:style:fix": "eslint '**/*.ts' --fix"
+    "lint:style:fix": "eslint '**/*.ts' --fix",
+    "get:version": "echo $npm_package_version"
   },
   "repository": {
     "type": "git",
