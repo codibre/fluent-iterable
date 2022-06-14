@@ -358,7 +358,9 @@ describe('fluent async iterable', () => {
           let error: unknown;
 
           try {
-            await fluentAsync(subject)[func]().toArray();
+            await fluentAsync(subject as any)
+              [func]()
+              .toArray();
           } catch (err) {
             error = err;
           }
@@ -368,7 +370,12 @@ describe('fluent async iterable', () => {
         it('not flat', async () =>
           expect(
             await fluentAsync(
-              new ObjectReadableMock([[1, 2], [3, 4, 5], [], [6]]),
+              new ObjectReadableMock([
+                [1, 2],
+                [3, 4, 5],
+                [],
+                [6],
+              ]) as AsyncIterable<any>,
             )
               [func]()
               .toArray(),

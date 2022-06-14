@@ -11,6 +11,19 @@ import {
 export const head = Symbol.for('@head');
 export const tail = Symbol.for('@tail');
 
+type AnyHack<T> = T extends never ? 'A' : 'B';
+
+/**
+ * Returns true wether T is any or unknown
+ */
+export type IsAnyOrUnknown<T> = T extends unknown
+  ? true
+  : AnyHack<T> extends 'A'
+  ? false
+  : AnyHack<T> extends 'B'
+  ? false
+  : true;
+
 /**
  * Represents the first string or non iterable item from chained iterables
  */

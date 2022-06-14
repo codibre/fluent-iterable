@@ -1,8 +1,8 @@
 import { AsyncMapper, Mapper, AnyIterable } from 'augmentative-iterable';
-import { AsyncItemType, ItemType } from '../base';
+import { AsyncItemType, IsAnyOrUnknown, ItemType } from '../base';
 import { FluentAsyncIterable, FluentIterable } from '../base';
 
-export interface FlattenFunction<T> {
+type FlattenNoParams<T> = {
   /**
    * Projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.<br>
    * Examples:<br>
@@ -11,7 +11,9 @@ export interface FlattenFunction<T> {
    * @returns The [[FluentIterable]] of the flattened iterable.
    */
   <R extends ItemType<T>>(): FluentIterable<R>;
+};
 
+export type FlattenFunction<T> = {
   /**
    * Projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.<br>
    * Examples:<br>
@@ -31,9 +33,13 @@ export interface FlattenFunction<T> {
    * @returns The [[FluentIterable]] of the flattened iterable.
    */
   <K extends keyof T, R extends ItemType<T[K]>>(mapper: K): FluentIterable<R>;
-}
+} & (T extends Iterable<any>
+  ? FlattenNoParams<T>
+  : IsAnyOrUnknown<T> extends true
+  ? FlattenNoParams<T>
+  : {});
 
-export interface AsyncFlattenFunction<T> {
+type AsyncFlattenNoParams<T> = {
   /**
    * Projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.<br>
    * Examples:<br>
@@ -42,6 +48,9 @@ export interface AsyncFlattenFunction<T> {
    * @returns The [[FluentIterable]] of the flattened iterable.
    */
   <R extends AsyncItemType<T>>(): FluentAsyncIterable<R>;
+};
+
+export type AsyncFlattenFunction<T> = {
   /**
    * Asynchronously projects each element of the iterable to an iterable and flattens the resulting iterable into one iterable.
    * @typeparam R The type of the elements in the inner iterable.
@@ -56,6 +65,10 @@ export interface AsyncFlattenFunction<T> {
    * @returns The flattened [[FluentAsyncIterable]].
    */
   <K extends keyof T, R extends AsyncItemType<T[K]>>(
-    mapper?: K,
+    mapper: K,
   ): FluentAsyncIterable<R>;
-}
+} & (T extends AnyIterable<any>
+  ? AsyncFlattenNoParams<T>
+  : IsAnyOrUnknown<T> extends true
+  ? AsyncFlattenNoParams<T>
+  : {});
