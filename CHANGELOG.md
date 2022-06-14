@@ -1,3 +1,12 @@
+## [1.21.9](https://github.com/codibre/fluent-iterable/compare/v1.21.8...v1.21.9) (2022-06-14)
+
+
+### Bug Fixes
+
+* fixing documentation generation ([3910cfa](https://github.com/codibre/fluent-iterable/commit/3910cfa2b58e5814f786e635796dcd71973df0bc))
+* fixing toMap contract ([d073225](https://github.com/codibre/fluent-iterable/commit/d07322507e143e1c8990239b4dd5da08d31631a8))
+* preparing for fast-iterable mirror publishing ([a0ee7e5](https://github.com/codibre/fluent-iterable/commit/a0ee7e575a684d6be8aa5d8550b8e83d328e186e))
+
 ## [1.21.8](https://github.com/codibre/fluent-iterable/compare/v1.21.7...v1.21.8) (2022-06-14)
 
 
