@@ -1,3 +1,10 @@
+## [1.21.7](https://github.com/codibre/fluent-iterable/compare/v1.21.6...v1.21.7) (2022-06-14)
+
+
+### Bug Fixes
+
+* adding semantic release badge ([9402856](https://github.com/codibre/fluent-iterable/commit/94028566b30484d0c5f66287a85a1fdf2d115167))
+
 ## [1.21.6](https://github.com/codibre/fluent-iterable/compare/v1.21.5...v1.21.6) (2022-06-14)
 
 
