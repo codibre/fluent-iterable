@@ -37,10 +37,12 @@ jobs:
           CI: true
       - run: npx semantic-release --ci
       - run: finalVersion=$(sed 's/.*"version"&#58; "\(.*\)".*/\1/;t;d' ./package.json)
-      - run: if [ "$previousVersion" = "$finalVersion" ]; then exit 0; fi
-      - run: git push
-      - run: sed -i "s/\*\*@codibre\/fluent-iterable\*\*/**fast-iterable**/g" README.md
-      - run: sed -i "s/@codibre\/fluent-iterable/fast-iterable/g" package*.json
-      - run: npm publish
+      - run: |
+          if [ "$previousVersion" != "$finalVersion" ]; then
+            git push
+            sed -i "s/\*\*@codibre\/fluent-iterable\*\*/**fast-iterable**/g" README.md
+            sed -i "s/@codibre\/fluent-iterable/fast-iterable/g" package*.json
+            npm publish
+          fi
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
