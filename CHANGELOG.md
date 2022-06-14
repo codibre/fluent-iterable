@@ -1,3 +1,10 @@
+## [1.22.2](https://github.com/codibre/fluent-iterable/compare/v1.22.1...v1.22.2) (2022-06-14)
+
+
+### Bug Fixes
+
+* fixing readme ([af2d196](https://github.com/codibre/fluent-iterable/commit/af2d196f4973662516dcabe9f7b67f47ea29046f))
+
 ## [1.22.1](https://github.com/codibre/fluent-iterable/compare/v1.22.0...v1.22.1) (2022-06-14)
 
 
