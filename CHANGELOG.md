@@ -1,3 +1,10 @@
+# [1.22.0](https://github.com/codibre/fluent-iterable/compare/v1.21.9...v1.22.0) (2022-06-14)
+
+
+### Features
+
+* fixing docs generation ([5509bd6](https://github.com/codibre/fluent-iterable/commit/5509bd6fa35d856a785e76eb40ec77e91ed1e537))
+
 ## [1.21.9](https://github.com/codibre/fluent-iterable/compare/v1.21.8...v1.21.9) (2022-06-14)
 
 
