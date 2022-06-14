@@ -1,3 +1,10 @@
+## [1.22.1](https://github.com/codibre/fluent-iterable/compare/v1.22.0...v1.22.1) (2022-06-14)
+
+
+### Bug Fixes
+
+* adding custom homepage ([975905d](https://github.com/codibre/fluent-iterable/commit/975905da501ee81d433af3242eafa10db28e3f97))
+
 # [1.22.0](https://github.com/codibre/fluent-iterable/compare/v1.21.9...v1.22.0) (2022-06-14)
 
 
