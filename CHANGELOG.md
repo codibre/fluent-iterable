@@ -1,3 +1,10 @@
+## [1.21.5](https://github.com/codibre/fluent-iterable/compare/v1.21.4...v1.21.5) (2022-06-14)
+
+
+### Bug Fixes
+
+* updating augmentative-iterable to 1.5.7 ([9350aa7](https://github.com/codibre/fluent-iterable/commit/9350aa7a4995607c37613c61120ebfaef44c6625))
+
 ## [1.21.4](https://github.com/codibre/fluent-iterable/compare/v1.21.3...v1.21.4) (2022-06-13)
 
 
