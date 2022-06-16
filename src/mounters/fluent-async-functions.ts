@@ -47,6 +47,7 @@ import {
   nextAsync,
   toMapAsync,
   toSetAsync,
+  flatJoinAsync,
 } from '../async';
 import {
   combineEmitter,
@@ -79,6 +80,7 @@ export const asyncIterableFuncs = {
   prepend: prependAsync,
   concat: concatAsync,
   repeat: repeatAsync,
+  flatJoin: flatJoinAsync,
   flatten: flattenAsync,
   flatMap: flattenAsync,
   flatMerge: flatMergeAsync,

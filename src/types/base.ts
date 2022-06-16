@@ -39,6 +39,15 @@ export type ItemOrSelfType<T> = T extends string
 export type ItemType<T> = T extends Iterable<infer R> ? R : never;
 
 /**
+ * Represents the first string or non iterable item from chained iterables
+ */
+export type AsyncItemOrSelfType<T> = T extends string
+  ? T
+  : T extends AnyIterable<infer R>
+  ? AsyncItemOrSelfType<R>
+  : T;
+
+/**
  * Represents the type of the item of an iterable or an async iterable
  */
 export type AsyncItemType<T> = T extends AnyIterable<infer R> ? R : never;

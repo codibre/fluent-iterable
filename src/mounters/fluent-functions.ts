@@ -81,6 +81,7 @@ import {
   isDistinctAsync,
   toMapAsync,
   toSetAsync,
+  flatJoinAsync,
 } from '../async';
 import { combineEmitter, concatEmitter } from '../emitter';
 import * as common from '../common';
@@ -117,6 +118,7 @@ export const iterableAsyncFuncs = {
   skipWhileAsync,
   mapAsync,
   filterAsync,
+  flatJoinAsync,
   flattenAsync,
   flatMerge,
   flatMapAsync: flattenAsync,

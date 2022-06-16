@@ -14,6 +14,7 @@ declare module './base' {
     prepend: f.AsyncPrependFunction<T>;
     concat: f.AsyncConcatFunction<T>;
     repeat: f.AsyncRepeatFunction<T>;
+    flatJoin: f.AsyncFlatJoinFunction<T>;
     flatten: f.AsyncFlattenFunction<T>;
     flatMap: f.AsyncFlattenFunction<T>;
     sort: f.AsyncSortFunction<T>;
