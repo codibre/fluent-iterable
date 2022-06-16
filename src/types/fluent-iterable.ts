@@ -83,7 +83,9 @@ declare module './base' {
     hasMoreOrExactly: f.HasMoreOrExactlyFunction;
     waitAll: f.WaitAllFunction<T>;
     combine: f.CombineFunction<T>;
+    combineJoin: f.CombineJoinFunction<T>;
     combineAsync: f.AsyncCombineFunction<T>;
+    combineJoinAsync: f.AsyncCombineJoinFunction<T>;
     emit: f.EmitFunction<T>;
     flatMerge: f.FlatMergeFunction<T>;
     whenEmpty: f.WhenEmptyFunction;

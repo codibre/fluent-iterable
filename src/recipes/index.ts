@@ -1,6 +1,7 @@
 export * from './append-recipe';
 export * from './augment-iterable-recipe';
 export * from './avg-recipe';
+export * from './combine-join-recipe';
 export * from './comparison-recipe';
 export * from './concat-recipe';
 export * from './contains-recipe';

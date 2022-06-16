@@ -1,29 +1,35 @@
 import { AnyIterable, Mapper } from 'augmentative-iterable';
-import { AnyMapper } from '../types-internal';
+import { AnyMapper, ResolverType } from '../types-internal';
 import { prepare } from '../types-internal/prepare';
 import { identity } from '../utils';
 import { CombineIngredients } from './ingredients';
 
-function getMapItems<U>(m: Map<unknown, U[]>, keyB: (u: U) => unknown) {
-  return (u: U) => {
-    const key = keyB(u);
-    let p = m.get(key);
-    if (!p) {
-      p = [] as U[];
-      m.set(key, p);
-    }
-    p.push(u);
-    return m;
-  };
+function getMapItems<U>(
+  m: Map<unknown, U[]>,
+  keyB: (u: U) => unknown,
+  resolver: ResolverType,
+) {
+  return (u: U) =>
+    resolver(keyB(u), (key) => {
+      let p = m.get(key);
+      if (!p) {
+        p = [] as U[];
+        m.set(key, p);
+      }
+      p.push(u);
+      return m;
+    });
 }
 function getMapResult<T, U>(
   m: Map<unknown, U[]>,
   keyA: Mapper<T, unknown>,
+  resolver: ResolverType,
 ): any {
-  return (t: T) => {
-    const result = m.get(keyA(t));
-    return result ? result.map((u) => [t, u]) : undefined;
-  };
+  return (t: T) =>
+    resolver(keyA(t), (key) => {
+      const result = m.get(key);
+      return result !== undefined ? result.map((u) => [t, u]) : undefined;
+    });
 }
 function getMapNN<T, U>(cache: U[], map: Function): any {
   return ([a, bIt]: [T, AnyIterable<U>]) =>
@@ -59,10 +65,15 @@ function getInnerJoin({
     const keyA = prepare(baseKeyA);
     const keyB = prepare(baseKeyB);
     const m = new Map<unknown, U[]>();
-    return resolver(forEach.call(iterable, getMapItems(m, keyB)), () =>
-      flatten.call(
-        filter.call(map.call(itThis, getMapResult(m, keyA)), identity),
-      ),
+    return resolver(
+      forEach.call(iterable, getMapItems(m, keyB, resolver)),
+      () =>
+        flatten.call(
+          filter.call(
+            map.call(itThis, getMapResult(m, keyA, resolver)),
+            identity,
+          ),
+        ),
     );
   };
 }
@@ -75,14 +86,14 @@ export function combineRecipe(combineFuncs: CombineIngredients) {
   return function <T, U>(
     this: AnyIterable<T>,
     iterable: AnyIterable<U>,
-    keyA?: Mapper<T, unknown>,
-    keyB?: Mapper<U, unknown>,
-  ) {
-    if (!keyA === !!keyB) {
+    baseKeyA?: AnyMapper<T>,
+    baseKeyB?: AnyMapper<U>,
+  ): AnyIterable<[T, U]> {
+    if (!baseKeyA === !!baseKeyB) {
       throw new Error('Both key mapper must be informed, or no one');
     }
-    return keyA
-      ? innerJoin(this, iterable, keyA, keyB!)
+    return baseKeyA
+      ? innerJoin(this, iterable, baseKeyA, baseKeyB!)
       : combineNN(this, iterable);
   };
 }

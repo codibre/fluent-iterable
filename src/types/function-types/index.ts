@@ -4,6 +4,7 @@ export * from './append-function';
 export * from './avg-function';
 export * from './catch-functions';
 export * from './combine-function';
+export * from './combine-join-function';
 export * from './concat-function';
 export * from './contains-function';
 export * from './count-function';

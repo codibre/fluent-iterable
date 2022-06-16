@@ -16,7 +16,7 @@ export type AnyHack<T> = T extends never ? 'A' : 'B';
 /**
  * Returns true wether T is any or unknown
  */
-export type IsAnyOrUnknown<T> = T extends unknown
+export type IsAnyOrUnknown<T> = unknown extends T
   ? true
   : AnyHack<T> extends 'A'
   ? false
@@ -96,6 +96,21 @@ export interface Reducer<T, A> {
    * @returns The new accumulator value.
    */
   (current: A, next: T): A;
+}
+/**
+ * Represents a reducer of type `T` into the accumulator type `A`.<br>
+ *   Example: `const sumReducer: Reducer<number, number> = (sum, next) => sum + next;`
+ * @typeparam T The source type.
+ * @typeparam A The accumulator type.
+ */
+export interface AnyReducer<T, A> {
+  /**
+   * Generates the next accumulator item based on the previous one and the next item under reduce.
+   * @param current The previous accumulator value.
+   * @param next The next item.
+   * @returns The new accumulator value.
+   */
+  (current: A, next: T): Promise<A> | A;
 }
 /**
  * Represents an asynchronous reducer of type `T` into the accumulator type `A`.<br>

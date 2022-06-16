@@ -27,6 +27,12 @@ export type ConcatIngredient = (
   this: AnyIterable<any>,
   ...iterables: Array<AnyIterable<any>>
 ) => AnyIterable<any>;
+export type CombineIngredient = (
+  this: AnyIterable<any>,
+  iterable: AnyIterable<any>,
+  baseKeyA?: AnyMapper<any>,
+  baseKeyB?: AnyMapper<any>,
+) => AnyIterable<[any, any]> | Promise<AnyIterable<[any, any]>>;
 export type EmptyIngredient = () => AnyIterable<any>;
 
 export interface BasicIngredients {

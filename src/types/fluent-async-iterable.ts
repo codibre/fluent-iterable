@@ -55,6 +55,7 @@ declare module './base' {
     mergeEmitterCatching: f.AsyncMergeEmitterCatchingFunction<T>;
     waitAll: f.AsyncWaitAllFunction<T>;
     combine: f.AsyncCombineFunction<T>;
+    combineJoin: f.AsyncCombineJoinFunction<T>;
     emit: f.AsyncEmitFunction<T>;
     flatMerge: f.FlatMergeFunction<T>;
     whenEmpty: f.AsyncWhenEmptyFunction;
