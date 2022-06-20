@@ -1,3 +1,10 @@
+# [1.23.0](https://github.com/codibre/fluent-iterable/compare/v1.22.3...v1.23.0) (2022-06-20)
+
+
+### Features
+
+* implementing combineJoin ([#50](https://github.com/codibre/fluent-iterable/issues/50)) ([17f7e0d](https://github.com/codibre/fluent-iterable/commit/17f7e0d8bbfea70ed570da15f28c853c81ac2eda))
+
 ## [1.22.3](https://github.com/codibre/fluent-iterable/compare/v1.22.2...v1.22.3) (2022-06-16)
 
 
