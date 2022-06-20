@@ -4,6 +4,7 @@ export * from './append';
 export * from './avg';
 export * from './catch';
 export * from './combine';
+export * from './combine-join';
 export * from './concat';
 export * from './contains';
 export * from './count';

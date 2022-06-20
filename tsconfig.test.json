@@ -2,6 +2,7 @@
   "extends": "@codibre/confs/tsconfig.test.json",
   "compilerOptions": {
     "outDir": "./dist",
+    "sourceMap": true,
     "types": [
       "reflect-metadata",
       "node",
@@ -12,5 +13,10 @@
     ],
     "esModuleInterop": true
   },
-  "include": ["./src", "./test", "./test-benchmark", "./test-memory"]
+  "include": [
+    "./src",
+    "./test",
+    "./test-benchmark",
+    "./test-memory"
+  ]
 }

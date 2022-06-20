@@ -23,7 +23,8 @@ function identity<T>(param: T): T {
 async function* promiseIterateAsync<T>(
   a: PromiseLike<AnyIterable<T>>,
 ): AsyncIterable<T> {
-  yield* await a;
+  const resolved = await a;
+  yield* resolved;
 }
 
 /**
