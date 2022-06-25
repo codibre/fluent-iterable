@@ -1,3 +1,10 @@
+# [1.24.0](https://github.com/codibre/fluent-iterable/compare/v1.23.0...v1.24.0) (2022-06-25)
+
+
+### Features
+
+* adding toJSON to make fluent iterables serializable ([#51](https://github.com/codibre/fluent-iterable/issues/51)) ([12183f7](https://github.com/codibre/fluent-iterable/commit/12183f726f38328f555ba5f9a440f91daf1fa506))
+
 # [1.23.0](https://github.com/codibre/fluent-iterable/compare/v1.22.3...v1.23.0) (2022-06-20)
 
 
