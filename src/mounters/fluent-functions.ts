@@ -164,6 +164,7 @@ export const resolvingFuncs = {
   someAsync: anyAsync,
   contains,
   toArray,
+  toJSON: toArray,
   toObject,
   toObjectAsync,
   forEach,

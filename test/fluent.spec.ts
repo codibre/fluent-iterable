@@ -116,6 +116,11 @@ describe('fluent iterable', () => {
           fluent([1, 2, 3]).forEach((x) => (sum += x));
           expect(sum).to.be.eq(6);
         });
+        it('should serialize as an array', () => {
+          expect(JSON.stringify(fluent([1, 2, 3]).map((x) => x * 2))).to.be.eql(
+            '[2,4,6]',
+          );
+        });
       });
       context('withIndex', () => {
         it('should return Indexed instances from informed array', () => {
