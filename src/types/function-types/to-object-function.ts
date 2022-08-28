@@ -2,15 +2,6 @@ import { AsyncMapper, Mapper } from 'augmentative-iterable';
 import { ToObjectKeyType } from '../base';
 import { Choose } from '../choose';
 
-export type ObjectResult<
-  R extends string | symbol | number,
-  O extends {
-    [k in R]: unknown;
-  },
-> = {
-  [k in R]: O[R];
-};
-
 export type ObjectType<R extends string | symbol | number> = {
   [k in R]: unknown;
 };
@@ -39,11 +30,11 @@ export interface ToObjectFunction<T> {
    * @param valueSelector Projects an element of the iterable into the value of the corresponding field. The identity function is being used if omitted.
    * @returns The object composed of the elements of the iterable as fields.
    */
-  <R extends KeyType, O extends ObjectType<R>>(
+  <R extends KeyType, O>(
     keySelector: Mapper<T, R>,
-    valueSelector: Mapper<T, O[R]>,
+    valueSelector: Mapper<T, O>,
     reduceValue?: Choose<O>,
-  ): ObjectResult<R, O>;
+  ): Record<R, O>;
 
   /**
    * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by a key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.<br>
@@ -120,11 +111,11 @@ export interface AsyncToObjectFunction<T> {
    * @param reduceValue reduce the following items to the map value type. If not informed, assumes only the first value
    * @returns A promise of the object composed of the elements of the iterable as fields.
    */
-  <R extends KeyType, O extends ObjectType<R>>(
-    keySelector: AsyncMapper<T, R>,
-    valueSelector: AsyncMapper<T, O[R]>,
-    reduceValue?: Choose<R>,
-  ): Promise<ObjectResult<R, O>>;
+  <K extends KeyType, V>(
+    keySelector: AsyncMapper<T, K>,
+    valueSelector: AsyncMapper<T, V>,
+    reduceValue?: Choose<V>,
+  ): Promise<Record<K, V>>;
 
   /**
    * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by an asynchronous key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.
