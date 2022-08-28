@@ -1,3 +1,10 @@
+## [1.24.1](https://github.com/codibre/fluent-iterable/compare/v1.24.0...v1.24.1) (2022-08-28)
+
+
+### Bug Fixes
+
+* fixing toObject return type in some cases ([df88204](https://github.com/codibre/fluent-iterable/commit/df88204866ea9914416c9164ec42a5645a6e0a4e))
+
 # [1.24.0](https://github.com/codibre/fluent-iterable/compare/v1.23.0...v1.24.0) (2022-06-25)
 
 
