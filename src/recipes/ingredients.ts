@@ -76,3 +76,9 @@ export interface ComparisonIngredients extends BasicIngredients {
   take: ThresholdIngredient;
   comparer: CompareProvider;
 }
+
+export interface ToObjectChainRecipe extends BasicIngredients {
+  flatJoin: Function;
+  group: Function;
+  toObject: Function;
+}

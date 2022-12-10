@@ -49,6 +49,7 @@ import {
   toMapAsync,
   toSetAsync,
   flatJoinAsync,
+  toObjectChainAsync,
 } from '../async';
 import {
   combineEmitter,
@@ -122,6 +123,7 @@ export const asyncResolvingFuncs = {
   emit: emitAsync,
   toArray: toArrayAsync,
   toObject: toObjectAsync,
+  toObjectChain: toObjectChainAsync,
   forEach: forEachAsync,
   join: joinAsync,
   sum: sumAsync,

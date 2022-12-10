@@ -43,6 +43,7 @@ export * from './take-while-async';
 export * from './to-array-async';
 export * from './to-map-async';
 export * from './to-object-async';
+export * from './to-object-chain-async';
 export * from './to-set-async';
 export * from './top-async';
 export * from './wait-all-async';

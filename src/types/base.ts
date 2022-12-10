@@ -301,3 +301,7 @@ export interface FluentAsyncIterable<T>
   extends AsyncIterable<T>,
     OrderAssurable<FluentAsyncIterable<T>>,
     FluentIterableEmitter<T> {}
+
+export type KeysOfType<T, V> = {
+  [K in keyof T]-?: T[K] extends V ? K : never;
+}[keyof T];

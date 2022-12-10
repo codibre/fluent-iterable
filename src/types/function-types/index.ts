@@ -49,6 +49,7 @@ export * from './take-while-function';
 export * from './to-array-function';
 export * from './to-async-function';
 export * from './to-map-function';
+export * from './to-object-chain-function';
 export * from './to-object-function';
 export * from './to-set-function';
 export * from './top-function';
