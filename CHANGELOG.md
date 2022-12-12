@@ -1,3 +1,10 @@
+# [1.25.0](https://github.com/codibre/fluent-iterable/compare/v1.24.1...v1.25.0) (2022-12-12)
+
+
+### Features
+
+* adding toObjectChain ([#52](https://github.com/codibre/fluent-iterable/issues/52)) ([2428d7a](https://github.com/codibre/fluent-iterable/commit/2428d7af9c9f7ebd2a01b1624d5c66cab5d0736e))
+
 ## [1.24.1](https://github.com/codibre/fluent-iterable/compare/v1.24.0...v1.24.1) (2022-08-28)
 
 
