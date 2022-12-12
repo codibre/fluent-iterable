@@ -52,6 +52,7 @@ import {
   catchSync,
   next,
   toSet,
+  toObjectChain,
 } from '../sync';
 import {
   allAsync,
@@ -84,6 +85,7 @@ import {
   toMapAsync,
   toSetAsync,
   flatJoinAsync,
+  toObjectChainAsync,
 } from '../async';
 import { combineEmitter, concatEmitter } from '../emitter';
 import * as common from '../common';
@@ -167,6 +169,8 @@ export const resolvingFuncs = {
   toJSON: toArray,
   toObject,
   toObjectAsync,
+  toObjectChain,
+  toObjectChainAsync,
   forEach,
   forEachAsync,
   join,

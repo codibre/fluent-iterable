@@ -30,6 +30,7 @@ export * from './sum-recipe';
 export * from './take-recipe';
 export * from './take-while-recipe';
 export * from './to-map-recipe';
+export * from './to-object-chain-recipe';
 export * from './to-object-recipe';
 export * from './to-set-recipe';
 export * from './top-recipe';
