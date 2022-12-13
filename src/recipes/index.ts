@@ -34,4 +34,5 @@ export * from './to-object-chain-recipe';
 export * from './to-object-recipe';
 export * from './to-set-recipe';
 export * from './top-recipe';
+export * from './unwind-recipe';
 export * from './with-index-recipe';

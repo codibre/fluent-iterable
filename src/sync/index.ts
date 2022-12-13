@@ -48,6 +48,7 @@ export * from './to-object';
 export * from './to-object-chain';
 export * from './to-set';
 export * from './top';
+export * from './unwind';
 export * from './wait-all';
 export * from './when-empty';
 export * from './with-index';
