@@ -1,3 +1,10 @@
+# [1.26.0](https://github.com/codibre/fluent-iterable/compare/v1.25.0...v1.26.0) (2022-12-13)
+
+
+### Features
+
+* adding unwind operation ([#53](https://github.com/codibre/fluent-iterable/issues/53)) ([e03a582](https://github.com/codibre/fluent-iterable/commit/e03a582cb9e4e1f28b678ec578dc21dce408d45a))
+
 # [1.25.0](https://github.com/codibre/fluent-iterable/compare/v1.24.1...v1.25.0) (2022-12-12)
 
 
