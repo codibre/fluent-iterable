@@ -46,5 +46,6 @@ export * from './to-object-async';
 export * from './to-object-chain-async';
 export * from './to-set-async';
 export * from './top-async';
+export * from './unwind-async';
 export * from './wait-all-async';
 export * from './with-index-async';

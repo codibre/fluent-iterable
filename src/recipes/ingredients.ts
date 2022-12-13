@@ -77,8 +77,14 @@ export interface ComparisonIngredients extends BasicIngredients {
   comparer: CompareProvider;
 }
 
-export interface ToObjectChainRecipe extends BasicIngredients {
-  flatJoin: Function;
+export interface UnwindIngredients extends BasicIngredients {
+  flatten: Function;
+  toObject: Function;
+  combineJoin: Function;
+}
+
+export interface ToObjectChainIngredients extends BasicIngredients {
   group: Function;
   toObject: Function;
+  unwind: Function;
 }

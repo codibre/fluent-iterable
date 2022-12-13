@@ -62,5 +62,6 @@ declare module './base' {
     whenEmpty: f.AsyncWhenEmptyFunction;
     catch: f.AsyncCatchFunction<T>;
     next: f.AsyncNextFunction<T>;
+    unwind: f.AsyncUnwindFunction<T>;
   }
 }

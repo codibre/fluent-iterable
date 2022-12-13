@@ -50,6 +50,7 @@ import {
   toSetAsync,
   flatJoinAsync,
   toObjectChainAsync,
+  unwindAsync,
 } from '../async';
 import {
   combineEmitter,
@@ -101,6 +102,7 @@ export const asyncIterableFuncs = {
   mergeEmitterCatching,
   whenEmpty: whenEmptyAsync,
   catch: catchAsync,
+  unwind: unwindAsync,
 };
 
 export const asyncSpecial = {

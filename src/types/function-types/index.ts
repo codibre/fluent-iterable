@@ -53,6 +53,7 @@ export * from './to-object-chain-function';
 export * from './to-object-function';
 export * from './to-set-function';
 export * from './top-function';
+export * from './unwind-function';
 export * from './wait-all-function';
 export * from './when-empty-function';
 export * from './with-index-function';
