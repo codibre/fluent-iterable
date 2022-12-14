@@ -85,6 +85,11 @@
   "peerDependencies": {
     "for-emit-of": "^1.3.3"
   },
+  "peerDependenciesMeta": {
+    "for-emit-of": {
+      "optional": true
+    }
+  },
   "dependencies": {
     "augmentative-iterable": "^1.5.8",
     "extension-methods": "^1.0.1",
