@@ -46,10 +46,7 @@ export const extendAsync = {
    * @param name The name of the method
    * @param operation The resolving operation to be made
    */
-  useResolving(
-    name: string,
-    operation: (iterable: AsyncIterableResolvingOperation) => any,
-  ) {
+  useResolving(name: string, operation: AsyncIterableResolvingOperation) {
     addCustomMethod(asyncProxyReference, { [name]: operation });
   },
 };
