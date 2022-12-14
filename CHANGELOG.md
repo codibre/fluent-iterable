@@ -1,3 +1,10 @@
+## [1.26.2](https://github.com/codibre/fluent-iterable/compare/v1.26.1...v1.26.2) (2022-12-14)
+
+
+### Bug Fixes
+
+* fixing type of extendAsync.useResolving ([cf490d6](https://github.com/codibre/fluent-iterable/commit/cf490d6d24a8f63aed640b4b8bcdc2a72f96b829))
+
 ## [1.26.1](https://github.com/codibre/fluent-iterable/compare/v1.26.0...v1.26.1) (2022-12-14)
 
 
