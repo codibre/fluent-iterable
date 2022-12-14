@@ -1,3 +1,10 @@
+## [1.26.1](https://github.com/codibre/fluent-iterable/compare/v1.26.0...v1.26.1) (2022-12-14)
+
+
+### Bug Fixes
+
+* markign for-emit-of as optional ([3fcfc5c](https://github.com/codibre/fluent-iterable/commit/3fcfc5c9d97e831427e07bc6448818ccf42e56c9))
+
 # [1.26.0](https://github.com/codibre/fluent-iterable/compare/v1.25.0...v1.26.0) (2022-12-13)
 
 
