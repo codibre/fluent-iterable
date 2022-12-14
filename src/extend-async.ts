@@ -8,7 +8,7 @@ import { asyncProxyReference } from './async-handler';
  * An operation that returns an AsyncIterable
  */
 export type AsyncIterableOperation = <T>(
-  iterable: AsyncIterable<T>,
+  this: AsyncIterable<T>,
   ...args: any[]
 ) => AsyncIterable<any> | PromiseLike<AnyIterable<any>>;
 
@@ -16,7 +16,7 @@ export type AsyncIterableOperation = <T>(
  * A resolving operation
  */
 export type AsyncIterableResolvingOperation = <T>(
-  iterable: AsyncIterable<T>,
+  this: AsyncIterable<T>,
   ...args: any[]
 ) => PromiseLike<any>;
 
