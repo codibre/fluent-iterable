@@ -1,3 +1,10 @@
+## [1.26.3](https://github.com/codibre/fluent-iterable/compare/v1.26.2...v1.26.3) (2022-12-14)
+
+
+### Bug Fixes
+
+* fixing type of extend contracts ([03aadb4](https://github.com/codibre/fluent-iterable/commit/03aadb4480d95c9f306d8d8d9d21422054ef2f97))
+
 ## [1.26.2](https://github.com/codibre/fluent-iterable/compare/v1.26.1...v1.26.2) (2022-12-14)
 
 
