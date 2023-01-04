@@ -3,7 +3,7 @@
 import fluent from '../fluent';
 import { FluentAsyncIterable, FluentGroup, FluentIterable } from '../types';
 import { Group, AverageStepper } from '../types/base';
-import { AnyIterable, AsyncPredicate, Predicate } from 'augmentative-iterable';
+import { AnyIterable, AsyncPredicate } from 'augmentative-iterable';
 import { orderAssured } from '../types-internal';
 import { valueTypeWrapper } from '../types-internal/string-wrapper';
 import { map } from '../sync/map';
@@ -179,8 +179,11 @@ function falsity(): boolean {
  * @typeparam T the item type of the [[Predicate]]
  * @param predicate The predicate to be negated
  */
-function negation<T>(predicate: Predicate<T>): Predicate<T> {
-  return (item: T) => !predicate(item);
+function negation<TArgs extends any[], R>(
+  this: unknown,
+  predicate: (...args: TArgs) => R,
+): (...args: TArgs) => boolean {
+  return (...item: TArgs) => !predicate.apply(this, item);
 }
 
 /**
