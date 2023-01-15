@@ -51,6 +51,7 @@ import {
   flatJoinAsync,
   toObjectChainAsync,
   unwindAsync,
+  finallyAsync,
 } from '../async';
 import {
   combineEmitter,
@@ -103,6 +104,7 @@ export const asyncIterableFuncs = {
   whenEmpty: whenEmptyAsync,
   catch: catchAsync,
   unwind: unwindAsync,
+  finally: finallyAsync,
 };
 
 export const asyncSpecial = {

@@ -12,6 +12,7 @@ export * from './distinct';
 export * from './emit';
 export * from './execute';
 export * from './filter';
+export * from './finally';
 export * from './first';
 export * from './flat-join';
 export * from './flat-merge';

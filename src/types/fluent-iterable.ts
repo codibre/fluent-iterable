@@ -96,5 +96,7 @@ declare module './base' {
     next: f.NextFunction<T>;
     unwind: f.UnwindFunction<T, 'sync'>;
     unwindAsync: f.UnwindFunction<T, 'async'>;
+    finally: f.FinallyFunction<T, 'sync'>;
+    finallyAsync: f.FinallyFunction<T, 'async'>;
   }
 }

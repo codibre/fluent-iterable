@@ -11,6 +11,7 @@ export * from './distinct-async';
 export * from './emit-async';
 export * from './execute-async';
 export * from './filter-async';
+export * from './finally-async';
 export * from './first-async';
 export * from './flat-join-async';
 export * from './flat-merge-async';

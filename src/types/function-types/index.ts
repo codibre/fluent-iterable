@@ -12,6 +12,7 @@ export * from './distinct-function';
 export * from './emit-function';
 export * from './execute-function';
 export * from './filter-function';
+export * from './finally-function';
 export * from './first-function';
 export * from './flat-join-function';
 export * from './flat-merge-function';

@@ -54,6 +54,7 @@ import {
   toSet,
   toObjectChain,
   unwind,
+  finallySync,
 } from '../sync';
 import {
   allAsync,
@@ -88,6 +89,7 @@ import {
   flatJoinAsync,
   toObjectChainAsync,
   unwindAsync,
+  finallyAsync,
 } from '../async';
 import { combineEmitter, concatEmitter } from '../emitter';
 import * as common from '../common';
@@ -118,6 +120,7 @@ export const iterableFuncs = {
   whenEmpty,
   catch: catchSync,
   unwind,
+  finally: finallySync,
 };
 
 export const iterableAsyncFuncs = {
@@ -139,6 +142,7 @@ export const iterableAsyncFuncs = {
   concatEmitter,
   catchAsync,
   unwindAsync,
+  finallyAsync,
 };
 
 export const special = {

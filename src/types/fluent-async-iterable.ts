@@ -63,5 +63,6 @@ declare module './base' {
     catch: f.AsyncCatchFunction<T>;
     next: f.AsyncNextFunction<T>;
     unwind: f.UnwindFunction<T, 'async'>;
+    finally: f.FinallyFunction<T, 'async'>;
   }
 }
