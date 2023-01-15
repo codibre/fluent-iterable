@@ -81,6 +81,7 @@ export interface UnwindIngredients extends BasicIngredients {
   flatten: Function;
   toObject: Function;
   combineJoin: Function;
+  symbols: Symbol[];
 }
 
 export interface ToObjectChainIngredients extends BasicIngredients {

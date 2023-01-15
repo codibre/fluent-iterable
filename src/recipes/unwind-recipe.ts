@@ -7,12 +7,16 @@ export function unwindRecipe({
   map,
   combineJoin,
   toObject,
+  symbols,
 }: UnwindIngredients) {
   return function (this: AnyIterable<any>, ...keys: string[]) {
     return flatten.call(this, (value: any) => {
       const it = map.call(keys, (x) => {
         const current = value[x];
-        return Array.isArray(current)
+        return symbols.some(
+          (symbol) =>
+            typeof current[symbol as keyof typeof current] === 'function',
+        )
           ? map.call(current, (v) => [x, v])
           : [[x, current]];
       });
