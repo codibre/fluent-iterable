@@ -13,7 +13,10 @@ export function unwindRecipe({
     return flatten.call(this, (value: any) => {
       const it = map.call(keys, (x) => {
         const current = value[x];
-        return symbols.some((symbol) => typeof current[symbol as keyof typeof current] === 'function')
+        return symbols.some(
+          (symbol) =>
+            typeof current[symbol as keyof typeof current] === 'function',
+        )
           ? map.call(current, (v) => [x, v])
           : [[x, current]];
       });
