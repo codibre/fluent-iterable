@@ -94,7 +94,7 @@ declare module './base' {
     catch: f.CatchFunction<T>;
     catchAsync: f.AsyncCatchFunction<T>;
     next: f.NextFunction<T>;
-    unwind: f.UnwindFunction<T>;
-    unwindAsync: f.AsyncUnwindFunction<T>;
+    unwind: f.UnwindFunction<T, 'sync'>;
+    unwindAsync: f.UnwindFunction<T, 'async'>;
   }
 }
