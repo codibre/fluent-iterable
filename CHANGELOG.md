@@ -1,3 +1,10 @@
+# [1.27.0](https://github.com/codibre/fluent-iterable/compare/v1.26.4...v1.27.0) (2023-01-15)
+
+
+### Features
+
+* adding finally operator ([b21b08b](https://github.com/codibre/fluent-iterable/commit/b21b08b68ae8b96ab84097c4b4593f6f88770d69))
+
 ## [1.26.4](https://github.com/codibre/fluent-iterable/compare/v1.26.3...v1.26.4) (2023-01-15)
 
 
