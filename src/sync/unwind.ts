@@ -9,4 +9,5 @@ export const unwind = unwindRecipe({
   flatten,
   combineJoin,
   toObject,
+  symbols: [Symbol.iterator],
 });

@@ -14,7 +14,7 @@ describe('unwind', () => {
           },
           {
             test: ['b', 'c'],
-            c: [2, 3],
+            c: new Set([2, 3]),
             d: true,
             id: 2,
           },
@@ -56,19 +56,19 @@ describe('unwind', () => {
           },
           {
             unwinded: { test: 'b', c: 2 },
-            value: { test: ['b', 'c'], c: [2, 3], d: true, id: 2 },
+            value: { test: ['b', 'c'], c: new Set([2, 3]), d: true, id: 2 },
           },
           {
             unwinded: { test: 'b', c: 3 },
-            value: { test: ['b', 'c'], c: [2, 3], d: true, id: 2 },
+            value: { test: ['b', 'c'], c: new Set([2, 3]), d: true, id: 2 },
           },
           {
             unwinded: { test: 'c', c: 2 },
-            value: { test: ['b', 'c'], c: [2, 3], d: true, id: 2 },
+            value: { test: ['b', 'c'], c: new Set([2, 3]), d: true, id: 2 },
           },
           {
             unwinded: { test: 'c', c: 3 },
-            value: { test: ['b', 'c'], c: [2, 3], d: true, id: 2 },
+            value: { test: ['b', 'c'], c: new Set([2, 3]), d: true, id: 2 },
           },
           {
             unwinded: { test: 'c', c: 2 },

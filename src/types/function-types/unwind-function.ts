@@ -1,9 +1,17 @@
+import { AnyIterable } from 'augmentative-iterable';
 /* eslint-disable no-magic-numbers */
 import { FluentAsyncIterable, FluentIterable } from '../base';
 
 export type UnwindResult<Arr extends Array<keyof V>, V> = {
   unwinded: {
-    [k in Arr[number]]: V[k] extends Array<infer T> ? T : V[k];
+    [k in Arr[number]]: V[k] extends Iterable<infer T> ? T : V[k];
+  };
+  value: V;
+};
+
+export type AsyncUnwindResult<Arr extends Array<keyof V>, V> = {
+  unwinded: {
+    [k in Arr[number]]: V[k] extends AnyIterable<infer T> ? T : V[k];
   };
   value: V;
 };
@@ -25,6 +33,6 @@ export interface AsyncUnwindFunction<T> {
    * @returns The object chain
    */
   <A extends Array<keyof T>>(...keys: A): FluentAsyncIterable<
-    UnwindResult<A, T>
+    AsyncUnwindResult<A, T>
   >;
 }
