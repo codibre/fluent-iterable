@@ -2,16 +2,19 @@ import { AnyIterable } from 'augmentative-iterable';
 /* eslint-disable no-magic-numbers */
 import { FluentAsyncIterable, FluentIterable } from '../base';
 
+export type ExtractItemType<V> = V extends Iterable<infer T> ? T : V;
+export type ExtractAsyncItemType<V> = V extends AnyIterable<infer T> ? T : V;
+
 export type UnwindResult<Arr extends Array<keyof V>, V> = {
   unwinded: {
-    [k in Arr[number]]: V[k] extends Iterable<infer T> ? T : V[k];
+    [k in Arr[number]]: ExtractItemType<V[k]>;
   };
   value: V;
 };
 
 export type AsyncUnwindResult<Arr extends Array<keyof V>, V> = {
   unwinded: {
-    [k in Arr[number]]: V[k] extends AnyIterable<infer T> ? T : V[k];
+    [k in Arr[number]]: ExtractAsyncItemType<V[k]>;
   };
   value: V;
 };
