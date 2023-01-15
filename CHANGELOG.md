@@ -1,3 +1,12 @@
+## [1.26.4](https://github.com/codibre/fluent-iterable/compare/v1.26.3...v1.26.4) (2023-01-15)
+
+
+### Bug Fixes
+
+* fixing pipeline ([9a41040](https://github.com/codibre/fluent-iterable/commit/9a410408249101631ffa53cd48fc22a6baee9a8a))
+* making negation more flexible ([#54](https://github.com/codibre/fluent-iterable/issues/54)) ([386e3ca](https://github.com/codibre/fluent-iterable/commit/386e3ca3f32a340c76dfd53ba55cde0d83bb44b3))
+* making unwind unwinds any iterable ([#56](https://github.com/codibre/fluent-iterable/issues/56)) ([6435352](https://github.com/codibre/fluent-iterable/commit/64353521bb84e4bef1ec8514cccb3a852be82ad8))
+
 ## [1.26.3](https://github.com/codibre/fluent-iterable/compare/v1.26.2...v1.26.3) (2022-12-14)
 
 
