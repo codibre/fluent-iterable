@@ -12,13 +12,13 @@ describe('finally', () => {
 
         const result = fluent(payload).finally(callback).last();
 
-        expect(callback).to.have.callsLike([]);
+        expect(callback).to.have.callsLike([true]);
         expect(result).to.be.eq('c');
       });
 
       it('should run callback specified to finally even when an error occurs', () => {
         const expectedError = new Error('my error');
-        const iterable = (function *() {
+        const iterable = (function* () {
           yield 1;
           yield 2;
           throw expectedError;
@@ -32,7 +32,7 @@ describe('finally', () => {
           thrownError = err;
         }
 
-        expect(callback).to.have.callsLike([]);
+        expect(callback).to.have.callsLike([false]);
         expect(thrownError).to.be.eq(expectedError);
       });
     });
@@ -43,13 +43,13 @@ describe('finally', () => {
 
         const result = await fluentAsync(payload).finally(callback).last();
 
-        expect(callback).to.have.callsLike([]);
+        expect(callback).to.have.callsLike([true]);
         expect(result).to.be.eq('c');
       });
 
       it('should run callback specified to finally even when an error occurs', async () => {
         const expectedError = new Error('my error');
-        const iterable = (async function *() {
+        const iterable = (async function* () {
           yield 1;
           yield 2;
           throw expectedError;
@@ -63,13 +63,13 @@ describe('finally', () => {
           thrownError = err;
         }
 
-        expect(callback).to.have.callsLike([]);
+        expect(callback).to.have.callsLike([false]);
         expect(thrownError).to.be.eq(expectedError);
       });
 
       it('should run callback specified to finally even when an error occurs', async () => {
         const expectedError = new Error('my error');
-        const iterable = (function *() {
+        const iterable = (function* () {
           yield 1;
           yield 2;
           throw expectedError;
@@ -83,7 +83,7 @@ describe('finally', () => {
           thrownError = err;
         }
 
-        expect(callback).to.have.callsLike([]);
+        expect(callback).to.have.callsLike([false]);
         expect(thrownError).to.be.eq(expectedError);
       });
     });

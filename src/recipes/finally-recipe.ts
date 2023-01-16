@@ -1,24 +1,26 @@
 import { AnyIterable } from 'augmentative-iterable';
 
-export function finallyRecipe(
-  iterableType: 'sync' | 'async',
-) {
+export function finallyRecipe(iterableType: 'sync' | 'async') {
   return iterableType === 'sync'
-    ? function* (this: Iterable<any>, callback: () => unknown) {
+    ? function* (this: Iterable<any>, callback: (success: boolean) => unknown) {
+        let success = false;
         try {
           yield* this;
+          success = true;
         } finally {
-          callback();
+          callback(success);
         }
       }
     : async function* (
         this: AnyIterable<any>,
-        callback: () => Promise<unknown>,
+        callback: (success: boolean) => Promise<unknown>,
       ) {
+        let success = false;
         try {
           yield* this;
+          success = true;
         } finally {
-          await callback();
+          await callback(success);
         }
       };
 }

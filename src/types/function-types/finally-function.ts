@@ -8,7 +8,9 @@ export interface FinallyFunction<T, Type extends 'sync' | 'async'> {
    */
   (
     callback: Type extends 'sync'
-      ? () => unknown
-      : () => Promise<unknown> | unknown,
+      ? (() => unknown) | ((success: boolean) => unknown)
+      :
+          | (() => Promise<unknown> | unknown)
+          | ((success: boolean) => Promise<unknown> | unknown),
   ): Type extends 'sync' ? FluentIterable<T> : FluentAsyncIterable<T>;
 }
