@@ -1,3 +1,10 @@
+## [1.27.1](https://github.com/codibre/fluent-iterable/compare/v1.27.0...v1.27.1) (2023-01-16)
+
+
+### Bug Fixes
+
+* receiving success flag on finally ([6b509e1](https://github.com/codibre/fluent-iterable/commit/6b509e1fd2cc1982a53adeef14b72e5cdd0b657c))
+
 # [1.27.0](https://github.com/codibre/fluent-iterable/compare/v1.26.4...v1.27.0) (2023-01-15)
 
 
