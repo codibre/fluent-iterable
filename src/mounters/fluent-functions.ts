@@ -55,6 +55,7 @@ import {
   toObjectChain,
   unwind,
   finallySync,
+  toObjectChainReduce,
 } from '../sync';
 import {
   allAsync,
@@ -90,6 +91,7 @@ import {
   toObjectChainAsync,
   unwindAsync,
   finallyAsync,
+  toObjectChainReduceAsync,
 } from '../async';
 import { combineEmitter, concatEmitter } from '../emitter';
 import * as common from '../common';
@@ -178,7 +180,9 @@ export const resolvingFuncs = {
   toObject,
   toObjectAsync,
   toObjectChain,
+  toObjectChainReduce,
   toObjectChainAsync,
+  toObjectChainReduceAsync,
   forEach,
   forEachAsync,
   join,

@@ -88,4 +88,5 @@ export interface ToObjectChainIngredients extends BasicIngredients {
   group: Function;
   toObject: Function;
   unwind: Function;
+  reduce: AsyncReducer<any, any>;
 }
