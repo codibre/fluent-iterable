@@ -8,20 +8,20 @@ describe('toObjectChainReduce', () => {
       it('should create a object chain based on keyable informed properties', () => {
         const payload = [
           {
-            test: ['a', 'b', 'c'],
-            c: 1,
+            test: ['mary', 'josh', 'juan'],
+            c: 'holmes',
             d: false,
             id: 1,
           },
           {
-            test: ['b', 'c'],
-            c: 2,
+            test: ['josh', 'juan'],
+            c: 'moriarty',
             d: true,
             id: 2,
           },
           {
-            test: ['c', 'd'],
-            c: 2,
+            test: ['josh', 'enzo'],
+            c: 'moriarty',
             d: true,
             id: 3,
           },
@@ -35,10 +35,10 @@ describe('toObjectChainReduce', () => {
         );
 
         expect(result).to.be.like({
-          a: { 1: 1 },
-          b: { 1: 1, 2: 2 },
-          c: { 1: 1, 2: 5 },
-          d: { 2: 3 },
+          mary: { holmes: 1 },
+          josh: { holmes: 1, moriarty: 5 },
+          juan: { holmes: 1, moriarty: 2 },
+          enzo: { moriarty: 3 },
         });
       });
 

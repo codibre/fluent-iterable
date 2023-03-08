@@ -15,6 +15,7 @@ export function unwindRecipe({
         const current = value[x];
         return symbols.some(
           (symbol) =>
+            typeof current !== 'string' &&
             typeof current[symbol as keyof typeof current] === 'function',
         )
           ? map.call(current, (v) => [x, v])
