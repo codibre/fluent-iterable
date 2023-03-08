@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import { fluent, fluentAsync } from '../src';
+import 'chai-callslike';
 
 describe('toObjectChainReduce', () => {
   describe('iterable', () => {
@@ -33,14 +34,15 @@ describe('toObjectChainReduce', () => {
           'c',
         );
 
-        expect(result['a'][1]).to.be.eql(1);
-        expect(result['b'][1]).to.be.eql(1);
-        expect(result['b'][2]).to.be.eql(2);
-        expect(result['c'][2]).to.be.eql(5);
-        expect(result['d'][2]).to.be.eql(3);
+        expect(result).to.be.like({
+          a: { 1: 1 },
+          b: { 1: 1, 2: 2 },
+          c: { 1: 1, 2: 5 },
+          d: { 2: 3 },
+        });
       });
 
-      it('should return an array when no properties are informed', () => {
+      it('should apply the reduction to all items when no properties are informed', () => {
         const payload = [
           {
             test: ['a', 'b', 'c'],
@@ -176,7 +178,7 @@ describe('toObjectChainReduce', () => {
       expect(result['d'][2]).to.be.eql(3);
     });
 
-    it('should return an array when no properties are informed', async () => {
+    it('should apply the reduction to all items when no properties are informed', async () => {
       const arr = [
         {
           test: ['a', 'b', 'c'],
