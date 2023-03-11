@@ -1,3 +1,10 @@
+# [1.28.0](https://github.com/codibre/fluent-iterable/compare/v1.27.1...v1.28.0) (2023-03-11)
+
+
+### Features
+
+* crating toObjectChainReduce ([#57](https://github.com/codibre/fluent-iterable/issues/57)) ([afa4302](https://github.com/codibre/fluent-iterable/commit/afa43028943d4f587303f7364d6d66d49404b7e5))
+
 ## [1.27.1](https://github.com/codibre/fluent-iterable/compare/v1.27.0...v1.27.1) (2023-01-16)
 
 
