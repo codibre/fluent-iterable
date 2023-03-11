@@ -104,6 +104,28 @@ describe('unwind', () => {
         expect(result[12].value).to.be.eq(payload[2]);
         expect(result[13].value).to.be.eq(payload[2]);
       });
+
+      it('should not unwind string', () => {
+        const payload = [
+          {
+            field: 'test1',
+          },
+          {
+            field: 'test2',
+          },
+          {
+            field: 'test3',
+          },
+        ];
+
+        const result = fluent(payload).unwind('field').toArray();
+
+        expect(result).to.be.like([
+          { unwinded: { field: 'test1' }, value: { field: 'test1' } },
+          { unwinded: { field: 'test2' }, value: { field: 'test2' } },
+          { unwinded: { field: 'test3' }, value: { field: 'test3' } },
+        ]);
+      });
     });
     describe('async', () => {
       it('should unwind specified properties for unwindAsync', async () => {
@@ -208,6 +230,28 @@ describe('unwind', () => {
             .filter((x) => x.unwinded.test === 'd' && x.unwinded.c === 2)!
             .map((x) => x.value.id),
         ).to.be.eql([3]);
+      });
+
+      it('should not unwind string', async () => {
+        const payload = [
+          {
+            field: 'test1',
+          },
+          {
+            field: 'test2',
+          },
+          {
+            field: 'test3',
+          },
+        ];
+
+        const result = await fluentAsync(payload).unwind('field').toArray();
+
+        expect(result).to.be.like([
+          { unwinded: { field: 'test1' }, value: { field: 'test1' } },
+          { unwinded: { field: 'test2' }, value: { field: 'test2' } },
+          { unwinded: { field: 'test3' }, value: { field: 'test3' } },
+        ]);
       });
     });
   });

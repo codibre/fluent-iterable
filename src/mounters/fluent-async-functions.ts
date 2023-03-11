@@ -52,6 +52,7 @@ import {
   toObjectChainAsync,
   unwindAsync,
   finallyAsync,
+  toObjectChainReduceAsync,
 } from '../async';
 import {
   combineEmitter,
@@ -128,6 +129,7 @@ export const asyncResolvingFuncs = {
   toArray: toArrayAsync,
   toObject: toObjectAsync,
   toObjectChain: toObjectChainAsync,
+  toObjectChainReduce: toObjectChainReduceAsync,
   forEach: forEachAsync,
   join: joinAsync,
   sum: sumAsync,

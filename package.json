@@ -42,7 +42,8 @@
     "lint:format:fix": "prettier --write '{src,test}/**/*.ts'",
     "lint:style": "eslint '**/*.ts'",
     "lint:style:fix": "eslint '**/*.ts' --fix",
-    "get:version": "echo $npm_package_version"
+    "get:version": "echo $npm_package_version",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
