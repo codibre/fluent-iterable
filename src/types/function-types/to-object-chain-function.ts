@@ -5,7 +5,8 @@ export type ChainKeyType =
   | string
   | symbol
   | number
-  | Array<string | symbol | number>;
+  | Array<string | symbol | number>
+  | ReadonlyArray<string | symbol | number>;
 type Indexes = [
   1,
   2,
@@ -40,7 +41,9 @@ export type RecordChain<
   any: any;
   recur: V[Arr[Pos]] extends string | number | symbol
     ? Record<V[Arr[Pos]], RecordChain<Arr, V, R, Indexes[Pos]>>
-    : V[Arr[Pos]] extends Array<string | number | symbol>
+    : V[Arr[Pos]] extends
+        | Array<string | symbol | number>
+        | ReadonlyArray<string | number | symbol>
     ? Record<ItemType<V[Arr[Pos]]>, RecordChain<Arr, V, R, Indexes[Pos]>>
     : never;
 }[Pos extends Arr['length'] ? 'done' : Pos extends -1 ? 'any' : 'recur'];
