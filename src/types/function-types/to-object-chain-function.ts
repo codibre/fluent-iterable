@@ -5,7 +5,8 @@ export type ChainKeyType =
   | string
   | symbol
   | number
-  | Array<string | symbol | number>;
+  | Array<string | symbol | number>
+  | ReadonlyArray<string | symbol | number>;
 type Indexes = [
   1,
   2,
