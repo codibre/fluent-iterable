@@ -5,7 +5,12 @@ describe('toObjectChain', () => {
   describe('iterable', () => {
     describe('sync', () => {
       it('should create a object chain based on keyable informed properties', () => {
-        const payload = [
+        const payload: {
+          test: readonly string[];
+          c: number;
+          d: boolean;
+          id: number;
+        }[] = [
           {
             test: ['a', 'b', 'c'],
             c: 1,
