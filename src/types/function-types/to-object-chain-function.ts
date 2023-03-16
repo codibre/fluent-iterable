@@ -7,7 +7,7 @@ export type ChainKeyType =
   | number
   | Array<string | symbol | number>
   | ReadonlyArray<string | symbol | number>;
-type Indexes = [
+export type Indexes = [
   1,
   2,
   3,
