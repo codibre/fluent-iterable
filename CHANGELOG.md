@@ -1,3 +1,10 @@
+# [1.29.0](https://github.com/codibre/fluent-iterable/compare/v1.28.0...v1.29.0) (2023-03-16)
+
+
+### Features
+
+* adding support to readonly arrays in toObjectChain ([1c3fd80](https://github.com/codibre/fluent-iterable/commit/1c3fd80bf4892d7afdb95913d85b461544ee3b2f))
+
 # [1.28.0](https://github.com/codibre/fluent-iterable/compare/v1.27.1...v1.28.0) (2023-03-11)
 
 
