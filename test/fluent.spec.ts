@@ -328,6 +328,22 @@ describe('fluent iterable', () => {
             expect(item).to.equal(data[idx++].name);
           }
         });
+        it('should map symbol properties', () => {
+          const mySymbol = Symbol('test');
+
+          const res = fluent([{ [mySymbol]: 123 }, { [mySymbol]: 456 }])
+            .map(mySymbol)
+            .toArray();
+
+          expect(res).to.be.eql([123, 456]);
+        });
+        it('should map numeric properties', () => {
+          const res = fluent([[123], [456]])
+            .map(0)
+            .toArray();
+
+          expect(res).to.be.eql([123, 456]);
+        });
         it('should work with key string', () => {
           const res = fluent(subject)
             .map((p) => p.name)
