@@ -1,3 +1,10 @@
+## [1.29.1](https://github.com/codibre/fluent-iterable/compare/v1.29.0...v1.29.1) (2023-03-21)
+
+
+### Bug Fixes
+
+* fixing mapping os symbol and numbers ([#60](https://github.com/codibre/fluent-iterable/issues/60)) ([532cbbf](https://github.com/codibre/fluent-iterable/commit/532cbbf786847bada6992b06790cf7447ccbd326))
+
 # [1.29.0](https://github.com/codibre/fluent-iterable/compare/v1.28.0...v1.29.0) (2023-03-16)
 
 
