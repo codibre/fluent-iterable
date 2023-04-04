@@ -38,9 +38,8 @@ function flatMapFactory(ingredients: CombineIngredients, deepFlat: Function) {
         return flatten.call(deepFlat(current), (subItem: any) =>
           flatMap(getNewResult(result, field, subItem), subItem, path, i + 1),
         );
-      } else {
-        fillField(result, field, current);
       }
+      fillField(result, field, current);
     }
     result[head] = current;
 
