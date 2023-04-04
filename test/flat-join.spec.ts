@@ -99,7 +99,7 @@ describe(flatJoin.name, () => {
     expect(result[4][head]).to.be.eq(source1.field1[0].field2.field3.field1[0]);
     expect(result[5][tail]).to.be.eq(source1);
     expect(result[5][head]).to.be.eq(source1.field1[0].field2.field3.field1[1]);
-    expect(result[6][tail]).to.be.eq(source2[0]);
+    expect(result[6][tail]).to.be.eq(source2[0][0][0]);
     expect(result[6][head]).to.be.eq(
       source2[0][0][0].field1.field2[0].field3[0].field1,
     );
@@ -212,10 +212,71 @@ describe(flatJoinAsync.name, () => {
       expect(result[5][head]).to.be.eq(
         source1.field1[0].field2.field3.field1[1],
       );
-      expect(result[6][tail]).to.be.eq(source2[0]);
+      expect(result[6][tail]).to.be.eq(source2[0][0][0]);
       expect(result[6][head]).to.be.eq(
         source2[0][0][0].field1.field2[0].field3[0].field1,
       );
+    });
+    it('should work with just one field mapped', async () => {
+      const source0 = {
+        field1: {
+          field2: [
+            {
+              field3: {
+                field1: [1, 2, 3],
+              },
+            },
+            {
+              field3: {
+                field1: 4,
+              },
+            },
+          ],
+        },
+      };
+      const source1 = {
+        field1: [
+          {
+            field2: {
+              field3: {
+                field1: ['value1', 5],
+              },
+            },
+          },
+        ],
+      };
+      const source2 = [
+        [
+          [
+            {
+              field1: {
+                field2: [{ field3: [{ field1: 6 }] }],
+              },
+            },
+          ],
+        ],
+      ];
+      const source = [source0, source1, source2];
+
+      const result = await fluent(source).flatJoinAsync('field1').toArray();
+
+      expect(result).to.be.like([
+        {
+          field1: source0.field1,
+        },
+        {
+          field1: source1.field1[0],
+        },
+        {
+          field1: source2[0][0][0].field1,
+        },
+      ]);
+      expect(result[0][tail]).to.be.eq(source0);
+      expect(result[0][head]).to.be.eq(source0.field1);
+      expect(result[1][tail]).to.be.eq(source1);
+      expect(result[1][head]).to.be.eq(source1.field1[0]);
+      expect(result[2][tail]).to.be.eq(source2[0][0][0]);
+      expect(result[2][head]).to.be.eq(source2[0][0][0].field1);
     });
   });
 
@@ -325,7 +386,7 @@ describe(flatJoinAsync.name, () => {
       expect(result[5][head]).to.be.eq(
         source1.field1[0].field2.field3.field1[1],
       );
-      expect(result[6][tail]).to.be.eq(source2[0]);
+      expect(result[6][tail]).to.be.eq(source2[0][0][0]);
       expect(result[6][head]).to.be.eq(
         source2[0][0][0].field1.field2[0].field3[0].field1,
       );
