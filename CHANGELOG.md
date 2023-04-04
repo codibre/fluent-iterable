@@ -1,3 +1,10 @@
+## [1.29.2](https://github.com/codibre/fluent-iterable/compare/v1.29.1...v1.29.2) (2023-04-04)
+
+
+### Bug Fixes
+
+* fixing flatMap fields mapping for one field flatting ([#62](https://github.com/codibre/fluent-iterable/issues/62)) ([e50818c](https://github.com/codibre/fluent-iterable/commit/e50818c42ef3b9e84098f010712bc41323ad8f05))
+
 ## [1.29.1](https://github.com/codibre/fluent-iterable/compare/v1.29.0...v1.29.1) (2023-03-21)
 
 
