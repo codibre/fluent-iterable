@@ -28,22 +28,23 @@ describe('order assuring', () => {
       const it = fluent([1, 2, 3])
         .o()
         .filter((x) => x > 1);
-      const tw = it.takeWhile((x) => x < 3);
-      const mp = tw.map((x) => x * 2);
 
       expect(it[orderAssured]).to.exist;
+      const tw = it.takeWhile((x) => x < 3);
+
       expect(tw[orderAssured]).to.exist;
+      const mp = tw.map((x) => x * 2);
+
       expect(mp[orderAssured]).to.not.exist;
     });
     it('should keep an assured descending order through filter and takeWhile operations, but not through a mapper', () => {
       const it = fluent([1, 2, 3])
         .od()
         .filter((x) => x > 1);
-      const tw = it.takeWhile((x) => x < 3);
-      const mp = tw.map((x) => x * 2);
-
       expect(it[orderAssured]).to.be.eq(-1);
+      const tw = it.takeWhile((x) => x < 3);
       expect(tw[orderAssured]).to.be.eq(-1);
+      const mp = tw.map((x) => x * 2);
       expect(mp[orderAssured]).to.not.exist;
     });
   });

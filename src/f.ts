@@ -1,6 +1,7 @@
 import EventEmitter = require('events');
 import fluent from './fluent';
-import { fluentAsync, fluentEmit } from './fluent-async';
+import { fluentEmit } from './fluent-async';
+import { fluentAsync } from './fluent-async-func';
 import { fluentObject } from './fluent-object';
 import { isAsyncIterable } from './is-async-iterable';
 import { isIterable } from './is-iterable';

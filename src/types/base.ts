@@ -1,8 +1,8 @@
-import { OrderAssurable } from './assure-order-types';
-import { FluentIterableEmitter } from './emitter';
+import type { OrderAssurable } from './assure-order-types';
+import type { FluentIterableEmitter } from './emitter';
 
-import TypedEmitter from 'typed-emitter';
-import {
+import type TypedEmitter from 'typed-emitter';
+import type {
   Predicate as FunctionPredicate,
   AsyncPredicate as AsyncFunctionPredicate,
   AnyIterable,

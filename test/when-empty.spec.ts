@@ -11,7 +11,10 @@ describe('whenEmpty', () => {
     });
 
     it('should return the fallback result when the original is empty', () => {
-      expect(fluent([]).whenEmpty([4, 5, 6]).toArray()).to.be.eql([4, 5, 6]);
+      const part1 = fluent([]).whenEmpty([4, 5, 6]);
+      const result = part1.toArray();
+
+      expect(result).to.be.eql([4, 5, 6]);
     });
   });
 

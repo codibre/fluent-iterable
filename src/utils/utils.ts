@@ -7,6 +7,7 @@ import { AnyIterable, AsyncPredicate } from 'augmentative-iterable';
 import { orderAssured } from '../types-internal';
 import { valueTypeWrapper } from '../types-internal/string-wrapper';
 import { map } from '../sync/map';
+import { FluentClass } from '../fluent-class';
 
 const valueTypes = ['string', 'number', 'boolean'];
 /**
@@ -27,6 +28,30 @@ async function* promiseIterateAsync<T>(
   yield* resolved;
 }
 
+function iteratorIterateAsync<T>(a: Iterable<T>) {
+  return {
+    [Symbol.asyncIterator]() {
+      const iterator = a[Symbol.iterator]();
+      return {
+        next() {
+          const { done, value } = iterator.next();
+          return Promise.resolve({ done, value: done ? undefined : value });
+        },
+        return: iterator.return
+          ? () => Promise.resolve(iterator.return!(iterator))
+          : undefined,
+        throw: iterator.throw
+          ? () => Promise.resolve(iterator.throw!(iterator))
+          : undefined,
+      };
+    },
+  };
+}
+
+export function isPromise(t: unknown): t is PromiseLike<any> {
+  return !!(t && typeof (t as any).then === 'function');
+}
+
 /**
  * Iterates all element of an async iterable
  * @typeparam T the item type of the [[Iterable]]
@@ -35,11 +60,10 @@ async function* promiseIterateAsync<T>(
 function iterateAsync<T>(
   a: AnyIterable<T> | PromiseLike<AnyIterable<T>>,
 ): AsyncIterable<T> {
-  return (
-    (a as any).then || (a as any)[Symbol.iterator]
-      ? promiseIterateAsync(a as any)
-      : a
-  ) as any;
+  if (isPromise(a)) return promiseIterateAsync(a as any);
+  return (a as any)[Symbol.iterator]
+    ? iteratorIterateAsync(a as any)
+    : (a as any);
 }
 
 /**
@@ -228,7 +252,7 @@ function getAverageStepper() {
 function getItemToAssure<
   F extends Function | FluentIterable<any> | FluentAsyncIterable<any>,
 >(f: F): any {
-  return typeof f === 'function'
+  return typeof f === 'function' && !(f instanceof FluentClass)
     ? (...args: any[]) => (f as CallableFunction)(...args)
     : f;
 }
@@ -294,10 +318,6 @@ export function desc<F>(f: F): F {
   return assureOrderDescending(
     (isValueType(f) ? { [valueTypeWrapper]: f } : f) as any,
   );
-}
-
-export function isPromise(t: unknown): t is PromiseLike<any> {
-  return !!(t && typeof (t as any).then === 'function');
 }
 
 export {

@@ -1,5 +1,6 @@
 import { FluentAsyncIterable, FluentIterable } from '.';
-import { fluentSymbol, fluentSymbolAsync } from './types-internal';
+import { FluentAsyncClass } from './fluent-async-class';
+import { FluentClass } from './fluent-class';
 
 /**
  * Return true when the informed value is an fluent iterable, and false otherwise
@@ -9,9 +10,5 @@ import { fluentSymbol, fluentSymbolAsync } from './types-internal';
 export function isAnyFluentIterable<T>(
   value: unknown,
 ): value is FluentIterable<T> | FluentAsyncIterable<T> {
-  return !!(
-    value &&
-    ((value as any).fluent === fluentSymbol ||
-      (value as any).fluent === fluentSymbolAsync)
-  );
+  return value instanceof FluentClass || value instanceof FluentAsyncClass;
 }

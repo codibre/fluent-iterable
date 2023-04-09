@@ -5,26 +5,16 @@ import {
   asyncResolvingFuncs,
   asyncSpecial,
 } from './mounters';
-import { mountIterableFunctions, mountSpecial } from './mounters';
-import { AnyIterable } from 'augmentative-iterable';
-import { iterateAsync } from './utils';
-import { extend } from 'extension-methods';
+import { mountSpecial } from './mounters';
 import { EventEmitter } from 'events';
 import { getIterableFromEmitter } from './emitter';
-import { fluentSymbolAsync, getFluent } from './types-internal';
-import { asyncHandler, asyncProxyReference } from './async-handler';
-import { internalAsyncWrapper } from './internal-wrapper';
-/**
- * Tranforms an asynchronous iterable into a [[FluentAsyncIterable]].
- * @typeparam T The type of the items in the async iterable.
- * @param iterable The asynchronous iterable instance.
- * @returns The [[FluentAsyncIterable]] instance.
- */
-function fluentAsync<T>(
-  iterable: AnyIterable<T> | PromiseLike<AnyIterable<T>>,
-): FluentAsyncIterable<T> {
-  return getFluent(iterateAsync(iterable), asyncHandler, fluentSymbolAsync);
-}
+import { fluentAsync } from './fluent-async-func';
+import {
+  FluentAsyncClass,
+  addAsyncFluentMethod,
+  addAsyncFluentResolvingMethod,
+} from './fluent-async-class';
+import { addFactory } from './utils/internal-utils';
 
 /**
  * Transforms an EventEmitter into a [[FluentAsyncIterable]].
@@ -47,17 +37,20 @@ function fluentEmit<T = any>(
   emitter: EventEmitter,
   options?: FluentEmitOptions,
 ): FluentAsyncIterable<T> {
-  return extend(
+  return new FluentAsyncClass(
     getIterableFromEmitter<T>(emitter, options),
-    asyncHandler,
   ) as any;
 }
 
-Object.assign(asyncProxyReference, {
-  ...mountIterableFunctions(asyncIterableFuncs, internalAsyncWrapper),
-  ...mountSpecial(asyncSpecial, internalAsyncWrapper, internalAsyncWrapper),
-  ...asyncResolvingFuncs,
-  fluent: fluentSymbolAsync,
-});
+Object.keys(asyncIterableFuncs).forEach(
+  addFactory(addAsyncFluentMethod, asyncIterableFuncs),
+);
+const mountedSpecial = mountSpecial(asyncSpecial, fluentAsync, fluentAsync);
+Object.keys(mountedSpecial).forEach(
+  addFactory(addAsyncFluentMethod, mountedSpecial),
+);
+Object.keys(asyncResolvingFuncs).forEach(
+  addFactory(addAsyncFluentResolvingMethod, asyncResolvingFuncs),
+);
 
 export { fluentAsync, fluentEmit };

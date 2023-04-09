@@ -1,15 +1,21 @@
-import { fluentSymbol } from './types-internal/fluent-symbol';
 import { FluentIterable } from './types';
 import {
   iterableFuncs,
   resolvingFuncs,
   iterableAsyncFuncs,
   special,
+  specialAsync,
 } from './mounters';
-import { mountIterableFunctions, mountSpecial } from './mounters';
-import { getFluent } from './types-internal';
-import { internalAsyncWrapper, internalWrapper } from './internal-wrapper';
-import { proxyReference, syncHandler } from './sync-handler';
+import { mountSpecial } from './mounters';
+import {
+  FluentClass,
+  addFluentAsyncMethod,
+  addFluentMethod,
+  addFluentResolvingMethod,
+} from './fluent-class';
+import { fluentAsync } from './fluent-async';
+import { addFactory } from './utils/internal-utils';
+
 /**
  * Tranforms an iterable into a [[FluentIterable]].
  * @typeparam T The type of the items in the iterable.
@@ -17,15 +23,25 @@ import { proxyReference, syncHandler } from './sync-handler';
  * @returns The [[FluentIterable]] instance.
  */
 function fluent<T>(iterable: Iterable<T>): FluentIterable<T> {
-  return getFluent(iterable, syncHandler, fluentSymbol);
+  return (iterable instanceof FluentClass
+    ? iterable
+    : new FluentClass(iterable)) as unknown as FluentIterable<T>;
 }
 
-Object.assign(proxyReference, {
-  ...mountIterableFunctions(iterableFuncs, internalWrapper),
-  ...mountIterableFunctions(iterableAsyncFuncs, internalAsyncWrapper, true),
-  ...resolvingFuncs,
-  ...mountSpecial(special, internalWrapper, internalAsyncWrapper),
-  fluent: fluentSymbol,
-});
+Object.keys(iterableFuncs).forEach(addFactory(addFluentMethod, iterableFuncs));
+Object.keys(iterableAsyncFuncs).forEach(
+  addFactory(addFluentAsyncMethod, iterableAsyncFuncs),
+);
+const mountedSpecial = mountSpecial(special, fluent, fluentAsync);
+Object.keys(mountedSpecial).forEach(
+  addFactory(addFluentMethod, mountedSpecial),
+);
+const mountedSpecialAsync = mountSpecial(specialAsync, fluent, fluentAsync);
+Object.keys(mountedSpecialAsync).forEach(
+  addFactory(addFluentAsyncMethod, mountedSpecialAsync),
+);
+Object.keys(resolvingFuncs).forEach(
+  addFactory(addFluentResolvingMethod, resolvingFuncs),
+);
 
 export default fluent;
