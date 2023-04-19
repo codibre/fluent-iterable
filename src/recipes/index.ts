@@ -1,3 +1,4 @@
+export * from './aggregate-recipe';
 export * from './append-recipe';
 export * from './augment-iterable-recipe';
 export * from './avg-recipe';

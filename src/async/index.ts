@@ -1,3 +1,4 @@
+export * from './aggregate-async';
 export * from './all-async';
 export * from './any-async';
 export * from './append-async';
