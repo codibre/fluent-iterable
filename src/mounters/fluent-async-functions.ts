@@ -1,4 +1,5 @@
 import {
+  aggregateAsync,
   anyAsync,
   appendAsync,
   avgAsync,
@@ -115,6 +116,7 @@ export const asyncSpecial = {
 };
 
 export const asyncResolvingFuncs = {
+  aggregate: aggregateAsync,
   count: countAsync,
   first: firstAsync,
   last: lastAsync,

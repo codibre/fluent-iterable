@@ -1,4 +1,5 @@
 import {
+  aggregate,
   any,
   contains,
   count,
@@ -58,6 +59,7 @@ import {
   toObjectChainReduce,
 } from '../sync';
 import {
+  aggregateAsync,
   allAsync,
   avgAsync,
   anyAsync,
@@ -155,6 +157,8 @@ export const special = {
 };
 
 export const resolvingFuncs = {
+  aggregate,
+  aggregateAsync,
   count,
   countAsync,
   emit,
