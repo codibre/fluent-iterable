@@ -2,6 +2,8 @@ import * as f from './function-types';
 
 declare module './base' {
   interface FluentIterable<T> {
+    aggregate: f.AggregateFunction<T>;
+    aggregateAsync: f.AsyncAggregateFunction<T>;
     withIndex: f.WithIndexFunction<T>;
     takeWhile: f.TakeWhileFunction<T>;
     takeWhileAsync: f.AsyncTakeWhileFunction<T>;
