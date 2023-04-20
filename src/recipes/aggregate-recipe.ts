@@ -22,15 +22,8 @@ class Context {
   defaultId() {
     return (this.customIds[this.id++] ??= Symbol(this.id));
   }
-  getModMultiplyId(id: any) {
-    return typeof id === 'symbol'
-      ? id
-      : (this.modMultiplySymbols[id] ??= Symbol(id));
-  }
-  getModSumId(id: any) {
-    return typeof id === 'symbol'
-      ? id
-      : (this.modSumSymbols[id] ??= Symbol(id));
+  getId(id: any, prop: 'modMultiplySymbols' | 'modSumSymbols') {
+    return typeof id === 'symbol' ? id : (this[prop][id] ??= Symbol(id));
   }
 }
 
@@ -87,7 +80,7 @@ class Aggregations {
   modSum(value: number, mod: number, id = this[contextSymbol].defaultId()) {
     const context = (this[contextSymbol].modSumInternal ??= {});
     return (context[id] =
-      this.sum(value, this[contextSymbol].getModSumId(id)) % mod);
+      this.sum(value, this[contextSymbol].getId(id, 'modSumSymbols')) % mod);
   }
   modMultiply(
     value: number,
@@ -96,7 +89,10 @@ class Aggregations {
   ) {
     const context = (this[contextSymbol].modMultiplyInternal ??= {});
     return (context[id] =
-      this.multiply(value, this[contextSymbol].getModMultiplyId(id)) % mod);
+      this.multiply(
+        value,
+        this[contextSymbol].getId(id, 'modMultiplySymbols'),
+      ) % mod);
   }
 }
 
