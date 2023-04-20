@@ -38,6 +38,14 @@ benchmarkSuite
         x => x.avg(),
       );
   })
+  .add('aggregate', () => {
+    getBase()
+      .aggregate((x, agg) => ({
+        min: agg.min(x),
+        max: agg.max(x),
+        avg: agg.avg(x),
+      }));
+  })
   .on('error', function (event) {
     log += `${event.target} error\n`;
     errors.add(event.target);
