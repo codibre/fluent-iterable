@@ -1,11 +1,9 @@
 /* eslint-disable no-magic-numbers */
 import { AsyncReducer, ItemType, KeysOfType, Reducer } from '../base';
 
-export type ChainKeyType =
-  | string
-  | symbol
-  | number
-  | Iterable<string | symbol | number>;
+export type BaseChainKeyType = string | symbol | number;
+
+export type ChainKeyType = BaseChainKeyType | Iterable<BaseChainKeyType>;
 
 export type ToObjectChainFuncMap<T> = (x: T) => ChainKeyType;
 
@@ -54,14 +52,12 @@ export type RecordChain<
 > = {
   done: R;
   any: any;
-  recur: ToObjectChainValueOf<V, Arr[Pos]> extends string | number | symbol
+  recur: ToObjectChainValueOf<V, Arr[Pos]> extends BaseChainKeyType
     ? Record<
         ToObjectChainValueOf<V, Arr[Pos]>,
         RecordChain<Arr, V, R, Indexes[Pos]>
       >
-    : ToObjectChainValueOf<V, Arr[Pos]> extends
-        | Array<string | symbol | number>
-        | ReadonlyArray<string | number | symbol>
+    : ToObjectChainValueOf<V, Arr[Pos]> extends Iterable<BaseChainKeyType>
     ? Record<
         ItemType<ToObjectChainValueOf<V, Arr[Pos]>>,
         RecordChain<Arr, V, R, Indexes[Pos]>

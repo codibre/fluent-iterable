@@ -16,7 +16,11 @@ function unwindAndGroup(
       ? ing.map.call(current, (item) => [item, x])
       : [[current, x]];
   });
-  return ing.group.call(it, (x: any) => x[0]);
+  return ing.group.call(
+    it,
+    (x: any) => x[0],
+    (_k: any, v: any) => [v[1]],
+  );
 }
 
 function toObjectNode<T, R>(
@@ -34,20 +38,8 @@ function toObjectNode<T, R>(
     'key',
     index < keys.length - 1
       ? (subIt: any) =>
-          toObjectNode(
-            ing.map.call(subIt.values, (x: any) => x[1]),
-            keys,
-            index + 1,
-            ing,
-            reducer,
-            initial,
-          )
-      : (subIt: any) =>
-          ing.reduce.call(
-            ing.map.call(subIt.values, (x: any) => x[1]),
-            reducer,
-            initial(),
-          ),
+          toObjectNode(subIt.values, keys, index + 1, ing, reducer, initial)
+      : (subIt: any) => ing.reduce.call(subIt.values, reducer, initial()),
   );
 }
 
