@@ -1,12 +1,16 @@
 /* eslint-disable no-magic-numbers */
 import { AsyncReducer, ItemType, KeysOfType, Reducer } from '../base';
 
-export type ChainKeyType =
-  | string
-  | symbol
-  | number
-  | Array<string | symbol | number>
-  | ReadonlyArray<string | symbol | number>;
+export type BaseChainKeyType = string | symbol | number;
+
+export type ChainKeyType = BaseChainKeyType | Iterable<BaseChainKeyType>;
+
+export type ToObjectChainFuncMap<T> = (x: T) => ChainKeyType;
+
+export type ToObjectChainKey<T> =
+  | KeysOfType<T, ChainKeyType>
+  | ToObjectChainFuncMap<T>;
+
 export type Indexes = [
   1,
   2,
@@ -31,20 +35,33 @@ export type Indexes = [
   -1,
 ];
 
+export type ToObjectChainValueOf<
+  V,
+  K extends ToObjectChainKey<V>,
+> = K extends ToObjectChainFuncMap<V>
+  ? ReturnType<K>
+  : K extends keyof V
+  ? V[K]
+  : never;
+
 export type RecordChain<
-  Arr extends Array<KeysOfType<V, ChainKeyType>>,
+  Arr extends Array<ToObjectChainKey<V>>,
   V,
   R = V[],
   Pos extends number = 0,
 > = {
   done: R;
   any: any;
-  recur: V[Arr[Pos]] extends string | number | symbol
-    ? Record<V[Arr[Pos]], RecordChain<Arr, V, R, Indexes[Pos]>>
-    : V[Arr[Pos]] extends
-        | Array<string | symbol | number>
-        | ReadonlyArray<string | number | symbol>
-    ? Record<ItemType<V[Arr[Pos]]>, RecordChain<Arr, V, R, Indexes[Pos]>>
+  recur: ToObjectChainValueOf<V, Arr[Pos]> extends BaseChainKeyType
+    ? Record<
+        ToObjectChainValueOf<V, Arr[Pos]>,
+        RecordChain<Arr, V, R, Indexes[Pos]>
+      >
+    : ToObjectChainValueOf<V, Arr[Pos]> extends Iterable<BaseChainKeyType>
+    ? Record<
+        ItemType<ToObjectChainValueOf<V, Arr[Pos]>>,
+        RecordChain<Arr, V, R, Indexes[Pos]>
+      >
     : never;
 }[Pos extends Arr['length'] ? 'done' : Pos extends -1 ? 'any' : 'recur'];
 
@@ -55,16 +72,16 @@ export interface ToObjectChainFunction<T> {
    * @param keys The keys to be chained
    * @returns The object chain
    */
-  <A extends Array<KeysOfType<T, ChainKeyType>>>(...keys: A): RecordChain<A, T>;
+  <A extends Array<ToObjectChainKey<T>>>(...keys: A): RecordChain<A, T>;
 }
 export interface AsyncToObjectChainFunction<T> {
   /**
    * Creates an object chain with the values of the specified fields where the latest
    * value in the chain will be the iterable item itself. This is a resolving operation
-   * @param keys The keys to be chained
+   * @param keys The keys to be chained. It can be either property names or mapping functions
    * @returns The object chain
    */
-  <A extends Array<KeysOfType<T, ChainKeyType>>>(...keys: A): Promise<
+  <A extends Array<ToObjectChainKey<T>>>(...keys: A): Promise<
     RecordChain<A, T>
   >;
 }
@@ -75,10 +92,10 @@ export interface ToObjectChainReduceFunction<T> {
    * value in the chain will be the iterable item itself. This is a resolving operation
    * @param initial An initializer function to define the base value for each leaf
    * @param reduce: A reduce function to accumulate the leaf value for each value that fits it
-   * @param keys The keys to be chained
+   * @param keys The keys to be chained. It can be either property names or mapping functions
    * @returns The object chain
    */
-  <A extends Array<KeysOfType<T, ChainKeyType>>, R>(
+  <A extends Array<ToObjectChainKey<T>>, R>(
     initial: () => R,
     reduce: Reducer<T, R>,
     ...keys: A
@@ -90,10 +107,10 @@ export interface AsyncToObjectChainReduceFunction<T> {
    * value in the chain will be the iterable item itself. This is a resolving operation
    * @param initial An initializer function to define the base value for each leaf
    * @param reduce: A reduce function to accumulate the leaf value for each value that fits it
-   * @param keys The keys to be chained
+   * @param keys The keys to be chained. It can be either property names or mapping functions
    * @returns The object chain
    */
-  <A extends Array<KeysOfType<T, ChainKeyType>>, R>(
+  <A extends Array<ToObjectChainKey<T>>, R>(
     initial: () => R,
     reduce: AsyncReducer<T, R>,
     ...keys: A
