@@ -50,6 +50,7 @@ export * from './take-functions';
 export * from './take-while-function';
 export * from './to-array-function';
 export * from './to-async-function';
+export * from './to-map-chain-function';
 export * from './to-map-function';
 export * from './to-object-chain-function';
 export * from './to-object-function';
