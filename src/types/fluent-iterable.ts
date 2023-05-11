@@ -100,5 +100,9 @@ declare module './base' {
     unwindAsync: f.UnwindFunction<T, 'async'>;
     finally: f.FinallyFunction<T, 'sync'>;
     finallyAsync: f.FinallyFunction<T, 'async'>;
+    toMapChain: f.ToMapChainFunction<T>;
+    toMapChainReduce: f.ToMapChainReduceFunction<T>;
+    toMapChainAsync: f.AsyncToMapChainFunction<T>;
+    toMapChainReduceAsync: f.AsyncToMapChainReduceFunction<T>;
   }
 }

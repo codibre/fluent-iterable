@@ -1,3 +1,7 @@
+import { toMapChainReduceAsync } from './../async/to-map-chain-reduce-async';
+import { toMapChainAsync } from './../async/to-map-chain-async';
+import { toMapChainReduce } from './../sync/to-map-chain-reduce';
+import { toMapChain } from './../sync/to-map-chain';
 import {
   any,
   contains,
@@ -210,4 +214,8 @@ export const resolvingFuncs = {
   toMapAsync,
   toSet,
   toSetAsync,
+  toMapChain,
+  toMapChainReduce,
+  toMapChainAsync,
+  toMapChainReduceAsync,
 };

@@ -1,3 +1,4 @@
+import { toMapChainAsync } from './../async/to-map-chain-async';
 import {
   anyAsync,
   appendAsync,
@@ -53,6 +54,7 @@ import {
   unwindAsync,
   finallyAsync,
   toObjectChainReduceAsync,
+  toMapChainReduceAsync,
 } from '../async';
 import {
   combineEmitter,
@@ -146,4 +148,6 @@ export const asyncResolvingFuncs = {
   isDistinct: isDistinctAsync,
   toMap: toMapAsync,
   toSet: toSetAsync,
+  toMapChain: toMapChainAsync,
+  toMapChainReduce: toMapChainReduceAsync,
 };
