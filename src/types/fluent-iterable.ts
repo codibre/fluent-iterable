@@ -28,6 +28,8 @@ declare module './base' {
     sort: f.SortFunction<T>;
     sortBy: f.SortByFunction<T>;
     distinct: f.DistinctFunction<T>;
+    distinctBy: f.DistinctByFunction<T>;
+    distinctByAsync: f.AsyncDistinctByFunction<T>;
     distinctAsync: f.AsyncDistinctFunction<T>;
     isDistinct: f.IsDistinctFunction<T>;
     isDistinctAsync: f.AsyncIsDistinctFunction<T>;
