@@ -1,3 +1,10 @@
+# [1.30.0](https://github.com/codibre/fluent-iterable/compare/v1.29.2...v1.30.0) (2023-04-26)
+
+
+### Features
+
+* accepting function mapping for to object chain ([#65](https://github.com/codibre/fluent-iterable/issues/65)) ([14d1632](https://github.com/codibre/fluent-iterable/commit/14d163229fc30e5f8125b2f224c55f9b4aff6955))
+
 ## [1.29.2](https://github.com/codibre/fluent-iterable/compare/v1.29.1...v1.29.2) (2023-04-04)
 
 
