@@ -20,6 +20,7 @@ declare module './base' {
     sort: f.AsyncSortFunction<T>;
     sortBy: f.AsyncSortByFunction<T>;
     distinct: f.AsyncDistinctFunction<T>;
+    distinctBy: f.AsyncDistinctByFunction<T>;
     isDistinct: f.AsyncIsDistinctFunction<T>;
     group: f.AsyncGroupFunction<T>;
     count: f.AsyncCountFunction<T>;

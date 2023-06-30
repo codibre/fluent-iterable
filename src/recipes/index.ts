@@ -6,6 +6,7 @@ export * from './comparison-recipe';
 export * from './concat-recipe';
 export * from './contains-recipe';
 export * from './count-recipe';
+export * from './distinct-by-recipe';
 export * from './distinct-recipe';
 export * from './emit-recipe';
 export * from './execute-recipe';
