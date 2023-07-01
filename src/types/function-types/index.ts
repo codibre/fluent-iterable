@@ -8,6 +8,7 @@ export * from './combine-join-function';
 export * from './concat-function';
 export * from './contains-function';
 export * from './count-function';
+export * from './distinct-by-function';
 export * from './distinct-function';
 export * from './emit-function';
 export * from './execute-function';

@@ -2,6 +2,8 @@ import { toMapChainReduceAsync } from './../async/to-map-chain-reduce-async';
 import { toMapChainAsync } from './../async/to-map-chain-async';
 import { toMapChainReduce } from './../sync/to-map-chain-reduce';
 import { toMapChain } from './../sync/to-map-chain';
+import { distinctByAsync } from './../async/distinct-by-async';
+
 import {
   any,
   contains,
@@ -35,6 +37,7 @@ import {
   sort,
   sortBy,
   distinct,
+  distinctBy,
   group,
   last,
   all,
@@ -120,6 +123,7 @@ export const iterableFuncs = {
   sort,
   sortBy,
   distinct,
+  distinctBy,
   execute,
   combine,
   combineJoin,
@@ -140,6 +144,7 @@ export const iterableAsyncFuncs = {
   flatMerge,
   flatMapAsync: flattenAsync,
   distinctAsync,
+  distinctByAsync,
   executeAsync,
   toAsync,
   combineAsync,

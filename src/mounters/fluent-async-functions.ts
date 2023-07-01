@@ -54,6 +54,7 @@ import {
   unwindAsync,
   finallyAsync,
   toObjectChainReduceAsync,
+  distinctByAsync,
   toMapChainReduceAsync,
 } from '../async';
 import {
@@ -94,6 +95,7 @@ export const asyncIterableFuncs = {
   sort: sortAsync,
   sortBy: sortByAsync,
   distinct: distinctAsync,
+  distinctBy: distinctByAsync,
   distinctAsync,
   execute: executeAsync,
   merge,
