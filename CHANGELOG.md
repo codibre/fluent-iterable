@@ -1,3 +1,17 @@
+# [1.31.0](https://github.com/codibre/fluent-iterable/compare/v1.30.0...v1.31.0) (2023-06-30)
+
+
+### Features
+
+* implementing distinctby ([#67](https://github.com/codibre/fluent-iterable/issues/67)) ([a75ce0c](https://github.com/codibre/fluent-iterable/commit/a75ce0c64ca2f38e38105d368594e430a14adab0))
+
+# [1.30.0](https://github.com/codibre/fluent-iterable/compare/v1.29.2...v1.30.0) (2023-04-26)
+
+
+### Features
+
+* accepting function mapping for to object chain ([#65](https://github.com/codibre/fluent-iterable/issues/65)) ([14d1632](https://github.com/codibre/fluent-iterable/commit/14d163229fc30e5f8125b2f224c55f9b4aff6955))
+
 ## [1.29.2](https://github.com/codibre/fluent-iterable/compare/v1.29.1...v1.29.2) (2023-04-04)
 
 

@@ -54,6 +54,7 @@ import {
   unwindAsync,
   finallyAsync,
   toObjectChainReduceAsync,
+  distinctByAsync,
 } from '../async';
 import {
   combineEmitter,
@@ -93,6 +94,7 @@ export const asyncIterableFuncs = {
   sort: sortAsync,
   sortBy: sortByAsync,
   distinct: distinctAsync,
+  distinctBy: distinctByAsync,
   distinctAsync,
   execute: executeAsync,
   merge,
