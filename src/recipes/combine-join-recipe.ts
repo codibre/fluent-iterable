@@ -10,7 +10,7 @@ export function combineJoinRecipe(
   reduce: ReduceIngredient,
   resolver: ResolverType,
 ) {
-  return function <T>(
+  return function combineJoin<T>(
     this: AnyIterable<AnyIterable<T>>,
     baseKey?: AnyMapper<unknown>,
   ) {
@@ -21,16 +21,19 @@ export function combineJoinRecipe(
       keyA = ([a]) => keyB!(a);
     }
 
-    return reduce.call(
-      this,
-      (result, nextIterable) =>
-        result
-          ? resolver(
-              combine.call(result, nextIterable, keyA, keyB),
-              (combined) => map.call(combined, ([a, b]: [T[], T]) => [...a, b]),
-            )
-          : map.call(nextIterable, (x) => [x]),
-      undefined,
+    return (
+      reduce.call(
+        this,
+        (result, nextIterable) =>
+          result
+            ? resolver(
+                combine.call(result, nextIterable, keyA, keyB),
+                (combined) =>
+                  map.call(combined, ([a, b]: [T[], T]) => [...a, b]),
+              )
+            : map.call(nextIterable, (x) => [x]),
+        undefined,
+      ) ?? []
     );
   };
 }
