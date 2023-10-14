@@ -1,3 +1,10 @@
+## [1.31.1](https://github.com/codibre/fluent-iterable/compare/v1.31.0...v1.31.1) (2023-09-02)
+
+
+### Bug Fixes
+
+* fixing combineJoin with empty iterable ([#69](https://github.com/codibre/fluent-iterable/issues/69)) ([5ca6c12](https://github.com/codibre/fluent-iterable/commit/5ca6c12c19ec80b07fc6060ed8c5386484db0374))
+
 # [1.31.0](https://github.com/codibre/fluent-iterable/compare/v1.30.0...v1.31.0) (2023-06-30)
 
 

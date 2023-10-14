@@ -1,4 +1,4 @@
-import { fluent, fluentAsync } from '../src';
+import { constant, fluent, fluentAsync } from '../src';
 import { expect } from 'chai';
 import { combineJoin } from '../src/sync';
 import { ObjectReadableMock } from 'stream-mock';
@@ -71,6 +71,19 @@ describe(combineJoin.name, () => {
           { type: 0, value: 6 },
         ],
       ]);
+    });
+
+    it('should work with an empty iterable', () => {
+      const result = fluent([
+        [1, 2],
+        [3, 4],
+        [5, 6],
+      ])
+        .filter(constant(false))
+        .combineJoin()
+        .toArray();
+
+      expect(result).to.be.eql([]);
     });
   });
 
