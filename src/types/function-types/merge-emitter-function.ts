@@ -18,7 +18,8 @@ export interface AsyncMergeEmitterFunction<T> {
    * @param options The EventEmitter options. Optional
    * @returns A new iterable that returns the elements of all others in the order of which resolves first
    */
-  <R>(emitter: EventEmitter, options?: FluentEmitOptions): FluentAsyncIterable<
-    T | R
-  >;
+  <R>(
+    emitter: EventEmitter,
+    options?: FluentEmitOptions,
+  ): FluentAsyncIterable<T | R>;
 }

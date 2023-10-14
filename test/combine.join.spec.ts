@@ -4,7 +4,7 @@ import { combineJoin } from '../src/sync';
 import { ObjectReadableMock } from 'stream-mock';
 
 describe(combineJoin.name, () => {
-  context('fluent.combine', () => {
+  describe('fluent.combine', () => {
     it('should join all the sub iterables as an NxN combination', () => {
       const result = fluent([
         [1, 2],
@@ -74,7 +74,7 @@ describe(combineJoin.name, () => {
     });
   });
 
-  context('fluent.combineAsync', () => {
+  describe('fluent.combineAsync', () => {
     it('should join all the sub iterables as an NxN combination', async () => {
       const result = await fluent([
         [1, 2],
@@ -144,7 +144,7 @@ describe(combineJoin.name, () => {
     });
   });
 
-  context('fluentAsync.combine', () => {
+  describe('fluentAsync.combine', () => {
     it('should join all the sub async iterables as an NxN combination', async () => {
       const result = await fluentAsync(
         new ObjectReadableMock([

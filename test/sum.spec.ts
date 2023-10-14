@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { fluent, fluentAsync } from '../src';
 
 describe('.sum()', () => {
-  context('sync', () => {
+  describe('sync', () => {
     it('should work with empty', () =>
       expect(fluent([] as number[]).sum()).to.be.eq(0));
     it('should work with no params', () =>
@@ -16,7 +16,7 @@ describe('.sum()', () => {
     it('should sum numeric strings', () =>
       expect(fluent(['1', '2', '3']).sum()).to.be.eq(6));
   });
-  context('fluent async', () => {
+  describe('fluent async', () => {
     it('should work with empty', async () =>
       expect(await fluent([] as number[]).sumAsync()).to.be.eq(0));
     it('should work with no params', async () =>
@@ -36,7 +36,7 @@ describe('.sum()', () => {
     it('should sum numeric strings', async () =>
       expect(await fluent(['1', '2', '3']).sumAsync()).to.be.eq(6));
   });
-  context('fluentAsync', () => {
+  describe('fluentAsync', () => {
     it('should work with empty', async () =>
       expect(await fluentAsync([] as number[]).sum()).to.be.eq(0));
     it('should work with no params', async () =>

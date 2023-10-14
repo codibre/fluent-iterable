@@ -3,7 +3,7 @@ import { fluent } from '../src';
 import { orderAssured } from '../src/types-internal';
 
 describe('order assuring', () => {
-  context('iterable', () => {
+  describe('iterable', () => {
     it('should be possible to assure an ascending order for an iterable', () => {
       const it = fluent([1, 2, 3]).assureOrder();
 

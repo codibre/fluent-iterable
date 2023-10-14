@@ -50,9 +50,11 @@ export interface CombineFunction<T> {
    * @param keyA A property name with value will be used as for comparison with the key of the second iterable
    * @param keyB A property name with value will be used as for comparison with the key of the first iterable
    */
-  <U>(iterable: Iterable<U>, keyA: keyof T, keyB: keyof U): FluentIterable<
-    [T, U]
-  >;
+  <U>(
+    iterable: Iterable<U>,
+    keyA: keyof T,
+    keyB: keyof U,
+  ): FluentIterable<[T, U]>;
 }
 
 export interface AsyncCombineFunction<T> {

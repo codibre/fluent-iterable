@@ -8,7 +8,7 @@ interface Test {
 }
 
 describe('sort', () => {
-  context('fluent', () => {
+  describe('fluent', () => {
     const af = { a: 'f', b: 3 };
     const ac = { a: 'c', b: 5 };
     const ad = { a: 'd', b: 1 };
@@ -69,7 +69,7 @@ describe('sort', () => {
       ).to.eql([af2, af, ad, ac, aa]));
   });
 
-  context('fluentAsync', () => {
+  describe('fluentAsync', () => {
     const af = { a: 'f', b: 3 };
     const ac = { a: 'c', b: 5 };
     const ad = { a: 'd', b: 1 };

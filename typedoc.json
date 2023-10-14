@@ -1,6 +1,6 @@
 {
   "hideGenerator": true,
-  "theme": "markdown",
+  "theme": "default",
   "out": "docs",
   "readme": "none",
   "name": "fluent-iterable",

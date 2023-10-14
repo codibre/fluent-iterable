@@ -5,7 +5,7 @@ import { RequiredResolverIngredient } from './ingredients';
 
 export function emitRecipe(forEach: RequiredResolverIngredient) {
   return function <T>(this: AnyIterable<T>): FluentEmitter<T> {
-    const emitter = new EventEmitter();
+    const emitter = new EventEmitter() as FluentEmitter<T>;
     process.nextTick(async () => {
       try {
         await forEach.call(this, (x: T) => emitter.emit('data', x));

@@ -217,11 +217,11 @@ export interface Equality<T> {
   (a: T, b: T): boolean;
 }
 
-export interface FluentEvents<T> {
+export type FluentEvents<T> = {
   data(t: T): void;
   error(error: any): void;
   end(): void;
-}
+};
 
 /**
  * Represents a page of a paginated resource.

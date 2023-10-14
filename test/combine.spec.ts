@@ -14,7 +14,7 @@ const expected = [
   [3, 'c'],
 ];
 describe('combine', () => {
-  context('fluent.combine', () => {
+  describe('fluent.combine', () => {
     it('should join two iterables as an NxN combination', () => {
       const result = fluent([1, 2, 3]).combine(['a', 'b', 'c']).toArray();
 
@@ -141,7 +141,7 @@ describe('combine', () => {
     });
   });
 
-  context('fluent.combineAsync', async () => {
+  describe('fluent.combineAsync', async () => {
     it('should join two iterables as an NxN combination', async () => {
       const result = await fluent([1, 2, 3])
         .combineAsync(new ObjectReadableMock(['a', 'b', 'c']))
@@ -278,7 +278,7 @@ describe('combine', () => {
     });
   });
 
-  context('fluent.combineEmitter', async () => {
+  describe('fluent.combineEmitter', async () => {
     it('should join an iterable and an Emitter as an NxN combination', async () => {
       const result = await fluent([1, 2, 3])
         .combineEmitter(new ObjectReadableMock(['a', 'b', 'c']))
@@ -379,7 +379,7 @@ describe('combine', () => {
     });
   });
 
-  context('fluentAsync.combine', async () => {
+  describe('fluentAsync.combine', async () => {
     it('should join two async iterables as an NxN combination', async () => {
       const result = await fluentAsync(new ObjectReadableMock([1, 2, 3]))
         .combine(new ObjectReadableMock(['a', 'b', 'c']))
@@ -520,7 +520,7 @@ describe('combine', () => {
     });
   });
 
-  context('fluentAsync.combineEmitter', async () => {
+  describe('fluentAsync.combineEmitter', async () => {
     it('should join two async iterables as an NxN combination', async () => {
       const result = await fluentAsync(new ObjectReadableMock([1, 2, 3]))
         .combineEmitter(new ObjectReadableMock(['a', 'b', 'c']))

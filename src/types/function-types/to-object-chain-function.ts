@@ -64,9 +64,9 @@ export interface AsyncToObjectChainFunction<T> {
    * @param keys The keys to be chained
    * @returns The object chain
    */
-  <A extends Array<KeysOfType<T, ChainKeyType>>>(...keys: A): Promise<
-    RecordChain<A, T>
-  >;
+  <A extends Array<KeysOfType<T, ChainKeyType>>>(
+    ...keys: A
+  ): Promise<RecordChain<A, T>>;
 }
 
 export interface ToObjectChainReduceFunction<T> {

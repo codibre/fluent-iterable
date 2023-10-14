@@ -25,7 +25,9 @@ export interface UnwindFunction<T, Type extends 'sync' | 'async'> {
    * @param keys The keys to be unwinded
    * @returns The object chain
    */
-  <A extends Array<keyof T>>(...keys: A): Type extends 'sync'
+  <A extends Array<keyof T>>(
+    ...keys: A
+  ): Type extends 'sync'
     ? FluentIterable<UnwindResult<A, T, Type>>
     : FluentAsyncIterable<UnwindResult<A, T, Type>>;
 }

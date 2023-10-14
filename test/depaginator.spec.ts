@@ -7,7 +7,7 @@ describe('depaginate()', () => {
       ({
         results: [token + 1, token + 2, token + 3],
         nextPageToken: token === 0 ? token + 3 : undefined,
-      } as Page<number, number>);
+      }) as Page<number, number>;
 
     const result = await fluentAsync(depaginate(pager)).toArray();
 

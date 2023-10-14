@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { o, fluent, fluentAsync } from '../src';
 
 describe('isDistinct()', () => {
-  context('iterable', () => {
+  describe('iterable', () => {
     it('should return true when all elements are distinct with a call with no mapper', () => {
       const result = fluent([1, 2, 3]).isDistinct();
 
@@ -52,7 +52,7 @@ describe('isDistinct()', () => {
     });
   });
 
-  context('iterable isDinstinctAsync', () => {
+  describe('iterable isDinstinctAsync', () => {
     it('should return true when all elements are distinct with a call with a mapper', async () => {
       const result = await fluent([1, 2, 3]).isDistinctAsync((x) => x * 2);
 
@@ -72,7 +72,7 @@ describe('isDistinct()', () => {
     });
   });
 
-  context('async iterable', () => {
+  describe('async iterable', () => {
     it('should return true when all elements are distinct with a call with no mapper', async () => {
       const result = await fluentAsync([1, 2, 3]).isDistinct();
 

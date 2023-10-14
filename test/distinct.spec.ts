@@ -2,8 +2,11 @@ import { AnyIterable } from 'augmentative-iterable';
 import { expect } from 'chai';
 import { ObjectReadableMock } from 'stream-mock';
 import { fluent, fluentAsync } from '../src';
-import { asyncGenerator } from './fluent-async.spec';
 import { data, generator, Person, picker } from './fluent.spec';
+
+async function* asyncGenerator(): AsyncIterable<Person> {
+  yield* data;
+}
 
 describe('distinct', () => {
   describe('iterable', () => {
@@ -12,23 +15,29 @@ describe('distinct', () => {
 
       beforeEach(() => (subject = createSubject()));
       describe('sync', () => {
-        it('empty', () => expect(fluent([]).distinct().toArray()).to.be.empty);
-        it('not distinct numbers', () =>
+        it('empty', () => {
+          expect(fluent([]).distinct().toArray()).to.be.empty;
+        });
+        it('not distinct numbers', () => {
           expect(fluent([1, 1, 1, 2, 2, 3]).distinct().toArray()).to.eql([
             1, 2, 3,
-          ]));
-        it('already distinct collection', () =>
-          expect(fluent(subject).distinct().toArray()).to.eql(data));
-        it('with mapper', () =>
+          ]);
+        });
+        it('already distinct collection', () => {
+          expect(fluent(subject).distinct().toArray()).to.eql(data);
+        });
+        it('with mapper', () => {
           expect(
             fluent(subject)
               .distinct((p) => p.gender)
               .toArray(),
-          ).to.eql(picker(0, 3, 4, 5)));
-        it('should work with key string', () =>
+          ).to.eql(picker(0, 3, 4, 5));
+        });
+        it('should work with key string', () => {
           expect(fluent(subject).distinct('gender').toArray()).to.eql(
             picker(0, 3, 4, 5),
-          ));
+          );
+        });
         it('should keep only the chosen values when choose is used', () => {
           expect(
             fluent([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])

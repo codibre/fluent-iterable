@@ -16,7 +16,7 @@ import { AnyIterable } from 'augmentative-iterable';
 import { emitGenerator } from './fluent-emit.spec';
 import { FluentAsyncClass } from '../src/fluent-async-class';
 
-export async function* asyncGenerator(): AsyncIterable<Person> {
+async function* asyncGenerator(): AsyncIterable<Person> {
   yield* data;
 }
 
@@ -31,7 +31,7 @@ describe('fluent async iterable', () => {
     let subject: AnyIterable<Person>;
 
     beforeEach(() => (subject = createSubject()));
-    context('basics work', async () => {
+    describe('basics work', async () => {
       it('wrapping does not fail', async () => {
         fluentAsync(subject);
       });
@@ -59,7 +59,7 @@ describe('fluent async iterable', () => {
         expect(sum).to.be.eq(6);
       });
     });
-    context('withIndex', () => {
+    describe('withIndex', () => {
       it('should return Indexed instances from informed array', async () => {
         expect(
           await fluentAsync(new ObjectReadableMock(['a', 'b', 'c']))
@@ -72,7 +72,7 @@ describe('fluent async iterable', () => {
         ]);
       });
     });
-    context('takeWhile', async () => {
+    describe('takeWhile', async () => {
       it('works with initially not true statement', async () =>
         expect(
           await fluentAsync(subject)
@@ -94,7 +94,7 @@ describe('fluent async iterable', () => {
         ).to.eql(data);
       });
     });
-    context('take', async () => {
+    describe('take', async () => {
       it('works with negative count', async () =>
         expect(await fluentAsync(subject).take(-5).toArray()).to.be.empty);
       it('works with zero count', async () =>
@@ -118,7 +118,7 @@ describe('fluent async iterable', () => {
             .toArray(),
         ).to.eql(data));
     });
-    context('skipWhile', async () => {
+    describe('skipWhile', async () => {
       it('works with initially not true statement', async () =>
         expect(
           await fluentAsync(subject)
@@ -144,7 +144,7 @@ describe('fluent async iterable', () => {
             .toArray(),
         ).to.eql(data.slice(1)));
     });
-    context('skip', async () => {
+    describe('skip', async () => {
       it('works with negative count', async () =>
         expect(await fluentAsync(subject).skip(-5).toArray()).to.eql(data));
       it('works with zero count', async () =>
@@ -633,11 +633,15 @@ describe('fluent async iterable', () => {
         ).to.equal(3));
       it('assuring order', async () =>
         expect(
-          await fluentAsync([1, 2, 4, 5, 6]).count(o((x) => x % 2 === 0)),
+          await fluentAsync([1, 2, 4, 5, 6]).count(
+            o((x: number) => x % 2 === 0),
+          ),
         ).to.equal(2));
       it('assuring descending order', async () =>
         expect(
-          await fluentAsync([1, 2, 4, 5, 6]).count(o((x) => x % 2 === 0)),
+          await fluentAsync([1, 2, 4, 5, 6]).count(
+            o((x: number) => x % 2 === 0),
+          ),
         ).to.equal(2));
     });
     describe('first', () => {
@@ -671,7 +675,9 @@ describe('fluent async iterable', () => {
         ).to.be.equal(8));
       it('assuring order', async () =>
         expect(
-          await fluentAsync([3, 1, 2, 6, 3, 8]).last(o((x) => x % 2 === 0)),
+          await fluentAsync([3, 1, 2, 6, 3, 8]).last(
+            o((x: number) => x % 2 === 0),
+          ),
         ).to.be.equal(6));
     });
     describe('reduceAndMap', () => {

@@ -123,9 +123,9 @@ export interface AsyncToObjectFunction<T> {
    * @param keySelector Asynchronously projects an element of the iterable into the key of the corresponding field.
    * @returns A promise of the object composed of the elements of the iterable as fields.
    */
-  <R1 extends keyof T>(keySelector: R1): Promise<
-    Record<ToObjectKeyType<T, R1>, T>
-  >;
+  <R1 extends keyof T>(
+    keySelector: R1,
+  ): Promise<Record<ToObjectKeyType<T, R1>, T>>;
 
   /**
    * Translates the iterable into an object using the elements of the iterable as representations of fields as specified by an asynchronous key- and value selector. This is a resolving operation, will cause a full loop through all the elements of the iterable.

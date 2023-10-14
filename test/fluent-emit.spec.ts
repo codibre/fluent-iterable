@@ -39,7 +39,7 @@ describe('fluent emit iterable', () => {
     let subject: EventEmitter;
 
     beforeEach(() => (subject = createSubject()));
-    context('basics work', async () => {
+    describe('basics work', async () => {
       it('wrapping does not fail', async () => {
         fluentEmit(subject);
       });
@@ -53,7 +53,7 @@ describe('fluent emit iterable', () => {
         expect(await fluentEmit(subject).toArray()).to.eql(data);
       });
     });
-    context('withIndex', () => {
+    describe('withIndex', () => {
       it('should return Indexed instances from informed array', async () => {
         expect(
           await fluentEmit(emitGenerator(['a', 'b', 'c']))
@@ -66,7 +66,7 @@ describe('fluent emit iterable', () => {
         ]);
       });
     });
-    context('takeWhile', async () => {
+    describe('takeWhile', async () => {
       it('works with initially not true statement', async () =>
         expect(
           await fluentEmit(subject)
@@ -88,7 +88,7 @@ describe('fluent emit iterable', () => {
         ).to.eql(data);
       });
     });
-    context('take', async () => {
+    describe('take', async () => {
       it('works with negative count', async () =>
         expect(await fluentEmit(subject).take(-5).toArray()).to.be.empty);
       it('works with zero count', async () =>
@@ -112,7 +112,7 @@ describe('fluent emit iterable', () => {
             .toArray(),
         ).to.eql(data));
     });
-    context('skipWhile', async () => {
+    describe('skipWhile', async () => {
       it('works with initially not true statement', async () =>
         expect(
           await fluentEmit(subject)
@@ -138,7 +138,7 @@ describe('fluent emit iterable', () => {
             .toArray(),
         ).to.eql(data.slice(1)));
     });
-    context('skip', async () => {
+    describe('skip', async () => {
       it('works with negative count', async () =>
         expect(await fluentEmit(subject).skip(-5).toArray()).to.eql(data));
       it('works with zero count', async () =>
