@@ -66,5 +66,7 @@ declare module './base' {
     next: f.AsyncNextFunction<T>;
     unwind: f.UnwindFunction<T, 'async'>;
     finally: f.FinallyFunction<T, 'async'>;
+    toMapChain: f.AsyncToMapChainFunction<T>;
+    toMapChainReduce: f.AsyncToMapChainReduceFunction<T>;
   }
 }

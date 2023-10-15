@@ -1,12 +1,12 @@
-import { FunctionAnyMapper } from './../types/any-mapper';
-import { AnyIterable } from 'augmentative-iterable';
-import { AsyncReducer } from '../types';
-import { ToObjectChainIngredients } from './ingredients';
+import type { FunctionAnyMapper } from './../types/any-mapper';
+import type { AnyIterable } from 'augmentative-iterable';
+import type { AsyncReducer } from '../types';
+import type { ToObjectChainIngredients } from './ingredients';
 import { prepare } from '../types-internal/prepare';
 
 function unwindAndGroup(
   it: AnyIterable<any>,
-  ing: ToObjectChainIngredients,
+  ing: Omit<ToObjectChainIngredients, 'toObject'>,
   key: FunctionAnyMapper<any>,
 ) {
   it = ing.flatten.call(it, (x: any) => {
@@ -23,27 +23,32 @@ function unwindAndGroup(
   );
 }
 
-function toObjectNode<T, R>(
+function toNode<T, R>(
   it: AnyIterable<any>,
   keys: FunctionAnyMapper<any>[],
   index: number,
-  ing: ToObjectChainIngredients,
+  ing: Omit<ToObjectChainIngredients, 'toObject'>,
   reducer: AsyncReducer<T, R>,
   initial: () => R,
+  dictFunc: Function,
 ): any {
   const key = keys[index];
   it = unwindAndGroup(it, ing, key);
-  return ing.toObject.call(
+  return dictFunc.call(
     it,
     'key',
     index < keys.length - 1
       ? (subIt: any) =>
-          toObjectNode(subIt.values, keys, index + 1, ing, reducer, initial)
+          toNode(subIt.values, keys, index + 1, ing, reducer, initial, dictFunc)
       : (subIt: any) => ing.reduce.call(subIt.values, reducer, initial()),
   );
 }
 
-export function toObjectChainReduceRecipe(ing: ToObjectChainIngredients) {
+export function chainRecipeFactory(
+  reduce: Function,
+  ing: Omit<ToObjectChainIngredients, 'toObject'>,
+  toDictFunc: Function,
+) {
   return function <T, R>(
     this: AnyIterable<any>,
     initial: () => R,
@@ -52,7 +57,11 @@ export function toObjectChainReduceRecipe(ing: ToObjectChainIngredients) {
   ) {
     const prepared = keys.map((x) => prepare(x));
     return keys.length === 0
-      ? ing.reduce.call(this, reducer, initial())
-      : toObjectNode(this, prepared, 0, ing, reducer, initial);
+      ? reduce.call(this, reducer, initial())
+      : toNode(this, prepared, 0, ing, reducer, initial, toDictFunc);
   };
+}
+
+export function toObjectChainReduceRecipe(ing: ToObjectChainIngredients) {
+  return chainRecipeFactory(ing.reduce, ing, ing.toObject);
 }
