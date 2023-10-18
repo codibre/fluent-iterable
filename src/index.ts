@@ -21,7 +21,8 @@ import {
 } from './types/base';
 
 import fluent from './fluent';
-import { fluentAsync, fluentEmit } from './fluent-async';
+import { fluentEmit } from './fluent-async';
+import { fluentAsync } from './fluent-async-func';
 import depaginate from './depaginator';
 import { interval } from './interval';
 import { mergeIterators, mergeIterables } from './async-base/merging';

@@ -113,7 +113,6 @@ export const asyncIterableFuncs = {
 export const asyncSpecial = {
   partition: partitionAsync,
   group: groupAsync,
-  next: nextAsync,
 };
 
 export const asyncResolvingFuncs = {
@@ -148,4 +147,5 @@ export const asyncResolvingFuncs = {
   isDistinct: isDistinctAsync,
   toMap: toMapAsync,
   toSet: toSetAsync,
+  next: nextAsync,
 };

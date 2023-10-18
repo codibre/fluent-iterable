@@ -103,8 +103,8 @@ function partitionIterateRecipe<T>(symbol: symbol, resolver: ResolverType) {
       [symbol]() {
         return {
           next: nextFactory(resolver, wrapper, getValue),
-          return: iterator.return?.bind(iterator),
-          throw: iterator.throw?.bind(iterator),
+          return: iterator.return ? iterator.return.bind(iterator) : undefined,
+          throw: iterator.throw ? iterator.throw.bind(iterator) : undefined,
         };
       },
     } as any;

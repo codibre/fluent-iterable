@@ -23,11 +23,13 @@ export function mountSpecial(
     }
   });
 
-  result.partition = function <T>(this: AnyIterable<T>, ...args: any[]) {
-    return wrapper(partition!.call(this, ...args)).map((part: any) => {
-      return wrapper(part);
-    });
-  };
+  if (partition) {
+    result.partition = function <T>(this: AnyIterable<T>, ...args: any[]) {
+      return wrapper(partition.call(this, ...args)).map((part: any) => {
+        return wrapper(part);
+      });
+    };
+  }
 
   if (next) {
     result.next = function <T>(this: AnyIterable<T>, ...args: any[]) {

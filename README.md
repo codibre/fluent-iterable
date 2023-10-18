@@ -5,7 +5,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/069043968e0e72b2b5aa/test_coverage)](https://codeclimate.com/github/Codibre/fluent-iterable/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/069043968e0e72b2b5aa/maintainability)](https://codeclimate.com/github/Codibre/fluent-iterable/maintainability)
 [![npm version](https://badge.fury.io/js/%40codibre%2Ffluent-iterable.svg)](https://badge.fury.io/js/%40codibre%2Ffluent-iterable)
-![downlods per month](https://img.shields.io/npm/dm/@codibre/fluent-iterable)
+![downloads per month](https://img.shields.io/npm/dm/@codibre/fluent-iterable)
 [![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 
 A fast way to iterate, sync or async, over array likes, stream and async iterables. It provides [fluent api](https://en.wikipedia.org/wiki/Fluent_interface) operations so you can easily chain many operations.
@@ -19,19 +19,19 @@ Here a some results we got comparing to another similar options on node 16:
 
 | Library | Ops/sec | Margin | Ran samples |
 | ------- | ------- | ----------- | ----------- |
-| **fluent** | 300 | ±0.16% | 89 |
-| [iterare](https://www.npmjs.com/package/iterare ) | 265 | ±0.11%  | 89 |
-| [iter-tools](https://www.npmjs.com/package/iter-tools-es ) | 152 | ±0.16%  | 86 |
-| [rxjs](https://www.npmjs.com/package/rxjs) | 125 | ±2.61% | 80 |
-| native generators | 93.55 | ±5.62% | 69 |
-| native array operations chain | 44.36 | ±4.23% | 58 |
+| **fluent** | 293 | ±0.29% | 92 |
+| [iterare](https://www.npmjs.com/package/iterare ) | 259 | ±0.18%  | 87 |
+| [iter-tools](https://www.npmjs.com/package/iter-tools-es ) | 156 | ±0.21%  | 88 |
+| [rxjs](https://www.npmjs.com/package/rxjs) | 126 | ±0.45% | 80 |
+| native generators | 97.98 | ±0.27% | 74 |
+| native array operations chain | 42.60 | ±2.30% | 56 |
 
-You can check the bechmark code [here](./test-benchmark/general-benchmark.spec.ts)
+You can check the benchmark code [here](./test-benchmark/general-benchmark.spec.ts)
 
 
 ## But Why?
 
-When you're dealing with complex operations envolving lists with multiple items, you can fall in the need of transform, filter, perform a flat map or even take just some items from that list. In cases like that, if you're dealing with a pure array, one solution is to simply do something like this:
+When you're dealing with complex operations involving lists with multiple items, you can fall in the need of transform, filter, perform a flat map or even take just some items from that list. In cases like that, if you're dealing with a pure array, one solution is to simply do something like this:
 
 ```typescript
 const flattedList = [];
@@ -92,7 +92,7 @@ So, as you see, regardless some similarities, there're some pretty important dif
 
 ## Usage
 
-**fast-iterable** have some neat operations already implemente. If you want to Click here for the [Full API Reference](https://github.com/Codibre/fluent-iterable/blob/master/docs/README.md).
+**fast-iterable** have some neat operations already implements. If you want to Click here for the [Full API Reference](https://github.com/Codibre/fluent-iterable/blob/master/docs/README.md).
 
 ### Basics
 
@@ -444,9 +444,9 @@ async function *scan<TData>(
 
 const productsParams: DynamoDB.DocumentClient.ScanInput = {
   TableName : 'ProductTable',
-  FilterExpression : '#shoename = :shoename', // optional
-  ExpressionAttributeValues : {':shoename' : 'yeezys'}, // optional
-  ExpressionAttributeNames: { '#shoename': 'name' } // optional
+  FilterExpression : '#shoeName = :shoeName', // optional
+  ExpressionAttributeValues : {':shoeName' : 'YeeZys'}, // optional
+  ExpressionAttributeNames: { '#shoeName': 'name' } // optional
 };
 
 async function printProducts(count: number) {

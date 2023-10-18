@@ -1,14 +1,14 @@
 import { AnyIterable } from 'augmentative-iterable';
 import { orderAssured } from '../types-internal';
-export function assureOrderRecipe<T>(symbol: symbol, direction: number) {
+export function assureOrderRecipe<T>(direction: number) {
   return function (this: AnyIterable<T>) {
-    (this as any)[symbol] = direction;
+    (this as any)[orderAssured] = direction;
 
     return this;
   };
 }
 
-export const assureOrder = assureOrderRecipe(orderAssured, 1);
+export const assureOrder = assureOrderRecipe(1);
 export const o = assureOrder;
-export const assureOrderDescending = assureOrderRecipe(orderAssured, -1);
+export const assureOrderDescending = assureOrderRecipe(-1);
 export const od = assureOrderDescending;

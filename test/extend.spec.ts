@@ -1,10 +1,10 @@
-import { extend, fluent } from '../src';
+import { FluentAsyncIterable, extend, fluent } from '../src';
 import { expect } from 'chai';
 
 declare module '../src' {
   interface FluentIterable<T> {
     testIterable(): FluentIterable<T>;
-    testAsyncIterable(): FluentIterable<T>;
+    testAsyncIterable(): FluentAsyncIterable<T>;
     testResolving(): number;
   }
 }

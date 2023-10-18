@@ -154,8 +154,10 @@ export const iterableAsyncFuncs = {
 export const special = {
   partition,
   group,
+};
+
+export const specialAsync = {
   groupAsync,
-  next,
 };
 
 export const resolvingFuncs = {

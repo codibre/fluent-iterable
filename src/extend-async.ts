@@ -1,8 +1,8 @@
-import { mountIterableFunctions } from './mounters';
-import { addCustomMethod } from './add-custom-method';
 import { AnyIterable } from 'augmentative-iterable';
-import { fluentAsync } from './fluent-async';
-import { asyncProxyReference } from './async-handler';
+import {
+  addAsyncFluentMethod,
+  addAsyncFluentResolvingMethod,
+} from './fluent-async-class';
 
 /**
  * An operation that returns an AsyncIterable
@@ -36,10 +36,7 @@ export const extendAsync = {
    * @param operation The operation to be made
    */
   use(name: string, operation: AsyncIterableOperation) {
-    addCustomMethod(
-      asyncProxyReference,
-      mountIterableFunctions({ [name]: operation }, fluentAsync),
-    );
+    addAsyncFluentMethod(name, operation);
   },
   /**
    * Add a resolving method
@@ -47,6 +44,6 @@ export const extendAsync = {
    * @param operation The resolving operation to be made
    */
   useResolving(name: string, operation: AsyncIterableResolvingOperation) {
-    addCustomMethod(asyncProxyReference, { [name]: operation });
+    addAsyncFluentResolvingMethod(name, operation);
   },
 };

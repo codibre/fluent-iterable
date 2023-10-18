@@ -1,10 +1,10 @@
-import { fluentSymbol } from './../src/types-internal/fluent-symbol';
 import { o, fluent, identity, interval, od, getGroupingDistinct } from '../src';
 import expect, { flatMap, pick } from './tools';
 import delay from 'delay';
 import 'chai-callslike';
 import { ObjectReadableMock } from 'stream-mock';
 import { stub } from 'chai-callslike';
+import { FluentClass } from '../src/fluent-class';
 
 export enum Gender {
   Male = 'Male',
@@ -1786,6 +1786,6 @@ describe('fluent iterable', () => {
   it('should be identifiable as fluent', () => {
     const result: any = fluent(fluent([1, 2, 3]));
 
-    expect(result.fluent).to.be.eq(fluentSymbol);
+    expect(result).to.be.instanceOf(FluentClass);
   });
 });

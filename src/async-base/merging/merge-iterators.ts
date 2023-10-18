@@ -21,7 +21,9 @@ export async function* mergeIterators<T>(
   while (asyncIteratorsValues.size > 0) {
     const { result, index } = await getNextValue(asyncIteratorsValues);
     if (result.done) {
-      iterators[index].return?.call(iterators[index]);
+      if (iterators[index].return) {
+        iterators[index].return!.call(iterators[index]);
+      }
       asyncIteratorsValues.delete(index);
     } else {
       yield result.value;
