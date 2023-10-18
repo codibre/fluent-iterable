@@ -1,3 +1,10 @@
+# [1.32.0](https://github.com/codibre/fluent-iterable/compare/v1.31.1...v1.32.0) (2023-10-18)
+
+
+### Features
+
+* removing proxy ([#63](https://github.com/codibre/fluent-iterable/issues/63)) ([74d639e](https://github.com/codibre/fluent-iterable/commit/74d639eab59c4180464203c992881fbc5b2e7d23))
+
 ## [1.31.1](https://github.com/codibre/fluent-iterable/compare/v1.31.0...v1.31.1) (2023-09-02)
 
 
