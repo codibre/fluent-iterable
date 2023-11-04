@@ -1,3 +1,10 @@
+## [1.32.1](https://github.com/codibre/fluent-iterable/compare/v1.32.0...v1.32.1) (2023-11-04)
+
+
+### Bug Fixes
+
+* fixing async join contract ([4beaaac](https://github.com/codibre/fluent-iterable/commit/4beaaac5cafd1a7a06a9adc499221ccbc6b400b8))
+
 # [1.32.0](https://github.com/codibre/fluent-iterable/compare/v1.31.1...v1.32.0) (2023-10-18)
 
 
