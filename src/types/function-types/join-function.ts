@@ -28,7 +28,7 @@ export interface AsyncJoinFunction<T> {
    * @param mapper The function which asynchronously projects the elements of the iterable into `string`s. Falls back to the identity function if omitted.
    * @returns A promise of the concatenated string of the elements in the iterable.
    */
-  (separator: string, mapper: AsyncMapper<T, string>): Promise<string>;
+  (separator: string, mapper?: AsyncMapper<T, string>): Promise<string>;
 
   /**
    * Asynchronously projects and concatenates the elements of the iterable into a `string` using a separator. This is a resolving operation, will cause a full loop through all the elements of the iterable.
@@ -36,5 +36,5 @@ export interface AsyncJoinFunction<T> {
    * @param mapper The function which asynchronously projects the elements of the iterable into `string`s. Falls back to the identity function if omitted.
    * @returns A promise of the concatenated string of the elements in the iterable.
    */
-  (separator: string, mapper: keyof T): Promise<string>;
+  (separator: string, mapper?: keyof T): Promise<string>;
 }
