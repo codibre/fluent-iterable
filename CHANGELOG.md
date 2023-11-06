@@ -1,3 +1,10 @@
+## [1.34.2](https://github.com/codibre/fluent-iterable/compare/v1.34.1...v1.34.2) (2023-11-06)
+
+
+### Bug Fixes
+
+* exposing fluentFor ([0a74a55](https://github.com/codibre/fluent-iterable/commit/0a74a5507198811ad2999cbfae0b7299038449d8))
+
 ## [1.34.1](https://github.com/codibre/fluent-iterable/compare/v1.34.0...v1.34.1) (2023-11-06)
 
 
