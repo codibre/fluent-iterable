@@ -21,9 +21,9 @@ async function* internalFluentForAsync<T>(
  * @param increment The increment. Default 1
  */
 export function fluentForAsync<T>(
-  start: T,
-  condition: (value: T) => boolean,
-  increment = identity,
+  start: T | Promise<T>,
+  condition: (value: T) => boolean | Promise<boolean>,
+  increment: (value: T) => T | Promise<T> = identity,
 ): FluentAsyncIterable<T> {
   return fluentAsync(internalFluentForAsync(start, condition, increment));
 }

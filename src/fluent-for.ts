@@ -32,7 +32,7 @@ function internalFluentFor<T>(
 export function fluentFor<T>(
   start: T,
   condition: (value: T) => boolean,
-  increment = identity,
+  increment: (value: T) => T = identity,
 ): FluentIterable<T> {
   return fluent(internalFluentFor(start, condition, increment));
 }
