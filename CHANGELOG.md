@@ -1,3 +1,10 @@
+## [1.34.1](https://github.com/codibre/fluent-iterable/compare/v1.34.0...v1.34.1) (2023-11-06)
+
+
+### Bug Fixes
+
+* ultimate fluentFor contract ([1dba148](https://github.com/codibre/fluent-iterable/commit/1dba148d4141d0871f610ea7f3d50bfb7cea04e2))
+
 # [1.34.0](https://github.com/codibre/fluent-iterable/compare/v1.33.0...v1.34.0) (2023-11-06)
 
 
