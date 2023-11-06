@@ -1,3 +1,10 @@
+# [1.35.0](https://github.com/codibre/fluent-iterable/compare/v1.34.3...v1.35.0) (2023-11-06)
+
+
+### Features
+
+* creating decrement function ([2cf0398](https://github.com/codibre/fluent-iterable/commit/2cf03988b689eaae10db8c02ea10193eeb657de0))
+
 ## [1.34.3](https://github.com/codibre/fluent-iterable/compare/v1.34.2...v1.34.3) (2023-11-06)
 
 
