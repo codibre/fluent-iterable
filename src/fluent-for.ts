@@ -1,10 +1,11 @@
+import { identity } from '.';
 import fluent from './fluent';
 import { FluentIterable } from './types';
 
 function internalFluentFor(
   start: number,
   condition: (value: number) => boolean,
-  increment: number,
+  increment: (value: number) => number,
 ): Iterable<number> {
   let current = start;
   return {
@@ -12,7 +13,7 @@ function internalFluentFor(
       next() {
         const done = !condition(current);
         const value = current;
-        current += increment;
+        current = increment(current);
         return {
           value,
           done,
@@ -31,7 +32,7 @@ function internalFluentFor(
 export function fluentFor(
   start: number,
   condition: (value: number) => boolean,
-  increment = 1,
+  increment = identity,
 ): FluentIterable<number> {
   return fluent(internalFluentFor(start, condition, increment));
 }
