@@ -2,11 +2,11 @@ import { identity } from '.';
 import fluent from './fluent';
 import { FluentIterable } from './types';
 
-function internalFluentFor(
-  start: number,
-  condition: (value: number) => boolean,
-  increment: (value: number) => number,
-): Iterable<number> {
+function internalFluentFor<T>(
+  start: T,
+  condition: (value: T) => boolean,
+  increment: (value: T) => T,
+): Iterable<T> {
   let current = start;
   return {
     [Symbol.iterator]: () => ({
@@ -29,10 +29,10 @@ function internalFluentFor(
  * @param condition The keep going condition
  * @param increment The increment. Default 1
  */
-export function fluentFor(
-  start: number,
-  condition: (value: number) => boolean,
+export function fluentFor<T>(
+  start: T,
+  condition: (value: T) => boolean,
   increment = identity,
-): FluentIterable<number> {
+): FluentIterable<T> {
   return fluent(internalFluentFor(start, condition, increment));
 }
