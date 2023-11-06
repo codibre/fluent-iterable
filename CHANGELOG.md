@@ -1,3 +1,10 @@
+# [1.33.0](https://github.com/codibre/fluent-iterable/compare/v1.32.1...v1.33.0) (2023-11-06)
+
+
+### Features
+
+* implementing fluentFor ([1b25af4](https://github.com/codibre/fluent-iterable/commit/1b25af430a173370aeb79fe6ed632f80841c05a8))
+
 ## [1.32.1](https://github.com/codibre/fluent-iterable/compare/v1.32.0...v1.32.1) (2023-11-04)
 
 
