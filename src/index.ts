@@ -71,3 +71,5 @@ export * from './is-fluent-async-iterable';
 export * from './is-fluent-iterable';
 export * from './is-any-iterable';
 export * from './is-any-fluent-iterable';
+export * from './fluent-for';
+export * from './fluent-for-async';
