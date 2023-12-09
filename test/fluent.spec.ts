@@ -1197,7 +1197,7 @@ describe('fluent iterable', () => {
         it('empty', async () =>
           expect(
             fluent([]).reduceAndMap(
-              (a, b) => (a += b),
+              (a, b) => a + b,
               0,
               (a) => a * 10 + 1,
             ),
@@ -1205,7 +1205,7 @@ describe('fluent iterable', () => {
         it('not empty', async () =>
           expect(
             fluent([1, 2, 3]).reduceAndMap(
-              (a, b) => (a += b),
+              (a, b) => a + b,
               0,
               (a) => a * 10 + 1,
             ),
@@ -1226,7 +1226,7 @@ describe('fluent iterable', () => {
         it('empty', async () =>
           expect(
             await fluent([]).reduceAndMapAsync(
-              async (a, b) => (a += b),
+              async (a, b) => a + b,
               0,
               async (a) => a * 10 + 1,
             ),
@@ -1234,7 +1234,7 @@ describe('fluent iterable', () => {
         it('not empty', async () =>
           expect(
             await fluent([1, 2, 3]).reduceAndMapAsync(
-              async (a, b) => (a += b),
+              async (a, b) => a + b,
               0,
               async (a) => a * 10 + 1,
             ),
@@ -1252,22 +1252,67 @@ describe('fluent iterable', () => {
           ).to.be.equals(6));
       });
       describe('reduce', () => {
-        it('empty', async () =>
-          expect(fluent([]).reduce((a, b) => (a += b), 0)).to.be.equal(0));
-        it('not empty', async () =>
-          expect(fluent([1, 2, 3]).reduce((a, b) => (a += b), 0)).to.be.equals(
-            6,
-          ));
+        it('empty', () =>
+          expect(fluent([]).reduce((a, b) => a + b, 0)).to.be.equal(0));
+        it('not empty', () =>
+          expect(fluent([1, 2, 3]).reduce((a, b) => a + b, 0)).to.be.equals(6));
+        it('with no initializer', () => {
+          const result = fluent([1, 2, 3]).reduce((a, b) => a + b);
+
+          expect(result).to.be.equals(6);
+        });
+        it('with no initializer and type changing', () => {
+          const result = fluent([1, 2, 3]).reduce<string>(
+            (a, b) => `${a}:${b}`,
+          );
+
+          expect(result).to.be.equals('1:2:3');
+        });
+
+        it('with single element arrays', () => {
+          const result = fluent([1]).reduce<string>((a, b) => `${a}:${b}`);
+
+          expect(result).to.be.equals(1);
+        });
+
+        it('with no initializer and type changing', () => {
+          const result = fluent([1, 2, 3]).reduce<string>(
+            (a, b) => `${a}:${b}`,
+          );
+
+          expect(result).to.be.equals('1:2:3');
+        });
       });
       describe('reduceAsync', () => {
         it('empty', async () =>
           expect(
-            await fluent([]).reduceAsync(async (a, b) => (a += b), 0),
+            await fluent([]).reduceAsync(async (a, b) => a + b, 0),
           ).to.be.equal(0));
         it('not empty', async () =>
           expect(
-            await fluent([1, 2, 3]).reduceAsync(async (a, b) => (a += b), 0),
+            await fluent([1, 2, 3]).reduceAsync(async (a, b) => a + b, 0),
           ).to.be.equals(6));
+        it('with no initializer', async () => {
+          const result = await fluent([1, 2, 3]).reduceAsync((a, b) => a + b);
+
+          expect(result).to.be.equals(6);
+        });
+
+        it('with single element arrays', async () => {
+          const result = await fluent([1]).reduceAsync<string>(
+            (a, b) => `${a}:${b}`,
+          );
+
+          expect(result).to.be.equals(1);
+        });
+
+        it('with no initializer and type changing', async () => {
+          const result = await fluent([1, 2, 3]).reduceAsync<string>(
+            (a, b) => `${a}:${b}`,
+          );
+
+          expect(result).to.be.equals('1:2:3');
+        });
       });
       const all: ['all', 'every'] = ['all', 'every'];
       all.forEach((func) => {
