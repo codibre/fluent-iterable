@@ -1,3 +1,10 @@
+# [1.36.0](https://github.com/codibre/fluent-iterable/compare/v1.35.0...v1.36.0) (2023-12-09)
+
+
+### Features
+
+* supporting reduce with no initializer ([#70](https://github.com/codibre/fluent-iterable/issues/70)) ([da912a9](https://github.com/codibre/fluent-iterable/commit/da912a9420984d29e7e44589405bb2dc641755b6))
+
 # [1.35.0](https://github.com/codibre/fluent-iterable/compare/v1.34.3...v1.35.0) (2023-11-06)
 
 
