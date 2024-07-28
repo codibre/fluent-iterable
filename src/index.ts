@@ -26,7 +26,12 @@ import { fluentAsync } from './fluent-async-func';
 import depaginate from './depaginator';
 import { interval } from './interval';
 import { mergeIterators, mergeIterables } from './async-base/merging';
-import { assureOrder as o, assureOrderDescending as od } from './utils';
+import {
+  assureOrder as o,
+  assureOrderDescending as od,
+  getMinMaxStepper,
+  getStatsStepper,
+} from './utils';
 import { AsyncMapper, Mapper } from 'augmentative-iterable';
 
 export * from './extend-async';
@@ -61,6 +66,8 @@ export {
   mergeIterators,
   head,
   tail,
+  getMinMaxStepper,
+  getStatsStepper,
 };
 export * from './utils';
 export * from './is-async-iterable';
