@@ -244,6 +244,9 @@ function getAverageStepper() {
     get avg() {
       return count ? avg : NaN;
     },
+    get count() {
+      return count;
+    },
     step: (y: number) => (avg = avg + (y - avg) / ++count),
   };
 

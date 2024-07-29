@@ -207,6 +207,11 @@ export interface AverageStepper {
   readonly avg: number;
 
   /**
+   * Return total number of computed items
+   */
+  readonly count: number;
+
+  /**
    * Calculates next avg
    * @param y the next number to be considered
    */
