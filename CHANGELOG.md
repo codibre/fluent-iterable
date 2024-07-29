@@ -1,3 +1,10 @@
+# [1.37.0](https://github.com/codibre/fluent-iterable/compare/v1.36.0...v1.37.0) (2024-07-29)
+
+
+### Features
+
+* creating statistic stepper ([#72](https://github.com/codibre/fluent-iterable/issues/72)) ([d29709c](https://github.com/codibre/fluent-iterable/commit/d29709cc387c8e22f8aad074edc9f7ef962da713))
+
 # [1.36.0](https://github.com/codibre/fluent-iterable/compare/v1.35.0...v1.36.0) (2023-12-09)
 
 
