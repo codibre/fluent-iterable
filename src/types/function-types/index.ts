@@ -1,3 +1,4 @@
+export * from './aggregate-function';
 export * from './all-function';
 export * from './any-function';
 export * from './append-function';

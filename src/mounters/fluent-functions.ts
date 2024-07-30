@@ -1,5 +1,6 @@
 import { distinctByAsync } from './../async/distinct-by-async';
 import {
+  aggregate,
   any,
   contains,
   count,
@@ -60,6 +61,7 @@ import {
   toObjectChainReduce,
 } from '../sync';
 import {
+  aggregateAsync,
   allAsync,
   avgAsync,
   anyAsync,
@@ -161,6 +163,8 @@ export const specialAsync = {
 };
 
 export const resolvingFuncs = {
+  aggregate,
+  aggregateAsync,
   count,
   countAsync,
   emit,
