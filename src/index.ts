@@ -80,3 +80,11 @@ export * from './is-any-iterable';
 export * from './is-any-fluent-iterable';
 export * from './fluent-for';
 export * from './fluent-for-async';
+
+async function test() {
+  fluentAsync([{ a: 1 }, { a: 1 }, { a: 1 }])
+    .flatJoin('a')
+    .toArray();
+}
+
+void test();

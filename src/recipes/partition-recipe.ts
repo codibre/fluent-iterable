@@ -117,7 +117,7 @@ export function partitionRecipe(symbol: symbol, resolver: ResolverType) {
     this: Iterable<T>,
     criteria: number | Equality<unknown>,
   ): AnyIterable<AnyIterable<T>> {
-    if (criteria < 1) {
+    if (typeof criteria == 'number' && criteria < 1) {
       throw new Error(
         `Validation failed, size (${criteria}) expected to be bigger than 0`,
       );

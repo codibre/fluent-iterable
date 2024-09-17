@@ -18,8 +18,8 @@ function compareFunc(props: FunctionAnyMapper<any>[]) {
           typeof x === 'string' && typeof y === 'string'
             ? x.localeCompare(y)
             : x < y
-            ? -1
-            : 1;
+              ? -1
+              : 1;
 
         if (ret !== 0) {
           if (descending) {

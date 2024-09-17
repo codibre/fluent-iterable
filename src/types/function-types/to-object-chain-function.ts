@@ -35,14 +35,12 @@ export type Indexes = [
   -1,
 ];
 
-export type ToObjectChainValueOf<
-  V,
-  K extends ToObjectChainKey<V>,
-> = K extends ToObjectChainFuncMap<V>
-  ? ReturnType<K>
-  : K extends keyof V
-  ? V[K]
-  : never;
+export type ToObjectChainValueOf<V, K extends ToObjectChainKey<V>> =
+  K extends ToObjectChainFuncMap<V>
+    ? ReturnType<K>
+    : K extends keyof V
+      ? V[K]
+      : never;
 
 export type RecordChain<
   Arr extends Array<ToObjectChainKey<V>>,
@@ -58,11 +56,11 @@ export type RecordChain<
         RecordChain<Arr, V, R, Indexes[Pos]>
       >
     : ToObjectChainValueOf<V, Arr[Pos]> extends Iterable<BaseChainKeyType>
-    ? Record<
-        ItemType<ToObjectChainValueOf<V, Arr[Pos]>>,
-        RecordChain<Arr, V, R, Indexes[Pos]>
-      >
-    : never;
+      ? Record<
+          ItemType<ToObjectChainValueOf<V, Arr[Pos]>>,
+          RecordChain<Arr, V, R, Indexes[Pos]>
+        >
+      : never;
 }[Pos extends Arr['length'] ? 'done' : Pos extends -1 ? 'any' : 'recur'];
 
 export interface ToObjectChainFunction<T> {
@@ -81,9 +79,9 @@ export interface AsyncToObjectChainFunction<T> {
    * @param keys The keys to be chained. It can be either property names or mapping functions
    * @returns The object chain
    */
-  <A extends Array<ToObjectChainKey<T>>>(...keys: A): Promise<
-    RecordChain<A, T>
-  >;
+  <A extends Array<ToObjectChainKey<T>>>(
+    ...keys: A
+  ): Promise<RecordChain<A, T>>;
 }
 
 export interface ToObjectChainReduceFunction<T> {

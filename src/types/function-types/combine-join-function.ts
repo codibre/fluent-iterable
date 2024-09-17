@@ -26,11 +26,12 @@ export interface CombineJoinFunctionContract<T> {
   (key: keyof T): FluentIterable<T[]>;
 }
 
-export type CombineJoinFunction<T> = T extends Iterable<any>
-  ? CombineJoinFunctionContract<ItemType<T>>
-  : IsAnyOrUnknown<T> extends true
-  ? CombineJoinFunctionContract<ItemType<T>>
-  : {};
+export type CombineJoinFunction<T> =
+  T extends Iterable<any>
+    ? CombineJoinFunctionContract<ItemType<T>>
+    : IsAnyOrUnknown<T> extends true
+      ? CombineJoinFunctionContract<ItemType<T>>
+      : {};
 
 export interface AsyncCombineJoinFunctionContract<T> {
   /**
@@ -51,8 +52,9 @@ export interface AsyncCombineJoinFunctionContract<T> {
   (key: keyof T): FluentAsyncIterable<T[]>;
 }
 
-export type AsyncCombineJoinFunction<T> = T extends AnyIterable<any>
-  ? AsyncCombineJoinFunctionContract<AsyncItemType<T>>
-  : IsAnyOrUnknown<T> extends true
-  ? AsyncCombineJoinFunctionContract<AsyncItemType<T>>
-  : never;
+export type AsyncCombineJoinFunction<T> =
+  T extends AnyIterable<any>
+    ? AsyncCombineJoinFunctionContract<AsyncItemType<T>>
+    : IsAnyOrUnknown<T> extends true
+      ? AsyncCombineJoinFunctionContract<AsyncItemType<T>>
+      : never;

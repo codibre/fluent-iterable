@@ -35,9 +35,9 @@ export interface FilterFunction<T> {
    * @param predicate A predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`.
    * @returns A [[FluentIterable]] of the elements against which the predicate evaluates to `true`.
    */
-  <Guarantees extends keyof T>(predicate: Predicate<T>): FluentIterable<
-    RequiresTruthy<T, Guarantees>
-  >;
+  <Guarantees extends keyof T>(
+    predicate: Predicate<T>,
+  ): FluentIterable<RequiresTruthy<T, Guarantees>>;
   /**
    * Filters the iterable of `T` based on a predicate.<br>
    *   Example: `fluent(['anchor', 'almond', 'bound', 'alpine']).filter(word => word[0] === 'a')` yields *anchor*, *almond*, and *alpine*.
@@ -78,7 +78,7 @@ export interface AsyncFilterFunction<T> {
    * @param predicate An asynchronous predicate of `T`. All elements are yielded from the iterable against which this evaluates to `true`.
    * @returns A [[FluentAsyncIterable]] of the elements against which the predicate evaluates to `true`.
    */
-  <R extends keyof T, K extends keyof T>(predicate: R): FluentAsyncIterable<
-    RequiresTruthy<T, K>
-  >;
+  <R extends keyof T, K extends keyof T>(
+    predicate: R,
+  ): FluentAsyncIterable<RequiresTruthy<T, K>>;
 }

@@ -2,12 +2,21 @@
   "extends": "@codibre/confs/tsconfig.json",
   "compilerOptions": {
     "target": "es2018",
-    "rootDir": "./src",
+    "rootDir": ".",
     "outDir": "./dist",
     "declaration": true,
-    "strictBindCallApply": true
+    "strictBindCallApply": true,
+    "esModuleInterop": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "allowJs": true,
+    "verbatimModuleSyntax": false,
+    "sourceMap": true
   },
   "include": [
-    "./src"
+    "./src",
+    "./test",
+    "test/benchmark",
+    "test/memory"
   ]
 }

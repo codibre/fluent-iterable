@@ -43,7 +43,8 @@ export interface AsyncTopFunction<T> {
    * @param comparer The comparison function.
    * @returns A promise of the top of the iterable's projected elements.
    */
-  <R extends keyof T>(mapper: T, comparer: Comparer<T[R]>): Promise<
-    T | undefined
-  >;
+  <R extends keyof T>(
+    mapper: T,
+    comparer: Comparer<T[R]>,
+  ): Promise<T | undefined>;
 }
