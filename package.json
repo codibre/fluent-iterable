@@ -92,7 +92,7 @@
     }
   },
   "dependencies": {
-    "augmentative-iterable": "^1.5.11",
+    "augmentative-iterable": "^1.6.0",
     "typed-emitter": "^1.4.0"
   },
   "devDependencies": {
