@@ -29,8 +29,7 @@ export function addAsyncFluentMethod(method: string, body: Function) {
     this: FluentAsyncClass,
     ...args: any
   ) {
-    this['base'] = iterateAsync(body.apply(this['base'], args));
-    return this;
+    return new FluentAsyncClass(iterateAsync(body.apply(this['base'], args)));
   };
 }
 

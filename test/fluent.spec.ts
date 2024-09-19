@@ -1833,4 +1833,14 @@ describe('fluent iterable', () => {
 
     expect(result).to.be.instanceOf(FluentClass);
   });
+
+  it('should support branching', () => {
+    const result1 = fluent([1, 2, 3]).map((x) => x * 2);
+    const result2 = result1.map((x) => x * 3);
+    const result3 = result1.map((x) => x * 5);
+
+    expect(result3.toArray()).to.be.eql([10, 20, 30]);
+    expect(result2.toArray()).to.be.eql([6, 12, 18]);
+    expect(result1.toArray()).to.be.eql([2, 4, 6]);
+  });
 });

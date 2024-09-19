@@ -26,8 +26,7 @@ export function addFluentMethod(method: string, body: Function) {
     this: FluentClass,
     ...args: any
   ) {
-    this['base'] = body.call(this['base'], ...args);
-    return this;
+    return new FluentClass(body.call(this['base'], ...args));
   };
 }
 
