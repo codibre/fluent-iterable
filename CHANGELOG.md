@@ -1,3 +1,10 @@
+# [1.38.0](https://github.com/codibre/fluent-iterable/compare/v1.37.1...v1.38.0) (2024-09-20)
+
+
+### Features
+
+* updating library to node 22 ([#74](https://github.com/codibre/fluent-iterable/issues/74)) ([92a7bc4](https://github.com/codibre/fluent-iterable/commit/92a7bc45b132cfc5923e509c493956723f0ec399))
+
 ## [1.37.1](https://github.com/codibre/fluent-iterable/compare/v1.37.0...v1.37.1) (2024-09-19)
 
 
