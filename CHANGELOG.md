@@ -1,3 +1,10 @@
+## [1.37.1](https://github.com/codibre/fluent-iterable/compare/v1.37.0...v1.37.1) (2024-09-19)
+
+
+### Bug Fixes
+
+* making the operations immutable ([#75](https://github.com/codibre/fluent-iterable/issues/75)) ([76c1edf](https://github.com/codibre/fluent-iterable/commit/76c1edfb96ea0c0cc0b8a574e33b978ba98dc130))
+
 # [1.37.0](https://github.com/codibre/fluent-iterable/compare/v1.36.0...v1.37.0) (2024-07-29)
 
 

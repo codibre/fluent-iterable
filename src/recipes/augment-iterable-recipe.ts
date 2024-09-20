@@ -14,6 +14,7 @@ export function augmentIterableRecipe(
       return augmentIterable(
         (this as any)[orderAssured] ? itClone(this) : this,
         prepare(action),
+        true,
       );
     };
   }
@@ -22,6 +23,6 @@ export function augmentIterableRecipe(
     this: AnyIterable<T>,
     action: AnyMapper<T>,
   ): AnyIterable<T> {
-    return augmentIterable(this, prepare(action));
+    return augmentIterable(this, prepare(action), true);
   };
 }
