@@ -19,10 +19,10 @@ export type AnyHack<T> = T extends never ? 'A' : 'B';
 export type IsAnyOrUnknown<T> = unknown extends T
   ? true
   : AnyHack<T> extends 'A'
-  ? false
-  : AnyHack<T> extends 'B'
-  ? false
-  : true;
+    ? false
+    : AnyHack<T> extends 'B'
+      ? false
+      : true;
 
 /**
  * Represents the first string or non iterable item from chained iterables
@@ -30,8 +30,8 @@ export type IsAnyOrUnknown<T> = unknown extends T
 export type ItemOrSelfType<T> = T extends string
   ? T
   : T extends Iterable<infer R>
-  ? ItemOrSelfType<R>
-  : T;
+    ? ItemOrSelfType<R>
+    : T;
 
 /**
  * Represents the type of the item of an iterable
@@ -44,8 +44,8 @@ export type ItemType<T> = T extends Iterable<infer R> ? R : never;
 export type AsyncItemOrSelfType<T> = T extends string
   ? T
   : T extends AnyIterable<infer R>
-  ? AsyncItemOrSelfType<R>
-  : T;
+    ? AsyncItemOrSelfType<R>
+    : T;
 
 /**
  * Represents the type of the item of an iterable or an async iterable

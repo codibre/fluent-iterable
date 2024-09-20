@@ -63,9 +63,9 @@ export function getGroupingDistinct<K, T, NewT = T[]>(
 
     return filter.call(valueMapper(v), (nv: any) => {
       const kv = valueDistinctMapper(nv);
-      const result = !set!.has(kv);
+      const result = !set.has(kv);
       if (result) {
-        set!.add(kv);
+        set.add(kv);
       }
 
       return result;

@@ -80,7 +80,7 @@ export function getGroupingTopHit<K, T, NewT = T>(
       chosenMap.set(chosenKey, [mapped, previous.length]);
       return [mapped];
     }
-    const chosen = choose!(prev[0], mapped);
+    const chosen = choose(prev[0], mapped);
     if (chosen !== prev[0]) {
       chosenMap.set(chosenKey, [chosen, prev[1]]);
       previous[prev[1]] = chosen;

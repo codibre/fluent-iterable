@@ -36,8 +36,8 @@ export type FlattenFunction<T> = {
 } & (T extends Iterable<any>
   ? FlattenNoParams<T>
   : IsAnyOrUnknown<T> extends true
-  ? FlattenNoParams<T>
-  : {});
+    ? FlattenNoParams<T>
+    : {});
 
 export type AsyncFlattenNoParams<T> = {
   /**
@@ -70,5 +70,5 @@ export type AsyncFlattenFunction<T> = {
 } & (T extends AnyIterable<any>
   ? AsyncFlattenNoParams<T>
   : IsAnyOrUnknown<T> extends true
-  ? AsyncFlattenNoParams<T>
-  : {});
+    ? AsyncFlattenNoParams<T>
+    : {});
