@@ -29,7 +29,7 @@
     "test:coverage": "jest test/unit --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest test/e2e",
-    "test:benchmark": "jest test/benchmark",
+    "test:benchmark": "node test/benchmark/general-benchmark.spec.js",
     "test:memory": "ts-node test/memory/run.ts",
     "test:memory-native": "ts-node test/memory/run.ts",
     "prepublishOnly": "npm run build && npm run test:coverage",
