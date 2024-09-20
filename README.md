@@ -15,7 +15,7 @@ A fast way to iterate, sync or async, over array likes, stream and async iterabl
 ## Benchmarks
 
 Fluent-iterable are strongly focused on performance. Check it out in our [benchmark](https://runkit.com/farenheith/fluent-iterable-benchmark)!;
-Here a some results we got comparing to another similar options on node 16:
+Here a some results we got comparing to another similar options on node 22:
 
 | Library | Ops/sec | Margin | Ran samples |
 | ------- | ------- | ----------- | ----------- |
@@ -27,6 +27,7 @@ Here a some results we got comparing to another similar options on node 16:
 | native generators | 156 | ±0.57% | 81 |
 | native array operations chain | 68.95 | ±1.69% | 71 |
 
+Notice that what we call native builtin ierator is the [iterator helper](https://v8.dev/features/iterator-helpers), recently released in the NodeJs 22, so due to some strategies we use, we can achieve a performance even better than the helper implemented in the V8 Engine!
 You can check the benchmark code [here](./test-benchmark/general-benchmark.spec.ts)
 
 
