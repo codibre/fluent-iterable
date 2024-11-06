@@ -3,6 +3,7 @@ import {
   anyAsync,
   appendAsync,
   avgAsync,
+  branchAsync,
   emitAsync,
   prependAsync,
   groupAsync,
@@ -152,4 +153,5 @@ export const asyncResolvingFuncs = {
   next: nextAsync,
   toMapChain: toMapChainAsync,
   toMapChainReduce: toMapChainReduceAsync,
+  branch: branchAsync,
 };

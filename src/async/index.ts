@@ -2,6 +2,7 @@ export * from './all-async';
 export * from './any-async';
 export * from './append-async';
 export * from './avg-async';
+export * from './branch-async';
 export * from './combine-async';
 export * from './combine-join-async';
 export * from './concat-async';
