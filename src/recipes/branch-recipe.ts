@@ -40,7 +40,7 @@ function getBranchedAsyncIterable<T>(
             }
             node = node.next;
           }
-          return { done, value };
+          return Promise.resolve({ done, value });
         },
       };
     },
@@ -70,7 +70,7 @@ function getBranchedIterable<T>(
             }
             node = node.next;
           }
-          return { done, value };
+          return Promise.resolve({ done, value });
         },
       };
     },
