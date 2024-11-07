@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { fluent, fluentAsync } from '../src';
 
 describe('toMapChain', () => {
@@ -38,31 +37,31 @@ describe('toMapChain', () => {
             .get('a')
             ?.get(1)
             ?.map((x) => x.id),
-        ).to.be.eql([1]);
+        ).toEqual([1]);
         expect(
           result
             .get('b')
             ?.get(1)
             ?.map((x) => x.id),
-        ).to.be.eql([1]);
+        ).toEqual([1]);
         expect(
           result
             .get('b')
             ?.get(2)
             ?.map((x) => x.id),
-        ).to.be.eql([2]);
+        ).toEqual([2]);
         expect(
           result
             .get('c')
             ?.get(2)
             ?.map((x) => x.id),
-        ).to.be.eql([2, 3]);
+        ).toEqual([2, 3]);
         expect(
           result
             .get('d')
             ?.get(2)
             ?.map((x) => x.id),
-        ).to.be.eql([3]);
+        ).toEqual([3]);
       });
 
       it('should create a object chain based on function mapping informed parameters', () => {
@@ -102,31 +101,31 @@ describe('toMapChain', () => {
             .get('a')
             ?.get(1)
             ?.map((x) => x.id),
-        ).to.be.eql([1]);
+        ).toEqual([1]);
         expect(
           result
             .get('b')
             ?.get(1)
             ?.map((x) => x.id),
-        ).to.be.eql([1]);
+        ).toEqual([1]);
         expect(
           result
             .get('b')
             ?.get(2)
             ?.map((x) => x.id),
-        ).to.be.eql([2]);
+        ).toEqual([2]);
         expect(
           result
             .get('c')
             ?.get(2)
             ?.map((x) => x.id),
-        ).to.be.eql([2, 3]);
+        ).toEqual([2, 3]);
         expect(
           result
             .get('d')
             ?.get(2)
             ?.map((x) => x.id),
-        ).to.be.eql([3]);
+        ).toEqual([3]);
       });
 
       it('should return an array when no properties are informed', () => {
@@ -153,7 +152,7 @@ describe('toMapChain', () => {
 
         const result = fluent(payload).toMapChain();
 
-        expect(result).to.be.eql(payload);
+        expect(result).toEqual(payload);
       });
     });
     describe('async', () => {
@@ -187,31 +186,31 @@ describe('toMapChain', () => {
             .get('a')
             ?.get(1)
             ?.map((x) => x.id),
-        ).to.be.eql([1]);
+        ).toEqual([1]);
         expect(
           result
             .get(objectKey)
             ?.get(1)
             ?.map((x) => x.id),
-        ).to.be.eql([1]);
+        ).toEqual([1]);
         expect(
           result
             .get(objectKey)
             ?.get(2)
             ?.map((x) => x.id),
-        ).to.be.eql([2]);
+        ).toEqual([2]);
         expect(
           result
             .get('c')
             ?.get(2)
             ?.map((x) => x.id),
-        ).to.be.eql([2, 3]);
+        ).toEqual([2, 3]);
         expect(
           result
             .get('d')
             ?.get(2)
             ?.map((x) => x.id),
-        ).to.be.eql([3]);
+        ).toEqual([3]);
       });
 
       it('should create a object chain based on function mapping informed parameters', async () => {
@@ -246,31 +245,31 @@ describe('toMapChain', () => {
             .get('a')
             ?.get(1)
             ?.map((x) => x.id),
-        ).to.be.eql([1]);
+        ).toEqual([1]);
         expect(
           result
             .get('b')
             ?.get(1)
             ?.map((x) => x.id),
-        ).to.be.eql([1]);
+        ).toEqual([1]);
         expect(
           result
             .get('b')
             ?.get(2)
             ?.map((x) => x.id),
-        ).to.be.eql([2]);
+        ).toEqual([2]);
         expect(
           result
             .get('c')
             ?.get(2)
             ?.map((x) => x.id),
-        ).to.be.eql([2, 3]);
+        ).toEqual([2, 3]);
         expect(
           result
             .get('d')
             ?.get(2)
             ?.map((x) => x.id),
-        ).to.be.eql([3]);
+        ).toEqual([3]);
       });
 
       it('should return an array when no properties are informed', async () => {
@@ -297,7 +296,7 @@ describe('toMapChain', () => {
 
         const result = await fluent(payload).toMapChainAsync();
 
-        expect(result).to.be.eql(payload);
+        expect(result).toEqual(payload);
       });
     });
   });
@@ -332,31 +331,31 @@ describe('toMapChain', () => {
           .get('a')
           ?.get(1)
           ?.map((x) => x.id),
-      ).to.be.eql([1]);
+      ).toEqual([1]);
       expect(
         result
           .get('b')
           ?.get(1)
           ?.map((x) => x.id),
-      ).to.be.eql([1]);
+      ).toEqual([1]);
       expect(
         result
           .get('b')
           ?.get(2)
           ?.map((x) => x.id),
-      ).to.be.eql([2]);
+      ).toEqual([2]);
       expect(
         result
           .get('c')
           ?.get(2)
           ?.map((x) => x.id),
-      ).to.be.eql([2, 3]);
+      ).toEqual([2, 3]);
       expect(
         result
           .get('d')
           ?.get(2)
           ?.map((x) => x.id),
-      ).to.be.eql([3]);
+      ).toEqual([3]);
     });
 
     it('should return an array when no properties are informed', async () => {
@@ -384,7 +383,7 @@ describe('toMapChain', () => {
 
       const result = await fluentAsync(payload).toMapChain();
 
-      expect(result).to.be.eql(arr);
+      expect(result).toEqual(arr);
     });
   });
 });
