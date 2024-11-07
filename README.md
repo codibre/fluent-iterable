@@ -19,13 +19,14 @@ Here a some results we got comparing to another similar options on node 22:
 
 | Library | Ops/sec | Margin | Ran samples |
 | ------- | ------- | ----------- | ----------- |
-| **fluent** | 473 | ±0.99% | 91 |
-| [iterare](https://www.npmjs.com/package/iterare ) | 438 | ±0.39%  | 88 |
-| native builtin iterator | 312 | ±0.41% | 93 |
-| [iter-tools](https://www.npmjs.com/package/iter-tools-es ) | 242 | ±0.39%  | 88 |
-| [rxjs](https://www.npmjs.com/package/rxjs) | 197 | ±1.02% | 84 |
-| native generators | 156 | ±0.57% | 81 |
-| native array operations chain | 68.95 | ±1.69% | 71 |
+| **fluent** | 494 | ±1.43% | 91 |
+| [iterare](https://www.npmjs.com/package/iterare) | 436 | ±1.10%  | 92 |
+| [iter-ops](https://www.npmjs.com/package/iter-ops) | 376 | ±0.21% | 91 |
+| native builtin iterator | 326 | ±0.21% | 92 |
+| [iter-tools](https://www.npmjs.com/package/iter-tools-es) | 243 | ±0.17%  | 88 |
+| [rxjs](https://www.npmjs.com/package/rxjs) | 197 | ±0.49% | 83 |
+| native generators | 155 | ±0.83% | 81 |
+| native array operations chain | 63.71 | ±2.79% | 66 |
 
 Notice that what we call native builtin ierator is the [iterator helper](https://v8.dev/features/iterator-helpers), recently released in the NodeJs 22, so due to some strategies we use, we can achieve a performance even better than the helper implemented in the V8 Engine!
 You can check the benchmark code [here](./test-benchmark/general-benchmark.spec.ts)
@@ -51,9 +52,9 @@ const result = flattedList
 This code looks fluent and easy to read, but it is severe to performance.
 That's because each operation do a complete iteration over the array, generating a new one! It can cause serious memory and cpu consumption, so, such practice is not encouraged.
 So, to solve this, you can write an equivalent code which will solve everything in with two chained loops. This will give you the best performance possible, but can result in a code harder to maintain.
-And that's where **fast-iterable** comes in!
+And that's where **fluent-iterable** comes in!
 
-With **fast-iterable**, you can do the same operation with the following code:
+With **fluent-iterable**, you can do the same operation with the following code:
 
 ``` typescript
 const result = fluent(list)
@@ -68,7 +69,7 @@ const result = fluent(list)
 ```
 
 Pretty simple, right? With this code, you'll do exactly two chained loops, exactly as the vanilla solution described above!
-**fast-iterable** takes advantage of the Iterable and AsyncIterable contracts to achieve this, but it goes beyond. It uses a special library called **augmentative-iterables** that we developed as the core engine of the iterations. This library is focused exclusively in performance, so, with it, we achieved a processing time very close to the vanilla solution above!
+**fluent-iterable** takes advantage of the Iterable and AsyncIterable contracts to achieve this, but it goes beyond. It uses a special library called **augmentative-iterables** that we developed as the core engine of the iterations. This library is focused exclusively in performance, so, with it, we achieved a processing time very close to the vanilla solution above!
 Comparing to iterations using **for of**, the native way to iterate over iterables of JavaScript, we achieved a result 50% faster!
 
 ## Doesn't it what rxjs do?
@@ -85,20 +86,20 @@ Think of RxJS as Lodash for events.
 That's it. Rxjs is focused primarily in event handling.
 Over that, some key differences can be pointed out:
 
-* *A previous operation of rxjs doesn't stop when some next operation stops, while with **fast-iterable** it does.*
-That's because, with rxjs you can chain multiple operations parallel after one, which makes sense for event handling. With **fast-iterable**, on the other hand, you can only have, normally, a straight line of operations and,f no matter what operation break the iteration, everything stops.
-* *With rxjs, a previous operation doesn't wait for a async next operation to end before go to the next step, while with **fast-iterable** it does.*
+* *A previous operation of rxjs doesn't stop when some next operation stops, while with **fluent-iterable** it does.*
+That's because, with rxjs you can chain multiple operations parallel after one, which makes sense for event handling. With **fluent-iterable**, on the other hand, you can only have, normally, a straight line of operations and,f no matter what operation break the iteration, everything stops.
+* *With rxjs, a previous operation doesn't wait for a async next operation to end before go to the next step, while with **fluent-iterable** it does.*
 Again, rxjs is focused on events. When dealing with event, you just want to emit them as fast as possible. With a simple iteration, though, you want to make sure that the whole chain of steps is concluded before advancing to the next one.
 
 So, as you see, regardless some similarities, there're some pretty important differences between them and those are libraries focused on quite different problems.
 
 ## Usage
 
-**fast-iterable** have some neat operations already implements. If you want to Click here for the [Full API Reference](https://github.com/Codibre/fluent-iterable/blob/master/docs/README.md).
+**fluent-iterable** have some neat operations already implements. If you want to Click here for the [Full API Reference](https://github.com/Codibre/fluent-iterable/blob/master/docs/README.md).
 
 ### Basics
 
-ECMAScript introduced support for [iterables and generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators) with version ES6 and their [asynchronous counterparts](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator) with version ES2018. It has introduced an abstraction over sequential iterators (arrays, maps, generators, etc), enabling us to implement solutions regardless of the actual type of the iterable collection. It is especially powerful when using in tandem with generator functions to avoid storing all items in memory when its avoidable. The API provided by ***fast-iterable*** reads the elements of the underlying iterable only when needed and stops reading elements as soon as the result is determined.
+ECMAScript introduced support for [iterables and generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators) with version ES6 and their [asynchronous counterparts](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator) with version ES2018. It has introduced an abstraction over sequential iterators (arrays, maps, generators, etc), enabling us to implement solutions regardless of the actual type of the iterable collection. It is especially powerful when using in tandem with generator functions to avoid storing all items in memory when its avoidable. The API provided by ***fluent-iterable*** reads the elements of the underlying iterable only when needed and stops reading elements as soon as the result is determined.
 
 To get started with the fluent API, you need to translate the iterable (can be any object with [Symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) [iterator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator) or [asyncIterator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator) defined) into either a **FluentIterable** using **fluent()** or a **FluentAsyncIterable** using **fluentAsync()**.
 
@@ -109,7 +110,7 @@ import {
   fluentAsync,
   FluentIterable,
   FluentAsyncIterable,
-} from '**fast-iterable**';
+} from '**fluent-iterable**';
 
 const iterableOfArray: FluentIterable<number> = fluent([3, 1, 8, 6, 9, 2]);
 
@@ -212,7 +213,7 @@ You can see a list of many advanced examples for **fluent** clicking [here!](adv
 #### Playing with Fibonacci generator
 
 ``` typescript
-import { fluent } from '**fast-iterable**';
+import { fluent } from '**fluent-iterable**';
 
 function* naiveFibonacci(): Iterable<number> {
   yield 0;
@@ -259,7 +260,7 @@ console.log(
 #### Playing with object arrays
 
 ``` typescript
-import { fluent } from '**fast-iterable**';
+import { fluent } from '**fluent-iterable**';
 
 enum Gender {
   Male = 'Male',
@@ -342,7 +343,7 @@ console.log(
 
 ``` typescript
 import fetch from 'node-fetch';
-import { fluentAsync, Pager } from '**fast-iterable**';
+import { fluentAsync, Pager } from '**fluent-iterable**';
 
 interface Data {
   id: number;
@@ -371,7 +372,7 @@ fluentAsync(depaginate(pager))
 ### Doing an inner join between two iterables:
 
 ``` typescript
-import { fluent, identity } from '**fast-iterable**';
+import { fluent, identity } from '**fluent-iterable**';
 
 const genders = [
   { code: 'm', description: 'male' },
@@ -422,7 +423,7 @@ fluent(genders)
 ``` typescript
 import { DynamoDB } from 'aws-sdk';
 import { Key } from 'aws-sdk/clients/dynamodb';
-import { depaginate, fluentAsync, Pager } from '**fast-iterable**';
+import { depaginate, fluentAsync, Pager } from '**fluent-iterable**';
 
 async function *scan<TData>(
   input: DynamoDB.DocumentClient.ScanInput
@@ -469,7 +470,7 @@ The solution used for this problems was 90% inspired in the [fraxken combine-asy
 You can add custom methods to the FluentIterable and FluentAsyncIterable using the *extend* and *extendAsync* utilities. Here is a practical example of how to:
 
 ``` TypeScript
-declare module '**fast-iterable**' {
+declare module '**fluent-iterable**' {
   import { extendAsync } from '../src';
 
   interface FluentAsyncIterable<T> {
