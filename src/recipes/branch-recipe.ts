@@ -9,7 +9,7 @@ interface LinkedNode<T> {
 function getBranchedAsyncIterable<T>(
   node: LinkedNode<T> | undefined,
   iterator: AsyncIterator<T>,
-  context: { next?: Promise<IteratorResult<T>> },
+  context: { next?: Promise<void> },
 ) {
   return {
     [Symbol.asyncIterator]() {
@@ -21,18 +21,10 @@ function getBranchedAsyncIterable<T>(
             value = node.value;
             done = false;
             if (!node.next) {
-              const promise = (context.next ??= new Promise(
-                async (resolve, reject) => {
-                  try {
-                    const next = await iterator.next();
-                    if (!next.done) node!.next = { value: next.value };
-                    context.next = undefined;
-                    resolve(next);
-                  } catch (err) {
-                    reject(err);
-                  }
-                },
-              ));
+              const promise = (context.next ??= iterator.next().then((next) => {
+                if (!next.done) node!.next = { value: next.value };
+                context.next = undefined;
+              }));
               return promise.then(() => {
                 node = node!.next;
                 return { done, value };
@@ -63,10 +55,6 @@ function getBranchedIterable<T>(
             if (!node.next) {
               const next = iterator.next();
               if (!next.done) node.next = { value: next.value };
-              return new Promise((resolve) => {
-                node = node!.next;
-                resolve({ done, value });
-              });
             }
             node = node.next;
           }

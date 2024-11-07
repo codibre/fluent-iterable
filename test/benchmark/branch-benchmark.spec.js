@@ -12,12 +12,6 @@ function* interval(init, final) {
 }
 
 let log = '';
-let min = [];
-let max = [];
-let avg = [];
-let minBranch = [];
-let maxBranch = [];
-let avgBranch = [];
 const errors = new Set();
 function getBase() {
   return fluent(interval(1, ITEMS))
@@ -30,18 +24,18 @@ function getBase() {
 
 benchmarkSuite
   .add('separated', () => {
-    min = getBase().min();
-    max = getBase().max();
-    avg = getBase().avg();
+    getBase().min();
+    getBase().max();
+    getBase().avg();
   })
   .add('manual branch', () => {
-    base = getBase().toArray();
-    min = fluent(base).min();
-    max = fluent(base).max();
-    avg = fluent(base).avg();
+    const base = getBase().toArray();
+    fluent(base).min();
+    fluent(base).max();
+    fluent(base).avg();
   })
   .add('banching', async () => {
-    [minBranch, maxBranch, avgBranch] = await getBase()
+    await getBase()
       .branch(
         x => x.min(),
         x => x.max(),
