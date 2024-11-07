@@ -1,5 +1,11 @@
 import { fluent, fluentAsync, interval } from '../../src';
 
+async function* toAsync<T>(it: Iterable<T>) {
+  for await (const item of it) {
+    yield item;
+  }
+}
+
 describe('branch', () => {
   const items = [
     { a: 1, b: 'c', id: 1 },
@@ -33,6 +39,30 @@ describe('branch', () => {
           expect(b).toEqual(fluent(items).map('id').max());
           expect(c).toEqual(fluent(items).map('id').min());
         });
+        it('should work with non resolving branches', async () => {
+          const [a, b, c] = await fluent(items).branch(
+            (x) => x.distinctBy('a'),
+            (x) => x.map('id'),
+            (x) => x.map('id'),
+          );
+
+          expect(await a.toArray()).toEqual(
+            fluent(items).distinctBy('a').toArray(),
+          );
+          expect(await b.max()).toEqual(fluent(items).map('id').max());
+          expect(await c.min()).toEqual(fluent(items).map('id').min());
+        });
+        it('should work with partial resolved branches', async () => {
+          const [a, b, c] = await fluent(items).branch(
+            (x) => x.distinctBy('a').toArray(),
+            (x) => x.map('id'),
+            (x) => x.map('id'),
+          );
+
+          expect(a).toEqual(fluent(items).distinctBy('a').toArray());
+          expect(await b.max()).toEqual(fluent(items).map('id').max());
+          expect(await c.min()).toEqual(fluent(items).map('id').min());
+        });
         it('should intercalate the steps between every branch', async () => {
           const steps: number[] = [];
           await fluent(items).branch(
@@ -64,7 +94,7 @@ describe('branch', () => {
 
       describe('async', () => {
         it('empty', async () => {
-          const [a, b, c] = await fluentAsync([]).branch(
+          const [a, b, c] = await fluentAsync(toAsync([])).branch(
             (x) => x.toArray(),
             (x) => x.toArray(),
             (x) => x.toArray(),
@@ -74,7 +104,7 @@ describe('branch', () => {
           expect(c).toBeEmpty();
         });
         it('not empty', async () => {
-          const [a, b, c] = await fluentAsync(items).branch(
+          const [a, b, c] = await fluentAsync(toAsync(items)).branch(
             (x) => x.distinctBy('a').toArray(),
             (x) => x.map('id').max(),
             (x) => x.map('id').min(),
@@ -84,9 +114,33 @@ describe('branch', () => {
           expect(b).toEqual(fluent(items).map('id').max());
           expect(c).toEqual(fluent(items).map('id').min());
         });
+        it('should work with non resolving branches', async () => {
+          const [a, b, c] = await fluentAsync(toAsync(items)).branch(
+            (x) => x.distinctBy('a'),
+            (x) => x.map('id'),
+            (x) => x.map('id'),
+          );
+
+          expect(await a.toArray()).toEqual(
+            fluent(items).distinctBy('a').toArray(),
+          );
+          expect(await b.max()).toEqual(fluent(items).map('id').max());
+          expect(await c.min()).toEqual(fluent(items).map('id').min());
+        });
+        it('should work with partial resolved branches', async () => {
+          const [a, b, c] = await fluentAsync(toAsync(items)).branch(
+            (x) => x.distinctBy('a').toArray(),
+            (x) => x.map('id'),
+            (x) => x.map('id'),
+          );
+
+          expect(a).toEqual(fluent(items).distinctBy('a').toArray());
+          expect(await b.max()).toEqual(fluent(items).map('id').max());
+          expect(await c.min()).toEqual(fluent(items).map('id').min());
+        });
         it('should intercalate the steps between every branch', async () => {
           const steps: number[] = [];
-          await fluentAsync(items).branch(
+          await fluentAsync(toAsync(items)).branch(
             (x) =>
               x
                 .execute(() => steps.push(1))
