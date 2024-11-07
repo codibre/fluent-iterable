@@ -1,50 +1,111 @@
 import { AnyIterable } from 'augmentative-iterable';
-import { on } from 'events';
-import { EventEmitter } from 'stream';
-import { FluentEmitOptions } from '../types/base';
 
-const NODE_VERSION = Number(process.version.split('.')[0].substring(1));
-const VERSION_WITH_RELIABLE_ON = 20;
 let fluentAsync: Function;
-let fluentEmit: Function;
+interface LinkedNode<T> {
+  value: T;
+  next?: LinkedNode<T>;
+}
 
-const getBranchedAsyncIterable =
-  NODE_VERSION >= VERSION_WITH_RELIABLE_ON
-    ? <T>(emitter: EventEmitter): AsyncIterable<T> => {
-        const iterable = on(emitter, 'item', {
-          close: ['close'],
-        });
-        fluentAsync ??= require('../fluent-async-func').fluentAsync;
-        return fluentAsync(iterable).filter('length').map(0);
-      }
-    : <T>(emitter: EventEmitter): AsyncIterable<T> => {
-        fluentEmit ??= require('../fluent-async').fluentEmit;
-        return fluentEmit(emitter, {
-          end: ['close'],
-          error: 'error',
-          event: 'item',
-        } as FluentEmitOptions);
+function getBranchedAsyncIterable<T>(
+  node: LinkedNode<T> | undefined,
+  iterator: AsyncIterator<T>,
+  context: { next?: Promise<IteratorResult<T>> },
+) {
+  return {
+    [Symbol.asyncIterator]() {
+      return {
+        next() {
+          let done = true;
+          let value: T | undefined;
+          if (node) {
+            value = node.value;
+            done = false;
+            if (!node.next) {
+              const promise = (context.next ??= new Promise(
+                async (resolve, reject) => {
+                  try {
+                    const next = await iterator.next();
+                    if (!next.done) node!.next = { value: next.value };
+                    context.next = undefined;
+                    resolve(next);
+                  } catch (err) {
+                    reject(err);
+                  }
+                },
+              ));
+              return promise.then(() => {
+                node = node!.next;
+                return { done, value };
+              });
+            }
+            node = node.next;
+          }
+          return { done, value };
+        },
       };
+    },
+  };
+}
 
-function emitEventFromIterable<T>(it: AnyIterable<T>, emitter: EventEmitter) {
-  setImmediate(async () => {
-    try {
-      for await (const item of it) emitter.emit('item', item);
-      emitter.emit('close');
-    } catch (err) {
-      emitter.emit('error', err);
-    }
-  });
+function getBranchedIterable<T>(
+  node: LinkedNode<T> | undefined,
+  iterator: Iterator<T>,
+) {
+  return {
+    [Symbol.asyncIterator]() {
+      return {
+        next() {
+          let done = true;
+          let value: T | undefined;
+          if (node) {
+            value = node.value;
+            done = false;
+            if (!node.next) {
+              const next = iterator.next();
+              if (!next.done) node.next = { value: next.value };
+              return new Promise((resolve) => {
+                node = node!.next;
+                resolve({ done, value });
+              });
+            }
+            node = node.next;
+          }
+          return { done, value };
+        },
+      };
+    },
+  };
+}
+
+async function getAsync<T>(
+  it: AsyncIterable<T>,
+  items: ((it: AsyncIterable<T>) => unknown)[],
+) {
+  const context = {};
+  const iterator = it[Symbol.asyncIterator]();
+  const first = await iterator.next();
+  const node = first.done ? undefined : { value: first.value };
+  return Promise.all(
+    items.map((cb) =>
+      cb(fluentAsync(getBranchedAsyncIterable(node, iterator, context))),
+    ),
+  );
 }
 
 export function branchRecipe(): any {
   return function branch<T>(
     this: AnyIterable<T>,
-    ...items: Array<(it: AnyIterable<T>) => unknown>
+    ...items: Array<(it: AsyncIterable<T>) => unknown>
   ) {
-    const emitter = new EventEmitter();
-    const result = items.map((cb) => cb(getBranchedAsyncIterable(emitter)));
-    emitEventFromIterable(this, emitter);
-    return Promise.all(result);
+    fluentAsync ??= require('../fluent-async').fluentAsync;
+    if (Symbol.iterator in this) {
+      const iterator = this[Symbol.iterator]();
+      const first = iterator.next();
+      const node = first.done ? undefined : { value: first.value };
+      return Promise.all(
+        items.map((cb) => cb(fluentAsync(getBranchedIterable(node, iterator)))),
+      );
+    }
+    return getAsync(this, items);
   };
 }

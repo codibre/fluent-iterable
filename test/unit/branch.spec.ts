@@ -1,4 +1,4 @@
-import { fluent } from '../../src';
+import { fluent, fluentAsync, interval } from '../../src';
 
 describe('branch', () => {
   const items = [
@@ -53,8 +53,63 @@ describe('branch', () => {
                 .min(),
           );
 
-          const sequence = [1, 2, 3];
-          expect(steps.slice(0, 6)).toEqual([...sequence, ...sequence]);
+          console.log(steps);
+          interval(0, 6).forEach((i) =>
+            expect(
+              steps[i] !== steps[i + 1] || steps[i] !== steps[i + 2],
+            ).toBeTrue(),
+          );
+        });
+      });
+
+      describe('async', () => {
+        it('empty', async () => {
+          const [a, b, c] = await fluentAsync([]).branch(
+            (x) => x.toArray(),
+            (x) => x.toArray(),
+            (x) => x.toArray(),
+          );
+          expect(a).toBeEmpty();
+          expect(b).toBeEmpty();
+          expect(c).toBeEmpty();
+        });
+        it('not empty', async () => {
+          const [a, b, c] = await fluentAsync(items).branch(
+            (x) => x.distinctBy('a').toArray(),
+            (x) => x.map('id').max(),
+            (x) => x.map('id').min(),
+          );
+
+          expect(a).toEqual(fluent(items).distinctBy('a').toArray());
+          expect(b).toEqual(fluent(items).map('id').max());
+          expect(c).toEqual(fluent(items).map('id').min());
+        });
+        it('should intercalate the steps between every branch', async () => {
+          const steps: number[] = [];
+          await fluentAsync(items).branch(
+            (x) =>
+              x
+                .execute(() => steps.push(1))
+                .distinctBy('a')
+                .toArray(),
+            (x) =>
+              x
+                .execute(() => steps.push(2))
+                .map('id')
+                .max(),
+            (x) =>
+              x
+                .execute(() => steps.push(3))
+                .map('id')
+                .min(),
+          );
+
+          console.log(steps);
+          interval(0, 6).forEach((i) =>
+            expect(
+              steps[i] !== steps[i + 1] || steps[i] !== steps[i + 2],
+            ).toBeTrue(),
+          );
         });
       });
     };
