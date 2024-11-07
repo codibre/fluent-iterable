@@ -6,6 +6,7 @@
   "name": "fluent-iterable",
   "includeVersion": true,
   "disableSources": true,
+  "plugin": ["typedoc-plugin-markdown"],
   "entryPoints": [
     "./src/types/function-types/index.ts",
     "./src/index.ts",

@@ -1,4 +1,3 @@
-import { distinctByAsync } from './../async/distinct-by-async';
 import {
   any,
   contains,
@@ -58,6 +57,8 @@ import {
   unwind,
   finallySync,
   toObjectChainReduce,
+  toMapChain,
+  toMapChainReduce,
 } from '../sync';
 import {
   allAsync,
@@ -94,6 +95,9 @@ import {
   unwindAsync,
   finallyAsync,
   toObjectChainReduceAsync,
+  distinctByAsync,
+  toMapChainAsync,
+  toMapChainReduceAsync,
 } from '../async';
 import { combineEmitter, concatEmitter } from '../emitter';
 import * as common from '../common';
@@ -216,4 +220,8 @@ export const resolvingFuncs = {
   toMapAsync,
   toSet,
   toSetAsync,
+  toMapChain,
+  toMapChainReduce,
+  toMapChainAsync,
+  toMapChainReduceAsync,
 };

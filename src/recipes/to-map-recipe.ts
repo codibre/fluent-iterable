@@ -14,12 +14,16 @@ export function chooseToMapRecipe({ forEach, resolver }: DistinctIngredients) {
     const map = new Map();
     return resolver(
       forEach.call(this, (x) => {
-        const k = getKey(x);
-        const old = map.get(k);
-        const newOne = old === undefined ? mapper(x) : choose?.(old, x) || old;
-        if (old !== newOne) {
-          map.set(k, newOne);
-        }
+        return resolver(getKey(x), (k) => {
+          const old = map.get(k);
+          const newOneP =
+            old === undefined ? mapper(x) : choose?.(old, x) || old;
+          return resolver(newOneP, (newOne: any) => {
+            if (old !== newOne) {
+              map.set(k, newOne);
+            }
+          });
+        });
       }),
       () => map,
     );

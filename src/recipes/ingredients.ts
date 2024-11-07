@@ -90,3 +90,10 @@ export interface ToObjectChainIngredients extends BasicIngredients {
   flatten: Function;
   reduce: AsyncReducer<any, any>;
 }
+
+export interface ToMapChainIngredients extends BasicIngredients {
+  group: Function;
+  toMap: Function;
+  flatten: Function;
+  reduce: AsyncReducer<any, any>;
+}
