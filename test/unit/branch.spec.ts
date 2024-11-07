@@ -83,6 +83,17 @@ describe('branch', () => {
       expect(await b.max()).toEqual(fluent(items).map('id').max());
       expect(await c.min()).toEqual(fluent(items).map('id').min());
     });
+    it('should work with perfectly balanced operations', async () => {
+      const [a, b, c] = await fluent(items).branch(
+        (x) => x.toArray(),
+        (x) => x.toArray(),
+        (x) => x.toArray(),
+      );
+
+      expect(a).toEqual(fluent(items).toArray());
+      expect(b).toEqual(fluent(items).toArray());
+      expect(c).toEqual(fluent(items).toArray());
+    });
     it('should intercalate the steps between every branch', async () => {
       const steps: number[] = [];
       await fluent(items).branch(
@@ -168,6 +179,17 @@ describe('branch', () => {
       expect(a).toEqual(fluent(items).distinctBy('a').toArray());
       expect(await b.max()).toEqual(fluent(items).map('id').max());
       expect(await c.min()).toEqual(fluent(items).map('id').min());
+    });
+    it('should work with perfectly balanced operations', async () => {
+      const [a, b, c] = await fluentAsync(toAsync(items)).branch(
+        (x) => x.toArray(),
+        (x) => x.toArray(),
+        (x) => x.toArray(),
+      );
+
+      expect(a).toEqual(fluent(items).toArray());
+      expect(b).toEqual(fluent(items).toArray());
+      expect(c).toEqual(fluent(items).toArray());
     });
     it('should intercalate the steps between every branch', async () => {
       const steps: number[] = [];

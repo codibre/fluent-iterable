@@ -15,11 +15,7 @@ let log = '';
 const errors = new Set();
 function getBase() {
   return fluent(interval(1, ITEMS))
-    .map(x => x * 2).map(x => x + 2).map(x => x / 2)
-    .map(x => x * 3).map(x => x + 3).map(x => x / 3)
-    .map(x => x * 4).map(x => x + 4).map(x => x / 4)
-    .map(x => x * 5).map(x => x + 5).map(x => x / 5)
-    .map(x => x * 6).map(x => x + 6).map(x => x / 6);
+    .map(x => x * 2).map(x => x + 2).map(x => x / 2);
 }
 
 benchmarkSuite
