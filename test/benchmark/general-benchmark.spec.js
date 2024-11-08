@@ -3,6 +3,7 @@ const rxjs = require('rxjs');
 const rxjsOp = require('rxjs/operators');
 const { iterate } = require('iterare');
 const iterTools = require('iter-tools-es');
+const iterOps = require('iter-ops');
 const Benchmark = require('benchmark');
 
 const ITEMS = 100000;
@@ -156,6 +157,29 @@ benchmarkSuite
       iterTools.take(TAKE),
       iterTools.forEach((x) => x.join(',')),
     );
+  })
+  .add('iter-ops', () => {
+    return Array.from(iterOps.pipe(
+      interval(1, ITEMS),
+      iterOps.map((x) => x * MULTIPLIER1),
+      iterOps.map((x) => x * MULTIPLIER2),
+      iterOps.map((x) => x / MULTIPLIER2),
+      iterOps.map((x) => x * MULTIPLIER2),
+      iterOps.map((x) => x / MULTIPLIER2),
+      iterOps.map((x) => x * MULTIPLIER2),
+      iterOps.filter((x) => x % QUOTIENT === 0),
+      iterOps.map((x) => x / MULTIPLIER2),
+      iterOps.map((x) => x * MULTIPLIER2),
+      iterOps.map((x) => x / MULTIPLIER2),
+      iterOps.map((x) => x * MULTIPLIER2),
+      iterOps.map((x) => x / MULTIPLIER2),
+      iterOps.map((x) => x * MULTIPLIER2),
+      iterOps.map((x) => x / MULTIPLIER2),
+      iterOps.map((x) => x * MULTIPLIER2),
+      iterOps.map((x) => interval2(x, x + FLAT_FACTOR)),
+      iterOps.take(TAKE),
+      iterOps.last((x) => x.join(',')),
+    ))[0];
   })
   .add('iterare', () => {
     iterate(interval(1, ITEMS))
