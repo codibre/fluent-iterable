@@ -106,5 +106,6 @@ declare module './base' {
     toMapChainReduce: f.ToMapChainReduceFunction<T>;
     toMapChainAsync: f.AsyncToMapChainFunction<T>;
     toMapChainReduceAsync: f.AsyncToMapChainReduceFunction<T>;
+    branch: f.BranchFunction<T>;
   }
 }

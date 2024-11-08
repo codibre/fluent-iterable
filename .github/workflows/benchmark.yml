@@ -19,7 +19,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: install
         run: npm ci
+      - name: "build"
+        run: npm run build
       - name: "Benchmark"
-        run: |
-          npm run build
-          npm run test:benchmark
+        run: npm run test:benchmark
+      - name: "Benchmark - branch"
+        run: npm run test:benchmark:branch

@@ -1,5 +1,6 @@
 import {
   any,
+  branch,
   contains,
   count,
   emit,
@@ -224,4 +225,5 @@ export const resolvingFuncs = {
   toMapChainReduce,
   toMapChainAsync,
   toMapChainReduceAsync,
+  branch,
 };

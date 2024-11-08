@@ -2,6 +2,7 @@ export * from './all-function';
 export * from './any-function';
 export * from './append-function';
 export * from './avg-function';
+export * from './branch-functions';
 export * from './catch-functions';
 export * from './combine-function';
 export * from './combine-join-function';
