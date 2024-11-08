@@ -1,4 +1,5 @@
 import {
+  aggregate,
   any,
   branch,
   contains,
@@ -62,6 +63,7 @@ import {
   toMapChainReduce,
 } from '../sync';
 import {
+  aggregateAsync,
   allAsync,
   avgAsync,
   anyAsync,
@@ -166,6 +168,8 @@ export const specialAsync = {
 };
 
 export const resolvingFuncs = {
+  aggregate,
+  aggregateAsync,
   count,
   countAsync,
   emit,

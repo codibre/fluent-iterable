@@ -1,5 +1,6 @@
 import { toMapChainAsync } from './../async/to-map-chain-async';
 import {
+  aggregateAsync,
   anyAsync,
   appendAsync,
   avgAsync,
@@ -119,6 +120,7 @@ export const asyncSpecial = {
 };
 
 export const asyncResolvingFuncs = {
+  aggregate: aggregateAsync,
   count: countAsync,
   first: firstAsync,
   last: lastAsync,

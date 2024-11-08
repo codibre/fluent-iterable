@@ -2,6 +2,7 @@ import * as f from './function-types';
 
 declare module './base' {
   interface FluentAsyncIterable<T> {
+    aggregate: f.AsyncAggregateFunction<T>;
     withIndex: f.AsyncWithIndexFunction<T>;
     takeWhile: f.AsyncTakeWhileFunction<T>;
     take: f.AsyncTakeFunction<T>;
