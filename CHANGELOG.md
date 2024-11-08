@@ -1,3 +1,11 @@
+# [1.39.0](https://github.com/codibre/fluent-iterable/compare/v1.38.1...v1.39.0) (2024-11-08)
+
+
+### Features
+
+* adding to map chain operation ([#66](https://github.com/codibre/fluent-iterable/issues/66)) ([abb6a90](https://github.com/codibre/fluent-iterable/commit/abb6a90b89b4a5516671c930791ca2325d05a0f9))
+* creating branch operation ([#76](https://github.com/codibre/fluent-iterable/issues/76)) ([df5203a](https://github.com/codibre/fluent-iterable/commit/df5203a550a2e79c65b6006c4264bf0da1a60299))
+
 ## [1.38.1](https://github.com/codibre/fluent-iterable/compare/v1.38.0...v1.38.1) (2024-09-20)
 
 
