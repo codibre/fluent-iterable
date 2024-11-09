@@ -51,9 +51,9 @@ const result = flattedList
 This code looks fluent and easy to read, but it is severe to performance.
 That's because each operation do a complete iteration over the array, generating a new one! It can cause serious memory and cpu consumption, so, such practice is not encouraged.
 So, to solve this, you can write an equivalent code which will solve everything in with two chained loops. This will give you the best performance possible, but can result in a code harder to maintain.
-And that's where **fast-iterable** comes in!
+And that's where **fluent-iterable** comes in!
 
-With **fast-iterable**, you can do the same operation with the following code:
+With **fluent-iterable**, you can do the same operation with the following code:
 
 ``` typescript
 const result = fluent(list)
@@ -68,7 +68,7 @@ const result = fluent(list)
 ```
 
 Pretty simple, right? With this code, you'll do exactly two chained loops, exactly as the vanilla solution described above!
-**fast-iterable** takes advantage of the Iterable and AsyncIterable contracts to achieve this, but it goes beyond. It uses a special library called **augmentative-iterables** that we developed as the core engine of the iterations. This library is focused exclusively in performance, so, with it, we achieved a processing time very close to the vanilla solution above!
+**fluent-iterable** takes advantage of the Iterable and AsyncIterable contracts to achieve this, but it goes beyond. It uses a special library called **augmentative-iterables** that we developed as the core engine of the iterations. This library is focused exclusively in performance, so, with it, we achieved a processing time very close to the vanilla solution above!
 Comparing to iterations using **for of**, the native way to iterate over iterables of JavaScript, we achieved a result 50% faster!
 
 ## Doesn't it what rxjs do?
@@ -85,20 +85,20 @@ Think of RxJS as Lodash for events.
 That's it. Rxjs is focused primarily in event handling.
 Over that, some key differences can be pointed out:
 
-* *A previous operation of rxjs doesn't stop when some next operation stops, while with **fast-iterable** it does.*
-That's because, with rxjs you can chain multiple operations parallel after one, which makes sense for event handling. With **fast-iterable**, on the other hand, you can only have, normally, a straight line of operations and,f no matter what operation break the iteration, everything stops.
-* *With rxjs, a previous operation doesn't wait for a async next operation to end before go to the next step, while with **fast-iterable** it does.*
+* *A previous operation of rxjs doesn't stop when some next operation stops, while with **fluent-iterable** it does.*
+That's because, with rxjs you can chain multiple operations parallel after one, which makes sense for event handling. With **fluent-iterable**, on the other hand, you can only have, normally, a straight line of operations and,f no matter what operation break the iteration, everything stops.
+* *With rxjs, a previous operation doesn't wait for a async next operation to end before go to the next step, while with **fluent-iterable** it does.*
 Again, rxjs is focused on events. When dealing with event, you just want to emit them as fast as possible. With a simple iteration, though, you want to make sure that the whole chain of steps is concluded before advancing to the next one.
 
 So, as you see, regardless some similarities, there're some pretty important differences between them and those are libraries focused on quite different problems.
 
 ## Usage
 
-**fast-iterable** have some neat operations already implements. If you want to Click here for the [Full API Reference](https://github.com/Codibre/fluent-iterable/blob/master/docs/README.md).
+**fluent-iterable** have some neat operations already implements. If you want to Click here for the [Full API Reference](https://github.com/Codibre/fluent-iterable/blob/master/docs/README.md).
 
 ### Basics
 
-ECMAScript introduced support for [iterables and generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators) with version ES6 and their [asynchronous counterparts](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator) with version ES2018. It has introduced an abstraction over sequential iterators (arrays, maps, generators, etc), enabling us to implement solutions regardless of the actual type of the iterable collection. It is especially powerful when using in tandem with generator functions to avoid storing all items in memory when its avoidable. The API provided by ***fast-iterable*** reads the elements of the underlying iterable only when needed and stops reading elements as soon as the result is determined.
+ECMAScript introduced support for [iterables and generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators) with version ES6 and their [asynchronous counterparts](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator) with version ES2018. It has introduced an abstraction over sequential iterators (arrays, maps, generators, etc), enabling us to implement solutions regardless of the actual type of the iterable collection. It is especially powerful when using in tandem with generator functions to avoid storing all items in memory when its avoidable. The API provided by ***fluent-iterable*** reads the elements of the underlying iterable only when needed and stops reading elements as soon as the result is determined.
 
 To get started with the fluent API, you need to translate the iterable (can be any object with [Symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) [iterator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator) or [asyncIterator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator) defined) into either a **FluentIterable** using **fluent()** or a **FluentAsyncIterable** using **fluentAsync()**.
 
@@ -109,7 +109,7 @@ import {
   fluentAsync,
   FluentIterable,
   FluentAsyncIterable,
-} from '**fast-iterable**';
+} from '@codibre/fluent-iterable';
 
 const iterableOfArray: FluentIterable<number> = fluent([3, 1, 8, 6, 9, 2]);
 
@@ -136,7 +136,7 @@ async function* emails(): AsyncIterable<string> {
     if (!res.ok) {
       break;
     }
-    yield* (await res.json()).data.map((user) => user.email);
+    yield* (await res.json()).data.map((user: { email: string }) => user.email);
   }
 }
 
@@ -171,11 +171,11 @@ function getNumberOfUsers(iterable: FluentAsyncIterable<ChatMessage>): Promise<n
   return getAllUsers(iterable).count();
 }
 
-async function getMostActiveUser(iterable: FluentAsyncIterable<ChatMessage>): Promise<string> {
-  const maxGroup: FluentGroup<ChatMessage> = await iterable
+async function getMostActiveUser(iterable: FluentAsyncIterable<ChatMessage>): Promise<string | undefined> {
+  const maxGroup = await iterable
     .group(chatMessage => chatMessage.from) // group the messages by their sender
     .max(chatMessage => chatMessage.values.count()); // find one of the groups which has the most messages
-  return maxGroup.key;
+  return maxGroup?.key;
 }
 
 async function hasUserSentEmptyMessage(iterable: FluentAsyncIterable<ChatMessage>, user: string): Promise<bool> {
@@ -186,7 +186,7 @@ async function hasUserSentEmptyMessage(iterable: FluentAsyncIterable<ChatMessage
 async function createBackupSequential(iterable: FluentAsyncIterable<ChatMessage>): Promise<void> {
   await iterable
     .execute(chatMessage => console.log(`Backing up message ${chatMessage.id}.`)) // log progress w/o modifying the iterable
-    .forEachAsync(chatMessage => fetch(BACKUP_URL, { // execute the asynchronous backup operation against all elements one-by-one
+    .forEach(chatMessage => fetch(BACKUP_URL, { // execute the asynchronous backup operation against all elements one-by-one
       method: 'post',
       body:    JSON.stringify(chatMessage),
       headers: { 'Content-Type': 'application/json' },
@@ -194,14 +194,31 @@ async function createBackupSequential(iterable: FluentAsyncIterable<ChatMessage>
 }
 
 async function createBackupParallel(iterable: FluentAsyncIterable<ChatMessage>): Promise<void> {
-  const promises = iterable
+  await iterable
     .execute(chatMessage => console.log(`Backing up message ${chatMessage.id}.`)) // log progress w/o modifying the iterable
-    .map(chatMessage => fetch(BACKUP_URL, { // translate all elements into a promise of their asynchronous backup operation
-      method: 'post',
-      body:    JSON.stringify(chatMessage),
-      headers: { 'Content-Type': 'application/json' },
-    }));
-  await Promise.all(promises);
+    .map(chatMessage => {
+      const result = fetch(BACKUP_URL, { // translate all elements into a promise of their asynchronous backup operation
+          method: 'post',
+          body:    JSON.stringify(chatMessage),
+          headers: { 'Content-Type': 'application/json' },
+      }).then(x => [x]);
+      return fluentAsync(result);
+    })
+    // Joins everything in parallel, generating an AsyncIterable with the results in the order of what yielded first
+    .flatMerge(
+      (error) => console.log(error) // This callback will be called whenever some of the fetch calls throws an error
+    )
+    .last();
+}
+
+async function createBackupParallelV2(iterable: FluentAsyncIterable<ChatMessage>): Promise<Response[]> {
+  return iterable
+    .execute(chatMessage => console.log(`Backing up message ${chatMessage.id}.`)) // log progress w/o modifying the iterable
+    .waitAll(chatMessage => fetch(BACKUP_URL, { // translate all elements into a promise of their asynchronous backup operation
+          method: 'post',
+          body:    JSON.stringify(chatMessage),
+          headers: { 'Content-Type': 'application/json' },
+      }));
 }
 ```
 
@@ -212,7 +229,7 @@ You can see a list of many advanced examples for **fluent** clicking [here!](adv
 #### Playing with Fibonacci generator
 
 ``` typescript
-import { fluent } from '**fast-iterable**';
+import { fluent } from '@codibre/fluent-iterable';
 
 function* naiveFibonacci(): Iterable<number> {
   yield 0;
@@ -259,7 +276,7 @@ console.log(
 #### Playing with object arrays
 
 ``` typescript
-import { fluent } from '**fast-iterable**';
+import { fluent } from '@codibre/fluent-iterable';
 
 enum Gender {
   Male = 'Male',
@@ -342,7 +359,7 @@ console.log(
 
 ``` typescript
 import fetch from 'node-fetch';
-import { fluentAsync, Pager } from '**fast-iterable**';
+import { fluentAsync, Pager } from '@cobidre/fluent-iterable';
 
 interface Data {
   id: number;
@@ -371,7 +388,7 @@ fluentAsync(depaginate(pager))
 ### Doing an inner join between two iterables:
 
 ``` typescript
-import { fluent, identity } from '**fast-iterable**';
+import { fluent, identity } from '@codibre/fluent-iterable';
 
 const genders = [
   { code: 'm', description: 'male' },
@@ -420,18 +437,16 @@ fluent(genders)
 #### Bonus: How to Scan DynamoDB like a pro
 
 ``` typescript
-import { DynamoDB } from 'aws-sdk';
-import { Key } from 'aws-sdk/clients/dynamodb';
-import { depaginate, fluentAsync, Pager } from '**fast-iterable**';
+import { DynamoDB, ScanInput, AttributeValue } from '@aws-sdk/client-dynamodb';
+import { depaginate, fluentAsync, Pager } from '@codibre/fluent-iterable';
 
 async function *scan<TData>(
-  input: DynamoDB.DocumentClient.ScanInput
+  input: ScanInput
 ): AsyncIterable<TData> {
-  const ddb = new DynamoDB.DocumentClient(..);
-  const pager: Pager<TData, Key> = async (token) => {
+  const ddb = new DynamoDB();
+  const pager: Pager<TData, Record<string, AttributeValue>> = async (token) => {
     const result = await ddb
-      .scan(input)
-      .promise();
+      .scan(input);
 
     return {
       nextPageToken: result.LastEvaluatedKey,
@@ -444,10 +459,10 @@ async function *scan<TData>(
 
 // and use it like this:
 
-const productsParams: DynamoDB.DocumentClient.ScanInput = {
+const productsParams: ScanInput = {
   TableName : 'ProductTable',
   FilterExpression : '#shoeName = :shoeName', // optional
-  ExpressionAttributeValues : {':shoeName' : 'YeeZys'}, // optional
+  ExpressionAttributeValues : {':shoeName' : { S: 'YeeZys' } }, // optional
   ExpressionAttributeNames: { '#shoeName': 'name' } // optional
 };
 
@@ -469,17 +484,18 @@ The solution used for this problems was 90% inspired in the [fraxken combine-asy
 You can add custom methods to the FluentIterable and FluentAsyncIterable using the *extend* and *extendAsync* utilities. Here is a practical example of how to:
 
 ``` TypeScript
-declare module '**fast-iterable**' {
-  import { extendAsync } from '../src';
+import { extendAsync } from '../src';
+
+declare module '@codibre/fluent-iterable' {
 
   interface FluentAsyncIterable<T> {
     myCustomIterableMethod(): FluentAsyncIterable<T>;
     myCustomResolvingMethod(): PromiseLike<number>;
   }
-
-  extendAsync.use('myCustomIterableMethod', (x) => someOperation(x));
-  extendAsync.use('myCustomResolvingMethod', (x) => someResolvingOperation(x));
 }
+
+extendAsync.use('myCustomIterableMethod', (x) => someOperation(x));
+extendAsync.use('myCustomResolvingMethod', (x) => someResolvingOperation(x));
 ```
 
 Notice that, when you import a code like the above, all the next created FluentAsyncIterable will have the declared methods, so use it with caution!

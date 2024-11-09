@@ -47,7 +47,7 @@ fluent(invoices)
         value: x.value
       }))
     )
-  )
+  );
 ```
 
 Those nested fluent operation can become very messy when your business rule starts to become more complicated. Luckily, fluent offers you a powerful operation called **flatJoin**. With flatJoin, you can automatically obtain the items of each nested level with just one operation, like that:
@@ -59,7 +59,7 @@ fluent(invoices)
     invoiceId: invoice.id,
     itemId: items.id,
     value: taxes.value
-  }))
+  }));
 ```
 
 Look that the root item of each operation is added to the result in the property named with the symbol **tail**, that you can import from fluent. You can also get the last items from symbol **head**, but in this case it'll be the same value as the property **taxes**.

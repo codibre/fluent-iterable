@@ -252,9 +252,7 @@ function getAverageStepper() {
 
   return wrapper;
 }
-function getItemToAssure<
-  F extends Function | FluentIterable<any> | FluentAsyncIterable<any>,
->(f: F): any {
+function getItemToAssure<F extends Function | AnyIterable<any>>(f: F): any {
   return typeof f === 'function' && !(f instanceof FluentClass)
     ? (...args: any[]) => (f as CallableFunction)(...args)
     : f;
@@ -272,9 +270,7 @@ function getItemToAssure<
  *
  * @param f the function to assure order
  */
-function assureOrder<
-  F extends Function | FluentIterable<any> | FluentAsyncIterable<any>,
->(f: F): F {
+function assureOrder<F extends Function | AnyIterable<any>>(f: F): F {
   const result = getItemToAssure(f);
   result[orderAssured] = 1;
   return result;

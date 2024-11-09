@@ -26,7 +26,7 @@ Instead, you need to do as follow:
 ```ts
 const origin = [1, 2, 3];
 const evens = fluent(it).filter((x) => x % 2 === 0);
-const odds = fluent(it().filter((x) => x % 2 !== 0)
+const odds = fluent(it).filter((x) => x % 2 !== 0)
 ```
 
 That's how iterables works: you can't guarantee a second iteration over the same iterable, and that's needed for some core behaviors of it. Also, an iterable is not guaranteed to support multiples iterations over it. An array supports it, but it's not the rule, it's an exception. Iterables created using the [generator pattern](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) can only be iterated once, for example. Because of this, fluent-iterable don't give support to parallel iterations deriving from the same node and must be used as a straight forward fluent tool.
@@ -44,7 +44,8 @@ The operations are executed in the chaining order for each iterable item when a 
 const test = fluent([1, 2, 3])
   .repeat(3)
   .withIndex()
-  .flatMap(({ value, idx }) => fluent(value).map((x) => x * (idx + 1)));
+  .partition(3)
+  .flatMap((x) => fluent(x).map(({ value, idx }) => value * (idx + 1)));
 
 // Here, the iteration happens
 for (const i of test) {
