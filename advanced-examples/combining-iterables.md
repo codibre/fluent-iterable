@@ -55,7 +55,7 @@ const categories = [
   },
   {
     parentId: 1,
-    id: 2
+    id: 2,
     description: 'movies',
   },
   {

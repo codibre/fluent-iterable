@@ -16,7 +16,7 @@ async function doTheWork(request: MyRequest) {
   // Also notice that the item type is an array, because we're talking about a strem of chunked data
   await fluent<SomeData[]>(getChunkedData(request))
     .flatMap() // With flat map, the stream of SomeData[] will unwind and be transformed in a stream of SomeData
-    .forEach(doEachWork); // You could also just return the iterable without resolve it and del with the data somewhere else, for decoupling purpose
+    .forEachAsync(doEachWork); // You could also just return the iterable without resolve it and del with the data somewhere else, for decoupling purpose
 }
 ```
 

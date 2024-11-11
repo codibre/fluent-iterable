@@ -110,7 +110,7 @@ import {
   fluentAsync,
   FluentIterable,
   FluentAsyncIterable,
-} from '**fluent-iterable**';
+} from '@codibre/fluent-iterable';
 
 const iterableOfArray: FluentIterable<number> = fluent([3, 1, 8, 6, 9, 2]);
 
@@ -137,7 +137,7 @@ async function* emails(): AsyncIterable<string> {
     if (!res.ok) {
       break;
     }
-    yield* (await res.json()).data.map((user) => user.email);
+    yield* (await res.json()).data.map((user: { email: string }) => user.email);
   }
 }
 
@@ -172,11 +172,11 @@ function getNumberOfUsers(iterable: FluentAsyncIterable<ChatMessage>): Promise<n
   return getAllUsers(iterable).count();
 }
 
-async function getMostActiveUser(iterable: FluentAsyncIterable<ChatMessage>): Promise<string> {
-  const maxGroup: FluentGroup<ChatMessage> = await iterable
+async function getMostActiveUser(iterable: FluentAsyncIterable<ChatMessage>): Promise<string | undefined> {
+  const maxGroup = await iterable
     .group(chatMessage => chatMessage.from) // group the messages by their sender
     .max(chatMessage => chatMessage.values.count()); // find one of the groups which has the most messages
-  return maxGroup.key;
+  return maxGroup?.key;
 }
 
 async function hasUserSentEmptyMessage(iterable: FluentAsyncIterable<ChatMessage>, user: string): Promise<bool> {
@@ -187,7 +187,7 @@ async function hasUserSentEmptyMessage(iterable: FluentAsyncIterable<ChatMessage
 async function createBackupSequential(iterable: FluentAsyncIterable<ChatMessage>): Promise<void> {
   await iterable
     .execute(chatMessage => console.log(`Backing up message ${chatMessage.id}.`)) // log progress w/o modifying the iterable
-    .forEachAsync(chatMessage => fetch(BACKUP_URL, { // execute the asynchronous backup operation against all elements one-by-one
+    .forEach(chatMessage => fetch(BACKUP_URL, { // execute the asynchronous backup operation against all elements one-by-one
       method: 'post',
       body:    JSON.stringify(chatMessage),
       headers: { 'Content-Type': 'application/json' },
@@ -195,14 +195,31 @@ async function createBackupSequential(iterable: FluentAsyncIterable<ChatMessage>
 }
 
 async function createBackupParallel(iterable: FluentAsyncIterable<ChatMessage>): Promise<void> {
-  const promises = iterable
+  await iterable
     .execute(chatMessage => console.log(`Backing up message ${chatMessage.id}.`)) // log progress w/o modifying the iterable
-    .map(chatMessage => fetch(BACKUP_URL, { // translate all elements into a promise of their asynchronous backup operation
-      method: 'post',
-      body:    JSON.stringify(chatMessage),
-      headers: { 'Content-Type': 'application/json' },
-    }));
-  await Promise.all(promises);
+    .map(chatMessage => {
+      const result = fetch(BACKUP_URL, { // translate all elements into a promise of their asynchronous backup operation
+          method: 'post',
+          body:    JSON.stringify(chatMessage),
+          headers: { 'Content-Type': 'application/json' },
+      }).then(x => [x]);
+      return fluentAsync(result);
+    })
+    // Joins everything in parallel, generating an AsyncIterable with the results in the order of what yielded first
+    .flatMerge(
+      (error) => console.log(error) // This callback will be called whenever some of the fetch calls throws an error
+    )
+    .last();
+}
+
+async function createBackupParallelV2(iterable: FluentAsyncIterable<ChatMessage>): Promise<Response[]> {
+  return iterable
+    .execute(chatMessage => console.log(`Backing up message ${chatMessage.id}.`)) // log progress w/o modifying the iterable
+    .waitAll(chatMessage => fetch(BACKUP_URL, { // translate all elements into a promise of their asynchronous backup operation
+          method: 'post',
+          body:    JSON.stringify(chatMessage),
+          headers: { 'Content-Type': 'application/json' },
+      }));
 }
 ```
 
@@ -213,7 +230,7 @@ You can see a list of many advanced examples for **fluent** clicking [here!](adv
 #### Playing with Fibonacci generator
 
 ``` typescript
-import { fluent } from '**fluent-iterable**';
+import { fluent } from '@codibre/fluent-iterable';
 
 function* naiveFibonacci(): Iterable<number> {
   yield 0;
@@ -260,7 +277,7 @@ console.log(
 #### Playing with object arrays
 
 ``` typescript
-import { fluent } from '**fluent-iterable**';
+import { fluent } from '@codibre/fluent-iterable';
 
 enum Gender {
   Male = 'Male',
@@ -343,7 +360,7 @@ console.log(
 
 ``` typescript
 import fetch from 'node-fetch';
-import { fluentAsync, Pager } from '**fluent-iterable**';
+import { fluentAsync, Pager } from '@cobidre/fluent-iterable';
 
 interface Data {
   id: number;
@@ -372,7 +389,7 @@ fluentAsync(depaginate(pager))
 ### Doing an inner join between two iterables:
 
 ``` typescript
-import { fluent, identity } from '**fluent-iterable**';
+import { fluent, identity } from '@codibre/fluent-iterable';
 
 const genders = [
   { code: 'm', description: 'male' },
@@ -421,18 +438,16 @@ fluent(genders)
 #### Bonus: How to Scan DynamoDB like a pro
 
 ``` typescript
-import { DynamoDB } from 'aws-sdk';
-import { Key } from 'aws-sdk/clients/dynamodb';
-import { depaginate, fluentAsync, Pager } from '**fluent-iterable**';
+import { DynamoDB, ScanInput, AttributeValue } from '@aws-sdk/client-dynamodb';
+import { depaginate, fluentAsync, Pager } from '@codibre/fluent-iterable';
 
 async function *scan<TData>(
-  input: DynamoDB.DocumentClient.ScanInput
+  input: ScanInput
 ): AsyncIterable<TData> {
-  const ddb = new DynamoDB.DocumentClient(..);
-  const pager: Pager<TData, Key> = async (token) => {
+  const ddb = new DynamoDB();
+  const pager: Pager<TData, Record<string, AttributeValue>> = async (token) => {
     const result = await ddb
-      .scan(input)
-      .promise();
+      .scan(input);
 
     return {
       nextPageToken: result.LastEvaluatedKey,
@@ -445,10 +460,10 @@ async function *scan<TData>(
 
 // and use it like this:
 
-const productsParams: DynamoDB.DocumentClient.ScanInput = {
+const productsParams: ScanInput = {
   TableName : 'ProductTable',
   FilterExpression : '#shoeName = :shoeName', // optional
-  ExpressionAttributeValues : {':shoeName' : 'YeeZys'}, // optional
+  ExpressionAttributeValues : {':shoeName' : { S: 'YeeZys' } }, // optional
   ExpressionAttributeNames: { '#shoeName': 'name' } // optional
 };
 
@@ -470,17 +485,18 @@ The solution used for this problems was 90% inspired in the [fraxken combine-asy
 You can add custom methods to the FluentIterable and FluentAsyncIterable using the *extend* and *extendAsync* utilities. Here is a practical example of how to:
 
 ``` TypeScript
-declare module '**fluent-iterable**' {
-  import { extendAsync } from '../src';
+import { extendAsync } from '../src';
+
+declare module '@codibre/fluent-iterable' {
 
   interface FluentAsyncIterable<T> {
     myCustomIterableMethod(): FluentAsyncIterable<T>;
     myCustomResolvingMethod(): PromiseLike<number>;
   }
-
-  extendAsync.use('myCustomIterableMethod', (x) => someOperation(x));
-  extendAsync.use('myCustomResolvingMethod', (x) => someResolvingOperation(x));
 }
+
+extendAsync.use('myCustomIterableMethod', (x) => someOperation(x));
+extendAsync.use('myCustomResolvingMethod', (x) => someResolvingOperation(x));
 ```
 
 Notice that, when you import a code like the above, all the next created FluentAsyncIterable will have the declared methods, so use it with caution!

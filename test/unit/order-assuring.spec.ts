@@ -1,4 +1,4 @@
-import { fluent } from '../../src';
+import { fluent, o } from '../../src';
 import { orderAssured } from '../../src/types-internal';
 
 describe('order assuring', () => {
@@ -27,6 +27,17 @@ describe('order assuring', () => {
       const it: any = fluent([1, 2, 3])
         .o()
         .filter((x) => x > 1);
+
+      expect(it[orderAssured]).toBeDefined();
+      const tw = it.takeWhile((x: any) => x < 3);
+
+      expect(tw[orderAssured]).toBeDefined();
+      const mp: any = tw.map((x: any) => x * 2);
+
+      expect(mp[orderAssured]).not.toBeDefined();
+    });
+    it('should keep an assured ascending order through filter and takeWhile operations, but not through a mapper when using assurer directly on iterable', () => {
+      const it: any = fluent(o([1, 2, 3])).filter((x) => x > 1);
 
       expect(it[orderAssured]).toBeDefined();
       const tw = it.takeWhile((x: any) => x < 3);

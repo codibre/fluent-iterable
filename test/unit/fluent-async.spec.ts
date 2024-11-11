@@ -1090,6 +1090,27 @@ describe('fluent async iterable', () => {
       expect(resolved).toBe(10);
       expect(result).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     });
+
+    it('should resolve promises in parallel', async () => {
+      let resolved = 0;
+      let current = 0;
+
+      const promise = fluentAsync(fluent(interval(1, 10)).toAsync()).waitAll(
+        (x) =>
+          new Promise(async (resolve) => {
+            await delay(1);
+            resolved++;
+            resolve(x + current);
+            await delay(1);
+            current = 1;
+          }),
+      );
+
+      expect(resolved).toBe(0);
+      const result = await promise;
+      expect(resolved).toBe(10);
+      expect(result).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    });
   });
 
   it('should be identifiable as fluent async', () => {

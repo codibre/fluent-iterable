@@ -11,8 +11,8 @@ fluentAsync(dataStream)
   })
   .map((x) => requestSomeData(x)) // Here, request is an async operation
   .map((x) => otherRequest(parse(x))) // Parse is sync, otherRequest async, but that's okay, as long async/await is not used
-  .group('categoryId'); // A grouping operation is performed by the categoryId value
-take(10); //Take just 10 items
+  .group('categoryId') // A grouping operation is performed by the categoryId value
+  .take(10); //Take just 10 items
 ```
 
 The good thing here is that fluent works over the iterable and async iterable mechanism, and in that way, it is possible to chain operations that results in promises, and all the iterable sequence will be respected, instead of generating a lot of promises which will flood node queue.
@@ -26,8 +26,8 @@ fluent(data)
   })
   .mapAsync((x) => requestSomeData(x)) // From that point, the FluentIterable is transformed in a FluentAsyncIterable, and you don't need the async suffix any longer
   .map((x) => otherRequest(parse(x))) // Parse is sync, otherRequest async, but that's okay, as long async/await is not used
-  .group('categoryId'); // A grouping operation is performed by the categoryId value
-take(10); //Take just 10 items
+  .group('categoryId') // A grouping operation is performed by the categoryId value
+  .take(10); //Take just 10 items
 ```
 
 [Go back](README.md)
