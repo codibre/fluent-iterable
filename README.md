@@ -19,13 +19,14 @@ Here a some results we got comparing to another similar options on node 22:
 
 | Library | Ops/sec | Margin | Ran samples |
 | ------- | ------- | ----------- | ----------- |
-| **fluent** | 473 | ±0.99% | 91 |
-| [iterare](https://www.npmjs.com/package/iterare ) | 438 | ±0.39%  | 88 |
-| native builtin iterator | 312 | ±0.41% | 93 |
-| [iter-tools](https://www.npmjs.com/package/iter-tools-es ) | 242 | ±0.39%  | 88 |
-| [rxjs](https://www.npmjs.com/package/rxjs) | 197 | ±1.02% | 84 |
-| native generators | 156 | ±0.57% | 81 |
-| native array operations chain | 68.95 | ±1.69% | 71 |
+| **fluent** | 494 | ±1.43% | 91 |
+| [iterare](https://www.npmjs.com/package/iterare) | 436 | ±1.10%  | 92 |
+| [iter-ops](https://www.npmjs.com/package/iter-ops) | 376 | ±0.21% | 91 |
+| native builtin iterator | 326 | ±0.21% | 92 |
+| [iter-tools](https://www.npmjs.com/package/iter-tools-es) | 243 | ±0.17%  | 88 |
+| [rxjs](https://www.npmjs.com/package/rxjs) | 197 | ±0.49% | 83 |
+| native generators | 155 | ±0.83% | 81 |
+| native array operations chain | 63.71 | ±2.79% | 66 |
 
 Notice that what we call native builtin ierator is the [iterator helper](https://v8.dev/features/iterator-helpers), recently released in the NodeJs 22, so due to some strategies we use, we can achieve a performance even better than the helper implemented in the V8 Engine!
 You can check the benchmark code [here](./test-benchmark/general-benchmark.spec.ts)
