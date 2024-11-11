@@ -1,3 +1,10 @@
+## [1.39.1](https://github.com/codibre/fluent-iterable/compare/v1.39.0...v1.39.1) (2024-11-11)
+
+
+### Bug Fixes
+
+* fix documentation ([#78](https://github.com/codibre/fluent-iterable/issues/78)) ([28d1ea9](https://github.com/codibre/fluent-iterable/commit/28d1ea97f0e255d86a3c5239135ab7b34fe7ee72))
+
 # [1.39.0](https://github.com/codibre/fluent-iterable/compare/v1.38.1...v1.39.0) (2024-11-08)
 
 
