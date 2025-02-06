@@ -12,6 +12,7 @@ function unwindAndGroup(
   it = ing.flatten.call(it, (x: any) => {
     const current = key(x);
     return typeof current !== 'string' &&
+      current &&
       typeof current[Symbol.iterator] === 'function'
       ? ing.map.call(current, (item) => [item, x])
       : [[current, x]];
