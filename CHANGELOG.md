@@ -1,3 +1,10 @@
+## [1.39.2](https://github.com/codibre/fluent-iterable/compare/v1.39.1...v1.39.2) (2025-02-06)
+
+
+### Bug Fixes
+
+* treating undefined key ([7b31e67](https://github.com/codibre/fluent-iterable/commit/7b31e6793059e56687be722fef63e99bb8bd27e9))
+
 ## [1.39.1](https://github.com/codibre/fluent-iterable/compare/v1.39.0...v1.39.1) (2024-11-11)
 
 
