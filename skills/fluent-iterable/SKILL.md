@@ -605,13 +605,16 @@ fluent(items)
    const result = await fluentAsync(...).toArray();
    ```
 
-3. **Don't use async methods on fluent()**
+3. **Don't use async methods on fluentAsync()**
    ```typescript
    // ❌ WRONG - forEachAsync doesn't exist on fluent()
-   fluent(array).forEachAsync(...)
+   fluentAsync(array).forEachAsync(...)
    
    // ✅ CORRECT
-   await fluentAsync(array).forEachAsync(...)
+   await fluent(array).forEachAsync(...)
+      
+    // ✅ Also CORRECT
+    await fluenAsync(data).forEach(...)
    ```
 
 4. **Don't chain multiple .toArray() calls**
@@ -891,13 +894,16 @@ const uniqueIds = fluent(items)
 ## Troubleshooting
 
 ### Problem: "Cannot find property forEachAsync"
-**Cause:** Using `fluent()` instead of `fluentAsync()`
+**Cause:** Using `fluentAsync()` instead of `fluent()`
 ```typescript
 // ❌ WRONG
-fluent(data).forEachAsync(...)
+fluentAsync(data).forEachAsync(...)
 
 // ✅ CORRECT
-await fluentAsync(data).forEachAsync(...)
+await fluent(data).forEachAsync(...)
+
+// ✅ Also CORRECT
+await fluenAsync(data).forEach(...)
 ```
 
 ### Problem: "Awaiting non-Promise"
