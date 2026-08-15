@@ -4,42 +4,55 @@ on:
   push:
     branches: [master]
 
+permissions:
+  contents: write
+  id-token: write
+
+env:
+  HUSKY: 0
+  CI: true
+
 jobs:
-  semantic:
+  release:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-      HUSKY: 0
-      CI: true
     steps:
-      - uses: actions/checkout@master
+      - name: Checkout repository
+        uses: actions/checkout@v7
         with:
-          token: ${{ secrets.GH_TOKEN }}
-      - uses: actions/setup-node@v3
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
         with:
-          node-version: "22.x"
-      - run: printf "//`node -p \"require('url').parse('https://registry.npmjs.org').host\"`/:_authToken=${NPM_TOKEN}\n" >> ~/.npmrc
-      - run: npm ci
-      - run: npm run build --if-present
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "lts/*"
-      - run: previousVersion=$(sed 's/.*"version"&#58; "\(.*\)".*/\1/;t;d' ./package.json)
-      - run: npm i -g @semantic-release/changelog @semantic-release/commit-analyzer @semantic-release/git @semantic-release/github @semantic-release/exec @semantic-release/npm @semantic-release/release-notes-generator semantic-release
+          node-version: "26.x"
+          cache: npm
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build --if-present
+
+      - name: Get OIDC Token
+        id: oidc
+        run: |
+          IDENTITY_TOKEN=$(curl -sL "${ACTIONS_ID_TOKEN_REQUEST_URL}?audience=https://registry.npmjs.org" \
+            -H "Authorization: Bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" | jq -r '.value')
+          NPM_TOKEN=$(curl -s -X POST \
+            -H "Content-Type: application/json" \
+            -d "{\"token\": \"${IDENTITY_TOKEN}\"}" \
+            "https://registry.npmjs.org/-/npm/v1/oauth/token" | jq -r '.token')
+          echo "npm-token=${NPM_TOKEN}" >> $GITHUB_OUTPUT
+
+      - name: Configure npm with OIDC token
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ steps.oidc.outputs.npm-token }}" > ~/.npmrc
+          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+          echo "always-auth=true" >> ~/.npmrc
+
+      - name: Semantic Release
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-          HUSKY: 0
-          CI: true
-      - run: npx semantic-release --ci
-      - run: finalVersion=$(sed 's/.*"version"&#58; "\(.*\)".*/\1/;t;d' ./package.json)
-      - run: |
-          if [ "$previousVersion" != "$finalVersion" ]; then
-            git push
-            sed -i "s/\*\*@codibre\/fluent-iterable\*\*/**fast-iterable**/g" README.md
-            sed -i "s/@codibre\/fluent-iterable/fast-iterable/g" package*.json
-            npm publish
-          fi
-        env:
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release --ci
