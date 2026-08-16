@@ -42,7 +42,7 @@ jobs:
         id: oidc
         run: |
           IDENTITY_TOKEN=$(curl -sL "${ACTIONS_ID_TOKEN_REQUEST_URL}?audience=https://registry.npmjs.org" \
-            -H "Authorization: Bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" | jq -r '.value')
+            -H "Authorization: Bearer ${ACTIONS_ID_TOKEN}" | jq -r '.value')
           NPM_TOKEN=$(curl -s -X POST \
             -H "Content-Type: application/json" \
             -d "{\"token\": \"${IDENTITY_TOKEN}\"}" \
