@@ -1,3 +1,18 @@
+# [1.40.0](https://github.com/codibre/fluent-iterable/compare/v1.39.2...v1.40.0) (2026-08-16)
+
+
+### Bug Fixes
+
+* fixing publishing ([dc1abdc](https://github.com/codibre/fluent-iterable/commit/dc1abdceeecd606e3d650f205ddf28393220245d))
+* pin semantic-release plugins in workflow ([#82](https://github.com/codibre/fluent-iterable/issues/82)) ([3b7cd88](https://github.com/codibre/fluent-iterable/commit/3b7cd88b9793dc03a0e75c8b36e6cee3fd663138))
+* run semantic-release directly instead of npx ([7789280](https://github.com/codibre/fluent-iterable/commit/7789280ef47292742c5abf3c1939d2ad663f9387))
+* update CI pipelines, Node 26.x, OIDC npm auth, fix broken badges ([#81](https://github.com/codibre/fluent-iterable/issues/81)) ([37c9f96](https://github.com/codibre/fluent-iterable/commit/37c9f960b0cfc0288c973f6a8233be306b091f3c))
+
+
+### Features
+
+* adding fluent-iterable skill ([#79](https://github.com/codibre/fluent-iterable/issues/79)) ([27e80bb](https://github.com/codibre/fluent-iterable/commit/27e80bb53e1eddc9c82d2cbbc292c3fff6fee29e))
+
 ## [1.39.2](https://github.com/codibre/fluent-iterable/compare/v1.39.1...v1.39.2) (2025-02-06)
 
 
