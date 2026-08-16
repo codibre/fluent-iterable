@@ -32,6 +32,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install semantic-release plugins globally
+        run: npm install -g @semantic-release/changelog@7.0.0 @semantic-release/commit-analyzer@13.0.1 @semantic-release/release-notes-generator@14.1.1 @semantic-release/exec@7.1.0 @semantic-release/npm@13.1.5 @semantic-release/github@12.0.9 @semantic-release/git@11.0.1
+
       - name: Build
         run: npm run build --if-present
 
@@ -39,7 +42,7 @@ jobs:
         id: oidc
         run: |
           IDENTITY_TOKEN=$(curl -sL "${ACTIONS_ID_TOKEN_REQUEST_URL}?audience=https://registry.npmjs.org" \
-            -H "Authorization: Bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" | jq -r '.value')
+            -H "Authorization: Bearer ${ACTIONS_ID_TOKEN}" | jq -r '.value')
           NPM_TOKEN=$(curl -s -X POST \
             -H "Content-Type: application/json" \
             -d "{\"token\": \"${IDENTITY_TOKEN}\"}" \
