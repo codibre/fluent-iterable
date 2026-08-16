@@ -33,8 +33,6 @@
     "test:benchmark:branch": "node test/benchmark/branch-benchmark.spec.js",
     "test:memory": "ts-node test/memory/run.ts",
     "test:memory-native": "ts-node test/memory/run.ts",
-    "prepublishOnly": "npm run build && npm run test:coverage",
-    "preversion": "npm run build && npm run test:coverage",
     "clear": "npm run clear:build && npm run clear:modules",
     "clear:build": "del-cli ./dist",
     "clear:modules": "del-cli ./node_modules",

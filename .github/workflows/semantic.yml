@@ -1,4 +1,4 @@
-name: semantic-release
+name: release
 
 on:
   push:
@@ -32,11 +32,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install semantic-release plugins globally
-        run: npm install -g semantic-release@25.0.9 @semantic-release/changelog@7.0.0 @semantic-release/commit-analyzer@13.0.1 @semantic-release/release-notes-generator@14.1.1 @semantic-release/exec@7.1.0 @semantic-release/npm@13.1.5 @semantic-release/github@12.0.9 @semantic-release/git@11.0.1
-
       - name: Build
         run: npm run build --if-present
+
+      - name: Install release-it for CI
+        run: npm install -g release-it@21.0.2 @release-it/conventional-changelog@12.0.0
 
       - name: Get OIDC Token
         id: oidc
@@ -55,7 +55,10 @@ jobs:
           echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
           echo "always-auth=true" >> ~/.npmrc
 
-      - name: Semantic Release
+      - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: semantic-release --ci
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          release-it --ci
