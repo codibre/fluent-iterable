@@ -1,6 +1,5 @@
-# This is a basic workflow to help you get started with Actions
-
 name: benchmark
+
 on:
   workflow_dispatch:
     branches: [master]
@@ -10,18 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [22.x]
+        node-version: [26.x]
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v7
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
-      - name: install
+          cache: npm
+      - name: Install dependencies
         run: npm ci
-      - name: "build"
+      - name: Build
         run: npm run build
-      - name: "Benchmark"
+      - name: Benchmark
         run: npm run test:benchmark
-      - name: "Benchmark - branch"
+      - name: Benchmark - branch
         run: npm run test:benchmark:branch
