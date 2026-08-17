@@ -1,0 +1,13 @@
+packages:
+  - '.'
+  - 'libs/**'
+allowBuilds:
+  '@datadog/pprof': false
+  '@nestjs/core': false
+  '@newrelic/fn-inspect': false
+  '@newrelic/native-metrics': false
+  '@scarf/scarf': false
+  protobufjs: true
+  unrs-resolver: true
+minimumReleaseAgeExclude:
+  - '@types/node@25.9.1'
