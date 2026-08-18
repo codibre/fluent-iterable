@@ -33,8 +33,7 @@
     "lint:format": "prettier --check '{src,test}/**/*.ts'",
     "lint:format:fix": "prettier --write '{src,test}/**/*.ts'",
     "lint:style": "eslint '**/*.ts'",
-    "lint:style:fix": "eslint '**/*.ts' --fix",
-    "prepare": "husky install"
+    "lint:style:fix": "eslint '**/*.ts' --fix"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -81,7 +80,6 @@
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-unused-imports": "^1.0.0",
-    "husky": "^7.0.4",
     "jest-callslike": "^0.2.0",
     "jest-extended": "^2.0.0",
     "prettier": "^2.5.1",

@@ -30,8 +30,7 @@
     "lint:format": "prettier --check '{src,test}/**/*.ts'",
     "lint:format:fix": "prettier --write '{src,test}/**/*.ts'",
     "lint:style": "eslint index.js 'lib/*.js' '**/*.ts'",
-    "lint:style:fix": "eslint index.js 'lib/*.js' '**/*.ts' --fix",
-    "prepare": "husky install"
+    "lint:style:fix": "eslint index.js 'lib/*.js' '**/*.ts' --fix"
   },
   "repository": {
     "type": "git",
@@ -53,7 +52,6 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-unused-imports": "^3.0.0",
-    "husky": "^9.1.6",
     "prettier": "^3.3.3"
   }
 }
