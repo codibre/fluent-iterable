@@ -25,6 +25,11 @@ overrides:
 # their own deps aren't resolvable at root.
 publicHoistPattern:
   - '@types/node'
+  - 'eslint'
+  - '@typescript-eslint/*'
+  - '@stylistic/eslint-plugin'
+  - 'eslint-plugin-unused-imports'
+  - 'globals'
   - 'jest'
   - 'ts-jest'
   - '@types/jest'

@@ -11,11 +11,8 @@
   },
   "include": [
     "lib",
-    "index.js",
-    "index.d.ts"
-  ],
-  "exclude": [
-    ".eslintrc.js"
+    "test",
+    "index.js"
   ],
   "extends": "../../tsconfig.base.json"
 }

@@ -29,8 +29,8 @@
     "action:verify:update-modules:clean": "del-cli .check",
     "lint:format": "prettier --check '{src,test}/**/*.ts'",
     "lint:format:fix": "prettier --write '{src,test}/**/*.ts'",
-    "lint:style": "eslint index.js 'lib/*.js' '**/*.ts'",
-    "lint:style:fix": "eslint index.js 'lib/*.js' '**/*.ts' --fix"
+    "lint:style": "eslint '**/*.ts'",
+    "lint:style:fix": "eslint '**/*.ts' --fix"
   },
   "repository": {
     "type": "git",
@@ -44,14 +44,8 @@
   "license": "MIT",
   "devDependencies": {
     "@types/benchmark": "^2.1.5",
-    "@typescript-eslint/eslint-plugin": "^7.0.0",
-    "@typescript-eslint/parser": "^7.0.0",
     "benchmark": "^2.1.4",
     "del-cli": "^5.1.0",
-    "eslint": "^8.56.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-unused-imports": "^3.0.0",
     "prettier": "^3.3.3"
   }
 }

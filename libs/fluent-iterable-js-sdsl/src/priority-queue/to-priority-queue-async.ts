@@ -2,6 +2,6 @@ import { toOrderedContainerAsyncFactory } from '../utils/to-ordered-container-as
 import { IterablePriorityQueue } from './iterable-priority-queue';
 
 export const toPriorityQueueAsync = toOrderedContainerAsyncFactory(
-	(cmp) => new IterablePriorityQueue([], cmp),
-	'push',
+  (cmp) => new IterablePriorityQueue([], cmp),
+  'push',
 );

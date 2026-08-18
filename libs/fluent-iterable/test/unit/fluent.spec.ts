@@ -449,8 +449,7 @@ describe('fluent iterable', () => {
           }
           expect(
             fluent([{ b: 'abc', a: 1 }, undefined, { a: 2, b: 'b' }] as (
-              | Test
-              | undefined
+              Test | undefined
             )[])
               .filter()
               .map((x) => `${x.a.toFixed(2)} and ${x.b.length}`)
@@ -538,8 +537,7 @@ describe('fluent iterable', () => {
           }
           expect(
             await fluent([{ b: 'abc', a: 1 }, undefined, { a: 2, b: 'b' }] as (
-              | Test
-              | undefined
+              Test | undefined
             )[])
               .filterAsync()
               .map((x) => `${x.a.toFixed(2)} and ${x.b.length}`)

@@ -30,7 +30,13 @@
     "ts-jest": "^29.2.5",
     "@types/jest": "^29.5.13",
     "vitest": "^4.1.10",
-    "@vitest/coverage-v8": "^4.1.10"
+    "@vitest/coverage-v8": "^4.1.10",
+    "globals": "^16.0.0",
+    "eslint": "^10.4.0",
+    "@typescript-eslint/eslint-plugin": "^8.59.4",
+    "@typescript-eslint/parser": "^8.59.4",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "eslint-plugin-unused-imports": "^4.4.1"
   },
   "packageManager": "pnpm@11.1.3"
 }

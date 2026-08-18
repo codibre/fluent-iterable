@@ -5,15 +5,15 @@ import { IterableDeque } from './iterable-deque';
 import { prepare } from './prepare';
 
 export async function toDequeAsync<T>(
-	this: Iterable<T> | AsyncIterable<T>,
-	key: Mapping<T> | undefined,
-	reverse = false,
+  this: Iterable<T> | AsyncIterable<T>,
+  key: Mapping<T> | undefined,
+  reverse = false,
 ) {
-	({ key, reverse } = prepare(key, reverse));
-	const result = new IterableDeque<unknown>();
-	await fluentAsync(this).forEach(
-		fillOutFactory(result, reverse ? 'pushFront' : 'pushBack', key),
-	);
+  ({ key, reverse } = prepare(key, reverse));
+  const result = new IterableDeque<unknown>();
+  await fluentAsync(this).forEach(
+    fillOutFactory(result, reverse ? 'pushFront' : 'pushBack', key),
+  );
 
-	return result;
+  return result;
 }

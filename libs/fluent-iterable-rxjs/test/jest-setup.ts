@@ -3,23 +3,23 @@ import 'jest-callslike';
 import '../src';
 
 afterEach(() => {
-	jest.restoreAllMocks();
-	jest.clearAllMocks();
+  jest.restoreAllMocks();
+  jest.clearAllMocks();
 });
 
 declare global {
-	function getNames<T extends object>(c: { prototype: T }): T;
+  function getNames<T extends object>(c: { prototype: T }): T;
 }
 
 global.getNames = function getNames<T extends object>(c: { prototype: T }): T {
-	return new Proxy(c.prototype, {
-		get(target: T, property: string) {
-			const result = target[property as keyof T];
-			if (!result) {
-				throw new Error(`Method ${property} doesn't exist`);
-			}
+  return new Proxy(c.prototype, {
+    get(target: T, property: string) {
+      const result = target[property as keyof T];
+      if (!result) {
+        throw new Error(`Method ${property} doesn't exist`);
+      }
 
-			return result;
-		},
-	});
+      return result;
+    },
+  });
 };

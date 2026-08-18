@@ -8,8 +8,7 @@ export type ChainKeyType = BaseChainKeyType | Iterable<BaseChainKeyType>;
 export type ToObjectChainFuncMap<T> = (x: T) => ChainKeyType;
 
 export type ToObjectChainKey<T> =
-  | KeysOfType<T, ChainKeyType>
-  | ToObjectChainFuncMap<T>;
+  KeysOfType<T, ChainKeyType> | ToObjectChainFuncMap<T>;
 
 export type Indexes = [
   1,

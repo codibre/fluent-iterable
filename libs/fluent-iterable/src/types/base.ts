@@ -281,9 +281,7 @@ export interface FluentGroup<T, R> extends Group<T, R> {
 }
 
 export type ToObjectKeyType<T, R1 extends keyof T> = T[R1] extends
-  | string
-  | number
-  | symbol
+  string | number | symbol
   ? T[R1]
   : any;
 
@@ -293,7 +291,8 @@ export type ToObjectKeyType<T, R1 extends keyof T> = T[R1] extends
  * @typeparam T The type of the items in the iterable.
  */
 export interface FluentIterable<T>
-  extends Iterable<T>,
+  extends
+    Iterable<T>,
     OrderAssurable<FluentIterable<T>>,
     FluentIterableEmitter<T> {}
 
@@ -303,7 +302,8 @@ export interface FluentIterable<T>
  * @typeparam T The type of the items in the asynchronous iterable.
  */
 export interface FluentAsyncIterable<T>
-  extends AsyncIterable<T>,
+  extends
+    AsyncIterable<T>,
     OrderAssurable<FluentAsyncIterable<T>>,
     FluentIterableEmitter<T> {}
 
