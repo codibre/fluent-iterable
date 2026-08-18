@@ -1,4 +1,4 @@
-name: benchmark-14
+name: benchmark
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  benchmark:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -25,5 +25,9 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Benchmark
-        run: pnpm test:benchmark
+      - name: Build
+        run: pnpm build
+      - name: Benchmark augmentative-iterable
+        run: pnpm --filter augmentative-iterable test:benchmark
+      - name: Benchmark fluent-iterable
+        run: pnpm --filter @codibre/fluent-iterable test:benchmark
