@@ -1,7 +1,0 @@
-{
-  "npmClient": "pnpm",
-  "useWorkspaces": true,
-  "plugins": [
-    "@release-it/conventional-changelog"
-  ]
-}

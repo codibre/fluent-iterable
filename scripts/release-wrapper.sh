@@ -6,6 +6,8 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+RELEASE_IT_CONFIG="$REPO_ROOT/.release-it.json"
 VERSION_SCRIPT="$SCRIPT_DIR/check-version-bump.sh"
 
 # Default values
@@ -59,7 +61,7 @@ case "$BUMP_TYPE" in
     "major"|"minor"|"patch")
         pnpm run build
         log "Running release-it with $BUMP_TYPE version bump..."
-        exec release-it "$BUMP_TYPE" $RELEASE_IT_ARGS
+        exec release-it -c "$RELEASE_IT_CONFIG" "$BUMP_TYPE" $RELEASE_IT_ARGS
         ;;
     *)
         error "Unknown bump type: $BUMP_TYPE"

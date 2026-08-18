@@ -1,10 +1,12 @@
 {
   "$schema": "https://unpkg.com/release-it@19/schema/release-it.json",
+  "npmClient": "pnpm",
+  "useWorkspaces": true,
+  "gitChecksBeforeCommit": false,
   "git": {
     "tagName": "v${version}",
     "commitMessage": "chore(release): v${version} [skip ci]",
     "requireCleanWorkingDir": false,
-    "commitsPath": ".",
     "push": true,
     "pushRepo": "origin",
     "requireCommits": false
@@ -37,10 +39,6 @@
       "infile": "CHANGELOG.md",
       "ignoreRecommendedBump": false,
       "strictSemVer": true,
-      "commitsPath": ".",
-      "gitRawCommitsOpts": {
-        "path": "."
-      },
       "skipOnEmpty": true
     }
   }

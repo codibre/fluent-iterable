@@ -1,4 +1,0 @@
-"hooks": {
-  "pre-commit": "npm run lint:fix",
-  "post-merge": "npm ci"
-}
