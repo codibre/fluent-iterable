@@ -68,9 +68,6 @@ importers:
       eslint-plugin-unused-imports:
         specifier: ^3.0.0
         version: 3.2.0(@typescript-eslint/eslint-plugin@7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.6.2))(eslint@8.57.1)(typescript@5.6.2))(eslint@8.57.1)
-      husky:
-        specifier: ^9.1.6
-        version: 9.1.7
       prettier:
         specifier: ^3.3.3
         version: 3.9.6
@@ -202,9 +199,6 @@ importers:
       eslint-plugin-unused-imports:
         specifier: ^1.0.0
         version: 1.1.5(@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0(eslint@7.32.0)(typescript@5.6.2))(eslint@7.32.0)(typescript@5.6.2))(eslint@7.32.0)
-      husky:
-        specifier: ^7.0.4
-        version: 7.0.4
       jest-callslike:
         specifier: ^0.2.0
         version: 0.2.3
@@ -257,9 +251,6 @@ importers:
       eslint-plugin-unused-imports:
         specifier: ^1.0.0
         version: 1.1.5(@typescript-eslint/eslint-plugin@5.62.0(@typescript-eslint/parser@5.62.0(eslint@7.32.0)(typescript@5.6.2))(eslint@7.32.0)(typescript@5.6.2))(eslint@7.32.0)
-      husky:
-        specifier: ^7.0.4
-        version: 7.0.4
       jest-callslike:
         specifier: ^0.2.0
         version: 0.2.3
@@ -2164,11 +2155,6 @@ packages:
   human-signals@2.1.0:
     resolution: {integrity: sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==}
     engines: {node: '>=10.17.0'}
-
-  husky@7.0.4:
-    resolution: {integrity: sha512-vbaCKN2QLtP/vD4yvs6iz6hBEo6wkSzs8HpRah1Z6aGmF2KW5PdYuAd7uX5a+OyBZHBhd+TFLqgjUgytQr4RvQ==}
-    engines: {node: '>=12'}
-    hasBin: true
 
   husky@9.1.7:
     resolution: {integrity: sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA==}
@@ -6205,8 +6191,6 @@ snapshots:
   html-void-elements@3.0.0: {}
 
   human-signals@2.1.0: {}
-
-  husky@7.0.4: {}
 
   husky@9.1.7: {}
 
