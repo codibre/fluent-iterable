@@ -1,0 +1,7 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "tslint.autoFixOnSave": "explicit"
+  },
+  "editor.formatOnSave": true
+}

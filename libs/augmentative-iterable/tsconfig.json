@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "sourceMap": false,
+    "allowJs": true,
+    "rootDir": ".",
+    "declaration": true
+  },
+  "include": [
+    "lib",
+    "index.js",
+    "index.d.ts"
+  ],
+  "exclude": [
+    ".eslintrc.js"
+  ],
+  "extends": "../../tsconfig.base.json"
+}

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+echo "Updating CHANGELOG and CONTRIBUTORS..."
+
+CHANGELOG=CHANGELOG.md
+CONTRIBUTORS=CONTRIBUTORS.md
+
+echo > $CHANGELOG
+
+unset LAST_TAG
+for TAG in $(git tag | tac); do
+  if [ -n "$LAST_TAG" ]; then
+    git log $TAG..$LAST_TAG --oneline | sed 's/^/* /' >> $CHANGELOG
+  elif [ -n "$1" ]; then
+    echo "## $1" >> $CHANGELOG
+    git log $TAG.. --oneline | sed 's/^/* /' >> $CHANGELOG
+  fi
+  echo "## $TAG" >> $CHANGELOG
+  LAST_TAG=$TAG
+done
+git log $LAST_TAG --oneline | sed 's/^/* /' >> $CHANGELOG
+
+git shortlog -nse | cut -f2 | sed 's/^/* /' > CONTRIBUTORS.md

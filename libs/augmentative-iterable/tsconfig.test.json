@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "strict": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictNullChecks": true,
+    "noImplicitAny": false,
+    "moduleResolution": "node",
+    "lib": ["es6", "dom"],
+    "sourceMap": true,
+    "rootDir": ".",
+    "allowJs": true,
+    "types": [
+      "node"
+    ],
+    "esModuleInterop": true
+  },
+  "include": ["./lib", "./test", "index.js"]
+}

@@ -1,0 +1,75 @@
+image: node:10.15.3
+clone:
+  depth: full
+
+options:
+  size: 2x
+
+definitions:
+  steps:
+    - step: &install-packages
+        name: Install Packages
+        script:
+         - printf "//`node -p \"require('url').parse('https://registry.npmjs.org').host\"`/:_authToken=${NPM_TOKEN}\n" >> ~/.npmrc
+         - npm install
+        artifacts:
+          - node_modules/**
+        caches:
+          - node
+    - step: &build-application
+        name: Build Application
+        script:
+          - npm run build
+        artifacts:
+          - dist/**
+    - step: &validate-lint
+        name: Validate Lint
+        script:
+          - npm run lint
+    - step: &run-tests
+        name: Run Tests
+        script:
+          - npm run test:coverage
+        artifacts:
+          - coverage/**
+    - step: &scan-code
+        name: Scan Code
+        script:
+          - npm install -g sonarqube-scanner
+          - sonar-scanner -Dsonar.login=$SONAR_TOKEN
+        caches:
+          - sonar-scanner
+    - step: &publish-package
+        name: Publish Package
+        script:
+          - printf "//`node -p \"require('url').parse('https://registry.npmjs.org').host\"`/:_authToken=${NPM_PUBLISH_TOKEN}\n" >> ~/.npmrc
+          - npm publish
+
+  caches:
+    sonar-scanner: /root/.sonar/native-sonar-scanner
+
+pipelines:
+  default:
+    - step: *install-packages
+    - parallel:
+        - step: *build-application
+        - step: *validate-lint
+        - step: *run-tests
+    - step: *scan-code
+
+  branches:
+    master:
+      - step: *install-packages
+      - parallel:
+          - step: *build-application
+          - step: *validate-lint
+          - step: *run-tests
+      - step: *scan-code
+      - step: *publish-package
+  pull-requests:
+    '**':
+      - step: *install-packages
+      - parallel:
+          - step: *validate-lint
+          - step: *run-tests
+          - step: *scan-code

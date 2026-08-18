@@ -1,0 +1,33 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "tsc:debug:build",
+      "type": "shell",
+      "command": "npx tsc -b ${workspaceRoot}/tsconfig.debug.json", // && \\cp -fR ${workspaceRoot}/src/protos ${workspaceRoot}/.ts-debug/src/protos",
+      "problemMatcher": ["$tsc"],
+      "group": "build"
+    },
+    {
+      "label": "tsc:debug:clean",
+      "type": "shell",
+      "command": "rm -rf ${workspaceRoot}/.ts-debug",
+      "group": "build"
+    },
+    {
+      "label": "tsc:test:clean",
+      "type": "shell",
+      "command": "rm -rf ${workspaceRoot}/.ts-test",
+      "group": "build"
+    },
+    {
+      "label": "tsc:test:build",
+      "type": "shell",
+      "command": "${workspaceRoot}/node_modules/.bin/tsc -b ${workspaceRoot}/tsconfig.test.json",
+      "problemMatcher": ["$tsc"],
+      "group": "build"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "name": "@fluent-iterable/rxjs",
+  "description": "A plugin with useful operations to generate rxjs data structures",
+  "version": "1.0.2",
+  "private": false,
+  "author": {
+    "name": "Thiago O Santos <tos.oliveira@gmail.com>"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "scripts": {
+    "doc": "rm -rf docs && pnpm exec typedoc && git add . && git commit -m 'chore: generating docs [skip ci]'",
+    "lint": "pnpm run lint:format && pnpm run lint:style",
+    "lint:fix": "pnpm run lint:format:fix && pnpm run lint:style:fix",
+    "build": "tsc -p tsconfig.build.json",
+    "test": "jest test/unit",
+    "test:watch": "jest test/unit --watch",
+    "test:coverage": "jest test/unit --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest test/e2e",
+    "clear": "pnpm run clear:build && pnpm run clear:modules",
+    "clear:build": "del-cli ./dist",
+    "clear:modules": "del-cli ./node_modules",
+    "prebuild": "pnpm run clear:build && del-cli tsconfig.tsbuildinfo",
+    "preaction:verify:update-modules": "pnpm run action:verify:update-modules:check",
+    "action:verify:update-modules": "pnpm run action:verify:update-modules:reinstall && pnpm run action:verify:update-modules:clean",
+    "action:verify:update-modules:clean": "del-cli .check",
+    "lint:format": "prettier --check '{src,test}/**/*.ts'",
+    "lint:format:fix": "prettier --write '{src,test}/**/*.ts'",
+    "lint:style": "eslint '**/*.ts'",
+    "lint:style:fix": "eslint '**/*.ts' --fix",
+    "prepare": "husky install"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "preset": "ts-jest",
+    "coverageDirectory": "./coverage",
+    "collectCoverageFrom": [
+      "./src/**/*.ts"
+    ],
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "./test/jest-setup.ts"
+    ]
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codibre/fluent-iterable-rxjs"
+  },
+  "homepage": "https://github.com/codibre/fluent-iterable-rxjs#readme",
+  "bugs": {
+    "url": "https://github.com/codibre/fluent-iterable-rxjs/issues"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {
+    "@codibre/fluent-iterable": "workspace:^",
+    "rxjs": ">=7.0.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
+    "del-cli": "^3.0.1",
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^7.0.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-unused-imports": "^1.0.0",
+    "husky": "^7.0.4",
+    "jest-callslike": "^0.2.0",
+    "jest-extended": "^2.0.0",
+    "prettier": "^2.5.1",
+    "ts-loader": "^9.2.7",
+    "ts-node": "^10.6.0",
+    "typedoc": "^0.22.17",
+    "typedoc-plugin-markdown": "^3.12.1"
+  }
+}
