@@ -1,0 +1,15 @@
+{
+  "npmClient": "pnpm",
+  "useWorkspaces": true,
+  "gitChecksBeforeCommit": false,
+  "plugins": [
+    "@release-it/conventional-changelog"
+  ],
+  "hooks": {
+    "after:bump": "echo Auto-bumped version to ${version}"
+  },
+  "github": {
+    "release": true,
+    "tokenRef": "GITHUB_TOKEN"
+  }
+}

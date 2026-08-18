@@ -1,0 +1,3 @@
+{
+  "*.ts": ["pnpm run lint:format:fix", "pnpm run lint:style:fix", "git add"]
+}

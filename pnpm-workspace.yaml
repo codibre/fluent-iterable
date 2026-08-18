@@ -1,5 +1,4 @@
 packages:
-  - '.'
   - 'libs/**'
 allowBuilds:
   '@datadog/pprof': false
@@ -11,3 +10,23 @@ allowBuilds:
   unrs-resolver: true
 minimumReleaseAgeExclude:
   - '@types/node@25.9.1'
+
+# pnpm 11 reads settings here (package.json "pnpm" field is ignored).
+# Pin TypeScript monorepo-wide: ^5.6.2 floats to 5.9.x which breaks the
+# fluent-iterable async type inference (TS2740).
+overrides:
+  typescript: 5.6.2
+
+# Shared monorepo tooling (types + test runners) must be resolvable from every
+# workspace member even when declared only in the root package.json.
+# Only hoist what subprojects need but don't declare themselves.
+# Keep this list narrow: tsc auto-includes every package it finds under a
+# typeRoots dir, so unrelated @types (e.g. minimatch) break the build when
+# their own deps aren't resolvable at root.
+publicHoistPattern:
+  - '@types/node'
+  - 'jest'
+  - 'ts-jest'
+  - '@types/jest'
+  - 'vitest'
+  - '@vitest/coverage-v8'

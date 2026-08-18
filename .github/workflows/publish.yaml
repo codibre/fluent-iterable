@@ -1,0 +1,166 @@
+name: Publish Libraries
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  packages: write
+  actions: write
+  id-token: write
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Test
+        uses: ./.github/actions/build-and-test
+        with:
+          node-auth-token: ${{ secrets.GHA_PACKAGES }}
+          cc-test-reporter-id: ${{ secrets.CC_TEST_REPORTER_ID }}
+
+  check-releases:
+    runs-on: ubuntu-latest
+    outputs:
+      release-matrix: ${{ steps.check-releases.outputs.release-matrix }}
+      has-releases: ${{ steps.check-releases.outputs.has-releases }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check which libraries need release
+        id: check-releases
+        run: |
+          echo "Discovering libraries and checking release requirements..."
+
+          release_needed=()
+
+          for lib_dir in libs/*/; do
+            [ -d "$lib_dir" ] || continue
+
+            lib=$(basename "$lib_dir")
+            echo "Checking release status for $lib..."
+
+            package_name=$(grep -o '"name"[[:space:]]*:[[:space:]]*"[^"]*"' "libs/$lib/package.json" | cut -d'"' -f4)
+            echo "Package name: $package_name"
+
+            if ./scripts/ci-release-check.sh "./libs/$lib" "$package_name"; then
+              echo "Release needed for $lib"
+              release_needed+=("\"$lib\"")
+            else
+              echo "No release needed for $lib"
+            fi
+          done
+
+          if [ ${#release_needed[@]} -gt 0 ]; then
+            release_matrix="[$(IFS=,; echo "${release_needed[*]}")]"
+            has_releases="true"
+            echo "Libraries needing release: $release_matrix"
+          else
+            release_matrix="[]"
+            has_releases="false"
+            echo "No libraries need release"
+          fi
+
+          echo "release-matrix=$release_matrix" >> $GITHUB_OUTPUT
+          echo "has-releases=$has_releases" >> $GITHUB_OUTPUT
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: [check-releases, build-and-test]
+    if: needs.check-releases.outputs.has-releases == 'true'
+
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        library: ${{ fromJson(needs.check-releases.outputs.release-matrix) }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global push.followTags true
+
+      - name: Get pnpm version
+        id: pnpm-version
+        run: |
+          PNPM_VERSION=$(grep -o '"packageManager": "pnpm@[^\"]*"' package.json | sed 's/.*pnpm@\([^\"]*\).*/\1/')
+          echo "version=$PNPM_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ steps.pnpm-version.outputs.version }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '26.x'
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        env:
+          HUSKY: 0
+
+      - name: Build Libs
+        run: |
+          pnpm i
+          pnpm run build
+        env:
+          HUSKY: 0
+
+      - name: Install release-it for CI
+        run: npm install -g release-it@21.0.2 @release-it/conventional-changelog@12.0.0
+
+      - name: Get OIDC Token
+        id: oidc
+        run: |
+          IDENTITY_TOKEN=$(curl -sL "${ACTIONS_ID_TOKEN_REQUEST_URL}?audience=https://registry.npmjs.org" \
+            -H "Authorization: Bearer ${ACTIONS_ID_TOKEN}" | jq -r '.value')
+          NPM_TOKEN=$(curl -s -X POST \
+            -H "Content-Type: application/json" \
+            -d "{\"token\": \"${IDENTITY_TOKEN}\"}" \
+            "https://registry.npmjs.org/-/npm/v1/oauth/token" | jq -r '.token')
+          echo "npm-token=${NPM_TOKEN}" >> $GITHUB_OUTPUT
+
+      - name: Configure npm with OIDC token
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ steps.oidc.outputs.npm-token }}" > ~/.npmrc
+          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+          echo "always-auth=true" >> ~/.npmrc
+
+      - name: Release ${{ matrix.library }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          package_name=$(grep -o '"name"[[:space:]]*:[[:space:]]*"[^"]*"' "libs/${{ matrix.library }}/package.json" | cut -d'"' -f4)
+          echo "Package name: $package_name"
+
+          git pull origin master
+
+          ./scripts/release-wrapper.sh "./libs/${{ matrix.library }}" "$package_name" --ci
+          echo "Successfully released ${{ matrix.library }}"

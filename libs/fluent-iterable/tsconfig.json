@@ -1,17 +1,14 @@
 {
-  "extends": "@codibre/confs/tsconfig.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "target": "es2018",
     "rootDir": ".",
     "outDir": "./dist",
-    "declaration": true,
     "strictBindCallApply": true,
-    "esModuleInterop": true,
     "strictFunctionTypes": true,
     "strictNullChecks": true,
     "allowJs": true,
-    "verbatimModuleSyntax": false,
-    "sourceMap": true
+    "verbatimModuleSyntax": false
   },
   "include": [
     "./src",

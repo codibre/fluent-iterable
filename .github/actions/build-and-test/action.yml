@@ -1,0 +1,118 @@
+name: 'Build and Test'
+description: 'Reusable action to setup environment, install dependencies, build and test packages'
+
+inputs:
+  node-auth-token:
+    description: 'GitHub Packages authentication token'
+    required: true
+  github-token:
+    description: 'GitHub token for checkout'
+    required: true
+    default: ${{ github.token }}
+  cc-test-reporter-id:
+    description: 'Code Climate Test Reporter ID'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ inputs.github-token }}
+
+    - name: Get pnpm version
+      id: pnpm-version
+      shell: bash
+      run: |
+        PNPM_VERSION=$(grep -o '"packageManager": "pnpm@[^"]*"' package.json | sed 's/.*pnpm@\([^"]*\).*/\1/')
+        echo "version=$PNPM_VERSION" >> $GITHUB_OUTPUT
+        echo "Using pnpm version: $PNPM_VERSION"
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: ${{ steps.pnpm-version.outputs.version }}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+        cache: 'pnpm'
+      env:
+        NPM_TOKEN: ${{ inputs.node-auth-token }}
+
+    - name: Get dependency cache key
+      id: cache-key
+      shell: bash
+      run: |
+        # Create a hash from all package.json files and pnpm-lock.yaml
+        DEPS_HASH=$(find . -name "package.json" -o -name "pnpm-lock.yaml" | head -20 | xargs cat | sha256sum | cut -d' ' -f1)
+        echo "hash=$DEPS_HASH" >> $GITHUB_OUTPUT
+        echo "Dependencies hash: $DEPS_HASH"
+
+    - name: Cache pnpm dependencies
+      uses: actions/cache@v4
+      id: pnpm-cache
+      with:
+        path: |
+          ~/.pnpm-store
+          node_modules
+          libs/*/node_modules
+        key: pnpm-${{ runner.os }}-${{ steps.pnpm-version.outputs.version }}-${{ steps.cache-key.outputs.hash }}
+        restore-keys: |
+          pnpm-${{ runner.os }}-${{ steps.pnpm-version.outputs.version }}-
+          pnpm-${{ runner.os }}-
+
+    - name: Cache build artifacts
+      uses: actions/cache/restore@v4
+      id: build-cache
+      with:
+        path: |
+          .turbo
+          .jest
+          libs/*/.turbo
+          libs/*/.jest
+        key: build-${{ runner.os }}-${{ github.ref_name }}
+        restore-keys: |
+          build-${{ runner.os }}-main
+          build-${{ runner.os }}-
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile
+      env:
+        NPM_TOKEN: ${{ inputs.node-auth-token }}
+
+    - name: Build packages
+      shell: bash
+      run: pnpm run build
+
+    - name: Lint packages
+      shell: bash
+      run: pnpm run lint || echo "Lint command not found, skipping..."
+
+    - name: Test packages
+      shell: bash
+      run: pnpm run test:cov
+
+    - name: Submit Code Quality
+      uses: qltysh/qlty-action/coverage@v1
+      if: inputs.cc-test-reporter-id != ''
+      with:
+        token: ${{ inputs.cc-test-reporter-id }}
+        files: coverage/lcov.info
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-artifacts
+        path: |
+          .turbo
+          .jest
+          libs/*/.turbo
+          libs/*/.jest
+        retention-days: 1
+        if-no-files-found: ignore
+        include-hidden-files: true

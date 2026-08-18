@@ -1,0 +1,26 @@
+name: Standard
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - '**/*.md'
+  workflow_dispatch:
+
+jobs:
+  ci:
+    name: CI - Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Test
+        uses: ./.github/actions/build-and-test
+        with:
+          node-auth-token: ${{ secrets.GHA_PACKAGES }}
+          cc-test-reporter-id: ${{ secrets.CC_TEST_REPORTER_ID }}
