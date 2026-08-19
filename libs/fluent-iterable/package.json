@@ -83,7 +83,7 @@
     }
   },
   "dependencies": {
-    "augmentative-iterable": "workspace:*",
+    "augmentative-iterable": "workspace:^",
     "typed-emitter": "^1.4.0"
   },
   "devDependencies": {

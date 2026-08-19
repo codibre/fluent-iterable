@@ -81,7 +81,7 @@ importers:
   libs/fluent-iterable:
     dependencies:
       augmentative-iterable:
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../augmentative-iterable
       typed-emitter:
         specifier: ^1.4.0
