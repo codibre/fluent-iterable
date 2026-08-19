@@ -22,7 +22,6 @@
     "test:watch": "jest test/unit --watch",
     "test:coverage": "jest test/unit --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest test/e2e",
     "clear": "pnpm run clear:build && pnpm run clear:modules",
     "clear:build": "del-cli ./dist",
     "clear:modules": "del-cli ./node_modules",
@@ -35,26 +34,6 @@
     "lint:style": "eslint '**/*.ts'",
     "lint:style:fix": "eslint '**/*.ts' --fix",
     "prepublishOnly": "pnpm run build"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "testRegex": ".spec.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "preset": "ts-jest",
-    "coverageDirectory": "./coverage",
-    "collectCoverageFrom": [
-      "./src/**/*.ts"
-    ],
-    "testEnvironment": "node",
-    "setupFilesAfterEnv": [
-      "./test/jest-setup.ts"
-    ]
   },
   "directories": {
     "test": "test"

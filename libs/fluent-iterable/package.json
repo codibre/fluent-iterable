@@ -23,7 +23,6 @@
     "test": "jest test/unit",
     "test:watch": "jest test/unit --watch",
     "test:coverage": "jest test/unit --coverage",
-    "test:e2e": "jest test/e2e",
     "test:benchmark": "node test/benchmark/general-benchmark.spec.js",
     "test:benchmark:branch": "node test/benchmark/branch-benchmark.spec.js",
     "test:memory": "ts-node test/memory/run.ts",
