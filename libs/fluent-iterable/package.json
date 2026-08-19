@@ -28,6 +28,7 @@
     "test:memory": "ts-node test/memory/run.ts",
     "lint": "pnpm run lint:format && pnpm run lint:style",
     "lint:fix": "pnpm run lint:format:fix && pnpm run lint:style:fix",
+    "lint:staged": "lint-staged -c ../../.lintstagedrc",
     "lint:format": "prettier --check '{src,test}/**/*.ts'",
     "lint:format:fix": "prettier --write '{src,test}/**/*.ts'",
     "lint:style": "eslint '**/*.ts'",

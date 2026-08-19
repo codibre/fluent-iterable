@@ -8,6 +8,7 @@
     },
     "test": {},
     "test:coverage": {},
+    "lint:staged": {},
     "lint": {},
     "lint:fix": {},
     "lint:format": {},

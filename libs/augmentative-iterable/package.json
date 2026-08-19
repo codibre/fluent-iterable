@@ -20,6 +20,7 @@
     "format": "prettier --write 'src/**/*.ts' 'test/**/*.ts'",
     "lint": "pnpm run lint:format && pnpm run lint:style",
     "lint:fix": "pnpm run lint:format:fix && pnpm run lint:style:fix",
+    "lint:staged": "lint-staged -c ../../.lintstagedrc",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:benchmark": "node --expose-gc test/benchmark/index.js",

@@ -17,6 +17,7 @@
     "doc": "rm -rf docs && npx typedoc && git add . && git commit -m 'chore: generating docs [skip ci]'",
     "lint": "pnpm run lint:format && pnpm run lint:style",
     "lint:fix": "pnpm run lint:format:fix && pnpm run lint:style:fix",
+    "lint:staged": "lint-staged -c ../../.lintstagedrc",
     "build": "tsc -p tsconfig.build.json",
     "test": "jest test/unit",
     "test:watch": "jest test/unit --watch",
