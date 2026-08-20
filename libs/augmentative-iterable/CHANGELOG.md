@@ -1,3 +1,10 @@
+# Changelog
+
+## [1.7.0](https://github.com/codibre/fluent-iterable/compare/v1.40.0...%24%7Bnpm.name%7D%401.7.0) (2026-08-20)
+
+### Features
+
+* configure pnpm monorepo following nestjs-context pattern ([#86](https://github.com/codibre/fluent-iterable/issues/86)) ([178cda7](https://github.com/codibre/fluent-iterable/commit/178cda7829079f4a0fc7aad89c024e6e7d03e1cb))
 
 ## 1.6.0
 * ba7cd32 feat: adding support for immutability (#28)
