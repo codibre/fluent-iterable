@@ -7,7 +7,6 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-RELEASE_IT_CONFIG="$REPO_ROOT/.release-it.json"
 VERSION_SCRIPT="$SCRIPT_DIR/check-version-bump.sh"
 
 # Default values
@@ -56,12 +55,17 @@ log "Release needed with bump type: $BUMP_TYPE"
 # Change to library directory
 cd "$LIBRARY_PATH"
 
-# Run release-it with the determined version
+# Run release-it with the determined version (per-lib .release-it.json extends the root base)
 case "$BUMP_TYPE" in
     "major"|"minor"|"patch")
-        pnpm run build
+        # Build first if this lib has a build script (skip for source-shipped libs like augmentative-iterable)
+        if grep -q '"build"' package.json; then
+            pnpm run build
+        else
+            log "No build script for this lib — skipping build step."
+        fi
         log "Running release-it with $BUMP_TYPE version bump..."
-        exec release-it -c "$RELEASE_IT_CONFIG" "$BUMP_TYPE" $RELEASE_IT_ARGS
+        exec release-it "$BUMP_TYPE" $RELEASE_IT_ARGS
         ;;
     *)
         error "Unknown bump type: $BUMP_TYPE"
