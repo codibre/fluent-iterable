@@ -40,11 +40,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/codibre/fluent-iterable-rxjs"
+    "url": "https://github.com/codibre/fluent-iterable"
   },
-  "homepage": "https://github.com/codibre/fluent-iterable-rxjs#readme",
+  "homepage": "https://github.com/codibre/fluent-iterable#readme",
   "bugs": {
-    "url": "https://github.com/codibre/fluent-iterable-rxjs/issues"
+    "url": "https://github.com/codibre/fluent-iterable/issues"
   },
   "keywords": [],
   "license": "MIT",

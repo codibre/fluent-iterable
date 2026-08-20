@@ -35,11 +35,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/codibre/augmentative-iterable.git"
+    "url": "https://github.com/codibre/fluent-iterable"
   },
-  "homepage": "https://github.com/codibre/augmentative-iterable#readme",
+  "homepage": "https://github.com/codibre/fluent-iterable#readme",
   "bugs": {
-    "url": "https://github.com/codibre/augmentative-iterable/issues"
+    "url": "https://github.com/codibre/fluent-iterable/issues"
   },
   "keywords": [],
   "license": "MIT",
