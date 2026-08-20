@@ -2,6 +2,7 @@
   "$schema": "https://unpkg.com/release-it@19/schema/release-it.json",
   "git": {
     "tagName": "${npm.name}@${version}",
+    "tagMatch": "${npm.name}@*",
     "commitMessage": "chore(release): ${npm.name} v${version} [skip ci]",
     "requireCleanWorkingDir": false,
     "push": true,
