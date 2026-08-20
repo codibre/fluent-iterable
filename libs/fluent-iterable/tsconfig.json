@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "target": "es2018",
+    "rootDir": ".",
+    "outDir": "./dist",
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "allowJs": true,
+    "verbatimModuleSyntax": false
+  },
+  "include": [
+    "./src",
+    "./test",
+    "test/benchmark",
+    "test/memory"
+  ]
+}

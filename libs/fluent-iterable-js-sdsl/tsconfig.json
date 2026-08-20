@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "resolveJsonModule": true,
+    "strictNullChecks": true,
+    "removeComments": true,
+    "target": "es2018",
+    "outDir": "./dist",
+    "noImplicitAny": true,
+    "alwaysStrict": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true
+  },
+  "include": [
+    "./src",
+    "./test"
+  ],
+  "extends": "../../tsconfig.base.json"
+}

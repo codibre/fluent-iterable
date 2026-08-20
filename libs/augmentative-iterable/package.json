@@ -1,0 +1,52 @@
+{
+  "name": "augmentative-iterable",
+  "description": "This project is just a template for creation of new projects",
+  "version": "1.6.0",
+  "private": false,
+  "author": {
+    "name": "Thiago O Santos <tos.oliveira@gmail.com>"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "files": [
+    "index.js",
+    "lib",
+    "index.d.ts"
+  ],
+  "types": "index.d.ts",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier --write 'src/**/*.ts' 'test/**/*.ts'",
+    "lint": "pnpm run lint:format && pnpm run lint:style",
+    "lint:fix": "pnpm run lint:format:fix && pnpm run lint:style:fix",
+    "lint:staged": "lint-staged -c ../../.lintstagedrc",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:benchmark": "node --expose-gc test/benchmark/index.js",
+    "clear:modules": "del-cli ./node_modules",
+    "preaction:verify:update-modules": "pnpm run action:verify:update-modules:check",
+    "action:verify:update-modules": "pnpm run action:verify:update-modules:reinstall && pnpm run action:verify:update-modules:clean",
+    "action:verify:update-modules:clean": "del-cli .check",
+    "lint:format": "prettier --check '{src,test}/**/*.ts'",
+    "lint:format:fix": "prettier --write '{src,test}/**/*.ts'",
+    "lint:style": "eslint '**/*.ts'",
+    "lint:style:fix": "eslint '**/*.ts' --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codibre/fluent-iterable"
+  },
+  "homepage": "https://github.com/codibre/fluent-iterable#readme",
+  "bugs": {
+    "url": "https://github.com/codibre/fluent-iterable/issues"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/benchmark": "^2.1.5",
+    "benchmark": "^2.1.4",
+    "del-cli": "^5.1.0",
+    "prettier": "^3.3.3"
+  }
+}

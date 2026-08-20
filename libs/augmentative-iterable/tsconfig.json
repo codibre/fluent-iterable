@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "sourceMap": false,
+    "allowJs": true,
+    "rootDir": ".",
+    "declaration": true
+  },
+  "include": [
+    "lib",
+    "test",
+    "index.js"
+  ],
+  "extends": "../../tsconfig.base.json"
+}

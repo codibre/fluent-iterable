@@ -1,0 +1,28 @@
+{
+  "hideGenerator": true,
+  "theme": "default",
+  "out": "docs",
+  "readme": "none",
+  "name": "fluent-iterable",
+  "includeVersion": true,
+  "disableSources": true,
+  "plugin": ["typedoc-plugin-markdown"],
+  "entryPoints": [
+    "./src/types/function-types/index.ts",
+    "./src/index.ts",
+    "./src/types/index.ts",
+    "./src/types-internal/index.ts"
+  ],
+  "exclude": [
+    "src/fluentFunctions.ts",
+    "src/fluentAsyncFunctions.ts",
+    "src/sync/**",
+    "src/async/**",
+    "src/recipes/**",
+    "src/types-internal/**",
+    "src/helpers/**",
+    "src/mounters/**",
+    "src/common/**",
+    "index.ts"
+  ]
+}

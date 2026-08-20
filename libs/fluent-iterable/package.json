@@ -1,0 +1,114 @@
+{
+  "name": "@codibre/fluent-iterable",
+  "description": "Provides LINQ-like fluent api operations for iterables and async iterables (ES2018+).",
+  "version": "1.40.0",
+  "private": true,
+  "author": {
+    "name": "Thiago O Santos <tos.oliveira@gmail.com>"
+  },
+  "contributors": [
+    "Thiago O Santos <tos.oliveira@gmail.com>",
+    "Gentilhomme <gentilhomme.thomas@gmail.fr>"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "nest build",
+    "test": "jest test/unit",
+    "test:watch": "jest test/unit --watch",
+    "test:coverage": "jest test/unit --coverage",
+    "test:benchmark": "node test/benchmark/general-benchmark.spec.js",
+    "test:benchmark:branch": "node test/benchmark/branch-benchmark.spec.js",
+    "test:memory": "ts-node test/memory/run.ts",
+    "lint": "pnpm run lint:format && pnpm run lint:style",
+    "lint:fix": "pnpm run lint:format:fix && pnpm run lint:style:fix",
+    "lint:staged": "lint-staged -c ../../.lintstagedrc",
+    "lint:format": "prettier --check '{src,test}/**/*.ts'",
+    "lint:format:fix": "prettier --write '{src,test}/**/*.ts'",
+    "lint:style": "eslint '**/*.ts'",
+    "lint:style:fix": "eslint '**/*.ts' --fix",
+    "clear": "del-cli ./dist && del-cli ./node_modules",
+    "get:version": "echo $npm_package_version"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codibre/fluent-iterable"
+  },
+  "homepage": "https://codibre.github.io/fluent-iterable",
+  "bugs": {
+    "url": "https://github.com/codibre/fluent-iterable/issues"
+  },
+  "keywords": [
+    "iterable",
+    "asyncIterable",
+    "linq",
+    "map",
+    "filter",
+    "fluent",
+    "stream",
+    "streams",
+    "readable",
+    "merge",
+    "combine",
+    "iterator",
+    "asyncIterator",
+    "iteration",
+    "functional",
+    "collection",
+    "array",
+    "map",
+    "set",
+    "filter",
+    "reduce",
+    "flatten",
+    "concat",
+    "every",
+    "some",
+    "flat",
+    "flatMap"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "for-emit-of": "^1.3.3"
+  },
+  "peerDependenciesMeta": {
+    "for-emit-of": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "augmentative-iterable": "workspace:^",
+    "typed-emitter": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/benchmark": "^2.1.5",
+    "benchmark": "^2.1.4",
+    "del-cli": "^5.1.0",
+    "delay": "^5.0.0",
+    "expect": "^29.7.0",
+    "for-emit-of": "^1.4.0",
+    "husky": "^9.1.6",
+    "iter-ops": "^3.5.0",
+    "iter-tools-es": "^7.5.3",
+    "iterare": "^1.2.1",
+    "jest-callslike": "^0.2.1",
+    "jest-extended": "^4.0.2",
+    "nyc": "^17.0.0",
+    "prettier": "^3.3.3",
+    "random-int": "^2.0.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1",
+    "stream-mock": "^2.0.5",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typedoc": "^0.26.7",
+    "typedoc-plugin-markdown": "^4.2.10"
+  },
+  "packageManager": "pnpm@11.1.3"
+}

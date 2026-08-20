@@ -1,0 +1,19 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "envMode": "loose",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "test": {},
+    "test:coverage": {},
+    "lint:staged": {},
+    "lint": {},
+    "lint:fix": {},
+    "lint:format": {},
+    "lint:format:fix": {},
+    "lint:style": {},
+    "lint:style:fix": {}
+  }
+}
