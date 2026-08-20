@@ -139,23 +139,23 @@ jobs:
       - name: Get OIDC Token
         id: oidc
         run: |
-          IDENTITY_TOKEN=$(curl -sL "${ACTIONS_ID_TOKEN_REQUEST_URL}?audience=https://registry.npmjs.org" \
+          # Request raw OIDC JWT from GitHub (same as nestjs-context working pattern)
+          OIDC_TOKEN=$(curl -sL "${ACTIONS_ID_TOKEN_REQUEST_URL}?audience=https://registry.npmjs.org" \
             -H "Authorization: Bearer ${ACTIONS_ID_TOKEN}" | jq -r '.value')
-          NPM_TOKEN=$(curl -s -X POST \
-            -H "Content-Type: application/json" \
-            -d "{\"token\": \"${IDENTITY_TOKEN}\"}" \
-            "https://registry.npmjs.org/-/npm/v1/oauth/token" | jq -r '.token')
-          echo "npm-token=${NPM_TOKEN}" >> $GITHUB_OUTPUT
+          echo "oidc-token=${OIDC_TOKEN}" >> $GITHUB_OUTPUT
 
       - name: Configure npm with OIDC token
         run: |
-          echo "//registry.npmjs.org/:_authToken=${{ steps.oidc.outputs.npm-token }}" > ~/.npmrc
+          # Use the raw JWT directly as auth token (provenance-compatible)
+          # This matches nestjs-context working pattern, NOT the old oauth/token exchange
+          echo "//registry.npmjs.org/:_authToken=${{ steps.oidc.outputs.oidc-token }}" > ~/.npmrc
           echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
           echo "always-auth=true" >> ~/.npmrc
 
       - name: Release ${{ matrix.library }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          OIDC_TOKEN: ${{ steps.oidc.outputs.oidc-token }}
         run: |
           package_name=$(grep -o '"name"[[:space:]]*:[[:space:]]*"[^"]*"' "libs/${{ matrix.library }}/package.json" | cut -d'"' -f4)
           echo "Package name: $package_name"
