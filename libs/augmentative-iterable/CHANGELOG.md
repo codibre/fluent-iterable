@@ -1,5 +1,7 @@
 # Changelog
 
+## [1.8.0](https://github.com/codibre/fluent-iterable/compare/augmentative-iterable%401.7.0...%24%7Bnpm.name%7D%401.8.0) (2026-08-21)
+
 ## [1.7.0](https://github.com/codibre/fluent-iterable/compare/v1.40.0...%24%7Bnpm.name%7D%401.7.0) (2026-08-20)
 
 ### Features
