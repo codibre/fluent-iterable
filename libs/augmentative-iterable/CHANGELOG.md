@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.9.1](https://github.com/codibre/fluent-iterable/compare/augmentative-iterable%401.9.0...%24%7Bnpm.name%7D%401.9.1) (2026-08-21)
+
+### Bug Fixes
+
+* force release ([7a5d13d](https://github.com/codibre/fluent-iterable/commit/7a5d13da550d5f1fcbae8b739081bc4dfab76fcf))
+
 ## [1.9.0](https://github.com/codibre/fluent-iterable/compare/augmentative-iterable%401.8.0...%24%7Bnpm.name%7D%401.9.0) (2026-08-21)
 
 ## [1.8.0](https://github.com/codibre/fluent-iterable/compare/augmentative-iterable%401.7.0...%24%7Bnpm.name%7D%401.8.0) (2026-08-21)

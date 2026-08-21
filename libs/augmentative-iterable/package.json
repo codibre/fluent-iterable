@@ -1,7 +1,7 @@
 {
   "name": "augmentative-iterable",
   "description": "This project is just a template for creation of new projects",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "private": false,
   "author": {
     "name": "Thiago O Santos <tos.oliveira@gmail.com>"
