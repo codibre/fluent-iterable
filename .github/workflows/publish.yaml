@@ -64,7 +64,6 @@ jobs:
         run: |
           set -euo pipefail
 
-          TOKEN_OBTAINED_AT=0
           PUBLISHED=()
           SKIPPED=()
 
@@ -89,24 +88,11 @@ jobs:
             echo "always-auth=true" >> ~/.npmrc
           }
 
-          NOW=$(date +%s)
-          # Token TTL is ~5 min; refresh if older than 4 min
-          TOKEN_TTL=240
-          OIDC_TOKEN="${{ steps.oidc.outputs.oidc-token }}"
-
           for entry in $PACKAGES; do
             IFS='|' read -r pkg_name lib_path <<< "$entry"
             pkg_dir=$(realpath "./${lib_path}")
             echo ""
             echo ">>> Checking ${pkg_name} from ${pkg_dir}"
-
-            # Refresh OIDC token if missing or older than 4 minutes
-            if [ $((NOW - TOKEN_OBTAINED_AT)) -gt $TOKEN_TTL ] || [ -z "$OIDC_TOKEN" ]; then
-              echo "  Obtaining fresh OIDC token..."
-              OIDC_TOKEN=$(curl -sL "${ACTIONS_ID_TOKEN_REQUEST_URL}?audience=https://registry.npmjs.org" \
-                -H "Authorization: Bearer ${ACTIONS_ID_TOKEN}" | jq -r '.value')
-              TOKEN_OBTAINED_AT=$(date +%s)
-            fi
 
             configure_npmrc "$OIDC_TOKEN"
 
