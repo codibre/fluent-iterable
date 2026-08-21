@@ -8,9 +8,9 @@ Monorepo for the `@codibre/fluent-iterable` ecosystem — LINQ-like fluent API o
 |---------|-------------|---------|
 | [`libs/fluent-iterable`](./libs/fluent-iterable) | Core library: `@codibre/fluent-iterable` — fluent operations for sync & async iterables | [![npm](https://img.shields.io/npm/v/@codibre/fluent-iterable)](https://www.npmjs.com/package/@codibre/fluent-iterable) |
 | [`libs/augmentative-iterable`](./libs/augmentative-iterable) | `augmentative-iterable` — base iterable augmentation utilities used by the core | [![npm](https://img.shields.io/npm/v/augmentative-iterable)](https://www.npmjs.com/package/augmentative-iterable) |
-|| [`libs/fluent-iterable-rxjs`](./libs/fluent-iterable-rxjs) | `@fluent-iterable/rxjs` — RxJS integration plugin for fluent-iterable | [![npm](https://img.shields.io/npm/v/@fluent-iterable/rxjs)](https://www.npmjs.com/package/@fluent-iterable/rxjs) |
-|| [`libs/fluent-iterable-js-sdsl`](./libs/fluent-iterable-js-sdsl) | `@fluent-iterable/js-sdsl` — js-sdsl data structure plugin for fluent-iterable | [![npm](https://img.shields.io/npm/v/@fluent-iterable/js-sdsl)](https://www.npmjs.com/package/@fluent-iterable/js-sdsl) |
-|| [`libs/fluent-iterable-async-sema`](./libs/fluent-iterable-async-sema) | `@fluent-iterable/async-sema` — async-sema concurrency control integration for fluent-iterable | [![npm](https://img.shields.io/npm/v/@fluent-iterable/async-sema)](https://www.npmjs.com/package/@fluent-iterable/async-sema) |
+| [`libs/fluent-iterable-rxjs`](./libs/fluent-iterable-rxjs) | `@fluent-iterable/rxjs` — RxJS integration plugin for fluent-iterable | [![npm](https://img.shields.io/npm/v/@fluent-iterable/rxjs)](https://www.npmjs.com/package/@fluent-iterable/rxjs) |
+| [`libs/fluent-iterable-js-sdsl`](./libs/fluent-iterable-js-sdsl) | `@fluent-iterable/js-sdsl` — js-sdsl data structure plugin for fluent-iterable | [![npm](https://img.shields.io/npm/v/@fluent-iterable/js-sdsl)](https://www.npmjs.com/package/@fluent-iterable/js-sdsl) |
+| [`libs/fluent-iterable-async-sema`](./libs/fluent-iterable-async-sema) | `@fluent-iterable/async-sema` — async-sema concurrency control integration for fluent-iterable | [![npm](https://img.shields.io/npm/v/@fluent-iterable/async-sema)](https://www.npmjs.com/package/@fluent-iterable/async-sema) |
 
 ## Getting Started
 
