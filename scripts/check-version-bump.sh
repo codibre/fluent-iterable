@@ -202,7 +202,7 @@ main() {
 
     # Use tag version as reference, fallback to package.json version
     local reference_version="${tag_version:-$current_version}"
-    local from_ref="${latest_tag}"
+    local from_ref=""
 
     if [ -z "$reference_version" ]; then
         error "Could not determine current version from package.json or git tags"
@@ -212,9 +212,9 @@ main() {
     log "Reference version: $reference_version"
     log "Analyzing commits from: ${from_ref:-'beginning'}"
 
-    # Analyze commits and determine bump type
+    # Analyze commits and determine bump type (use LIBRARY_PATH, not ".")
     local bump_type
-    bump_type=$(analyze_commits "$from_ref" ".")
+    bump_type=$(analyze_commits "$from_ref" "$LIBRARY_PATH")
     local needs_release=$?
 
     # Calculate next version
