@@ -1,3 +1,16 @@
+# Changelog
+
+## [1.41.0](https://github.com/codibre/fluent-iterable/compare/v1.40.0...%24%7Bnpm.name%7D%401.41.0) (2026-08-21)
+
+### Features
+
+* configure pnpm monorepo following nestjs-context pattern ([#86](https://github.com/codibre/fluent-iterable/issues/86)) ([178cda7](https://github.com/codibre/fluent-iterable/commit/178cda7829079f4a0fc7aad89c024e6e7d03e1cb))
+
+### Bug Fixes
+
+* force release ([f3f5fda](https://github.com/codibre/fluent-iterable/commit/f3f5fda64b081bfb32da0dd49906b1665b111455))
+* remove private flag from @codibre/fluent-iterable to allow publishing ([e207aaf](https://github.com/codibre/fluent-iterable/commit/e207aaf40598dcf38ac082b44939b6a2ea7a9fa3))
+
 # [1.40.0](https://github.com/codibre/fluent-iterable/compare/v1.39.2...v1.40.0) (2026-08-16)
 
 
