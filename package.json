@@ -10,7 +10,8 @@
     "format": "prettier --write '**/*.{ts,json,md}'",
     "test:cov": "turbo test:coverage",
     "prepare": "husky",
-    "lint:staged": "turbo lint:staged --concurrency=1"
+    "lint:staged": "turbo lint:staged --concurrency=1",
+    "test:benchmark": "turbo test:benchmark --concurrency=1"
   },
   "keywords": [
     "monorepo",
