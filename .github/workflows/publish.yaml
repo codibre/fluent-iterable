@@ -81,6 +81,13 @@ jobs:
           echo "Packages to check:"
           echo "$PACKAGES" | while IFS='|' read -r name path; do echo "  - $name"; done
 
+          # Refresh OIDC token if needed (valid ~5 min from GitHub)
+          refresh_oidc_token() {
+            echo "  Obtaining fresh OIDC token..."
+            OIDC_TOKEN=$(curl -sL "${ACTIONS_ID_TOKEN_REQUEST_URL}?audience=https://registry.npmjs.org" \
+              -H "Authorization: Bearer ${ACTIONS_ID_TOKEN}" | jq -r '.value')
+          }
+
           configure_npmrc() {
             local token="$1"
             echo "//registry.npmjs.org/:_authToken=${token}" > ~/.npmrc
@@ -88,11 +95,22 @@ jobs:
             echo "always-auth=true" >> ~/.npmrc
           }
 
+          NOW=$(date +%s)
+          TOKEN_OBTAINED_AT=0
+          TOKEN_TTL=240  # Refresh if older than 4 min (TTL ~5 min)
+
           for entry in $PACKAGES; do
             IFS='|' read -r pkg_name lib_path <<< "$entry"
             pkg_dir=$(realpath "./${lib_path}")
             echo ""
             echo ">>> Checking ${pkg_name} from ${pkg_dir}"
+
+            # Refresh OIDC token if missing or older than 4 minutes
+            ELAPSED=$((NOW - TOKEN_OBTAINED_AT))
+            if [ $ELAPSED -gt $TOKEN_TTL ] || [ -z "$OIDC_TOKEN" ]; then
+              refresh_oidc_token
+              TOKEN_OBTAINED_AT=$NOW
+            fi
 
             configure_npmrc "$OIDC_TOKEN"
 
