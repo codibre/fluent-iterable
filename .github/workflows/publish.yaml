@@ -51,11 +51,19 @@ jobs:
       - name: Install release-it
         run: npm install -g release-it@21.0.2 @release-it/conventional-changelog@12.0.0
 
+      - name: Get OIDC Token
+        id: oidc
+        run: |
+          OIDC_TOKEN=$(curl -sL "${ACTIONS_ID_TOKEN_REQUEST_URL}?audience=https://registry.npmjs.org" \
+            -H "Authorization: Bearer ${ACTIONS_ID_TOKEN}" | jq -r '.value')
+          echo "oidc-token=${OIDC_TOKEN}" >> $GITHUB_OUTPUT
+
       - name: Publish libraries sequentially
+        env:
+          OIDC_TOKEN: ${{ steps.oidc.outputs.oidc-token }}
         run: |
           set -euo pipefail
 
-          OIDC_TOKEN=""
           TOKEN_OBTAINED_AT=0
           PUBLISHED=()
           SKIPPED=()
@@ -74,12 +82,6 @@ jobs:
           echo "Packages to check:"
           echo "$PACKAGES" | while IFS='|' read -r name path; do echo "  - $name"; done
 
-          # Get OIDC token helper (valid ~5 min from GitHub)
-          get_oidc_token() {
-            curl -sL "${ACTIONS_ID_TOKEN_REQUEST_URL}?audience=https://registry.npmjs.org" \
-              -H "Authorization: Bearer ${ACTIONS_ID_TOKEN}" | jq -r '.value'
-          }
-
           configure_npmrc() {
             local token="$1"
             echo "//registry.npmjs.org/:_authToken=${token}" > ~/.npmrc
@@ -90,6 +92,7 @@ jobs:
           NOW=$(date +%s)
           # Token TTL is ~5 min; refresh if older than 4 min
           TOKEN_TTL=240
+          OIDC_TOKEN="${{ steps.oidc.outputs.oidc-token }}"
 
           for entry in $PACKAGES; do
             IFS='|' read -r pkg_name lib_path <<< "$entry"
@@ -100,7 +103,8 @@ jobs:
             # Refresh OIDC token if missing or older than 4 minutes
             if [ $((NOW - TOKEN_OBTAINED_AT)) -gt $TOKEN_TTL ] || [ -z "$OIDC_TOKEN" ]; then
               echo "  Obtaining fresh OIDC token..."
-              OIDC_TOKEN=$(get_oidc_token)
+              OIDC_TOKEN=$(curl -sL "${ACTIONS_ID_TOKEN_REQUEST_URL}?audience=https://registry.npmjs.org" \
+                -H "Authorization: Bearer ${ACTIONS_ID_TOKEN}" | jq -r '.value')
               TOKEN_OBTAINED_AT=$(date +%s)
             fi
 
