@@ -1,3 +1,6 @@
+> **NOTE:** This package has moved to the [codibre/fluent-iterable](https://github.com/codibre/fluent-iterable) monorepo (libs/fluent-iterable-rxjs/). This repository is preserved for historical reference only.
+
+|
 [![Actions Status](https://github.com/Codibre/fluent-iterable-rxjs/workflows/build/badge.svg)](https://github.com/Codibre/fluent-iterable-rxjs/actions)
 [![Actions Status](https://github.com/Codibre/fluent-iterable-rxjs/workflows/test/badge.svg)](https://github.com/Codibre/fluent-iterable-rxjs/actions)
 [![Actions Status](https://github.com/Codibre/fluent-iterable-rxjs/workflows/lint/badge.svg)](https://github.com/Codibre/fluent-iterable-rxjs/actions)

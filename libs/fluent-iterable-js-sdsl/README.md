@@ -1,3 +1,6 @@
+> **NOTE:** This package has moved to the [codibre/fluent-iterable](https://github.com/codibre/fluent-iterable) monorepo (libs/fluent-iterable-js-sdsl/). This repository is preserved for historical reference only.
+
+|
 [![Actions Status](https://github.com/Codibre/fluent-iterable-js-sdsl/workflows/build/badge.svg)](https://github.com/Codibre/fluent-iterable-js-sdsl/actions)
 [![Actions Status](https://github.com/Codibre/fluent-iterable-js-sdsl/workflows/test/badge.svg)](https://github.com/Codibre/fluent-iterable-js-sdsl/actions)
 [![Actions Status](https://github.com/Codibre/fluent-iterable-js-sdsl/workflows/lint/badge.svg)](https://github.com/Codibre/fluent-iterable-js-sdsl/actions)

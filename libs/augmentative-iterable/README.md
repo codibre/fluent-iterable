@@ -1,3 +1,6 @@
+> **NOTE:** This package has moved to the [codibre/fluent-iterable](https://github.com/codibre/fluent-iterable) monorepo (libs/augmentative-iterable/). This repository is preserved for historical reference only.
+
+|
 [![Actions Status](https://github.com/Codibre/augmentative-iterable/workflows/test/badge.svg)](https://github.com/Codibre/augmentative-iterable/actions)
 [![Actions Status](https://github.com/Codibre/augmentative-iterable/workflows/lint/badge.svg)](https://github.com/Codibre/augmentative-iterable/actions)
 [![npm version](https://badge.fury.io/js/augmentative-iterable.svg)](https://badge.fury.io/js/augmentative-iterable)
