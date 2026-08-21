@@ -14,17 +14,6 @@ jobs:
   publish:
     runs-on: ubuntu-latest
 
-    strategy:
-      fail-fast: false
-      max-parallel: 1
-      matrix:
-        library:
-          - augmentative-iterable
-          - fluent-iterable
-          - fluent-iterable-js-sdsl
-          - fluent-iterable-rxjs
-          - fluent-iterable-async-sema
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -59,26 +48,88 @@ jobs:
         env:
           HUSKY: 0
 
-      - name: Get OIDC Token
-        id: oidc
-        run: |
-          OIDC_TOKEN=$(curl -sL "${ACTIONS_ID_TOKEN_REQUEST_URL}?audience=https://registry.npmjs.org" \
-            -H "Authorization: Bearer ${ACTIONS_ID_TOKEN}" | jq -r '.value')
-          echo "oidc-token=${OIDC_TOKEN}" >> $GITHUB_OUTPUT
-
-      - name: Configure npm authentication
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ steps.oidc.outputs.oidc-token }}" > ~/.npmrc
-          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
-          echo "always-auth=true" >> ~/.npmrc
-        env:
-          OIDC_TOKEN: ${{ steps.oidc.outputs.oidc-token }}
-
       - name: Install release-it
         run: npm install -g release-it@21.0.2 @release-it/conventional-changelog@12.0.0
 
-      - name: Release ${{ matrix.library }}
-        working-directory: ./libs/${{ matrix.library }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: release-it --ci
+      - name: Publish libraries sequentially
+        run: |
+          set -euo pipefail
+
+          OIDC_TOKEN=""
+          TOKEN_OBTAINED_AT=0
+          PUBLISHED=()
+          SKIPPED=()
+
+          # Get list of non-private packages in libs/
+          PACKAGES=$(for lib in libs/*/; do
+            if [ -f "${lib}package.json" ]; then
+              name=$(node -p "require('./${lib}package.json').name")
+              private=$(node -p "try{require('./${lib}package.json').private}catch(e){'undefined'}")
+              if [ "$private" != "true" ] && [ -n "$name" ]; then
+                echo "${name}|${lib}"
+              fi
+            fi
+          done)
+
+          echo "Packages to check:"
+          echo "$PACKAGES" | while IFS='|' read -r name path; do echo "  - $name"; done
+
+          # Get OIDC token helper (valid ~5 min from GitHub)
+          get_oidc_token() {
+            curl -sL "${ACTIONS_ID_TOKEN_REQUEST_URL}?audience=https://registry.npmjs.org" \
+              -H "Authorization: Bearer ${ACTIONS_ID_TOKEN}" | jq -r '.value'
+          }
+
+          configure_npmrc() {
+            local token="$1"
+            echo "//registry.npmjs.org/:_authToken=${token}" > ~/.npmrc
+            echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+            echo "always-auth=true" >> ~/.npmrc
+          }
+
+          NOW=$(date +%s)
+          # Token TTL is ~5 min; refresh if older than 4 min
+          TOKEN_TTL=240
+
+          for entry in $PACKAGES; do
+            IFS='|' read -r pkg_name lib_path <<< "$entry"
+            pkg_dir=$(realpath ".${lib_path}")
+            echo ""
+            echo ">>> Checking ${pkg_name} from ${pkg_dir}"
+
+            # Refresh OIDC token if missing or older than 4 minutes
+            if [ $((NOW - TOKEN_OBTAINED_AT)) -gt $TOKEN_TTL ] || [ -z "$OIDC_TOKEN" ]; then
+              echo "  Obtaining fresh OIDC token..."
+              OIDC_TOKEN=$(get_oidc_token)
+              TOKEN_OBTAINED_AT=$(date +%s)
+            fi
+
+            configure_npmrc "$OIDC_TOKEN"
+
+            # Capture release-it output to detect if it actually published
+            OUTPUT=$(cd "$pkg_dir" && release-it --ci 2>&1 || true)
+            echo "$OUTPUT"
+
+            # Check if the output contains a version bump (not just SKIP)
+            if echo "$OUTPUT" | grep -qE "release [0-9]+\.[0-9]+\.[0-9]+|[0-9]+\.[0-9]+\.[0-9]+\.\.\.[0-9]+\.[0-9]+\.[0-9]+" && ! echo "$OUTPUT" | grep -q "No commits found"; then
+              PUBLISHED+=("$pkg_name")
+            else
+              SKIPPED+=("$pkg_name")
+            fi
+          done
+
+          echo ""
+          echo "=== Summary ==="
+          if [ ${#PUBLISHED[@]} -gt 0 ]; then
+            echo "Published:"
+            for pkg in "${PUBLISHED[@]}"; do echo "  ✓ $pkg"; done
+          fi
+          if [ ${#SKIPPED[@]} -gt 0 ]; then
+            echo "Skipped (no new commits):"
+            for pkg in "${SKIPPED[@]}"; do echo "  ⏭️  $pkg"; done
+          fi
+          if [ ${#PUBLISHED[@]} -eq 0 ] && [ ${#SKIPPED[@]} -gt 0 ]; then
+            echo "No libraries needed publishing this run."
+          elif [ ${#PUBLISHED[@]} -gt 0 ]; then
+            echo "Successfully published ${#PUBLISHED[@]} library(ies)."
+          fi
