@@ -1,5 +1,7 @@
 # Changelog
 
+## [0.10.0](https://github.com/codibre/fluent-iterable/compare/%40fluent-iterable%2Fjs-sdsl%400.9.0...%24%7Bnpm.name%7D%400.10.0) (2026-08-21)
+
 ## [0.9.0](https://github.com/codibre/fluent-iterable/compare/%40fluent-iterable%2Fjs-sdsl%400.8.0...%24%7Bnpm.name%7D%400.9.0) (2026-08-21)
 
 ## [0.8.0](https://github.com/codibre/fluent-iterable/compare/v1.40.0...%24%7Bnpm.name%7D%400.8.0) (2026-08-20)
