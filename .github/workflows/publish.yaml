@@ -2,125 +2,33 @@ name: Publish Libraries
 
 on:
   push:
-    branches: [main]
-  workflow_dispatch: # Allow manual triggering
+    branches: [master]
+  workflow_dispatch:
 
 permissions:
   contents: write
-  pull-requests: write
-  issues: write
   packages: write
-  actions: write
   id-token: write
 
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build and Test
-        uses: ./.github/actions/build-and-test
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          cc-test-reporter-id: ${{ secrets.CC_TEST_REPORTER_ID }}
-
-  check-releases:
-    runs-on: ubuntu-latest
-
-    outputs:
-      release-matrix: ${{ steps.check-releases.outputs.release-matrix }}
-      has-releases: ${{ steps.check-releases.outputs.has-releases }}
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Check which libraries need release
-        id: check-releases
-        run: |
-          echo "🔍 Discovering libraries and checking release requirements..."
-
-          release_needed=()
-
-          # Find all library directories and check if they need release
-          for lib_dir in libs/*/; do
-            # Skip if not a directory or if it's just the libs folder
-            [ -d "$lib_dir" ] || continue
-
-            lib=$(basename "$lib_dir")
-            echo "🔍 Checking release status for $lib..."
-
-            # Get package name from package.json
-            package_name=$(grep -o '"name"[[:space:]]*:[[:space:]]*"[^"]*"' "libs/$lib/package.json" | cut -d'"' -f4)
-            echo "Package name: $package_name"
-
-            # Check if release is needed using our script
-            if ./scripts/ci-release-check.sh "./libs/$lib" "$package_name"; then
-              echo "✅ Release needed for $lib"
-              release_needed+=("\"$lib\"")
-            else
-              echo "⏭️ No release needed for $lib"
-            fi
-          done
-
-          # Create JSON array of libraries that need release
-          if [ ${#release_needed[@]} -gt 0 ]; then
-            release_matrix="[$(IFS=,; echo "${release_needed[*]}")]"
-            has_releases="true"
-            echo "📦 Libraries needing release: $release_matrix"
-          else
-            release_matrix="[]"
-            has_releases="false"
-            echo "🎉 No libraries need release"
-          fi
-
-          echo "release-matrix=$release_matrix" >> $GITHUB_OUTPUT
-          echo "has-releases=$has_releases" >> $GITHUB_OUTPUT
-
-  persist-cache:
-    runs-on: ubuntu-latest
-    needs: [build-and-test]
-    if: always() # Run even if build-and-test fails
-    continue-on-error: true # Don't fail the pipeline if cache saving fails
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Persist Build Cache
-        uses: ./.github/actions/persist-cache
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
   publish:
     runs-on: ubuntu-latest
-    needs: [check-releases, build-and-test]
-    if: needs.check-releases.outputs.has-releases == 'true'
 
     strategy:
       fail-fast: false
-      max-parallel: 1
       matrix:
-        library: ${{ fromJson(needs.check-releases.outputs.release-matrix) }}
+        library:
+          - augmentative-iterable
+          - fluent-iterable
+          - fluent-iterable-js-sdsl
+          - fluent-iterable-rxjs
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Configure Git
         run: |
@@ -128,147 +36,48 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global push.followTags true
 
-      - name: Get pnpm version
-        id: pnpm-version
-        run: |
-          PNPM_VERSION=$(grep -o '"packageManager": "pnpm@[^"]*"' package.json | sed 's/.*pnpm@\([^"]*\).*/\1/')
-          echo "version=$PNPM_VERSION" >> $GITHUB_OUTPUT
-          echo "Using pnpm version: $PNPM_VERSION"
-
       - name: Setup pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@v4
         with:
-          version: ${{ steps.pnpm-version.outputs.version }}
+          version: 11.1.3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
-          node-version: "lts/*"
+          node-version: '20.x'
           cache: 'pnpm'
           registry-url: 'https://registry.npmjs.org'
-
-      - name: Build Libs
-        run: |
-          pnpm i
-          pnpm run build
-        env:
-          HUSKY: 0
-
-      - name: Get dependency cache key
-        id: cache-key
-        run: |
-          # Create a hash from all package.json files and pnpm-lock.yaml
-          DEPS_HASH=$(find . -name "package.json" -o -name "pnpm-lock.yaml" | head -20 | xargs cat | sha256sum | cut -d' ' -f1)
-          echo "hash=$DEPS_HASH" >> $GITHUB_OUTPUT
-          echo "Dependencies hash: $DEPS_HASH"
-
-      - name: Cache pnpm dependencies
-        uses: actions/cache@v4
-        id: pnpm-cache
-        with:
-          path: |
-            ~/.pnpm-store
-            node_modules
-            libs/*/node_modules
-          key: pnpm-${{ runner.os }}-${{ steps.pnpm-version.outputs.version }}-${{ steps.cache-key.outputs.hash }}
-          restore-keys: |
-            pnpm-${{ runner.os }}-${{ steps.pnpm-version.outputs.version }}-
-            pnpm-${{ runner.os }}-
-
-      - name: Cache global pnpm packages
-        uses: actions/cache@v4
-        id: pnpm-global-cache
-        with:
-          path: ~/.pnpm/global
-          key: pnpm-global-${{ runner.os }}-${{ steps.pnpm-version.outputs.version }}-release-it-v2
-          restore-keys: |
-            pnpm-global-${{ runner.os }}-${{ steps.pnpm-version.outputs.version }}-
-            pnpm-global-${{ runner.os }}-
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
         env:
           HUSKY: 0
 
-      - name: Install release-it for CI
-        run: |
-          npm install -g release-it@19.0.6 @release-it/conventional-changelog@10.0.1
+      - name: Build
+        run: pnpm run build
+        env:
+          HUSKY: 0
 
       - name: Get OIDC Token
         id: oidc
         run: |
-          # Request OIDC token from GitHub
           OIDC_TOKEN=$(curl -sL "${ACTIONS_ID_TOKEN_REQUEST_URL}?audience=https://registry.npmjs.org" \
-            -H "Authorization: Bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" | jq -r '.value')
+            -H "Authorization: Bearer ${ACTIONS_ID_TOKEN}" | jq -r '.value')
           echo "oidc-token=${OIDC_TOKEN}" >> $GITHUB_OUTPUT
 
-      - name: Configure npm authentication for OIDC
+      - name: Configure npm authentication
         run: |
-          # Configure npm to use OIDC token
-          echo "//registry.npmjs.org/:_authToken=${OIDC_TOKEN}" > ~/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${{ steps.oidc.outputs.oidc-token }}" > ~/.npmrc
           echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
           echo "always-auth=true" >> ~/.npmrc
-
-          # Verify authentication
-          echo "Testing npm authentication..."
-          npm whoami || echo "npm whoami failed"
         env:
           OIDC_TOKEN: ${{ steps.oidc.outputs.oidc-token }}
 
+      - name: Install release-it
+        run: npm install -g release-it@21.0.2 @release-it/conventional-changelog@12.0.0
+
       - name: Release ${{ matrix.library }}
+        working-directory: ./libs/${{ matrix.library }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          echo "📦 Processing ${{ matrix.library }}..."
-
-          # Get package name from package.json
-          package_name=$(grep -o '"name"[[:space:]]*:[[:space:]]*"[^"]*"' "libs/${{ matrix.library }}/package.json" | cut -d'"' -f4)
-          echo "Package name: $package_name"
-
-          # Validate package name
-          if [ -z "$package_name" ] || [ "$package_name" = "undefined" ]; then
-            echo "❌ Error: Could not detect package name from libs/${{ matrix.library }}/package.json"
-            cat "libs/${{ matrix.library }}/package.json" | head -10
-            exit 1
-          fi
-
-          # Debug authentication
-          echo "Checking npm configuration..."
-          echo "Home .npmrc:"
-          cat ~/.npmrc || echo "No ~/.npmrc found"
-          echo "Local .npmrc:"
-          cat libs/${{ matrix.library }}/.npmrc || echo "No local .npmrc found"
-          echo "NPM_TOKEN is set: $([ -n "$NPM_TOKEN" ] && echo "YES" || echo "NO")"
-
-          # Pull latest changes to avoid conflicts
-          git pull origin main
-
-          # Use our release wrapper script - any error should fail the job
-          echo "🚀 Running release wrapper..."
-          ./scripts/release-wrapper.sh "./libs/${{ matrix.library }}" "$package_name" --ci
-          echo "✅ Successfully released ${{ matrix.library }}"
-
-          # Verify the tag was created and pushed
-          echo "🔍 Verifying tag creation..."
-          NEW_VERSION=$(grep -o '"version"[[:space:]]*:[[:space:]]*"[^"]*"' "libs/${{ matrix.library }}/package.json" | cut -d'"' -f4)
-          EXPECTED_TAG="${package_name}@${NEW_VERSION}"
-          echo "Expected tag: $EXPECTED_TAG"
-
-          if git tag -l | grep -q "^${EXPECTED_TAG}$"; then
-            echo "✅ Tag created locally: $EXPECTED_TAG"
-
-            # Give a moment for the push to complete, then verify
-            sleep 2
-            if git ls-remote --tags origin | grep -q "refs/tags/${EXPECTED_TAG}"; then
-              echo "✅ Tag successfully pushed to remote: $EXPECTED_TAG"
-            else
-              echo "⚠️ Tag not found on remote, attempting manual push..."
-              git push origin --tags
-              echo "✅ Tags pushed manually"
-            fi
-          else
-            echo "❌ Expected tag not found locally: $EXPECTED_TAG"
-            echo "Available tags:"
-            git tag -l | tail -10
-            exit 1
-          fi
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: release-it --ci
