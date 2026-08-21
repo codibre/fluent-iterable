@@ -37,6 +37,7 @@ import { AsyncMapper, Mapper } from 'augmentative-iterable';
 export * from './extend-async';
 export * from './extend';
 export * from './transform-obj-values';
+
 export {
   o,
   od,
