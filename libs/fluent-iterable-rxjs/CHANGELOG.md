@@ -1,5 +1,7 @@
 # Changelog
 
+## [1.2.0](https://github.com/codibre/fluent-iterable/compare/%40fluent-iterable%2Frxjs%401.1.0...%24%7Bnpm.name%7D%401.2.0) (2026-08-21)
+
 ## [1.1.0](https://github.com/codibre/fluent-iterable/compare/v1.40.0...%24%7Bnpm.name%7D%401.1.0) (2026-08-20)
 
 ### Features
