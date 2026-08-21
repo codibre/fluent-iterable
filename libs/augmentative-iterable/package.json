@@ -17,6 +17,7 @@
   "types": "index.d.ts",
   "main": "index.js",
   "scripts": {
+    "build": "echo 'No build step required for this package'",
     "format": "prettier --write 'src/**/*.ts' 'test/**/*.ts'",
     "lint": "pnpm run lint:format && pnpm run lint:style",
     "lint:fix": "pnpm run lint:format:fix && pnpm run lint:style:fix",
