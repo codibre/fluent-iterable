@@ -2,9 +2,9 @@
   "$schema": "https://unpkg.com/release-it@19/schema/release-it.json",
   "git": {
     "tagName": "${npm.name}@${version}",
-    "tagMatch": "${npm.name}@*",
-    "commitMessage": "chore(release): ${npm.name} v${version} [skip ci]",
+    "commitMessage": "chore(${npm.name}): release v${version} [skip ci]",
     "requireCleanWorkingDir": false,
+    "commitsPath": ".",
     "push": true,
     "pushRepo": "origin",
     "requireCommits": false
@@ -20,7 +20,7 @@
     "after:bump": "pnpm publish --no-git-checks --provenance"
   },
   "plugins": {
-    "@release-it/conventional-changelog": {
+      "@release-it/conventional-changelog": {
       "preset": {
         "name": "conventionalcommits",
         "types": [
@@ -37,11 +37,11 @@
       "infile": "CHANGELOG.md",
       "ignoreRecommendedBump": false,
       "strictSemVer": true,
-      "skipOnEmpty": true,
       "commitsPath": ".",
       "gitRawCommitsOpts": {
         "path": "."
-      }
+      },
+      "skipOnEmpty": true
     }
   }
 }
