@@ -21,7 +21,6 @@ jobs:
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and Test
         uses: ./.github/actions/build-and-test
