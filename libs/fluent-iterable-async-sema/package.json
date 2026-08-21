@@ -1,0 +1,57 @@
+{
+  "name": "@fluent-iterable/async-sema",
+  "description": "async-sema integration with @codibre/fluent-iterable",
+  "version": "0.1.1",
+  "private": false,
+  "author": {
+    "name": "Farenheith"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "jest test/unit",
+    "lint": "pnpm run lint:format && pnpm run lint:style",
+    "lint:fix": "pnpm run lint:format:fix && pnpm run lint:style:fix",
+    "lint:staged": "lint-staged -c ../../.lintstagedrc",
+    "lint:format": "prettier --check '{src,test}/**/*.ts'",
+    "lint:format:fix": "prettier --write '{src,test}/**/*.ts'",
+    "lint:style": "eslint '**/*.ts'",
+    "lint:style:fix": "eslint '**/*.ts' --fix"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "keywords": [
+    "fluent-iterable",
+    "fluent interface",
+    "Iterable",
+    "AsyncIterable",
+    "Stream"
+  ],
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codibre/fluent-iterable"
+  },
+  "homepage": "https://github.com/codibre/fluent-iterable#readme",
+  "bugs": {
+    "url": "https://github.com/codibre/fluent-iterable/issues"
+  },
+  "dependencies": {
+    "@codibre/fluent-iterable": "workspace:^"
+  },
+  "peerDependencies": {
+    "async-sema": "^3.1.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "del-cli": "^5.1.0",
+    "jest-extended": "^4.0.2"
+  }
+}

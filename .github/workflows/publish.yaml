@@ -23,6 +23,7 @@ jobs:
           - fluent-iterable
           - fluent-iterable-js-sdsl
           - fluent-iterable-rxjs
+          - fluent-iterable-async-sema
 
     steps:
       - name: Checkout repository
