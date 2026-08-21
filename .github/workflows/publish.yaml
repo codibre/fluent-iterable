@@ -93,7 +93,7 @@ jobs:
 
           for entry in $PACKAGES; do
             IFS='|' read -r pkg_name lib_path <<< "$entry"
-            pkg_dir=$(realpath ".${lib_path}")
+            pkg_dir=$(realpath "./${lib_path}")
             echo ""
             echo ">>> Checking ${pkg_name} from ${pkg_dir}"
 
