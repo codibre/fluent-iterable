@@ -297,4 +297,63 @@ describe('Iterable', () => {
 
     expect(result).toEqual([6]);
   });
+
+  describe('native toArray passthrough', () => {
+    it('should return plain array materialization', () => {
+      const original = [1, 2, 3];
+
+      expect(augmentativeToArray.call(original)).toEqual([1, 2, 3]);
+    });
+
+    it('should close the source iterator after normal completion', () => {
+      const original = [1, 2, 3];
+      let closed = false;
+      const closeable = {
+        [Symbol.iterator]: () => {
+          const inner = original[Symbol.iterator]();
+
+          return {
+            next: () => inner.next(),
+            return: () => {
+              closed = true;
+              return { done: true, value: undefined };
+            },
+          };
+        },
+      };
+
+      expect(augmentativeToArray.call(closeable)).toEqual([1, 2, 3]);
+      expect(closed).toBe(true);
+    });
+
+    it('should propagate mapper errors', () => {
+      const boom = () => {
+        throw new Error('boom');
+      };
+      const mapped = mapIterable([1, 2, 3], boom);
+
+      expect(() => augmentativeToArray.call(mapped)).toThrow('boom');
+    });
+
+    it('should close a takeWhile-cut iterator without consuming the tail', () => {
+      const seen: number[] = [];
+      let closed = false;
+      function* source() {
+        try {
+          for (let i = 0; i < 10; i++) {
+            seen.push(i);
+            yield i;
+          }
+        } finally {
+          closed = true;
+        }
+      }
+
+      const taken = takeWhileIterable(source(), (x) => x < 3);
+
+      expect(augmentativeToArray.call(taken)).toEqual([0, 1, 2]);
+      expect(closed).toBe(true);
+      expect(seen).toEqual([0, 1, 2, 3]);
+    });
+  });
 });

@@ -9,10 +9,8 @@ const end = {
 };
 const isPromiseLike = (p) => p && typeof p.then === 'function';
 
-const resolverAsync = (
-  promise,
-  callback,
-) => isPromiseLike(promise) ? promise.then(callback) : callback(promise);
+const resolverAsync = (promise, callback) =>
+  isPromiseLike(promise) ? promise.then(callback) : callback(promise);
 
 function itClone(it) {
   let iteratorType;
@@ -28,6 +26,8 @@ function itClone(it) {
   };
 }
 
+const isAugmentative = (it) =>
+  it[augments] !== undefined || it[baseIterable] !== undefined;
 
 function addMutableAugmentation(type, action) {
   this[augments].push({
@@ -37,7 +37,12 @@ function addMutableAugmentation(type, action) {
   return this;
 }
 
-function addImmutableAugmentation(type, action, iteratorType, augmentativeIterate) {
+function addImmutableAugmentation(
+  type,
+  action,
+  iteratorType,
+  augmentativeIterate,
+) {
   const augmentList = this[augments];
   const { length } = augmentList;
   const newAugmentList = new Array(length + 1);
@@ -54,44 +59,56 @@ function addImmutableAugmentation(type, action, iteratorType, augmentativeIterat
   };
 }
 
-const getSkippedAugmentIterable = (
-  iteratorType,
-  augmentativeIterate,
-) => function (it, offset = 0, isImmutable) {
-  const augmentList = it[augments];
-  let baseOffset;
+const getSkippedAugmentIterable = (iteratorType, augmentativeIterate) =>
+  function (it, offset = 0, isImmutable) {
+    const augmentList = it[augments];
+    let baseOffset;
 
-  if (!augmentList || augmentList.length === 0) baseOffset = it[offsetSymbol];
+    if (!augmentList || augmentList.length === 0) baseOffset = it[offsetSymbol];
 
-  return {
-    [iteratorType]: augmentativeIterate,
-    [baseIterable]: it,
-    [offsetSymbol]: (baseOffset || 0) + Math.max(offset, 0),
-    [addAugmentation]: it[addAugmentation] || (isImmutable ? addImmutableAugmentation : addMutableAugmentation),
+    return {
+      [iteratorType]: augmentativeIterate,
+      [baseIterable]: it,
+      [offsetSymbol]: (baseOffset || 0) + Math.max(offset, 0),
+      [addAugmentation]:
+        it[addAugmentation] ||
+        (isImmutable ? addImmutableAugmentation : addMutableAugmentation),
+    };
   };
-};
 
-const getAugmentIterable = (
-  iteratorType,
-  augmentativeIterate,
-  type,
-) => function (it, action, isImmutable) {
-  if (it[augments] && it[iteratorType]) return it[addAugmentation](type, action, iteratorType, augmentativeIterate);
+const getAugmentIterable = (iteratorType, augmentativeIterate, type) =>
+  function (it, action, isImmutable) {
+    if (it[augments] && it[iteratorType])
+      return it[addAugmentation](
+        type,
+        action,
+        iteratorType,
+        augmentativeIterate,
+      );
 
-  return {
-    [iteratorType]: augmentativeIterate,
-    [augments]: [{
-      type,
-      action,
-    }],
-    [baseIterable]: it,
-    [addAugmentation]: isImmutable ? addImmutableAugmentation : addMutableAugmentation,
+    return {
+      [iteratorType]: augmentativeIterate,
+      [augments]: [
+        {
+          type,
+          action,
+        },
+      ],
+      [baseIterable]: it,
+      [addAugmentation]: isImmutable
+        ? addImmutableAugmentation
+        : addMutableAugmentation,
+    };
   };
-};
 
 const resolver = (value, callback) => callback(value);
 
-function getIterableParameters(self, next, iteratorSymbol, augmentativeIterate) {
+function getIterableParameters(
+  self,
+  next,
+  iteratorSymbol,
+  augmentativeIterate,
+) {
   let augmentList;
   let base;
   const offset = self[offsetSymbol] || 0;
@@ -111,6 +128,7 @@ function getIterableParameters(self, next, iteratorSymbol, augmentativeIterate) 
 module.exports = {
   getAugmentIterable,
   getSkippedAugmentIterable,
+  isAugmentative,
   isPromiseLike,
   itClone,
   resolver,
