@@ -106,13 +106,12 @@ function augmentativeForEach(action) {
 // Augmentative pipelines keep the fused JS loop: for them the C++ collector
 // only re-enters JS next() per item through the augment wrapper and measures
 // slightly slower than the in-place loop, with no short-circuit benefit.
-const nativeToArray =
-  typeof Iterator === 'function' &&
-  typeof Iterator.prototype.toArray === 'function'
-    ? Iterator.prototype.toArray
-    : undefined;
-
+// The helper is looked up per materialization call (a couple of ns against a
+// whole pipeline pass) so engines, and test environments, without iterator
+// helpers transparently take the JS loop.
 function augmentativeToArray() {
+  const nativeToArray =
+    typeof Iterator === 'function' ? Iterator.prototype.toArray : undefined;
   if (nativeToArray && !isAugmentative(this)) {
     if (typeof this[Symbol.iterator] === 'function') {
       const iterator = this[Symbol.iterator]();

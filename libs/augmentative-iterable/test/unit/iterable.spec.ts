@@ -355,5 +355,24 @@ describe('Iterable', () => {
       expect(closed).toBe(true);
       expect(seen).toEqual([0, 1, 2, 3]);
     });
+
+    it('should throw for an async iterable receiver', () => {
+      async function* asyncSource() {
+        yield 1;
+      }
+
+      expect(() =>
+        augmentativeToArray.call(asyncSource() as unknown as Iterable<number>),
+      ).toThrow();
+    });
+
+    it('should keep augmentative pipelines on the fused loop even when native toArray exists', () => {
+      const pipeline = mapIterable([1, 2, 3], (x) => x * 2);
+      const iterator = pipeline[Symbol.iterator]();
+
+      expect(augmentativeToArray.call(pipeline)).toEqual([2, 4, 6]);
+      // the pipeline object must remain usable through its own iterator
+      expect(iterator.next().value).toBe(2);
+    });
   });
 });
