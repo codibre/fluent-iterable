@@ -81,6 +81,37 @@ Another thing we tried to do here is to avoid the use of async operation everyti
 
 This library actually have been made to have the base functionalities of [@codibre/fluent-iterable](https://github.com/Codibre/fluent-iterable), so, at this first version, it's not really simple to use as for some methods you have to rely on _bind_ or _call_ uses for some functions, but checkout our [index file](./index.d.ts) where we described each exported function if you want to try it!
 
+## Native iterator helpers interop
+
+On runtimes with iterator helpers (Node.js 22+), `augmentativeToArray` delegates
+plain (non-augmentative) iterables to `Iterator.prototype.toArray`, whose eager
+C++ collection beats the JS loop: measuring 100k items on Node 26, a bare
+`toArray` over a generator drops from ~15 to ~10.5 ns/item — parity with the
+native helper. On older runtimes the JS loop runs instead, transparently.
+
+Augmentative pipelines (`mapIterable`/`filterIterable`/`skipIterable`/... —
+detectable via the exported `isAugmentative`) keep the fused JS loop, and
+`augmentativeForEach` never delegates, for the same reason: the fused loop
+applies every augmentation inline per item, in the same language tier, so V8
+inlines the whole pipeline into one machine-code loop. Handing such an
+iterator to a native driver instead means every item crosses the C++→JS
+boundary into the wrapper's `next()`, which cannot be inlined — a ~4x
+per-iteration penalty in isolation that makes augmented pipelines ~3% slower
+ungated, and `forEach` 10-55% slower wherever this library's direct array
+indexing or fused loop currently wins. The rule of thumb: delegating to a
+native builtin pays off only when the builtin itself absorbs the work
+(collection, allocation); when the per-item work stays a JS callback, the
+fused JS loop is the faster pairing.
+
+Two semantics are preserved on both paths, and neither matches a bare
+`Iterator.prototype.toArray` alias:
+
+- `return()` is invoked on the iterator after normal completion (the native
+  helper does not close iterators by itself) — what the JS loop has always
+  done;
+- iterators are not closed on abrupt completion, and errors propagate as
+  before.
+
 ## License
 
 Licensed under [MIT](https://en.wikipedia.org/wiki/MIT_License).

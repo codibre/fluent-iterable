@@ -4,7 +4,13 @@ import {
   resolver,
   isPromiseLike,
 } from '../../lib/augments-utils';
-import { augmentativeToArrayAsync, itClone } from '../../index';
+import {
+  augmentativeToArrayAsync,
+  itClone,
+  isAugmentative,
+  mapIterable,
+  skipIterable,
+} from '../../index';
 import { getAsync } from './get-async';
 
 describe('augments-utils', () => {
@@ -78,6 +84,35 @@ describe('augments-utils', () => {
       }
 
       expect(thrownError).toBeInstanceOf(Error);
+    });
+
+    it('should clone an augmentative iterable keeping its augmentations', () => {
+      const pipeline = mapIterable([1, 2, 3], (x) => x * 2);
+      const cloned = itClone(pipeline);
+
+      expect(Array.from(cloned)).toEqual([2, 4, 6]);
+    });
+  });
+
+  describe('isAugmentative()', () => {
+    it('should return true for augmentative iterables', () => {
+      expect(isAugmentative(mapIterable([1], (x) => x))).toBe(true);
+      expect(isAugmentative(skipIterable([1], 0))).toBe(true);
+    });
+
+    it('should return false for plain iterables', () => {
+      expect(isAugmentative([1, 2, 3])).toBe(false);
+      expect(isAugmentative(new Set([1]))).toBe(false);
+    });
+  });
+
+  describe('skipIterable() immutability', () => {
+    it('should propagate the immutable addAugmentation to plain sources', () => {
+      const skipped = skipIterable([1, 2, 3, 4], 1, true);
+      const mapped = mapIterable(skipped, (x) => x * 10);
+
+      expect(Array.from(mapped)).toEqual([20, 30, 40]);
+      expect(Array.from(skipped)).toEqual([2, 3, 4]);
     });
   });
 });

@@ -12,18 +12,20 @@ A fast way to iterate, sync or async, over array likes, stream and async iterabl
 ## Benchmarks
 
 Fluent-iterable are strongly focused on performance. Check it out in our [benchmark](https://runkit.com/farenheith/fluent-iterable-benchmark)!;
-Here a some results we got comparing to another similar options on node 22:
+These are the results from our CI benchmark workflow (Node 22), compared to other similar options:
 
 | Library | Ops/sec | Margin | Ran samples |
 | ------- | ------- | ----------- | ----------- |
-| **fluent** | 494 | ±1.43% | 91 |
-| [iterare](https://www.npmjs.com/package/iterare) | 436 | ±1.10%  | 92 |
-| [iter-ops](https://www.npmjs.com/package/iter-ops) | 376 | ±0.21% | 91 |
-| native builtin iterator | 326 | ±0.21% | 92 |
-| [iter-tools](https://www.npmjs.com/package/iter-tools-es) | 243 | ±0.17%  | 88 |
-| [rxjs](https://www.npmjs.com/package/rxjs) | 197 | ±0.49% | 83 |
-| native generators | 155 | ±0.83% | 81 |
-| native array operations chain | 63.71 | ±2.79% | 66 |
+| **fluent** | 483 | ±0.47% | 93 |
+| [iterare](https://www.npmjs.com/package/iterare) | 430 | ±0.72% | 94 |
+| [iter-ops](https://www.npmjs.com/package/iter-ops) | 361 | ±0.51% | 91 |
+| native builtin iterator | 316 | ±0.14% | 94 |
+| [iter-tools](https://www.npmjs.com/package/iter-tools-es) | 233 | ±0.23% | 91 |
+| [rxjs](https://www.npmjs.com/package/rxjs) | 193 | ±0.52% | 88 |
+| native iterable | 151 | ±0.56% | 85 |
+| array operation chain | 63.99 | ±0.74% | 66 |
+
+Absolute numbers scale with runner load (successive runs on identical code have differed by up to ~1.8x across all libraries, third-party ones included), but rankings and relative margins are stable: fluent consistently leads, at ~1.4-1.5x the native builtin iterator.
 
 Notice that what we call native builtin ierator is the [iterator helper](https://v8.dev/features/iterator-helpers), recently released in the NodeJs 22, so due to some strategies we use, we can achieve a performance even better than the helper implemented in the V8 Engine!
 You can check the benchmark code [here](./test-benchmark/general-benchmark.spec.ts)

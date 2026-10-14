@@ -144,7 +144,7 @@ export declare function mapAsyncIterable<T, R>(
  */
 export declare function flatMapIterable<
   T,
-  R = T extends AnyIterable<infer Sub> ? Sub : never
+  R = T extends AnyIterable<infer Sub> ? Sub : never,
 >(
   it: Iterable<T>,
   mapper?: AsyncMapper<T, AnyIterable<R>>,
@@ -159,7 +159,7 @@ export declare function flatMapIterable<
  */
 export declare function flatMapAsyncIterable<
   T,
-  R = T extends AnyIterable<infer Sub> ? Sub : never
+  R = T extends AnyIterable<infer Sub> ? Sub : never,
 >(
   it: AnyIterable<T>,
   mapper?: AsyncMapper<T, AnyIterable<R>>,
@@ -300,3 +300,10 @@ export declare function resolverAsync<T, R>(
 ): Promise<R> | R;
 
 export declare function itClone<T extends AnyIterable<any>>(it: T): T;
+
+/**
+ * Checks if the informed iterable is an augmentative one (built by this library),
+ * as opposed to a plain/native iterable.
+ * @param it the value to check
+ */
+export declare function isAugmentative(it: unknown): boolean;

@@ -297,4 +297,82 @@ describe('Iterable', () => {
 
     expect(result).toEqual([6]);
   });
+
+  describe('native toArray passthrough', () => {
+    it('should return plain array materialization', () => {
+      const original = [1, 2, 3];
+
+      expect(augmentativeToArray.call(original)).toEqual([1, 2, 3]);
+    });
+
+    it('should close the source iterator after normal completion', () => {
+      const original = [1, 2, 3];
+      let closed = false;
+      const closeable = {
+        [Symbol.iterator]: () => {
+          const inner = original[Symbol.iterator]();
+
+          return {
+            next: () => inner.next(),
+            return: () => {
+              closed = true;
+              return { done: true, value: undefined };
+            },
+          };
+        },
+      };
+
+      expect(augmentativeToArray.call(closeable)).toEqual([1, 2, 3]);
+      expect(closed).toBe(true);
+    });
+
+    it('should propagate mapper errors', () => {
+      const boom = () => {
+        throw new Error('boom');
+      };
+      const mapped = mapIterable([1, 2, 3], boom);
+
+      expect(() => augmentativeToArray.call(mapped)).toThrow('boom');
+    });
+
+    it('should close a takeWhile-cut iterator without consuming the tail', () => {
+      const seen: number[] = [];
+      let closed = false;
+      function* source() {
+        try {
+          for (let i = 0; i < 10; i++) {
+            seen.push(i);
+            yield i;
+          }
+        } finally {
+          closed = true;
+        }
+      }
+
+      const taken = takeWhileIterable(source(), (x) => x < 3);
+
+      expect(augmentativeToArray.call(taken)).toEqual([0, 1, 2]);
+      expect(closed).toBe(true);
+      expect(seen).toEqual([0, 1, 2, 3]);
+    });
+
+    it('should throw for an async iterable receiver', () => {
+      async function* asyncSource() {
+        yield 1;
+      }
+
+      expect(() =>
+        augmentativeToArray.call(asyncSource() as unknown as Iterable<number>),
+      ).toThrow();
+    });
+
+    it('should keep augmentative pipelines on the fused loop even when native toArray exists', () => {
+      const pipeline = mapIterable([1, 2, 3], (x) => x * 2);
+      const iterator = pipeline[Symbol.iterator]();
+
+      expect(augmentativeToArray.call(pipeline)).toEqual([2, 4, 6]);
+      // the pipeline object must remain usable through its own iterator
+      expect(iterator.next().value).toBe(2);
+    });
+  });
 });

@@ -30,6 +30,7 @@ const {
   itClone,
   resolver,
   resolverAsync,
+  isAugmentative,
 } = require('./lib/augments-utils');
 
 module.exports = {
@@ -46,6 +47,7 @@ module.exports = {
   filterAsyncIterable,
   immutable,
   immutableAsync,
+  isAugmentative,
   itClone,
   mapAsyncIterable,
   flatMapAsyncIterable,

@@ -5,12 +5,9 @@ const {
   end,
   getSkippedAugmentIterable,
   getIterableParameters,
+  isAugmentative,
 } = require('./augments-utils');
-const {
-  YIELD,
-  IGNORE,
-  STOP,
-} = require('./augments-types');
+const { YIELD, IGNORE, STOP } = require('./augments-types');
 
 function resolveState(augmentList, value) {
   let ai = 0;
@@ -81,21 +78,50 @@ function augmentativeIterateIterable(augmentList, base, offset) {
 }
 
 function augmentativeIterate(next) {
-  const { augmentList, base, offset } = getIterableParameters(this, next, Symbol.iterator, augmentativeIterate);
+  const { augmentList, base, offset } = getIterableParameters(
+    this,
+    next,
+    Symbol.iterator,
+    augmentativeIterate,
+  );
 
-  return Array.isArray(base) ? augmentativeIterateArray(augmentList, base, offset) : augmentativeIterateIterable(augmentList, base, offset);
+  return Array.isArray(base)
+    ? augmentativeIterateArray(augmentList, base, offset)
+    : augmentativeIterateIterable(augmentList, base, offset);
 }
 
-function augmentativeForEach(
-  action,
-) {
+function augmentativeForEach(action) {
   const it = augmentativeIterate.call(this);
   let next;
   while (!(next = it.next()).done) action(next.value);
   if (it.return) it.return();
 }
 
+// Iterator.prototype.toArray is available from Node 22 (V8 12.2+). When
+// present, its eager C++ collection beats the JS next()-and-push loop for
+// plain iterables, so we delegate to it and keep the closing semantics this
+// library has always had: return() is invoked after normal completion (native
+// toArray does not close the iterator itself) and no closing on abrupt
+// completion, so error-path parity with the fallback loop is kept.
+// Augmentative pipelines keep the fused JS loop: for them the C++ collector
+// only re-enters JS next() per item through the augment wrapper and measures
+// slightly slower than the in-place loop, with no short-circuit benefit.
+// The helper is looked up per materialization call (a couple of ns against a
+// whole pipeline pass) so engines, and test environments, without iterator
+// helpers transparently take the JS loop.
 function augmentativeToArray() {
+  const nativeToArray =
+    typeof Iterator === 'function' ? Iterator.prototype.toArray : undefined;
+  if (nativeToArray && !isAugmentative(this)) {
+    if (typeof this[Symbol.iterator] === 'function') {
+      const iterator = this[Symbol.iterator]();
+      const result = nativeToArray.call(iterator);
+      if (iterator.return) iterator.return();
+
+      return result;
+    }
+  }
+
   const result = [];
 
   augmentativeForEach.call(this, result.push.bind(result));
@@ -138,9 +164,17 @@ const skipIterable = getSkippedAugmentIterable(
   augmentativeIterate,
 );
 
-const addFilter = getAugmentIterable(Symbol.iterator, augmentativeIterate, IGNORE);
+const addFilter = getAugmentIterable(
+  Symbol.iterator,
+  augmentativeIterate,
+  IGNORE,
+);
 const addMap = getAugmentIterable(Symbol.iterator, augmentativeIterate, YIELD);
-const addTakeWhile = getAugmentIterable(Symbol.iterator, augmentativeIterate, STOP);
+const addTakeWhile = getAugmentIterable(
+  Symbol.iterator,
+  augmentativeIterate,
+  STOP,
+);
 
 module.exports = {
   addFilter,
