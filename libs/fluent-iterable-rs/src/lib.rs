@@ -821,10 +821,20 @@ pub trait FluentIter: Iterator + Sized {
     /// assert_eq!(sorted.first().copied(), Some(("b", 1)));
     /// ```
     ///
-    /// Resolving, like [`FluentIter::sorted`]. "Take the least" spells as
-    /// `.sort_by(k).first().copied()` — `first` is inherent to `Vec`/slices
-    /// (std `Iterator` has no `first`), which the resolving design gets you
-    /// for free.
+    /// Resolving, like [`FluentIter::sorted`] — but only pay for what you
+    /// need: if the goal is *the least* rather than the whole order, use
+    /// [`Iterator::min_by_key`] (or [`Iterator::max_by_key`]) directly.
+    /// One pass, no allocation, and std documents first-wins on ties —
+    /// the exact semantics of `sortBy(k).first()` over `.sort(k => k)` in
+    /// JS, without the `O(n log n)` sort and the intermediate `Vec`.
+    ///
+    /// ```
+    /// use fluent_iterable::FluentIter; // for the sibling vocabulary
+    ///
+    /// let rows = [("b", 1), ("a", 2), ("b", 3)];
+    /// // sortBy(v => v).first() ⇔ min_by_key, in O(n):
+    /// assert_eq!(rows.iter().min_by_key(|(_, v)| *v).copied(), Some(("b", 1)));
+    /// ```
     fn sort_by<K, F>(self, mut key: F) -> Vec<Self::Item>
     where
         K: Ord,
