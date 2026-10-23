@@ -1,6 +1,6 @@
 [package]
 name = "fluent-iterable"
-version = "0.0.2"
+version = "0.0.3"
 edition = "2021"
 rust-version = "1.70"
 license = "MIT"

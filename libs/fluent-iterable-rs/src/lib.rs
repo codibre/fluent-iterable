@@ -429,15 +429,16 @@ where
 ///
 /// Lazy wrapper, buffering like npm's generator: every iterable is read and
 /// folded on the first `next()`, then rows are yielded one at a time.
-pub struct CombineJoin<I, T, F>
+pub struct CombineJoin<I, T, K, F>
 where
     I: Iterator,
 {
     phase: Phase<I, Vec<T>>,
     key: F,
+    _k: std::marker::PhantomData<fn(&T) -> K>,
 }
 
-impl<I, T, K, F> Iterator for CombineJoin<I, T, F>
+impl<I, T, K, F> Iterator for CombineJoin<I, T, K, F>
 where
     I: Iterator,
     I::Item: IntoIterator<Item = T>,
@@ -540,13 +541,14 @@ where
 }
 
 /// Sorted sequence produced by [`FluentIter::sort_by`] / [`FluentIter::sort_by_desc`].
-pub struct SortBy<I: Iterator, F> {
+pub struct SortBy<I: Iterator, K, F> {
     phase: Phase<I, I::Item>,
     key: F,
     descending: bool,
+    _k: std::marker::PhantomData<fn(&I::Item) -> K>,
 }
 
-impl<I, K, F> Iterator for SortBy<I, F>
+impl<I, K, F> Iterator for SortBy<I, K, F>
 where
     I: Iterator,
     K: Ord,
@@ -688,7 +690,7 @@ pub trait FluentIter: Iterator + Sized {
     ///
     /// Lazy: the whole family is folded on the first pull, rows are yielded
     /// one at a time.
-    fn combine_join<T, K, F>(self, key: F) -> CombineJoin<Self, T, F>
+    fn combine_join<T, K, F>(self, key: F) -> CombineJoin<Self, T, K, F>
     where
         Self::Item: IntoIterator<Item = T>,
         K: Eq + Hash,
@@ -698,6 +700,7 @@ pub trait FluentIter: Iterator + Sized {
         CombineJoin {
             phase: Phase::Source(self),
             key,
+            _k: std::marker::PhantomData,
         }
     }
 
@@ -1003,7 +1006,7 @@ pub trait FluentIter: Iterator + Sized {
     /// ```
     ///
     /// Lazy wrapper over the sort (buffered on first pull).
-    fn sort_by<K, F>(self, key: F) -> SortBy<Self, F>
+    fn sort_by<K, F>(self, key: F) -> SortBy<Self, K, F>
     where
         K: Ord,
         F: FnMut(&Self::Item) -> K,
@@ -1012,6 +1015,7 @@ pub trait FluentIter: Iterator + Sized {
             phase: Phase::Source(self),
             key,
             descending: false,
+            _k: std::marker::PhantomData,
         }
     }
 
@@ -1027,7 +1031,7 @@ pub trait FluentIter: Iterator + Sized {
     /// ```
     ///
     /// Lazy wrapper over the sort (buffered on first pull).
-    fn sort_by_desc<K, F>(self, key: F) -> SortBy<Self, F>
+    fn sort_by_desc<K, F>(self, key: F) -> SortBy<Self, K, F>
     where
         K: Ord,
         F: FnMut(&Self::Item) -> K,
@@ -1036,6 +1040,7 @@ pub trait FluentIter: Iterator + Sized {
             phase: Phase::Source(self),
             key,
             descending: true,
+            _k: std::marker::PhantomData,
         }
     }
 
@@ -1632,6 +1637,28 @@ mod tests {
             HashSet::from_iter(rows.iter().map(|r| r[0].1)),
             HashSet::from(["a1", "a2"])
         );
+    }
+
+    #[test]
+    fn adapters_resolve_std_iterator_methods() {
+        // 0.0.3 regression: SortBy/CombineJoin carried K only in the impl
+        // header, so std Iterator methods failed to resolve on them from a
+        // bare call site. Keep K pinned in the struct type parameters.
+        // (Note std `Iterator` has no `first` — that one is inherent to
+        // slices — so the std spelling of "take the least" is `next()`.)
+        let rows = [("b", 1), ("a", 2), ("b", 3)];
+        assert_eq!(rows.iter().sort_by(|(_, v)| *v).count(), 3);
+        assert_eq!(
+            rows.iter().sort_by_desc(|(_, v)| *v).next().copied(),
+            Some(("b", 3))
+        );
+        // ascending first == the minimum key (1, held by "b").
+        assert_eq!(
+            rows.iter().sort_by(|(_, v)| *v).next().copied(),
+            Some(("b", 1))
+        );
+        let groups = vec![vec![("x", 1)], vec![("x", 2), ("y", 3)]];
+        assert_eq!(groups.into_iter().combine_join(|(k, _)| *k).count(), 1);
     }
 
     #[test]
