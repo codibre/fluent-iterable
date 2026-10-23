@@ -123,3 +123,26 @@ jobs:
           elif [ ${#PUBLISHED[@]} -gt 0 ]; then
             echo "Successfully published ${#PUBLISHED[@]} library(ies)."
           fi
+
+      # Rust crate: manifest-driven. The version in Cargo.toml merged to
+      # master IS the release request -- bump it in the PR (pnpm --filter
+      # fluent-iterable-rs version:set x.y.z) and merging publishes it here.
+      # Skips silently when crates.io is already at that version; fails
+      # loudly when the secret is missing while a publish IS pending.
+      # Trusted publishing (OIDC): crates.io verifies THIS workflow's
+      # identity and mints a 30-minute token — no stored API token at all.
+      # One-time setup on crates.io (crate Settings -> Trusted Publishing):
+      #   owner codibre / repo fluent-iterable / workflow publish.yaml,
+      #   environment left empty. continue-on-error keeps routine merges
+      # green before that config exists: with nothing pending the publish
+      # step skips on its own; with a pending version and no token it
+      # fails loudly with a pointer.
+      - name: crates.io OIDC exchange (trusted publishing)
+        id: cargo-auth
+        continue-on-error: true
+        uses: rust-lang/crates-io-auth-action@v1
+      - name: Publish Rust crate (crates.io)
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ steps.cargo-auth.outputs.token }}
+          PUSH_GIT: "1"
+        run: pnpm --filter fluent-iterable-rs run publish

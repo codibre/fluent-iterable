@@ -11,6 +11,7 @@ Monorepo for the `@codibre/fluent-iterable` ecosystem — LINQ-like fluent API o
 | [`libs/fluent-iterable-rxjs`](./libs/fluent-iterable-rxjs) | `@fluent-iterable/rxjs` — RxJS integration plugin for fluent-iterable | [![npm](https://img.shields.io/npm/v/@fluent-iterable/rxjs)](https://www.npmjs.com/package/@fluent-iterable/rxjs) |
 | [`libs/fluent-iterable-js-sdsl`](./libs/fluent-iterable-js-sdsl) | `@fluent-iterable/js-sdsl` — js-sdsl data structure plugin for fluent-iterable | [![npm](https://img.shields.io/npm/v/@fluent-iterable/js-sdsl)](https://www.npmjs.com/package/@fluent-iterable/js-sdsl) |
 | [`libs/fluent-iterable-async-sema`](./libs/fluent-iterable-async-sema) | `@fluent-iterable/async-sema` — async-sema concurrency control integration for fluent-iterable | [![npm](https://img.shields.io/npm/v/@fluent-iterable/async-sema)](https://www.npmjs.com/package/@fluent-iterable/async-sema) |
+| [`libs/fluent-iterable-rs`](./libs/fluent-iterable-rs) | `fluent-iterable` (crates.io) — Rust port of the vocabulary as a zero-dep extension trait over `std::iter::Iterator` | [![crates](https://img.shields.io/crates/v/fluent-iterable)](https://crates.io/crates/fluent-iterable) |
 
 ## Getting Started
 
@@ -56,7 +57,8 @@ fluent-iterable/
 │   ├── augmentative-iterable    # augmentative-iterable (base utils)
 │   ├── fluent-iterable-rxjs     # @fluent-iterable/rxjs
 │   ├── fluent-iterable-js-sdsl  # @fluent-iterable/js-sdsl
-│   └── fluent-iterable-async-sema  # @fluent-iterable/async-sema
+│   ├── fluent-iterable-async-sema  # @fluent-iterable/async-sema
+│   └── fluent-iterable-rs       # fluent-iterable (crates.io, Rust)
 ├── .github/workflows/           # CI: standard.yaml, publish.yaml
 ├── scripts/                     # Release helper scripts
 ├── pnpm-workspace.yaml          # Workspace config
