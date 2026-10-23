@@ -132,10 +132,13 @@ pnpm --filter fluent-iterable-rs run publish:check   # what CI would do, read-on
 pnpm --filter fluent-iterable-rs run publish:dry     # + cargo publish --dry-run
 ```
 
-CI needs the `CARGO_REGISTRY_TOKEN` repository secret (a crates.io API
-token); it is only consulted when a publish is actually pending. Manual
-escape hatch, exactly equivalent: `cargo publish` from this directory —
-`package.json` exists only to bridge pnpm/turbo; the crate has zero npm
-coupling.
+Publishing uses **trusted publishing (OIDC)**: the workflow exchanges its
+GitHub identity for a 30-minute crates.io token — no API token stored
+anywhere. One-time setup (crate owner, on crates.io): the crate's
+**Settings → Trusted Publishing → Add (GitHub)** with owner `codibre`,
+repository `fluent-iterable`, workflow filename `publish.yaml`, environment
+left empty. Manual escape hatch, exactly equivalent: `cargo publish` from
+this directory (needs `cargo login` locally) — `package.json` exists only
+to bridge pnpm/turbo; the crate has zero npm coupling.
 
 [`fluent-iterable`]: https://crates.io/crates/fluent-iterable

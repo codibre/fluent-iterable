@@ -44,7 +44,7 @@ echo "pending publish: $CRATE_NAME@$CARGO_V (crates.io latest: $latest)"
 if [ "$MODE" = "--check" ]; then exit 0; fi
 
 [ "$MODE" = "--dry-run" ] || {
-  [ -n "${CARGO_REGISTRY_TOKEN:-}" ] || fail "CARGO_REGISTRY_TOKEN is empty — set the repository secret to let CI publish $CRATE_NAME@$CARGO_V"
+  [ -n "${CARGO_REGISTRY_TOKEN:-}" ] || fail "no publish token — the OIDC exchange failed: configure Trusted Publishing for $CRATE_NAME on crates.io (owner codibre / repo fluent-iterable / workflow publish.yaml)"
 }
 
 echo ">>> cargo publish ($MODE)"
