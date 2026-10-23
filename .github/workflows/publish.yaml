@@ -123,3 +123,14 @@ jobs:
           elif [ ${#PUBLISHED[@]} -gt 0 ]; then
             echo "Successfully published ${#PUBLISHED[@]} library(ies)."
           fi
+
+      # Rust crate: manifest-driven. The version in Cargo.toml merged to
+      # master IS the release request -- bump it in the PR (pnpm --filter
+      # fluent-iterable-rs version:set x.y.z) and merging publishes it here.
+      # Skips silently when crates.io is already at that version; fails
+      # loudly when the secret is missing while a publish IS pending.
+      - name: Publish Rust crate (crates.io)
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+          PUSH_GIT: "1"
+        run: pnpm --filter fluent-iterable-rs run publish

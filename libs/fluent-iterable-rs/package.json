@@ -6,7 +6,12 @@
   "scripts": {
     "build": "cargo build",
     "test": "cargo test",
-    "lint": "cargo fmt --check && cargo clippy --all-targets -- -D warnings",
-    "lint:fix": "cargo fmt && cargo clippy --all-targets --fix --allow-dirty"
+    "lint": "bash scripts/publish-crate.sh --lint && cargo fmt --check && cargo clippy --all-targets -- -D warnings",
+    "lint:fix": "cargo fmt && cargo clippy --all-targets --fix --allow-dirty",
+    "version:check": "bash scripts/publish-crate.sh --lint",
+    "version:set": "bash scripts/set-version.sh",
+    "publish:check": "bash scripts/publish-crate.sh --check",
+    "publish:dry": "bash scripts/publish-crate.sh --dry-run",
+    "publish": "bash scripts/publish-crate.sh"
   }
 }

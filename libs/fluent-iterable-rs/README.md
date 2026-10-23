@@ -118,8 +118,24 @@ cargo install cargo-llvm-cov
 cargo llvm-cov --all-targets --lcov --output-path lcov.info
 ```
 
-Publishing to crates.io is done from this directory with `cargo publish`
-(the `package.json` exists only to bridge pnpm/turbo; the crate itself has
-zero npm coupling).
+## Releasing
+
+Publishing is **manifest-driven**: the version in `Cargo.toml` merged to
+`master` *is* the release request. The `publish.yaml` pipeline compares it
+against crates.io after each merge — higher publishes (+ tag
+`fluent-iterable-rs@<version>`), equal is a silent no-op, lower fails the
+run. So a release is just a PR:
+
+```sh
+pnpm --filter fluent-iterable-rs version:set 0.0.6   # syncs Cargo.toml + package.json
+pnpm --filter fluent-iterable-rs run publish:check   # what CI would do, read-only
+pnpm --filter fluent-iterable-rs run publish:dry     # + cargo publish --dry-run
+```
+
+CI needs the `CARGO_REGISTRY_TOKEN` repository secret (a crates.io API
+token); it is only consulted when a publish is actually pending. Manual
+escape hatch, exactly equivalent: `cargo publish` from this directory —
+`package.json` exists only to bridge pnpm/turbo; the crate has zero npm
+coupling.
 
 [`fluent-iterable`]: https://crates.io/crates/fluent-iterable
