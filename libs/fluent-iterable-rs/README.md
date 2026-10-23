@@ -24,9 +24,9 @@ let lines: Vec<(&i32, &(i32, &str))> = orders
     .combine(customers.iter(), |(o, _)| *o, |(id, _)| *id)
     .collect();
 
-// stable grouping, like .group(keyFn) — lazy, full pass on first pull
-let by_customer: Vec<(&i32, Vec<(&i32, &i32)>)> =
-    orders.iter().group_by_stable(|(c, _)| *c).collect();
+// stable grouping, like .group(keyFn) — resolves to Vec (the pass is
+// inherently full: any item can extend an earlier group)
+let by_customer = orders.iter().group_by_stable(|(c, _)| *c);
 
 // fold + project, like .reduceAndMap(reducer, initial, mapFn)
 let report = orders
@@ -37,7 +37,12 @@ assert_eq!(report, "total 350");
 ```
 
 No wrapper type, no runtime dependencies, nothing to learn beyond your
-iterators: `use fluent_iterable::FluentIter;` and chain.
+iterators: `use fluent_iterable::FluentIter;` and chain. Laziness is
+applied where it pays: `distinct`/`distinct_by`/`combine` are streaming
+adapters that short-circuit under `take(k)`; operations whose first result
+is not final until the whole source is read (`group_by_stable`,
+`combine_join`, the sort family) resolve to a solid `Vec` — same work, same
+memory, plus re-iterability and every `Vec` method for free.
 
 ## npm ⇄ Rust map
 
@@ -45,9 +50,9 @@ Operations this crate provides (npm name → Rust method):
 
 | npm fluent-iterable          | Rust                                            |
 |------------------------------|-------------------------------------------------|
-| `.group(keyFn)`              | `group_by_stable` (lazy; full pass on first pull) |
+| `.group(keyFn)`              | `group_by_stable` (resolves to `Vec`; the pass is inherently full) |
 | `.combine(other, ka, kb)`    | `combine` (lazy; left streams)                  |
-| `.combineJoin(baseKey)`      | `combine_join` (lazy)                             |
+| `.combineJoin(baseKey)`      | `combine_join` (resolves to `Vec`)                  |
 | `.distinct()`                | `distinct` (lazy adapter)                       |
 | `.distinct(keyFn)`           | `distinct_by` (lazy adapter)                    |
 | `.isDistinct()`              | `is_distinct` (short-circuits)                  |
@@ -58,8 +63,8 @@ Operations this crate provides (npm name → Rust method):
 | `.join(sep)`                 | `join`                                          |
 | `.join(sep, mapFn)`          | `join_by`                                       |
 | `.avg()` / `.avg(mapFn)`     | `avg` / `avg_by` (`Option<f64>`, `None` empty)  |
-| `.sort(cmp?)`                | `sorted` / `sort_with` (stable, lazy wrapper)   |
-| `.sortBy(key)` / desc        | `sort_by` / `sort_by_desc` (stable, lazy wrapper) |
+| `.sort(cmp?)`                | `sorted` / `sort_with` (stable, resolves to `Vec`) |
+| `.sortBy(key)` / desc        | `sort_by` / `sort_by_desc` (stable, resolves to `Vec`) |
 | `.hasExactly(n)`             | `has_exactly`                                   |
 | `.hasLessThan(n)`            | `has_less_than`                                 |
 | `.hasLessOrExactly(n)`       | `has_less_or_exactly`                           |

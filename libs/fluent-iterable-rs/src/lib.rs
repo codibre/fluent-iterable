@@ -12,8 +12,7 @@
 //! use fluent_iterable::FluentIter;
 //!
 //! let rows = [("sa", 10), ("sp", 30), ("sa", 25)];
-//! let by_state: Vec<(&str, Vec<(&str, i32)>)> =
-//!     rows.into_iter().group_by_stable(|(s, _)| *s).collect();
+//! let by_state = rows.into_iter().group_by_stable(|(s, _)| *s);
 //! assert_eq!(by_state[0].1, vec![("sa", 10), ("sa", 25)]);
 //!
 //! let report = rows
@@ -245,44 +244,6 @@ where
     }
 }
 
-/// Internal phase of a buffered adapter: nothing consumed until the first
-/// `next()` (⇔ the JS generators that run their full pass on first pull).
-enum Phase<I: Iterator, O> {
-    Source(I),
-    Emitting(std::vec::IntoIter<O>),
-    Done,
-}
-
-impl<I, O> Phase<I, O>
-where
-    I: Iterator,
-{
-    /// Drive one step: on the first call run `build` over the source (that
-    /// is the only place the sequence is materialized), then drain.
-    fn next_with(&mut self, mut build: impl FnMut(I) -> Vec<O>) -> Option<O> {
-        if matches!(self, Phase::Source(_)) {
-            // Only the Pending→Emitting transition consumes; later calls
-            // must NOT replace (that would discard the buffered iterator).
-            let src = match std::mem::replace(self, Phase::Done) {
-                Phase::Source(i) => i,
-                _ => unreachable!("guarded by matches! above"),
-            };
-            *self = Phase::Emitting(build(src).into_iter());
-        }
-        match self {
-            Phase::Emitting(it) => it.next(),
-            _ => None,
-        }
-    }
-
-    fn size_hint(&self) -> (usize, Option<usize>) {
-        match self {
-            Phase::Emitting(it) => it.size_hint(),
-            _ => (0, None),
-        }
-    }
-}
-
 /// Keyed streaming dedup produced by [`FluentIter::distinct_by`] — see there.
 ///
 /// Purely lazy: buffers only the seen-key [`HashSet`], never the sequence.
@@ -315,49 +276,6 @@ where
 
     fn size_hint(&self) -> (usize, Option<usize>) {
         (0, self.iter.size_hint().1)
-    }
-}
-
-/// Stable grouping produced by [`FluentIter::group_by_stable`] — see there.
-///
-/// Lazy wrapper, buffering like npm's generator: the full pass runs on the
-/// first `next()`, then groups are yielded one at a time.
-pub struct GroupByStable<I, K, F>
-where
-    I: Iterator,
-{
-    phase: Phase<I, (K, Vec<I::Item>)>,
-    key: F,
-}
-
-impl<I, K, F> Iterator for GroupByStable<I, K, F>
-where
-    I: Iterator,
-    K: Eq + Hash + Clone,
-    F: FnMut(&I::Item) -> K,
-{
-    type Item = (K, Vec<I::Item>);
-
-    fn next(&mut self) -> Option<Self::Item> {
-        self.phase.next_with(|src| {
-            let mut index: HashMap<K, usize> = HashMap::new();
-            let mut out: Vec<(K, Vec<I::Item>)> = Vec::new();
-            for item in src {
-                let k = (self.key)(&item);
-                match index.get(&k) {
-                    Some(&i) => out[i].1.push(item),
-                    None => {
-                        index.insert(k.clone(), out.len());
-                        out.push((k, vec![item]));
-                    }
-                }
-            }
-            out
-        })
-    }
-
-    fn size_hint(&self) -> (usize, Option<usize>) {
-        self.phase.size_hint()
     }
 }
 
@@ -425,164 +343,25 @@ where
     }
 }
 
-/// Folded join produced by [`FluentIter::combine_join`] — see there.
-///
-/// Lazy wrapper, buffering like npm's generator: every iterable is read and
-/// folded on the first `next()`, then rows are yielded one at a time.
-pub struct CombineJoin<I, T, K, F>
-where
-    I: Iterator,
-{
-    phase: Phase<I, Vec<T>>,
-    key: F,
-    _k: std::marker::PhantomData<fn(&T) -> K>,
-}
-
-impl<I, T, K, F> Iterator for CombineJoin<I, T, K, F>
-where
-    I: Iterator,
-    I::Item: IntoIterator<Item = T>,
-    K: Eq + Hash,
-    T: Clone,
-    F: FnMut(&T) -> K,
-{
-    type Item = Vec<T>;
-
-    fn next(&mut self) -> Option<Vec<T>> {
-        self.phase.next_with(|src| {
-            let mut acc: Vec<Vec<T>> = Vec::new();
-            let mut first = true;
-            for iterable in src {
-                let items: Vec<T> = iterable.into_iter().collect();
-                if first {
-                    first = false;
-                    acc = items.into_iter().map(|item| vec![item]).collect();
-                    continue;
-                }
-                if acc.is_empty() {
-                    continue;
-                }
-                let mut idx: HashMap<K, Vec<T>> = HashMap::new();
-                for item in items {
-                    idx.entry((self.key)(&item)).or_default().push(item);
-                }
-                let mut next_acc = Vec::new();
-                for row in acc {
-                    // Rows are non-empty by construction; their key never
-                    // changes across folds (inner-join invariant).
-                    if let Some(bucket) = idx.get(&(self.key)(&row[0])) {
-                        for item in bucket {
-                            let mut grown = row.clone();
-                            grown.push(item.clone());
-                            next_acc.push(grown);
-                        }
-                    }
-                }
-                acc = next_acc;
-            }
-            acc
-        })
-    }
-
-    fn size_hint(&self) -> (usize, Option<usize>) {
-        self.phase.size_hint()
-    }
-}
-
-/// Sorted sequence produced by [`FluentIter::sorted`] — see there.
-pub struct Sorted<I: Iterator> {
-    phase: Phase<I, I::Item>,
-}
-
-impl<I> Iterator for Sorted<I>
-where
-    I: Iterator,
-    I::Item: Ord,
-{
-    type Item = I::Item;
-
-    fn next(&mut self) -> Option<I::Item> {
-        self.phase.next_with(|src| {
-            let mut out: Vec<I::Item> = src.collect();
-            out.sort();
-            out
-        })
-    }
-
-    fn size_hint(&self) -> (usize, Option<usize>) {
-        self.phase.size_hint()
-    }
-}
-
-/// Sorted sequence produced by [`FluentIter::sort_with`] — see there.
-pub struct SortWith<I: Iterator, F> {
-    phase: Phase<I, I::Item>,
-    compare: F,
-}
-
-impl<I, F> Iterator for SortWith<I, F>
-where
-    I: Iterator,
-    F: FnMut(&I::Item, &I::Item) -> Ordering,
-{
-    type Item = I::Item;
-
-    fn next(&mut self) -> Option<I::Item> {
-        self.phase.next_with(|src| {
-            let mut out: Vec<I::Item> = src.collect();
-            out.sort_by(&mut self.compare);
-            out
-        })
-    }
-
-    fn size_hint(&self) -> (usize, Option<usize>) {
-        self.phase.size_hint()
-    }
-}
-
-/// Sorted sequence produced by [`FluentIter::sort_by`] / [`FluentIter::sort_by_desc`].
-pub struct SortBy<I: Iterator, K, F> {
-    phase: Phase<I, I::Item>,
-    key: F,
-    descending: bool,
-    _k: std::marker::PhantomData<fn(&I::Item) -> K>,
-}
-
-impl<I, K, F> Iterator for SortBy<I, K, F>
-where
-    I: Iterator,
-    K: Ord,
-    F: FnMut(&I::Item) -> K,
-{
-    type Item = I::Item;
-
-    fn next(&mut self) -> Option<I::Item> {
-        self.phase.next_with(|src| {
-            let mut out: Vec<I::Item> = src.collect();
-            if self.descending {
-                out.sort_by_key(|item| std::cmp::Reverse((self.key)(item)));
-            } else {
-                out.sort_by_key(&mut self.key);
-            }
-            out
-        })
-    }
-
-    fn size_hint(&self) -> (usize, Option<usize>) {
-        self.phase.size_hint()
-    }
-}
-
 /// The missing combinators of [`std::iter::Iterator`], in the
 /// [`@codibre/fluent-iterable`] vocabulary (see the [crate docs](crate) for
 /// the full npm ⇄ Rust map).
 ///
 /// Blanket-implemented for every iterator — just `use fluent_iterable::FluentIter;`.
 ///
-/// Every operator that npm returns as an iterable returns an [`Iterator`]
-/// here too — chain freely and resolve with [`collect`][Iterator::collect]
-/// when you want a collection. Operators that npm resolves (`avg`, `join`,
-/// `toMap`, `hasX`, `contains`, …) return the plain value here.
+/// ## Laziness model
+///
+/// Streaming adapters are reserved for operations where laziness *can pay*:
+/// [`distinct`][FluentIter::distinct], [`distinct_by`][FluentIter::distinct_by]
+/// and [`combine`][FluentIter::combine] short-circuit under `take(k)` and
+/// never buffer the sequence. Operations whose *first result is not final
+/// until the whole source has been read* — [`group_by_stable`][FluentIter::group_by_stable],
+/// [`combine_join`][FluentIter::combine_join] and the sort family — are
+/// inherently O(N) and resolve to a solid [`Vec`] right away: a lazy wrapper
+/// over a full pass would consume the same source and store the same
+/// results, while losing re-iterability and every `Vec` method. Chaining
+/// still works (`Vec` is an `IntoIterator`); terminals (`avg`, `join`,
+/// `to_map*`, `has_*`, …) return plain values like npm does.
 pub trait FluentIter: Iterator + Sized {
     /// ⇔ `.group(keyFn)`: **stable** grouping — first-seen key order is
     /// preserved and each group keeps encounter order.
@@ -594,26 +373,36 @@ pub trait FluentIter: Iterator + Sized {
     /// ```
     /// use fluent_iterable::FluentIter;
     ///
-    /// let grouped: Vec<_> = ["b", "a", "b", "c", "a"]
-    ///     .into_iter()
-    ///     .group_by_stable(|x| *x)
-    ///     .collect();
+    /// let grouped = ["b", "a", "b", "c", "a"].into_iter().group_by_stable(|x| *x);
     /// let keys: Vec<_> = grouped.iter().map(|(k, _)| *k).collect();
     /// assert_eq!(keys, vec!["b", "a", "c"]);
     /// assert_eq!(grouped[1].1, vec!["a", "a"]);
     /// ```
     ///
-    /// Lazy: the full grouping pass runs on the first pull, then groups are
-    /// yielded one at a time — chain on without materializing the pair vec.
-    fn group_by_stable<K, F>(self, key: F) -> GroupByStable<Self, K, F>
+    /// Resolving: grouping is O(N) by nature — an element can extend a
+    /// group that was opened first, so no group is final before the whole
+    /// source is read. The `Vec` costs the same memory as any buffering
+    /// adapter and stays re-iterable; chain it with `.into_iter()` when you
+    /// want adapters over the groups.
+    fn group_by_stable<K, F>(self, key: F) -> Vec<(K, Vec<Self::Item>)>
     where
         K: Eq + Hash + Clone,
         F: FnMut(&Self::Item) -> K,
     {
-        GroupByStable {
-            phase: Phase::Source(self),
-            key,
+        let mut key = key;
+        let mut index: HashMap<K, usize> = HashMap::new();
+        let mut out: Vec<(K, Vec<Self::Item>)> = Vec::new();
+        for item in self {
+            let k = key(&item);
+            match index.get(&k) {
+                Some(&i) => out[i].1.push(item),
+                None => {
+                    index.insert(k.clone(), out.len());
+                    out.push((k, vec![item]));
+                }
+            }
         }
+        out
     }
 
     /// ⇔ `.combine(other, keySelf, keyOther)`: inner equi-join yielding
@@ -677,10 +466,9 @@ pub trait FluentIter: Iterator + Sized {
     /// let a = [(1, "a1"), (2, "a2")];
     /// let b = [(1, "b1"), (2, "b2")];
     /// let c = [(1, "c1")];
-    /// let rows: Vec<Vec<_>> = [a.as_slice(), b.as_slice(), c.as_slice()]
+    /// let rows = [a.as_slice(), b.as_slice(), c.as_slice()]
     ///     .into_iter()
-    ///     .combine_join(|(k, _)| *k)
-    ///     .collect();
+    ///     .combine_join(|(k, _)| *k);
     /// assert_eq!(rows.len(), 1);
     /// assert_eq!(
     ///     rows[0].iter().map(|(_, v)| *v).collect::<Vec<_>>(),
@@ -688,20 +476,48 @@ pub trait FluentIter: Iterator + Sized {
     /// );
     /// ```
     ///
-    /// Lazy: the whole family is folded on the first pull, rows are yielded
-    /// one at a time.
-    fn combine_join<T, K, F>(self, key: F) -> CombineJoin<Self, T, K, F>
+    /// Resolving, like [`group_by_stable`][FluentIter::group_by_stable]:
+    /// the fold reads every iterable before any row is final, so the row
+    /// table comes back as a `Vec` instead of a buffering wrapper.
+    fn combine_join<T, K, F>(self, key: F) -> Vec<Vec<T>>
     where
         Self::Item: IntoIterator<Item = T>,
         K: Eq + Hash,
         T: Clone,
         F: FnMut(&T) -> K,
     {
-        CombineJoin {
-            phase: Phase::Source(self),
-            key,
-            _k: std::marker::PhantomData,
+        let mut key = key;
+        let mut acc: Vec<Vec<T>> = Vec::new();
+        let mut first = true;
+        for iterable in self {
+            let items: Vec<T> = iterable.into_iter().collect();
+            if first {
+                first = false;
+                acc = items.into_iter().map(|item| vec![item]).collect();
+                continue;
+            }
+            if acc.is_empty() {
+                continue;
+            }
+            let mut idx: HashMap<K, Vec<T>> = HashMap::new();
+            for item in items {
+                idx.entry(key(&item)).or_default().push(item);
+            }
+            let mut next_acc = Vec::new();
+            for row in acc {
+                // Rows are non-empty by construction; their key never
+                // changes across folds (inner-join invariant).
+                if let Some(bucket) = idx.get(&key(&row[0])) {
+                    for item in bucket {
+                        let mut grown = row.clone();
+                        grown.push(item.clone());
+                        next_acc.push(grown);
+                    }
+                }
+            }
+            acc = next_acc;
         }
+        acc
     }
 
     /// ⇔ `.distinct()` on hashable items: keeps the **first** occurrence of
@@ -958,19 +774,20 @@ pub trait FluentIter: Iterator + Sized {
     /// ```
     /// use fluent_iterable::FluentIter;
     ///
-    /// let out: Vec<i32> = [3, 1, 2].into_iter().sorted().collect();
-    /// assert_eq!(out, vec![1, 2, 3]);
+    /// assert_eq!([3, 1, 2].into_iter().sorted(), vec![1, 2, 3]);
     /// ```
     ///
-    /// Lazy wrapper over the sort, ⇔ npm's `IterableSorted`: the collect +
-    /// sort runs on the first pull, then items are yielded in order.
-    fn sorted(self) -> Sorted<Self>
+    /// Resolving: nothing beats the minimum until the source is drained, so
+    /// a lazy sort wrapper can never short-circuit — the sorted `Vec` does
+    /// the same work once and adds re-iterability plus every `Vec` method
+    /// (npm's `IterableSorted` buffering made sense in JS, not here).
+    fn sorted(self) -> Vec<Self::Item>
     where
         Self::Item: Ord,
     {
-        Sorted {
-            phase: Phase::Source(self),
-        }
+        let mut out: Vec<Self::Item> = self.collect();
+        out.sort();
+        out
     }
 
     /// ⇔ `.sort(compareFn)`: stable sort with a custom comparator.
@@ -978,19 +795,17 @@ pub trait FluentIter: Iterator + Sized {
     /// ```
     /// use fluent_iterable::FluentIter;
     ///
-    /// let out: Vec<i32> = [1, 2, 3].into_iter().sort_with(|a, b| b.cmp(a)).collect();
-    /// assert_eq!(out, vec![3, 2, 1]);
+    /// assert_eq!([1, 2, 3].into_iter().sort_with(|a, b| b.cmp(a)), vec![3, 2, 1]);
     /// ```
     ///
-    /// Lazy wrapper over the sort (buffered on first pull).
-    fn sort_with<F>(self, compare: F) -> SortWith<Self, F>
+    /// Resolving, like [`FluentIter::sorted`].
+    fn sort_with<F>(self, mut compare: F) -> Vec<Self::Item>
     where
         F: FnMut(&Self::Item, &Self::Item) -> Ordering,
     {
-        SortWith {
-            phase: Phase::Source(self),
-            compare,
-        }
+        let mut out: Vec<Self::Item> = self.collect();
+        out.sort_by(&mut compare);
+        out
     }
 
     /// ⇔ `.sortBy(keyFn)`: stable sort ascending by key. Ties keep encounter
@@ -1001,22 +816,23 @@ pub trait FluentIter: Iterator + Sized {
     /// use fluent_iterable::FluentIter;
     ///
     /// let rows = [("b", 1), ("a", 2), ("b", 3)];
-    /// let out: Vec<_> = rows.into_iter().sort_by(|(_, v)| *v).collect();
-    /// assert_eq!(out, vec![("b", 1), ("a", 2), ("b", 3)]);
+    /// let sorted = rows.into_iter().sort_by(|(_, v)| *v);
+    /// assert_eq!(sorted, vec![("b", 1), ("a", 2), ("b", 3)]);
+    /// assert_eq!(sorted.first().copied(), Some(("b", 1)));
     /// ```
     ///
-    /// Lazy wrapper over the sort (buffered on first pull).
-    fn sort_by<K, F>(self, key: F) -> SortBy<Self, K, F>
+    /// Resolving, like [`FluentIter::sorted`]. "Take the least" spells as
+    /// `.sort_by(k).first().copied()` — `first` is inherent to `Vec`/slices
+    /// (std `Iterator` has no `first`), which the resolving design gets you
+    /// for free.
+    fn sort_by<K, F>(self, mut key: F) -> Vec<Self::Item>
     where
         K: Ord,
         F: FnMut(&Self::Item) -> K,
     {
-        SortBy {
-            phase: Phase::Source(self),
-            key,
-            descending: false,
-            _k: std::marker::PhantomData,
-        }
+        let mut out: Vec<Self::Item> = self.collect();
+        out.sort_by_key(&mut key);
+        out
     }
 
     /// ⇔ `.sortBy('-keyFn')` (the descending order descriptor): stable sort
@@ -1026,22 +842,21 @@ pub trait FluentIter: Iterator + Sized {
     /// use fluent_iterable::FluentIter;
     ///
     /// let rows = [("b", 1), ("a", 2), ("b", 3)];
-    /// let out: Vec<_> = rows.into_iter().sort_by_desc(|(_, v)| *v).collect();
-    /// assert_eq!(out, vec![("b", 3), ("a", 2), ("b", 1)]);
+    /// assert_eq!(
+    ///     rows.into_iter().sort_by_desc(|(_, v)| *v),
+    ///     vec![("b", 3), ("a", 2), ("b", 1)]
+    /// );
     /// ```
     ///
-    /// Lazy wrapper over the sort (buffered on first pull).
-    fn sort_by_desc<K, F>(self, key: F) -> SortBy<Self, K, F>
+    /// Resolving, like [`FluentIter::sorted`].
+    fn sort_by_desc<K, F>(self, mut key: F) -> Vec<Self::Item>
     where
         K: Ord,
         F: FnMut(&Self::Item) -> K,
     {
-        SortBy {
-            phase: Phase::Source(self),
-            key,
-            descending: true,
-            _k: std::marker::PhantomData,
-        }
+        let mut out: Vec<Self::Item> = self.collect();
+        out.sort_by_key(|item| std::cmp::Reverse(key(item)));
+        out
     }
 
     /// ⇔ `.avg()`: arithmetic mean as `Option<f64>` — `None` on empty
@@ -1271,7 +1086,7 @@ mod tests {
     #[test]
     fn stable_group_order() {
         let items = ["b", "a", "b", "c", "a"];
-        let grouped: Vec<_> = items.into_iter().group_by_stable(|x| *x).collect();
+        let grouped = items.into_iter().group_by_stable(|x| *x);
         let keys: Vec<_> = grouped.iter().map(|(k, _)| *k).collect();
         assert_eq!(keys, vec!["b", "a", "c"]);
         assert_eq!(grouped[1].1, vec!["a", "a"]);
@@ -1434,22 +1249,25 @@ mod tests {
     }
 
     #[test]
-    fn buffered_adapters_consume_nothing_until_polled() {
-        // ⇔ JS generators: building the chain runs no code; the internal
-        // full pass happens on the first next().
+    fn full_pass_ops_resolve_eagerly() {
+        // 0.0.4 design rule: operations whose first result is not final
+        // until the source is drained resolve immediately to Vec — no
+        // buffering wrapper pretending to be lazy. Distinct-by and combine
+        // keep real laziness (their short-circuit tests live beside this).
         let (source, counter) = counting([3, 1, 2].into_iter());
-        let _grouped = source.group_by_stable(|x| *x);
-        assert_eq!(counter.get(), 0);
-
-        let (source, counter) = counting([3, 1, 2].into_iter());
-        let mut sorted = source.sorted();
-        assert_eq!(counter.get(), 0);
-        assert_eq!(sorted.next(), Some(1)); // first pull buffers + sorts all
+        let grouped = source.group_by_stable(|x| *x);
         assert_eq!(counter.get(), 3);
+        assert_eq!(grouped.len(), 3); // re-iterable result
 
-        let (source, counter) = counting([vec![1], vec![2]].into_iter());
-        let _joined = source.combine_join(|x| *x);
-        assert_eq!(counter.get(), 0);
+        let (source, counter) = counting([3, 1, 2].into_iter());
+        let sorted = source.sorted();
+        assert_eq!(counter.get(), 3);
+        assert_eq!(sorted.first(), Some(&1)); // Vec's inherent first
+
+        let (source, counter) = counting([vec![1, 2], vec![1, 2]].into_iter());
+        let rows = source.combine_join(|x| *x);
+        assert_eq!(counter.get(), 2);
+        assert_eq!(rows, vec![vec![1, 1], vec![2, 2]]);
     }
 
     #[test]
@@ -1470,14 +1288,14 @@ mod tests {
     #[test]
     fn sort_family_is_stable() {
         let rows = [("b", 1), ("a", 2), ("b", 3), ("a", 1)];
-        let by_value: Vec<_> = rows.into_iter().sort_by(|(_, v)| *v).collect();
+        let by_value = rows.into_iter().sort_by(|(_, v)| *v);
         // ties (value 1 then 2..): encounter order preserved
         assert_eq!(by_value, vec![("b", 1), ("a", 1), ("a", 2), ("b", 3)]);
-        let desc: Vec<_> = rows.into_iter().sort_by_desc(|(_, v)| *v).collect();
+        let desc = rows.into_iter().sort_by_desc(|(_, v)| *v);
         assert_eq!(desc, vec![("b", 3), ("a", 2), ("b", 1), ("a", 1)]);
-        let asc: Vec<u8> = [3u8, 1, 2].into_iter().sorted().collect();
+        let asc: Vec<u8> = [3u8, 1, 2].into_iter().sorted();
         assert_eq!(asc, vec![1, 2, 3]);
-        let custom: Vec<i32> = [1, 2, 3].into_iter().sort_with(|a, b| b.cmp(a)).collect();
+        let custom: Vec<i32> = [1, 2, 3].into_iter().sort_with(|a, b| b.cmp(a));
         assert_eq!(custom, vec![3, 2, 1]);
     }
 
@@ -1600,10 +1418,9 @@ mod tests {
         let a = [(1, "a1"), (2, "a2")];
         let b = [(1, "b1"), (2, "b2")];
         let c = [(1, "c1")];
-        let rows: Vec<Vec<_>> = [a.as_slice(), b.as_slice(), c.as_slice()]
+        let rows = [a.as_slice(), b.as_slice(), c.as_slice()]
             .into_iter()
-            .combine_join(|(k, _)| *k)
-            .collect();
+            .combine_join(|(k, _)| *k);
         assert_eq!(rows.len(), 1);
         assert_eq!(
             rows[0].iter().map(|(_, v)| *v).collect::<Vec<_>>(),
@@ -1617,10 +1434,9 @@ mod tests {
         let b = [(1, "b1")];
         let c = [(2, "c2")];
         // key 1 dies at `c`, key 2 died at `b` → empty
-        let rows: Vec<Vec<_>> = [a.as_slice(), b.as_slice(), c.as_slice()]
+        let rows = [a.as_slice(), b.as_slice(), c.as_slice()]
             .into_iter()
-            .combine_join(|(k, _)| *k)
-            .collect();
+            .combine_join(|(k, _)| *k);
         assert!(rows.is_empty());
     }
 
@@ -1628,10 +1444,9 @@ mod tests {
     fn combine_join_multiplies_duplicate_keys() {
         let a = [(1, "a1"), (1, "a2")];
         let b = [(1, "b1")];
-        let rows: Vec<Vec<_>> = [a.as_slice(), b.as_slice()]
+        let rows = [a.as_slice(), b.as_slice()]
             .into_iter()
-            .combine_join(|(k, _)| *k)
-            .collect();
+            .combine_join(|(k, _)| *k);
         assert_eq!(rows.len(), 2);
         assert_eq!(
             HashSet::from_iter(rows.iter().map(|r| r[0].1)),
@@ -1640,39 +1455,41 @@ mod tests {
     }
 
     #[test]
-    fn adapters_resolve_std_iterator_methods() {
-        // 0.0.3 regression: SortBy/CombineJoin carried K only in the impl
-        // header, so std Iterator methods failed to resolve on them from a
-        // bare call site. Keep K pinned in the struct type parameters.
-        // (Note std `Iterator` has no `first` — that one is inherent to
-        // slices — so the std spelling of "take the least" is `next()`.)
+    fn resolving_results_and_streaming_adapters_chain() {
+        // Resolving ops return Vec: std Vec methods work directly and the
+        // result re-iterates; adapters expose std Iterator methods (the
+        // 0.0.3 phantom-K trap must never come back — if K drifts out of a
+        // struct's parameters again, `next`/`count` stop resolving here).
         let rows = [("b", 1), ("a", 2), ("b", 3)];
-        assert_eq!(rows.iter().sort_by(|(_, v)| *v).count(), 3);
-        assert_eq!(
-            rows.iter().sort_by_desc(|(_, v)| *v).next().copied(),
-            Some(("b", 3))
-        );
-        // ascending first == the minimum key (1, held by "b").
-        assert_eq!(
-            rows.iter().sort_by(|(_, v)| *v).next().copied(),
-            Some(("b", 1))
-        );
-        let groups = vec![vec![("x", 1)], vec![("x", 2), ("y", 3)]];
-        assert_eq!(groups.into_iter().combine_join(|(k, _)| *k).count(), 1);
+        let asc = rows.into_iter().sort_by(|(_, v)| *v);
+        assert_eq!(asc.first().copied(), Some(("b", 1))); // minimum by key
+        assert_eq!(asc.len(), 3);
+        let desc2: Vec<_> = rows
+            .into_iter()
+            .sort_by_desc(|(_, v)| *v)
+            .into_iter()
+            .take(2)
+            .collect();
+        assert_eq!(desc2, vec![("b", 3), ("a", 2)]);
+        let (source, counter) = counting([1, 1, 2, 3].into_iter());
+        assert_eq!(source.distinct().count(), 3);
+        assert_eq!(counter.get(), 4);
+        let mut joined = [1].iter().combine([(1, "x")].iter(), |l| **l, |(k, _)| *k);
+        assert_eq!(joined.next(), Some((&1, &(1, "x"))));
+        let grouped = rows.into_iter().group_by_stable(|(_, v)| *v % 2);
+        assert_eq!(grouped.len(), 2);
     }
 
     #[test]
     fn combine_join_of_nothing_is_empty() {
-        let rows: Vec<Vec<_>> = std::iter::empty::<&[(i32, &str)]>()
-            .combine_join(|(k, _)| *k)
-            .collect();
+        let rows = std::iter::empty::<&[(i32, &str)]>().combine_join(|(k, _)| *k);
         assert!(rows.is_empty());
     }
 
     #[test]
     fn chaining_matches_readme_example() {
         let rows = [("sa", 10), ("sp", 30), ("sa", 25)];
-        let by_state: Vec<_> = rows.into_iter().group_by_stable(|(s, _)| *s).collect();
+        let by_state = rows.into_iter().group_by_stable(|(s, _)| *s);
         assert_eq!(by_state[0].1, vec![("sa", 10), ("sa", 25)]);
         let report = rows
             .into_iter()
