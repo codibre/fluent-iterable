@@ -1,0 +1,17 @@
+[package]
+name = "fluent-iterable"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.70"
+license = "MIT"
+description = "Fluent extension trait for std Iterator, port of @codibre/fluent-iterable vocabulary: joins, grouping, distinctness, cardinality checks"
+repository = "https://github.com/codibre/fluent-iterable"
+keywords = ["iterator", "fluent", "linq", "collections", "combinators"]
+categories = ["rust-patterns", "data-structures"]
+authors = ["Thiago O Santos <tos.oliveira@gmail.com>"]
+include = ["/src", "/README.md", "/LICENSE"]
+
+[dependencies]
+
+# Standalone: do not let cargo attach this crate to a parent workspace.
+[workspace]
