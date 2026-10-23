@@ -1,6 +1,6 @@
 {
   "name": "fluent-iterable-rs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "description": "Cargo bridge for the libs/fluent-iterable-rs crate (published to crates.io as `fluent-iterable`): lets pnpm/turbo drive cargo from the monorepo root.",
   "scripts": {

@@ -17,12 +17,16 @@ use fluent_iterable::FluentIter;
 let orders = [(1, 100), (2, 200), (1, 50)];
 let customers = [(1, "Ada"), (2, "Grace")];
 
-// inner join, like .combine(other, keySelf, keyOther)
-let lines: Vec<(&i32, &(i32, &str))> =
-    orders.iter().combine(customers.iter(), |(o, _)| *o, |(id, _)| *id);
+// inner join, like .combine(other, keySelf, keyOther) — lazy: the left
+// side streams, resolve with collect()
+let lines: Vec<(&i32, &(i32, &str))> = orders
+    .iter()
+    .combine(customers.iter(), |(o, _)| *o, |(id, _)| *id)
+    .collect();
 
-// stable grouping, like .group(keyFn)
-let by_customer = orders.iter().group_by_stable(|(c, _)| *c);
+// stable grouping, like .group(keyFn) — lazy, full pass on first pull
+let by_customer: Vec<(&i32, Vec<(&i32, &i32)>)> =
+    orders.iter().group_by_stable(|(c, _)| *c).collect();
 
 // fold + project, like .reduceAndMap(reducer, initial, mapFn)
 let report = orders
@@ -41,11 +45,11 @@ Operations this crate provides (npm name → Rust method):
 
 | npm fluent-iterable          | Rust                                            |
 |------------------------------|-------------------------------------------------|
-| `.group(keyFn)`              | `group_by_stable`                               |
-| `.combine(other, ka, kb)`    | `combine`                                       |
-| `.combineJoin(baseKey)`      | `combine_join`                                  |
+| `.group(keyFn)`              | `group_by_stable` (lazy; full pass on first pull) |
+| `.combine(other, ka, kb)`    | `combine` (lazy; left streams)                  |
+| `.combineJoin(baseKey)`      | `combine_join` (lazy)                             |
 | `.distinct()`                | `distinct` (lazy adapter)                       |
-| `.distinct(keyFn)`           | `distinct_by`                                   |
+| `.distinct(keyFn)`           | `distinct_by` (lazy adapter)                    |
 | `.isDistinct()`              | `is_distinct` (short-circuits)                  |
 | `.isDistinct(keyFn)`         | `is_distinct_by` (short-circuits)               |
 | `.toMap(k, v)`               | `to_map_by`                                     |
@@ -54,8 +58,8 @@ Operations this crate provides (npm name → Rust method):
 | `.join(sep)`                 | `join`                                          |
 | `.join(sep, mapFn)`          | `join_by`                                       |
 | `.avg()` / `.avg(mapFn)`     | `avg` / `avg_by` (`Option<f64>`, `None` empty)  |
-| `.sort(cmp?)`                | `sorted` / `sort_with` (stable)                 |
-| `.sortBy(key)` / desc        | `sort_by` / `sort_by_desc` (stable)             |
+| `.sort(cmp?)`                | `sorted` / `sort_with` (stable, lazy wrapper)   |
+| `.sortBy(key)` / desc        | `sort_by` / `sort_by_desc` (stable, lazy wrapper) |
 | `.hasExactly(n)`             | `has_exactly`                                   |
 | `.hasLessThan(n)`            | `has_less_than`                                 |
 | `.hasLessOrExactly(n)`       | `has_less_or_exactly`                           |
