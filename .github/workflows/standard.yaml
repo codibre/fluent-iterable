@@ -23,4 +23,4 @@ jobs:
         uses: ./.github/actions/build-and-test
         with:
           node-auth-token: ${{ secrets.GHA_PACKAGES }}
-          qlty-coverage-token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          qlty-coverage-token: ${{ secrets.CC_TEST_REPORTER_ID }}
