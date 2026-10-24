@@ -58,9 +58,22 @@ jobs:
             -H "Authorization: Bearer ${ACTIONS_ID_TOKEN}" | jq -r '.value')
           echo "oidc-token=${OIDC_TOKEN}" >> $GITHUB_OUTPUT
 
+      # crates.io trusted publishing (OIDC): one 30-minute token for the
+      # loop below, consumed by libs/fluent-iterable-rs release-it hook
+      # (scripts/cargo-publish.sh). One-time setup on crates.io (crate
+      # Settings -> Trusted Publishing): owner codibre / repo
+      # fluent-iterable / workflow publish.yaml, environment empty.
+      # continue-on-error: harmless while no rs release is pending; a
+      # pending one fails loudly inside the hook with a pointer.
+      - name: crates.io OIDC exchange (trusted publishing)
+        id: cargo-auth
+        continue-on-error: true
+        uses: rust-lang/crates-io-auth-action@v1
+
       - name: Publish libraries sequentially
         env:
           OIDC_TOKEN: ${{ steps.oidc.outputs.oidc-token }}
+          CARGO_REGISTRY_TOKEN: ${{ steps.cargo-auth.outputs.token }}
         run: |
           set -euo pipefail
 
@@ -129,20 +142,3 @@ jobs:
       # fluent-iterable-rs version:set x.y.z) and merging publishes it here.
       # Skips silently when crates.io is already at that version; fails
       # loudly when the secret is missing while a publish IS pending.
-      # Trusted publishing (OIDC): crates.io verifies THIS workflow's
-      # identity and mints a 30-minute token — no stored API token at all.
-      # One-time setup on crates.io (crate Settings -> Trusted Publishing):
-      #   owner codibre / repo fluent-iterable / workflow publish.yaml,
-      #   environment left empty. continue-on-error keeps routine merges
-      # green before that config exists: with nothing pending the publish
-      # step skips on its own; with a pending version and no token it
-      # fails loudly with a pointer.
-      - name: crates.io OIDC exchange (trusted publishing)
-        id: cargo-auth
-        continue-on-error: true
-        uses: rust-lang/crates-io-auth-action@v1
-      - name: Publish Rust crate (crates.io)
-        env:
-          CARGO_REGISTRY_TOKEN: ${{ steps.cargo-auth.outputs.token }}
-          PUSH_GIT: "1"
-        run: pnpm --filter fluent-iterable-rs run publish

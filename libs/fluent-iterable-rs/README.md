@@ -120,25 +120,26 @@ cargo llvm-cov --all-targets --lcov --output-path lcov.info
 
 ## Releasing
 
-Publishing is **manifest-driven**: the version in `Cargo.toml` merged to
-`master` *is* the release request. The `publish.yaml` pipeline compares it
-against crates.io after each merge — higher publishes (+ tag
-`fluent-iterable-rs@<version>`), equal is a silent no-op, lower fails the
-run. So a release is just a PR:
+The crate releases itself the same way the TS siblings do: **conventional
+commits touching this directory** are the release trigger. On merge to
+`master`, the publish pipeline runs release-it here — the shared
+`.release-it.base.js` gate looks for `feat`/`fix` commits under this path
+since the last `fluent-iterable-rs@<v>` tag (silent skip otherwise), the
+conventional preset picks the next version (feat→minor, fix→patch on 0.x),
+and the `.release-it.js` hook (`scripts/cargo-publish.sh`) mirrors the new
+version into `Cargo.toml` and publishes the crate to crates.io. The same
+release-it run commits and tags — so the crate shows up in the workflow's
+Published/Skipped summary alongside the npm packages.
 
-```sh
-pnpm --filter fluent-iterable-rs version:set 0.0.6   # syncs Cargo.toml + package.json
-pnpm --filter fluent-iterable-rs run publish:check   # what CI would do, read-only
-pnpm --filter fluent-iterable-rs run publish:dry     # + cargo publish --dry-run
-```
-
-Publishing uses **trusted publishing (OIDC)**: the workflow exchanges its
-GitHub identity for a 30-minute crates.io token — no API token stored
-anywhere. One-time setup (crate owner, on crates.io): the crate's
-**Settings → Trusted Publishing → Add (GitHub)** with owner `codibre`,
+Auth is **trusted publishing (OIDC)**: `rust-lang/crates-io-auth-action`
+exchanges the workflow identity for a 30-minute crates.io token — no API
+token stored anywhere. One-time setup (crate owner, on crates.io): crate
+**Settings → Trusted Publishing → Add (GitHub)**, owner `codibre`,
 repository `fluent-iterable`, workflow filename `publish.yaml`, environment
-left empty. Manual escape hatch, exactly equivalent: `cargo publish` from
-this directory (needs `cargo login` locally) — `package.json` exists only
-to bridge pnpm/turbo; the crate has zero npm coupling.
+empty.
+
+Manual escape hatch: `cargo publish` from this directory (needs `cargo
+login` locally); `pnpm run publish:check` / `publish:dry` preview state
+against crates.io, `version:set` force-syncs both manifests.
 
 [`fluent-iterable`]: https://crates.io/crates/fluent-iterable
