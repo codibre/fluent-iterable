@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.1](https://github.com/codibre/fluent-iterable/compare/fluent-iterable-rs%401.0.0...%24%7Bnpm.name%7D%401.0.1) (2026-10-24)
+
+### Bug Fixes
+
+* **rs:** keep test binaries out of the crate coverage report ([403e5c1](https://github.com/codibre/fluent-iterable/commit/403e5c197fae2198c950f546b346408af579bcbd))
+
 ## [1.0.0](https://github.com/codibre/fluent-iterable/compare/v1.40.0...%24%7Bnpm.name%7D%401.0.0) (2026-10-24)
 
 ### ⚠ BREAKING CHANGES
