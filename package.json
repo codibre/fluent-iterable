@@ -8,7 +8,7 @@
     "test": "turbo test",
     "lint": "turbo lint",
     "format": "prettier --write '**/*.{ts,json,md}'",
-    "test:cov": "turbo test:coverage",
+    "test:cov": "turbo test:coverage && node scripts/merge-lcov.mjs",
     "prepare": "husky",
     "lint:staged": "turbo lint:staged --concurrency=1",
     "test:benchmark": "turbo test:benchmark --concurrency=1"
