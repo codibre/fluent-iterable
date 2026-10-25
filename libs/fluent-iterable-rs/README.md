@@ -61,7 +61,7 @@ every `Iterator`.
 
 | Method | What it gives you | Execution |
 |---|---|---|
-| `combine(other, key_left, key_right)` | inner-join rows, streaming the left side | lazy adapter |
+| `combine(other, key_left, key_right)` | inner-join rows, yielding while indexing the right side | lazy adapter |
 | `combine_join(key)` | merge a stream of row-sets into per-key groups | resolves once |
 | `group_by_stable(key)` | buckets keyed by `key`, keys ordered by **first appearance** | resolves once |
 | `to_map_by(key, value)` | index into a `HashMap` (last write wins) | resolves once |

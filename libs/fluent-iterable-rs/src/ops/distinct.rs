@@ -10,7 +10,7 @@ use std::hash::Hash;
 #[derive(Debug)]
 pub struct Distinct<I: Iterator>
 where
-    I::Item: Clone,
+    I::Item: Copy,
 {
     pub(crate) iter: I,
     pub(crate) seen: HashSet<I::Item>,
@@ -19,22 +19,24 @@ where
 impl<I> Iterator for Distinct<I>
 where
     I: Iterator,
-    I::Item: Eq + Hash + Clone,
+    I::Item: Eq + Hash + Copy,
 {
     type Item = I::Item;
 
+    #[inline]
     fn next(&mut self) -> Option<I::Item> {
         loop {
             let item = self.iter.next()?;
-            // `seen` must retain the value to compare future items, while
-            // we hand this occurrence out — so the item clones itself into
-            // the set (same contract as itertools' `unique`).
-            if self.seen.insert(item.clone()) {
+            // Handles only: `seen` retains a bit-copy of the handle (a
+            // pointer for reference streams), never the object behind it —
+            // the payload lives exactly once, in the caller's container.
+            if self.seen.insert(item) {
                 return Some(item);
             }
         }
     }
 
+    #[inline]
     fn size_hint(&self) -> (usize, Option<usize>) {
         let (_, upper) = self.iter.size_hint();
         (0, upper)
@@ -62,6 +64,7 @@ where
 {
     type Item = I::Item;
 
+    #[inline]
     fn next(&mut self) -> Option<I::Item> {
         // Disjoint-field borrows (edition 2021 capture): iter is advanced
         // while the key/seen state is consulted.
@@ -70,6 +73,7 @@ where
             .find(|item| self.seen.insert((self.key)(item)))
     }
 
+    #[inline]
     fn size_hint(&self) -> (usize, Option<usize>) {
         (0, self.iter.size_hint().1)
     }

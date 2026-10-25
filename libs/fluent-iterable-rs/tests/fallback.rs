@@ -67,3 +67,25 @@ fn when_empty_with_empty_fallback_is_empty() {
     let out: Vec<i32> = empty.into_iter().when_empty(empty).collect();
     assert!(out.is_empty());
 }
+
+#[test]
+fn repeat_replays_handles_and_never_clones() {
+    // Handle contract: every pass replays pointers to the originals —
+    // no payload copy happens on any pass, at any multiplicity.
+    let (counter, items) = counted_items(3);
+    let out: Vec<u64> = items.iter().repeat(3).map(|c| c.id).collect();
+    assert_eq!(out, [0u64, 1, 2].repeat(3));
+    assert_eq!(counter.get(), 0, "repeat() must never clone payloads");
+
+    // times == 1: streaming, no caching of any kind.
+    let (counter, items) = counted_items(3);
+    let out: Vec<u64> = items.iter().repeat(1).map(|c| c.id).collect();
+    assert_eq!(out, vec![0, 1, 2]);
+    assert_eq!(counter.get(), 0);
+
+    // times == 2: the second pass reads the same handles back.
+    let (counter, items) = counted_items(3);
+    let out: Vec<u64> = items.iter().repeat(2).map(|c| c.id).collect();
+    assert_eq!(out, vec![0, 1, 2, 0, 1, 2]);
+    assert_eq!(counter.get(), 0);
+}
