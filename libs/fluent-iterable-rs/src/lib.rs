@@ -4,7 +4,7 @@
 
 use std::cmp::Ordering;
 use std::collections::{HashMap, HashSet};
-use std::fmt::Display;
+use std::fmt::{Display, Write as _};
 use std::hash::Hash;
 
 pub mod ops;

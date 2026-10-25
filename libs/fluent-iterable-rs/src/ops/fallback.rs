@@ -28,6 +28,7 @@ where
 {
     type Item = I::Item;
 
+    #[inline]
     fn next(&mut self) -> Option<I::Item> {
         match &mut self.phase {
             WhenEmptyPhase::Source(source, yielded) => match source.next() {
@@ -61,12 +62,16 @@ where
 }
 /// Finite repetition adapter behind [`FluentIter::repeat`].
 ///
-/// The first pass streams the source while caching; passes 2..=n replay the
-/// cache. With `times == 0` the source is never consumed at all.
+/// Items are `Copy` handles: the cache retains pointers (for reference
+/// streams), never payload copies — every pass yields handles to the
+/// same originals, exactly like the JS side replaying the same object
+/// references. The first pass streams the source while caching (skipped
+/// entirely when `times == 1` — the cache stays empty); passes 2..=n
+/// replay it. With `times == 0` the source is never consumed at all.
 #[derive(Debug)]
 pub struct Repeat<I: Iterator>
 where
-    I::Item: Clone,
+    I::Item: Copy,
 {
     pub(crate) source: I,
     pub(crate) cache: Vec<I::Item>,
@@ -79,10 +84,11 @@ where
 impl<I> Iterator for Repeat<I>
 where
     I: Iterator,
-    I::Item: Clone,
+    I::Item: Copy,
 {
     type Item = I::Item;
 
+    #[inline]
     fn next(&mut self) -> Option<I::Item> {
         if self.times == 0 {
             return None;
@@ -90,7 +96,10 @@ where
         loop {
             if self.round == 0 {
                 if let Some(item) = self.source.next() {
-                    self.cache.push(item.clone());
+                    if self.times > 1 {
+                        // A handle bit-copy; the object is never copied.
+                        self.cache.push(item);
+                    }
                     return Some(item);
                 }
                 self.round = 1;
@@ -99,9 +108,9 @@ where
             if self.round >= self.times {
                 return None;
             }
-            if let Some(item) = self.cache.get(self.pos) {
+            if let Some(item) = self.cache.get(self.pos).copied() {
                 self.pos += 1;
-                return Some(item.clone());
+                return Some(item);
             }
             self.round += 1;
             self.pos = 0;

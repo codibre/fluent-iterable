@@ -51,3 +51,16 @@ fn is_distinct_checks_and_short_circuits() {
     assert!(!source.is_distinct());
     assert_eq!(counter.get(), 3);
 }
+
+#[test]
+fn distinct_shares_handles_and_never_clones() {
+    // Handle contract: the seen-set stores pointers (8 bytes per unique),
+    // never the payload — dedup across a full duplicate pass copies no
+    // objects at all, and hashing/equality run on the referents.
+    let (counter, items) = counted_items(64);
+    let out: Vec<_> = items.iter().chain(items.iter()).distinct().collect();
+    assert_eq!(out.len(), 64);
+    assert_eq!(out[0].id, 0);
+    assert_eq!(out[63].id, 63);
+    assert_eq!(counter.get(), 0, "distinct() must never clone payloads");
+}

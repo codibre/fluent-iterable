@@ -7,6 +7,38 @@ mod support;
 use support::*;
 
 #[test]
+fn combine_take_stops_inside_the_right_bootstrap() {
+    // The first left item's pairs stream out while the right side is
+    // still being pulled: take(2) over a left that matches with its head
+    // consumes exactly 2 right elements — nothing is pre-scanned.
+    let left = [0u32, 0, 1];
+    let (right, right_pulls) = counting((0..100u32).map(|i| (0u32, i)));
+    let pairs: Vec<(&u32, (u32, u32))> = left
+        .iter()
+        .combine(right, |l| **l, |r| r.0)
+        .take(2)
+        .collect();
+    assert_eq!(pairs, vec![(&0, (0, 0)), (&0, (0, 1))]);
+    assert_eq!(right_pulls.get(), 2, "take(k) stops mid right-side scan");
+
+    // Once a *second* left item needs matches the scan completes — and
+    // every right element is still consumed exactly once, in order.
+    let (right, right_pulls) = counting((0..100u32).map(|i| (0u32, i)));
+    let pairs: Vec<(u32, u32)> = left
+        .iter()
+        .combine(right, |l| **l, |r| r.0)
+        .map(|(l, r)| (*l, r.1))
+        .collect();
+    assert_eq!(pairs.len(), 200, "both left items fan out over the index");
+    assert_eq!(right_pulls.get(), 100, "the right side is read once, ever");
+    assert_eq!(
+        pairs[100],
+        (0, 0),
+        "second left restarts the bucket in order"
+    );
+}
+
+#[test]
 fn combine_all_pairs_left_order() {
     let left = [1, 2, 1];
     let right = [(1, "x"), (1, "y"), (3, "z")];
@@ -85,20 +117,145 @@ fn combine_join_of_nothing_is_empty() {
 }
 
 #[test]
-fn combine_owned_items_fan_out_clones() {
-    let left = vec![String::from("a"), String::from("a")];
-    let right = vec![String::from("a1"), String::from("a2")];
-    let joined = left
+fn combine_fanout_shares_handles_and_never_clones() {
+    // Copy-handle contract: borrows are shared into every pair, so a
+    // fan-out multiplies pointers — never data. (The owned-pair shape
+    // this contract replaced cloned all but one copy per fan-out.)
+    let left = [String::from("a"), String::from("a")];
+    let right = [String::from("a1"), String::from("a2")];
+    let joined: Vec<(&String, &String)> = left
+        .iter()
+        .combine(right.iter(), |l| l[..1].to_owned(), |r| r[..1].to_owned())
+        .collect();
+    let shapes: Vec<(&str, &str)> = joined
         .into_iter()
-        .combine(right, |l| l.clone(), |r| r[..1].to_owned());
-    let shapes: Vec<(String, String)> = joined.into_iter().collect();
+        .map(|(l, r)| (l.as_str(), r.as_str()))
+        .collect();
     assert_eq!(
         shapes,
+        vec![("a", "a1"), ("a", "a2"), ("a", "a1"), ("a", "a2"),]
+    );
+}
+
+#[test]
+fn combine_shares_counted_inputs_without_cloning() {
+    // Fan-out over borrows of a clone-counting payload: every pair
+    // shares the originals, so a correct join must observe zero clones
+    // whatever the multiplicity.
+    let (counter, left) = counted_items(3);
+    let right = [(0u64, "x"), (0, "y"), (1, "z"), (2, "w")];
+    let joined: Vec<(u64, &str)> = left
+        .iter()
+        .combine(right.iter(), |l| l.id, |(k, _)| *k)
+        .map(|(l, (_, name))| (l.id, *name))
+        .collect();
+    assert_eq!(joined, vec![(0, "x"), (0, "y"), (1, "z"), (2, "w")]);
+    assert_eq!(
+        counter.get(),
+        0,
+        "pairs share the inputs; combine clones nothing"
+    );
+}
+
+#[test]
+fn combine_join_unique_folds_clone_nothing() {
+    // 1:1 folds over referenced payloads: handles fan out into rows and
+    // the counting payload is never cloned — nor could it be by value,
+    // the contract takes Copy handles only.
+    let (counter, items) = counted_items(9);
+    let mut items = items;
+    for item in items.iter_mut() {
+        item.id %= 3;
+    }
+    let (a, rest) = items.split_at(3);
+    let (b, c) = rest.split_at(3);
+
+    let rows = [a, b, c].into_iter().combine_join(|item| item.id);
+    let shape: Vec<Vec<u64>> = rows
+        .iter()
+        .map(|row| row.iter().map(|item| item.id).collect())
+        .collect();
+    assert_eq!(shape, vec![vec![0, 0, 0], vec![1, 1, 1], vec![2, 2, 2]]);
+    assert_eq!(
+        counter.get(),
+        0,
+        "handles shared into rows; payload untouched"
+    );
+}
+
+#[test]
+fn combine_join_fanout_shares_cells_without_cloning() {
+    // Full fan-out (two rows, two cells, one shared key): rows multiply
+    // by four, cells stay shared handles — the payload is never cloned
+    // at any multiplicity.
+    let (ca, mut a) = counted_items(2);
+    let (cb, mut b) = counted_items(2);
+    for item in a.iter_mut() {
+        item.id = 0;
+    }
+    for item in b.iter_mut() {
+        item.id = 0;
+    }
+    let rows = [a.as_slice(), b.as_slice()]
+        .into_iter()
+        .combine_join(|item| item.id);
+    assert_eq!(rows.len(), 4, "2 rows x 2 cells");
+    assert!(rows.iter().all(|r| r.len() == 2));
+    assert_eq!(
+        ca.get() + cb.get(),
+        0,
+        "fan-out multiplies handles, never payloads"
+    );
+}
+
+#[test]
+fn combine_join_accepts_one_shot_streams() {
+    // The last-child row move walks BACK only the join's own indexed
+    // buckets (`Vec<T>` collected internally, as master always did) —
+    // never a caller iterator. `from_fn` is not a `DoubleEndedIterator`,
+    // so this compiles and folds correctly only because the public API
+    // adds no back-iteration requirement: single-pass streams stay valid
+    // inputs, each consumed forward exactly once.
+    let pulls = std::rc::Rc::new(std::cell::Cell::new(0u32));
+    let stream = |names: &'static [&'static str]| {
+        let pulls = pulls.clone();
+        let mut i = 0usize;
+        std::iter::from_fn(move || {
+            if i < names.len() {
+                let item = (i as i32 + 1, names[i]);
+                i += 1;
+                pulls.set(pulls.get() + 1);
+                Some(item)
+            } else {
+                None
+            }
+        })
+    };
+    let outer = std::iter::from_fn({
+        let mut k = 0u32;
+        move || {
+            k += 1;
+            match k {
+                1 => Some(stream(&["a1", "a2", "a3"])),
+                2 => Some(stream(&["b1", "b2", "b3"])),
+                3 => Some(stream(&["c1", "c2", "c3"])),
+                _ => None,
+            }
+        }
+    });
+
+    let rows = outer.combine_join(|(key, _)| *key);
+    let shape: Vec<Vec<&str>> = rows
+        .iter()
+        .map(|row| row.iter().map(|(_, v)| *v).collect())
+        .collect();
+    assert_eq!(
+        shape,
         vec![
-            ("a".to_owned(), "a1".to_owned()),
-            ("a".to_owned(), "a2".to_owned()),
-            ("a".to_owned(), "a1".to_owned()),
-            ("a".to_owned(), "a2".to_owned()),
+            vec!["a1", "b1", "c1"],
+            vec!["a2", "b2", "c2"],
+            vec!["a3", "b3", "c3"]
         ]
     );
+    assert_eq!(pulls.get(), 9, "each stream drained once, never rewound");
 }
