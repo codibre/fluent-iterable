@@ -57,6 +57,36 @@ assert_eq!(report, "20 chars ordered");
 One import — `use fluent_iterable::FluentIter;` — adds everything below to
 every `Iterator`.
 
+### Memory by design
+
+Keeping peak memory low is the point of the library. Every method falls in
+one of four profile classes (stated in the tables' *Execution* column):
+
+- **Streaming adapters** (`map`, `filter`, `take`, … and `combine`) hold
+  O(1) per item. `combine` additionally indexes the right side once —
+  `O(right)` — and yields its first pairs while that index is still
+  filling, so `take(k)` can stop before the right side is drained.
+- **Lazy dedup** (`distinct`, `distinct_by`) buffers only handles or keys
+  seen so far — never payload copies — and items stream through; pass a
+  borrowed key (`|item| &item.id`) to `distinct_by` for zero copies end
+  to end.
+- **Short-circuit guards** (`is_distinct`, `contains`, the cardinality
+  checks) do work only until the answer is proven.
+- **Resolving terminals** (`combine_join`, `group_by_stable`, the
+  `to_map*` family, sorts) materialize the result itself — that is the
+  output — with at most one extra input's index alive transiently, never
+  all inputs at once.
+
+Joins take `Copy` handles (usually references): pairs and rows *share*
+the data instead of copying it, so a fan-out multiplies 16-byte handles
+and the payload lives exactly once, in your containers. Rows of `&T`
+borrow the inputs — drop the rows and the inputs are free again; if you
+need self-contained owned rows, materialize at the call site. The real
+OOM frontier for fan-out results is the output size itself: duplicated
+join keys multiply rows — that is the answer, not overhead. Prefer
+`distinct_by` before a fold, or the lazy `combine` with `take`, when
+keys might repeat.
+
 ### Joins & grouping
 
 | Method | What it gives you | Execution |
@@ -82,7 +112,7 @@ every `Iterator`.
 | Method | What it gives you | Execution |
 |---|---|---|
 | `when_empty(fallback)` | the source, unless it yields nothing | lazy |
-| `repeat(times)` | the sequence, `times` times (streams pass 1, replays a cache after) | lazy |
+| `repeat(times)` | the sequence, `times` times (streams pass 1, replays a **handles** cache after — payload never copies) | lazy |
 | `has_exactly(n)` / `has_less_than(n)` / `has_less_or_exactly(n)` / `has_more_than(n)` / `has_more_or_exactly(n)` | cardinality answers without draining | **stop at `n + 1` items** |
 
 ### Sorting, strings & numbers
