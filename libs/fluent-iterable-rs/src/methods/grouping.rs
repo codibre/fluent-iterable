@@ -37,6 +37,10 @@
             match index.get(&k) {
                 Some(&i) => out[i].1.push(item),
                 None => {
+                    // The group key has two owners — the returned
+                    // `(K, Vec<Item>)` and the lookup index — so one K
+                    // materializes per GROUP (never per item). Borrowed
+                    // keys (`|i| &i.id`) make even this a pointer copy.
                     index.insert(k.clone(), out.len());
                     out.push((k, vec![item]));
                 }
@@ -140,6 +144,10 @@
                     inner
                         .into_iter()
                         .map(|(k2, items)| {
+                            // Each group starts from its OWN accumulator:
+                            // one seed clone per group — the value is the
+                            // output state, not duplicated data. For Copy
+                            // accumulators (numbers, handles) it is free.
                             let acc = items.into_iter().fold(init.clone(), &mut reduce);
                             (k2, acc)
                         })
