@@ -30,10 +30,15 @@
         }
     }
 
-    /// ⇔ `.repeat(n)`: yield the whole sequence `n` times (first pass
-    /// streams and caches, later passes replay). `n == 0` yields nothing
-    /// and never consumes the source. Unlike `std`'s nightly-only `cycle`,
-    /// this is finite.
+    /// ⇔ `.repeat(n)`: yield the whole sequence `n` times. `Item` must be
+    /// `Copy` — the same handle contract as the joins and dedup: the cache
+    /// retains handles, so every pass replays pointers to the originals
+    /// (JS repeats the same object references; nothing is duplicated per
+    /// pass). `n == 0` yields nothing and never consumes the source;
+    /// `n == 1` streams without caching at all. Unlike `std`'s
+    /// nightly-only `cycle`, this is finite. For owned, transient streams,
+    /// materialize at the source (e.g. `.map(|v| v.clone())`) where the
+    /// duplication is actually wanted.
     ///
     /// ```
     /// use fluent_iterable::FluentIter;
@@ -43,10 +48,15 @@
     ///
     /// let out: Vec<i32> = [1, 2].into_iter().repeat(0).collect();
     /// assert!(out.is_empty());
+    ///
+    /// // Deep payloads: every pass replays the same handles — nothing copies.
+    /// let words = vec!["go".to_string(), "stop".to_string()];
+    /// let out: Vec<&String> = words.iter().repeat(2).collect();
+    /// assert_eq!(out, vec![&words[0], &words[1], &words[0], &words[1]]);
     /// ```
     fn repeat(self, times: usize) -> Repeat<Self>
     where
-        Self::Item: Clone,
+        Self::Item: Copy,
     {
         Repeat {
             source: self,
