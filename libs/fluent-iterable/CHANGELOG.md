@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.0](https://github.com/codibre/fluent-iterable/compare/%40codibre%2Ffluent-iterable%401.41.0...%24%7Bnpm.name%7D%402.0.0) (2026-11-11)
+
+### Bug Fixes
+
+* **fluent-iterable:** correct README typos and links, add iterator helpers benchmark results ([d26182f](https://github.com/codibre/fluent-iterable/commit/d26182f2306f0bb63fef66f7ec03fd5d594edd2d))
+
 ## [1.41.0](https://github.com/codibre/fluent-iterable/compare/v1.40.0...%24%7Bnpm.name%7D%401.41.0) (2026-08-21)
 
 ### Features
