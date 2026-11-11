@@ -18,6 +18,10 @@
     "test:benchmark": {
       "dependsOn": ["build"],
       "cache": false
+    },
+    "test:benchmark:iterators": {
+      "dependsOn": ["build"],
+      "cache": false
     }
   }
 }
