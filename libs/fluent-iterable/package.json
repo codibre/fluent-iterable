@@ -25,6 +25,7 @@
     "test:coverage": "jest test/unit --coverage",
     "test:benchmark": "node test/benchmark/general-benchmark.spec.js",
     "test:benchmark:branch": "node test/benchmark/branch-benchmark.spec.js",
+    "test:benchmark:iterators": "node test/benchmark/iterator-helpers-benchmark.spec.js",
     "test:memory": "ts-node test/memory/run.ts",
     "lint": "pnpm run lint:format && pnpm run lint:style",
     "lint:fix": "pnpm run lint:format:fix && pnpm run lint:style:fix",
