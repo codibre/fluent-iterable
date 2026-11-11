@@ -10,16 +10,25 @@ on:
 jobs:
   benchmark:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - suite: general
+            script: test:benchmark
+          - suite: iterator-helpers
+            script: test:benchmark:iterators
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 26
         uses: actions/setup-node@v7
         with:
+          node-version: 26.x
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Benchmark
-        run: pnpm test:benchmark
+      - name: Benchmark (${{ matrix.suite }})
+        run: pnpm turbo run ${{ matrix.script }} --filter=@codibre/fluent-iterable
