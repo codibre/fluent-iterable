@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/codibre/fluent-iterable/compare/fluent-iterable-rs%401.0.1...fluent-iterable-rs%401.0.2) (2026-11-14)
+
+### Bug Fixes
+
+* **release:** decide each package's bump from its own commits only ([6ff751f](https://github.com/codibre/fluent-iterable/commit/6ff751f3d6cdbd2a3265cfec542dd2a8126e97e2))
+* **rs:** take the docs.rs badge from docs.rs ([74471f0](https://github.com/codibre/fluent-iterable/commit/74471f065b54efdbcca33dae940d5010f4e62169))
+
 ## [1.0.1](https://github.com/codibre/fluent-iterable/compare/fluent-iterable-rs%401.0.0...%24%7Bnpm.name%7D%401.0.1) (2026-10-24)
 
 ### Bug Fixes
