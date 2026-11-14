@@ -6,8 +6,7 @@
 [![Actions Status](https://github.com/Codibre/fluent-iterable-js-sdsl/workflows/lint/badge.svg)](https://github.com/Codibre/fluent-iterable-js-sdsl/actions)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/ab8fe8c90db9d596e996/test_coverage)](https://codeclimate.com/github/Codibre/fluent-iterable-js-sdsl/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ab8fe8c90db9d596e996/maintainability)](https://codeclimate.com/github/Codibre/fluent-iterable-js-sdsl/maintainability)
-[![Packages](https://david-dm.org/Codibre/fluent-iterable-js-sdsl.svg)](https://david-dm.org/Codibre/fluent-iterable-js-sdsl)
-[![npm version](https://badge.fury.io/js/%40codibre%2Ffluent-iterable-js-sdsl.svg)](https://badge.fury.io/js/%40codibre%2Ffluent-iterable-js-sdsl)
+[![npm version](https://img.shields.io/npm/v/%40fluent-iterable%2Fjs-sdsl)](https://www.npmjs.com/package/@fluent-iterable/js-sdsl)
 
 This packages is an ex extension to [@codibr/fluent-iterable](https://www.npmjs.com/package/@codibre/fluent-iterable) which integrates it with [js-sdsl](https://www.npmjs.com/package/js-sdsl), a library with some great data structures implementations
 
