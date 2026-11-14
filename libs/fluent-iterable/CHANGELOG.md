@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.1](https://github.com/codibre/fluent-iterable/compare/%40codibre%2Ffluent-iterable%402.0.0...%40codibre%2Ffluent-iterable%402.0.1) (2026-11-14)
+
+### Bug Fixes
+
+* **fluent-iterable:** badges point at what actually runs ([51ebb9d](https://github.com/codibre/fluent-iterable/commit/51ebb9d1148c5f7b85bc600834ca5c60031c598e))
+
 ## [2.0.0](https://github.com/codibre/fluent-iterable/compare/%40codibre%2Ffluent-iterable%401.41.0...%24%7Bnpm.name%7D%402.0.0) (2026-11-11)
 
 ### Bug Fixes
