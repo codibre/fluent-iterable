@@ -6,8 +6,7 @@
 [![Actions Status](https://github.com/Codibre/fluent-iterable-rxjs/workflows/lint/badge.svg)](https://github.com/Codibre/fluent-iterable-rxjs/actions)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/ab8fe8c90db9d596e996/test_coverage)](https://codeclimate.com/github/Codibre/fluent-iterable-rxjs/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ab8fe8c90db9d596e996/maintainability)](https://codeclimate.com/github/Codibre/fluent-iterable-rxjs/maintainability)
-[![Packages](https://david-dm.org/Codibre/fluent-iterable-rxjs.svg)](https://david-dm.org/Codibre/fluent-iterable-rxjs)
-[![npm version](https://badge.fury.io/js/%40codibre%2Ffluent-iterable-rxjs.svg)](https://badge.fury.io/js/%40codibre%2Ffluent-iterable-rxjs)
+[![npm version](https://img.shields.io/npm/v/%40fluent-iterable%2Frxjs)](https://www.npmjs.com/package/@fluent-iterable/rxjs)
 
 This packages is an ex extension to [@codibr/fluent-iterable](https://www.npmjs.com/package/@codibre/fluent-iterable) which integrates it with [rxjs](https://www.npmjs.com/package/rxjs), a library with some great data structures implementations
 
