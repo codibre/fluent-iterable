@@ -1,7 +1,7 @@
 # fluent-iterable
 
 [![crates.io](https://img.shields.io/crates/v/fluent-iterable.svg)](https://crates.io/crates/fluent-iterable)
-[![docs.rs](https://img.shields.io/docs.rs/fluent-iterable/latest)](https://docs.rs/fluent-iterable)
+[![docs.rs](https://docs.rs/fluent-iterable/badge.svg)](https://docs.rs/fluent-iterable)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 **The fluent iterator operations `std` forgot — joins, stable grouping, key
