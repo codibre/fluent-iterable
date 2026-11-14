@@ -1,47 +1,32 @@
-const { execSync } = require("child_process");
-const path = require("path");
+const { computeIncrement } = require("./scripts/conventional-increment.js");
 
-console.log("[DEBUG] .release-it.js is being loaded..."); 
-
+// Gate: only continue when commits touching THIS package's directory, since
+// its own last release tag, warrant a release. release-it's conventional
+// bump is scoped natively via `commitsOpts.path` below; this script mirrors
+// the same rules so the skip is fast, explicit, and log-friendly.
+let pkgName, tag, increment;
 try {
-  const pkgPath = path.resolve(process.cwd(), "package.json");
-  const pkgName = require(pkgPath).name;
-  
-  let lastTag = null;
-  
-  try {
-    lastTag = execSync(`git describe --tags --match="${pkgName}@*" --abbrev=0`, { encoding: "utf8", stdio: "pipe" }).trim();
-  } catch (e) {
-    // 128 indica ausência de tags (primeira release). Qualquer outro erro é propagado.
-    if (e.status !== 128) throw e;
-  }
-  
-  // Se não há tag, avalia todo o histórico do diretório (.)
-  const logCmd = lastTag 
-    ? `git log ${lastTag}..HEAD --oneline -- .` 
-    : `git log --oneline -- .`;
-    
-  const log = execSync(logCmd, { encoding: "utf8", stdio: "pipe" });
-
-  const hasRelevantCommits = /^[a-f0-9]+\s+(feat|fix)(\(.*\))?!?:|BREAKING CHANGE:/m.test(log);
-
-  if (!hasRelevantCommits) {
-    const timeframe = lastTag ? `since ${lastTag}` : `in history`;
-    console.log(`\n\x1b[33m[release-it] No feat or fix commits found for ${pkgName} ${timeframe}. Skipping release.\x1b[0m\n`);
-    process.exit(0); 
-  }
+  ({ pkgName, tag, increment } = computeIncrement(process.cwd()));
 } catch (e) {
-  console.error("[DEBUG] Pre-check failed. Aborting to prevent false bumps.\nError:", e.message || e);
+  console.error("[release-it] Pre-check failed. Aborting to prevent false bumps.\nError:", e.message || e);
   process.exit(1);
 }
 
-// 2. Configuração padrão
+if (!increment) {
+  const timeframe = tag ? `since ${tag}` : "in history";
+  console.log(`\n\x1b[33m[release-it] No feat/fix/perf or BREAKING CHANGE commits touching ${pkgName}'s directory ${timeframe}. Skipping release.\x1b[0m\n`);
+  process.exit(0);
+}
+
+console.log(`[release-it] ${pkgName}: ${increment} bump (${tag || "full history"}..HEAD, path-scoped)`);
+
+// Shared configuration for every libs/* package.
 module.exports = {
   "$schema": "https://unpkg.com/release-it@19/schema/release-it.json",
   "git": {
-    "tagName": "${npm.name}@${version}",
-    "tagMatch": "${npm.name}@*",
-    "commitMessage": "chore(${npm.name}): release v${version} [skip ci]",
+    "tagName": `${pkgName}@\${version}`,
+    "tagMatch": `${pkgName}@*`,
+    "commitMessage": `chore(${pkgName}): release v\${version} [skip ci]`,
     "requireCleanWorkingDir": false,
     "commitsPath": ".",
     "push": true,
@@ -73,11 +58,16 @@ module.exports = {
       "infile": "CHANGELOG.md",
       "ignoreRecommendedBump": false,
       "strictSemVer": true,
-      "path": ".",
-      "gitRawCommitsOpts": {
+      // Scope the RECOMMENDED BUMP to this directory: without it the plugin
+      // feeds every commit in <lastTag>..HEAD to conventional-recommended-bump
+      // and another subproject's BREAKING CHANGE forces a major here.
+      "commitsOpts": {
         "path": "."
       },
-      "skipOnEmpty": true
+      // Same scoping for the rendered changelog.
+      "gitRawCommitsOpts": {
+        "path": "."
+      }
     }
   }
 };

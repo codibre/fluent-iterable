@@ -1,8 +1,8 @@
 // Release-it config for the Rust crate — same driver as every TS subproject,
 // different publish command (the "custom:publish" seam the base config opens
 // via hooks). Version selection stays conventional-commit/path-scoped: only
-// feat|fix commits touching libs/fluent-iterable-rs since the last
-// fluent-iterable-rs@<v> tag trigger a release; the recommended bump
+// commits touching libs/fluent-iterable-rs since the last
+// fluent-iterable-rs@<v> tag trigger a release (rules: scripts/conventional-increment.js); the recommended bump
 // (feat→minor, fix→patch on 0.x) writes package.json, then the hook syncs
 // Cargo.toml and publishes the crate to crates.io. Release-it commits and
 // tags (fluent-iterable-rs@<version> via the base tagName) exactly like the

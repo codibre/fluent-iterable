@@ -1,7 +1,7 @@
-[![build](https://github.com/codibre/fluent-iterable/actions/workflows/standard.yaml/badge.svg?branch=master)](https://github.com/codibre/fluent-iterable/actions/workflows/standard.yaml?query=branch%3Amaster)
+[![build](https://github.com/codibre/fluent-iterable/actions/workflows/standard.yaml/badge.svg?event=pull_request)](https://github.com/codibre/fluent-iterable/actions/workflows/standard.yaml?query=event%3Apull_request)
 [![benchmark](https://github.com/codibre/fluent-iterable/actions/workflows/benchmark.yaml/badge.svg?branch=master)](https://github.com/codibre/fluent-iterable/actions/workflows/benchmark.yaml?query=branch%3Amaster)
 [![publish](https://github.com/codibre/fluent-iterable/actions/workflows/publish.yaml/badge.svg?branch=master)](https://github.com/codibre/fluent-iterable/actions/workflows/publish.yaml?query=branch%3Amaster)
-[![npm version](https://badge.fury.io/js/%40codibre%2Ffluent-iterable.svg)](https://badge.fury.io/js/%40codibre%2Ffluent-iterable)
+[![npm version](https://img.shields.io/npm/v/%40codibre%2Ffluent-iterable)](https://www.npmjs.com/package/@codibre/fluent-iterable)
 ![downloads per month](https://img.shields.io/npm/dm/@codibre/fluent-iterable)
 
 A fast way to iterate, sync or async, over array-likes, streams and async iterables. It provides [fluent api](https://en.wikipedia.org/wiki/Fluent_interface) operations so you can easily chain many operations.

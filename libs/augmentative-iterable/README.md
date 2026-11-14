@@ -3,7 +3,7 @@
 |
 [![Actions Status](https://github.com/Codibre/augmentative-iterable/workflows/test/badge.svg)](https://github.com/Codibre/augmentative-iterable/actions)
 [![Actions Status](https://github.com/Codibre/augmentative-iterable/workflows/lint/badge.svg)](https://github.com/Codibre/augmentative-iterable/actions)
-[![npm version](https://badge.fury.io/js/augmentative-iterable.svg)](https://badge.fury.io/js/augmentative-iterable)
+[![npm version](https://img.shields.io/npm/v/augmentative-iterable)](https://www.npmjs.com/package/augmentative-iterable)
 
 This library offers some operations over iterables with the intention of a better performance overall.
 
