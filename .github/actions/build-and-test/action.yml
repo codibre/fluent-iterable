@@ -9,9 +9,9 @@ inputs:
     description: 'GitHub token for checkout'
     required: true
     default: ${{ github.token }}
-  cc-test-reporter-id:
-    description: 'Code Climate Test Reporter ID'
-    required: true
+  qlty-coverage-token:
+    description: 'Qlty Cloud coverage token (qltcp_/qltcw_ prefix, or empty to skip upload)'
+    required: false
 
 runs:
   using: 'composite'
@@ -98,10 +98,10 @@ runs:
       run: pnpm run test:cov
 
     - name: Submit Code Quality
-      uses: qltysh/qlty-action/coverage@v1
-      if: inputs.cc-test-reporter-id != ''
+      uses: qltysh/qlty-action/coverage@v2
+      if: inputs.qlty-coverage-token != ''
       with:
-        token: ${{ inputs.cc-test-reporter-id }}
+        token: ${{ inputs.qlty-coverage-token }}
         files: coverage/lcov.info
 
     - name: Upload build artifacts
