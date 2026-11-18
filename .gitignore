@@ -2,3 +2,15 @@ node_modules/
 dist/
 coverage/
 .turbo/
+
+# BEGIN config-loom generated files
+# Patterns synthesized by `config-loom init` from the pnpm workspace
+# globs; wildcards are intentional so new projects are covered without
+# editing this file. Hand-edit config-loom.yaml; 'config-loom init
+# --force' regenerates the block.
+libs/**/eslint.config.mjs
+libs/**/jest.config.js
+libs/**/tsconfig.build.json
+libs/**/tsconfig.json
+libs/**/vitest.config.mts
+# END config-loom generated files
