@@ -1,0 +1,12 @@
+{
+  "name": "fluent-lazy-structures-rs",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cargo bridge for the libs/fluent-lazy-structures-rs crate (published to crates.io as `fluent-lazy-structures` once release wiring lands; must never reach npm).",
+  "scripts": {
+    "build": "cargo build",
+    "test": "cargo test",
+    "lint": "cargo fmt --check && cargo clippy --all-targets -- -D warnings",
+    "lint:fix": "cargo fmt && cargo clippy --all-targets --fix --allow-dirty"
+  }
+}
