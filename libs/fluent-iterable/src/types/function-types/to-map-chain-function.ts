@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 import { Mapper } from 'augmentative-iterable';
 import { AsyncReducer, ItemType, Reducer } from '../base';
 import { BaseChainKeyType, Indexes } from './to-object-chain-function';

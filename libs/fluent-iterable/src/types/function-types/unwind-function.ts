@@ -1,5 +1,4 @@
 import { AsyncItemType } from './../base';
-/* eslint-disable no-magic-numbers */
 import { AnyIterable } from 'augmentative-iterable';
 import { FluentAsyncIterable, FluentIterable } from '../base';
 
