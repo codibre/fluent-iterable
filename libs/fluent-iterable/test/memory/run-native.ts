@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 import { interval, truth } from '../../src';
 
 const SIZE = 1000;

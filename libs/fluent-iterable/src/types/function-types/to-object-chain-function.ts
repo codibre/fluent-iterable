@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 import { AsyncReducer, ItemType, KeysOfType, Reducer } from '../base';
 
 export type BaseChainKeyType = string | symbol | number;

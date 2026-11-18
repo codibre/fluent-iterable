@@ -1,0 +1,105 @@
+# Managed by config-loom.
+# Each `files:` entry writes one workspace file. The entry key names
+# it; `filename:` sets the target file (default: the key), so several
+# entries may share one filename to serve different workspace subsets
+# — for a workspace, the FIRST entry whose `include` matches and whose
+# `exclude` does not is the one that renders. `include` and `exclude`
+# take one regular expression or a list, matched full against the
+# workspace directory path; omit `include` to cover every workspace.
+# `default:` is the required base content of the entry. Each rule is a
+# `pattern` (same regex syntax) and a `value`. Order matters: rules
+# merge over default and each other, top to bottom, later rules win.
+# A null INSIDE a rule value removes an inherited key (JSON Merge
+# Patch, RFC 7386). Structured values are written as text block
+# scalars (JSON/JSONC text, or canonical YAML text for yaml files) —
+# the managed document never mixes with loom properties. Prefer
+# families (`libs/.*`, `.*-rs`) over name lists, so new projects
+# joining a shape need no edit here. Instead of an inline value,
+# `template: <repo-relative path>` pulls content from a file
+# (multiline text or commented JSONC) — `init` auto-moves values over
+# `--template-threshold` lines to `.config-loom/` that way; commit
+# those files, they are inputs. After editing, run 'config-loom
+# sync' (or any turbo command, once wired).
+files:
+  tsconfig.json:
+    format: jsonc
+    arrays: replace
+    default: |
+      {
+        "compilerOptions": {
+          "rootDir": ".",
+          "outDir": "./dist",
+          "allowJs": true
+        },
+        "include": [
+          "./src",
+          "./test"
+        ],
+        "extends": "../../tsconfig.base.json"
+      }
+    rules:
+      - pattern: libs/augmentative-iterable
+        value: |
+          {
+            "compilerOptions": {
+              "outDir": null,
+              "lib": [
+                "es6",
+                "dom"
+              ],
+              "sourceMap": false
+            },
+            "include": [
+              "lib",
+              "test",
+              "index.js"
+            ]
+          }
+    exclude:
+      - .*-rs
+  tsconfig.build.json:
+    format: json
+    arrays: replace
+    default: |
+      {
+        "extends": "./tsconfig.json",
+        "compilerOptions": {
+          "rootDir": "./src",
+          "sourceMap": false
+        },
+        "include": [
+          "./src"
+        ]
+      }
+    exclude:
+      - libs/augmentative-iterable|libs/fluent-iterable-rs
+  eslint.config.mjs:
+    format: ts
+    arrays: replace
+    default: |
+      import rules from '../../eslint.config.mjs';
+
+      /** @type {import('eslint').ESLint} **/
+      export default rules;
+    rules:
+      - pattern: libs/fluent-iterable
+        template: .config-loom/eslint.config.mjs/fluent-iterable.mjs
+    exclude:
+      - .*-rs
+  vitest.config.mts:
+    format: ts
+    arrays: replace
+    default: |
+      export { default } from '../../vitest.config.mts';
+    exclude:
+      - libs/fluent-.*
+  jest.config.js:
+    format: ts
+    arrays: replace
+    default: |
+      const jest = require('../../jest.config');
+
+      module.exports = jest;
+    exclude:
+      - .*-rs
+      - libs/augmentative-iterable
