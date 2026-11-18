@@ -4,14 +4,58 @@ on:
   push:
     branches: [master]
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Exercise everything without publishing, committing or merging'
+        type: boolean
+        default: false
+      version:
+        description: 'Exact version for any package that releases (empty = conventional bump)'
+        type: string
+        default: ''
+
+# Only the most recently merged change should publish. Runs are SERIALIZED —
+# cancel-in-progress stays false so a run that already started publishing is
+# never killed mid-flight — and every older run skips itself in `decide` once
+# a newer commit lands on master. The newest run builds master's tip, so one
+# release covers all the merged PRs with a single changelog.
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
 
 permissions:
   contents: write
   packages: write
   id-token: write
+  pull-requests: write
 
 jobs:
+  decide:
+    runs-on: ubuntu-latest
+    outputs:
+      superseded: ${{ steps.check.outputs.superseded }}
+    steps:
+      - name: Check whether a newer commit landed on the branch
+        id: check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ '${{ github.event_name }}' != 'push' ]; then
+            echo 'Manual run — publishing whatever commit was dispatched.'
+            echo 'superseded=false' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          LATEST=$(gh api "repos/${GITHUB_REPOSITORY}/commits/${GITHUB_REF_NAME}" --jq .sha)
+          if [ -n "$LATEST" ] && [ "$LATEST" != '${{ github.sha }}' ]; then
+            echo "superseded=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::Superseded by ${LATEST:0:7} — the newest run publishes all merged changes in one release."
+          else
+            echo 'superseded=false' >> "$GITHUB_OUTPUT"
+          fi
+
   publish:
+    needs: decide
+    if: needs.decide.outputs.superseded == 'false'
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +69,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global push.followTags true
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -54,8 +97,12 @@ jobs:
       - name: Get OIDC Token
         id: oidc
         run: |
-          OIDC_TOKEN=$(curl -sL "${ACTIONS_ID_TOKEN_REQUEST_URL}?audience=https://registry.npmjs.org" \
-            -H "Authorization: Bearer ${ACTIONS_ID_TOKEN}" | jq -r '.value')
+          OIDC_TOKEN=$(curl -sSL --fail-with-body "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=https://registry.npmjs.org" \
+            -H "Authorization: Bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" | jq -r '.value')
+          if [ -z "$OIDC_TOKEN" ] || [ "$OIDC_TOKEN" = 'null' ]; then
+            echo '::error::Could not mint an OIDC token for npm provenance (see curl output above). Check Actions general permissions: "Can GitHub Actions mint an id-token".'
+            exit 1
+          fi
           echo "oidc-token=${OIDC_TOKEN}" >> $GITHUB_OUTPUT
 
       # crates.io trusted publishing (OIDC): one 30-minute token for the
@@ -72,13 +119,17 @@ jobs:
 
       - name: Publish libraries sequentially
         env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OIDC_TOKEN: ${{ steps.oidc.outputs.oidc-token }}
           CARGO_REGISTRY_TOKEN: ${{ steps.cargo-auth.outputs.token }}
+          DRY_RUN: ${{ inputs.dry_run }}
+          MANUAL_VERSION: ${{ inputs.version }}
         run: |
           set -euo pipefail
 
           PUBLISHED=()
           SKIPPED=()
+          FAILED=()
 
           # Get list of non-private packages in libs/
           PACKAGES=$(for lib in libs/*/; do
@@ -101,6 +152,16 @@ jobs:
             echo "always-auth=true" >> ~/.npmrc
           }
 
+          DRY_FLAG=''
+          if [ "$DRY_RUN" = 'true' ]; then
+            DRY_FLAG='--dry-run'
+          fi
+
+          VERSION_ARG=''
+          if [ -n "$MANUAL_VERSION" ]; then
+            VERSION_ARG="$MANUAL_VERSION"
+          fi
+
           for entry in $PACKAGES; do
             IFS='|' read -r pkg_name lib_path <<< "$entry"
             pkg_dir=$(realpath "./${lib_path}")
@@ -108,17 +169,53 @@ jobs:
             echo ">>> Checking ${pkg_name} from ${pkg_dir}"
 
             configure_npmrc "$OIDC_TOKEN"
+            OLD_VERSION=$(node -p "require('${pkg_dir}/package.json').version")
 
-            # Capture release-it output to detect if it actually published
-            OUTPUT=$(cd "$pkg_dir" && release-it --ci 2>&1 || true)
+            # master accepts changes through pull requests, so release-it must
+            # NOT push: it bumps, writes CHANGELOG.md, runs the publish hook
+            # (npm --provenance, or cargo for the rs bridge), then commits and
+            # tags LOCALLY; commit+tag reach master through a release PR
+            # below. The PR title carries [skip ci], so merging triggers no
+            # further run. The old `|| true` + regex guess turned real publish
+            # failures into a green "Successfully published" — failures now
+            # fail the job.
+            RC=0
+            OUTPUT=$(cd "$pkg_dir" && release-it ${VERSION_ARG} --ci --git.push=false ${DRY_FLAG} 2>&1) || RC=$?
             echo "$OUTPUT"
-
-            # Check if the output contains a version bump (not just SKIP)
-            if echo "$OUTPUT" | grep -qE "release [0-9]+\.[0-9]+\.[0-9]+|[0-9]+\.[0-9]+\.[0-9]+\.\.\.[0-9]+\.[0-9]+\.[0-9]+" && ! echo "$OUTPUT" | grep -q "No commits found"; then
-              PUBLISHED+=("$pkg_name")
-            else
-              SKIPPED+=("$pkg_name")
+            if [ "$RC" -ne 0 ]; then
+              echo "::error::${pkg_name}: release-it failed (exit ${RC}). Nothing was merged; check the output above before re-running."
+              FAILED+=("$pkg_name")
+              continue
             fi
+
+            NEW_VERSION=$(node -p "require('${pkg_dir}/package.json').version")
+            if [ "$NEW_VERSION" = "$OLD_VERSION" ]; then
+              SKIPPED+=("$pkg_name")
+              continue
+            fi
+
+            if [ "$DRY_RUN" = 'true' ]; then
+              echo "Dry run: would push release/${pkg_name}-v${NEW_VERSION} + tag ${pkg_name}@${NEW_VERSION} and merge its PR."
+              PUBLISHED+=("$pkg_name ${NEW_VERSION} (dry run)")
+              continue
+            fi
+
+            BRANCH="release/${pkg_name}-v${NEW_VERSION}"
+            TAG="${pkg_name}@${NEW_VERSION}"
+            if git ls-remote --exit-code --tags origin "refs/tags/${TAG}" >/dev/null 2>&1; then
+              echo "::error::${TAG} already exists on the remote but ${pkg_name} was bumped again — investigate before re-running."
+              FAILED+=("$pkg_name")
+              continue
+            fi
+
+            git push origin "HEAD:refs/heads/${BRANCH}" "refs/tags/${TAG}"
+
+            PR_URL=$(gh pr create --base master --head "$BRANCH" \
+              --title "chore(${pkg_name}): release v${NEW_VERSION} [skip ci]" \
+              --body "Automated release from the publish workflow (run commit \`${GITHUB_SHA}\`). The version was published by this run; merging lands the version bump and changelog on master.")
+            PR_NUM=${PR_URL##*/}
+            gh pr merge "$PR_NUM" --merge
+            PUBLISHED+=("$pkg_name ${NEW_VERSION}")
           done
 
           echo ""
@@ -131,14 +228,19 @@ jobs:
             echo "Skipped (no new commits):"
             for pkg in "${SKIPPED[@]}"; do echo "  ⏭️  $pkg"; done
           fi
+          if [ ${#FAILED[@]} -gt 0 ]; then
+            echo "FAILED:"
+            for pkg in "${FAILED[@]}"; do echo "  ✖ $pkg"; done
+            exit 1
+          fi
           if [ ${#PUBLISHED[@]} -eq 0 ] && [ ${#SKIPPED[@]} -gt 0 ]; then
             echo "No libraries needed publishing this run."
           elif [ ${#PUBLISHED[@]} -gt 0 ]; then
             echo "Successfully published ${#PUBLISHED[@]} library(ies)."
           fi
 
-      # Rust crate: manifest-driven. The version in Cargo.toml merged to
-      # master IS the release request -- bump it in the PR (pnpm --filter
-      # fluent-iterable-rs version:set x.y.z) and merging publishes it here.
-      # Skips silently when crates.io is already at that version; fails
-      # loudly when the secret is missing while a publish IS pending.
+      # Rust crate note (historical): the manifest is no longer the release
+      # trigger. fluent-iterable-rs is release-it-driven like the TS
+      # siblings — conventional commits touching its directory bump it, and
+      # the after:bump hook (scripts/cargo-publish.sh) syncs Cargo.toml and
+      # publishes the crate to crates.io with the OIDC token above.
