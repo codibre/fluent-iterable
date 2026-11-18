@@ -64,7 +64,7 @@ describe('LazyMap (toLazyMap)', () => {
     }
   });
 
-  it('is inert on construction: the source is never touched', () => {
+  it('the exported LazyMap class is inert on construction: the source is never touched', () => {
     let pulls = 0;
     const map = new LazyMap(
       source(items, { onPull: (c) => (pulls = c) }),
@@ -76,10 +76,9 @@ describe('LazyMap (toLazyMap)', () => {
 
   it('start() returns this and is idempotent', async () => {
     let pulls = 0;
-    const map = new LazyMap(
+    const map = fluentAsync(
       source(items, { onPull: (c) => (pulls = c) }),
-      byId,
-    );
+    ).toLazyMap(byId);
     expect(map.start()).toBe(map);
     expect(map.start()).toBe(map);
     await wait(30);
@@ -89,7 +88,7 @@ describe('LazyMap (toLazyMap)', () => {
   });
 
   it('serves cache hits synchronously, without a promise', async () => {
-    const map = new LazyMap(source(items), byId, byPayload);
+    const map = fluentAsync(source(items)).toLazyMap(byId, byPayload);
     map.start();
     await wait(30);
     const hit = map.get('b');
@@ -99,18 +98,19 @@ describe('LazyMap (toLazyMap)', () => {
 
   it('the first get() starts consumption when start() was not called', async () => {
     let pulls = 0;
-    const map = new LazyMap(
+    const map = fluentAsync(
       source(items, { delay: 5, onPull: (c) => (pulls = c) }),
-      byId,
-      byPayload,
-    );
+    ).toLazyMap(byId, byPayload);
     expect(pulls).toBe(0);
     await expect(map.get('a')).resolves.toBe(1);
     expect(pulls).toBeGreaterThan(0);
   });
 
   it('a miss suspends only that caller until the key arrives', async () => {
-    const map = new LazyMap(source(items, { delay: 25 }), byId, byPayload);
+    const map = fluentAsync(source(items, { delay: 25 })).toLazyMap(
+      byId,
+      byPayload,
+    );
     map.start();
     const late = map.get('c');
     expect(late).toBeInstanceOf(Promise);
@@ -123,14 +123,17 @@ describe('LazyMap (toLazyMap)', () => {
   });
 
   it('resolves every waiter of a key with the produced value', async () => {
-    const map = new LazyMap(source(items, { delay: 15 }), byId, byPayload);
+    const map = fluentAsync(source(items, { delay: 15 })).toLazyMap(
+      byId,
+      byPayload,
+    );
     map.start();
     const all = await Promise.all([map.get('b'), map.get('b'), map.get('c')]);
     expect(all).toEqual([2, 2, 3]);
   });
 
   it('returns undefined for missing keys once the stream completed', async () => {
-    const map = new LazyMap(source(items), byId, byPayload);
+    const map = fluentAsync(source(items)).toLazyMap(byId, byPayload);
     map.start();
     await wait(30);
     const missing = map.get('zzz');
@@ -140,8 +143,7 @@ describe('LazyMap (toLazyMap)', () => {
 
   it('propagates producer failures to pending and future gets, with onError', async () => {
     const errors: unknown[] = [];
-    const map = new LazyMap(
-      source(items, { delay: 10, failAt: 2 }),
+    const map = fluentAsync(source(items, { delay: 10, failAt: 2 })).toLazyMap(
       byId,
       byPayload,
     );
@@ -158,11 +160,9 @@ describe('LazyMap (toLazyMap)', () => {
 
   it('dispose() closes the underlying iterator and settles pending gets', async () => {
     let closed = false;
-    const map = new LazyMap(
+    const map = fluentAsync(
       source(items, { delay: 20, onReturn: () => (closed = true) }),
-      byId,
-      byPayload,
-    );
+    ).toLazyMap(byId, byPayload);
     map.start();
     const pending = map.get('c');
     await map.dispose();
@@ -173,18 +173,16 @@ describe('LazyMap (toLazyMap)', () => {
 
   it('Symbol.asyncDispose closes the iterator', async () => {
     let closed = false;
-    const map = new LazyMap(
+    const map = fluentAsync(
       source(items, { delay: 20, onReturn: () => (closed = true) }),
-      byId,
-      byPayload,
-    );
+    ).toLazyMap(byId, byPayload);
     map.start();
     await map[Symbol.asyncDispose]();
     expect(closed).toBe(true);
   });
 
-  it('storing whole items when no valueSelector is given', async () => {
-    const map = new LazyMap(source(items), byId);
+  it('stores whole items when no valueSelector is given', async () => {
+    const map = fluentAsync(source(items)).toLazyMap(byId);
     map.start();
     await expect(map.get('b')).resolves.toEqual({ id: 'b', payload: 2 });
   });
