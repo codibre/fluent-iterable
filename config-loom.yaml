@@ -28,7 +28,8 @@ files:
       {
         "compilerOptions": {
           "rootDir": ".",
-          "outDir": "./dist"
+          "outDir": "./dist",
+          "allowJs": true
         },
         "include": [
           "./src",
@@ -46,21 +47,13 @@ files:
                 "es6",
                 "dom"
               ],
-              "sourceMap": false,
-              "allowJs": true
+              "sourceMap": false
             },
             "include": [
               "lib",
               "test",
               "index.js"
             ]
-          }
-      - pattern: libs/fluent-iterable
-        value: |
-          {
-            "compilerOptions": {
-              "allowJs": true
-            }
           }
     exclude:
       - .*-rs
