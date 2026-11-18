@@ -68,13 +68,6 @@ files:
               "test/memory"
             ]
           }
-      - pattern: libs/fluent-iterable-async-sema
-        value: |
-          {
-            "compilerOptions": {
-              "rootDir": "./src"
-            }
-          }
     exclude:
       - .*-rs
   tsconfig.build.json:
@@ -98,17 +91,6 @@ files:
       - pattern: libs/fluent-iterable
         value: |
           {
-            "exclude": null,
-            "include": [
-              "./src"
-            ]
-          }
-      - pattern: libs/fluent-iterable-async-sema
-        value: |
-          {
-            "compilerOptions": {
-              "sourceMap": null
-            },
             "exclude": null,
             "include": [
               "./src"
