@@ -67,22 +67,10 @@ files:
           "rootDir": "./src",
           "sourceMap": false
         },
-        "exclude": [
-          "node_modules",
-          "test",
-          "dist",
-          "**/*spec.ts"
+        "include": [
+          "./src"
         ]
       }
-    rules:
-      - pattern: libs/fluent-iterable
-        value: |
-          {
-            "exclude": null,
-            "include": [
-              "./src"
-            ]
-          }
     exclude:
       - libs/augmentative-iterable|libs/fluent-iterable-rs
   eslint.config.mjs:
