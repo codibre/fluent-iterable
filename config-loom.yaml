@@ -60,13 +60,7 @@ files:
           {
             "compilerOptions": {
               "allowJs": true
-            },
-            "include": [
-              "./src",
-              "./test",
-              "test/benchmark",
-              "test/memory"
-            ]
+            }
           }
     exclude:
       - .*-rs
