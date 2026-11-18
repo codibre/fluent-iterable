@@ -10,7 +10,7 @@ allowBuilds:
   unrs-resolver: true
 minimumReleaseAgeExclude:
   - '@types/node@25.9.1'
-  - config-loom@0.9.1
+  - config-loom@0.10.0
 
 # pnpm 11 reads settings here (package.json "pnpm" field is ignored).
 # Pin TypeScript monorepo-wide: ^5.6.2 floats to 5.9.x which breaks the

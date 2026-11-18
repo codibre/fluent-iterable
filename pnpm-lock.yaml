@@ -33,8 +33,8 @@ importers:
         specifier: ^4.1.10
         version: 4.1.10(vitest@4.1.10)
       config-loom:
-        specifier: 0.9.1
-        version: 0.9.1
+        specifier: 0.10.0
+        version: 0.10.0
       eslint:
         specifier: ^10.4.0
         version: 10.8.1
@@ -1403,8 +1403,8 @@ packages:
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
-  config-loom@0.9.1:
-    resolution: {integrity: sha512-3zCaduDde1QbGzOJMQZgJ2dB/vPYzlucJpfmwen2WR7uwdHyttdlBc9SurF/+4H2hXjLYURtoBfauUqUzIdSPg==}
+  config-loom@0.10.0:
+    resolution: {integrity: sha512-LGZyWMYmjLJbLpSXkfzYFhIhZo+aCuk/roAJeZL3L2nsyDjFL0+YOucc57XO3NWn3Qf1Tp2+rlo/H+8dmmMwAQ==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -5062,7 +5062,7 @@ snapshots:
 
   concat-map@0.0.1: {}
 
-  config-loom@0.9.1:
+  config-loom@0.10.0:
     dependencies:
       commander: 14.0.3
       jsonc-parser: 3.3.1

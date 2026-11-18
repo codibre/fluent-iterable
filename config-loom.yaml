@@ -156,7 +156,7 @@ files:
       export default rules;
     rules:
       - pattern: libs/fluent-iterable
-        template: .config-loom/eslint.config.mjs/rule-1.mjs
+        template: .config-loom/eslint.config.mjs/fluent-iterable.mjs
     exclude:
       - .*-rs
   vitest.config.mts:
