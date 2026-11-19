@@ -1,7 +1,7 @@
 {
   "name": "@fluent-iterable/lazy-structures",
   "description": "On-demand, concurrently populated lookup structures (LazyMap) for @codibre/fluent-iterable",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": false,
   "author": {
     "name": "Farenheith"
