@@ -106,33 +106,7 @@ jobs:
       # TEMPORARY diagnostic (chore): proves which URL form yields a
       # registry-audience JWT and what the registry answers. Prints JWT
       # CLAIMS only — never the token itself. Remove once auth is fixed.
-      - name: Diagnose npm OIDC audience (temporary)
-        env:
-          OIDC_TOKEN: ${{ steps.oidc.outputs.oidc-token }}
-        run: |
-          claims() { cut -d. -f2 <<<"$1" | base64 -d 2>/dev/null | jq -c '{iss, aud, sub, nbf, exp}'; }
-          echo "URL=*** | sed 's|https://[^/]*/|https://<host>/|' | sed 's/[0-9a-f-]\{16,\}/|<redacted>/g')"
-          echo "main mint  claims: $(claims "$OIDC_TOKEN")"
-          T_Q=$(curl -sSL "${ACTIONS_ID_TOKEN_REQUEST_URL}?audience=https://registry.npmjs.org" \
-            -H "Authorization: Bearer ${ACTI...KEN}" | jq -r '.value // empty')
-          echo "question-mark mint claims: $(claims "${T_Q:-none}")"
-          echo "== registry /-/whoami with main token =="
-          curl -sS -o /tmp/whoami_body -w 'HTTP %{http_code}\n' \
-            -H "authorization: Bearer $OIDC_TOKEN" https://registry.npmjs.org/-/whoami || true
-          head -c 300 /tmp/whoami_body; echo
-          echo "== npm whoami exactly as release-it runs it =="
-          echo "//registry.npmjs.org/:_authToken=${OIDC_TOKEN}" > ~/.npmrc
-          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
-          echo "userconfig: $(npm config get userconfig)"
-          npm whoami 2>&1 | grep -v "$OIDC_TOKEN" | head -8 || true
 
-      # crates.io trusted publishing (OIDC): one 30-minute token for the
-      # loop below, consumed by the -rs bridges' release-it hooks
-      # (scripts/cargo-publish.sh). One-time setup on crates.io (crate
-      # Settings -> Trusted Publishing): owner codibre / repo
-      # fluent-iterable / workflow publish.yaml, environment empty.
-      # continue-on-error: harmless while no rs release is pending; a
-      # pending one fails loudly inside the hook with a pointer.
       - name: crates.io OIDC exchange (trusted publishing)
         id: cargo-auth
         continue-on-error: true
