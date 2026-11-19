@@ -1,6 +1,6 @@
 {
   "name": "fluent-lazy-structures-rs",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Cargo bridge for the libs/fluent-lazy-structures-rs crate (published to crates.io as `fluent-lazy-structures`). Release-it-driven like the TS siblings, but publishing goes through the shared root scripts/cargo-publish.sh (see .release-it.js) instead of npm — the crate must never reach the npm registry.",
   "scripts": {
     "build": "cargo build",
