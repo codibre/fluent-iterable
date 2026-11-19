@@ -8,6 +8,7 @@ coverage/
 # globs; wildcards are intentional so new projects are covered without
 # editing this file. Hand-edit config-loom.yaml; 'config-loom init
 # --force' regenerates the block.
+libs/**/.release-it.js
 libs/**/eslint.config.mjs
 libs/**/jest.config.js
 libs/**/tsconfig.build.json
