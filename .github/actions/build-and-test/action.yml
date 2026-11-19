@@ -93,6 +93,18 @@ runs:
       shell: bash
       run: pnpm run lint || echo "Lint command not found, skipping..."
 
+    # Both -rs bridges run cargo-llvm-cov; when llvm-tools-preview is
+    # missing, cargo-llvm-cov fetches it via rustup on the spot — and two
+    # turbo tasks doing that in parallel trip over rustup's download cache
+    # (`.partial` rename race, os error 2). Installing once here makes the
+    # per-crate fetch a no-op. Guarded: jobs without a rust toolchain skip.
+    - name: Pre-install rustup llvm-tools
+      shell: bash
+      run: |
+        if command -v rustup >/dev/null 2>&1; then
+          rustup component add llvm-tools-preview
+        fi
+
     - name: Test packages
       shell: bash
       run: pnpm run test:cov
