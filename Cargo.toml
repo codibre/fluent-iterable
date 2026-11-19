@@ -1,0 +1,11 @@
+# Cargo workspace for the Rust crates under libs/. The npm side stays the
+# driver: every crate has a package.json bridge and pnpm/turbo fan out
+# build/test/lint per package (each running cargo in its own directory).
+# This file only unifies dependency resolution and the build cache —
+# `cargo publish` still happens inside each crate directory.
+[workspace]
+resolver = "2"
+members = [
+  "libs/fluent-iterable-rs",
+  "libs/fluent-lazy-structures-rs",
+]
