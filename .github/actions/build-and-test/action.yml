@@ -32,8 +32,9 @@ runs:
 
     - name: Setup pnpm
       uses: pnpm/action-setup@v4
-      with:
-        version: ${{ steps.pnpm-version.outputs.version }}
+      # No `version` input: the action reads it from packageManager in
+      # package.json (single source of truth). The step above only exists
+      # to key the pnpm cache on the version.
 
     - name: Setup Node.js
       uses: actions/setup-node@v7
