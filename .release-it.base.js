@@ -40,7 +40,12 @@ module.exports = {
     "release": false
   },
   "hooks": {
-    "after:bump": "pnpm publish --no-git-checks --provenance"
+    // Staged publishing: CI queues the version (OIDC + provenance) and the
+    // owner approves it from the npm publish queue / `pnpm stage approve`
+    // with their 2FA proof-of-presence. Mirrors monorepo-utils. The registry
+    // still requires the package's Trusted Publisher to point at this repo's
+    // publish.yaml — that relationship is what authenticates the CI token.
+    "after:bump": "pnpm stage publish --no-git-checks --provenance"
   },
   "plugins": {
     "@release-it/conventional-changelog": {
