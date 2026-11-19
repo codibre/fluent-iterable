@@ -18,6 +18,3 @@ tokio = { version = "1", default-features = false, features = ["rt", "sync"] }
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }
-
-# Standalone: do not let cargo attach this crate to a parent workspace.
-[workspace]

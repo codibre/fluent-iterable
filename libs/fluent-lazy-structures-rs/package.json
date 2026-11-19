@@ -1,12 +1,18 @@
 {
   "name": "fluent-lazy-structures-rs",
   "version": "0.1.0",
-  "private": true,
-  "description": "Cargo bridge for the libs/fluent-lazy-structures-rs crate (published to crates.io as `fluent-lazy-structures` once release wiring lands; must never reach npm).",
+  "description": "Cargo bridge for the libs/fluent-lazy-structures-rs crate (published to crates.io as `fluent-lazy-structures`). Release-it-driven like the TS siblings, but publishing goes through the shared root scripts/cargo-publish.sh (see .release-it.js) instead of npm — the crate must never reach the npm registry.",
   "scripts": {
     "build": "cargo build",
     "test": "cargo test",
-    "lint": "cargo fmt --check && cargo clippy --all-targets -- -D warnings",
-    "lint:fix": "cargo fmt && cargo clippy --all-targets --fix --allow-dirty"
+    "lint": "bash ../../scripts/publish-crate.sh --lint && cargo fmt --check && cargo clippy --all-targets -- -D warnings",
+    "lint:fix": "cargo fmt && cargo clippy --all-targets --fix --allow-dirty",
+    "version:check": "bash ../../scripts/publish-crate.sh --lint",
+    "version:set": "bash ../../scripts/set-version.sh",
+    "publish:check": "bash ../../scripts/publish-crate.sh --check",
+    "publish:dry": "bash ../../scripts/publish-crate.sh --dry-run",
+    "publish": "bash ../../scripts/publish-crate.sh",
+    "test:coverage": "bash ../../scripts/coverage.sh",
+    "test:cov": "bash ../../scripts/coverage.sh"
   }
 }

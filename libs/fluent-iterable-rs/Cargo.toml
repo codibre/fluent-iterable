@@ -13,6 +13,3 @@ authors = ["Thiago O Santos <tos.oliveira@gmail.com>"]
 include = ["/src", "/build.rs", "/README.md", "/LICENSE"]
 
 [dependencies]
-
-# Standalone: do not let cargo attach this crate to a parent workspace.
-[workspace]

@@ -1,18 +1,18 @@
 {
   "name": "fluent-iterable-rs",
   "version": "1.0.2",
-  "description": "Cargo bridge for the libs/fluent-iterable-rs crate (published to crates.io as `fluent-iterable`). Release-it-driven like the TS siblings, but publishing goes through scripts/cargo-publish.sh (see .release-it.js) instead of npm — the crate must never reach the npm registry.",
+  "description": "Cargo bridge for the libs/fluent-iterable-rs crate (published to crates.io as `fluent-iterable`). Release-it-driven like the TS siblings, but publishing goes through the shared root scripts/cargo-publish.sh (see .release-it.js) instead of npm — the crate must never reach the npm registry.",
   "scripts": {
     "build": "cargo build",
     "test": "cargo test",
-    "lint": "bash scripts/publish-crate.sh --lint && cargo fmt --check && cargo clippy --all-targets -- -D warnings",
+    "lint": "bash ../../scripts/publish-crate.sh --lint && cargo fmt --check && cargo clippy --all-targets -- -D warnings",
     "lint:fix": "cargo fmt && cargo clippy --all-targets --fix --allow-dirty",
-    "version:check": "bash scripts/publish-crate.sh --lint",
-    "version:set": "bash scripts/set-version.sh",
-    "publish:check": "bash scripts/publish-crate.sh --check",
-    "publish:dry": "bash scripts/publish-crate.sh --dry-run",
-    "publish": "bash scripts/publish-crate.sh",
-    "test:coverage": "bash scripts/coverage.sh",
-    "test:cov": "bash scripts/coverage.sh"
+    "version:check": "bash ../../scripts/publish-crate.sh --lint",
+    "version:set": "bash ../../scripts/set-version.sh",
+    "publish:check": "bash ../../scripts/publish-crate.sh --check",
+    "publish:dry": "bash ../../scripts/publish-crate.sh --dry-run",
+    "publish": "bash ../../scripts/publish-crate.sh",
+    "test:coverage": "bash ../../scripts/coverage.sh",
+    "test:cov": "bash ../../scripts/coverage.sh"
   }
 }

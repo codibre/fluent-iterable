@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Sync the crate version across Cargo.toml + package.json. Both must match:
 # crates.io reads Cargo.toml; pnpm/turbo (and the CI filter) see package.json.
-#   usage: pnpm --filter fluent-iterable-rs version:set 0.1.0
+# Run from the crate directory.
+#   usage: pnpm --filter <bridge-name> version:set 0.1.0
 set -euo pipefail
-cd "$(dirname "$0")/.."
 V="${1:?usage: set-version.sh <x.y.z>}"
 if ! printf '%s' "$V" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$'; then
   echo "not a semver version: $V" >&2

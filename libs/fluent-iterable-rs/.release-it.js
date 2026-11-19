@@ -17,6 +17,6 @@ module.exports = {
     // commit — the synced Cargo.toml lands in the same commit. --allow-dirty
     // is required: the bumped files are uncommitted at hook time; the tree
     // content IS what gets published, and release-it commits it next.
-    "after:bump": "bash scripts/cargo-publish.sh",
+    "after:bump": "bash ../../scripts/cargo-publish.sh",
   },
 };

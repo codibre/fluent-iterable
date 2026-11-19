@@ -14,3 +14,7 @@ libs/**/tsconfig.build.json
 libs/**/tsconfig.json
 libs/**/vitest.config.mts
 # END config-loom generated files
+
+# cargo workspace (root Cargo.toml): build cache + resolution lock
+/target/
+/Cargo.lock

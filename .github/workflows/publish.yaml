@@ -106,7 +106,7 @@ jobs:
           echo "oidc-token=${OIDC_TOKEN}" >> $GITHUB_OUTPUT
 
       # crates.io trusted publishing (OIDC): one 30-minute token for the
-      # loop below, consumed by libs/fluent-iterable-rs release-it hook
+      # loop below, consumed by the -rs bridges' release-it hooks
       # (scripts/cargo-publish.sh). One-time setup on crates.io (crate
       # Settings -> Trusted Publishing): owner codibre / repo
       # fluent-iterable / workflow publish.yaml, environment empty.
@@ -240,7 +240,8 @@ jobs:
           fi
 
       # Rust crate note (historical): the manifest is no longer the release
-      # trigger. fluent-iterable-rs is release-it-driven like the TS
+      # trigger. Every -rs bridge is release-it-driven like the TS
       # siblings — conventional commits touching its directory bump it, and
-      # the after:bump hook (scripts/cargo-publish.sh) syncs Cargo.toml and
-      # publishes the crate to crates.io with the OIDC token above.
+      # the after:bump hook (shared root scripts/cargo-publish.sh) syncs
+      # Cargo.toml and publishes the crate to crates.io with the OIDC token
+      # above.

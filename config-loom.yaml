@@ -72,7 +72,7 @@ files:
         ]
       }
     exclude:
-      - libs/augmentative-iterable|libs/fluent-iterable-rs
+      - libs/augmentative-iterable|libs/.*-rs
   eslint.config.mjs:
     format: ts
     arrays: replace

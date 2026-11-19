@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-# Publish this crate to crates.io — manifest-driven:
+# Publish the crate of the CURRENT directory (run from a crate dir, e.g. via
+# that crate's package.json bridge) — manifest-driven:
 #   the version in Cargo.toml IS the release request.
 # Merged to master with a version higher than crates.io's latest => publish
-# and tag `fluent-iterable-rs@<version>`. Equal => nothing to do (idempotent
+# and tag `<bridge-name>@<version>`. Equal => nothing to do (idempotent
 # re-runs, workflow_dispatch included). Lower => the manifest is stale, fail.
 #
 #   modes:  --lint      version files in sync, no network (runs in turbo lint)
@@ -13,21 +14,21 @@
 # Auth: cargo reads CARGO_REGISTRY_TOKEN from the environment natively; it is
 # only consulted when there is actually something to publish.
 set -euo pipefail
-cd "$(dirname "$0")/.."
 
 MODE="${1:---publish}"
 CRATE_NAME=$(sed -n 's/^name = "\([^"]*\)"/\1/p' Cargo.toml | head -1)
 CARGO_V=$(sed -n 's/^version = "\([^"]*\)"/\1/p' Cargo.toml | head -1)
 PKG_V=$(node -p "require('./package.json').version")
+BRIDGE=$(node -p "require('./package.json').name")
 
 fail() { echo "::error::$*" >&2; exit 1; }
 
 # --- sync gate (all modes) ---
-[ "$CARGO_V" = "$PKG_V" ] || fail "version drift: Cargo.toml=$CARGO_V package.json=$PKG_V — run scripts/set-version.sh $CARGO_V"
+[ "$CARGO_V" = "$PKG_V" ] || fail "version drift: Cargo.toml=$CARGO_V package.json=$PKG_V — run pnpm --filter $BRIDGE version:set $CARGO_V"
 if [ "$MODE" = "--lint" ]; then echo "versions in sync: $CARGO_V"; exit 0; fi
 
 # --- what does crates.io have? ---
-latest=$(curl -fsS --max-time 30 -A 'fluent-iterable-rs-ci (codibre/fluent-iterable)' \
+latest=$(curl -fsS --max-time 30 -A "$BRIDGE-ci (codibre/fluent-iterable)" \
   "https://crates.io/api/v1/crates/$CRATE_NAME" \
   | sed -n 's/.*"max_version":"\([^"]*\)".*/\1/p')
 [ -n "$latest" ] || fail "could not read crates.io latest version for $CRATE_NAME"
@@ -38,7 +39,7 @@ if [ "$CARGO_V" = "$latest" ]; then
   exit 0
 fi
 if [ "$lower" = "$CARGO_V" ]; then
-  fail "Cargo.toml version $CARGO_V is BEHIND crates.io latest $latest — bump it (scripts/set-version.sh) or this branch is stale"
+  fail "Cargo.toml version $CARGO_V is BEHIND crates.io latest $latest — bump it (pnpm --filter $BRIDGE version:set) or this branch is stale"
 fi
 echo "pending publish: $CRATE_NAME@$CARGO_V (crates.io latest: $latest)"
 if [ "$MODE" = "--check" ]; then exit 0; fi
@@ -53,12 +54,12 @@ if [ "$MODE" = "--dry-run" ]; then
 else
   cargo publish
   # tag under the pnpm bridge name (matches the repo's <pkg>@<version> scheme)
-  if ! git rev-parse -q --verify "refs/tags/fluent-iterable-rs@$CARGO_V" >/dev/null; then
-    git tag -a "fluent-iterable-rs@$CARGO_V" -m "crates.io release $CRATE_NAME@$CARGO_V"
+  if ! git rev-parse -q --verify "refs/tags/$BRIDGE@$CARGO_V" >/dev/null; then
+    git tag -a "$BRIDGE@$CARGO_V" -m "crates.io release $CRATE_NAME@$CARGO_V"
     if [ "${PUSH_GIT:-0}" = "1" ]; then
-      git push origin "fluent-iterable-rs@$CARGO_V"
+      git push origin "$BRIDGE@$CARGO_V"
     else
-      echo "tagged locally: fluent-iterable-rs@$CARGO_V (PUSH_GIT=1 to push)"
+      echo "tagged locally: $BRIDGE@$CARGO_V (PUSH_GIT=1 to push)"
     fi
   fi
   echo "published $CRATE_NAME@$CARGO_V to crates.io"
